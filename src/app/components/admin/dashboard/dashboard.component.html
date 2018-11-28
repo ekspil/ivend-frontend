@@ -1,0 +1,41 @@
+<main>
+  <div class="wrapper-adm">
+    <h1>Users</h1>
+    <section>
+      <table>
+        <tr>
+          <td>ID</td>
+          <td>Имя</td>
+          <td>Фамилия</td>
+          <td>login</td>
+          <td class="btn-control">
+            <button class="remove" [routerLink]="['../user', 'create']">+</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <table>
+        <tr class="row" *ngFor="let user of users">
+          <td (click)="openUser(user.id)">{{user.id}}</td>
+          <td (click)="openUser(user.id)">{{user.firstName || 'null'}}</td>
+          <td (click)="openUser(user.id)">{{user.lastName || 'null'}}</td>
+          <td (click)="openUser(user.id)">{{user.login}}</td>
+          <td class="btn-control">
+            <button class="remove" (click)="deleteUser(user.id)">-</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+    <div class="pug">
+      <!--not implemented yet, out of time :(-->
+      <div class="paginator" *ngIf="false">
+        <a class="prev" href="#prev"> < </a>
+        <a href="#1">1</a>
+        <span>&hellip;</span>
+        <a href="#100">100</a>
+        <a class="next" href="#next"> > </a>
+      </div>
+    </div>
+  </div>
+</main>

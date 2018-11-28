@@ -1,0 +1,10 @@
+<app-user-card [user]="this.user" (submitEvent)="onEventSubmit($event)" [method]="'create'">
+
+</app-user-card>
+
+
+<div class="messages">
+  <div *ngIf="error">
+    {{error}}
+  </div>
+</div>

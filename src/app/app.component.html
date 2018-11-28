@@ -1,0 +1,10 @@
+<div class="buttons-area" *ngIf="role && role !== 'ROLE_ANONYMOUS'">
+  <button [routerLink]="['/admin/dashboard']" *ngIf="role && role === 'ROLE_ADMIN'">
+    Admin area
+  </button>
+  <button (click)="logout()">
+    Logout
+  </button>
+</div>
+
+<router-outlet></router-outlet>

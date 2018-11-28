@@ -1,0 +1,13 @@
+<app-user-card [user]="this.user" (submitEvent)="onEventSubmit($event)" [method]="'update'">
+
+</app-user-card>
+
+
+<div class="messages">
+  <div *ngIf="updated">
+    Successfully updated user profile
+  </div>
+  <div *ngIf="error">
+    {{error}}
+  </div>
+</div>
