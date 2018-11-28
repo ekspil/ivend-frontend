@@ -14012,21 +14012,21 @@ a.icon {
 	color: #757eaa;
 }
 .about-img{
-	background: url('../images/about.jpg');
+	background: url('/assets/images/about.jpg');
 	background-size: cover;
 	background-position: center;
 	position:relative;
 }
 .login-img {
-	background: url('../images/login.jpg');
+	background: url('/assets/images/login.jpg');
 	background-size: cover;
 }
 .construction-img {
-	background: url('../images/construction.jpg');
+	background: url('/assets/images/construction.jpg');
 	background-size: cover;
 }
 .card-blog-overlay {
-	background: url('../images/thumbnails/thumb2.jpg');
+	background: url('/assets/images/thumbnails/thumb2.jpg');
 	background-size: cover;
 	position:relative;
 }
@@ -19184,8 +19184,8 @@ svg {
 }
 @font-face {
 	font-family: 'Glyphicons Halflings';
-	src: url('../fonts/glyphicons-halflings-regular.eot');
-	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+	src: url('/assets/fonts/glyphicons-halflings-regular.eot');
+	src: url('/assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('/assets/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
 	position: relative;
