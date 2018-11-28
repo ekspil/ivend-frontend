@@ -13,9 +13,12 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {EditUserComponent} from "./components/edit-user/edit-user.component";
 import {UserCardComponent} from './components/user-card/user-card.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { ControllersComponent } from './components/controllers/controllers.component';
+import {HeaderComponent} from './components/header/header.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'controllers', component: ControllersComponent},
   {
     path: 'admin',
     canActivate: [AdminGuard],
@@ -52,7 +55,9 @@ const appRoutes: Routes = [
     HomeComponent, DashboardComponent,
     EditUserComponent,
     UserCardComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ControllersComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [UserGuard, AdminGuard, RestApiService],
   bootstrap: [AppComponent]
