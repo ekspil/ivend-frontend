@@ -1,0 +1,150 @@
+<template>
+    <div class="container">
+        <div class="side-app">
+
+
+
+
+            <div class="row mt-5">
+                <div class="col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
+                        <div class="card-header">
+                            <div class="card-title f-b">Контроллеры</div>
+                        </div>
+                        <div class="text-wrap">
+                            <div class="example">
+                                <a href="#" class="btn btn-primary">Добавить контроллер</a>
+                                <div class="form-group float-right">
+                                    <div class="row gutters-xs">
+													<span class="col-auto">
+															<button class="btn btn-primary" type="button"><i class="fe fe-upload"></i></button>
+													</span>
+                                        <div class="col">
+                                            <input type="text" class="form-control  search-cont" placeholder="Поиск">
+                                        </div>
+                                        <span class="col-auto">
+															<button class="btn btn-primary" type="button"><i class="fe fe-search"></i></button>
+														</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table card-table table-vcenter text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Контроллер</th>
+                                    <th>Автомат</th>
+                                    <th>Режим работы</th>
+                                    <th>Группа</th>
+                                    <th>Версия</th>
+                                    <th>Опции</th>
+                                    <th>Состояние</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
+                                    <td>Necta Kikko Max</td>
+                                    <td>Cashless</td>
+                                    <td>Общая</td>
+                                    <td>01</td>
+                                    <td>-</td>
+                                    <td><span class="status-icon bg-success"></span> Активирован</td>
+
+                                    <td class="text-right">
+                                        <div class="item-action dropdown">
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
+                                    <td>Necta Kikko Max</td>
+                                    <td>Cashless</td>
+                                    <td>Общая</td>
+                                    <td>01</td>
+                                    <td>-</td>
+                                    <td><span class="status-icon bg-danger"></span> Дективирован</td>
+
+                                    <td class="text-right">
+                                        <div class="item-action dropdown">
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
+                                    <td>Necta Kikko Max</td>
+                                    <td>Cashless</td>
+                                    <td>Общая</td>
+                                    <td>01</td>
+                                    <td>-</td>
+                                    <td><span class="status-icon bg-secondary"></span> Приостановлен</td>
+
+                                    <td class="text-right">
+                                        <div class="item-action dropdown">
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
+                                    <td>Necta Kikko Max</td>
+                                    <td>Cashless</td>
+                                    <td>Общая</td>
+                                    <td>01</td>
+                                    <td>-</td>
+                                    <td><span class="status-icon bg-yellow"></span> Отладка</td>
+
+                                    <td class="text-right">
+                                        <div class="item-action dropdown">
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- table-wrapper -->
+                    </div>
+                    <!-- section-wrapper -->
+
+                </div>
+            </div>
+
+
+        </div>
+        <!--footer-->
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-md-12 col-sm-12 mt-3 mt-lg-0 text-center">
+                        © 2018 <a href="#">ivend</a>. Все права защищены.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</template>
