@@ -1,8 +1,6 @@
 <template>
     <div class="container">
         <div class="side-app">
-
-
             <div class="row mt-5">
                 <div class="col-md-12 col-lg-12">
                     <div class="card">
@@ -32,7 +30,7 @@
                             </div>
 
                         </div>
-                        <div class="table-responsive" v-if="controllers && controllers.length > 0">
+                        <div class="table-responsive" v-if="getControllers && getControllers.length > 0">
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                 <tr>
@@ -48,40 +46,16 @@
                                 </thead>
                                 <tbody>
 
-                                <tr v-for="controller in controllers" v-bind:key="controller.id">
+
+                                <tr v-for="controller in getControllers" v-bind:key="controller.id">
                                     <td><a href="#" class="text-black f-b">{{controller.uid}}</a></td>
-                                    <td>Necta Kikko Max</td>
+                                    <td>{{controller.equipment.name}}</td>
                                     <td>{{controller.mode}}</td>
-                                    <!--<td>Общая</td>-->
-                                    <td>Not implemented</td>
-                                    <!--<td>01</td>-->
-                                    <td>Not implemented</td>
-                                    <!--<td>-</td>-->
-                                    <td>Not implemented</td>
-                                    <!--<td><span class="status-icon bg-success"></span> Активирован</td>-->
-                                    <td>Not implemented</td>
-
-                                    <td class="text-right">
-                                        <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
-                                                    class="fe fe-m      ore-vertical"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i
-                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i
-                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr><!--
-                                <tr>
-                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
-                                    <td>Necta Kikko Max</td>
-                                    <td>Cashless</td>
                                     <td>Общая</td>
-                                    <td>01</td>
+                                    <td>{{controller.revision}}</td>
                                     <td>-</td>
-                                    <td><span class="status-icon bg-danger"></span> Дективирован</td>
+                                    <!--<td><span class="status-icon bg-danger"></span> Дективирован</td>-->
+                                    <td>{{controller.status}}</td>
 
                                     <td class="text-right">
                                         <div class="item-action dropdown">
@@ -96,50 +70,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
-                                    <td>Necta Kikko Max</td>
-                                    <td>Cashless</td>
-                                    <td>Общая</td>
-                                    <td>01</td>
-                                    <td>-</td>
-                                    <td><span class="status-icon bg-secondary"></span> Приостановлен</td>
 
-                                    <td class="text-right">
-                                        <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
-                                                    class="fe fe-more-vertical"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i
-                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i
-                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
-                                    <td>Necta Kikko Max</td>
-                                    <td>Cashless</td>
-                                    <td>Общая</td>
-                                    <td>01</td>
-                                    <td>-</td>
-                                    <td><span class="status-icon bg-yellow"></span> Отладка</td>
-
-                                    <td class="text-right">
-                                        <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
-                                                    class="fe fe-more-vertical"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i
-                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i
-                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -171,12 +102,26 @@
 
     export default {
         apollo: {
-            controllers:
+            getControllers:
                 gql`
                     query {
-                      controllers {
+                      getControllers {
+                        id
+                        name
                         uid
                         mode
+                        revision
+                        status
+                        equipment {
+                          name
+                        }
+                        bankTerminal {
+                          name
+                        }
+                        fiscalRegistrar {
+                          name
+                        }
+
                       }
                     }
                 `,
