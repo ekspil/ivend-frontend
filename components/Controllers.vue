@@ -48,7 +48,7 @@
 
 
                                 <tr v-for="controller in getControllers" v-bind:key="controller.id">
-                                    <td><a href="#" class="text-black f-b">{{controller.uid}}</a></td>
+                                    <td><router-link href="#" class="text-black f-b" :to="`/controller/${controller.id}/edit`">{{controller.uid}}</router-link></td>
                                     <td>{{controller.equipment.name}}</td>
                                     <td>{{controller.mode}}</td>
                                     <td>Общая</td>
