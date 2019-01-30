@@ -3,8 +3,6 @@
         <div class="side-app">
 
 
-
-
             <div class="row mt-5">
                 <div class="col-md-12 col-lg-12">
                     <div class="card">
@@ -18,13 +16,15 @@
                                 <div class="form-group float-right">
                                     <div class="row gutters-xs">
 													<span class="col-auto">
-															<button class="btn btn-primary" type="button"><i class="fe fe-upload"></i></button>
+															<button class="btn btn-primary" type="button"><i
+                                                                    class="fe fe-upload"></i></button>
 													</span>
                                         <div class="col">
                                             <input type="text" class="form-control  search-cont" placeholder="Поиск">
                                         </div>
                                         <span class="col-auto">
-															<button class="btn btn-primary" type="button"><i class="fe fe-search"></i></button>
+															<button class="btn btn-primary" type="button"><i
+                                                                    class="fe fe-search"></i></button>
 														</span>
 
                                     </div>
@@ -32,7 +32,7 @@
                             </div>
 
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" v-if="controllers && controllers.length > 0">
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                 <tr>
@@ -48,25 +48,32 @@
                                 </thead>
                                 <tbody>
 
-                                <tr>
-                                    <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
+                                <tr v-for="controller in controllers">
+                                    <td><a href="#" class="text-black f-b">{{controller.uid}}</a></td>
                                     <td>Necta Kikko Max</td>
-                                    <td>Cashless</td>
-                                    <td>Общая</td>
-                                    <td>01</td>
-                                    <td>-</td>
-                                    <td><span class="status-icon bg-success"></span> Активирован</td>
+                                    <td>{{controller.mode}}</td>
+                                    <!--<td>Общая</td>-->
+                                    <td>Not implemented</td>
+                                    <!--<td>01</td>-->
+                                    <td>Not implemented</td>
+                                    <!--<td>-</td>-->
+                                    <td>Not implemented</td>
+                                    <!--<td><span class="status-icon bg-success"></span> Активирован</td>-->
+                                    <td>Not implemented</td>
 
                                     <td class="text-right">
                                         <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
+                                                    class="fe fe-m      ore-vertical"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr><!--
                                 <tr>
                                     <td><a href="#" class="text-black f-b">10000003-1217 </a></td>
                                     <td>Necta Kikko Max</td>
@@ -78,10 +85,13 @@
 
                                     <td class="text-right">
                                         <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
+                                                    class="fe fe-more-vertical"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
                                             </div>
                                         </div>
                                     </td>
@@ -97,10 +107,13 @@
 
                                     <td class="text-right">
                                         <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
+                                                    class="fe fe-more-vertical"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
                                             </div>
                                         </div>
                                     </td>
@@ -116,14 +129,17 @@
 
                                     <td class="text-right">
                                         <div class="item-action dropdown">
-                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
+                                                    class="fe fe-more-vertical"></i></a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
-                                                <a href="javascript:void(0)" class="dropdown-item"><i class="dropdown-icon fe fe-x"></i> Удалить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-edit-2"></i> Настроить </a>
+                                                <a href="javascript:void(0)" class="dropdown-item"><i
+                                                        class="dropdown-icon fe fe-x"></i> Удалить </a>
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -133,8 +149,6 @@
 
                 </div>
             </div>
-
-
         </div>
         <!--footer-->
         <footer class="footer">
@@ -146,5 +160,26 @@
                 </div>
             </div>
         </footer>
+
     </div>
+
 </template>
+
+
+<script>
+    import gql from 'graphql-tag'
+
+    export default {
+        apollo: {
+            controllers:
+                gql`
+                    query {
+                      controllers {
+                        uid
+                        mode
+                      }
+                    }
+                `,
+        },
+    }
+</script>
