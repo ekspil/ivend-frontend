@@ -1,17 +1,17 @@
 <template>
-    <div id="vue_app">
+    <div class="page-main">
         <Header/>
         <Navbar/>
-        <Controllers/>
+        <router-view/>
     </div>
 </template>
 <script>
-
-    import Header from './Header.vue'
-    import Navbar from './Navbar.vue'
-    import Controllers from './Controllers.vue'
+    import Navbar from './Navbar'
+    import Header from './Header'
+    import VueRouter from 'vue-router'
 
     export default {
-        components: {Header, Navbar, Controllers}
+        components: {Header, Navbar, VueRouter}
     }
+
 </script>

@@ -1,6 +1,9 @@
 import 'babel-polyfill'
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import VueApollo from "vue-apollo"
+import Controllers from './components/Controllers.vue'
+import Home from './components/Home.vue'
 import App from './components/App.vue'
 import {ApolloClient} from 'apollo-client'
 import {HttpLink} from 'apollo-link-http'
@@ -22,7 +25,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     // add the authorization to the headers
     operation.setContext({
         headers: {
-            authorization: `basic dGVzdDp0ZXN0`
+            authorization: `Basic dGVzdDp0ZXN0`
         }
     })
 
@@ -39,9 +42,25 @@ const apolloProvider = new VueApollo({
     defaultClient: apolloClient,
 })
 Vue.use(VueApollo)
+Vue.use(VueRouter)
+
+
+
+const routes = [
+    { path: '/', redirect: '/home' },
+    { path: '/home', component: Home },
+    { path: '/controllers', component: Controllers }
+]
+
+
+const router = new VueRouter({
+    routes
+})
+
 
 new Vue({
-    el: '#vue_app',
+    el: '.page',
+    router,
     apolloProvider,
     render: h => h(App)
 })

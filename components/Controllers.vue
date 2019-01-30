@@ -48,7 +48,7 @@
                                 </thead>
                                 <tbody>
 
-                                <tr v-for="controller in controllers">
+                                <tr v-for="controller in controllers" v-bind:key="controller.id">
                                     <td><a href="#" class="text-black f-b">{{controller.uid}}</a></td>
                                     <td>Necta Kikko Max</td>
                                     <td>{{controller.mode}}</td>

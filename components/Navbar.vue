@@ -5,7 +5,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="#">
                         <i class="fas fa-home"></i>
-                        <span> Главная</span>
+                        <router-link to="/home">Главная</router-link>
                     </a>
                 </li>
                 <li class="nav-item with-sub">
@@ -68,7 +68,7 @@
                                 <a href="#">Автоматы</a>
                             </li>
                             <li>
-                                <a href="#">Контроллеры</a>
+                                <router-link to="/controllers">Контроллеры</router-link>
                             </li>
                             <li>
                                 <a href="#">Уведомления</a>
@@ -83,3 +83,23 @@
         </div>
     </div>
 </template>
+<script>
+    export default {
+        computed: {
+            isActive(path) {
+                // We will see what `params` is shortly
+                console.log(path, this.$route.path)
+                return this.$route.path === path
+            },
+        },
+        methods: {
+            isActive() {
+                return true
+            }
+        },
+        data: {
+            isActive: true
+        }
+    }
+
+</script>
