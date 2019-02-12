@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-TileColor" content="#0061da">
+    <meta name="theme-color" content="#1643a3">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+
+    <!-- Title -->
+    <title>Настройки</title>
+
+    <!--Font Awesome-->
+    <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
+
+    <!-- Font Family-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900&amp;subset=cyrillic"
+          rel="stylesheet">
+
+    <!-- Dashboard Css -->
+    <link href="assets/css/dashboard.css" rel="stylesheet"/>
+
+    <!-- vector-map -->
+    <link href="assets/plugins/vector-map/jqvmap.min.css" rel="stylesheet">
+
+    <!-- Custom scroll bar css-->
+    <link href="assets/plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet"/>
+
+    <!-- Sidemenu Css -->
+    <link href="assets/plugins/toggle-sidebar/css/sidemenu.css" rel="stylesheet">
+
+    <!-- c3.js Charts Plugin -->
+    <link href="assets/plugins/charts-c3/c3-chart.css" rel="stylesheet"/>
+    <link href="./assets/plugins/morris/morris.css" rel="stylesheet"/>
+
+    <!---Font icons-->
+    <link href="assets/plugins/iconfonts/plugin.css" rel="stylesheet"/>
+
+    <link href="assets/scss/main.css" rel="stylesheet"/>
+
+</head>
+<body class="app">
+<div id="global-loader">
+    <div class="showbox">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<div class="page">
+    <div class="page-main">
+        <!-- Navbar-->
+        <header class="app-header header shadow-none relative">
+            <div id="particles-js"></div>
+            <div class="container">
+
+                <!-- Header Background Animation-->
+                <div id="canvas" class="gradient"></div>
+
+                <!-- Navbar Right Menu-->
+                <div class="container-fluid">
+                    <div class="d-flex">
+                        <a class="header-brand" href="index.html">
+                            <img alt="ren logo" class="header-brand-img" src="assets/images/brand/logo.png">
+                        </a>
+                        <div class="d-flex order-lg-2 ml-auto">
+
+
+                            <div class="dropdown d-none d-md-flex">
+                                <a class="nav-link icon" data-toggle="dropdown">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="nav-unread bg-dark"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item d-flex pb-3" href="#">
+                                        <div class="notifyimg">
+                                            <i class="fas fa-thumbs-up"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Someone likes our posts.</strong>
+                                            <div class="small text-muted">
+                                                3 hours ago
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex pb-3" href="#">
+                                        <div class="notifyimg">
+                                            <i class="fas fa-comment-alt"></i>
+                                        </div>
+                                        <div>
+                                            <strong>3 New Comments</strong>
+                                            <div class="small text-muted">
+                                                5 hour ago
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex pb-3" href="#">
+                                        <div class="notifyimg">
+                                            <i class="fas fa-cogs"></i>
+                                        </div>
+                                        <div>
+                                            <strong>Server Rebooted.</strong>
+                                            <div class="small text-muted">
+                                                45 mintues ago
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-center text-muted-dark" href="#">View all
+                                        Notification</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <a class="nav-link pr-0 leading-none d-flex" data-toggle="dropdown" href="#">
+                                    <span class="avatar avatar-md brround"
+                                          style="background-image: url(assets/images/faces/female/25.jpg)"></span>
+                                    <span class="ml-2 d-none d-lg-block">
+												<span class="text-black f-b">Дмитрий Бояринцев</span>
+											</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="#"><i
+                                            class="dropdown-icon mdi mdi-account-outline"></i> Profile</a>
+                                    <a class="dropdown-item" href="#"><i class="dropdown-icon mdi mdi-settings"></i>
+                                        Settings</a>
+                                    <a class="dropdown-item" href="#"><span class="float-right"><span
+                                            class="badge badge-primary">6</span></span> <i
+                                            class="dropdown-icon mdi mdi-message-outline"></i> Inbox</a>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="dropdown-icon mdi mdi-comment-check-outline"></i> Message</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"><i
+                                            class="dropdown-icon mdi mdi-compass-outline"></i> Need help?</a>
+                                    <a class="dropdown-item" href="login.html"><i
+                                            class="dropdown-icon mdi mdi-logout-variant"></i> Sign out</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse"
+                           data-target="#headerMenuCollapse">
+                            <span class="header-toggler-icon"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Horizantal menu-->
+        <div class="ren-navbar" id="headerMenuCollapse">
+            <div class="container">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-home"></i>
+                            <span> Главная</span>
+                        </a>
+                    </li>
+                    <li class="nav-item with-sub">
+                        <a class="nav-link" href="#"><i class="fas fa-desktop"></i> <span>Мониторинг</span></a>
+                        <div class="sub-item">
+                            <ul>
+                                <li>
+                                    <a href="maps.html">Рабочие</a>
+                                </li>
+                                <li>
+                                    <a href="chart-morris.html">Неисправные</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- dropdown-menu -->
+                    </li>
+                    <li class="nav-item with-sub">
+                        <a class="nav-link" href="#"><i class="fas fa-chart-bar"></i><span>Статистика</span></a>
+                        <div class="sub-item">
+                            <ul>
+                                <li>
+                                    <a href="maps.html">Контроллеры</a>
+                                </li>
+                                <li>
+                                    <a href="chart-morris.html">Товары</a>
+                                </li>
+                                <li>
+                                    <a href="chart-morris.html">Финансы</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- dropdown-menu -->
+                    </li>
+                    <li class="nav-item with-sub">
+                        <a class="nav-link" href="#"><i class="fas fa-cog"></i><span>Обслуживание</span></a>
+                        <div class="sub-item">
+                            <ul>
+                                <li>
+                                    <a href="profile.html">Товар</a>
+                                </li>
+                                <li>
+                                    <a href="editprofile.html">Наличные</a>
+                                </li>
+                                <li>
+                                    <a href="email.html">Ремонт</a>
+                                </li>
+                                <li>
+                                    <a href="emailservices.html">Установка</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- dropdown-menu -->
+                    </li>
+                    <li class="nav-item with-sub">
+                        <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-hdd"></i> <span>Оборудование</span></a>
+                        <div class="sub-item">
+                            <ul>
+                                <li>
+                                    <a href="form-elements.html">Группы</a>
+                                </li>
+                                <li>
+                                    <a href="form-wizard.html">Автоматы</a>
+                                </li>
+                                <li>
+                                    <a href="wysiwyag.html">Контроллеры</a>
+                                </li>
+                                <li>
+                                    <a href="wysiwyag.html">Уведомления</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- dropdown-menu -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-toggle="dropdown" href="#"><i class="fas fa-sliders-h"></i> <span>Настройки</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Horizantal menu-->
+
+        <div class="container">
+            <div class="side-app">
+
+                <div class="row mt-5">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
+                            <div class="card-header">
+                                <div class="card-title f-b">Настройки</div>
+                            </div>
+
+                            <div class="tab-menu-heading">
+                                <div class="tabs-menu1">
+                                    <!-- Tabs -->
+                                    <ul class="nav panel-tabs f-b">
+                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a></li>
+                                        <li><a href="#tab2" data-toggle="tab">Уведомления</a></li>
+                                        <li><a href="#tab3" data-toggle="tab">компания </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="text-wrap">
+                                <div class="example top-buttons-container">
+                                    <a href="#" class="btn btn-primary">Добавить автомат</a>
+                                    <div class="form-group float-right">
+                                        <div class="row gutters-xs">
+                                            <span class="col-auto">
+                                                <button class="btn btn-primary" type="button"><i
+                                                        class="fe fe-upload"></i>
+                                                </button>
+                                            </span>
+
+                                            <span class="col-auto">
+                                                <button class="btn btn-primary" type="button"><i
+                                                        class="fe fe-download"></i>
+                                                </button>
+                                            </span>
+
+                                            <span class="col-auto">
+                                                <button class="btn btn-primary" type="button">Сохранить
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive settings-table">
+                                <table class="table card-table table-vcenter text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th class="sortable up">Автомат</th>
+                                        <th class="sortable">Название</th>
+                                        <th>Группа</th>
+                                        <th>Тип</th>
+                                        <th>Модель</th>
+                                        <th>Товары</th>
+                                        <th class="sortable">Контроллер</th>
+                                        <th>Состояние</th>
+                                        <th>Дата</th>
+                                        <th>Прошивка</th>
+                                        <th>Режим</th>
+                                        <th>Фискализация</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr>
+                                        <td class="settings-link"><a href="#" class="f-b">25411</a> <i class="fe fe-more-vertical"></i> </td>
+                                        <td>Вокзал1</td>
+                                        <td>Общая</td>
+                                        <td>Кофе</td>
+                                        <td>Kikko Max</td>
+                                        <td>Не заполнены</td>
+                                        <td class="settings-link">10005-2018</td>
+                                        <td class="state dropdown" data-toggle="dropdown">
+                                            <span class="status-icon bg-success"></span> Активирован
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-success"></span> Активирован
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-danger"></span> Дективирован
+
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-secondary"></span>Приостановлен
+                                                </a>
+
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-yellow"></span> Отладка
+                                                </a>
+                                            </div>
+
+                                        </td>
+                                        <td>09.02.2019 14:45</td>
+                                        <td>123456</td>
+                                        <td>CASHLESS FREE</td>
+                                        <td>Подтвержденный</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="settings-link"> <a href="#" class="f-b">25411</a> <i class="fe fe-more-vertical"></i></td>
+                                        <td>Вокзал1</td>
+                                        <td>Общая</td>
+                                        <td>Кофе</td>
+                                        <td>Kikko Max</td>
+                                        <td>Не заполнены</td>
+                                        <td class="settings-link">10005-2018</td>
+                                        <td class="state dropdown" data-toggle="dropdown">
+                                            <span class="status-icon bg-secondary"></span>Приостановлен
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-success"></span> Активирован
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-danger"></span> Дективирован
+
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-secondary"></span>Приостановлен
+                                                </a>
+
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-yellow"></span> Отладка
+                                                </a>
+                                            </div>
+
+                                        </td>
+                                        <td>09.02.2019 14:45</td>
+                                        <td>123456</td>
+                                        <td>CASHLESS FREE</td>
+                                        <td>Подтвержденный</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="settings-link"><a href="#" class="f-b">25411</a> <i class="fe fe-more-vertical"></i> </td>
+                                        <td>Вокзал1</td>
+                                        <td>Общая</td>
+                                        <td>Кофе</td>
+                                        <td>Kikko Max</td>
+                                        <td>Не заполнены</td>
+                                        <td class="settings-link">10005-2018</td>
+
+                                        <td class="state dropdown" data-toggle="dropdown">
+                                            <span class="status-icon bg-danger"></span> Дективирован
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-success"></span> Активирован
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-danger"></span> Дективирован
+
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-secondary"></span>Приостановлен
+                                                </a>
+
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-yellow"></span> Отладка
+                                                </a>
+                                            </div>
+
+                                        </td>
+                                        <td>09.02.2019 14:45</td>
+                                        <td>123456</td>
+                                        <td>CASHLESS FREE</td>
+                                        <td>Подтвержденный</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="settings-link"> <a href="#" class="f-b">25411</a> <i class="fe fe-more-vertical"></i></td>
+                                        <td>Вокзал1</td>
+                                        <td>Общая</td>
+                                        <td>Кофе</td>
+                                        <td>Kikko Max</td>
+                                        <td>Не заполнены</td>
+                                        <td class="settings-link">10005-2018</td>
+
+                                        <td class="state dropdown" data-toggle="dropdown">
+                                            <span class="status-icon bg-yellow"></span> Отладка
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-success"></span> Активирован
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-danger"></span> Дективирован
+
+                                                </a>
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-secondary"></span>Приостановлен
+                                                </a>
+
+                                                <a href="javascript:void(0)" class="dropdown-item">
+                                                    <span class="status-icon bg-yellow"></span> Отладка
+                                                </a>
+                                            </div>
+
+                                        </td>
+                                        <td>09.02.2019 14:45</td>
+                                        <td>123456</td>
+                                        <td>CASHLESS FREE</td>
+                                        <td>Подтвержденный</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- table-wrapper -->
+                        </div>
+                        <!-- section-wrapper -->
+
+                    </div>
+                </div>
+            </div>
+
+            <!--footer-->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row align-items-center flex-row-reverse">
+                        <div class="col-md-12 col-sm-12 mt-3 mt-lg-0 text-center">
+                            © 2018 <a href="#">ivend</a>. Все права защищены.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- End Footer-->
+        </div>
+    </div>
+
+    <!-- Back to top -->
+    <a href="#top" id="back-to-top" style="display: inline;"><i class="fas fa-angle-up"></i></a>
+
+    <!-- Dashboard Core -->
+    <script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/jquery.sparkline.min.js"></script>
+    <script src="assets/js/vendors/selectize.min.js"></script>
+    <script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
+    <script src="assets/js/vendors/circle-progress.min.js"></script>
+    <script src="assets/plugins/rating/jquery.rating-stars.js"></script>
+    <!-- Side menu js -->
+    <script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
+
+    <!-- Custom scroll bar Js-->
+    <script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- c3.js Charts Plugin -->
+    <script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
+    <script src="./assets/plugins/charts-c3/c3-chart.js"></script>
+
+    <!-- Input Mask Plugin -->
+    <script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
+    <!-- Progress -->
+    <script src="assets/js/vendors/circle-progress.min.js"></script>
+
+    <!-- Animation -->
+    <script src="assets/plugins/particles/particles.js"></script>
+    <script src="assets/plugins/particles/particlesapp_default.js"></script>
+
+    <!-- Vector Map -->
+
+    <script src="assets/plugins/vector-map/jquery.vmap.js"></script>
+    <script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
+    <script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
+
+    <!--Counters -->
+    <script src="assets/plugins/counters/counterup.min.js"></script>
+    <script src="assets/plugins/counters/waypoints.min.js"></script>
+
+    <!-- Index Scripts -->
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/charts.js"></script>
+
+
+    <!--  Chart js -->
+    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="assets/js/chart.js"></script>
+
+    <!--Counters -->
+    <script src="assets/plugins/counters/counterup.min.js"></script>
+    <script src="assets/plugins/counters/waypoints.min.js"></script>
+
+    <!--  Chart js -->
+    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="./assets/plugins/chart/WidgetChart.js"></script>
+
+    <!-- custom js -->
+    <script src="assets/js/custom.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-TileColor" content="#0061da">
+    <meta name="theme-color" content="#1643a3">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+
+    <!-- Title -->
+    <title>Авторизация / Регистрация</title>
+
+    <!--Font Awesome-->
+    <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
+
+    <!-- Font Family-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900&amp;subset=cyrillic"
+          rel="stylesheet">
+
+    <!-- Dashboard Css -->
+    <link href="assets/css/dashboard.css" rel="stylesheet"/>
+
+    <!-- vector-map -->
+    <link href="assets/plugins/vector-map/jqvmap.min.css" rel="stylesheet">
+
+    <!-- Custom scroll bar css-->
+    <link href="assets/plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet"/>
+
+    <!-- Sidemenu Css -->
+    <link href="assets/plugins/toggle-sidebar/css/sidemenu.css" rel="stylesheet">
+
+    <!-- c3.js Charts Plugin -->
+    <link href="assets/plugins/charts-c3/c3-chart.css" rel="stylesheet"/>
+    <link href="./assets/plugins/morris/morris.css" rel="stylesheet"/>
+
+    <!---Font icons-->
+    <link href="assets/plugins/iconfonts/plugin.css" rel="stylesheet"/>
+
+    <link href="assets/scss/main.css" rel="stylesheet"/>
+
+</head>
+<body class="app">
+
+<div id="global-loader">
+    <div class="showbox">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<div class="auth-page">
+    <img src="assets/images/brand/logo.png" class="auth-page__logo"/>
+
+    <!-- Авторизация -->
+    <div class="auth-block">
+        <div class="auth-block__title">Авторизация</div>
+
+        <form name="login" action="">
+
+            <div class="auth-block__field-container auth-block__field-container--login">
+                <input class="auth-block__field" type="text" name="login" placeholder="Логин" required>
+            </div>
+
+            <div class="auth-block__field-container auth-block__field-container--pass">
+                <input class="auth-block__field" type="password" name="pass" placeholder="Пароль" required>
+            </div>
+
+            <button class="auth-block__submit-btn btn btn-primary" type="submit">Войти</button>
+            <div class="auth-block__flex">
+
+                <label class="default-checkbox" for="remember-checkbox">
+                    <input class="auth-block__checkbox" type="checkbox" name="remember" id="remember-checkbox">
+
+                    <span class="auth-block__checkbox-label">Запомнить меня</span>
+                </label>
+
+                <a class="auth-block__link" href="#">Вспомнить пароль</a>
+
+            </div>
+
+        </form>
+
+        <div class="auth-block__link-container">
+            <span class="auth-block__link-title">Нет аккаунта?</span>
+            <a href="#" class="auth-block__link">Зарегестрируйтесь</a>
+        </div>
+    </div>
+    <!-- Регистрация -->
+    <div class="auth-block disabled-block">
+        <div class="auth-block__title">Регистрация</div>
+
+        <form name="register" action="">
+            <div class="auth-block__field-container auth-block__field-container--email">
+                <input class="auth-block__field" type="email" name="login" placeholder="Email" required>
+            </div>
+            <div class="auth-block__field-container auth-block__field-container--phone">
+                <input class="auth-block__field" type="tel" name="phone" placeholder="Телефон" required>
+            </div>
+
+            <!-- Код телефона -->
+
+            <div class="auth-block__field-container auth-block__field-container--phone-code">
+                <input class="auth-block__field auth-block__field--phone-code" type="text" name="tel-code"
+                       placeholder="Код из смс" required>
+                <button class="auth-block__phone-code-btn">Выслать код</button>
+                <div class="auth-block__code-message">Код подтверждения отправлен на номер<br/>+7 (999) 999 9999</div>
+            </div>
+
+            <!-- Второй шаг регистрации -->
+
+            <div class="disabled-block">
+                <div class="auth-block__field-container auth-block__field-container--pass">
+                    <input class="auth-block__field" type="password" name="pass" placeholder="Пароль" required>
+                </div>
+                <div class="auth-block__field-container auth-block__field-container--pass">
+                    <input class="auth-block__field" type="password" name="pass-confirm" placeholder="Повторите пароль"
+                           required>
+                </div>
+                <button class="auth-block__submit-btn btn btn-primary" type="submit">Зерегистрироваться</button>
+                <label class="default-checkbox" for="сonditions-checkbox">
+                    <input class="auth-block__checkbox" type="checkbox" name="remember" id="сonditions-checkbox">
+                    <span class="auth-block__checkbox-label">Я согласен с <a class="auth-block__link" href="#">условиями соглашения</a></span>
+                </label>
+            </div>
+        </form>
+
+        <div class="auth-block__link-container">
+            <span class="auth-block__link-title">Уже есть аккаунт?</span>
+            <a href="#" class="auth-block__link">Войти</a>
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Core -->
+<script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="assets/js/vendors/jquery.sparkline.min.js"></script>
+<script src="assets/js/vendors/selectize.min.js"></script>
+<script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
+<script src="assets/js/vendors/circle-progress.min.js"></script>
+<script src="assets/plugins/rating/jquery.rating-stars.js"></script>
+<!-- Side menu js -->
+<script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
+
+<!-- Custom scroll bar Js-->
+<script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- c3.js Charts Plugin -->
+<script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
+<script src="./assets/plugins/charts-c3/c3-chart.js"></script>
+
+<!-- Input Mask Plugin -->
+<script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
+<!-- Progress -->
+<script src="assets/js/vendors/circle-progress.min.js"></script>
+
+<!-- Animation -->
+<script src="assets/plugins/particles/particles.js"></script>
+<script src="assets/plugins/particles/particlesapp_default.js"></script>
+
+<!-- Vector Map -->
+
+<script src="assets/plugins/vector-map/jquery.vmap.js"></script>
+<script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
+<script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
+<script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
+
+<!--Counters -->
+<script src="assets/plugins/counters/counterup.min.js"></script>
+<script src="assets/plugins/counters/waypoints.min.js"></script>
+
+<!-- Index Scripts -->
+<script src="assets/js/index.js"></script>
+<script src="assets/js/charts.js"></script>
+
+
+<!--  Chart js -->
+<script src="./assets/plugins/chart/Chart.bundle.js"></script>
+<script src="assets/js/chart.js"></script>
+
+<!--Counters -->
+<script src="assets/plugins/counters/counterup.min.js"></script>
+<script src="assets/plugins/counters/waypoints.min.js"></script>
+
+<!--  Chart js -->
+<script src="./assets/plugins/chart/Chart.bundle.js"></script>
+<script src="./assets/plugins/chart/WidgetChart.js"></script>
+
+<!-- custom js -->
+<script src="assets/js/custom.js"></script>
+
+
+</body>
+</html>

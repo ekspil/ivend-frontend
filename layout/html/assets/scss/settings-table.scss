@@ -1,0 +1,40 @@
+@import "mixins";
+
+.settings-table {
+  @include default-table();
+
+  td {
+    a {
+      color: #000000;
+    }
+
+    &.settings-link {
+      transition: .1s;
+
+      a {
+        transition: .1s;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: #00dabf;
+        color: #fff;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+
+    &.state {
+      &:hover {
+        cursor: pointer;
+
+        &:after {
+
+        }
+
+      }
+    }
+  }
+}

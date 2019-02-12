@@ -1,0 +1,31 @@
+@import "mixins";
+
+.card-header-links {
+  padding: 0 24px;
+  margin-top: 15px;
+  margin-bottom: 13px;
+
+  &__item {
+    cursor: pointer;
+    font-size: 0.8125rem;
+    line-height: 1.84615385;
+    letter-spacing: .03em;
+    color: #00dabf;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out;
+
+    margin: 0 10px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      color: #000;
+    }
+  }
+}

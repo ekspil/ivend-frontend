@@ -1,0 +1,47 @@
+@import "mixins";
+
+.stats-table {
+  @include default-table();
+  position: relative;
+  z-index: 1;
+
+  thead tr {
+    z-index: 11;
+    position: relative;
+    background-color: #fff;
+
+    th, td {
+      background-color: #fff;
+
+    }
+
+    &:hover {
+      background-color: #fff;
+    }
+  }
+
+  tr {
+    &:hover {
+      background-color: #f2f5f9;
+    }
+  }
+
+  td {
+    position: relative;
+    outline: 0;
+  }
+
+/*
+  td:hover::after,
+  td:focus::after {
+    content: '';
+    height: 10000px;
+    left: 0;
+    position: absolute;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
+    background-color: #ffa;
+  }*/
+
+}

@@ -1,0 +1,12 @@
+@import "mixins";
+
+.auth-page {
+  padding-top: 80px;
+  padding-bottom: 150px;
+
+  &__logo {
+    width: 200px;
+    margin: 30px auto;
+    display: block;
+  }
+}
