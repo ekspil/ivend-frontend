@@ -1,11 +1,8 @@
 import 'babel-polyfill'
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import router from './src/router/Router'
 import VueApollo from "vue-apollo"
-import Controllers from './components/Controllers.vue'
-import EditController from './components/EditController.vue'
-import Home from './components/Home.vue'
-import App from './components/App.vue'
+import App from './src/App.vue'
 import {ApolloClient} from 'apollo-client'
 import {HttpLink} from 'apollo-link-http'
 import {InMemoryCache} from 'apollo-cache-inmemory'
@@ -41,21 +38,9 @@ const apolloClient = new ApolloClient({
 const apolloProvider = new VueApollo({
     defaultClient: apolloClient,
 })
+
 Vue.use(VueApollo)
-Vue.use(VueRouter)
 
-
-const routes = [
-    {path: '/', redirect: '/home'},
-    {path: '/home', component: Home},
-    {path: '/controllers', component: Controllers},
-    {path: '/controller/:id/edit', component: EditController}
-]
-
-
-const router = new VueRouter({
-    routes
-})
 
 
 new Vue({
