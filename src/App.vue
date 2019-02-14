@@ -1,7 +1,10 @@
 <template>
     <div class="page-main">
-        <Header/>
-        <Navbar/>
+        <div v-if="this.$route.meta.role">
+            <Header/>
+            <Navbar/>
+        </div>
+
         <router-view/>
     </div>
 </template>
