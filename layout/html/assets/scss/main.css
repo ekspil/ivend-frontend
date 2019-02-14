@@ -74,10 +74,7 @@
 
 .auth-block {
   max-width: 400px;
-  margin: 0 15px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
   padding: 40px 30px 30px;
   background-color: #ffffff;
   box-shadow: 0 0 0 1px rgba(61, 119, 180, 0.12), 0 8px 16px 0 rgba(91, 139, 199, 0.24); }
@@ -178,8 +175,7 @@
     cursor: pointer; }
 
 .auth-page {
-  padding-top: 80px;
-  padding-bottom: 150px; }
+  padding: 80px 20px 150px; }
   .auth-page__logo {
     width: 200px;
     margin: 30px auto;
@@ -235,9 +231,11 @@
   margin-bottom: 30px; }
   .stats-top-menu__content-container {
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    flex-wrap: wrap; }
   .stats-top-menu__date-buttons {
-    display: flex; }
+    display: flex;
+    flex-wrap: wrap; }
   .stats-top-menu__item {
     font-weight: 500;
     letter-spacing: .03em;
@@ -251,6 +249,7 @@
     vertical-align: middle;
     user-select: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 10px;
     background: #fff;
     line-height: 1.84615385;
     margin-right: 10px; }
@@ -269,7 +268,8 @@
   .stats-top-menu__date-period {
     display: flex;
     align-items: center;
-    position: relative; }
+    position: relative;
+    margin-bottom: 10px; }
   .stats-top-menu__date-separator {
     width: 6px;
     height: 2px;
@@ -459,8 +459,15 @@
 .example {
   border: none; }
 
-.top-buttons-container {
-  border-top: none; }
+.top-buttons {
+  border-top: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; }
+  .top-buttons__left-container {
+    margin-bottom: 10px; }
+  .top-buttons .btn {
+    margin-bottom: 10px; }
 
 .default-checkbox input {
   position: absolute;
@@ -495,5 +502,12 @@
   left: 3px;
   content: '';
   background-image: url("../../assets/images/icons/checkmark.png"); }
+
+@media screen and (max-width: 768px) {
+  .selectgroup {
+    flex-wrap: wrap; }
+
+  .selectgroup-item {
+    width: 100%; } }
 
 /*# sourceMappingURL=main.css.map */

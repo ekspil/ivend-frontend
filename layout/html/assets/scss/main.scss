@@ -21,7 +21,22 @@
 }
 
 .top-buttons-container {
+
+}
+
+.top-buttons {
   border-top: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &__left-container {
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    margin-bottom: 10px;
+  }
 }
 
 .default-checkbox {
@@ -73,5 +88,17 @@
       content: '';
       background-image: url("../../assets/images/icons/checkmark.png");
     }
+  }
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .selectgroup {
+    flex-wrap: wrap;
+  }
+
+  .selectgroup-item {
+    width: 100%;
   }
 }
