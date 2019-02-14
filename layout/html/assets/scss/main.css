@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.settings-table .sortable:hover {
+  cursor: pointer;
+  background-color: #d4f9f6; }
+.settings-table .sortable:after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+  top: -2px;
+  width: 9px;
+  height: 5px;
+  background-image: url("../../assets/images/icons/dropdown-icon.png"); }
+.settings-table .sortable.up:after {
+  transform: rotate(180deg);
+  top: -3px; }
+.settings-table td a {
+  color: #000000; }
+.settings-table td.settings-link {
+  transition: .1s; }
+  .settings-table td.settings-link a {
+    transition: .1s; }
+  .settings-table td.settings-link:hover {
+    cursor: pointer;
+    background-color: #00dabf;
+    color: #fff; }
+    .settings-table td.settings-link:hover a {
+      color: #fff; }
+.settings-table td.state:hover {
+  cursor: pointer; }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.auth-block {
+  max-width: 400px;
+  margin: 0 15px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 40px 30px 30px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(61, 119, 180, 0.12), 0 8px 16px 0 rgba(91, 139, 199, 0.24); }
+  .auth-block__title {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 35px; }
+  .auth-block__field-container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 30px; }
+    .auth-block__field-container:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+      display: block;
+      width: 17px;
+      height: 17px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center; }
+    .auth-block__field-container--phone-code {
+      display: flex;
+      flex-wrap: wrap; }
+    .auth-block__field-container--login:after {
+      background-image: url("../../assets/images/icons/user-login.png"); }
+    .auth-block__field-container--pass:after {
+      background-image: url("../../assets/images/icons/password.png"); }
+    .auth-block__field-container--email:after {
+      background-image: url("../../assets/images/icons/mail.png");
+      opacity: .5; }
+    .auth-block__field-container--phone:after {
+      background-image: url("../../assets/images/icons/phone.png"); }
+  .auth-block__field {
+    width: 100%;
+    font-size: inherit;
+    border: 1px solid #05dabf;
+    background-color: #fff;
+    padding: 0.520rem 0.75rem;
+    border-radius: 3px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    line-height: 1.6; }
+    .auth-block__field--wrong {
+      border-color: #da0000; }
+    .auth-block__field--phone-code {
+      width: 60%;
+      border-radius: 3px 0 0 3px;
+      border-right: none; }
+  .auth-block__phone-code-btn {
+    width: 40%;
+    border: none;
+    border-radius: 0 3px 3px 0;
+    font-weight: 500;
+    letter-spacing: .03em;
+    font-size: 0.8125rem;
+    min-width: 2.375rem;
+    background: #00dabf;
+    color: #fff;
+    padding: 7px 16px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+    .auth-block__phone-code-btn:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: #000; }
+  .auth-block__submit-btn {
+    width: 100%;
+    margin-bottom: 22px; }
+  .auth-block__code-message {
+    font-size: inherit;
+    color: #373737;
+    width: 100%;
+    margin-top: 16px; }
+  .auth-block__flex {
+    display: flex;
+    justify-content: space-between; }
+  .auth-block__link-container {
+    text-align: center;
+    margin-top: 35px; }
+  .auth-block__link-title {
+    color: #a1a1a1; }
+  .auth-block__link {
+    text-decoration: underline;
+    color: #000000; }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.auth-page {
+  padding-top: 80px;
+  padding-bottom: 150px; }
+  .auth-page__logo {
+    width: 200px;
+    margin: 30px auto;
+    display: block; }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.card-header-links {
+  padding: 0 24px;
+  margin-top: 15px;
+  margin-bottom: 13px; }
+  .card-header-links__item {
+    cursor: pointer;
+    font-size: 0.8125rem;
+    line-height: 1.84615385;
+    letter-spacing: .03em;
+    color: #00dabf;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out;
+    margin: 0 10px; }
+    .card-header-links__item:first-child {
+      margin-left: 0; }
+    .card-header-links__item:last-child {
+      margin-right: 0; }
+    .card-header-links__item:hover {
+      color: #000; }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.stats-top-menu {
+  padding: 0 25px;
+  margin-top: 40px;
+  margin-bottom: 30px; }
+  .stats-top-menu__content-container {
+    display: flex;
+    justify-content: space-between; }
+  .stats-top-menu__date-buttons {
+    display: flex; }
+  .stats-top-menu__item {
+    font-weight: 500;
+    letter-spacing: .03em;
+    font-size: 0.8125rem;
+    border: 1px solid #00dabf;
+    padding: 7px 16px;
+    border-radius: 3px;
+    line-height: 1.84615385;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background: #fff;
+    line-height: 1.84615385;
+    margin-right: 10px; }
+    .stats-top-menu__item:hover {
+      background: #daf9f5;
+      cursor: pointer; }
+    .stats-top-menu__item--active {
+      background: #00dabf;
+      color: #fff;
+      transition: none; }
+      .stats-top-menu__item--active:hover {
+        cursor: default;
+        background: #58dabd; }
+  .stats-top-menu__date-period {
+    display: flex;
+    align-items: center; }
+  .stats-top-menu__date-separator {
+    width: 6px;
+    height: 2px;
+    background-color: #00dabf;
+    max-width: 0 8px; }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.stats-table {
+  position: relative;
+  z-index: 1;
+  /*
+    td:hover::after,
+    td:focus::after {
+      content: '';
+      height: 10000px;
+      left: 0;
+      position: absolute;
+      top: -5000px;
+      width: 100%;
+      z-index: -1;
+      background-color: #ffa;
+    }*/ }
+  .stats-table .sortable:hover {
+    cursor: pointer;
+    background-color: #d4f9f6; }
+  .stats-table .sortable:after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+    top: -2px;
+    width: 9px;
+    height: 5px;
+    background-image: url("../../assets/images/icons/dropdown-icon.png"); }
+  .stats-table .sortable.up:after {
+    transform: rotate(180deg);
+    top: -3px; }
+  .stats-table thead tr {
+    z-index: 11;
+    position: relative;
+    background-color: #fff; }
+    .stats-table thead tr th, .stats-table thead tr td {
+      background-color: #fff; }
+    .stats-table thead tr:hover {
+      background-color: #fff; }
+  .stats-table tr:hover {
+    background-color: #f2f5f9; }
+  .stats-table td {
+    position: relative;
+    outline: 0; }
+
+.disabled-block {
+  display: none; }
+
+.table-responsive {
+  border-top: 1px solid #e7effc; }
+
+.example {
+  border: none; }
+
+.top-buttons-container {
+  border-top: none; }
+
+.default-checkbox input {
+  position: absolute;
+  top: -9999px;
+  left: -9999px; }
+.default-checkbox span {
+  position: relative;
+  display: inline-block;
+  font-size: inherit;
+  color: #000000;
+  padding-left: 30px; }
+  .default-checkbox span:hover {
+    cursor: pointer; }
+  .default-checkbox span:before, .default-checkbox span:after {
+    content: '';
+    display: block;
+    position: absolute; }
+  .default-checkbox span:before {
+    margin-right: 10px;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    border: 1px solid #05dabf;
+    background-color: #fff; }
+.default-checkbox input:checked ~ span:before {
+  background-color: #05dabf; }
+.default-checkbox input:checked ~ span:after {
+  top: 5px;
+  width: 16px;
+  height: 12px;
+  left: 3px;
+  content: '';
+  background-image: url("../../assets/images/icons/checkmark.png"); }
+
+/*# sourceMappingURL=main.css.map */

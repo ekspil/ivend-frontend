@@ -1,0 +1,75 @@
+@import "mixins";
+@import "settings-table";
+@import "auth-block";
+@import "auth-page";
+@import "card-header-links";
+@import "stats-top-menu";
+@import "stats-table";
+
+.disabled-block {
+  display: none;
+}
+
+.table-responsive {
+  border-top: 1px solid #e7effc;
+}
+
+.example {
+  border: none;
+}
+
+.top-buttons-container {
+  border-top: none;
+}
+
+.default-checkbox {
+  input {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  span {
+    position: relative;
+    display: inline-block;
+    font-size: inherit;
+    color: #000000;
+    padding-left: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      position: absolute;
+
+    }
+
+    &:before {
+      margin-right: 10px;
+      left: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 3px;
+      border: 1px solid #05dabf;
+      background-color: #fff;
+    }
+  }
+
+  input:checked ~ span {
+    &:before {
+      background-color: #05dabf;
+    }
+
+    &:after {
+      top: 5px;
+      width: 16px;
+      height: 12px;
+      left: 3px;
+      content: '';
+      background-image: url("../../assets/images/icons/checkmark.png");
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import "mixins";
+
+.stats-top-menu {
+  padding: 0 25px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+
+  &__content-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__date-buttons {
+    display: flex;
+  }
+
+
+  &__item {
+    @include default-btn-style();
+
+    background: #fff;
+    line-height: 1.84615385;
+    margin-right: 10px;
+
+    &:hover {
+      background: #daf9f5;
+      cursor: pointer;
+    }
+
+    &--active {
+      background: $main-green-color;
+      color: #fff;
+      transition: none;
+
+      &:hover {
+        cursor: default;
+        background: $main-green-color-dark;
+      }
+    }
+  }
+
+  &__date-period {
+    display: flex;
+    align-items: center;
+  }
+
+  &__date-separator {
+    width: 6px;
+    height: 2px;
+    background-color: $main-green-color;
+    max-width: 0 8px;
+  }
+}
