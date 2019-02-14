@@ -85,21 +85,6 @@
 </template>
 <script>
     export default {
-        computed: {
-            isActive(path) {
-                // We will see what `params` is shortly
-                console.log(path, this.$route.path)
-                return this.$route.path === path
-            },
-        },
-        methods: {
-            isActive() {
-                return true
-            }
-        },
-        data: {
-            isActive: true
-        }
     }
 
 </script>
