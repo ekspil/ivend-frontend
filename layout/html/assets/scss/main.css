@@ -5,6 +5,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 .default-green-button {
   background: #00dabf;
   padding: 7px 16px;
@@ -263,14 +264,17 @@
       .stats-top-menu__item--active:hover {
         cursor: default;
         background: #58dabd; }
+    .stats-top-menu__item--date {
+      margin: 0; }
   .stats-top-menu__date-period {
     display: flex;
-    align-items: center; }
+    align-items: center;
+    position: relative; }
   .stats-top-menu__date-separator {
     width: 6px;
     height: 2px;
     background-color: #00dabf;
-    max-width: 0 8px; }
+    margin: 0 8px; }
 
 .default-green-button {
   background: #00dabf;
@@ -286,19 +290,7 @@
 
 .stats-table {
   position: relative;
-  z-index: 1;
-  /*
-    td:hover::after,
-    td:focus::after {
-      content: '';
-      height: 10000px;
-      left: 0;
-      position: absolute;
-      top: -5000px;
-      width: 100%;
-      z-index: -1;
-      background-color: #ffa;
-    }*/ }
+  z-index: 1; }
   .stats-table .sortable:hover {
     cursor: pointer;
     background-color: #d4f9f6; }
@@ -323,16 +315,146 @@
     .stats-table thead tr:hover {
       background-color: #fff; }
   .stats-table tr:hover {
-    background-color: #f2f5f9; }
+    background-color: rgba(212, 224, 236, 0.31); }
   .stats-table td {
     position: relative;
     outline: 0; }
+  .stats-table td:hover::after,
+  .stats-table td:focus::after {
+    content: '';
+    height: 10000px;
+    left: 0;
+    position: absolute;
+    top: -5000px;
+    width: 100%;
+    z-index: -1;
+    background-color: rgba(212, 224, 236, 0.31); }
+
+.default-green-button {
+  background: #00dabf;
+  padding: 7px 16px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: .03em;
+  font-size: 0.8125rem;
+  min-width: 2.375rem; }
+  .default-green-button:hover {
+    background-color: #000000;
+    cursor: pointer; }
+
+.calendar {
+  position: absolute;
+  width: 300px;
+  font-size: 0.875rem;
+  top: calc(100% + 10px);
+  z-index: 5; }
+  .calendar:focus {
+    display: block; }
+
+.v-cal *, .v-cal *:before, .v-cal *:after {
+  box-sizing: border-box; }
+
+.v-cal {
+  background-color: #fff;
+  border-radius: 0;
+  border: solid 1px #e7e9ed;
+  box-shadow: 0 4px 22px 0 rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%; }
+  .v-cal .vcal-header {
+    align-items: center;
+    display: flex;
+    padding: 1.2rem 1.4rem;
+    position: relative; }
+  .v-cal .vcal-header svg {
+    fill: #10989E; }
+  .v-cal .vcal-header__label {
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    font-size: 14px; }
+  .v-cal .vcal-week {
+    background-color: #eeeff2;
+    display: flex;
+    flex-wrap: wrap; }
+  .v-cal .vcal-week span {
+    flex-direction: column;
+    flex: 0 0 14.28%;
+    font-size: 0.875rem;
+    max-width: 14.28%;
+    padding: 1.2rem 0rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 13px; }
+  .v-cal .vcal-body {
+    background-color: rgba(231, 233, 237, 0.3);
+    display: flex;
+    flex-wrap: wrap; }
+  .v-cal .vcal-date {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 14.28%;
+    max-width: 14.28%;
+    padding: 0.6rem 0; }
+  .v-cal .vcal-date--active {
+    cursor: pointer; }
+  .v-cal .vcal-date--today {
+    background-color: #b3f2eb; }
+  .v-cal .cel-period {
+    background-color: #7fecdf; }
+  .v-cal .cel-selected {
+    background-color: #79e2d6; }
+  .v-cal .vcal-date--period {
+    background-color: #d8f9f5; }
+  .v-cal .vcal-date--disabled {
+    border-radius: 0;
+    cursor: not-allowed;
+    opacity: 0.5; }
+  .v-cal .vcal-btn--prev, .v-cal .vcal-btn--next {
+    width: 9px;
+    height: 100%;
+    opacity: .4;
+    position: absolute;
+    cursor: pointer;
+    left: 0px;
+    right: auto;
+    padding: 30px;
+    transition: opacity .1s, background-color .1s;
+    background-color: transparent; }
+    .v-cal .vcal-btn--prev:after, .v-cal .vcal-btn--next:after {
+      content: '';
+      display: block;
+      width: 9px;
+      height: 15px;
+      opacity: .4;
+      position: relative;
+      cursor: pointer;
+      background: url("../../assets/images/icons/arrow-switch.png") no-repeat;
+      background-size: contain;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+    .v-cal .vcal-btn--prev:hover, .v-cal .vcal-btn--next:hover {
+      opacity: .9;
+      background-color: #00dabf8f; }
+  .v-cal .vcal-btn--next {
+    transform: rotate(180deg);
+    right: 0px;
+    left: auto;
+    position: absolute;
+    height: 100%;
+    padding: 30px; }
 
 .disabled-block {
   display: none; }
 
 .table-responsive {
-  border-top: 1px solid #e7effc; }
+  border-top: 1px solid #e7effc;
+  overflow-y: hidden; }
 
 .example {
   border: none; }

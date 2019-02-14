@@ -5,6 +5,7 @@
 @import "card-header-links";
 @import "stats-top-menu";
 @import "stats-table";
+@import "calendar";
 
 .disabled-block {
   display: none;
@@ -12,6 +13,7 @@
 
 .table-responsive {
   border-top: 1px solid #e7effc;
+  overflow-y: hidden;
 }
 
 .example {
