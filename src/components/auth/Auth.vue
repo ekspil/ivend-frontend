@@ -34,7 +34,7 @@
 
             <div class="auth-block__link-container">
                 <span class="auth-block__link-title">Нет аккаунта?</span>
-                <a href="#" class="auth-block__link">Зарегестрируйтесь</a>
+                <router-link class="auth-block__link" to="/register">Зарегестрируйтесь</router-link>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Controllers from '../components/Controllers';
 import Auth from '../components/auth/Auth';
+import Registration from '../components/auth/Registration';
 import EditController from '../components/EditController';
 import Home from '../components/Home';
 import VueRouter from "vue-router";
@@ -33,6 +34,10 @@ const routes = [
     },
     {
         path: '/auth', component: Auth,
+        meta: {},
+    },
+    {
+        path: '/register', component: Registration,
         meta: {},
     }
 ];
