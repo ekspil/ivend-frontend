@@ -42,5 +42,5 @@
 </template>
 
 <style lang="scss">
-    @import "../../assets/scss/main.scss";
+    @import "../../../layout/html/assets/scss/main";
 </style>
