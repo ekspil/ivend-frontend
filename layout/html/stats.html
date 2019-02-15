@@ -43,6 +43,8 @@
     <!---Font icons-->
     <link href="assets/plugins/iconfonts/plugin.css" rel="stylesheet"/>
 
+
+
     <link href="assets/scss/main.css" rel="stylesheet"/>
 
 </head>
@@ -276,10 +278,41 @@
                                         <button class="stats-top-menu__item">Месяц</button>
 
 
-                                        <div class="stats-top-menu__date-period">
-                                            <button class="stats-top-menu__item">от</button>
+                                        <div id="periodinput" class="stats-top-menu__date-period">
+                                            <button id="btn1" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'from')" data-calendar-label="" data-calendar-area="">от</button>
+
                                             <div class="stats-top-menu__date-separator"></div>
-                                            <button class="stats-top-menu__item">до</button>
+
+                                            <button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>
+
+                                            <form id="calendar" class="calendar disabled-block" tabindex="-1">
+                                                <div class="v-cal" id="v-cal-from" >
+                                                    <div class="vcal-header">
+                                                        <div class="vcal-btn--prev" data-calendar-toggle="previous">
+                                                        </div>
+
+                                                        <div class="vcal-header__label" data-calendar-label="month">
+                                                            Февраль 2018
+                                                        </div>
+
+
+                                                        <div class="vcal-btn--next" data-calendar-toggle="next">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="vcal-week">
+                                                        <span>Пн</span>
+                                                        <span>Вт</span>
+                                                        <span>Ср</span>
+                                                        <span>Чт</span>
+                                                        <span>Пт</span>
+                                                        <span>Сб</span>
+                                                        <span>Вс</span>
+                                                    </div>
+                                                    <div class="vcal-body" data-calendar-area="month"></div>
+                                                </div>
+                                            </form>
 
                                         </div>
                                     </div>
@@ -443,7 +476,12 @@
 <!-- custom js -->
 <script src="assets/js/custom.js"></script>
 
+
+
+<script src="assets/js/vanillaCalendar.js"></script>
+
 <script src="assets/js/alexcustom.js"></script>
+
 
 </body>
 </html>

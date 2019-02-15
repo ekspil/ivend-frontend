@@ -8,15 +8,19 @@
   &__content-container {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   &__date-buttons {
     display: flex;
+    flex-wrap: wrap;
   }
 
 
   &__item {
     @include default-btn-style();
+
+    margin-bottom: 10px;
 
     background: #fff;
     line-height: 1.84615385;
@@ -37,17 +41,23 @@
         background: $main-green-color-dark;
       }
     }
+
+    &--date {
+      margin: 0;
+    }
   }
 
   &__date-period {
     display: flex;
     align-items: center;
+    position: relative;
+    margin-bottom: 10px;
   }
 
   &__date-separator {
     width: 6px;
     height: 2px;
     background-color: $main-green-color;
-    max-width: 0 8px;
+    margin: 0 8px;
   }
 }
