@@ -1,11 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Controllers from '../components/Controllers';
-import Auth from '../components/auth/Auth';
+import Login from '../components/auth/Login';
 import Registration from '../components/auth/Registration';
 import EditController from '../components/EditController';
 import Home from '../components/Home';
 import VueRouter from "vue-router";
+
+import { includes } from 'ramda';
+
+import store from '@/store';
 
 Vue.use(Router);
 
@@ -15,30 +19,19 @@ const routes = [
         redirect: '/home',
     },
     {
-        path: '/home', component: Home,
-        meta: {
-            role: 'USER'
-        },
+        path: '/home', component: Home
     },
     {
-        path: '/controllers', component: Controllers,
-        meta: {
-            role: 'USER'
-        },
+        path: '/controllers', component: Controllers
     },
     {
-        path: '/controller/:id/edit', component: EditController,
-        meta: {
-            role: 'USER'
-        },
+        path: '/controller/:id/edit', component: EditController
     },
     {
-        path: '/auth', component: Auth,
-        meta: {},
+        path: '/login', component: Login
     },
     {
-        path: '/register', component: Registration,
-        meta: {},
+        path: '/register', component: Registration
     }
 ];
 
@@ -48,26 +41,14 @@ const router = new VueRouter({
     mode: `history`
 })
 
-
 router.beforeEach((to, from, next) => {
-    const {role} = to.meta
-
-    if (role) {
-
-        const authenticated = false
-        const roleMatched = false
-
-        if (!authenticated) {
-            return next('/auth')
-        }
-
-        if (roleMatched) {
-            return next()
-        } else {
-            return next(false)
-        }
+    const isSecured = !includes(to.path, ['/login', '/register']);
+    if (isSecured && !store.state.auth.token) {
+        next('/login');
+    } else if (!isSecured && store.state.auth.token) {
+        next('/home');
     } else {
-        return next()
+        next();
     }
 })
 

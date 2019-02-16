@@ -5,6 +5,8 @@ import {HttpLink} from 'apollo-link-http'
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import {ApolloLink} from "apollo-link";
 
+import store from '@/store';
+
 // HTTP connexion to the API
 const httpLink = new HttpLink({
   // You should use an absolute URL here
@@ -20,6 +22,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
       //Basic test:test
+      //authorization: `Basic ${store.state.auth.token}`
       authorization: `Basic dGVzdDp0ZXN0`
     }
   })

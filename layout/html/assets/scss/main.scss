@@ -61,7 +61,6 @@
       content: '';
       display: block;
       position: absolute;
-
     }
 
     &:before {
@@ -75,9 +74,16 @@
     }
   }
 
+  &__error {
+    span::before {
+      border-color: $wrong-field-border-color;
+    }
+  }
+
   input:checked ~ span {
     &:before {
       background-color: #05dabf;
+      border-color: #05dabf;
     }
 
     &:after {

@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <div class="side-app">
+            <button @click="$store.commit('auth/setToken', null)">Снести токен</button>
             <div class="page-header">
                 <h4 class="page-title">Рабочий стол</h4>
 
@@ -325,7 +326,7 @@
             controllers:
                 gql`
                     query {
-                      controllers {
+                      getControllers {
                         uid
                         mode
                       }
