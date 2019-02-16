@@ -90,11 +90,13 @@
                             }
                         });
                     
-                        if (errors || !data.token) { this.serverError = head(errors).message || 'Ошибка авторизации.'; }
-                        else { this.serverError = null; }
-
-                        this.$store.commit('auth/setToken', data.token);
-                        this.$router.push('/home');
+                        if (errors || !data.token) {
+                            this.serverError = head(errors).message || 'Ошибка авторизации.';
+                        } else {
+                            this.serverError = null;
+                            this.$store.commit('auth/setToken', data.token);
+                            this.$router.push('/home');
+                        }
                     } catch (error) {
                         this.serverError = error.message || 'Ошибка авторизации.';
                     }
