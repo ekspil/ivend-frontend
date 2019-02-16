@@ -22,8 +22,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
       //Basic test:test
-      //authorization: `Basic ${store.state.auth.token}`
-      authorization: `Basic dGVzdDp0ZXN0`
+      authorization: `Bearer ${store.state.auth.token}`
+      //authorization: `Basic dGVzdDp0ZXN0`
     }
   })
 
