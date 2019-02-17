@@ -1,17 +1,20 @@
 import Vue from 'vue';
-import Router from 'vue-router';
-import Controllers from '../components/Controllers';
-import Login from '../components/auth/Login';
-import Registration from '../components/auth/Registration';
-import EditController from '../components/EditController';
-import Home from '../components/Home';
 import VueRouter from "vue-router";
+
+import Login from '@/components/auth/Login';
+import Registration from '@/components/auth/Registration';
+
+import Controllers from '@/components/controllers/Controllers';
+import EditController from '@/components/controllers/EditController';
+import AddController from '@/components/controllers/AddController';
+
+import Home from '@/components/Home';
 
 import { includes } from 'ramda';
 
 import store from '@/store';
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
 const routes = [
     {
@@ -22,11 +25,13 @@ const routes = [
         path: '/home', component: Home
     },
     {
-        path: '/controllers', component: Controllers
+        path: '/controllers', component: Controllers,
+        children: [
+            { path: ':id/edit', component: EditController },
+            { path: '/add', component: AddController }
+        ]
     },
-    {
-        path: '/controller/:id/edit', component: EditController
-    },
+
     {
         path: '/login', component: Login
     },

@@ -11,10 +11,9 @@
 <script>
     import Navbar from './components/Navbar'
     import Header from './components/Header'
-    import VueRouter from 'vue-router'
 
     export default {
-        components: {Header, Navbar, VueRouter}
+        components: {Header, Navbar}
     }
 
 </script>
