@@ -7,15 +7,15 @@
             <div class="auth-block__title">Регистрация</div>
 
             <form name="register" method="POST">
-                <div class="auth-block__validation" v-if="validation.email">{{ validation.email }}</div>
+                <div class="validation-error" v-if="validation.email">{{ validation.email }}</div>
                 <div class="auth-block__field-container auth-block__field-container--email">
-                    <input :class="['auth-block__field', validation.email ? 'auth-block__field--wrong' : '']" type="email" name="login" placeholder="E-Mail" required
+                    <input :class="['auth-block__field', validation.email ? 'input-invalid' : '']" type="email" name="login" placeholder="E-Mail" required
                            v-model="userData.email" />
                 </div>
 
-                <div class="auth-block__validation" v-if="validation.phone">{{ validation.phone }}</div>
+                <div class="validation-error" v-if="validation.phone">{{ validation.phone }}</div>
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <input :class="['auth-block__field', validation.phone ? 'auth-block__field--wrong' : '']" type="tel" name="phone" placeholder="Телефон" required
+                    <input :class="['auth-block__field', validation.phone ? 'input-invalid' : '']" type="tel" name="phone" placeholder="Телефон" required
                            v-model="userData.phone"/>
                 </div>
 
@@ -34,15 +34,15 @@
                 <!-- Второй шаг регистрации -->
 
                 <div class="auth-block__field-container auth-block__field-container--password">
-                    <div class="auth-block__validation" v-if="validation.password">{{ validation.password }}</div>
+                    <div class="validation-error" v-if="validation.password">{{ validation.password }}</div>
                     <div class="auth-block__field-container auth-block__field-container--pass">
-                        <input :class="['auth-block__field', validation.password ? 'auth-block__field--wrong' : '']" type="password" name="pass" placeholder="Пароль" required
+                        <input :class="['auth-block__field', validation.password ? 'input-invalid' : '']" type="password" name="pass" placeholder="Пароль" required
                                v-model="userData.password"/>
                     </div>
 
-                    <div class="auth-block__validation" v-if="validation.rePassword">{{ validation.rePassword }}</div>
+                    <div class="validation-error" v-if="validation.rePassword">{{ validation.rePassword }}</div>
                     <div class="auth-block__field-container auth-block__field-container--pass">
-                        <input :class="['auth-block__field', validation.rePassword ? 'auth-block__field--wrong' : '']" type="password" name="pass-confirm"
+                        <input :class="['auth-block__field', validation.rePassword ? 'input-invalid' : '']" type="password" name="pass-confirm"
                                placeholder="Повторите пароль"
                                required v-model="userData.rePassword" />
                     </div>
@@ -52,7 +52,7 @@
                                v-model="agreement"/>
                         <span class="auth-block__checkbox-label">Я согласен с <a class="auth-block__link" href="#">условиями соглашения</a></span>
                     </label>
-                    <div class="auth-block__validation">{{ validation.agreement }}</div>
+                    <div class="validation-error">{{ validation.agreement }}</div>
                 </div>
             </form>
 
@@ -74,7 +74,7 @@
 <script>
   import gql from 'graphql-tag';
 
-  import { equals, omit, head } from 'ramda';
+  import { equals, omit, head, isEmpty } from 'ramda';
   import { areKeysNull } from '@/utils';
   import {
     validate, mapValidationObject,
@@ -120,7 +120,7 @@
                         }
                     });
 
-                    if (errors || !data.token) {
+                    if (!isEmpty(errors) || !data.token) {
                         this.serverError = head(errors).message || 'Ошибка авторизации.';
                     } else {
                         this.serverError = null;

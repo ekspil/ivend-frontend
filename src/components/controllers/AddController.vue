@@ -1,8 +1,6 @@
 <template>
-	        <div class="container">
+	<div class="container">
             <div class="side-app">
-
-
                 <div class="row mt-5">
                     <div class="col-lg-10 offset-lg-1 col-md-12">
                         <form method="post" class="card">
@@ -12,7 +10,7 @@
 
 
                             <div class="card-header-links">
-                                <a href="javascript:void(0)" class="card-header-links__item">Вернуться назад</a>
+                                <router-link to="/controllers" class="card-header-links__item">Вернуться назад</router-link>
                             </div>
 
 
@@ -20,9 +18,11 @@
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12">
                                         <div class="form-group">
+                                            <div class="validation-error" v-if="validation.uid">{{ validation.uid }}</div>
                                             <label class="form-label f-b">Номер контроллера</label>
-                                            <input type="text" class="form-control" value=""
-                                                   name="example-text-input" placeholder="Введите номер контроллера">
+                                            <input type="text" :class="['form-control', validation.uid ? 'input-invalid' : '']" value=""
+                                                   name="example-text-input" placeholder="Введите номер контроллера"
+                                                   v-model="input.uid"/>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label f-b">Опции</label>
@@ -57,28 +57,28 @@
                                             <label class="form-label f-b">Состояние</label>
                                             <div class="selectgroup w-100">
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="11"
-                                                           class="selectgroup-input" checked>
+                                                    <input type="radio" name="state" value="0"
+                                                           class="selectgroup-input" checked v-model="input.status"/>
                                                     <span class="selectgroup-button">Активирован</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="12"
-                                                           class="selectgroup-input">
+                                                    <input type="radio" name="state" value="1"
+                                                           class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Деактивирован</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="13"
-                                                           class="selectgroup-input">
+                                                    <input type="radio" name="state" value="2"
+                                                           class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Обучение</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="14"
-                                                           class="selectgroup-input">
+                                                    <input type="radio" name="state" value="3"
+                                                           class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Приостановлен</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="15"
-                                                           class="selectgroup-input">
+                                                    <input type="radio" name="state" value="4"
+                                                           class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Отладка</span>
                                                 </label>
                                             </div>
@@ -88,17 +88,17 @@
                                             <label class="form-label f-b">Тип связи</label>
                                             <div class="selectgroup w-100">
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="01"
+                                                    <input type="radio" name="connection" value="01"
                                                            class="selectgroup-input" checked>
                                                     <span class="selectgroup-button">3G</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="02"
+                                                    <input type="radio" name="connection" value="02"
                                                            class="selectgroup-input">
                                                     <span class="selectgroup-button">WiFi</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="value" value="03"
+                                                    <input type="radio" name="connection" value="03"
                                                            class="selectgroup-input">
                                                     <span class="selectgroup-button">Ethernet</span>
                                                 </label>
@@ -107,12 +107,11 @@
 
                                         <div class="form-group">
                                             <label class="form-label f-b">Режим работы</label>
-                                            <select class="form-control custom-select">
-                                                <option value="0">Выберите режим</option>
-                                                <option value="1">MDB</option>
-                                                <option value="2">EXE</option>
-                                                <option value="3" selected>Cashless</option>
-                                                <option value="4">Cashless free</option>
+                                            <select class="form-control custom-select" v-model="input.mode">
+                                                <option value="0">MDB</option>
+                                                <option value="1">EXE</option>
+                                                <option value="2" selected>Cashless</option>
+                                                <option value="3" disabled>Cashless free</option>
                                             </select>
                                         </div>
 
@@ -122,7 +121,7 @@
                                                 <option value="0" selected>Выберите режим</option>
                                                 <option value="1">Монетник</option>
                                                 <option value="2">Автомат</option>
-                                                <option value="3" >Монетник+автомат</option>
+                                                <option value="3">Монетник+автомат</option>
                                             </select>
                                         </div>
 
@@ -132,6 +131,16 @@
                                                 <option value="0" selected>Нет</option>
                                                 <option value="1">ИНПАС</option>
                                                 <option value="2">Сбербанк</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Модель автомата</label>
+                                            <select class="form-control custom-select" v-model="input.equipment">
+                                                <option v-for="(equipment, index) in equipments"
+                                                        :key="equipment.id" :value="equipment.id">
+                                                    {{ equipment.name }}
+                                                </option>
                                             </select>
                                         </div>
 
@@ -153,8 +162,13 @@
                             </div>
                             <div class="card-footer text-right">
                                 <div class="d-flex">
-                                    <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+                                    <button type="submit" class="btn btn-primary ml-auto" @click.prevent="save">Сохранить</button>
                                 </div>
+
+                                <transition name="fade">
+                                    <div class="validation-error" v-if="status.error">{{ status.error }}</div>
+                                    <div class="success-message" v-if="status.success">{{ status.success }}</div>
+                                </transition>
                             </div>
                         </form>
 
@@ -178,7 +192,80 @@
 </template>
 
 <script>
+	import gql from 'graphql-tag';
+
+    import { head, isEmpty } from 'ramda';
+    import { areKeysNull } from '@/utils';
+    import {
+        validate, mapValidationObject,
+        required
+    } from '@/utils/validation';
+
 	export default {
-		name: 'AddController'
+		name: 'AddController',
+		data: () => ({
+			equipments: [],
+            input: {
+                uid: '',
+                status: 0,
+                mode: 2,
+                equipment: 1
+            },
+            validation: {},
+            status: {
+                error: null,
+                success: ''
+            }
+		}),
+		apollo: {
+			equipments: {
+				query: gql`
+					query {
+						getEquipments {
+							id,
+							name
+						}
+					}
+				`,
+				update (data) {
+					return data.getEquipments;
+				}
+			}
+		},
+        methods: {
+            showSuccessMessage (message = 'Успешно сохранено.') {
+                this.status.success = message;
+                setTimeout(() => { this.status.success = ''; }, 2500);
+            },
+            async save () {
+                this.validation = mapValidationObject(validate(this.input, {
+                    uid: [required]
+                }));
+
+                if (areKeysNull(this.validation)) {
+                    try {
+                        /*const { errors, data } = await this.$apollo.mutate({
+                            query: gql`
+                                mutation saveController ($data: CreateControllerInput!) {
+                                    createController(input: $data)
+                                }
+                            `,
+                            variables: {
+                                data: this.input
+                            }
+                        });*/
+                        const { errors, data } = { errors: [], data: null };
+
+                        if (!isEmpty(errors)) {
+                            this.status.error = head(errors).message || 'Ошибка сохранения.';
+                        } else {
+                            this.showSuccessMessage();
+                        }
+                    } catch (error) {
+                        this.status.error = error.message || 'Ошибка сохранения.';
+                    }
+                }
+            }
+        }
 	}
 </script>

@@ -1,11 +1,19 @@
 @import "mixins";
 @import "settings-table";
+@import "validation";
 @import "auth-block";
 @import "auth-page";
 @import "card-header-links";
 @import "stats-top-menu";
 @import "stats-table";
 @import "calendar";
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 .disabled-block {
   display: none;

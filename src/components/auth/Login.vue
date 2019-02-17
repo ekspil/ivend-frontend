@@ -8,15 +8,15 @@
             <div class="auth-block__title">Авторизация</div>
 
             <form name="login" method="POST">
-                <div class="auth-block__validation" v-if="validation.password">{{ validation.phone }}</div>
+                <div class="validation-error" v-if="validation.password">{{ validation.phone }}</div>
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <input :class="['auth-block__field', validation.phone ? 'auth-block__field--wrong' : '']" type="text" name="phone" placeholder="Номер телефона" required
+                    <input :class="['auth-block__field', validation.phone ? 'input-invalid' : '']" type="text" name="phone" placeholder="Номер телефона" required
                            v-model="userData.phone"/>
                 </div>
 
-                <div class="auth-block__validation" v-if="validation.password">{{ validation.password }}</div>
+                <div class="validation-error" v-if="validation.password">{{ validation.password }}</div>
                 <div class="auth-block__field-container auth-block__field-container--pass">
-                    <input :class="['auth-block__field', validation.password ? 'auth-block__field--wrong' : '']" type="password" name="pass" placeholder="Пароль" required
+                    <input :class="['auth-block__field', validation.password ? 'input-invalid' : '']" type="password" name="pass" placeholder="Пароль" required
                            v-model="userData.password"/>
                 </div>
 
@@ -53,7 +53,7 @@
 <script>
     import gql from 'graphql-tag';
 
-    import { head } from 'ramda';
+    import { head, isEmpty } from 'ramda';
     import { areKeysNull } from '@/utils';
     import {
         validate, mapValidationObject,
@@ -90,7 +90,7 @@
                             }
                         });
                     
-                        if (errors || !data.token) {
+                        if (!isEmpty(errors) || !data.token) {
                             this.serverError = head(errors).message || 'Ошибка авторизации.';
                         } else {
                             this.serverError = null;

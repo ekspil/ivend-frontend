@@ -26,12 +26,13 @@ const routes = [
     },
     {
         path: '/controllers', component: Controllers,
-        children: [
-            { path: ':id/edit', component: EditController },
-            { path: '/add', component: AddController }
-        ]
     },
-
+    {
+        path: '/controllers/edit/:id', component: EditController
+    },
+    {
+        path: '/controllers/add', component: AddController
+    },
     {
         path: '/login', component: Login
     },

@@ -1,6 +1,6 @@
 <template>
     <div class="page-main">
-        <div v-if="this.$route.meta.role">
+        <div>
             <Header/>
             <Navbar/>
         </div>

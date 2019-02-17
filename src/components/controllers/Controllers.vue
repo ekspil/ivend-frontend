@@ -10,7 +10,7 @@
                         </div>
                         <div class="text-wrap">
                             <div class="example">
-                                <a href="#" class="btn btn-primary">Добавить контроллер</a>
+                                <router-link to="/controllers/add" class="btn btn-primary">Добавить контроллер</router-link>
                                 <div class="form-group float-right">
                                     <div class="row gutters-xs">
 													<span class="col-auto">
