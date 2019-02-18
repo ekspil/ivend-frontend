@@ -10,8 +10,8 @@
             <form name="login" method="POST">
                 <div class="validation-error" v-if="validation.password">{{ validation.phone }}</div>
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <input :class="['auth-block__field', validation.phone ? 'input-invalid' : '']" type="text" name="phone" placeholder="Номер телефона" required
-                           v-model="userData.phone"/>
+                    <masked-input :class="['auth-block__field', validation.phone ? 'input-invalid' : '']" type="tel" name="phone" placeholder="Номер телефона" required
+                           v-model="userData.phone" mask="\+\7 (111) 111 11-11"/>
                 </div>
 
                 <div class="validation-error" v-if="validation.password">{{ validation.password }}</div>
@@ -53,6 +53,8 @@
 <script>
     import gql from 'graphql-tag';
 
+    import maskedInput from 'vue-masked-input';
+
     import { head, isEmpty } from 'ramda';
     import { areKeysNull } from '@/utils';
     import {
@@ -62,6 +64,9 @@
 
     export default {
         name: 'Login',
+        components: {
+            maskedInput
+        },
         data: () => ({
             userData: {
                 phone: '',
@@ -73,7 +78,7 @@
         methods: {
             async login () {
                 this.validation = mapValidationObject(validate(this.userData, {
-                    phone: [required, phone],
+                    phone: [required],
                     password: [required]
                 }));
 

@@ -17,10 +17,17 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12">
+                                       <div class="form-group">
+                                            <div class="validation-error" v-if="validation.name">{{ validation.name }}</div>
+                                            <label class="form-label f-b">Имя контроллера</label>
+                                            <input type="text" :class="['form-control', validation.name ? 'input-invalid' : '']"
+                                                   name="example-text-input" placeholder="Введите имя контроллера"
+                                                   v-model="input.name"/>
+                                        </div>
                                         <div class="form-group">
                                             <div class="validation-error" v-if="validation.uid">{{ validation.uid }}</div>
                                             <label class="form-label f-b">Номер контроллера</label>
-                                            <input type="text" :class="['form-control', validation.uid ? 'input-invalid' : '']" value=""
+                                            <input type="text" :class="['form-control', validation.uid ? 'input-invalid' : '']"
                                                    name="example-text-input" placeholder="Введите номер контроллера"
                                                    v-model="input.uid"/>
                                         </div>
@@ -57,27 +64,27 @@
                                             <label class="form-label f-b">Состояние</label>
                                             <div class="selectgroup w-100">
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="state" value="0"
+                                                    <input type="radio" name="state" value="ENABLED"
                                                            class="selectgroup-input" checked v-model="input.status"/>
                                                     <span class="selectgroup-button">Активирован</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="state" value="1"
+                                                    <input type="radio" name="state" value="DISABLED"
                                                            class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Деактивирован</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="state" value="2"
+                                                    <input type="radio" name="state" value="TRAINING"
                                                            class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Обучение</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="state" value="3"
+                                                    <input type="radio" name="state" value="PAUSED"
                                                            class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Приостановлен</span>
                                                 </label>
                                                 <label class="selectgroup-item">
-                                                    <input type="radio" name="state" value="4"
+                                                    <input type="radio" name="state" value="DEBUG"
                                                            class="selectgroup-input" v-model="input.status"/>
                                                     <span class="selectgroup-button">Отладка</span>
                                                 </label>
@@ -108,10 +115,10 @@
                                         <div class="form-group">
                                             <label class="form-label f-b">Режим работы</label>
                                             <select class="form-control custom-select" v-model="input.mode">
-                                                <option value="0">MDB</option>
-                                                <option value="1">EXE</option>
-                                                <option value="2" selected>Cashless</option>
-                                                <option value="3" disabled>Cashless free</option>
+                                                <option value="MDB">MDB</option>
+                                                <option value="EXE">EXE</option>
+                                                <option value="CASHLESS" selected>Cashless</option>
+                                                <option value="CASHLESS_FREE" disabled>Cashless free</option>
                                             </select>
                                         </div>
 
@@ -134,9 +141,19 @@
                                             </select>
                                         </div>
 
+                                       <div class="form-group">
+                                            <label class="form-label f-b">Версия контроллера</label>
+                                            <select class="form-control custom-select" v-model="input.revisionId">
+                                                <option v-for="(revision, index) in revisions"
+                                                        :key="revision.id" :value="revision.id">
+                                                    {{ revision.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="form-label f-b">Модель автомата</label>
-                                            <select class="form-control custom-select" v-model="input.equipment">
+                                            <select class="form-control custom-select" v-model="input.equipmentId">
                                                 <option v-for="(equipment, index) in equipments"
                                                         :key="equipment.id" :value="equipment.id">
                                                     {{ equipment.name }}
@@ -205,11 +222,14 @@
 		name: 'AddController',
 		data: () => ({
 			equipments: [],
+            revisions: [],
             input: {
+                name: '',
                 uid: '',
-                status: 0,
-                mode: 2,
-                equipment: 1
+                status: "DISABLED",
+                mode: "CASHLESS",
+                equipmentId: 1,
+                revisionId: 1
             },
             validation: {},
             status: {
@@ -230,7 +250,20 @@
 				update (data) {
 					return data.getEquipments;
 				}
-			}
+			},
+            revisions: {
+                query: gql`
+                    query {
+                        getRevisions {
+                            id,
+                            name
+                        }
+                    }
+                `,
+                update (data) {
+                    return data.getRevisions;
+                }
+            }
 		},
         methods: {
             showSuccessMessage (message = 'Успешно сохранено.') {
@@ -239,24 +272,26 @@
             },
             async save () {
                 this.validation = mapValidationObject(validate(this.input, {
-                    uid: [required]
+                    uid: [required],
+                    name: [required]
                 }));
 
                 if (areKeysNull(this.validation)) {
                     try {
-                        /*const { errors, data } = await this.$apollo.mutate({
-                            query: gql`
+                        const { errors, data } = await this.$apollo.mutate({
+                            mutation: gql`
                                 mutation saveController ($data: CreateControllerInput!) {
-                                    createController(input: $data)
+                                    createController (input: $data) {
+                                        name
+                                    }
                                 }
                             `,
                             variables: {
                                 data: this.input
                             }
-                        });*/
-                        const { errors, data } = { errors: [], data: null };
+                        });
 
-                        if (!isEmpty(errors)) {
+                        if (errors && !isEmpty(errors)) {
                             this.status.error = head(errors).message || 'Ошибка сохранения.';
                         } else {
                             this.showSuccessMessage();

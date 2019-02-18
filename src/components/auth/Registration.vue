@@ -15,8 +15,8 @@
 
                 <div class="validation-error" v-if="validation.phone">{{ validation.phone }}</div>
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <input :class="['auth-block__field', validation.phone ? 'input-invalid' : '']" type="tel" name="phone" placeholder="Телефон" required
-                           v-model="userData.phone"/>
+                    <masked-input :class="['auth-block__field', validation.phone ? 'input-invalid' : '']" type="tel" name="phone" placeholder="Телефон" required
+                           v-model="userData.phone" mask="\+\7 (111) 111 11-11"/>
                 </div>
 
                 <!-- Код телефона -->
@@ -69,10 +69,15 @@
 
 <style lang="scss">
     @import "../../../layout/html/assets/scss/main";
+    .validation-error {
+        margin: 0;
+    }
 </style>
 
 <script>
   import gql from 'graphql-tag';
+
+  import maskedInput from 'vue-masked-input';
 
   import { equals, omit, head, isEmpty } from 'ramda';
   import { areKeysNull } from '@/utils';
@@ -83,6 +88,9 @@
 
   export default {
     name: 'Registration',
+    components: {
+        maskedInput
+    },
     data: () => ({
         agreement: false,
         userData: {
@@ -99,7 +107,7 @@
             const that = this;
             this.validation = mapValidationObject(validate({ agreement: this.agreement, ...this.userData }, {
                 email: [required, email],
-                phone: [required, phone],
+                phone: [required],
                 password: [required],
                 rePassword: [required, rePassword => ({ error: equals(rePassword, that.userData.password) ? null : 'Пароли не совпадают.' })],
                 agreement: [check]

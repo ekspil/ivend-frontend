@@ -30,11 +30,12 @@
                             </div>
 
                         </div>
-                        <div class="table-responsive" v-if="getControllers && getControllers.length > 0">
+                        <div class="table-responsive" v-if="controllers && controllers.length > 0">
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th>Контроллер</th>
+                                    <th>ID</th>
+                                    <th>Имя</th>
                                     <th>Автомат</th>
                                     <th>Режим работы</th>
                                     <th>Группа</th>
@@ -47,12 +48,13 @@
                                 <tbody>
 
 
-                                <tr v-for="controller in getControllers" v-bind:key="controller.id">
-                                    <td><router-link href="#" class="text-black f-b" :to="`/controller/${controller.id}/edit`">{{controller.uid}}</router-link></td>
+                                <tr v-for="controller in controllers" v-bind:key="controller.id">
+                                    <td><router-link href="#" class="text-black f-b" :to="`/controllers/edit/${controller.id}`">{{controller.uid}}</router-link></td>
+                                    <td>{{controller.name}}</td>
                                     <td>{{controller.equipment.name}}</td>
                                     <td>{{controller.mode}}</td>
                                     <td>Общая</td>
-                                    <td>{{controller.revision}}</td>
+                                    <td>{{controller.revision.name}}</td>
                                     <td>-</td>
                                     <!--<td><span class="status-icon bg-danger"></span> Дективирован</td>-->
                                     <td>{{controller.status}}</td>
@@ -101,16 +103,21 @@
     import gql from 'graphql-tag'
 
     export default {
+        data: () => ({
+            controllers: []
+        }),
         apollo: {
-            getControllers:
-                gql`
+            controllers: {
+                query: gql`
                     query {
                       getControllers {
                         id
                         name
                         uid
                         mode
-                        revision
+                        revision {
+                            name
+                        }
                         status
                         equipment {
                           name
@@ -125,6 +132,10 @@
                       }
                     }
                 `,
-        },
+                update (data) {
+                    return data.getControllers;
+                }
+            }
+        }
     }
 </script>

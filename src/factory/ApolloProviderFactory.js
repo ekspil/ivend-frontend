@@ -2,9 +2,11 @@ import Vue from 'vue'
 import VueApollo from "vue-apollo"
 import {ApolloClient} from 'apollo-client'
 import {HttpLink} from 'apollo-link-http'
+import {onError} from 'apollo-link-error'
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import {ApolloLink} from "apollo-link";
 
+import { find, propEq } from 'ramda';
 import store from '@/store';
 
 // HTTP connexion to the API
@@ -27,7 +29,13 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     }
   })
 
-  return forward(operation)
+  return forward(operation).map(resp => {
+    if (resp.errors && find(propEq('message', 'Not authorized'))(resp.errors)) {
+      store.commit('auth/setToken', null)
+    }
+
+    return resp
+  })
 })
 
 // Create the apollo client
