@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  frontend:
+    build:
+      context: ./
+    ports:
+      - "8080:8080"
+    environment:
+      VUE_APP_GRAPHQL_API: https://graphql.p-factory.ru
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 15s

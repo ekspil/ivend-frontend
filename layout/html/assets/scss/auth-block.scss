@@ -1,11 +1,19 @@
 @import "mixins";
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 .auth-block {
   max-width: 400px;
   margin: 0 auto;
   padding: 40px 30px 30px;
   background-color: #ffffff;
   box-shadow: 0 0 0 1px rgba(61,119,180,.12), 0 8px 16px 0 rgba(91,139,199,.24);
+  position: relative;
 
   &__title {
     font-size: 16px;
@@ -15,19 +23,64 @@
   }
 
   &__field-container {
-   @include default-text-input-container();
-
+    width: 100%;
+    position: relative;
     margin-bottom: 30px;
 
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+      display: block;
+      width: 17px;
+      height: 17px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
 
     &--phone-code {
       display: flex;
       flex-wrap: wrap;
     }
+
+    &--login {
+      &:after {
+        background-image: url("../../assets/images/icons/user-login.png");
+      }
+    }
+
+    &--pass {
+      &:after {
+        background-image: url("../../assets/images/icons/password.png");
+      }
+    }
+
+    &--email {
+      &:after {
+        background-image: url("../../assets/images/icons/mail.png");
+        opacity: .5;
+      }
+    }
+
+    &--phone {
+      &:after {
+        background-image: url("../../assets/images/icons/phone.png");
+      }
+    }
   }
 
   &__field {
-    @include default-text-input();
+    width: 100%;
+    font-size: inherit;
+    border: 1px solid #05dabf;
+    background-color: #fff;
+    padding: 0.520rem 0.75rem;
+    border-radius: 3px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    line-height: 1.6;
 
     &--phone-code {
       width: 60%;
@@ -76,7 +129,7 @@
 
   &__link-container {
     text-align: center;
-    margin-top: 35px;
+    margin-top: 15px;
   }
 
   &__link-title {
@@ -86,5 +139,12 @@
   &__link {
     text-decoration: underline;
     color: #000000;
+  }
+
+  &__fetchError {
+    text-align: center;
+    color: $wrong-field-border-color;
+    font-weight: 500;
+    margin-top: 15px;
   }
 }

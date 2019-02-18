@@ -1,5 +1,6 @@
 @import "mixins";
 @import "settings-table";
+@import "validation";
 @import "auth-block";
 @import "auth-page";
 @import "card-header-links";
@@ -10,6 +11,13 @@
 @import "top-buttons";
 @import "product-matrix-table";
 @import "number-input";
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 .disabled-block {
   display: none;
@@ -51,7 +59,6 @@
       content: '';
       display: block;
       position: absolute;
-
     }
 
     &:before {
@@ -65,9 +72,16 @@
     }
   }
 
+  &__error {
+    span::before {
+      border-color: $wrong-field-border-color;
+    }
+  }
+
   input:checked ~ span {
     &:before {
       background-color: #05dabf;
+      border-color: #05dabf;
     }
 
     &:after {
