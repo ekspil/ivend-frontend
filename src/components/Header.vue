@@ -7,12 +7,10 @@
 
             <div class="container-fluid">
                 <div class="d-flex">
-                    <a class="header-brand" href="index.html">
+                    <router-link class="header-brand" to="/home">
                         <img alt="iVend" class="header-brand-img" src="/assets/images/brand/logo.png">
-                    </a>
+                    </router-link>
                     <div class="d-flex order-lg-2 ml-auto">
-
-
                         <div class="dropdown d-none d-md-flex">
                             <a class="nav-link icon" data-toggle="dropdown">
                                 <i class="fas fa-bell"></i>

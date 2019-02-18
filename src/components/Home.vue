@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                             <h3 class="mb-1 text-primary counter font-30">678</h3>
-                            <div class="f-b">Продаж сегодня</div>
+                            <div class="f-b">Продаж сегодня</div><br/>
                         </div>
                         <div class="card-chart-bg">
                             <div id="chart-bg-users-1"></div>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <h3 class="mb-1  text-primary font-30"><span class="counter">12435</span></h3>
-                            <div class="f-b">Выручка сегодня</div>
+                            <div class="f-b">Выручка сегодня</div><br/>
                         </div>
                         <div class="card-chart-bg">
                             <div id="chart-bg-users-4"></div>
@@ -51,8 +51,12 @@
                                     <i class="far fa-hdd text-white"></i>
                                 </div>
                             </div>
-                            <h3 class="mb-1  text-primary counter font-30">4</h3>
-                            <div class="f-b">Контроллера</div>
+
+                            <h3 class="mb-1  text-primary counter font-30">{{ controllers.length }}</h3>
+                            <div class="f-b">Контроллер{{ getWordEnding(controllers.length) }}</div>
+                            
+                            <router-link to="/controllers/add" class="f-b" v-if="controllers.length <= 0">Добавить контроллер</router-link>
+                            <br v-else/>
                         </div>
                         <div class="card-chart-bg">
                         </div>
@@ -70,7 +74,7 @@
                             </div>
                             <div class="f-b pb-2"><i class="fas fa-check text-white mr-1"></i> Контроллеры</div>
                             <div class="f-b pb-2"><i class="fas fa-check text-white mr-1"></i> Шина MDB</div>
-                            <div class="f-b pb-2"><i class="fas fa-check text-white mr-1"></i> Другие ошибки</div>
+                            <div class="f-b pb-2"><i class="fas fa-check text-white mr-1"></i> Другие ошибки</div><br/>
                         </div>
                         <div class="card-chart-bg" style=" height: 35px; ">
                         </div>
@@ -319,19 +323,30 @@
 
 
 <script>
-    import gql from 'graphql-tag'
+    import gql from 'graphql-tag';
+
+    import { getWordEnding } from '@/utils';
 
     export default {
+        name: 'Home',
+        data: () => ({
+            controllers: []
+        }),
         apollo: {
-            controllers:
-                gql`
+            controllers: {
+                query: gql`
                     query {
-                      getControllers {
-                        uid
-                        mode
-                      }
+                        getControllers {
+                            uid,
+                            mode
+                        }
                     }
                 `,
+                update: data => data.getControllers
+            }
         },
+        methods: {
+            getWordEnding (number) { return getWordEnding(number); }
+        }
     }
 </script>

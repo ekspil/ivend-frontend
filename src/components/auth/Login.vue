@@ -83,6 +83,11 @@
                 }));
 
                 if (areKeysNull(this.validation)) {
+                    const userData = {
+                        ...this.userData,
+                        phone: this.userData.phone.replace(/[()+\s-]/gi, '')
+                    };
+
                     try {
                         const { errors, data } = await this.$apollo.mutate({
                             mutation: gql`

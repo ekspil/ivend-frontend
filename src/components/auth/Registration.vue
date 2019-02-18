@@ -104,16 +104,20 @@
     }),
     methods: {
         async register () {
-            const that = this;
             this.validation = mapValidationObject(validate({ agreement: this.agreement, ...this.userData }, {
                 email: [required, email],
                 phone: [required],
                 password: [required],
-                rePassword: [required, rePassword => ({ error: equals(rePassword, that.userData.password) ? null : 'Пароли не совпадают.' })],
+                rePassword: [required, rePassword => ({ error: equals(rePassword, this.userData.password) ? null : 'Пароли не совпадают.' })],
                 agreement: [check]
             }));
 
             if (areKeysNull(this.validation)) {
+                const userData = {
+                    ...this.userData,
+                    phone: this.userData.phone.replace(/[()+\s-]/gi, '')
+                };
+
                 try {
                     const { errors, data } = await this.$apollo.mutate({
                         mutation: gql`
@@ -123,8 +127,8 @@
                             }
                         `,
                         variables: {
-                            regData: omit(['rePassword'], that.userData),
-                            logData: omit(['email', 'rePassword'], that.userData)
+                            regData: omit(['rePassword'], userData),
+                            logData: omit(['email', 'rePassword'], userData)
                         }
                     });
 

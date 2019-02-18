@@ -8,6 +8,8 @@ import Controllers from '@/components/controllers/Controllers';
 import EditController from '@/components/controllers/EditController';
 import AddController from '@/components/controllers/AddController';
 
+import Stats from '@/components/stats/Stats';
+
 import Home from '@/components/Home';
 
 import { includes } from 'ramda';
@@ -17,28 +19,17 @@ import store from '@/store';
 Vue.use(VueRouter);
 
 const routes = [
-    {
-        path: '/',
-        redirect: '/home',
-    },
-    {
-        path: '/home', component: Home
-    },
-    {
-        path: '/controllers', component: Controllers,
-    },
-    {
-        path: '/controllers/edit/:id', component: EditController
-    },
-    {
-        path: '/controllers/add', component: AddController
-    },
-    {
-        path: '/login', component: Login
-    },
-    {
-        path: '/register', component: Registration
-    }
+    { path: '/', redirect: '/home' },
+    { path: '/home', component: Home },
+
+    { path: '/controllers', component: Controllers },
+    { path: '/controllers/edit/:id', component: EditController },
+    { path: '/controllers/add', component: AddController },
+
+    { path: '/stats', component: Stats },
+
+    { path: '/login', component: Login },
+    { path: '/register', component: Registration }
 ];
 
 

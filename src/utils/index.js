@@ -21,3 +21,22 @@ export const areKeysNull = obj => {
 	@author Samir Amirseidov
 */
 export const purgeSuccessValidators = arr => filter(val => val !== null, pluck('error')(arr));
+
+export const getWordEnding = number => {
+	const lastNum = last(number.toString());
+	switch (lastNum) {
+		case "0":
+		case "5":
+		case "6":
+		case "7":
+		case "8":
+		case "9":
+			return 'ов';
+		case "1":
+			return "";
+		case "2":
+		case "3":
+		case "4":
+			return "а";
+	}
+};
