@@ -89,8 +89,8 @@
                                 data: this.userData
                             }
                         });
-                    
-                        if (!isEmpty(errors) || !data.token) {
+
+                        if ((errors && !isEmpty(errors)) || !data.token) {
                             this.serverError = head(errors).message || 'Ошибка авторизации.';
                         } else {
                             this.serverError = null;
