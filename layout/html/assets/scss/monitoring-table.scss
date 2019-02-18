@@ -3,22 +3,43 @@
 .monitoring-table {
   @include default-table();
 
+  tr {
+    &.warning-row {
+      background-color: #fbe0e0;
+    }
+
+    &.attention-row {
+      background-color: #f6e7cd;
+    }
+
+    &.ok-row {
+      background-color: #d9f9f5;
+    }
+
+    &.disabled-row {
+      background-color: #c9e2f7;
+    }
+  }
+
   td {
     a {
       color: #000000;
     }
 
+    &.warning-cel {
+      background-color: #fbe0e0;
+    }
+
     &.attention-cel {
-      background-color: #da000085;
-      color: #fff;
+      background-color: #f6e7cd;
     }
 
     &.ok-cel {
-      background-color: #00dabf82;
+      background-color: #d9f9f5;
     }
 
     &.disabled-cel {
-      background-color: #0078da78;
+      background-color: #c9e2f7;
     }
   }
 }

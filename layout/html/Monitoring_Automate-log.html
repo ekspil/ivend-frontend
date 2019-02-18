@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
     <!-- Title -->
-    <title>Настройки оборудования</title>
+    <title>Мониторинг | Континент2</title>
 
     <!--Font Awesome-->
     <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
@@ -42,6 +42,8 @@
 
     <!---Font icons-->
     <link href="assets/plugins/iconfonts/plugin.css" rel="stylesheet"/>
+
+
 
     <link href="assets/scss/main.css" rel="stylesheet"/>
 
@@ -252,209 +254,127 @@
                         <div class="card">
                             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
                             <div class="card-header">
-                                <div class="card-title f-b">Настройки</div>
+                                <div class="card-title f-b">Лог событий в торговом автомате Континент2</div>
                             </div>
 
-                            <div class="tab-menu-heading">
-                                <div class="tabs-menu1">
-                                    <!-- Tabs -->
-                                    <ul class="nav panel-tabs f-b">
-                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a></li>
-                                        <li><a href="#tab2" data-toggle="tab">Уведомления</a></li>
-                                        <li><a href="#tab3" data-toggle="tab">компания </a></li>
-                                    </ul>
-                                </div>
+                            <div class="card-header-links">
+                                <a href="javascript:void(0)" class="card-header-links__item">Вернуться назад</a>
                             </div>
 
-                            <div class="text-wrap">
-                                <div class="example top-buttons-container top-buttons">
-                                    <div class="top-buttons__left-container">
-                                    <a href="#" class="btn btn-primary">Добавить автомат</a>
+
+                            <div class="stats-top-menu">
+                                <div class="stats-top-menu__content-container">
+                                    <div class="stats-top-menu__date-buttons">
+                                        <button class="stats-top-menu__item">Всего</button>
+                                        <button class="stats-top-menu__item">День</button>
+                                        <button class="stats-top-menu__item stats-top-menu__item--active">Неделя
+                                        </button>
+                                        <button class="stats-top-menu__item">Месяц</button>
+
+
+                                        <div id="periodinput" class="stats-top-menu__date-period">
+                                            <button id="btn1" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'from')" data-calendar-label="" data-calendar-area="">от</button>
+
+                                            <div class="stats-top-menu__date-separator"></div>
+
+                                            <button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>
+
+                                            <form id="calendar" class="calendar disabled-block" tabindex="-1">
+                                                <div class="v-cal" id="v-cal-from" >
+                                                    <div class="vcal-header">
+                                                        <div class="vcal-btn--prev" data-calendar-toggle="previous">
+                                                        </div>
+
+                                                        <div class="vcal-header__label" data-calendar-label="month">
+                                                            Февраль 2018
+                                                        </div>
+
+
+                                                        <div class="vcal-btn--next" data-calendar-toggle="next">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="vcal-week">
+                                                        <span>Пн</span>
+                                                        <span>Вт</span>
+                                                        <span>Ср</span>
+                                                        <span>Чт</span>
+                                                        <span>Пт</span>
+                                                        <span>Сб</span>
+                                                        <span>Вс</span>
+                                                    </div>
+                                                    <div class="vcal-body" data-calendar-area="month"></div>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                     </div>
-                                            <div class="">
-                                        <div class="row gutters-xs">
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-upload"></i>
-                                                </button>
-                                            </span>
 
+                                    <div class="row gutters-xs">
                                             <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
+                                                <button class="btn btn-primary" type="button">Выгрузить <i
                                                         class="fe fe-download"></i>
                                                 </button>
                                             </span>
-
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button">Сохранить
-                                                </button>
-                                            </span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="table-responsive settings-table">
+                            <div class="table-responsive monitoring-table">
                                 <table class="table card-table table-vcenter text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th class="sortable up">Автомат</th>
-                                        <th class="sortable">Название</th>
-                                        <th>Группа</th>
-                                        <th>Тип</th>
-                                        <th>Модель</th>
-                                        <th>Товары</th>
-                                        <th class="sortable">Контроллер</th>
-                                        <th>Состояние</th>
-                                        <th>Дата</th>
-                                        <th>Прошивка</th>
-                                        <th>Режим</th>
-                                        <th>Фискализация</th>
+                                        <th>Событие</th>
+                                        <th>Время</th>
+                                        <th>Причина</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-success"></span> Активирован
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                        <td><a href="#" class="f-b">Инкасация</td>
+                                        <td>24 апр. 14:05</td>
+                                        <td>Произведена инкасация оператором Сергей Данилов</td>
                                     </tr>
 
                                     <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-secondary"></span>Приостановлен
+                                        <td><a href="#" class="f-b">Инкасация</td>
+                                        <td>22 апр. 14:05</td>
+                                        <td>Произведена инкасация оператором Сергей Данилов</td>
+                                    </tr>
 
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
+                                    <tr class="ok-row">
+                                        <td><a href="#" class="f-b">Монетник</td>
+                                        <td>22 апр. 14:00</td>
+                                        <td>Произведена инкасация оператором Сергей Данилов</td>
+                                    </tr>
 
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                    <tr class="warning-row">
+                                        <td><a href="#" class="f-b">Монетник</td>
+                                        <td>21 апр. 14:05</td>
+                                        <td>Не работает монетоприемник</td>
                                     </tr>
 
                                     <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-danger"></span> Дективирован
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                        <td><a href="#" class="f-b">Инкасация</td>
+                                        <td>17 апр. 14:05</td>
+                                        <td>Произведена инкасация оператором Сергей Данилов</td>
                                     </tr>
 
-                                    <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-yellow"></span> Отладка
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                    <tr class="ok-row">
+                                        <td><a href="#" class="f-b">Связь</td>
+                                        <td>16 апр. 14:05</td>
+                                        <td>Связь работает</td>
                                     </tr>
+
+                                    <tr class="warning-row">
+                                        <td><a href="#" class="f-b">Связь</td>
+                                        <td>15 апр. 14:05</td>
+                                        <td>Связь не работает</td>
+                                    </tr>
+
+
 
                                     </tbody>
                                 </table>
@@ -483,64 +403,71 @@
 
     <!-- Back to top -->
     <a href="#top" id="back-to-top" style="display: inline;"><i class="fas fa-angle-up"></i></a>
+</div>
+<!-- Dashboard Core -->
+<script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="assets/js/vendors/jquery.sparkline.min.js"></script>
+<script src="assets/js/vendors/selectize.min.js"></script>
+<script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
+<script src="assets/js/vendors/circle-progress.min.js"></script>
+<script src="assets/plugins/rating/jquery.rating-stars.js"></script>
+<!-- Side menu js -->
+<script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
 
-    <!-- Dashboard Core -->
-    <script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/vendors/jquery.sparkline.min.js"></script>
-    <script src="assets/js/vendors/selectize.min.js"></script>
-    <script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
-    <script src="assets/js/vendors/circle-progress.min.js"></script>
-    <script src="assets/plugins/rating/jquery.rating-stars.js"></script>
-    <!-- Side menu js -->
-    <script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
+<!-- Custom scroll bar Js-->
+<script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <!-- Custom scroll bar Js-->
-    <script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- c3.js Charts Plugin -->
+<script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
+<script src="./assets/plugins/charts-c3/c3-chart.js"></script>
 
-    <!-- c3.js Charts Plugin -->
-    <script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
-    <script src="./assets/plugins/charts-c3/c3-chart.js"></script>
+<!-- Input Mask Plugin -->
+<script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
+<!-- Progress -->
+<script src="assets/js/vendors/circle-progress.min.js"></script>
 
-    <!-- Input Mask Plugin -->
-    <script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
-    <!-- Progress -->
-    <script src="assets/js/vendors/circle-progress.min.js"></script>
+<!-- Animation -->
+<script src="assets/plugins/particles/particles.js"></script>
+<script src="assets/plugins/particles/particlesapp_default.js"></script>
 
-    <!-- Animation -->
-    <script src="assets/plugins/particles/particles.js"></script>
-    <script src="assets/plugins/particles/particlesapp_default.js"></script>
+<!-- Vector Map -->
 
-    <!-- Vector Map -->
+<script src="assets/plugins/vector-map/jquery.vmap.js"></script>
+<script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
+<script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
+<script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
 
-    <script src="assets/plugins/vector-map/jquery.vmap.js"></script>
-    <script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
-    <script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
-    <script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
+<!--Counters -->
+<script src="assets/plugins/counters/counterup.min.js"></script>
+<script src="assets/plugins/counters/waypoints.min.js"></script>
 
-    <!--Counters -->
-    <script src="assets/plugins/counters/counterup.min.js"></script>
-    <script src="assets/plugins/counters/waypoints.min.js"></script>
-
-    <!-- Index Scripts -->
-    <script src="assets/js/index.js"></script>
-    <script src="assets/js/charts.js"></script>
+<!-- Index Scripts -->
+<script src="assets/js/index.js"></script>
+<script src="assets/js/charts.js"></script>
 
 
-    <!--  Chart js -->
-    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="assets/js/chart.js"></script>
+<!--  Chart js -->
+<script src="./assets/plugins/chart/Chart.bundle.js"></script>
+<script src="assets/js/chart.js"></script>
 
-    <!--Counters -->
-    <script src="assets/plugins/counters/counterup.min.js"></script>
-    <script src="assets/plugins/counters/waypoints.min.js"></script>
+<!--Counters -->
+<script src="assets/plugins/counters/counterup.min.js"></script>
+<script src="assets/plugins/counters/waypoints.min.js"></script>
 
-    <!--  Chart js -->
-    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="./assets/plugins/chart/WidgetChart.js"></script>
+<!--  Chart js -->
+<script src="./assets/plugins/chart/Chart.bundle.js"></script>
+<script src="./assets/plugins/chart/WidgetChart.js"></script>
 
-    <!-- custom js -->
-    <script src="assets/js/custom.js"></script>
+<!-- custom js -->
+<script src="assets/js/custom.js"></script>
+
+
+
+<script src="assets/js/vanillaCalendar.js"></script>
+
+<script src="assets/js/alexcustom.js"></script>
+
 
 </body>
 </html>
