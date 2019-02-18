@@ -1,0 +1,24 @@
+@import "mixins";
+
+.monitoring-table {
+  @include default-table();
+
+  td {
+    a {
+      color: #000000;
+    }
+
+    &.attention-cel {
+      background-color: #da000085;
+      color: #fff;
+    }
+
+    &.ok-cel {
+      background-color: #00dabf82;
+    }
+
+    &.disabled-cel {
+      background-color: #0078da78;
+    }
+  }
+}

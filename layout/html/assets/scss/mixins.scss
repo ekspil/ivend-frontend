@@ -76,6 +76,26 @@ $border-color: #e9e9e9;
       }
     }
   }
+
+  td {
+    &.settings-link {
+      transition: .1s;
+
+      a {
+        transition: .1s;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: #00dabf;
+        color: #fff;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
 }
 
 @mixin default-text-input() {
