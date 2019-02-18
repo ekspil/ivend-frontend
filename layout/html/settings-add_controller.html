@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
     <!-- Title -->
-    <title>Добавление автомата</title>
+    <title>Ren - a responsive, flat and full featured admin template</title>
 
     <!--Font Awesome-->
     <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
@@ -46,9 +46,6 @@
 
     <!---Font icons-->
     <link href="assets/plugins/iconfonts/plugin.css" rel="stylesheet"/>
-
-    <link href="assets/scss/main.css" rel="stylesheet"/>
-
 </head>
 <body class="app">
 <div id="global-loader">
@@ -253,36 +250,163 @@
 
 
                 <div class="row mt-5">
-                    <div class="col-lg-10 offset-lg-1 col-md-12">
+                    <div class="col-lg-8 offset-2">
                         <form method="post" class="card">
                             <div class="card-header">
-                                <h3 class="card-title f-b">Добавление автомата</h3>
+                                <h3 class="card-title f-b">Редактирование оборудования 10000003-1217</h3>
                             </div>
 
-
-                            <div class="card-header-links">
-                                <a href="javascript:void(0)" class="card-header-links__item">Вернуться назад</a>
+                            <div class="tab-menu-heading">
+                                <div class="tabs-menu1 ">
+                                    <!-- Tabs -->
+                                    <ul class="nav panel-tabs f-b">
+                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Настройки</a></li>
+                                        <li><a href="#tab2" data-toggle="tab">Фискальный регистратор</a></li>
+                                        <li><a href="#tab3" data-toggle="tab">Товары</a></li>
+                                    </ul>
+                                </div>
                             </div>
-
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Название</label>
+                                            <input type="text" class="form-control" value="Контроллер"
+                                                   name="example-text-input" placeholder="Введите название">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Модель автомата</label>
+                                            <select class="form-control select2-show-search"
+                                                    data-placeholder="Выберите из списка">
+
+                                                <option label="Выберите из списка">
+                                                </option>
+                                                <option value="1">Necta Kikko Max</option>
+                                                <option value="2">Без автомата</option>
+                                                <option value="3" selected>Necta Kikko ES6</option>
+                                                <option value="4">Necta Astro</option>
+                                                <option value="5">Necta Snakky Max</option>
+                                                <option value="6">Necta Colibri C5</option>
+                                                <option value="7">Spengler 1000</option>
+                                                <option value="8">Crane 167</option>
+                                                <option value="9">Necta Opera</option>
+                                                <option value="10">Unicum Rosso</option>
+                                                <option value="11">Unicum FoodBox</option>
+                                                <option value="12">Unicum Nero</option>
+                                                <option value="13">Necta Concerto</option>
+                                                <option value="14">Rheavendors Luce X2</option>
+                                                <option value="15">Crane 472</option>
+                                                <option value="16">Rheavendors Sagoma H7</option>
+                                                <option value="17">Saeco Atlante 500</option>
+                                                <option value="18">Crane Vendo Sanden 217</option>
+                                                <option value="19">Crane Vendo Sanden 680</option>
+                                            </select>
+                                        </div>
 
                                         <div class="form-group">
-                                            <label class="form-label f-b">Название автомата</label>
-                                            <input type="text" class="form-control" value=""
-                                                   name="example-text-input" placeholder="Введите название автомата">
+                                            <label class="form-label f-b">Номер контроллера UID</label>
+                                            <input type="text" class="form-control" value="10000003-1217"
+                                                   name="example-text-input" placeholder="Введите UID">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Версия контроллера</label>
+                                            <div class="selectgroup w-100">
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="01"
+                                                           class="selectgroup-input" checked>
+                                                    <span class="selectgroup-button">01</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="02"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">02</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="03"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">03</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="04"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">04</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Версия контроллера</label>
+                                            <div class="selectgroup w-100">
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="11"
+                                                           class="selectgroup-input" checked>
+                                                    <span class="selectgroup-button">Активирован</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="12"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">Деактивирован</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="13"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">Обучение</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="14"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">Приостановлен</span>
+                                                </label>
+                                                <label class="selectgroup-item">
+                                                    <input type="radio" name="value" value="15"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">Отладка</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Режим работы</label>
+                                            <select class="form-control custom-select">
+                                                <option value="0">Выберите режим</option>
+                                                <option value="1">MDB</option>
+                                                <option value="2">EXE</option>
+                                                <option value="3" selected>Cashless</option>
+                                                <option value="4">Cashless free</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Фискальный регистратор</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" value="ККТ Казначей ФА"
+                                                       placeholder="Выберите регистратор">
+                                                <span class="input-group-append">
+															<button class="btn btn-dark"
+                                                                    type="button">Настроить</button>
+														</span>
+                                            </div>
                                         </div>
 
 
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Банковские терминал</label>
+                                            <select class="form-control custom-select">
+                                                <option value="0">Выберите режим</option>
+                                                <option value="1">MDB</option>
+                                                <option value="2">EXE</option>
+                                                <option value="3" selected>PAX D200</option>
+                                                <option value="4">Cashless free</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="card-footer text-right">
                                 <div class="d-flex">
-                                    <button type="submit" class="btn btn-primary ml-auto">Добавить автомат</button>
+                                    <a href="javascript:void(0)" class="btn btn-link">Вернуться назад</a>
+                                    <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
                                 </div>
                             </div>
                         </form>
