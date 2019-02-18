@@ -54,7 +54,7 @@
                                     </thead>
                                     <tbody>
 
-                                    <tr v-for="(controller, index) in controllers" :key="controller.id">
+                                    <tr v-for="(controller, index) in controllers" :key="controller.id" v-if="controller.lastState">
                                         <td class="settings-link"><a href="#" class="f-b">{{ controller.name }}<i class="fe fe-more-vertical"></i> </a> </td>
 
                                         <td class="warning-cel">{{ controller.lastState.signalStrength }}</td>
