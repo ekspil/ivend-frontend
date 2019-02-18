@@ -10,6 +10,8 @@ import AddController from '@/components/controllers/AddController';
 
 import Stats from '@/components/stats/Stats';
 
+import Monitoring from '@/components/monitoring/Monitoring';
+
 import Home from '@/components/Home';
 
 import { includes } from 'ramda';
@@ -27,6 +29,8 @@ const routes = [
     { path: '/controllers/add', component: AddController },
 
     { path: '/stats', component: Stats },
+
+    { path: '/monitoring', component: Monitoring },
 
     { path: '/login', component: Login },
     { path: '/register', component: Registration }
