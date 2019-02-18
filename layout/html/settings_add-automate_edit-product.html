@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
     <!-- Title -->
-    <title>Настройки оборудования</title>
+    <title>Редактирование товарной матрицы</title>
 
     <!--Font Awesome-->
     <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
@@ -32,6 +32,10 @@
 
     <!-- Custom scroll bar css-->
     <link href="assets/plugins/scroll-bar/jquery.mCustomScrollbar.css" rel="stylesheet"/>
+
+
+    <!-- select2 Plugin -->
+    <link href="assets/plugins/select2/select2.min.css" rel="stylesheet"/>
 
     <!-- Sidemenu Css -->
     <link href="assets/plugins/toggle-sidebar/css/sidemenu.css" rel="stylesheet">
@@ -247,226 +251,141 @@
         <div class="container">
             <div class="side-app">
 
+
                 <div class="row mt-5">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="card">
-                            <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
+                    <div class="col-lg-10 offset-lg-1 col-md-12">
+                        <form method="post" class="card">
                             <div class="card-header">
-                                <div class="card-title f-b">Настройки</div>
+                                <h3 class="card-title f-b">Настройки товарной матрицы</h3>
                             </div>
 
-                            <div class="tab-menu-heading">
-                                <div class="tabs-menu1">
-                                    <!-- Tabs -->
-                                    <ul class="nav panel-tabs f-b">
-                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a></li>
-                                        <li><a href="#tab2" data-toggle="tab">Уведомления</a></li>
-                                        <li><a href="#tab3" data-toggle="tab">компания </a></li>
-                                    </ul>
+
+                            <div class="card-header-links">
+                                <a href="javascript:void(0)" class="card-header-links__item">Вернуться назад</a>
+                            </div>
+
+                            <div class="top-buttons top-buttons--product-matrix">
+                                <div class="top-buttons__left-container">
                                 </div>
+                                <div class="top-buttons__content-container">
+                                    <button class="default-green-button btn btn-primary">Выбрать матрицу</button>
+                                    <button class="default-green-button btn btn-primary">Сохранить</button>
+                                </div>
+
                             </div>
 
-                            <div class="text-wrap">
-                                <div class="example top-buttons-container top-buttons">
-                                    <div class="top-buttons__left-container">
-                                    <a href="#" class="btn btn-primary">Добавить автомат</a>
-                                    </div>
-                                            <div class="">
-                                        <div class="row gutters-xs">
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-upload"></i>
-                                                </button>
-                                            </span>
 
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-download"></i>
-                                                </button>
-                                            </span>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Название товарной матрицы</label>
+                                            <input type="text" class="form-control" value=""
+                                                   name="example-text-input" placeholder="Название товарной матрицы">
+                                        </div>
 
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button">Сохранить
-                                                </button>
-                                            </span>
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Группа</label>
+                                            <select class="form-control select2-show-search"
+                                                    data-placeholder="Выберите из списка">
+
+                                                <option label="Выберите из списка">
+                                                </option>
+                                                <option value="1">Necta Kikko Max</option>
+                                                <option value="2">Без автомата</option>
+                                                <option value="3" selected>Necta Kikko ES6</option>
+                                                <option value="4">Necta Astro</option>
+                                                <option value="5">Necta Snakky Max</option>
+                                                <option value="6">Necta Colibri C5</option>
+                                                <option value="7">Spengler 1000</option>
+                                                <option value="8">Crane 167</option>
+                                                <option value="9">Necta Opera</option>
+                                                <option value="10">Unicum Rosso</option>
+                                                <option value="11">Unicum FoodBox</option>
+                                                <option value="12">Unicum Nero</option>
+                                                <option value="13">Necta Concerto</option>
+                                                <option value="14">Rheavendors Luce X2</option>
+                                                <option value="15">Crane 472</option>
+                                                <option value="16">Rheavendors Sagoma H7</option>
+                                                <option value="17">Saeco Atlante 500</option>
+                                                <option value="18">Crane Vendo Sanden 217</option>
+                                                <option value="19">Crane Vendo Sanden 680</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Тип</label>
+                                            <select class="form-control select2-show-search"
+                                                    data-placeholder="Выберите из списка">
+
+                                                <option label="Выберите из списка">
+                                                </option>
+                                                <option value="1">Напитки</option>
+                                                <option value="2">Товар</option>
+                                                <option value="3" selected>Услуги</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Модель</label>
+                                            <select class="form-control select2-show-search"
+                                                    data-placeholder="Выберите из списка">
+
+                                                <option label="Выберите из списка">
+                                                </option>
+                                                <option value="1">Напитки</option>
+                                                <option value="2">Товар</option>
+                                                <option value="3" selected>Услуги</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="table-responsive settings-table">
+                            <div class="table-responsive product-matrix-table">
                                 <table class="table card-table table-vcenter text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th class="sortable up">Автомат</th>
-                                        <th class="sortable">Название</th>
-                                        <th>Группа</th>
-                                        <th>Тип</th>
-                                        <th>Модель</th>
-                                        <th>Товары</th>
-                                        <th class="sortable">Контроллер</th>
-                                        <th>Состояние</th>
-                                        <th>Дата</th>
-                                        <th>Прошивка</th>
-                                        <th>Режим</th>
-                                        <th>Фискализация</th>
+                                        <th class="sortable up">Id</th>
+                                        <th class="sortable">Название товара</th>
+                                        <th>Мин</th>
+                                        <th>Макс</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-success"></span> Активирован
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
+                                        <td>1</td>
+                                        <td class="input-cel"><input type="text" value="Эспрессо"></td>
+                                        <td class="input-cel">
+                                            <div class="number-input">
+                                                <input type="number" min="10" max="100" value="10">
                                             </div>
-
                                         </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                        <td class="input-cel">
+                                            <div class="number-input">
+                                                <input type="number" min="10" max="100" value="100">
+                                            </div>
+                                        </td>
                                     </tr>
 
-                                    <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-secondary"></span>Приостановлен
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-danger"></span> Дективирован
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-yellow"></span> Отладка
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
 
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- table-wrapper -->
-                        </div>
-                        <!-- section-wrapper -->
+
+                            <div class="card-footer text-right">
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
-            </div>
 
+
+            </div>
             <!--footer-->
             <footer class="footer">
                 <div class="container">
@@ -484,7 +403,7 @@
     <!-- Back to top -->
     <a href="#top" id="back-to-top" style="display: inline;"><i class="fas fa-angle-up"></i></a>
 
-    <!-- Dashboard Core -->
+    <!-- Dashboard Css -->
     <script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/jquery.sparkline.min.js"></script>
@@ -498,49 +417,31 @@
     <!-- Custom scroll bar Js-->
     <script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <!-- c3.js Charts Plugin -->
-    <script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
-    <script src="./assets/plugins/charts-c3/c3-chart.js"></script>
+    <!--Select2 js -->
+    <script src="assets/plugins/select2/select2.full.min.js"></script>
 
-    <!-- Input Mask Plugin -->
-    <script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
-    <!-- Progress -->
-    <script src="assets/js/vendors/circle-progress.min.js"></script>
+    <!-- Timepicker js -->
+    <script src="assets/plugins/time-picker/jquery.timepicker.js"></script>
+    <script src="assets/plugins/time-picker/toggles.min.js"></script>
+
+    <!-- Datepicker js -->
+    <script src="assets/plugins/date-picker/spectrum.js"></script>
+    <script src="assets/plugins/date-picker/jquery-ui.js"></script>
+    <script src="assets/plugins/input-mask/jquery.maskedinput.js"></script>
 
     <!-- Animation -->
     <script src="assets/plugins/particles/particles.js"></script>
     <script src="assets/plugins/particles/particlesapp_default.js"></script>
 
-    <!-- Vector Map -->
-
-    <script src="assets/plugins/vector-map/jquery.vmap.js"></script>
-    <script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
-    <script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
-    <script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
+    <!-- Inline js -->
 
     <!--Counters -->
     <script src="assets/plugins/counters/counterup.min.js"></script>
     <script src="assets/plugins/counters/waypoints.min.js"></script>
 
-    <!-- Index Scripts -->
-    <script src="assets/js/index.js"></script>
-    <script src="assets/js/charts.js"></script>
-
-
-    <!--  Chart js -->
-    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="assets/js/chart.js"></script>
-
-    <!--Counters -->
-    <script src="assets/plugins/counters/counterup.min.js"></script>
-    <script src="assets/plugins/counters/waypoints.min.js"></script>
-
-    <!--  Chart js -->
-    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="./assets/plugins/chart/WidgetChart.js"></script>
-
-    <!-- custom js -->
+    <!-- Custom js -->
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/alexcustom.js"></script>
 
 </body>
 </html>

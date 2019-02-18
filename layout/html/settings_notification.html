@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
     <!-- Title -->
-    <title>Настройки оборудования</title>
+    <title>Настройки Уведомлений</title>
 
     <!--Font Awesome-->
     <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
@@ -259,206 +259,149 @@
                                 <div class="tabs-menu1">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs f-b">
-                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a></li>
+                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a>
+                                        </li>
                                         <li><a href="#tab2" data-toggle="tab">Уведомления</a></li>
                                         <li><a href="#tab3" data-toggle="tab">компания </a></li>
                                     </ul>
                                 </div>
                             </div>
+                            <form name="notifications" action="">
+                                <div class="text-wrap">
+                                    <div class="example top-buttons top-buttons--notification">
+                                        <div class="top-buttons__left-container">
+                                            <div class="top-buttons__field-container top-buttons__field-container--phone">
+                                                <input class="top-buttons__field" type="tel" placeholder="Телефон">
+                                            </div>
 
-                            <div class="text-wrap">
-                                <div class="example top-buttons-container top-buttons">
-                                    <div class="top-buttons__left-container">
-                                    <a href="#" class="btn btn-primary">Добавить автомат</a>
-                                    </div>
-                                            <div class="">
-                                        <div class="row gutters-xs">
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-upload"></i>
-                                                </button>
-                                            </span>
-
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-download"></i>
-                                                </button>
-                                            </span>
-
+                                            <div class="top-buttons__field-container top-buttons__field-container--email">
+                                                <input class="top-buttons__field" type="email" placeholder="Почта">
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="row gutters-xs">
                                             <span class="col-auto">
                                                 <button class="btn btn-primary" type="button">Сохранить
                                                 </button>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="table-responsive settings-table">
-                                <table class="table card-table table-vcenter text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th class="sortable up">Автомат</th>
-                                        <th class="sortable">Название</th>
-                                        <th>Группа</th>
-                                        <th>Тип</th>
-                                        <th>Модель</th>
-                                        <th>Товары</th>
-                                        <th class="sortable">Контроллер</th>
-                                        <th>Состояние</th>
-                                        <th>Дата</th>
-                                        <th>Прошивка</th>
-                                        <th>Режим</th>
-                                        <th>Фискализация</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
 
-                                    <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-success"></span> Активирован
+                                <div class="table-responsive notification-table">
 
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
+                                    <table class="table card-table table-vcenter text-nowrap notification-table">
+                                        <thead>
+                                        <tr>
+                                            <th>Событие</th>
+                                            <th>Email</th>
+                                            <th>Viber</th>
+                                            <th>Whatsapp</th>
+                                            <th>Telegram</th>
+                                            <th>SMS</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
+                                        <tr>
+                                            <td>Нет связи с автоматом</td>
 
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-11">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-11">
 
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
 
-                                    <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-secondary"></span>Приостановлен
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-12">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-12">
 
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-13">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-13">
 
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="checkbox-cel ">
+                                                <label class="default-checkbox" for="checkbox-14">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-14">
 
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-15">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-15">
 
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
 
-                                    <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
+                                        <tr>
+                                            <td>Отключение питания</td>
 
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-danger"></span> Дективирован
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-21">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-21">
 
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
 
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
+                                            <td class="checkbox-cel ">
+                                                <label class="default-checkbox" for="checkbox-22">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-22">
 
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-23">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-23">
 
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-24">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-24">
 
-                                    <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                            <td class="checkbox-cel">
+                                                <label class="default-checkbox" for="checkbox-25">
+                                                    <input class="auth-block__checkbox" type="checkbox" name="remember"
+                                                           id="checkbox-25">
 
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-yellow"></span> Отладка
+                                                    <span class="auth-block__checkbox-label"></span>
+                                                </label>
+                                            </td>
+                                        </tr>
 
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
+                                        </tbody>
+                                    </table>
 
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                </div>
+                            </form>
                             <!-- table-wrapper -->
                         </div>
                         <!-- section-wrapper -->

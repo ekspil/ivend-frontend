@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
     <!-- Title -->
-    <title>Настройки оборудования</title>
+    <title>Мониторинг | События</title>
 
     <!--Font Awesome-->
     <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
@@ -42,6 +42,8 @@
 
     <!---Font icons-->
     <link href="assets/plugins/iconfonts/plugin.css" rel="stylesheet"/>
+
+
 
     <link href="assets/scss/main.css" rel="stylesheet"/>
 
@@ -252,208 +254,82 @@
                         <div class="card">
                             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
                             <div class="card-header">
-                                <div class="card-title f-b">Настройки</div>
+                                <div class="card-title f-b">Мониторинг</div>
                             </div>
 
                             <div class="tab-menu-heading">
                                 <div class="tabs-menu1">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs f-b">
-                                        <li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a></li>
-                                        <li><a href="#tab2" data-toggle="tab">Уведомления</a></li>
-                                        <li><a href="#tab3" data-toggle="tab">компания </a></li>
+                                        <li class=""><a href="#tab1"  data-toggle="tab">Состояние</a></li>
+                                        <li><a href="#tab2" class="active" data-toggle="tab">События</a></li>
                                     </ul>
                                 </div>
                             </div>
 
+
                             <div class="text-wrap">
                                 <div class="example top-buttons-container top-buttons">
-                                    <div class="top-buttons__left-container">
-                                    <a href="#" class="btn btn-primary">Добавить автомат</a>
-                                    </div>
-                                            <div class="">
+                                    <div class="top-buttons__left-container"></div>
+
+                                    <div class="">
                                         <div class="row gutters-xs">
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-upload"></i>
-                                                </button>
-                                            </span>
 
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button"><i
-                                                        class="fe fe-download"></i>
-                                                </button>
-                                            </span>
-
-                                            <span class="col-auto">
-                                                <button class="btn btn-primary" type="button">Сохранить
-                                                </button>
-                                            </span>
+                                            <button class="btn btn-primary" type="button">Выгрузить &#032;<i
+                                                    class="fe fe-download"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="table-responsive settings-table">
+                            <div class="table-responsive monitoring-table">
                                 <table class="table card-table table-vcenter text-nowrap">
                                     <thead>
                                     <tr>
                                         <th class="sortable up">Автомат</th>
-                                        <th class="sortable">Название</th>
-                                        <th>Группа</th>
-                                        <th>Тип</th>
-                                        <th>Модель</th>
-                                        <th>Товары</th>
-                                        <th class="sortable">Контроллер</th>
-                                        <th>Состояние</th>
-                                        <th>Дата</th>
-                                        <th>Прошивка</th>
-                                        <th>Режим</th>
-                                        <th>Фискализация</th>
+                                        <th class="sortable">Связь</th>
+                                        <th class="sortable">Продажи</th>
+                                        <th class="sortable">Ошибки</th>
+                                        <th class="sortable">Аудит1</th>
+                                        <th class="sortable">Аудит2</th>
+                                        <th class="sortable">Инкасация</th>
+                                        <th class="sortable">Загрузка</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-success"></span> Активирован
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                        <td class="settings-link"><a href="#" class="f-b">Континент1 <i class="fe fe-more-vertical"></i> </a> </td>
+                                        <td class="ok-cel">1 мин назад</td>
+                                        <td class="attention-cel">25 окт 18:35</td>
+                                        <td class="ok-cel">22 окт. 17:25</td>
+                                        <td class="ok-cel">20 окт, 10:00</td>
+                                        <td class="disabled-cel">ОТКЛ</td>
+                                        <td class="attention-cel">21 окт. 10:10</td>
+                                        <td class="attention-cel">21 окт. 10:10</td>
                                     </tr>
 
                                     <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-secondary"></span>Приостановлен
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                        <td class="settings-link"><a href="#" class="f-b">Континент2 <i class="fe fe-more-vertical"></i> </a> </td>
+                                        <td class="warning-cel">1 день назад</td>
+                                        <td class="warning-cel">24 окт 18:35</td>
+                                        <td class="warning-cel">24 окт. 14:15</td>
+                                        <td class="warning-cel">15 окт, 10:10</td>
+                                        <td class="warning-cel">15 окт. 10:10</td>
+                                        <td class="warning-cel">15 окт. 10:10</td>
+                                        <td class="warning-cel">15 окт. 10:10</td>
                                     </tr>
 
                                     <tr>
-                                        <td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-danger"></span> Дективирован
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-                                        <td>Вокзал1</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>Kikko Max</td>
-                                        <td>Не заполнены</td>
-                                        <td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <span class="status-icon bg-yellow"></span> Отладка
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
-
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>CASHLESS FREE</td>
-                                        <td>Подтвержденный</td>
+                                        <td class="settings-link"><a href="#" class="f-b">Континент3 <i class="fe fe-more-vertical"></i> </a> </td>
+                                        <td class="ok-cel">10 мин назад</td>
+                                        <td class="ok-cel">25 окт 21:35</td>
+                                        <td class="ok-cel">20 окт. 10:45</td>
+                                        <td class="ok-cel">25 окт, 10:00</td>
+                                        <td class="ok-cel">25 окт, 10:10</td>
+                                        <td class="ok-cel">25 окт. 10:10</td>
+                                        <td class="ok-cel">25 окт. 10:10</td>
                                     </tr>
 
                                     </tbody>
@@ -483,64 +359,71 @@
 
     <!-- Back to top -->
     <a href="#top" id="back-to-top" style="display: inline;"><i class="fas fa-angle-up"></i></a>
+</div>
+<!-- Dashboard Core -->
+<script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
+<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="assets/js/vendors/jquery.sparkline.min.js"></script>
+<script src="assets/js/vendors/selectize.min.js"></script>
+<script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
+<script src="assets/js/vendors/circle-progress.min.js"></script>
+<script src="assets/plugins/rating/jquery.rating-stars.js"></script>
+<!-- Side menu js -->
+<script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
 
-    <!-- Dashboard Core -->
-    <script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/vendors/jquery.sparkline.min.js"></script>
-    <script src="assets/js/vendors/selectize.min.js"></script>
-    <script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
-    <script src="assets/js/vendors/circle-progress.min.js"></script>
-    <script src="assets/plugins/rating/jquery.rating-stars.js"></script>
-    <!-- Side menu js -->
-    <script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
+<!-- Custom scroll bar Js-->
+<script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <!-- Custom scroll bar Js-->
-    <script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- c3.js Charts Plugin -->
+<script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
+<script src="./assets/plugins/charts-c3/c3-chart.js"></script>
 
-    <!-- c3.js Charts Plugin -->
-    <script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
-    <script src="./assets/plugins/charts-c3/c3-chart.js"></script>
+<!-- Input Mask Plugin -->
+<script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
+<!-- Progress -->
+<script src="assets/js/vendors/circle-progress.min.js"></script>
 
-    <!-- Input Mask Plugin -->
-    <script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
-    <!-- Progress -->
-    <script src="assets/js/vendors/circle-progress.min.js"></script>
+<!-- Animation -->
+<script src="assets/plugins/particles/particles.js"></script>
+<script src="assets/plugins/particles/particlesapp_default.js"></script>
 
-    <!-- Animation -->
-    <script src="assets/plugins/particles/particles.js"></script>
-    <script src="assets/plugins/particles/particlesapp_default.js"></script>
+<!-- Vector Map -->
 
-    <!-- Vector Map -->
+<script src="assets/plugins/vector-map/jquery.vmap.js"></script>
+<script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
+<script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
+<script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
 
-    <script src="assets/plugins/vector-map/jquery.vmap.js"></script>
-    <script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
-    <script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
-    <script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
+<!--Counters -->
+<script src="assets/plugins/counters/counterup.min.js"></script>
+<script src="assets/plugins/counters/waypoints.min.js"></script>
 
-    <!--Counters -->
-    <script src="assets/plugins/counters/counterup.min.js"></script>
-    <script src="assets/plugins/counters/waypoints.min.js"></script>
-
-    <!-- Index Scripts -->
-    <script src="assets/js/index.js"></script>
-    <script src="assets/js/charts.js"></script>
+<!-- Index Scripts -->
+<script src="assets/js/index.js"></script>
+<script src="assets/js/charts.js"></script>
 
 
-    <!--  Chart js -->
-    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="assets/js/chart.js"></script>
+<!--  Chart js -->
+<script src="./assets/plugins/chart/Chart.bundle.js"></script>
+<script src="assets/js/chart.js"></script>
 
-    <!--Counters -->
-    <script src="assets/plugins/counters/counterup.min.js"></script>
-    <script src="assets/plugins/counters/waypoints.min.js"></script>
+<!--Counters -->
+<script src="assets/plugins/counters/counterup.min.js"></script>
+<script src="assets/plugins/counters/waypoints.min.js"></script>
 
-    <!--  Chart js -->
-    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
-    <script src="./assets/plugins/chart/WidgetChart.js"></script>
+<!--  Chart js -->
+<script src="./assets/plugins/chart/Chart.bundle.js"></script>
+<script src="./assets/plugins/chart/WidgetChart.js"></script>
 
-    <!-- custom js -->
-    <script src="assets/js/custom.js"></script>
+<!-- custom js -->
+<script src="assets/js/custom.js"></script>
+
+
+
+<script src="assets/js/vanillaCalendar.js"></script>
+
+<script src="assets/js/alexcustom.js"></script>
+
 
 </body>
 </html>

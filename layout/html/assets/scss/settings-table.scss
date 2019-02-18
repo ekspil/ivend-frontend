@@ -4,36 +4,17 @@
   @include default-table();
 
   td {
-    a {
-      color: #000000;
+    &:first-child {
+      font-weight: 600;
     }
 
-    &.settings-link {
-      transition: .1s;
-
-      a {
-        transition: .1s;
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: #00dabf;
-        color: #fff;
-
-        a {
-          color: #fff;
-        }
-      }
+    a {
+      color: #000000;
     }
 
     &.state {
       &:hover {
         cursor: pointer;
-
-        &:after {
-
-        }
-
       }
     }
   }
