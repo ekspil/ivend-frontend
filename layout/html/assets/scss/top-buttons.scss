@@ -1,0 +1,65 @@
+@import "mixins";
+
+.top-buttons {
+  border-top: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+
+  &--product-matrix {
+    padding: 0 1.5rem;
+
+    .btn {
+      margin-left: 10px;
+    }
+  }
+
+  &__left-container, &__content-container {
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  &__right-container {
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .btn {
+    margin-bottom: 10px;
+  }
+
+  &__field-container {
+    @include default-text-input-container();
+
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+  }
+
+  &__field {
+    @include default-text-input();
+  }
+
+  @media screen and (max-width: 768px) {
+    &--product-matrix {
+      .btn {
+        margin-left: 0;
+      }
+    }
+
+    &--notification, &--product-matrix  {
+      justify-content: flex-end;
+    }
+
+    &__left-container {
+      flex-wrap: wrap;
+      width: 100%;
+
+    }
+
+    &__field-container {
+      margin-right: 0;
+    }
+  }
+}

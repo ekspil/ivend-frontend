@@ -15,68 +15,19 @@
   }
 
   &__field-container {
-    width: 100%;
-    position: relative;
+   @include default-text-input-container();
+
     margin-bottom: 30px;
 
-    &:after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 10px;
-      display: block;
-      width: 17px;
-      height: 17px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-    }
 
     &--phone-code {
       display: flex;
       flex-wrap: wrap;
     }
-
-    &--login {
-      &:after {
-        background-image: url("../../assets/images/icons/user-login.png");
-      }
-    }
-
-    &--pass {
-      &:after {
-        background-image: url("../../assets/images/icons/password.png");
-      }
-    }
-
-    &--email {
-      &:after {
-        background-image: url("../../assets/images/icons/mail.png");
-        opacity: .5;
-      }
-    }
-
-    &--phone {
-      &:after {
-        background-image: url("../../assets/images/icons/phone.png");
-      }
-    }
   }
 
   &__field {
-    width: 100%;
-    font-size: inherit;
-    border: 1px solid #05dabf;
-    background-color: #fff;
-    padding: 0.520rem 0.75rem;
-    border-radius: 3px;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    line-height: 1.6;
-
-    &--wrong {
-      border-color: $wrong-field-border-color;
-    }
+    @include default-text-input();
 
     &--phone-code {
       width: 60%;

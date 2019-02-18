@@ -4,6 +4,10 @@
   @include default-table();
 
   td {
+    &:first-child {
+      font-weight: 600;
+    }
+
     a {
       color: #000000;
     }
@@ -29,11 +33,6 @@
     &.state {
       &:hover {
         cursor: pointer;
-
-        &:after {
-
-        }
-
       }
     }
   }

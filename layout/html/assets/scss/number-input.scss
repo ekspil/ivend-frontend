@@ -1,0 +1,82 @@
+@import "mixins";
+
+.number-input {
+  position: relative;
+
+  input {
+    width: 45px;
+    height: 42px;
+    line-height: 1.65;
+    float: left;
+    display: block;
+    padding: 0;
+    margin: 0;
+    padding-left: 20px;
+    border: 1px solid #eee;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__button {
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    text-align: center;
+    color: #333;
+    font-size: 15px;
+    transform: translateX(-100%);
+    user-select: none;
+
+    &:hover {
+      background-color: #daf9f5;
+    }
+
+    &--up {
+      position: absolute;
+      height: 50%;
+      top: 0;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 22px;
+    }
+
+    &--down {
+      position: absolute;
+      bottom: -1px;
+      height: 50%;
+    }
+  }
+
+  &__nav {
+    float: left;
+    position: relative;
+    height: 42px;
+  }
+
+  input[type=number]
+  {
+    -moz-appearance: textfield;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button
+  {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button
+  {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number]
+  {
+    -moz-appearance: textfield;
+  }
+
+
+}

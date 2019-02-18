@@ -1,0 +1,9 @@
+@import "mixins";
+
+.notification-table {
+  td {
+    &:first-child {
+      font-weight: 600;
+    }
+  }
+}
