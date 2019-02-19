@@ -13,207 +13,20 @@
 							<div class="tabs-menu1">
 								<!-- Tabs -->
 								<ul class="nav panel-tabs f-b">
-									<li class=""><a href="#tab1" class="active" data-toggle="tab">Оборудование</a></li>
-									<li><a href="#tab2" data-toggle="tab">Уведомления</a></li>
-									<li><a href="#tab3" data-toggle="tab">компания </a></li>
+									<li>
+										<a href="#" :class="activeTab === 'Equipment' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Equipment')">Оборудование</a>
+									</li>
+									<li>
+										<a href="#" :class="activeTab === 'Notifications' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Notifications')">Уведомления</a>
+									</li>
+									<li>
+										<a href="#" :class="activeTab === 'Company' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Company')">Компания</a>
+									</li>
 								</ul>
 							</div>
 						</div>
 
-						<div class="text-wrap">
-							<div class="example top-buttons-container top-buttons">
-								<div class="top-buttons__left-container">
-									<a href="#" class="btn btn-primary">Добавить автомат</a>
-								</div>
-								<div class="">
-									<div class="row gutters-xs">
-										<span class="col-auto">
-											<button class="btn btn-primary" type="button"><i
-												class="fe fe-upload"></i>
-											</button>
-										</span>
-
-										<span class="col-auto">
-											<button class="btn btn-primary" type="button"><i
-												class="fe fe-download"></i>
-											</button>
-										</span>
-
-										<span class="col-auto">
-											<button class="btn btn-primary" type="button">Сохранить
-											</button>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="table-responsive settings-table">
-							<table class="table card-table table-vcenter text-nowrap">
-								<thead>
-									<tr>
-										<th class="sortable up">Автомат</th>
-										<th class="sortable">Название</th>
-										<th>Группа</th>
-										<th>Тип</th>
-										<th>Модель</th>
-										<th>Товары</th>
-										<th class="sortable">Контроллер</th>
-										<th>Состояние</th>
-										<th>Дата</th>
-										<th>Прошивка</th>
-										<th>Режим</th>
-										<th>Фискализация</th>
-									</tr>
-								</thead>
-								<tbody>
-
-									<tr>
-										<td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-										<td>Вокзал1</td>
-										<td>Общая</td>
-										<td>Кофе</td>
-										<td>Kikko Max</td>
-										<td>Не заполнены</td>
-										<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-										<td class="state dropdown" data-toggle="dropdown">
-											<span class="status-icon bg-success"></span> Активирован
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-success"></span> Активирован
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-danger"></span> Дективирован
-
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-secondary"></span>Приостановлен
-												</a>
-
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-yellow"></span> Отладка
-												</a>
-											</div>
-
-										</td>
-										<td>09.02.2019 14:45</td>
-										<td>123456</td>
-										<td>CASHLESS FREE</td>
-										<td>Подтвержденный</td>
-									</tr>
-
-									<tr>
-										<td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-										<td>Вокзал1</td>
-										<td>Общая</td>
-										<td>Кофе</td>
-										<td>Kikko Max</td>
-										<td>Не заполнены</td>
-										<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-										<td class="state dropdown" data-toggle="dropdown">
-											<span class="status-icon bg-secondary"></span>Приостановлен
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-success"></span> Активирован
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-danger"></span> Дективирован
-
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-secondary"></span>Приостановлен
-												</a>
-
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-yellow"></span> Отладка
-												</a>
-											</div>
-
-										</td>
-										<td>09.02.2019 14:45</td>
-										<td>123456</td>
-										<td>CASHLESS FREE</td>
-										<td>Подтвержденный</td>
-									</tr>
-
-									<tr>
-										<td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
-										<td>Вокзал1</td>
-										<td>Общая</td>
-										<td>Кофе</td>
-										<td>Kikko Max</td>
-										<td>Не заполнены</td>
-										<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-										<td class="state dropdown" data-toggle="dropdown">
-											<span class="status-icon bg-danger"></span> Дективирован
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-success"></span> Активирован
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-danger"></span> Дективирован
-
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-secondary"></span>Приостановлен
-												</a>
-
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-yellow"></span> Отладка
-												</a>
-											</div>
-
-										</td>
-										<td>09.02.2019 14:45</td>
-										<td>123456</td>
-										<td>CASHLESS FREE</td>
-										<td>Подтвержденный</td>
-									</tr>
-
-									<tr>
-										<td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
-										<td>Вокзал1</td>
-										<td>Общая</td>
-										<td>Кофе</td>
-										<td>Kikko Max</td>
-										<td>Не заполнены</td>
-										<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
-
-										<td class="state dropdown" data-toggle="dropdown">
-											<span class="status-icon bg-yellow"></span> Отладка
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-success"></span> Активирован
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-danger"></span> Дективирован
-
-												</a>
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-secondary"></span>Приостановлен
-												</a>
-
-												<a href="javascript:void(0)" class="dropdown-item">
-													<span class="status-icon bg-yellow"></span> Отладка
-												</a>
-											</div>
-
-										</td>
-										<td>09.02.2019 14:45</td>
-										<td>123456</td>
-										<td>CASHLESS FREE</td>
-										<td>Подтвержденный</td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-						<!-- table-wrapper -->
+						<component :is="getActiveTab"></component>
 					</div>
 					<!-- section-wrapper -->
 
@@ -236,7 +49,30 @@
 </template>
 
 <script>
+	import Equipment from './modules/Equipment';
+	import Notifications from './modules/Notifications';
+	import Company from './modules/Company';
+
 	export default {
-		name: 'Settings'
+		name: 'Settings',
+		data: () => ({
+            activeTab: 'Equipment'
+        }),
+        computed: {
+            getActiveTab () {
+                switch (this.activeTab) {
+                    case 'Equipment': return Equipment;
+                    case 'Notifications': return Notifications;
+                    case 'Company': return Company;
+
+                    default: return Equipment;
+                }
+            }
+        },
+        methods: {
+            setActiveTab (tabName = 'Finance') {
+                this.activeTab = tabName;
+            }
+        }
 	}
 </script>

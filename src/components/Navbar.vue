@@ -3,10 +3,10 @@
         <div class="container">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <router-link class="nav-link active" to="/home">
                         <i class="fas fa-home"></i>
-                        <router-link to="/home">Главная</router-link>
-                    </a>
+                        Главная
+                    </router-link>
                 </li>
                 <li class="nav-item with-sub">
                     <a class="nav-link" href="#"><i class="fas fa-desktop"></i> <span>Мониторинг</span></a>
