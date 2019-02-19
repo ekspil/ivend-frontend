@@ -115,7 +115,7 @@
             if (areKeysNull(this.validation)) {
                 const userData = {
                     ...this.userData,
-                    phone: this.userData.phone.replace(/[()+\s-]/gi, '')
+                    phone: this.userData.phone.replace(/[()+\s-]/gi, '').slice(1)
                 };
 
                 try {
