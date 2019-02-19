@@ -25,10 +25,10 @@
                     <a class="nav-link" href="#"><i class="fas fa-chart-bar"></i><span>Статистика</span></a>
                     <div class="sub-item">
                         <ul>
-                            <li>
+                            <li v-if="false">
                                 <a href="#">Контроллеры</a>
                             </li>
-                            <li>
+                            <li v-if="false">
                                 <a href="#">Товары</a>
                             </li>
                             <li>
@@ -39,7 +39,7 @@
                 </li>
                 <li class="nav-item with-sub">
                     <a class="nav-link" href="#"><i class="fas fa-cog"></i><span>Обслуживание</span></a>
-                    <div class="sub-item">
+                    <div class="sub-item" v-if="false">
                         <ul>
                             <li>
                                 <a href="#">Товар</a>
@@ -62,22 +62,22 @@
                     <div class="sub-item">
                         <ul>
                             <li>
-                                <a href="#">Группы</a>
+                                <a href="#" v-if="false">Группы</a>
                             </li>
                             <li>
-                                <a href="#">Автоматы</a>
+                                <a href="#" v-if="false">Автоматы</a>
                             </li>
                             <li>
                                 <router-link to="/controllers">Контроллеры</router-link>
                             </li>
                             <li>
-                                <a href="#">Уведомления</a>
+                                <a href="#" v-if="false">Уведомления</a>
                             </li>
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link " data-toggle="dropdown" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
+                    <router-link class="nav-link" data-toggle="dropdown" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
                 </li>
             </ul>
         </div>
