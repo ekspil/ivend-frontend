@@ -5,6 +5,14 @@
   position: relative;
   z-index: 1;
 
+  &--sales {
+    tr td {
+      &:last-child {
+        width: 60%;
+      }
+    }
+  }
+
   thead tr {
     z-index: 11;
     position: relative;
@@ -12,7 +20,6 @@
 
     th, td {
       background-color: #fff;
-
     }
 
     &:hover {
@@ -31,7 +38,6 @@
     outline: 0;
   }
 
-
   td:hover::after,
   td:focus::after {
     content: '';
@@ -42,5 +48,15 @@
     width: 100%;
     z-index: -1;
     background-color: rgba(212, 224, 236, 0.31);
+  }
+
+  @media screen and (max-width: 992px) {
+    &--sales {
+      tr td {
+        &:last-child {
+          width: auto;
+        }
+      }
+    }
   }
 }

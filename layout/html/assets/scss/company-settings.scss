@@ -1,0 +1,32 @@
+@import "mixins";
+
+.company-settings {
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+  }
+
+  &__field-label {
+    font-weight: bold;
+  }
+
+  &__field-container {
+    @include default-text-input-container();
+
+    width: 30%;
+    margin-bottom: 20px;
+  }
+
+  &__field {
+    @include default-text-input();
+  }
+
+  @media screen and (max-width: 992px) {
+    &__field-container {
+      width: 100%;
+
+    }
+  }
+}
