@@ -69,22 +69,6 @@
                                         <td class="settings-link">{{ controller.uid }} <i class="fe fe-more-vertical"></i></td>
                                         <td class="state dropdown" data-toggle="dropdown">
                                             <div v-html="getStatus(controller.status)"></div>
-
-                                            <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-success"></span> Активирован
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-danger"></span> Дективирован
-
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-secondary"></span>Приостановлен
-                                                </a>
-                                                <a href="javascript:void(0)" class="dropdown-item">
-                                                    <span class="status-icon bg-yellow"></span> Отладка
-                                                </a>
-                                            </div>
                                         </td>
                                         <td>09.02.2019 14:45</td>
                                         <td>123456</td>
@@ -167,7 +151,7 @@
                     case 'DISABLED': return '<span class="status-icon bg-danger"></span> Деактивирован';
                     case 'PAUSED': return '<span class="status-icon bg-secondary"></span> Приостановлен';
                     case 'DEBUG': return '<span class="status-icon bg-yellow"></span> Отладка';
-                    case 'TRAINING': return '<span class="status-icon bg-secondary"></span> Обучение';
+                    case 'TRAINING': return '<span class="status-icon bg-info"></span> Обучение';
                 }
             }
         }
