@@ -96,7 +96,7 @@
                                 }
                             `,
                             variables: {
-                                data: this.userData
+                                data: userData
                             }
                         });
 
