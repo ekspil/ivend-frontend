@@ -134,7 +134,8 @@
                 `,
                 update (data) {
                     return data.getControllers;
-                }
+                },
+                fetchPolicy: 'no-cache'
             }
         }
     }
