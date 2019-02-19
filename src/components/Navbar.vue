@@ -13,10 +13,10 @@
                     <div class="sub-item">
                         <ul>
                             <li>
-                                <a href="#">Рабочие</a>
+                                <router-link to="/monitoring">Рабочие</router-link>
                             </li>
                             <li>
-                                <a href="#">Неисправные</a>
+                                <router-link to="/monitoring">Неисправные</router-link>
                             </li>
                         </ul>
                     </div>
@@ -32,7 +32,7 @@
                                 <a href="#">Товары</a>
                             </li>
                             <li>
-                                <a href="#">Финансы</a>
+                                <router-link to="/stats">Финансы</router-link>
                             </li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " data-toggle="dropdown" href="#"><i class="fas fa-sliders-h"></i> <span>Настройки</span></a>
+                    <router-link class="nav-link " data-toggle="dropdown" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
                 </li>
             </ul>
         </div>

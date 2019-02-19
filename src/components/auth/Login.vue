@@ -59,7 +59,7 @@
     import { areKeysNull } from '@/utils';
     import {
         validate, mapValidationObject,
-        required, phone
+        required
     } from '@/utils/validation';
 
     export default {
