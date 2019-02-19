@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 
     <!-- Title -->
-    <title>Статистика | Продажи </title>
+    <title>Настройки компании | Сотрудники</title>
 
     <!--Font Awesome-->
     <link href="assets/plugins/fontawesome-free/css/all.css" rel="stylesheet">
@@ -252,106 +252,53 @@
                         <div class="card">
                             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
                             <div class="card-header">
-                                <div class="card-title f-b">Статистика</div>
+                                <div class="card-title f-b">Настройки сотрудников компании</div>
                             </div>
 
-                            <div class="tab-menu-heading">
-                                <div class="tabs-menu1">
-                                    <!-- Tabs -->
-                                    <ul class="nav panel-tabs f-b">
-                                        <li class=""><a href="#tab1"  data-toggle="tab">Финансы</a></li>
-                                        <li><a href="#tab2" class="active" data-toggle="tab">Продажи</a></li>
-                                    </ul>
-                                </div>
+                            <div class="card-header-links">
+                                <a href="javascript:void(0)" class="card-header-links__item">Вернуться назад</a>
                             </div>
 
-
-                            <div class="stats-top-menu">
-                                <div class="stats-top-menu__content-container">
-                                    <div class="stats-top-menu__date-buttons">
-                                        <button class="stats-top-menu__item">Всего</button>
-                                        <button class="stats-top-menu__item">День</button>
-                                        <button class="stats-top-menu__item stats-top-menu__item--active">Неделя
-                                        </button>
-                                        <button class="stats-top-menu__item">Месяц</button>
-
-
-                                        <div id="periodinput" class="stats-top-menu__date-period">
-                                            <button id="btn1" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'from')" data-calendar-label="" data-calendar-area="">от</button>
-
-                                            <div class="stats-top-menu__date-separator"></div>
-
-                                            <button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>
-
-                                            <form id="calendar" class="calendar disabled-block" tabindex="-1">
-                                                <div class="v-cal" id="v-cal-from" >
-                                                    <div class="vcal-header">
-                                                        <div class="vcal-btn--prev" data-calendar-toggle="previous">
-                                                        </div>
-
-                                                        <div class="vcal-header__label" data-calendar-label="month">
-                                                            Февраль 2018
-                                                        </div>
-
-
-                                                        <div class="vcal-btn--next" data-calendar-toggle="next">
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="vcal-week">
-                                                        <span>Пн</span>
-                                                        <span>Вт</span>
-                                                        <span>Ср</span>
-                                                        <span>Чт</span>
-                                                        <span>Пт</span>
-                                                        <span>Сб</span>
-                                                        <span>Вс</span>
-                                                    </div>
-                                                    <div class="vcal-body" data-calendar-area="month"></div>
-                                                </div>
-                                            </form>
-
+                            <div class="text-wrap">
+                                <div class="example top-buttons-container top-buttons">
+                                    <div class="top-buttons__left-container">
+                                        <a href="#" class="btn btn-primary">Добавить сотрудника</a>
+                                    </div>
+                                    <div class="">
+                                        <div class="row gutters-xs">
+                                            <span class="col-auto">
+                                                <button class="btn btn-primary" type="button">Сохранить
+                                                </button>
+                                            </span>
                                         </div>
                                     </div>
-
-                                    <button class="btn btn-primary" type="button"><i
-                                            class="fe fe-download"></i>
-                                    </button>
                                 </div>
                             </div>
 
-                            <div class="table-responsive stats-table stats-table--sales">
-                                <table  class="table card-table table-vcenter text-nowrap">
+                            <div class="table-responsive settings-table">
+                                <table class="table card-table table-vcenter text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th class="sortable up">Автомат</th>
-                                        <th>Сумма</th>
-                                        <th>Кол-во продаж</th>
+                                        <th class="sortable up">Имя</th>
+                                        <th class="sortable">Должность</th>
+                                        <th>Телефон</th>
+                                        <th>Email</th>
+                                        <th>Логин</th>
+                                        <th>Пароль</th>
+                                        <th>Доступ</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
                                     <tr>
-                                        <td class="f-b">Континент1</td>
-                                        <td>2500</td>
-                                        <td>25</td>
-
+                                        <td>Дмитрий</td>
+                                        <td>Директор</td>
+                                        <td>89139726500</td>
+                                        <td>info@ivend.pro</td>
+                                        <td>dmitriy</td>
+                                        <td>11111</td>
+                                        <td class="settings-link"><a class="f-b" href="#">Настроить</a></td>
                                     </tr>
-
-                                    <tr>
-                                        <td class="f-b">Континент1</td>
-                                        <td>15000</td>
-                                        <td>130</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="f-b">Континент1</td>
-                                        <td>3000</td>
-                                        <td>30</td>
-                                    </tr>
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -379,69 +326,64 @@
 
     <!-- Back to top -->
     <a href="#top" id="back-to-top" style="display: inline;"><i class="fas fa-angle-up"></i></a>
-</div>
-<!-- Dashboard Core -->
-<script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
-<script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-<script src="assets/js/vendors/jquery.sparkline.min.js"></script>
-<script src="assets/js/vendors/selectize.min.js"></script>
-<script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
-<script src="assets/js/vendors/circle-progress.min.js"></script>
-<script src="assets/plugins/rating/jquery.rating-stars.js"></script>
-<!-- Side menu js -->
-<script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
 
-<!-- Custom scroll bar Js-->
-<script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Dashboard Core -->
+    <script src="assets/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/jquery.sparkline.min.js"></script>
+    <script src="assets/js/vendors/selectize.min.js"></script>
+    <script src="assets/js/vendors/jquery.tablesorter.min.js"></script>
+    <script src="assets/js/vendors/circle-progress.min.js"></script>
+    <script src="assets/plugins/rating/jquery.rating-stars.js"></script>
+    <!-- Side menu js -->
+    <script src="assets/plugins/toggle-sidebar/js/sidemenu.js"></script>
 
-<!-- c3.js Charts Plugin -->
-<script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
-<script src="./assets/plugins/charts-c3/c3-chart.js"></script>
+    <!-- Custom scroll bar Js-->
+    <script src="assets/plugins/scroll-bar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-<!-- Input Mask Plugin -->
-<script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
-<!-- Progress -->
-<script src="assets/js/vendors/circle-progress.min.js"></script>
+    <!-- c3.js Charts Plugin -->
+    <script src="./assets/plugins/charts-c3/d3.v5.min.js"></script>
+    <script src="./assets/plugins/charts-c3/c3-chart.js"></script>
 
-<!-- Animation -->
-<script src="assets/plugins/particles/particles.js"></script>
-<script src="assets/plugins/particles/particlesapp_default.js"></script>
+    <!-- Input Mask Plugin -->
+    <script src="assets/plugins/input-mask/jquery.mask.min.js"></script>
+    <!-- Progress -->
+    <script src="assets/js/vendors/circle-progress.min.js"></script>
 
-<!-- Vector Map -->
+    <!-- Animation -->
+    <script src="assets/plugins/particles/particles.js"></script>
+    <script src="assets/plugins/particles/particlesapp_default.js"></script>
 
-<script src="assets/plugins/vector-map/jquery.vmap.js"></script>
-<script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
-<script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
-<script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
+    <!-- Vector Map -->
 
-<!--Counters -->
-<script src="assets/plugins/counters/counterup.min.js"></script>
-<script src="assets/plugins/counters/waypoints.min.js"></script>
+    <script src="assets/plugins/vector-map/jquery.vmap.js"></script>
+    <script src="assets/plugins/vector-map/jquery.vmap.min.js"></script>
+    <script src="assets/plugins/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="assets/plugins/vector-map/country/jquery.vmap.world.js"></script>
 
-<!-- Index Scripts -->
-<script src="assets/js/index.js"></script>
-<script src="assets/js/charts.js"></script>
+    <!--Counters -->
+    <script src="assets/plugins/counters/counterup.min.js"></script>
+    <script src="assets/plugins/counters/waypoints.min.js"></script>
 
-
-<!--  Chart js -->
-<script src="./assets/plugins/chart/Chart.bundle.js"></script>
-<script src="assets/js/chart.js"></script>
-
-<!--Counters -->
-<script src="assets/plugins/counters/counterup.min.js"></script>
-<script src="assets/plugins/counters/waypoints.min.js"></script>
-
-<!--  Chart js -->
-<script src="./assets/plugins/chart/Chart.bundle.js"></script>
-<script src="./assets/plugins/chart/WidgetChart.js"></script>
-
-<!-- custom js -->
-<script src="assets/js/custom.js"></script>
+    <!-- Index Scripts -->
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/charts.js"></script>
 
 
-<script src="assets/js/vanillaCalendar.js"></script>
+    <!--  Chart js -->
+    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="assets/js/chart.js"></script>
 
-<script src="assets/js/alexcustom.js"></script>
+    <!--Counters -->
+    <script src="assets/plugins/counters/counterup.min.js"></script>
+    <script src="assets/plugins/counters/waypoints.min.js"></script>
+
+    <!--  Chart js -->
+    <script src="./assets/plugins/chart/Chart.bundle.js"></script>
+    <script src="./assets/plugins/chart/WidgetChart.js"></script>
+
+    <!-- custom js -->
+    <script src="assets/js/custom.js"></script>
 
 </body>
 </html>

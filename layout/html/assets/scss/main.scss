@@ -12,6 +12,7 @@
 @import "product-matrix-table";
 @import "number-input";
 @import "monitoring-table";
+@import "company-settings";
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
@@ -30,6 +31,10 @@
   overflow-y: hidden;
 }
 
+.tab-menu-heading {
+  padding: 20px 1.5rem;
+}
+
 .example {
   border: none;
 }
@@ -37,6 +42,12 @@
 .aligned-text {
   text-align: center;
   padding: 1em 0;
+}
+
+.card-footer {
+  &--settings-company {
+    display: none;
+  }
 }
 
 .default-checkbox {
@@ -97,6 +108,14 @@
       left: 3px;
       content: '';
       background-image: url("../../assets/images/icons/checkmark.png");
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .card-footer {
+    &--settings-company {
+      display: block;
     }
   }
 }
