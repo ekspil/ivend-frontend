@@ -59,25 +59,33 @@
 						<th class="sortable">Кол-во продаж</th>
 						<th class="sortable">Сумма</th>
 						<th class="sortable">Безнал</th>
+						<!--
 						<th>Терминал</th>
 						<th>Кошелек</th>
+						-->
 						<th class="sortable">Наличные</th>
+						<!--
 						<th>Купюры</th>
 						<th>Монеты</th>
+						-->
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="({ id, name, salesSummary }) in controllers" :key="id">
-						<template v-if="salesSummary">
-							<td class="f-b">{{ name }}</td>
-							<td>{{ salesSummary.salesCount }}</td>
-							<td>{{ salesSummary.overallAmount }}</td>
-							<td>{{ salesSummary.cashlessAmount }}</td>
+					<tr v-for="({ id, name, overallSalesSummary }) in controllers" :key="id">
+						<template v-if="overallSalesSummary">
+							<td class="f-b"><router-link :to="`/stats/${id}`">{{ name }}</router-link></td>
+							<td>{{ overallSalesSummary.salesCount }}</td>
+							<td>{{ overallSalesSummary.overallAmount }}</td>
+							<td>{{ overallSalesSummary.cashlessAmount }}</td>
+							<!--
 							<td>500</td>
 							<td>200</td>
-							<td>{{ salesSummary.cashAmount }}</td>
+							-->
+							<td>{{ overallSalesSummary.cashAmount }}</td>
+							<!--
 							<td>200</td>
 							<td>100</td>
+							-->
 						</template>
 						<template v-else>
 							<td class="f-b">{{ name }}</td>
@@ -85,10 +93,12 @@
 							<td>-</td>
 							<td>-</td>
 							<td>-</td>
+							<!--
 							<td>-</td>
 							<td>-</td>
 							<td>-</td>
 							<td>-</td>
+							-->
 						</template>
 					</tr>
 				</tbody>
@@ -112,7 +122,7 @@
 						getControllers {
 							id,
 							name,
-    						salesSummary {
+    						overallSalesSummary {
     						  salesCount,
     						  overallAmount,
     						  cashAmount,
@@ -127,3 +137,9 @@
 		}
 	}
 </script>
+
+<style scoped lang="scss">
+    .card-table td a {
+        color: black;
+    }
+</style>

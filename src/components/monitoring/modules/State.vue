@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<template v-if="!areStatesEmpty">
+		<template v-if="controllers.length > 0">
 			<div class="text-wrap">
 				<div class="example top-buttons-container top-buttons">
 					<div class="top-buttons__left-container"></div>
@@ -52,7 +52,6 @@
 			</div>
 		</template>
 
-        <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
         <div v-else class="aligned-text">Нет контроллеров</div>
 	</div>
 </template>
@@ -60,7 +59,6 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { all, propEq } from 'ramda';
 	import { getMonthName } from '@/utils';
 
 	export default {
@@ -88,11 +86,6 @@
 				`,
 				update: data => data.getControllers,
 				fetchPolicy: 'no-cache'
-			}
-		},
-		computed: {
-			areStatesEmpty () {
-				return all(propEq('lastState', null))(this.controllers);
 			}
 		},
 		methods: {

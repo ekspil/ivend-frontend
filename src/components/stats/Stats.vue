@@ -15,10 +15,7 @@
                             <!-- Tabs -->
                             <ul class="nav panel-tabs f-b">
                                 <li>
-                                    <a href="#" :class="activeTab === 'Finance' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Finance')">Финансы</a>
-                                </li>
-                                <li>
-                                    <a href="#" :class="activeTab === 'Sales' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Sales')">Продажи</a>
+                                    <a href="#" :class="activeTab === 'Finance' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Finance')">Финансы и продажи</a>
                                 </li>
                             </ul>
                         </div>
@@ -48,13 +45,11 @@
 
 <script>
     import Finance from './modules/Finance';
-    import Sales from './modules/Sales';
 
 	export default {
 		name: 'Stats',
         components: {
-            Finance,
-            Sales
+            Finance
         },
         data: () => ({
             activeTab: 'Finance'
@@ -63,7 +58,6 @@
             getActiveTab () {
                 switch (this.activeTab) {
                     case 'Finance': return Finance;
-                    case 'Sales': return Sales;
 
                     default: return Finance;
                 }

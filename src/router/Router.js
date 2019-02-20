@@ -9,6 +9,7 @@ import EditController from '@/components/controllers/EditController';
 import AddController from '@/components/controllers/AddController';
 
 import Stats from '@/components/stats/Stats';
+import ControllerSales from '@/components/stats/ControllerSales';
 
 import Monitoring from '@/components/monitoring/Monitoring';
 
@@ -31,6 +32,7 @@ const routes = [
     { path: '/controllers/add', component: AddController },
 
     { path: '/stats', component: Stats },
+    { path: '/stats/:id', component: ControllerSales },
 
     { path: '/monitoring', component: Monitoring },
 
