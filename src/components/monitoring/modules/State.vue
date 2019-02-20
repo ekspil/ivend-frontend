@@ -24,10 +24,6 @@
 							<th class="sortable">Контроллер</th>
 							<th>Монетник</th>
 							<th>Купюрник</th>
-							<th>Терминал</th>
-							<th>Касса</th>
-							<th>Аудит</th>
-							<th>Аудит2</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,10 +35,6 @@
 							<td class="warning-cel">X - 24.10 - 15:50</td>
 							<td class="warning-cel">{{ lastState.coinAmount }}</td>
 							<td class="warning-cel">{{ lastState.billAmount }}</td>
-							<td class="warning-cel">X - КИТ</td>
-							<td class="warning-cel">X - КИТ</td>
-							<td class="warning-cel">X</td>
-							<td class="disabled-cel">ОТКЛ</td>
 						</tr>
 					</tbody>
 				</table>
