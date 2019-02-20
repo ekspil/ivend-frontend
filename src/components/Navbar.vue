@@ -37,7 +37,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item with-sub">
+                <li class="nav-item with-sub" v-if="false">
                     <a class="nav-link" href="#"><i class="fas fa-cog"></i><span>Обслуживание</span></a>
                     <div class="sub-item" v-if="false">
                         <ul>
