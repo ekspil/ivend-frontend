@@ -58,7 +58,7 @@
                                     <tr v-for="controller in controllers" :key="controller.id">
                                         <td class="settings-link">
                                             <router-link :to="`/controllers/edit/${controller.id}`" class="f-b">
-                                                {{ controller.id }} <i class="fe fe-more-vertical"></i>
+                                                {{ controller.id }}
                                             </router-link>
                                         </td>
                                         <td>{{ controller.name }}</td>

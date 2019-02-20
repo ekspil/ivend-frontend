@@ -49,13 +49,13 @@
 				<tbody>
 
 					<tr>
-						<td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
+						<td class="settings-link"><a href="#" class="f-b">25411</a></td>
 						<td>Вокзал1</td>
 						<td>Общая</td>
 						<td>Кофе</td>
 						<td>Kikko Max</td>
 						<td>Не заполнены</td>
-						<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
+						<td class="settings-link">10005-2018 </td>
 						<td class="state dropdown" data-toggle="dropdown">
 							<span class="status-icon bg-success"></span> Активирован
 						</td>
@@ -66,13 +66,13 @@
 					</tr>
 
 					<tr>
-						<td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
+						<td class="settings-link"> <a href="#" class="f-b">25411</a></td>
 						<td>Вокзал1</td>
 						<td>Общая</td>
 						<td>Кофе</td>
 						<td>Kikko Max</td>
 						<td>Не заполнены</td>
-						<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
+						<td class="settings-link">10005-2018 </td>
 						<td class="state dropdown" data-toggle="dropdown">
 							<span class="status-icon bg-secondary"></span>Приостановлен
 						</td>
@@ -83,13 +83,13 @@
 					</tr>
 
 					<tr>
-						<td class="settings-link"><a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a>  </td>
+						<td class="settings-link"><a href="#" class="f-b">25411 </a>  </td>
 						<td>Вокзал1</td>
 						<td>Общая</td>
 						<td>Кофе</td>
 						<td>Kikko Max</td>
 						<td>Не заполнены</td>
-						<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
+						<td class="settings-link">10005-2018 </td>
 
 						<td class="state dropdown" data-toggle="dropdown">
 							<span class="status-icon bg-danger"></span> Дективирован
@@ -101,13 +101,13 @@
 					</tr>
 
 					<tr>
-						<td class="settings-link"> <a href="#" class="f-b">25411 <i class="fe fe-more-vertical"></i></a> </td>
+						<td class="settings-link"> <a href="#" class="f-b">25411 </a> </td>
 						<td>Вокзал1</td>
 						<td>Общая</td>
 						<td>Кофе</td>
 						<td>Kikko Max</td>
 						<td>Не заполнены</td>
-						<td class="settings-link">10005-2018 <i class="fe fe-more-vertical"></i></td>
+						<td class="settings-link">10005-2018 </td>
 
 						<td class="state dropdown" data-toggle="dropdown">
 							<span class="status-icon bg-yellow"></span> Отладка
