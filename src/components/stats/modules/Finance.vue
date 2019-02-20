@@ -57,7 +57,7 @@
 					<tr>
 						<th class="sortable up">Автомат</th>
 						<th class="sortable">Кол-во продаж</th>
-						<th class="sortable"> Сумма</th>
+						<th class="sortable">Сумма</th>
 						<th class="sortable">Безнал</th>
 						<th>Терминал</th>
 						<th>Кошелек</th>
@@ -67,16 +67,29 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="controller in controllers" :key="controller.id">
-						<td class="f-b">{{ controller.name }}</td>
-						<td>12</td>
-						<td>1200</td>
-						<td>700</td>
-						<td>500</td>
-						<td>200</td>
-						<td>500</td>
-						<td>200</td>
-						<td>100</td>
+					<tr v-for="({ id, name, salesSummary }) in controllers" :key="id">
+						<template v-if="salesSummary">
+							<td class="f-b">{{ name }}</td>
+							<td>{{ salesSummary.salesCount }}</td>
+							<td>{{ salesSummary.overallAmount }}</td>
+							<td>{{ salesSummary.cashlessAmount }}</td>
+							<td>500</td>
+							<td>200</td>
+							<td>{{ salesSummary.cashAmount }}</td>
+							<td>200</td>
+							<td>100</td>
+						</template>
+						<template v-else>
+							<td class="f-b">{{ name }}</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+							<td>-</td>
+						</template>
 					</tr>
 				</tbody>
 			</table>
@@ -98,7 +111,13 @@
 					query {
 						getControllers {
 							id,
-							name
+							name,
+    						salesSummary {
+    						  salesCount,
+    						  overallAmount,
+    						  cashAmount,
+    						  cashlessAmount
+    						}
 						}
 					}
 				`,

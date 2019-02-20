@@ -64,19 +64,16 @@
                                         <td>{{ controller.name }}</td>
                                         <td>Общая</td>
                                         <td>Кофе</td>
-                                        <td>{{ controller.equipment.name }}</td>
+                                        <td>{{ (controller.equipment && controller.equipment.name) || '-' }}</td>
                                         <td>Не заполнены</td>
-                                        <td class="settings-link">{{ controller.uid }} <i class="fe fe-more-vertical"></i></td>
+                                        <td class="settings-link">{{ controller.uid || '-' }} <i class="fe fe-more-vertical"></i></td>
                                         <td class="state dropdown" data-toggle="dropdown">
                                             <div v-html="getStatus(controller.status)"></div>
                                         </td>
                                         <td>09.02.2019 14:45</td>
-                                        <td>123456</td>
-                                        <td>{{ controller.mode }}</td>
-                                        <td>
-                                            <template v-if="controller.fiscalRegistrar">{{ controller.fiscalRegistrar.name }}</template>
-                                            <template v-else>-</template>
-                                        </td>
+                                        <td>{{ (controller.lastState && controller.lastState.firmwareId) || '-' }}</td>
+                                        <td>{{ controller.mode || '-' }}</td>
+                                        <td>{{ (controller.fiscalRegistrar && controller.fiscalRegistrar.name) || '-' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -134,6 +131,9 @@
                         }
                         fiscalRegistrar {
                           name
+                        }
+                        lastState {
+                            firmwareId
                         }
                       }
                     }

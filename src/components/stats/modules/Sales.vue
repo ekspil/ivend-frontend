@@ -57,13 +57,13 @@
                 <thead>
                     <tr>
                         <th class="sortable up">Автомат</th>
-                        <th v-for="(sale, index) in controller.saleStats" :key="index">{{ sale.item.name}}</th>
+                        <th v-for="(sale, index) in controller.itemSaleStats" :key="index">{{ sale.item.name}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="controller in controllers" :key="controller.id">
+                    <tr>
                         <td class="f-b">{{ controller.name }}</td>
-                        <td v-for="(sale, index) in controller.saleStats" :key="index">{{ sale.amount }}</td>
+                        <td v-if="controller.itemSaleStats" v-for="(sale, index) in controller.itemSaleStats" :key="index">{{ sale.amount || '-' }}</td>
                     </tr>
                 </tbody>
             </table>

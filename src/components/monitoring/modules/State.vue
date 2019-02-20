@@ -27,13 +27,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="({ id, name, lastState, lastSaleTime }) in controllers" :key="id">
+						<tr v-for="({ id, uid, name, lastState, lastSaleTime }) in controllers" :key="id">
 							<template v-if="lastState">
 								<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
 
-								<td class="warning-cel">{{ lastState.signalStrength }}</td>
-								<td class="warning-cel">{{ lastSaleTime || '-' }}</td>
-								<td class="warning-cel">{{ lastState.registrationTime }}</td>
+								<td class="ok-cel">{{ lastState.signalStrength || '-' }}</td>
+								<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>
+								<td class="disabled-cel">{{ uid || '-' }}</td>
 								<td class="warning-cel">{{ lastState.coinAmount }}</td>
 								<td class="warning-cel">{{ lastState.billAmount }}</td>
 							</template>
@@ -41,8 +41,8 @@
 								<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
 
 								<td class="warning-cel">-</td>
-								<td class="warning-cel">{{ lastSaleTime || '-' }}</td>
-								<td class="warning-cel">-</td>
+								<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>
+								<td class="disabled-cel">{{ uid }}</td>
 								<td class="warning-cel">-</td>
 								<td class="warning-cel">-</td>
 							</template>	
@@ -61,6 +61,7 @@
 	import gql from 'graphql-tag';
 
 	import { all, propEq } from 'ramda';
+	import { getMonthName } from '@/utils';
 
 	export default {
 		name: 'State',
@@ -73,6 +74,7 @@
 					query {
 						getControllers {
 							id,
+							uid,
 							name,
 							lastSaleTime,
 							lastState {
@@ -91,6 +93,16 @@
 		computed: {
 			areStatesEmpty () {
 				return all(propEq('lastState', null))(this.controllers);
+			}
+		},
+		methods: {
+			getTimestamp (time) {
+				if (time) {
+					const date = new Date(time);
+					return `${date.getDay() + 1} ${getMonthName(date.getMonth()).toLowerCase()}`;
+				}
+
+				return '-';
 			}
 		}
 	}

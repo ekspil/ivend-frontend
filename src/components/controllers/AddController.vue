@@ -35,7 +35,7 @@
                                         <div class="form-group">
                                             <label class="form-label f-b">Модель автомата</label>
                                             <select class="form-control custom-select" v-model="input.equipmentId">
-                                                <option v-for="(equipment, index) in equipments"
+                                                <option v-for="equipment in equipments"
                                                         :key="equipment.id" :value="equipment.id">
                                                     {{ equipment.name }}
                                                 </option>
@@ -126,7 +126,7 @@
                                        <div class="form-group">
                                             <label class="form-label f-b">Версия контроллера</label>
                                             <select class="form-control custom-select" v-model="input.revisionId">
-                                                <option v-for="(revision, index) in revisions"
+                                                <option v-for="revision in revisions"
                                                         :key="revision.id" :value="revision.id">
                                                     {{ revision.name }}
                                                 </option>
@@ -252,7 +252,7 @@
 
                 if (areKeysNull(this.validation)) {
                     try {
-                        const { errors, data } = await this.$apollo.mutate({
+                        const { errors } = await this.$apollo.mutate({
                             mutation: gql`
                                 mutation saveController ($data: CreateControllerInput!) {
                                     createController (input: $data) {

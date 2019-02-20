@@ -29,39 +29,17 @@
 					</tr>
 				</thead>
 				<tbody>
+						<tr v-for="({ id, name, lastState, lastSaleTime, lastErrorTime }) in controllers" :key="id">
+							<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
 
-					<tr>
-						<td class="settings-link"><a href="#" class="f-b">Континент1 <i class="fe fe-more-vertical"></i> </a> </td>
-						<td class="ok-cel">1 мин назад</td>
-						<td class="attention-cel">25 окт 18:35</td>
-						<td class="ok-cel">22 окт. 17:25</td>
-						<td class="ok-cel">20 окт, 10:00</td>
-						<td class="disabled-cel">ОТКЛ</td>
-						<td class="attention-cel">21 окт. 10:10</td>
-						<td class="attention-cel">21 окт. 10:10</td>
-					</tr>
-
-					<tr>
-						<td class="settings-link"><a href="#" class="f-b">Континент2 <i class="fe fe-more-vertical"></i> </a> </td>
-						<td class="warning-cel">1 день назад</td>
-						<td class="warning-cel">24 окт 18:35</td>
-						<td class="warning-cel">24 окт. 14:15</td>
-						<td class="warning-cel">15 окт, 10:10</td>
-						<td class="warning-cel">15 окт. 10:10</td>
-						<td class="warning-cel">15 окт. 10:10</td>
-						<td class="warning-cel">15 окт. 10:10</td>
-					</tr>
-
-					<tr>
-						<td class="settings-link"><a href="#" class="f-b">Континент3 <i class="fe fe-more-vertical"></i> </a> </td>
-						<td class="ok-cel">10 мин назад</td>
-						<td class="ok-cel">25 окт 21:35</td>
-						<td class="ok-cel">20 окт. 10:45</td>
-						<td class="ok-cel">25 окт, 10:00</td>
-						<td class="ok-cel">25 окт, 10:10</td>
-						<td class="ok-cel">25 окт. 10:10</td>
-						<td class="ok-cel">25 окт. 10:10</td>
-					</tr>
+							<td class="ok-cel">{{ (lastState && lastState.signalStrength) || '-' }}</td>
+							<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>
+							<td class="ok-cel">{{ getTimestamp(lastErrorTime) }}</td>
+							<td class="disabled-cel">-</td>
+							<td class="disabled-cel">-</td>
+							<td class="disabled-cel">-</td>
+							<td class="disabled-cel">-</td>
+						</tr>
 				</tbody>
 			</table>
 		</div>
@@ -69,7 +47,43 @@
 </template>
 
 <script>
+	import gql from 'graphql-tag';
+
+	import { getMonthName } from '@/utils';
+
 	export default {
-		name: 'Events'
+		name: 'Events',
+		data: () => ({
+			controllers: []
+		}),
+		apollo: {
+			controllers: {
+				query: gql`
+					query {
+						getControllers {
+							id,
+							name,
+							lastSaleTime,
+							lastErrorTime,
+							lastState {
+								signalStrength
+							}
+						}
+					}
+				`,
+				update: data => data.getControllers,
+				fetchPolicy: 'no-cache'
+			}
+		},
+		methods: {
+			getTimestamp (time) {
+				if (time) {
+					const date = new Date(time);
+					return `${date.getDay() + 1} ${getMonthName(date.getMonth()).toLowerCase()}`;
+				}
+
+				return '-';
+			}
+		}
 	}
 </script>
