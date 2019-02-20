@@ -8,9 +8,9 @@
                         Главная
                     </router-link>
                 </li>
-                <li class="nav-item with-sub">
-                    <a class="nav-link" href="#"><i class="fas fa-desktop"></i> <span>Мониторинг</span></a>
-                    <div class="sub-item">
+                <li class="nav-item">
+                    <router-link to="/monitoring" class="nav-link"><i class="fas fa-desktop"></i> <span>Мониторинг</span></router-link>
+                    <div class="sub-item" v-if="false">
                         <ul>
                             <li>
                                 <router-link to="/monitoring">Рабочие</router-link>
