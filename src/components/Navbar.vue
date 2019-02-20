@@ -21,7 +21,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item with-sub">
+                <li class="nav-item">
                     <router-link to="/stats" class="nav-link"><i class="fas fa-chart-bar"></i><span>Статистика</span></router-link>
                 </li>
                 <li class="nav-item with-sub" v-if="false">
