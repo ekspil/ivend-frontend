@@ -27,14 +27,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="({ id, name, lastState, lastSaleTime }) in controllers" :key="id" v-if="lastState">
-							<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
+						<tr v-for="({ id, name, lastState, lastSaleTime }) in controllers" :key="id">
+							<template v-if="lastState">
+								<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
 
-							<td class="warning-cel">{{ lastState.signalStrength }}</td>
-							<td class="warning-cel">{{ lastSaleTime }}</td>
-							<td class="warning-cel">{{ lastState.registrationTime }}</td>
-							<td class="warning-cel">{{ lastState.coinAmount }}</td>
-							<td class="warning-cel">{{ lastState.billAmount }}</td>
+								<td class="warning-cel">{{ lastState.signalStrength }}</td>
+								<td class="warning-cel">{{ lastSaleTime || '-' }}</td>
+								<td class="warning-cel">{{ lastState.registrationTime }}</td>
+								<td class="warning-cel">{{ lastState.coinAmount }}</td>
+								<td class="warning-cel">{{ lastState.billAmount }}</td>
+							</template>
+							<template v-else>
+								<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
+
+								<td class="warning-cel">-</td>
+								<td class="warning-cel">{{ lastSaleTime || '-' }}</td>
+								<td class="warning-cel">-</td>
+								<td class="warning-cel">-</td>
+								<td class="warning-cel">-</td>
+							</template>	
 						</tr>
 					</tbody>
 				</table>

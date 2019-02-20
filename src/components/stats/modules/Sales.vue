@@ -90,7 +90,7 @@
                         getControllers {
                             id,
                             name,
-                            saleStats (period: $period) {
+                            itemSaleStats (period: $period) {
                                 item {
                                     id,
                                     name,

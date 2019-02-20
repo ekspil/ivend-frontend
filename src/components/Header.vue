@@ -68,7 +68,7 @@
                                 <a class="dropdown-item" href="#"><i class="dropdown-icon mdi mdi-settings"></i>
                                     Настройки</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i
+                                <a @click.prevent="exit" class="dropdown-item" href="#"><i
                                         class="dropdown-icon mdi mdi-logout-variant"></i> Выйти</a>
                             </div>
                         </div>
@@ -82,3 +82,15 @@
         </div>
     </header>
 </template>
+
+<script>
+    export default {
+        name: 'Header',
+        methods: {
+            exit () {
+                this.$store.commit('auth/setToken', null);
+                this.$router.push('/login');
+            }
+        }
+    }
+</script>

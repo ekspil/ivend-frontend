@@ -19,9 +19,9 @@
                                     <div class="col-md-12 col-lg-12">
                                        <div class="form-group">
                                             <div class="validation-error" v-if="validation.name">{{ validation.name }}</div>
-                                            <label class="form-label f-b">Имя контроллера</label>
+                                            <label class="form-label f-b">Название точки продажи</label>
                                             <input type="text" :class="['form-control', validation.name ? 'input-invalid' : '']"
-                                                   name="example-text-input" placeholder="Введите имя контроллера"
+                                                   name="example-text-input" placeholder="Введите название точки продажи"
                                                    v-model="input.name"/>
                                         </div>
                                         <div class="form-group">
@@ -31,32 +31,14 @@
                                                    name="example-text-input" placeholder="Введите номер контроллера"
                                                    v-model="input.uid"/>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label f-b">Опции</label>
-                                            <select class="form-control select2-show-search"
-                                                    data-placeholder="Выберите из списка">
 
-                                                <option label="Выберите из списка">
+                                        <div class="form-group">
+                                            <label class="form-label f-b">Модель автомата</label>
+                                            <select class="form-control custom-select" v-model="input.equipmentId">
+                                                <option v-for="(equipment, index) in equipments"
+                                                        :key="equipment.id" :value="equipment.id">
+                                                    {{ equipment.name }}
                                                 </option>
-                                                <option value="1">Necta Kikko Max</option>
-                                                <option value="2">Без автомата</option>
-                                                <option value="3" selected>Necta Kikko ES6</option>
-                                                <option value="4">Necta Astro</option>
-                                                <option value="5">Necta Snakky Max</option>
-                                                <option value="6">Necta Colibri C5</option>
-                                                <option value="7">Spengler 1000</option>
-                                                <option value="8">Crane 167</option>
-                                                <option value="9">Necta Opera</option>
-                                                <option value="10">Unicum Rosso</option>
-                                                <option value="11">Unicum FoodBox</option>
-                                                <option value="12">Unicum Nero</option>
-                                                <option value="13">Necta Concerto</option>
-                                                <option value="14">Rheavendors Luce X2</option>
-                                                <option value="15">Crane 472</option>
-                                                <option value="16">Rheavendors Sagoma H7</option>
-                                                <option value="17">Saeco Atlante 500</option>
-                                                <option value="18">Crane Vendo Sanden 217</option>
-                                                <option value="19">Crane Vendo Sanden 680</option>
                                             </select>
                                         </div>
 
@@ -147,16 +129,6 @@
                                                 <option v-for="(revision, index) in revisions"
                                                         :key="revision.id" :value="revision.id">
                                                     {{ revision.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="form-label f-b">Модель автомата</label>
-                                            <select class="form-control custom-select" v-model="input.equipmentId">
-                                                <option v-for="(equipment, index) in equipments"
-                                                        :key="equipment.id" :value="equipment.id">
-                                                    {{ equipment.name }}
                                                 </option>
                                             </select>
                                         </div>
@@ -271,6 +243,8 @@
                 setTimeout(() => { this.status.success = ''; }, 2500);
             },
             async save () {
+                const that = this;
+
                 this.validation = mapValidationObject(validate(this.input, {
                     uid: [required],
                     name: [required]
@@ -295,6 +269,7 @@
                             this.status.error = head(errors).message || 'Ошибка сохранения.';
                         } else {
                             this.showSuccessMessage();
+                            setTimeout(() => { that.$router.push('/controllers'); }, 1000);
                         }
                     } catch (error) {
                         this.status.error = error.message || 'Ошибка сохранения.';
