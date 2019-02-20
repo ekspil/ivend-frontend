@@ -22,20 +22,7 @@
                     </div>
                 </li>
                 <li class="nav-item with-sub">
-                    <a class="nav-link" href="#"><i class="fas fa-chart-bar"></i><span>Статистика</span></a>
-                    <div class="sub-item">
-                        <ul>
-                            <li v-if="false">
-                                <a href="#">Контроллеры</a>
-                            </li>
-                            <li v-if="false">
-                                <a href="#">Товары</a>
-                            </li>
-                            <li>
-                                <router-link to="/stats">Финансы</router-link>
-                            </li>
-                        </ul>
-                    </div>
+                    <router-link to="/stats" class="nav-link"><i class="fas fa-chart-bar"></i><span>Статистика</span></router-link>
                 </li>
                 <li class="nav-item with-sub" v-if="false">
                     <a class="nav-link" href="#"><i class="fas fa-cog"></i><span>Обслуживание</span></a>
