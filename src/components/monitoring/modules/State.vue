@@ -32,7 +32,7 @@
 
 							<td class="warning-cel">{{ lastState.signalStrength }}</td>
 							<td class="warning-cel">{{ lastSaleTime }}</td>
-							<td class="warning-cel">X - 24.10 - 15:50</td>
+							<td class="warning-cel">{{ lastState.registrationTime }}</td>
 							<td class="warning-cel">{{ lastState.coinAmount }}</td>
 							<td class="warning-cel">{{ lastState.billAmount }}</td>
 						</tr>
@@ -67,6 +67,7 @@
 							lastState {
 								signalStrength,
 								billAmount,
+								registrationTime,
 								coinAmount
 							}
 						}
