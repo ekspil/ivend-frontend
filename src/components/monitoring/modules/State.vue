@@ -29,7 +29,7 @@
 					<tbody>
 						<tr v-for="({ id, uid, name, lastState, lastSaleTime }) in controllers" :key="id">
 							<template v-if="lastState">
-								<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
+								<td class="settings-link"><a href="#" class="f-b">{{ name }}</a></td>
 
 								<td class="ok-cel">{{ lastState.signalStrength || '-' }}</td>
 								<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>
@@ -38,7 +38,7 @@
 								<td class="warning-cel">{{ lastState.billAmount }}</td>
 							</template>
 							<template v-else>
-								<td class="settings-link"><a href="#" class="f-b">{{ name }} <i class="fe fe-more-vertical"></i> </a> </td>
+								<td class="settings-link"><a href="#" class="f-b">{{ name }}</a></td>
 
 								<td class="warning-cel">-</td>
 								<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>
