@@ -8,11 +8,17 @@
   padding: 1.5rem;
 
   &--product-matrix {
-    padding: 0 1.5rem;
-
     .btn {
       margin-left: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
     }
+  }
+
+  &--add-product {
+    padding: 0 1.5rem;
   }
 
   &__left-container, &__content-container {
@@ -42,24 +48,40 @@
   }
 
   @media screen and (max-width: 768px) {
-    &--product-matrix {
-      .btn {
-        margin-left: 0;
-      }
+
+    &--product-matrix &__left-container {
+      flex-wrap: wrap;
+      width: auto;
     }
 
-    &--notification, &--product-matrix  {
+    &--notification {
       justify-content: flex-end;
     }
 
     &__left-container {
       flex-wrap: wrap;
       width: 100%;
-
     }
 
     &__field-container {
       margin-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+
+  }
+
+  @media screen and (max-width: 370px) {
+
+    &--product-matrix {
+      .btn {
+        margin-left: 0px;
+      }
+    }
+
+    &--product-matrix &__content-container {
+      flex-wrap: wrap;
     }
   }
 }
