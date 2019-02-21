@@ -146,6 +146,7 @@
     border-radius: 34px;
     border: 1px solid #e7effc;
     box-sizing: border-box;
+    margin-bottom: -2px;
 
     &:before {
       position: absolute;
@@ -166,6 +167,7 @@
 .select-services {
   .toggle-checkbox {
     display: block;
+    margin-bottom: 12px;
   }
 }
 
