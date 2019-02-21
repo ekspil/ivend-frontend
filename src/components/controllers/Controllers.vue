@@ -40,13 +40,12 @@
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th class="sortable up">Автомат</th>
                                         <th class="sortable">Название</th>
+                                        <th class="sortable up">Контроллер</th>
                                         <th>Группа</th>
                                         <th>Тип</th>
                                         <th>Модель</th>
                                         <th>Товары</th>
-                                        <th class="sortable">Контроллер</th>
                                         <th>Состояние</th>
                                         <th>Дата</th>
                                         <th>Прошивка</th>
@@ -58,15 +57,14 @@
                                     <tr v-for="controller in controllers" :key="controller.id">
                                         <td class="settings-link">
                                             <router-link :to="`/controllers/edit/${controller.id}`" class="f-b">
-                                                {{ controller.id }}
+                                                {{ controller.name || '-' }}
                                             </router-link>
                                         </td>
-                                        <td>{{ controller.name }}</td>
+                                        <td>{{ controller.uid }}</td>
                                         <td>Общая</td>
                                         <td>Кофе</td>
                                         <td>{{ (controller.equipment && controller.equipment.name) || '-' }}</td>
                                         <td>Не заполнены</td>
-                                        <td class="settings-link">{{ controller.uid || '-' }} <i class="fe fe-more-vertical"></i></td>
                                         <td class="state dropdown" data-toggle="dropdown">
                                             <div v-html="getStatus(controller.status)"></div>
                                         </td>
@@ -101,7 +99,6 @@
     </div>
 
 </template>
-
 
 <script>
     import gql from 'graphql-tag'

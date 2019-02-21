@@ -3,10 +3,10 @@
 		<div class="stats-top-menu">
 			<div class="stats-top-menu__content-container">
 				<div class="stats-top-menu__date-buttons">
-					<button class="stats-top-menu__item">Всего</button>
-					<button class="stats-top-menu__item">День</button>
-					<button class="stats-top-menu__item stats-top-menu__item--active">Неделя</button>
-					<button class="stats-top-menu__item">Месяц</button>
+					<button :class="['stats-top-menu__item', period === 'Всего' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('Всего')">Всего</button>
+					<button :class="['stats-top-menu__item', period === 'День' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('День')">День</button>
+					<button :class="['stats-top-menu__item', period === 'Неделя' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('Неделя')">Неделя</button>
+					<button :class="['stats-top-menu__item', period === 'Месяц' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('Месяц')">Месяц</button>
 
 
 					<div id="periodinput" class="stats-top-menu__date-period">
@@ -110,19 +110,22 @@
 <script>
 	import gql from 'graphql-tag';
 
+	const MILLISECONDS_IN_DAY = 86400000;
+
 	export default {
 		name: 'Finance',
 		data: () => ({
-			controllers: []
+			controllers: [],
+			period: 'Неделя'
 		}),
 		apollo: {
 			controllers: {
 				query: gql`
-					query {
+					query ($period: Period) {
 						getControllers {
 							id,
 							name,
-    						overallSalesSummary {
+    						overallSalesSummary (period: $period) {
     						  salesCount,
     						  overallAmount,
     						  cashAmount,
@@ -131,8 +134,37 @@
 						}
 					}
 				`,
+				variables () {
+					console.log({
+						from: this.getPeriod,
+						to: Date.now()
+					});
+					return {
+						period: {
+							from: this.getPeriod,
+							to: Date.now()
+						}
+					};
+				},
 				update: data => data.getControllers,
 				fetchPolicy: 'no-cache'
+			}
+		},
+		methods: {
+			setPeriod (period = 'Неделя') {
+				this.period = period;
+			}
+		},
+		computed: {
+			getPeriod () {
+				switch (this.period) {
+					case 'Всего': return 0;
+					case 'Месяц': return Date.now() - MILLISECONDS_IN_DAY * 30;
+					case 'Неделя': return Date.now() - MILLISECONDS_IN_DAY * 7;
+					case 'День': return Date.now() - MILLISECONDS_IN_DAY;
+
+					default: return Date.now() - MILLISECONDS_IN_DAY * 7;
+				}
 			}
 		}
 	}

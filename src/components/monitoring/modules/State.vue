@@ -92,7 +92,7 @@
 			getTimestamp (time) {
 				if (time) {
 					const date = new Date(time);
-					return `${date.getDay() + 1} ${getMonthName(date.getMonth()).toLowerCase()}`;
+					return `${date.getDate()} ${getMonthName(date.getMonth()).toLowerCase()}`;
 				}
 
 				return '-';
