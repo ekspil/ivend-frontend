@@ -84,8 +84,7 @@
 						}
 					}
 				`,
-				update: data => data.getControllers,
-				fetchPolicy: 'no-cache'
+				update: data => data.getControllers
 			}
 		},
 		methods: {

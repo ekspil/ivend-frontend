@@ -1,0 +1,17 @@
+@import "mixins";
+
+.input-invalid {
+  border-color: $wrong-field-border-color;
+}
+
+.validation-error, .success-message {
+	font-weight: 500;
+	margin: .25em 0;
+}
+
+.validation-error {
+  color: $wrong-field-border-color;
+}
+.success-message {
+  color: $main-green-color;
+}

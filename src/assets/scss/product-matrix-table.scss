@@ -1,0 +1,22 @@
+@import "mixins";
+
+.product-matrix-table {
+  @include default-table();
+
+  td {
+    &:first-child {
+      font-weight: 600;
+    }
+
+
+
+    a {
+      color: #000000;
+    }
+
+  }
+
+  &--add-rproduct {
+    margin-top: 1.5rem;
+  }
+}

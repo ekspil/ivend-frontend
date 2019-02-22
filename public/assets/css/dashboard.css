@@ -19,7 +19,7 @@
 	  --gray: #868e96;
 	  --gray-dark: #343a40;
 	  --azure: #45aaf2;
-	  --lime: #7bd235;F
+	  --lime: #7bd235;
 	  --primary:#0061da;
 	  --secondary: #1643A3;
 	  --success: #2dce89;
@@ -11311,7 +11311,7 @@ img {
 	flex-direction: column;
 	-ms-flex-pack: center;
 	justify-content: center;
-/*TODO vue bug	min-height: 100%; */
+	min-height: 100%;
 }
 body.fixed-header .page {
 	padding-top: 4.5rem;
@@ -20214,7 +20214,7 @@ svg {
 }
 .tab-menu-heading{
 	padding:20px;
-    border:1px solid #e7effc;
+    // border:1px solid #e7effc;
     border-bottom: 0;
 }
 .tab_wrapper .content_wrapper .tab_content.active p:last-child{

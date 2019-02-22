@@ -8,6 +8,8 @@ import Controllers from '@/components/controllers/Controllers';
 import EditController from '@/components/controllers/EditController';
 import AddController from '@/components/controllers/AddController';
 
+import AddGoods from '@/components/goods/AddGoods';
+
 import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
 
@@ -30,6 +32,8 @@ const routes = [
     { path: '/controllers', component: Controllers },
     { path: '/controllers/edit/:id', component: EditController },
     { path: '/controllers/add', component: AddController },
+
+    { path: '/goods/add/:id', component: AddGoods },
 
     { path: '/stats', component: Stats },
     { path: '/stats/:id', component: ControllerSales },

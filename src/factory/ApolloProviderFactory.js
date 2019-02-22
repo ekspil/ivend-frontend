@@ -41,6 +41,16 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 const apolloClient = new ApolloClient({
   link: authMiddleware.concat(httpLink),
   cache,
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all'
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all'
+    }
+  }
 })
 
 const apolloProvider = new VueApollo({

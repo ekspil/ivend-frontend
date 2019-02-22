@@ -163,10 +163,9 @@
 				`,
 				variables () {
 					return {
-						id: +this.$route.params.id
+						id: Number(this.$route.params.id)
 					};
-				},
-				fetchPolicy: 'no-cache'
+				}
 			}
 		},
 		methods: {

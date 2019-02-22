@@ -135,10 +135,6 @@
 					}
 				`,
 				variables () {
-					console.log({
-						from: this.getPeriod,
-						to: Date.now()
-					});
 					return {
 						period: {
 							from: this.getPeriod,
@@ -146,8 +142,7 @@
 						}
 					};
 				},
-				update: data => data.getControllers,
-				fetchPolicy: 'no-cache'
+				update: data => data.getControllers
 			}
 		},
 		methods: {

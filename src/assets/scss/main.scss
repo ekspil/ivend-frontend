@@ -1,11 +1,26 @@
 @import "mixins";
 @import "settings-table";
+@import "validation";
 @import "auth-block";
 @import "auth-page";
 @import "card-header-links";
 @import "stats-top-menu";
 @import "stats-table";
 @import "calendar";
+@import "notification-table";
+@import "top-buttons";
+@import "product-matrix-table";
+@import "number-input";
+@import "monitoring-table";
+@import "company-settings";
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 .disabled-block {
   display: none;
@@ -16,30 +31,30 @@
   overflow-y: hidden;
 }
 
+.tab-menu-heading {
+  padding: 20px 1.5rem;
+}
+
 .example {
   border: none;
 }
 
-.top-buttons-container {
-
+.aligned-text {
+  text-align: center;
+  padding: 1em 0;
 }
 
-.top-buttons {
-  border-top: none;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  &__left-container {
-    margin-bottom: 10px;
-  }
-
-  .btn {
-    margin-bottom: 10px;
+.card-footer {
+  &--settings-company {
+    display: none;
   }
 }
 
 .default-checkbox {
+  min-width: 20px;
+  min-height: 20px;
+  margin-bottom: 0;
+
   input {
     position: absolute;
     top: -9999px;
@@ -48,7 +63,7 @@
 
   span {
     position: relative;
-    display: inline-block;
+    display: block;
     font-size: inherit;
     color: #000000;
     padding-left: 30px;
@@ -97,7 +112,13 @@
   }
 }
 
-
+@media screen and (max-width: 992px) {
+  .card-footer {
+    &--settings-company {
+      display: block;
+    }
+  }
+}
 
 @media screen and (max-width: 768px) {
   .selectgroup {
@@ -106,5 +127,11 @@
 
   .selectgroup-item {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-brand-img {
+    height: 3.2rem;
   }
 }

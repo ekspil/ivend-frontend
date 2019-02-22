@@ -25,7 +25,7 @@ input:-webkit-autofill:active  {
   &__field-container {
     width: 100%;
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 
     &:after {
       content: '';
@@ -82,19 +82,11 @@ input:-webkit-autofill:active  {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     line-height: 1.6;
 
-    &--wrong {
-      border-color: $wrong-field-border-color;
-    }
-
     &--phone-code {
       width: 60%;
       border-radius: 3px 0 0 3px;
       border-right: none;
     }
-  }
-
-  &__validation {
-    color: $wrong-field-border-color;
   }
 
   &__phone-code-btn {
