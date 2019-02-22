@@ -10,11 +10,13 @@
 
 
 					<div id="periodinput" class="stats-top-menu__date-period">
-						<button id="btn1" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'from')" data-calendar-label="" data-calendar-area="">от</button>
+						<!--<button id="btn1" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'from')" data-calendar-label="" data-calendar-area="">от</button>-->
+						<datepicker placeholder="от" v-model="calendar.from" :language="pickerLanguage" input-class="stats-top-menu__item stats-top-menu__item--date" @selected="setPeriodToNull" />
 
 						<div class="stats-top-menu__date-separator"></div>
 
-						<button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>
+						<!--<button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>-->
+						<datepicker placeholder="до" v-model="calendar.to" :language="pickerLanguage" input-class="stats-top-menu__item stats-top-menu__item--date" @selected="setPeriodToNull" />
 
 						<form id="calendar" class="calendar disabled-block" tabindex="-1">
 							<div class="v-cal" id="v-cal-from" >
@@ -110,13 +112,24 @@
 <script>
 	import gql from 'graphql-tag';
 
+	import datepicker from 'vuejs-datepicker';
+	import { ru } from 'vuejs-datepicker/dist/locale';
+
 	const MILLISECONDS_IN_DAY = 86400000;
 
 	export default {
 		name: 'Finance',
+		components: {
+			datepicker
+		},
 		data: () => ({
 			controllers: [],
-			period: 'Неделя'
+			period: 'Неделя',
+			calendar: {
+				from: undefined,
+				to: undefined
+			},
+			pickerLanguage: ru
 		}),
 		apollo: {
 			controllers: {
@@ -135,11 +148,18 @@
 					}
 				`,
 				variables () {
+					const notCustomDate = !this.calendar.from && !this.calendar.to;
+					if (notCustomDate) {
+						return {
+							period: {
+								from: this.getPeriod,
+								to: Date.now()
+							}
+						};
+					}
+
 					return {
-						period: {
-							from: this.getPeriod,
-							to: Date.now()
-						}
+						period: this.getPeriod
 					};
 				},
 				update: data => data.getControllers
@@ -147,7 +167,14 @@
 		},
 		methods: {
 			setPeriod (period = 'Неделя') {
+				this.calendar = {
+					from: undefined,
+					to: undefined
+				};
 				this.period = period;
+			},
+			setPeriodToNull () {
+				this.period = null;
 			}
 		},
 		computed: {
@@ -158,7 +185,10 @@
 					case 'Неделя': return Date.now() - MILLISECONDS_IN_DAY * 7;
 					case 'День': return Date.now() - MILLISECONDS_IN_DAY;
 
-					default: return Date.now() - MILLISECONDS_IN_DAY * 7;
+					default: return {
+						from: this.calendar.from ? this.calendar.from.getTime() : 0,
+						to: this.calendar.to ? this.calendar.to.getTime() : Date.now()
+					};
 				}
 			}
 		}
