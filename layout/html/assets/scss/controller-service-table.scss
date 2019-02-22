@@ -13,19 +13,6 @@
       color: #000;
       position: relative;
 
-     /* &:after {
-        content: '';
-        position: absolute;
-        right: 20px;
-        width: 12px;
-        height: 6px;
-        display: block;
-        background-image: url("../images/icons/dropdown-icon-black.png");
-        opacity: .7;
-        top: 50%;
-        transform: rotate(0deg) translateY(-30%);
-      }*/
-
       &:after {
         font-family: 'Font Awesome 5 Free';
         content: '\f0d7';
@@ -39,8 +26,6 @@
         top: 50%;
         transform: rotate(0deg) translateY(-45%);
       }
-
-
     }
 
     &.active {

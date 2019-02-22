@@ -99,14 +99,11 @@
 
     td.service-status-cel {
       &:after {
-        //content: '\f00d';
         font-weight: 900;
-
         width: 16px;
         height: 16px;
         background: url("../images/icons/cancel.svg") no-repeat;
         background-size: contain;
-
       }
     }
   }
@@ -127,7 +124,7 @@
     }
 
     &.delete-cel-btn {
-      padding: 0px !important;
+      padding: 0 !important;
       width: 140px;
     }
   }
