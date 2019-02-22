@@ -282,14 +282,13 @@
                         </div>
                     </div>
 
-                    <div class="balance-info-block balance-info__block active">
-                        <form action="" class="balance-info-block__recharge-form">
-                            <input class=" balance-info-block__recharge-input" type="number" placeholder="сумма">
-                            <button class="btn btn-primary balance-info-block__btn">Пополнить баланс</button>
+                    <div  class="balance-info-block balance-info__block ">
+                        <form action="" id="recharge-balance-form" class="balance-info-block__recharge-form ">
+                            <input class="balance-info-block__recharge-input" type="number" placeholder="сумма">
+                            <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn">Пополнить баланс</button>
                         </form>
-                        <div class="balance-info-block__hint">введите сумму для пополнения</div>
+                        <div id="recharge-hint" class="balance-info-block__hint">Введите сумму для пополнения</div>
                     </div>
-
 
                 </div>
 
@@ -501,6 +500,8 @@
 
     <!-- custom js -->
     <script src="assets/js/custom.js"></script>
+
+    <script src="assets/js/alexcustom.js"></script>
 
 </body>
 </html>

@@ -4,7 +4,29 @@ window.addEventListener('load', function () {
             disablePastDays: true
         });
     }
+
+    if (document.getElementById('recharge-submit-btn')) {
+        document.getElementById('recharge-submit-btn').onclick=function(event){
+            if (!document.getElementById('recharge-balance-form'))  {
+                event.preventDefault();
+                return;
+            }
+
+            if (!document.getElementById('recharge-balance-form').classList.contains('active')) {
+                event.preventDefault();
+                document.getElementById('recharge-balance-form').classList.add('active');
+
+                setTimeout(function() {
+                    document.getElementById('recharge-hint').classList.add('shown')
+                }, 2000);
+
+                return;
+            }
+        }
+    }
 });
+
+
 
 jQuery('<div class="number-input__nav"><div class="number-input__button number-input__button--up">+</div><div class="number-input__button number-input__button--down">-</div></div>').insertAfter('.number-input input');
 jQuery('.number-input').each(function() {

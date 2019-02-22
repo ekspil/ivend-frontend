@@ -94,14 +94,58 @@
     }
   }
 
+  &__recharge-form {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__recharge-form:hover ~ &__hint.shown {
+    opacity: 1 !important;
+    z-index: 5 !important;
+    top: -27px !important;
+  }
+
+  &__hint.shown {
+    opacity: 0 !important;
+    z-index: -11 !important;
+  }
+
   &__hint {
     position: absolute;
-    display: none;
+    z-index: -11;
+    top: -15px;
+    left: -20px;
     opacity: 0;
+    font-size: 13px;
+    padding: 14px;
+    background-color: #FFFFFF;
+    border: 1px solid $main-green-color;
+    border-radius: 3px;
+    transition: opacity .3s, top .2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 
-    .active & {
-
+    .active ~ & {
+      display: block;
+      opacity: 1;
+      z-index: 5;
+      top: -27px;
     }
+
+    &:before {
+      content: '';
+      top: 47px;
+      left: 30%;
+      z-index: 4;
+      height: 12px;
+      width: 12px;
+      position: absolute;
+      -webkit-box-shadow: -4px -4px var(--color_2);
+      box-shadow: -1px -1px #00dabf;
+      background: linear-gradient(-45deg, transparent 50%, #fff 50%);
+      -webkit-transform: translate(-50%, -50%) rotate(45deg);
+      transform: translate(-50%, -50%) rotate(-135deg);
+    }
+
   }
 
   @media screen and (max-width: 768px) {
@@ -110,6 +154,32 @@
       width: 100%;
       justify-content: space-between;
     }
+
+    &__recharge-form:hover ~ &__hint.shown {
+      opacity: 1;
+      z-index: 5;
+      top: -49px;
+      left: 25px;
+    }
+
+    &__recharge-form:hover ~ &__hint {
+      opacity: 1;
+      z-index: 5;
+      top: -49px;
+      left: 25px;
+    }
+
+    &__hint {
+      left: 25px;
+
+      .active ~ & {
+        display: block;
+        opacity: 0;
+        z-index: -5;
+        top: -27px;
+      }
+    }
+
 
     &__btn,
     &__recharge-input,
@@ -123,17 +193,12 @@
       min-width: auto;
     }
 
-    &__btn, .active &__btn {
-
-    }
-
     &__recharge-input, .active &__recharge-input {
       padding: 7px  14px;
       margin-right: 10px;
+      width: 100%;
     }
-
   }
-
 
   @media screen and (max-width: 370px) {
     &__recharge-form {
