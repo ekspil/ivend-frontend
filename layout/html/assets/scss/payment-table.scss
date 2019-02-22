@@ -75,7 +75,7 @@
       &:after {
         width: 19px;
         height: 19px;
-        background: url("../images/icons/clock.png") no-repeat;
+        background: url("../images/icons/clock.svg") no-repeat;
         background-size: contain;
       }
     }
@@ -88,7 +88,7 @@
       &:after {
         width: 19px;
         height: 17px;
-        background: url("../images/icons/table-checkmark.png") no-repeat;
+        background: url("../images/icons/checkmark.svg") no-repeat;
         background-size: contain;
       }
     }
@@ -104,7 +104,7 @@
 
         width: 16px;
         height: 16px;
-        background: url("../images/icons/table-cancel.png") no-repeat;
+        background: url("../images/icons/cancel.svg") no-repeat;
         background-size: contain;
 
       }
