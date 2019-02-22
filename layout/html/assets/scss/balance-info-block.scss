@@ -1,0 +1,155 @@
+@import "mixins";
+
+.balance-info-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  &--attention &__count {
+    color: #f5365c;
+  }
+
+  &--attention &__icon {
+    background: #f5365c;
+  }
+
+  &__count {
+    font-size: 30px;
+    font-weight: 500;
+    color: $main-green-color;
+    margin-bottom: 4px;
+
+    &:after {
+      font-size: 24px;
+    }
+
+    &--currency {
+      &:after {
+        content: 'р';
+      }
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__icon {
+    background: $background-gradient;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  &__btn {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    transition: right .15s, transform .15s;
+
+
+    .active & {
+      right: 24px;
+      transform: translate(0, -50%);
+    }
+  }
+
+  &__recharge-input {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 96px;
+    transform: translate(-50%, -50%);
+    border-radius: 1px 2px 3px 4px;
+    border: 1px solid $main-green-color;
+    letter-spacing: .03em;
+    padding: 7px 20px 7px 14px;
+    font-size: 13px;
+    box-sizing: border-box;
+    line-height: 1.84615385;
+    -moz-appearance:textfield;
+    transition: left .15s, transform .15s, padding-right .15s, width .15s;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .active & {
+      left: 24px;
+      padding-right: 175px;
+      transform: translate(0, -50%);
+      width: calc(100% - 48px);
+    }
+  }
+
+  &__hint {
+    position: absolute;
+    display: none;
+    opacity: 0;
+
+    .active & {
+
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    &__recharge-form {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &__btn,
+    &__recharge-input,
+    .active &__btn,
+    .active &__recharge-input {
+      position: relative;
+      transform: none;
+      top: auto;
+      left: auto;
+      right: auto;
+      min-width: auto;
+    }
+
+    &__btn, .active &__btn {
+
+    }
+
+    &__recharge-input, .active &__recharge-input {
+      padding: 7px  14px;
+      margin-right: 10px;
+    }
+
+  }
+
+
+  @media screen and (max-width: 370px) {
+    &__recharge-form {
+      flex-wrap: wrap;
+    }
+
+    &__btn,
+    &__recharge-input,
+    .active &__btn,
+    .active &__recharge-input {
+      width: 100%;
+    }
+
+    &__recharge-input, .active &__recharge-input {
+      margin-bottom: 8px;
+      margin-right: 0;
+    }
+  }
+}

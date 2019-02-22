@@ -13,6 +13,10 @@
 @import "number-input";
 @import "monitoring-table";
 @import "company-settings";
+@import "balance-info";
+@import "balance-info-block";
+@import "payment-table";
+@import "controller-service-table";
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;

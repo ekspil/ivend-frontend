@@ -1,0 +1,136 @@
+@import "mixins";
+
+.payment-table {
+  @include default-table();
+
+  margin-top: 50px;
+
+  &--services {
+    table {
+      .service-name-cel {
+        width: 60%;
+      }
+
+      .service-price-cel {
+        width: 20%;
+      }
+
+      .delete-cel-btn-cel {
+        width: 20%;
+      }
+    }
+  }
+
+  &--services &__row-subtable {
+    padding: 0;
+
+    td {
+      &.cel-table {
+        padding: 0 !important;
+      }
+
+      table {
+        width: 100%;
+
+
+      }
+    }
+  }
+
+  &--history {
+    .service-date-cel {
+      width: 65%;
+    }
+
+    .service-price-cel {
+      width: 20%;
+    }
+
+    .service-status-cel {
+      width: 15%;
+    }
+  }
+
+  td.service-status-cel {
+    text-align: center;
+
+    &:after {
+      font-family: 'Font Awesome 5 Free';
+      opacity: .9;
+      font-weight: 600;
+      content: '';
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  th.service-status-cel {
+    text-align: center;
+  }
+
+  &__pending-row {
+    background-color: #f6e7cd;
+
+    td.service-status-cel {
+      &:after {
+        width: 19px;
+        height: 19px;
+        background: url("../images/icons/clock.png") no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  &__successed-row {
+    background-color: #d9f9f5;
+
+    td.service-status-cel {
+      &:after {
+        width: 19px;
+        height: 17px;
+        background: url("../images/icons/table-checkmark.png") no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+
+  &__cancelled-row {
+    background-color: #ffd1d1;
+
+    td.service-status-cel {
+      &:after {
+        //content: '\f00d';
+        font-weight: 900;
+
+        width: 16px;
+        height: 16px;
+        background: url("../images/icons/table-cancel.png") no-repeat;
+        background-size: contain;
+
+      }
+    }
+  }
+
+  td {
+    &:first-child {
+      font-weight: 600;
+    }
+
+    a {
+      color: #000000;
+    }
+
+    &.state {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &.delete-cel-btn {
+      padding: 0px !important;
+      width: 140px;
+    }
+  }
+
+}
+
