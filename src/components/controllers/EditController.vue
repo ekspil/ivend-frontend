@@ -39,13 +39,6 @@
     import ControllerSettings from './modules/ControllerSettings';
     import ControllerGoods from './modules/ControllerGoods';
 
-    import { head, isEmpty } from 'ramda';
-    import { areKeysNull } from '@/utils';
-    import {
-        validate, mapValidationObject,
-        required
-    } from '@/utils/validation';
-
     export default {
         data: () => ({
             controller: null,

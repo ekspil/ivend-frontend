@@ -13,7 +13,7 @@
 						<label class="form-label f-b">Модель автомата</label>
 						<select class="form-control select2-show-search"
 						data-placeholder="Выберите из списка" v-model="controller.data.equipment.id">
-						<option v-for="(equipment, index) in controller.equipments" :key="equipment.id" :value="equipment.id">
+						<option v-for="equipment in controller.equipments" :key="equipment.id" :value="equipment.id">
 							{{ equipment.name }}
 						</option>
 					</select>
@@ -28,7 +28,7 @@
 				<div class="form-group">
 					<label class="form-label f-b">Версия контроллера</label>
 					<select class="form-control custom-select" v-model="controller.data.revision.id">
-						<option v-for="(revision, index) in controller.revisions"
+						<option v-for="revision in controller.revisions"
 						:key="revision.id" :value="revision.id">
 						{{ revision.name }}
 					</option>
@@ -140,93 +140,93 @@
                     }
                 },
                 query: gql`
-                    query GetController($id: Int!) {
-                      controller: getController(id: $id) {
+                query GetController($id: Int!) {
+                  controller: getController(id: $id) {
+                    id,
+                    name,
+                    uid,
+                    mode,
+                    revision {
                         id,
-                        name,
-                        uid,
-                        mode,
-                        revision {
-                            id,
+                        name
+                    },
+                    status,
+                    equipment {
+                      id,
+                      name
+                  },
+                  bankTerminal {
+                      name
+                  },
+                  fiscalRegistrar {
+                      name
+                  }
+              }
+
+              equipments: getEquipments {
+                 id,
+                 name
+             }
+
+             revisions: getRevisions {
+                 id,
+                 name
+             }
+         }
+         `,
+         update (data) {
+           return {
+              data: data.controller,
+              equipments: data.equipments,
+              revisions: data.revisions
+          };
+      }
+  }
+},
+methods: {
+    showSuccessMessage (message = 'Успешно сохранено.') {
+        this.status.success = message;
+        setTimeout(() => { this.status.success = ''; }, 2500);
+    },
+    async save () {
+        this.validation = mapValidationObject(validate(this.controller.data, {
+            name: [required]
+        }));
+
+        if (areKeysNull(this.validation)) {
+            try {
+                const controllerData = {
+                    name: this.controller.data.name,
+                    equipmentId: this.controller.data.equipment.id,
+                    revisionId: this.controller.data.revision.id,
+                    status: this.controller.data.status,
+                    mode: this.controller.data.mode
+                };
+
+                const { errors } = await this.$apollo.mutate({
+                    mutation: gql`
+                    mutation saveController ($id: Int, $data: EditControllerInput!) {
+                        editController (id: $id, input: $data) {
                             name
-                        },
-                        status,
-                        equipment {
-                          id,
-                          name
-                        },
-                        bankTerminal {
-                          name
-                        },
-                        fiscalRegistrar {
-                          name
                         }
-                      }
-
-                      equipments: getEquipments {
-                      	id,
-                      	name
-                      }
-
-                      revisions: getRevisions {
-                      	id,
-                      	name
-                      }
                     }
-                `,
-                update (data) {
-                	return {
-                		data: data.controller,
-                		equipments: data.equipments,
-                		revisions: data.revisions
-                	};
-                }
-            }
-        },
-        methods: {
-            showSuccessMessage (message = 'Успешно сохранено.') {
-                this.status.success = message;
-                setTimeout(() => { this.status.success = ''; }, 2500);
-            },
-            async save () {
-                this.validation = mapValidationObject(validate(this.controller.data, {
-                    name: [required]
-                }));
-
-                if (areKeysNull(this.validation)) {
-                    try {
-                        const controllerData = {
-                            name: this.controller.data.name,
-                            equipmentId: this.controller.data.equipment.id,
-                            revisionId: this.controller.data.revision.id,
-                            status: this.controller.data.status,
-                            mode: this.controller.data.mode
-                        };
-
-                        const { errors, data } = await this.$apollo.mutate({
-                            mutation: gql`
-                                mutation saveController ($id: Int, $data: EditControllerInput!) {
-                                    editController (id: $id, input: $data) {
-                                        name
-                                    }
-                                }
-                            `,
-                            variables: {
-                                id: this.controller.id,
-                                data: controllerData
-                            }
-                        });
-
-                        if (errors && !isEmpty(errors)) {
-                            this.status.error = head(errors).message || 'Ошибка сохранения.';
-                        } else {
-                            this.showSuccessMessage();
-                        }
-                    } catch (error) {
-                        this.status.error = error.message || 'Ошибка сохранения.';
+                    `,
+                    variables: {
+                        id: this.controller.id,
+                        data: controllerData
                     }
+                });
+
+                if (errors && !isEmpty(errors)) {
+                    this.status.error = head(errors).message || 'Ошибка сохранения.';
+                } else {
+                    this.showSuccessMessage();
                 }
+            } catch (error) {
+                this.status.error = error.message || 'Ошибка сохранения.';
             }
         }
     }
+}
+}
 </script>
