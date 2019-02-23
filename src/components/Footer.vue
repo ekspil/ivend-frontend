@@ -18,9 +18,10 @@
 
 <style scoped lang="scss">
 	.footer {
-		position: absolute;
+		position: fixed;
 		left: 0;
 		bottom: 0;
 		width: 100%;
+		z-index: 10;
 	}
 </style>

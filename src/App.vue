@@ -20,3 +20,9 @@
     }
 
 </script>
+
+<style scoped lang="scss">
+    .page-main {
+        padding-bottom: 75px;
+    }
+</style>
