@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: repo.treescale.com/pshenmic/ivend-frontend
+        image: registry.gitlab.com/pshenmic/ivend/frontend
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: regcred
+      - name: gitlabregistrycred
