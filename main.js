@@ -13,4 +13,4 @@ new Vue({
   store,
   apolloProvider,
   render: h => h(App)
-})
+});

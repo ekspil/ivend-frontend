@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { not } from 'ramda';
 import { validate, mapValidationObject } from '@/utils/validation';
 
@@ -14,13 +15,11 @@ const mutations = {
 	store (state, { formName, key, value }) {
 		if (formName && key && not(undefined, value)) {
 			if (state[formName]) {
-				state[formName].data[key] = value;
+				Vue.set(state[formName].data, key, value);
 			} else {
-				state[formName] = {
-					data: {
-						[key]: value
-					}
-				};
+				Vue.set(state, formName, {
+					data: { [key]: value }
+				});
 			}
 		}
 	},
@@ -29,7 +28,7 @@ const mutations = {
 		const data = state[formName].data;
 		const validation = mapValidationObject(validate(data, schema));
 
-		state[formName].validation = validation;
+		Vue.set(state[formName], 'validation', validation);
 		state._observable = formName;
 	},
 

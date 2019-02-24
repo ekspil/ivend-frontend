@@ -1,7 +1,10 @@
 @import "mixins";
 
 .input-invalid {
-  border-color: $wrong-field-border-color;
+  border-color: $wrong-field-border-color !important;
+  &:invalid {
+  	box-shadow: none;
+  }
 }
 
 .validation-error, .success-message {

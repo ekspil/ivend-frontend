@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" v-if="controller">
 		<div class="side-app">
 			<div class="row mt-5">
 				<div class="col-md-12 col-lg-12">

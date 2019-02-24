@@ -205,10 +205,6 @@
             }
 		},
         methods: {
-            showSuccessMessage (message = 'Успешно сохранено.') {
-                this.status.success = message;
-                setTimeout(() => { this.status.success = ''; }, 2500);
-            },
             async save () {
                 try {
                     const { errors } = await this.$apollo.mutate({
