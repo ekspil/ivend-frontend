@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form method="POST" class="card" v-if="!auth">
+        <form method="POST" class="card" v-if="card">
             <div class="card-header">
                 <h3 class="card-title f-b">{{ title }}</h3>
             </div>
@@ -20,12 +20,12 @@
                 </transition>
             </div>
         </form>
-        <form class="auth-form" method="POST" v-else>
+        <form :class="[className, 'auth-form']" method="POST" v-else>
             <slot></slot>
 
             <transition name="fade">
-                <div class="validation-error" v-if="status.error">{{ status.error }}</div>
-                <div class="success-message" v-if="status.success">{{ status.success }}</div>
+                <div class="validation-error auth" v-if="status.error">{{ status.error }}</div>
+                <div class="success-message auth" v-if="status.success">{{ status.success }}</div>
             </transition>
         </form>
     </div>
@@ -40,6 +40,7 @@
 	export default {
 		name: 'Validate',
 		props: {
+			className: String,
 			title: String,
 			formName: String,
 
@@ -50,9 +51,9 @@
 			},
 
 			// Является ли форма авторизацией
-			auth: {
+			card: {
 				type: Boolean,
-				default: false
+				default: true
 			}
 		},
 		data: () => ({
@@ -72,7 +73,7 @@
 				this.status[type] = message;
 				setTimeout(function () {
 					that.status[type] = null;
-				}, 1500);
+				}, 2500);
 			},
 
 			async submit () {
@@ -98,3 +99,10 @@
 		}
 	}
 </script>
+
+<style scoped lang="scss">
+	.validation-error.auth, .success-message.auth {
+		text-align: center;
+		margin: .25em 0;
+	}	
+</style>

@@ -25,7 +25,7 @@
                                 <div class="form-group">
                                     <label class="form-label f-b">Модель автомата</label>
                                     <select class="form-control custom-select" v-model="input.equipmentId">
-                                        <option v-for="equipment in equipments"
+                                        <option v-for="equipment in controller.equipments"
                                         :key="equipment.id" :value="equipment.id">
                                         {{ equipment.name }}
                                     </option>
@@ -116,7 +116,7 @@
                             <div class="form-group">
                                 <label class="form-label f-b">Версия контроллера</label>
                                 <select class="form-control custom-select" v-model="input.revisionId">
-                                    <option v-for="revision in revisions"
+                                    <option v-for="revision in controller.revisions"
                                     :key="revision.id" :value="revision.id">
                                     {{ revision.name }}
                                 </option>
@@ -133,6 +133,17 @@
                                     type="button">Настроить</button>
                                 </span>
                             </div>
+                        </div>
+
+                        <div class="form-group select-services">
+                            <label class="form-label f-b">Услуги</label>
+
+
+                            <label class="toggle-checkbox" v-for="service in controller.services.controller" :key="service.id">
+                                <input type="checkbox" v-model="input.serviceIds[service.id]"/>
+                                <span class="slider round"> </span>
+                                <span class="label-text">{{ service.name }} ({{ service.price }} руб/{{ getBillingAbbr(service.billingType) }})</span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -162,13 +173,17 @@
             Field
         },
 		data: () => ({
-			equipments: [],
-            revisions: [],
+			controller: {
+                revisions: [],
+                equipments: [],
+                services: {}
+            },
             input: {
                 status: "DISABLED",
                 mode: "CASHLESS",
                 equipmentId: 1,
-                revisionId: 1
+                revisionId: 1,
+                serviceIds: []
             },
 
             schema: {
@@ -177,35 +192,46 @@
             }
 		}),
 		apollo: {
-			equipments: {
+			controller: {
 				query: gql`
 					query {
 						getEquipments {
 							id,
 							name
-						}
-					}
-				`,
-				update (data) {
-					return data.getEquipments;
-				}
-			},
-            revisions: {
-                query: gql`
-                    query {
+						},
+
                         getRevisions {
                             id,
                             name
+                        },
+
+                        getAvailableServices {
+                            controller {
+                                id,
+                                name,
+                                price,
+                                billingType
+                            }
                         }
-                    }
-                `,
-                update (data) {
-                    return data.getRevisions;
-                }
-            }
+					}
+				`,
+				update (data) {
+					return {
+                        equipments: data.getEquipments,
+                        revisions: data.getRevisions,
+                        services: data.getAvailableServices
+                    };
+				}
+			}
 		},
         methods: {
             async save () {
+                const data = {
+                    ...this.input,
+                    ...this.$store.getters['cache/data'],
+                    serviceIds: this.input.serviceIds.map((id, index) => index).filter(id => id)
+                };
+
                 try {
                     const { errors } = await this.$apollo.mutate({
                         mutation: gql`
@@ -216,10 +242,7 @@
                         }
                         `,
                         variables: {
-                            data: {
-                                ...this.input,
-                                ...this.$store.getters['cache/data']
-                            }
+                            data
                         }
                     });
                     
@@ -231,6 +254,14 @@
             onSuccess () {
                 const router = this.$router;
                 setTimeout(function () { router.push('/controllers'); }, 1000);
+            },
+
+            getBillingAbbr (date) {
+                if (date === 'DAILY') {
+                    return 'день';
+                } else if (date === 'MONTHLY') {
+                    return 'мес.';
+                }
             }
         }
 	}

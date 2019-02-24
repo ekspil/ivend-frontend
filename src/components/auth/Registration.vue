@@ -11,7 +11,7 @@
                 formName="register"
                 :schema="schema"
                 ref="register"
-                :auth="true"
+                :card="false"
                 @onSubmit="register"
                 @onSuccess="onSuccess"
             >

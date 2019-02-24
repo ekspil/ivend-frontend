@@ -9,7 +9,7 @@
                 formName="login"
                 :schema="schema"
                 ref="login"
-                :auth="true"
+                :card="false"
                 @onSubmit="login"
                 @onSuccess="onSuccess"
             >

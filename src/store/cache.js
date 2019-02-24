@@ -12,14 +12,26 @@ const getters = {
 };
 
 const mutations = {
-	store (state, { formName, key, value }) {
+	store (state, { formName, key, value, push }) {
 		if (formName && key && not(undefined, value)) {
-			if (state[formName]) {
-				Vue.set(state[formName].data, key, value);
+			if (push) {
+				if (state[formName]) {
+					state[formName].data.push({
+						[key]: value
+					});
+				} else {
+					Vue.set(state, formName, {
+						data: [{ [key]: value }]
+					});
+				}
 			} else {
-				Vue.set(state, formName, {
-					data: { [key]: value }
-				});
+				if (state[formName]) {
+					Vue.set(state[formName].data, key, value);
+				} else {
+					Vue.set(state, formName, {
+						data: { [key]: value }
+					});
+				}
 			}
 		}
 	},

@@ -70,6 +70,10 @@
 			mask: {
 				type: String,
 				default: ''
+			},
+			array: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data: () => ({
@@ -91,7 +95,8 @@
 						that.$store.commit('cache/store', {
 							formName,
 							key: that.name,
-							value: that.input
+							value: that.input,
+							push: that.array ? true : false
 						});
 					}
 				})

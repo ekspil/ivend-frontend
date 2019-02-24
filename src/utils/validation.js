@@ -3,6 +3,7 @@ import { constructEntry, purgeSuccessValidators } from './index';
 
 const EMAIL_REGEXP = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_REGEXP = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
+const NUMBER_REGEXP = /^\d+$/;
 
 const testRegex = (regex, value) => regex.test(value);
 
@@ -11,6 +12,7 @@ export const required = value => ({ error: value ? null : 'Заполните п
 export const check = value => ({ error: value ? null : 'Отметьте поле.' });
 export const email = value => ({ error: testRegex(EMAIL_REGEXP, value) ? null : 'Некорректный E-Mail.' });
 export const phone = value => ({ error: testRegex(PHONE_REGEXP, value) ? null : 'Некорректный номер телефона.' });
+export const number = value => ({ error: testRegex(NUMBER_REGEXP, value) ? null : 'Некорректное значение.' })
 /* ------------------------------------------------------------------------ */
 
 /**

@@ -17,6 +17,8 @@ import Monitoring from '@/components/monitoring/Monitoring';
 
 import Settings from '@/components/settings/Settings';
 
+import Billing from '@/components/billing/Billing';
+
 import Home from '@/components/Home';
 
 import { includes } from 'ramda';
@@ -41,6 +43,8 @@ const routes = [
     { path: '/monitoring', component: Monitoring },
 
     { path: '/settings', component: Settings },
+
+    { path: '/billing', component: Billing },
 
     { path: '/login', component: Login },
     { path: '/register', component: Registration }
