@@ -30,10 +30,19 @@
                     </div>
                 </div>
                 <div class="balance-info-block balance-info__block ">
-                    <form action="" id="recharge-balance-form" class="balance-info-block__recharge-form ">
-                        <input class=" balance-info-block__recharge-input" type="number" placeholder="сумма">
-                        <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn">Пополнить баланс</button>
-                    </form>
+                    <Validate
+                        id="recharge-balance-form"
+                        className="balance-info-block__recharge-form" 
+                        :card="false"
+                        :schema="depositSchema"
+                        formName="deposit"
+                        ref="deposit"
+                        @onSubmit="requestDeposit"
+                        @onSuccess="requestOnSuccess"
+                    >
+                        <Field className="balance-info-block__recharge-input" type="number" placeholder="Сумма" formName="deposit" name="sum"/>
+                        <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" @click.prevent="$refs.deposit.submit">Пополнить баланс</button>
+                    </Validate>
                     <div id="recharge-hint" class="balance-info-block__hint">Введите сумму для пополнения</div>
                 </div>
             </div>
@@ -65,17 +74,23 @@
             </div>
         </div>
     </div>
-    </div>
 </template>
 
 <script>
 	import gql from 'graphql-tag';
+
+    import Validate from '@/modules/validation/Validate';
+    import Field from '@/modules/validation/Field';
 
 	import BillingHistory from './modules/BillingHistory';
 	import BillingServices from './modules/BillingServices';
 
 	export default {
 		name: 'Billing',
+        components: {
+            Validate,
+            Field
+        },
 		apollo: {
 			billing: {
 				query: gql`
@@ -94,7 +109,11 @@
 		},
 		data: () => ({
 			activeTab: 'History',
-			billing: null
+			billing: null,
+
+            depositSchema: {
+                sum: [sum => ({ error: sum > 0 ? null : 'Некорректная сумма.' })]
+            }
 		}),
         computed: {
             getActiveTab () {
@@ -107,6 +126,37 @@
         methods: {
             setActiveTab (tabName = 'History') {
                 this.activeTab = tabName;
+            },
+
+            async requestDeposit () {
+                try {
+                    const { errors, data } = await this.$apollo.mutate({
+                        mutation: gql`
+                            mutation RequestDeposit ($amount: Float!) {
+                                requestDeposit(amount: $amount) {
+                                    id,
+                                    status,
+                                    redirectUrl
+                                }
+                            }
+                        `,
+                        variables: {
+                            amount: parseFloat(this.$store.getters['cache/data'].sum)
+                        }
+                    });
+
+                    this.$refs.deposit.process({ errors, success: 'Успешно.', data });
+                } catch (error) {
+                    this.$refs.deposit.showMessage('error', 'Ошибка пополнения.');
+                }
+            },
+
+            requestOnSuccess (data) {
+                if (data.status === 'CANCELED') {
+                    this.$refs.deposit.showMessage('error', 'Пополнение отменено.');
+                } else {
+                    window.location.replace(data.redirectUrl);
+                }
             }
         }
 	}
@@ -115,5 +165,5 @@
 <style scoped lang="scss">
 	.balance-info {
 		margin-top: 50px;
-	}	
+	}
 </style>

@@ -49,13 +49,9 @@
   }
 
   &__btn {
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
+    width: 100%;
     transition: right .15s, transform .15s;
-
+    border-radius: 0 0 2px 2px;
 
     .active & {
       right: 24px;
@@ -64,13 +60,8 @@
   }
 
   &__recharge-input {
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    width: 96px;
-    transform: translate(-50%, -50%);
-    border-radius: 1px 2px 3px 4px;
+    width: 100%;
+    border-radius: 2px 2px 0 0;
     border: 1px solid $main-green-color;
     letter-spacing: .03em;
     padding: 7px 20px 7px 14px;

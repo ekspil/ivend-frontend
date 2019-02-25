@@ -64,7 +64,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <router-link :class="['nav-link', /^\/settings/.test($route.path) ? 'active' : '']" data-toggle="dropdown" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
+                    <router-link :class="['nav-link', /^\/settings/.test($route.path) ? 'active' : '']" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :class="['nav-link', /^\/billing/.test($route.path) ? 'active' : '']" to="/billing"><i class="fas fa-money-check"></i> <span>Оплата</span></router-link>
                 </li>
             </ul>
         </div>
