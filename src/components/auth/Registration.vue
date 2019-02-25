@@ -76,6 +76,8 @@
 <script>
 import gql from 'graphql-tag';
 
+import { convertServerError } from '@/utils';
+
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 
@@ -91,43 +93,58 @@ export default {
         Field
     },
     data: () => ({
-        schema: null
+        schema: null,
+        postData: null
     }),
     methods: {
         async register () {
             const cache = this.$store.getters['cache/data'];
-            const userData = {
-                ...(omit(['agreement', 'rePassword'], cache)),
-                phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
-            };
 
             try {
                 const { errors, data } = await this.$apollo.mutate({
                     mutation: gql `
-                            mutation registerUser ($regData: CreateUserInput!, $logData: RequestTokenInput!) {
+                            mutation registerUser ($regData: CreateUserInput!) {
                                 registerUser(input: $regData) { email }
-                                token: requestToken(input: $logData)
                             }
                         `,
                     variables: {
-                        regData: userData,
-                        logData: omit(['email'], userData)
+                        regData: {
+                            ...(omit(['agreement', 'rePassword'], cache)),
+                            phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
+                        }
                     }
                 });
 
                 this.$refs.register.process({ errors, data, success: 'Переадресация...' });
             } catch (error) {
-                this.$refs.register.showMessage('error', 'Ошибка авторизации.');
+                this.$refs.register.showMessage('error', convertServerError(error.message));
             }
         },
-        onSuccess ({ token }) {
-            this.$store.commit('auth/setToken', token);
+        async onSuccess ({ token }) {
+            const cache = this.$store.getters['cache/data'];
+
+            const { data } = await this.$apollo.mutate({
+                mutation: gql`
+                    mutation loginUser ($logData: RequestTokenInput!) {
+                        token: requestToken(input: $logData)
+                    }
+                `,
+                variables: {
+                    logData: {
+                        ...(omit(['agreement', 'rePassword', 'email'], cache)),
+                        phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
+                    }
+                }
+            });
+
+            this.$store.commit('auth/setToken', data.token);
             this.$router.push('/home');
         }
     },
     created () {
         const rePasswordValidator = bind(function (rePassword) {
-            return { error: equals(rePassword, this.$store.getters['cache/data'].password) ? null : 'Пароли не совпадают.' };
+            const cache = this.$store.state.cache.register.data;
+            return { error: equals(rePassword, cache.password) ? null : 'Пароли не совпадают.' };
         }, this);
 
         this.schema = {

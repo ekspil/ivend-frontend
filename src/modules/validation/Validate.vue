@@ -35,7 +35,7 @@
 	import bus from '@/bus';
 
 	import { head, isEmpty } from 'ramda';
-	import { areKeysNull } from '@/utils';
+	import { areKeysNull, convertServerError } from '@/utils';
 
 	export default {
 		name: 'Validate',
@@ -90,7 +90,7 @@
 			process ({ errors, success, data }) {
 				if (errors && !isEmpty(errors)) {
 					const error = head(errors).message || 'Ошибка сервера.';
-					this.showMessage('error', error);
+					this.showMessage('error', convertServerError(error));
 				} else {
 					this.showMessage('success', success);
 					this.$emit('onSuccess', data);

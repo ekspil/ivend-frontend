@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="billing">
         <div class="side-app">
-            <div class="balance-info" v-if="billing">
+            <div class="balance-info">
                 <div class="balance-info-block balance-info__block">
                     <div class="balance-info-block__info-container">
                         <div class="balance-info-block__count balance-info-block__count--currency">{{ billing.balance }}</div>
@@ -41,7 +41,7 @@
                         @onSuccess="requestOnSuccess"
                     >
                         <Field className="balance-info-block__recharge-input" type="number" placeholder="Сумма" formName="deposit" name="sum"/>
-                        <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" @click.prevent="$refs.deposit.submit">Пополнить баланс</button>
+                        <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="$refs.deposit.submit">Пополнить баланс</button>
                     </Validate>
                     <div id="recharge-hint" class="balance-info-block__hint">Введите сумму для пополнения</div>
                 </div>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
 
-                        <component :is="getActiveTab"></component>
+                        <component :is="getActiveTab" :deposits="billing.deposits"></component>
                     </div>
                     <!-- section-wrapper -->
                 </div>
@@ -78,6 +78,8 @@
 
 <script>
 	import gql from 'graphql-tag';
+
+    import { convertServerError } from '@/utils';
 
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
@@ -99,12 +101,17 @@
 							billing {
 								balance,
 								dailyBill,
-								daysLeft
+								daysLeft,
+                                deposits {
+                                    id,
+                                    amount,
+                                    status
+                                }
 							}
 						}
 					}
 				`,
-				update: data => data.getProfile.billing
+				update: data => data.getProfile ? data.getProfile.billing : {}
 			}
 		},
 		data: () => ({
@@ -113,13 +120,20 @@
 
             depositSchema: {
                 sum: [sum => ({ error: sum > 0 ? null : 'Некорректная сумма.' })]
-            }
+            },
+            depositStatus: ''
 		}),
         computed: {
             getActiveTab () {
                 switch (this.activeTab) {
                     case 'History': return BillingHistory;
                     case 'Services': return BillingServices;
+                }
+            },
+
+            isDepositPending () {
+                if (this.billing && this.billing.deposits) {
+                    return this.billing.deposits.some(deposit => deposit.status === 'PENDING') || this.depositStatus === 'PENDING';
                 }
             }
         },
@@ -145,17 +159,19 @@
                         }
                     });
 
-                    this.$refs.deposit.process({ errors, success: 'Успешно.', data });
+                    this.$refs.deposit.process({ errors, success: 'Успешно.', data: data.requestDeposit });
                 } catch (error) {
-                    this.$refs.deposit.showMessage('error', 'Ошибка пополнения.');
+                    this.$refs.deposit.showMessage('error', convertServerError(error.message));
                 }
             },
 
             requestOnSuccess (data) {
+                this.depositStatus = data.status;
+
                 if (data.status === 'CANCELED') {
                     this.$refs.deposit.showMessage('error', 'Пополнение отменено.');
-                } else {
-                    window.location.replace(data.redirectUrl);
+                } else if (data.redirectUrl) {
+                    window.location.href = data.redirectUrl;
                 }
             }
         }

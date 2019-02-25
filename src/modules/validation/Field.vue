@@ -105,7 +105,7 @@
 			}
 		},
 		beforeDestroy () {
-			bus.$off('submit');
+			bus.$off('submit', () => {});
 		}
 	}
 </script>

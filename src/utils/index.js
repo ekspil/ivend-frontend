@@ -1,4 +1,4 @@
-import { map, head, last, all, equals, filter, pluck } from 'ramda';
+import { map, head, last, all, equals, filter, pluck, forEachObjIndexed } from 'ramda';
 
 /**
 	Вытащить пару ключ/значение из массива от Object.entries
@@ -64,4 +64,25 @@ export const getMonthName = month => {
 		case 10: return 'Ноября';
 		case 11: return 'Декабря';
 	}
+};
+
+/**
+	Конвертировать ошибку GraphQL в читаемый вид
+	@author Samir Amirseidov
+*/
+export const convertServerError = error => {
+	const messages = {
+		'User with such email or phone already exists': 'Пользователь с такими данными уже существует.',
+		'Phone and password does not match': 'Логин и пароль не совпадают.',
+		'Another deposit already in process': 'Завершите существующий депозит.',
+		default: 'Неизвестная ошибка сервера.'
+	}
+
+	for (let key in messages) {
+		if (error.includes(key)) {
+			return messages[key];
+		}
+	}
+
+	return messages.default;
 };
