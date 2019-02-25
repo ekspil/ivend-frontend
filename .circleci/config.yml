@@ -53,7 +53,7 @@ jobs:
 
       - run:
           name: Deploy
-          command: ssh root@$DEPLOY_SERVER 'source /opt/.env && cd /opt/frontend && git pull && microk8s.kubectl apply -f kube-config.yml'
+          command: ssh root@$DEPLOY_SERVER 'source /opt/.env && cd /opt/frontend && git pull && microk8s.kubectl replace --force -f kube-config.yml'
 
 workflows:
   version: 2
