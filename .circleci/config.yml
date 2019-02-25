@@ -31,26 +31,12 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          keys:
-          - v1-docker-ivend-frontend-{{ .Branch }}-
-          - v1-docker-ivend-frontend-
       - deploy:
           name: Push application Docker image
           command: |
-            docker load -i .circleci/docker_cache/docker_layer_cache.tar || true
-
-            docker build -t "registry.gitlab.com/pshenmic/ivend/frontend" --cache-from registry.gitlab.com/pshenmic/ivend/frontend .
-
+            docker build -t "registry.gitlab.com/pshenmic/ivend/frontend" .
             docker login registry.gitlab.com -u "pshenmic" -p "$GITLAB_TOKEN"
             docker push "registry.gitlab.com/pshenmic/ivend/frontend"
-
-            docker save -o .circleci/docker_cache/docker_layer_cache.tar \
-            registry.gitlab.com/pshenmic/ivend/frontend
-      - save_cache:
-          paths:
-            - .circleci/docker_cache
-          key: v1-docker-ivend-frontend-{{ .Branch }}-{{ epoch }}
   deploy:
     docker:
       - image: circleci/node:11.1.0
@@ -67,7 +53,7 @@ jobs:
 
       - run:
           name: Deploy
-          command: ssh root@$DEPLOY_SERVER 'source /opt/.env && cd /opt/frontend && git pull && microk8s.kubectl apply -f kube-config.yml'
+          command: ssh root@$DEPLOY_SERVER 'source /opt/.env && cd /opt/frontend && git pull && microk8s.kubectl replace --force -f kube-config.yml'
 
 workflows:
   version: 2
