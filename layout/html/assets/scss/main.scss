@@ -18,6 +18,10 @@
 @import "payment-table";
 @import "controller-service-table";
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }

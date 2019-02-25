@@ -42,6 +42,7 @@ import gql from 'graphql-tag';
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 
+import { convertServerError } from '@/utils';
 import {
     required
 } from '@/utils/validation';
@@ -80,7 +81,7 @@ export default {
 
                 this.$refs.login.process({ errors, data, success: 'Переадресация...' });
             } catch (error) {
-                this.$refs.login.showMessage('error', 'Ошибка авторизации.');
+                this.$refs.login.showMessage('error', convertServerError(error.message));
             }
         },
         onSuccess({ token }) {

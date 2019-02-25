@@ -24,26 +24,11 @@ import gql from 'graphql-tag';
 
 export default {
     name: 'BillingHistory',
-        apollo: {
-            deposits: {
-                query: gql`
-                    query {
-                        getProfile {
-                            billing {
-                                deposits {
-                                    id,
-                                    amount,
-                                    status
-                                }
-                            }
-                        }
-                    }
-                `,
-                update: data => data.getProfile.billing.deposits
-            }
-        },
-        data: () => ({
-            deposits: null
-        })
+    props: {
+        deposits: {
+            type: Array,
+            default: () => []
+        }
+    }
 }
 </script>

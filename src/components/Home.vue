@@ -14,8 +14,13 @@
                                     <i class="fas fa-users text-white"></i>
                                 </div>
                             </div>
-                            <h3 class="mb-1 text-primary counter font-30">678</h3>
-                            <div class="f-b">Продаж сегодня</div><br/>
+
+                            <transition name="fade">
+                                <div v-if="!$apollo.loading">
+                                    <h3 class="mb-1 text-primary counter font-30">{{ getOverallSalesCount }}</h3>
+                                    <div class="f-b">Продаж сегодня</div><br/>
+                                </div>
+                            </transition>
                         </div>
                         <div class="card-chart-bg">
                             <div id="chart-bg-users-1"></div>
@@ -31,8 +36,13 @@
                                     <i class="fas fa-ruble-sign text-white"></i>
                                 </div>
                             </div>
-                            <h3 class="mb-1  text-primary font-30"><span class="counter">12435</span></h3>
-                            <div class="f-b">Выручка сегодня</div><br/>
+
+                            <transition name="fade">
+                                <div v-if="!$apollo.loading">
+                                    <h3 class="mb-1  text-primary font-30"><span class="counter">{{ getOverallSalesSummary }}</span></h3>
+                                    <div class="f-b">Выручка сегодня</div><br/>
+                                </div>
+                            </transition>
                         </div>
                         <div class="card-chart-bg">
                             <div id="chart-bg-users-4"></div>
@@ -50,11 +60,15 @@
                                 </div>
                             </div>
 
-                            <h3 class="mb-1  text-primary counter font-30">{{ controllers.length }}</h3>
-                            <div class="f-b">Контроллер{{ getWordEnding(controllers.length) }}</div>
-                            
-                            <router-link to="/controllers/add" class="f-b" v-if="controllers.length <= 0">Добавить контроллер</router-link>
-                            <br v-else/>
+                            <transition name="fade">
+                                <div v-if="!$apollo.loading">
+                                    <h3 class="mb-1  text-primary counter font-30">{{ controllers.length }}</h3>
+                                    <div class="f-b">Контроллер{{ getWordEnding(controllers.length) }}</div>
+                                    <router-link to="/controllers/add" class="f-b" v-if="controllers.length <= 0">Добавить контроллер</router-link>
+                                </div>
+                            </transition>
+                            <br v-if="controllers.length" />
+                        
                         </div>
                         <div class="card-chart-bg">
                         </div>
@@ -336,11 +350,31 @@
                     query {
                         getControllers {
                             uid,
-                            mode
+                            mode,
+                            overallSalesSummary {
+                                salesCount,
+                                overallAmount
+                            }
                         }
                     }
                 `,
                 update: data => data.getControllers
+            }
+        },
+        computed: {
+            getOverallSalesSummary () {
+                if (this.controllers) {
+                    return this.controllers.reduce((acc, controller) => {
+                        return acc + controller.overallSalesSummary.overallAmount;
+                    }, 0);
+                }
+            },
+            getOverallSalesCount () {
+                if (this.controllers) {
+                    return this.controllers.reduce((acc, controller) => {
+                        return acc + controller.overallSalesSummary.salesCount;
+                    }, 0);
+                }
             }
         },
         methods: {

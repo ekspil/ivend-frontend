@@ -41,12 +41,11 @@ const mutations = {
 		const validation = mapValidationObject(validate(data, schema));
 
 		Vue.set(state[formName], 'validation', validation);
-		state._observable = formName;
+		Vue.set(state, '_observable', formName);
 	},
 
-	// eslint-disable-next-line
-	clear (state) {
-		state = {};
+	clear (state, formName) {
+		Vue.set(state, formName, null);
 	}
 };
 
