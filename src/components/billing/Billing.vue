@@ -31,7 +31,6 @@
                 </div>
                 <div class="balance-info-block balance-info__block ">
                     <Validate
-                        id="recharge-balance-form"
                         className="balance-info-block__recharge-form" 
                         :card="false"
                         :schema="depositSchema"
@@ -40,8 +39,17 @@
                         @onSubmit="requestDeposit"
                         @onSuccess="requestOnSuccess"
                     >
-                        <Field className="balance-info-block__recharge-input" type="number" placeholder="Сумма" formName="deposit" name="sum"/>
-                        <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="$refs.deposit.submit">Пополнить баланс</button>
+                        <transition name="fade">
+                            <Field
+                                className="balance-info-block__recharge-input"
+                                type="number"
+                                placeholder="Сумма"
+                                formName="deposit"
+                                name="sum"
+                                v-if="depositRequested"
+                            />
+                        </transition>
+                        <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="submitDeposit">Пополнить баланс</button>
                     </Validate>
                     <div id="recharge-hint" class="balance-info-block__hint">Введите сумму для пополнения</div>
                 </div>
@@ -121,7 +129,8 @@
             depositSchema: {
                 sum: [sum => ({ error: sum > 0 ? null : 'Некорректная сумма.' })]
             },
-            depositStatus: ''
+            depositStatus: '',
+            depositRequested: false
 		}),
         computed: {
             getActiveTab () {
@@ -172,6 +181,14 @@
                     this.$refs.deposit.showMessage('error', 'Пополнение отменено.');
                 } else if (data.redirectUrl) {
                     window.location.href = data.redirectUrl;
+                }
+            },
+
+            submitDeposit () {
+                if (this.depositRequested) {
+                    this.$refs.deposit.submit();
+                } else {
+                    this.depositRequested = true;
                 }
             }
         }

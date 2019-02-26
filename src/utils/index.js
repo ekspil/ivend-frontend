@@ -75,6 +75,7 @@ export const convertServerError = error => {
 		'User with such email or phone already exists': 'Пользователь с такими данными уже существует.',
 		'Phone and password does not match': 'Логин и пароль не совпадают.',
 		'Another deposit already in process': 'Завершите существующий депозит.',
+		'Such buttonId already bound to this ItemMatrix': 'Введённый ID товара уже привязан к этой матрице.',
 		default: 'Неизвестная ошибка сервера.'
 	}
 

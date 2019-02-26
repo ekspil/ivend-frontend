@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="validation-wrapper">
         <form method="POST" class="card" v-if="card">
             <div class="card-header">
                 <h3 class="card-title f-b">{{ title }}</h3>
@@ -101,6 +101,9 @@
 </script>
 
 <style scoped lang="scss">
+	.validation-wrapper {
+		width: 100%;
+	}
 	.validation-error.auth, .success-message.auth {
 		text-align: center;
 		margin: .25em 0;
