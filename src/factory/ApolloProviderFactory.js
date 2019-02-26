@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueApollo from "vue-apollo"
 import {ApolloClient} from 'apollo-client'
 import {HttpLink} from 'apollo-link-http'
-import {onError} from 'apollo-link-error'
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import {ApolloLink} from "apollo-link";
 
@@ -42,6 +41,16 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 const apolloClient = new ApolloClient({
   link: authMiddleware.concat(httpLink),
   cache,
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all'
+    },
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all'
+    }
+  }
 })
 
 const apolloProvider = new VueApollo({

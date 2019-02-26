@@ -1,4 +1,4 @@
-import { map, head, last, all, equals, filter, pluck } from 'ramda';
+import { map, head, last, all, equals, filter, pluck, forEachObjIndexed } from 'ramda';
 
 /**
 	Вытащить пару ключ/значение из массива от Object.entries
@@ -22,6 +22,10 @@ export const areKeysNull = obj => {
 */
 export const purgeSuccessValidators = arr => filter(val => val !== null, pluck('error')(arr));
 
+/**
+	Функция возвращает окончание для существительных при числительных
+	@author Samir Amirseidov
+*/
 export const getWordEnding = number => {
 	const lastNum = last(number.toString());
 	switch (lastNum) {
@@ -39,4 +43,47 @@ export const getWordEnding = number => {
 		case "4":
 			return "а";
 	}
+};
+
+/**
+	Узнать месяц по номеру, начиная с 0
+	@author Samir Amirseidov
+*/
+export const getMonthName = month => {
+	switch (month) {
+		case 0: return 'Января';
+		case 1: return 'Февраля';
+		case 2: return 'Марта';
+		case 3: return 'Апреля';
+		case 4: return 'Мая';
+		case 5: return 'Июня';
+		case 6: return 'Июля';
+		case 7: return 'Августа';
+		case 8: return 'Сентября';
+		case 9: return 'Октября';
+		case 10: return 'Ноября';
+		case 11: return 'Декабря';
+	}
+};
+
+/**
+	Конвертировать ошибку GraphQL в читаемый вид
+	@author Samir Amirseidov
+*/
+export const convertServerError = error => {
+	const messages = {
+		'User with such email or phone already exists': 'Пользователь с такими данными уже существует.',
+		'Phone and password does not match': 'Логин и пароль не совпадают.',
+		'Another deposit already in process': 'Завершите существующий депозит.',
+		'Such buttonId already bound to this ItemMatrix': 'Введённый ID товара уже привязан к этой матрице.',
+		default: 'Неизвестная ошибка сервера.'
+	}
+
+	for (let key in messages) {
+		if (error.includes(key)) {
+			return messages[key];
+		}
+	}
+
+	return messages.default;
 };
