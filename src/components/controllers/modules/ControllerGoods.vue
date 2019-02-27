@@ -85,14 +85,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="button in buttons" :key="getRandomKey()">
-                                        <td class="input-cel"><input type="text" v-model="button.buttonId" placeholder="ID" /></td>
+                                    <tr v-for="({ buttonId, item }) in buttons" :key="buttonId">
+                                        <td class="input-cel">{{ buttonId }}</td>
                                         <td class="input-cel">
-                                            <select v-model="button.item.id">
-                                                <option v-for="({ item }) in buttons" :key="getRandomKey()" :value="Number(item.id)">
-                                                    {{ item.name }}
-                                                </option>
-                                            </select>
+                                            {{ item.name }}
                                         </td>
                                         <td class="delete-cel-btn">
                                             <button class=""><i class="far fa-trash-alt"></i></button>
@@ -103,11 +99,8 @@
                         </div>
                         <div class="card-footer text-right">
                             <div class="d-flex">
-                                <button type="submit" class="btn btn-primary ml-auto" @click.prevent="submit">Сохранить</button>
+                                <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
                             </div>
-                            <transition name="fade">
-                                <div class="validation-error" v-if="status.error">{{ status.error }}</div>
-                            </transition>
                         </div>
                     </form>
                 </div>
@@ -117,8 +110,6 @@
 </template>
 <script>
 import gql from 'graphql-tag';
-
-import { numberify, checkForRepeat } from '@/utils';
 
 export default {
     name: 'ControllerGoods',
@@ -148,36 +139,11 @@ export default {
         }
     },
     data: () => ({
-        buttons: [],
-
-        status: {
-            error: null
-        }
+        buttons: []
     }),
     methods: {
-        showError(message = 'Неизвестная ошибка.') {
-            const that = this;
-
-            this.status.error = message;
-
-            setTimeout(() => {
-                that.status.error = null;
-            }, 2500);
-        },
-
         getRandomKey() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        },
-
-        async submit() {
-            const pureButtons = numberify('buttonId', this.buttons);
-
-            const areKeysRepeating = checkForRepeat('buttonId', pureButtons);
-            if (!areKeysRepeating) {
-                // Mutation
-            } else {
-                this.showError('ID товаров не могут повторяться.');
-            }
         }
     }
 }
