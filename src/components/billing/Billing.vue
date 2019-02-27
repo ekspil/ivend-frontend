@@ -2,7 +2,7 @@
     <div class="container" v-if="billing">
         <div class="side-app">
             <div class="balance-info">
-                <div class="balance-info-block balance-info__block">
+                <div :class="['balance-info-block', 'balance-info__block', hasEnoughMoney ? '' : 'balance-info-block--attention']">
                     <div class="balance-info-block__info-container">
                         <div class="balance-info-block__count balance-info-block__count--currency">{{ billing.balance }}</div>
                         <div class="balance-info-block__title">Текущий баланс</div>
@@ -135,6 +135,16 @@
                 if (this.billing && this.billing.deposits) {
                     return this.billing.deposits.some(deposit => deposit.status === 'PENDING') || this.depositStatus === 'PENDING';
                 }
+            },
+
+            hasEnoughMoney () {
+                const billing = this.billing;
+                if (billing) {
+                    const WARN_BALANCE_DAYS = process.env.VUE_APP_WARN_BALANCE_DAYS || 3;
+                    return billing.balance > (billing.dailyBill * WARN_BALANCE_DAYS);
+                }
+
+                return false;
             }
         },
         methods: {
@@ -199,5 +209,10 @@
 <style scoped lang="scss">
 	.balance-info {
 		margin-top: 50px;
+        &-block__recharge-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 	}
 </style>

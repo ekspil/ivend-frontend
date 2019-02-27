@@ -1,28 +1,5 @@
 <template>
 	<form name="notifications" action="POST" v-if="profile">
-		<div class="text-wrap">
-			<div class="example top-buttons top-buttons--notification">
-				<div class="top-buttons__left-container">
-					<div class="top-buttons__field-container top-buttons__field-container--phone">
-						<input class="top-buttons__field" type="tel" placeholder="Телефон" v-model="profile.phone">
-					</div>
-
-					<div class="top-buttons__field-container top-buttons__field-container--email">
-						<input class="top-buttons__field" type="email" placeholder="Почта" v-model="profile.email">
-					</div>
-				</div>
-				<div class="">
-					<div class="row gutters-xs">
-						<span class="col-auto">
-							<button class="btn btn-primary" type="submit" @click.prevent="save">Сохранить
-							</button>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
 		<div class="table-responsive notification-table">
 			<table class="table card-table table-vcenter text-nowrap notification-table">
 				<thead>

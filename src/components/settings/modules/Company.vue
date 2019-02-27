@@ -2,10 +2,10 @@
 	<div>
 		<div class="text-wrap">
 			<div class="example top-buttons-container top-buttons">
-				<div class="top-buttons__left-container">
+				<div class="top-buttons__left-container" v-if="false">
 					<a href="#" class="btn btn-primary">Управление сотрудниками</a>
 				</div>
-				<div>
+				<div class="top-buttons__right-container">
 					<div class="row gutters-xs">
 						<span class="col-auto">
 							<button class="btn btn-primary" type="button" @click.prevent="$refs.company.submit">Сохранить</button>
@@ -221,3 +221,9 @@
 		}
 	}
 </script>
+
+<style scoped lang="scss">
+	.top-buttons {
+		justify-content: flex-end;
+	}
+</style>

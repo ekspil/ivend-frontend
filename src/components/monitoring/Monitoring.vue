@@ -23,8 +23,7 @@
                             </div>
                         </div>
 
-                        <component :is="getActiveTab"></component>
-                        <!-- table-wrapper -->
+                        <component :is="getActiveTab" v-if="!$apollo.loading"></component>
                     </div>
                     <!-- section-wrapper -->
 

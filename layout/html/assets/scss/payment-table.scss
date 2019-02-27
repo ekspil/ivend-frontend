@@ -48,7 +48,7 @@
     }
 
     .service-status-cel {
-      width: 15%;
+      width: 12.5%;
     }
   }
 
@@ -56,6 +56,8 @@
     text-align: center;
     display: flex;
     align-items: center;
+    font-size: 13px;
+    opacity: .95;
 
     &:before {
       font-family: 'Font Awesome 5 Free';
@@ -77,8 +79,8 @@
 
     td.service-status-cel {
       &:before {
-        min-width: 19px;
-        min-height: 19px;
+        min-width: 17px;
+        min-height: 17px;
         background: url("/assets/images/icons/clock.svg") no-repeat;
         background-size: contain;
       }
@@ -90,7 +92,7 @@
 
     td.service-status-cel {
       &:before {
-        min-width: 19px;
+        min-width: 17px;
         min-height: 17px;
         background: url("/assets/images/icons/checkmark.svg") no-repeat;
         background-size: contain;
@@ -104,8 +106,8 @@
     td.service-status-cel {
       &:before {
         font-weight: 900;
-        min-width: 16px;
-        min-height: 16px;
+        min-width: 14px;
+        min-height: 14px;
         background: url("/assets/images/icons/cancel.svg") no-repeat;
         background-size: contain;
       }

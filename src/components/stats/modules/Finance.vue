@@ -53,7 +53,7 @@
 			</div>
 		</div>
 
-		<div class="table-responsive stats-table">
+		<div class="table-responsive stats-table" v-if="controllers.length > 0 || !$apollo.loading">
 			<table class="table card-table table-vcenter text-nowrap">
 				<thead>
 					<tr>
@@ -106,6 +106,9 @@
 				</tbody>
 			</table>
 		</div>
+
+		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
+        <div v-else class="aligned-text">Нет автоматов</div>
 	</div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<template v-if="controllers.length > 0">
+		<template v-if="controllers.length > 0 || !$apollo.loading">
 			<div class="text-wrap">
 				<div class="example top-buttons-container top-buttons">
 					<div class="top-buttons__left-container"></div>
@@ -52,6 +52,7 @@
 			</div>
 		</template>
 
+		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
         <div v-else class="aligned-text">Нет контроллеров</div>
 	</div>
 </template>

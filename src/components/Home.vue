@@ -259,7 +259,7 @@
                 </div>
             </div>
 
-            <div class="row mg-t-20">
+            <div class="row mg-t-20" v-if="false">
                 <div class="col-12 grid-margin">
                     <div class="card">
                         <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
@@ -318,20 +318,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <!--footer-->
-        <footer class="footer">
-            <div class="container">
-                <div class="row align-items-center flex-row-reverse">
-                    <div class="col-md-12 col-sm-12 mt-3 mt-lg-0 text-center">
-                        © 2018 <a href="#">ivend</a>. Все права защищены.
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- End Footer-->
     </div>
 </template>
 
