@@ -1,4 +1,4 @@
-import { map, head, last, all, equals, filter, pluck, forEachObjIndexed } from 'ramda';
+import { map, head, last, all, equals, filter, pluck } from 'ramda';
 
 /**
 	Вытащить пару ключ/значение из массива от Object.entries

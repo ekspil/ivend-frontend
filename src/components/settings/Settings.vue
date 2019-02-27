@@ -39,7 +39,6 @@
 </template>
 
 <script>
-	import Equipment from './modules/Equipment';
 	import Notifications from './modules/Notifications';
 	import Company from './modules/Company';
 

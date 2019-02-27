@@ -179,7 +179,7 @@
                 services: {}
             },
             input: {
-                status: "DISABLED",
+                status: "ENABLED",
                 mode: "CASHLESS",
                 equipmentId: 1,
                 revisionId: 1,

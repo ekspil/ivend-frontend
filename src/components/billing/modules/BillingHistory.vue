@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-
 export default {
     name: 'BillingHistory',
     props: {

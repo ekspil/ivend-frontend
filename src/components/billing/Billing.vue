@@ -30,28 +30,20 @@
                     </div>
                 </div>
                 <div class="balance-info-block balance-info__block ">
-                    <Validate
-                        className="balance-info-block__recharge-form" 
-                        :card="false"
-                        :schema="depositSchema"
-                        formName="deposit"
-                        ref="deposit"
-                        @onSubmit="requestDeposit"
-                        @onSuccess="requestOnSuccess"
-                    >
+                    <form class="balance-info-block__recharge-form">
                         <transition name="fade">
-                            <Field
-                                className="balance-info-block__recharge-input"
+                            <input
+                                class="balance-info-block__recharge-input"
                                 type="number"
                                 placeholder="Сумма"
-                                formName="deposit"
-                                name="sum"
+                                v-model="depositSum"
                                 v-if="depositRequested"
                             />
                         </transition>
                         <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="submitDeposit">Пополнить баланс</button>
-                    </Validate>
-                    <div id="recharge-hint" class="balance-info-block__hint">Введите сумму для пополнения</div>
+                    </form>
+
+                    <Hint :text="hintText" ref="depositHint" />
                 </div>
             </div>
             <div class="row mt-5">
@@ -87,10 +79,10 @@
 <script>
 	import gql from 'graphql-tag';
 
+    import { head, isEmpty } from 'ramda';
     import { convertServerError } from '@/utils';
 
-    import Validate from '@/modules/validation/Validate';
-    import Field from '@/modules/validation/Field';
+    import Hint from '@/modules/Hint';
 
 	import BillingHistory from './modules/BillingHistory';
 	import BillingServices from './modules/BillingServices';
@@ -98,8 +90,7 @@
 	export default {
 		name: 'Billing',
         components: {
-            Validate,
-            Field
+            Hint
         },
 		apollo: {
 			billing: {
@@ -126,11 +117,11 @@
 			activeTab: 'History',
 			billing: null,
 
-            depositSchema: {
-                sum: [sum => ({ error: sum > 0 ? null : 'Некорректная сумма.' })]
-            },
+            depositSum: null,
             depositStatus: '',
-            depositRequested: false
+            depositRequested: false,
+
+            hintText: ''
 		}),
         computed: {
             getActiveTab () {
@@ -151,6 +142,13 @@
                 this.activeTab = tabName;
             },
 
+            showDepositHint (message) {
+                if (!this.$refs.depositHint.visible) {
+                    this.hintText = message;
+                    this.$refs.depositHint.show();
+                }
+            },
+
             async requestDeposit () {
                 try {
                     const { errors, data } = await this.$apollo.mutate({
@@ -164,29 +162,32 @@
                             }
                         `,
                         variables: {
-                            amount: parseFloat(this.$store.getters['cache/data'].sum)
+                            amount: parseFloat(this.depositSum)
                         }
                     });
 
-                    this.$refs.deposit.process({ errors, success: '', data: data.requestDeposit });
+                    if (errors && !isEmpty(errors)) {
+                        const error = head(errors).message || 'Ошибка сервера.';
+                        this.showDepositHint(convertServerError(error));
+                    } else {
+                        this.depositStatus = data.status;
+
+                        if (data.redirectUrl) {
+                            window.location.href = data.redirectUrl;
+                        }
+                    }
                 } catch (error) {
-                    this.$refs.deposit.showMessage('error', convertServerError(error.message));
-                }
-            },
-
-            requestOnSuccess (data) {
-                this.depositStatus = data.status;
-
-                if (data.status === 'CANCELED') {
-                    this.$refs.deposit.showMessage('error', 'Пополнение отменено.');
-                } else if (data.redirectUrl) {
-                    window.location.href = data.redirectUrl;
+                    this.showDepositHint(convertServerError(error.message));
                 }
             },
 
             submitDeposit () {
                 if (this.depositRequested) {
-                    this.$refs.deposit.submit();
+                    if (this.depositSum > 0) {
+                        this.requestDeposit();
+                    } else {
+                        this.showDepositHint('Некорректная сумма.');
+                    }
                 } else {
                     this.depositRequested = true;
                 }

@@ -7,15 +7,15 @@
                 <th></th>
             </thead>
             <tbody>
-                <tr class="payment-table__row-subtable">
+                <tr class="payment-table__row-subtable" v-for="controller in controllers" :key="controller.id" v-if="controller.services.length > 0">
                     <td class="cel-table" colspan="3">
                         <table class="controller-service-table">
                             <thead class="active">
                                 <tr>
-                                    <th colspan="3">Контроллер 1</th>
+                                    <th colspan="3">{{ controller.name }}</th>
                                 </tr>
                             </thead>
-                            <tr v-for="service in services.controller" :key="service.id">
+                            <tr v-for="service in controller.services" :key="service.id">
                                 <td class="service-name-cel">{{ service.name }}</td>
                                 <td class="service-price-cel">{{ service.price }}</td>
                                 <td class="delete-cel-btn">
@@ -36,14 +36,16 @@
 	export default {
 		name: 'BillingServices',
         data: () => ({
-            services: []
+            controllers: []
         }),
         apollo: {
-            services: {
+            controllers: {
                 query: gql`
                     query getServices {
-                        getAvailableServices {
-                            controller {
+                        getControllers {
+                            id,
+                            name,
+                            services {
                                 id,
                                 name,
                                 price,
@@ -53,7 +55,7 @@
                     }
                 `,
 
-                update: data => data.getAvailableServices
+                update: data => data.getControllers
             }
         }
 	}
