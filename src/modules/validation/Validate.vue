@@ -7,6 +7,9 @@
             <div class="card-header-links">
                 <a href="#" class="card-header-links__item" @click.prevent="goBack">Вернуться назад</a>
             </div>
+
+			<slot name="top-buttons"></slot>
+
             <div class="card-body">
                 <slot name="form"></slot>
             </div>

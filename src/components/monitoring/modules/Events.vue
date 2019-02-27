@@ -30,7 +30,7 @@
 				</thead>
 				<tbody>
 						<tr v-for="({ id, name, lastState, lastSaleTime, lastErrorTime }) in controllers" :key="id">
-							<td class="settings-link"><a href="#" class="f-b">{{ name }} </a></td>
+							<td class="f-b">{{ name }}</td>
 
 							<td class="ok-cel">{{ (lastState && lastState.signalStrength) || '-' }}</td>
 							<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>

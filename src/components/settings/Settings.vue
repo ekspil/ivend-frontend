@@ -13,9 +13,11 @@
 							<div class="tabs-menu1">
 								<!-- Tabs -->
 								<ul class="nav panel-tabs f-b">
+									<!--
 									<li>
 										<a href="#" :class="activeTab === 'Equipment' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Equipment')">Оборудование</a>
 									</li>
+									-->
 									<li>
 										<a href="#" :class="activeTab === 'Notifications' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Notifications')">Уведомления</a>
 									</li>
@@ -44,21 +46,21 @@
 	export default {
 		name: 'Settings',
 		data: () => ({
-            activeTab: 'Equipment'
+            activeTab: 'Notifications'
         }),
         computed: {
             getActiveTab () {
                 switch (this.activeTab) {
-                    case 'Equipment': return Equipment;
+                    // case 'Equipment': return Equipment;
                     case 'Notifications': return Notifications;
                     case 'Company': return Company;
 
-                    default: return Equipment;
+                    default: return Notifications;
                 }
             }
         },
         methods: {
-            setActiveTab (tabName = 'Finance') {
+            setActiveTab (tabName = 'Notifications') {
                 this.activeTab = tabName;
             }
         }

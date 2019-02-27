@@ -168,7 +168,7 @@
                         }
                     });
 
-                    this.$refs.deposit.process({ errors, success: 'Успешно.', data: data.requestDeposit });
+                    this.$refs.deposit.process({ errors, success: '', data: data.requestDeposit });
                 } catch (error) {
                     this.$refs.deposit.showMessage('error', convertServerError(error.message));
                 }

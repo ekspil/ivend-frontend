@@ -87,3 +87,28 @@ export const convertServerError = error => {
 
 	return messages.default;
 };
+
+/**
+	Конвертировать в число свойство каждого объекта в массиве
+	@author Samir Amirseidov
+*/
+export const numberify = (propName, array) => {
+	return map(obj => ({ ...obj, [propName]: Number(obj[propName]) }), array);
+};
+
+/**
+	Проверить, повторяется ли какое-нибудь свойство хоть раз
+	@author Samir Amirseidov
+*/
+export const checkForRepeat = (propName, array) => {
+	for (let i = 0; i < array.length; i++) {
+		const temp = array[i];
+		for (let j = i + 1; j < array.length; j++) {
+			if (equals(temp[propName], array[j][propName])) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+};
