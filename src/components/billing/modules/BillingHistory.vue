@@ -7,10 +7,10 @@
                 <th class="service-status-cel sortable">Статус</th>
             </thead>
             <tbody>
-                <tr class="payment-table__pending-row" v-for="deposit in deposits" :key="deposit.id">
+                <tr v-for="deposit in deposits" :key="deposit.id" :class="getStatusClass(deposit.status).class">
                     <td class="service-date-cel">10.02.2019 13:30</td>
                     <td class="service-price-cel">{{ deposit.amount }}</td>
-                    <td class="service-status-cel">{{ deposit.status }}</td>
+                    <td class="service-status-cel">{{ getStatusClass(deposit.status).text }}</td>
                 </tr>
             </tbody>
         </table>
@@ -28,6 +28,17 @@ export default {
         deposits: {
             type: Array,
             default: () => []
+        }
+    },
+    methods: {
+        getStatusClass (status) {
+            if (status === 'SUCCEEDED') {
+                return { class: 'payment-table__successed-row', text: 'Успешно' };
+            } else if (status === 'PENDING') {
+                return { class: 'payment-table__pending-row', text: 'В ожидании' };
+            } else if (status === 'CANCELED') {
+                return { class: 'payment-table__cancelled-row', text: 'Отменено' };
+            }
         }
     }
 }

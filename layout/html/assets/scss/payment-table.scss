@@ -55,12 +55,13 @@
   td.service-status-cel {
     text-align: center;
 
-    &:after {
+    &:before {
       font-family: 'Font Awesome 5 Free';
       opacity: .9;
       font-weight: 600;
       content: '';
       margin: 0 auto;
+      margin-right: .5em;
       display: block;
     }
   }
@@ -73,10 +74,10 @@
     background-color: #f6e7cd;
 
     td.service-status-cel {
-      &:after {
-        width: 19px;
-        height: 19px;
-        background: url("/images/icons/clock.svg") no-repeat;
+      &:before {
+        min-width: 19px;
+        min-height: 19px;
+        background: url("/assets/images/icons/clock.svg") no-repeat;
         background-size: contain;
       }
     }
@@ -86,10 +87,10 @@
     background-color: #d9f9f5;
 
     td.service-status-cel {
-      &:after {
-        width: 19px;
-        height: 17px;
-        background: url("/images/icons/checkmark.svg") no-repeat;
+      &:before {
+        min-width: 19px;
+        min-height: 17px;
+        background: url("/assets/images/icons/checkmark.svg") no-repeat;
         background-size: contain;
       }
     }
@@ -99,11 +100,11 @@
     background-color: #ffd1d1;
 
     td.service-status-cel {
-      &:after {
+      &:before {
         font-weight: 900;
-        width: 16px;
-        height: 16px;
-        background: url("/images/icons/cancel.svg") no-repeat;
+        min-width: 16px;
+        min-height: 16px;
+        background: url("/assets/images/icons/cancel.svg") no-repeat;
         background-size: contain;
       }
     }
