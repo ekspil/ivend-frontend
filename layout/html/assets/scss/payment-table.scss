@@ -54,6 +54,8 @@
 
   td.service-status-cel {
     text-align: center;
+    display: flex;
+    align-items: center;
 
     &:before {
       font-family: 'Font Awesome 5 Free';
