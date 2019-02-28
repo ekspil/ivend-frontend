@@ -55,7 +55,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="controller in controllers" :key="controller.id">
-                                        <td class="settings-link">
+                                        <td>
                                             <router-link :to="`/controllers/edit/${controller.id}`" class="f-b">
                                                 {{ controller.name || '-' }}
                                             </router-link>
