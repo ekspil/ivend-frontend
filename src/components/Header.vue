@@ -11,7 +11,7 @@
                         <img alt="iVend" class="header-brand-img" src="/assets/images/brand/logo.png">
                     </router-link>
                     <div class="d-flex order-lg-2 ml-auto">
-                        <div class="dropdown d-none d-md-flex">
+                        <div class="dropdown d-none d-md-flex" v-if="false">
                             <a class="nav-link icon" data-toggle="dropdown">
                                 <i class="fas fa-bell"></i>
                                 <span class="nav-unread bg-dark"></span>
@@ -58,8 +58,8 @@
                             <a class="nav-link pr-0 leading-none d-flex" data-toggle="dropdown" href="#">
                                     <span class="avatar avatar-md brround"
                                           style="background-image: url(/assets/images/faces/female/25.jpg)"></span>
-                                <span class="ml-2 d-none d-lg-block">
-												<span class="text-black f-b">Дмитрий Бояринцев</span>
+                                <span class="ml-2 d-none d-lg-block" v-if="user && user.phone">
+												<span class="text-black f-b">{{ user.phone | prettify }}</span>
 											</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -84,12 +84,34 @@
 </template>
 
 <script>
+    import gql from 'graphql-tag';
+
+    import { prettifyPhone } from '@/utils';
+
     export default {
         name: 'Header',
+        apollo: {
+            user: {
+                query: gql`
+                    query {
+                        user: getProfile {
+                            phone
+                        }
+                    }
+                `,
+
+                update: data => data.user
+            }
+        },
         methods: {
             exit () {
                 this.$store.commit('auth/setToken', null);
                 this.$router.push('/login');
+            }
+        },
+        filters: {
+            prettify (phone) {
+                return prettifyPhone(phone);
             }
         }
     }

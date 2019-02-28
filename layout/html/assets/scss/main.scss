@@ -22,6 +22,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.hint-wrapper {
+  .hint {
+    z-index: 10;
+  }
+  .hint-visible {
+    opacity: 1;
+    top: -35px;
+  }
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }

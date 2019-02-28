@@ -43,7 +43,7 @@
                         <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="submitDeposit">Пополнить баланс</button>
                     </form>
 
-                    <Hint :text="hintText" ref="depositHint" />
+                    <Hint ref="depositHint" className="billing-hint" />
                 </div>
             </div>
             <div class="row mt-5">
@@ -119,9 +119,7 @@
 
             depositSum: null,
             depositStatus: '',
-            depositRequested: false,
-
-            hintText: ''
+            depositRequested: false
 		}),
         computed: {
             getActiveTab () {
@@ -152,13 +150,6 @@
                 this.activeTab = tabName;
             },
 
-            showDepositHint (message) {
-                if (!this.$refs.depositHint.visible) {
-                    this.hintText = message;
-                    this.$refs.depositHint.show();
-                }
-            },
-
             async requestDeposit () {
                 try {
                     const { errors, data } = await this.$apollo.mutate({
@@ -178,7 +169,7 @@
 
                     if (errors && !isEmpty(errors)) {
                         const error = head(errors).message || 'Ошибка сервера.';
-                        this.showDepositHint(convertServerError(error));
+                        this.$refs.depositHint.show(convertServerError(error));
                     } else {
                         this.depositStatus = data.status;
 
@@ -187,7 +178,7 @@
                         }
                     }
                 } catch (error) {
-                    this.showDepositHint(convertServerError(error.message));
+                    this.$refs.depositHint.show(convertServerError(error.message));
                 }
             },
 
@@ -196,7 +187,7 @@
                     if (this.depositSum > 0) {
                         this.requestDeposit();
                     } else {
-                        this.showDepositHint('Некорректная сумма.');
+                        this.$refs.depositHint.show('Некорректная сумма.');
                     }
                 } else {
                     this.depositRequested = true;

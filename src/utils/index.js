@@ -1,4 +1,7 @@
-import { map, head, last, all, equals, filter, pluck } from 'ramda';
+import {
+	map, head, last, all, equals, filter, pluck,
+	split, prepend, insertAll, flatten, join
+} from 'ramda';
 
 /**
 	Вытащить пару ключ/значение из массива от Object.entries
@@ -111,4 +114,24 @@ export const checkForRepeat = (propName, array) => {
 	}
 
 	return false;
+};
+
+/**
+	Преобразовать в удобочитаемый вид телефонный номер вида 999 999 99-99
+	@author Samir Amirseidov
+*/
+export const prettifyPhone = phone => {
+	let str = split('', phone);
+
+	str = join('', flatten(
+		prepend('+7',
+			prepend([' ', '('],
+				insertAll(3, [')', ' '],
+					insertAll(6, [' '], split('', phone))
+				)
+			)
+		)
+	));
+
+	return str;
 };

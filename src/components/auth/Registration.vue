@@ -26,7 +26,7 @@
 
                 <!-- Код телефона -->
                 <!-- Скрыто, функционала нет -->
-                <div class="auth-block__field-container auth-block__field-container--phone-code disabled-block">
+                <div class="auth-block__field-container auth-block__field-container--phone-code">
                     <input class="auth-block__field auth-block__field--phone-code" type="text" name="tel-code"
                            placeholder="Код из смс" required>
                     <button class="auth-block__phone-code-btn">Выслать код</button>

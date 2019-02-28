@@ -1,10 +1,15 @@
 const state = () => ({
-	token: null
+	token: null,
+	user: {}
 });
 
 const mutations = {
 	setToken (state, token = null) {
 		state.token = token;
+	},
+
+	setUser (state, user = {}) {
+		state.user = user;
 	}
 };
 

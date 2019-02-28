@@ -1,5 +1,17 @@
 <template>
 	<form name="notifications" action="POST" v-if="profile">
+		<div class="text-wrap">
+			<div class="example top-buttons-container top-buttons">
+				<div class="top-buttons__right-container submit-button">
+					<Hint ref="notificationsHint" className="hint" />
+					<div class="row gutters-xs">
+						<span class="col-auto">
+							<button class="btn btn-primary" type="button" @click.prevent="save">Сохранить</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="table-responsive notification-table">
 			<table class="table card-table table-vcenter text-nowrap notification-table">
 				<thead>
@@ -45,8 +57,16 @@
 <script>
 	import gql from 'graphql-tag';
 
+	import { isEmpty } from 'ramda';
+	import { convertServerError } from '@/utils';
+
+	import Hint from '@/modules/Hint';
+
 	export default {
 		name: 'Notifications',
+		components: {
+			Hint
+		},
 		apollo: {
 			profile: {
 				query: gql`
@@ -71,23 +91,45 @@
 		methods: {
 			async save () {
 				const notification = this.profile.notificationSettings[0];
-				await this.$apollo.mutate({
-					mutation: gql`
+
+				try {
+					const { errors } = await this.$apollo.mutate({
+						mutation: gql`
 						mutation EditSettings ($data: UpdateNotificationSettingInput!) {
 							updateNotificationSetting(input: $data) {
 								type
 							}
 						}
-					`,
-					variables: {
-						data: {
-							type: notification.type,
-							email: notification.email,
-							sms: notification.sms
+						`,
+						variables: {
+							data: {
+								type: notification.type,
+								email: notification.email,
+								sms: notification.sms
+							}
 						}
+					});
+
+					if (errors && !isEmpty(errors)) {
+						const error = head(errors).message || 'Ошибка сервера.';
+						this.$refs.notificationsHint.show(convertServerError(error));
+					} else {
+						this.$refs.notificationsHint.show('Сохранено');
 					}
-				});
+				} catch (error) {
+					this.$refs.notificationsHint.show(convertServerError(error.message));
+				}
 			}
 		}
 	}
 </script>
+
+<style scoped lang="scss">
+	.top-buttons {
+		justify-content: flex-end;
+
+		.submit-button {
+			position: relative;
+		}
+	}
+</style>

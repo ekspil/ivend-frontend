@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1.5rem;
+  padding: 0 1.5rem;
 
   &--product-matrix {
     .btn {
@@ -29,6 +29,12 @@
   &__right-container {
     margin-bottom: 10px;
     display: flex;
+
+    .hint {
+      &.hint-visible {
+        top: -60px;
+      }
+    }
   }
 
   .btn {
