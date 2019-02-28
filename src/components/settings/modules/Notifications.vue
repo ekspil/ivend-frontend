@@ -56,9 +56,6 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { isEmpty } from 'ramda';
-	import { convertServerError } from '@/utils';
-
 	export default {
 		name: 'Notifications',
 		apollo: {
@@ -91,7 +88,7 @@
 			async save () {
 				const notification = this.profile.notificationSettings[0];
 
-				const { errors } = await this.$apollo.mutate({
+				await this.$apollo.mutate({
 					mutation: gql`
 					mutation EditSettings ($data: UpdateNotificationSettingInput!) {
 						updateNotificationSetting(input: $data) {

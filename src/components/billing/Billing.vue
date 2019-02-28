@@ -138,6 +138,7 @@
             hasEnoughMoney () {
                 const billing = this.billing;
                 if (billing) {
+                    // eslint-disable-next-line
                     const WARN_BALANCE_DAYS = process.env.VUE_APP_WARN_BALANCE_DAYS || 3;
                     return billing.balance > (billing.dailyBill * WARN_BALANCE_DAYS);
                 }
