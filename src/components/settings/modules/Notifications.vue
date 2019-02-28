@@ -2,8 +2,7 @@
 	<form name="notifications" action="POST" v-if="profile">
 		<div class="text-wrap">
 			<div class="example top-buttons-container top-buttons">
-				<div class="top-buttons__right-container submit-button">
-					<Hint ref="notificationsHint" className="hint" />
+				<div class="top-buttons__right-container">
 					<div class="row gutters-xs">
 						<span class="col-auto">
 							<button class="btn btn-primary" type="button" @click.prevent="save">Сохранить</button>
@@ -60,13 +59,8 @@
 	import { isEmpty } from 'ramda';
 	import { convertServerError } from '@/utils';
 
-	import Hint from '@/modules/Hint';
-
 	export default {
 		name: 'Notifications',
-		components: {
-			Hint
-		},
 		apollo: {
 			profile: {
 				query: gql`
@@ -86,39 +80,33 @@
 			}
 		},
 		data: () => ({
-			profile: null
+			profile: null,
+
+			status: {
+				error: null,
+				success: null
+			}
 		}),
 		methods: {
 			async save () {
 				const notification = this.profile.notificationSettings[0];
 
-				try {
-					const { errors } = await this.$apollo.mutate({
-						mutation: gql`
-						mutation EditSettings ($data: UpdateNotificationSettingInput!) {
-							updateNotificationSetting(input: $data) {
-								type
-							}
+				const { errors } = await this.$apollo.mutate({
+					mutation: gql`
+					mutation EditSettings ($data: UpdateNotificationSettingInput!) {
+						updateNotificationSetting(input: $data) {
+							type
 						}
-						`,
-						variables: {
-							data: {
-								type: notification.type,
-								email: notification.email,
-								sms: notification.sms
-							}
-						}
-					});
-
-					if (errors && !isEmpty(errors)) {
-						const error = head(errors).message || 'Ошибка сервера.';
-						this.$refs.notificationsHint.show(convertServerError(error));
-					} else {
-						this.$refs.notificationsHint.show('Сохранено');
 					}
-				} catch (error) {
-					this.$refs.notificationsHint.show(convertServerError(error.message));
-				}
+					`,
+					variables: {
+						data: {
+							type: notification.type,
+							email: notification.email,
+							sms: notification.sms
+						}
+					}
+				});
 			}
 		}
 	}
@@ -127,9 +115,5 @@
 <style scoped lang="scss">
 	.top-buttons {
 		justify-content: flex-end;
-
-		.submit-button {
-			position: relative;
-		}
 	}
 </style>
