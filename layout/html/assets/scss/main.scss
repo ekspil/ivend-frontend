@@ -18,6 +18,10 @@
 @import "payment-table";
 @import "controller-service-table";
 
+td.f-b a, a.f-b {
+  color: black;
+}
+
 button:disabled {
   cursor: not-allowed;
 }
