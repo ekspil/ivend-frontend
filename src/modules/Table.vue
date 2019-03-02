@@ -29,7 +29,7 @@
 </template>
 
 <script>
-	import { lt, gt, sort, equals, not, or, and } from 'ramda';
+	import { lt, gt, sort, equals, not, or } from 'ramda';
 	import { convertCriteries } from '@/utils';
 
 	export default {

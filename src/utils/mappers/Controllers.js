@@ -1,5 +1,4 @@
 import { map } from 'ramda';
-import { getTimestamp } from '@/utils';
 
 const getStatus = status => {
     switch (status) {

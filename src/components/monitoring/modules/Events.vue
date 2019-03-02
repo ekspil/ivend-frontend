@@ -14,7 +14,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<Table
 			v-if="controllers.length > 0 || !$apollo.loading"
 			:headers="getTableHeaders"
@@ -28,8 +28,6 @@
 
 <script>
 	import gql from 'graphql-tag';
-
-	import { getMonthName } from '@/utils';
 
 	import Table from '@/modules/Table';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringEvents';
