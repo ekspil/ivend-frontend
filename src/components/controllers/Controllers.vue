@@ -36,47 +36,12 @@
                             </div>
                         </div>
 
-                        <div class="table-responsive settings-table" v-if="controllers && controllers.length > 0">
-                            <table class="table card-table table-vcenter text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th class="sortable">Название</th>
-                                        <th class="sortable up">Контроллер</th>
-                                        <th>Группа</th>
-                                        <th>Тип</th>
-                                        <th>Модель</th>
-                                        <th>Товары</th>
-                                        <th>Состояние</th>
-                                        <th>Дата</th>
-                                        <th>Прошивка</th>
-                                        <th>Режим</th>
-                                        <th>Фискализация</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="controller in controllers" :key="controller.id">
-                                        <td>
-                                            <router-link :to="`/controllers/edit/${controller.id}`" class="f-b">
-                                                {{ controller.name || '-' }}
-                                            </router-link>
-                                        </td>
-                                        <td>{{ controller.uid }}</td>
-                                        <td>Общая</td>
-                                        <td>Кофе</td>
-                                        <td>{{ (controller.equipment && controller.equipment.name) || '-' }}</td>
-                                        <td>Не заполнены</td>
-                                        <td class="state dropdown" data-toggle="dropdown">
-                                            <div v-html="getStatus(controller.status)"></div>
-                                        </td>
-                                        <td>09.02.2019 14:45</td>
-                                        <td>{{ (controller.lastState && controller.lastState.firmwareId) || '-' }}</td>
-                                        <td>{{ controller.mode || '-' }}</td>
-                                        <td>{{ (controller.fiscalRegistrar && controller.fiscalRegistrar.name) || '-' }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- table-wrapper -->
+                        <Table
+                            v-if="controllers && controllers.length > 0"
+                            :headers="getTableHeaders"
+                            :fields="getTableFields"
+                            className="settings-table"
+                        />
 
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
                         <div v-else class="aligned-text">Нет контроллеров</div>
@@ -89,9 +54,16 @@
 </template>
 
 <script>
-    import gql from 'graphql-tag'
+    import gql from 'graphql-tag';
+
+    import Table from '@/modules/Table';
+    import { getTableHeaders, getTableFields } from '@/utils/mappers/Controllers';
 
     export default {
+        name: 'ControllersList',
+        components: {
+            Table
+        },
         data: () => ({
             controllers: []
         }),
@@ -138,6 +110,10 @@
                     case 'TRAINING': return '<span class="status-icon bg-info"></span> Обучение';
                 }
             }
+        },
+        computed: {
+            getTableHeaders,
+            getTableFields () { return getTableFields(this.controllers); }
         }
     }
 </script>
