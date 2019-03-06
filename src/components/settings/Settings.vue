@@ -13,11 +13,9 @@
 							<div class="tabs-menu1">
 								<!-- Tabs -->
 								<ul class="nav panel-tabs f-b">
-									<!--
 									<li>
 										<a href="#" :class="activeTab === 'Equipment' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Equipment')">Оборудование</a>
 									</li>
-									-->
 									<li>
 										<a href="#" :class="activeTab === 'Notifications' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Notifications')">Уведомления</a>
 									</li>
@@ -39,22 +37,23 @@
 </template>
 
 <script>
+	import Equipment from './modules/Equipment';
 	import Notifications from './modules/Notifications';
 	import Company from './modules/Company';
 
 	export default {
 		name: 'Settings',
 		data: () => ({
-            activeTab: 'Notifications'
+            activeTab: 'Equipment'
         }),
         computed: {
             getActiveTab () {
                 switch (this.activeTab) {
-                    // case 'Equipment': return Equipment;
+                    case 'Equipment': return Equipment;
                     case 'Notifications': return Notifications;
                     case 'Company': return Company;
 
-                    default: return Notifications;
+                    default: return Equipment;
                 }
             }
         },

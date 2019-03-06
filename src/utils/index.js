@@ -1,6 +1,7 @@
 import {
 	map, head, last, all, equals, filter, pluck,
-	split, prepend, insertAll, flatten, join
+	split, prepend, insertAll, flatten, join, is,
+	or
 } from 'ramda';
 
 /**
@@ -135,3 +136,23 @@ export const prettifyPhone = phone => {
 
 	return str;
 };
+
+/**
+	Преобразовать timestamp в удобочитаемую дату
+	@author Samir Amirseidov
+*/
+export const getTimestamp = time => {
+	if (time) {
+		const date = new Date(time);
+		return `${date.getDate()} ${getMonthName(date.getMonth()).toLowerCase()}`;
+	}
+
+	return '-';
+}
+
+export const convertCriteries = (a, b, critery) => {
+	return {
+		firstCritery: is(String, b[critery]) ? a[critery] : or(a[critery], null),
+		secondCritery: is(String, a[critery]) ? b[critery] : or(b[critery], null)
+	};
+}

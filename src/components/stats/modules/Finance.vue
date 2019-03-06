@@ -53,60 +53,12 @@
 			</div>
 		</div>
 
-		<div class="table-responsive stats-table" v-if="controllers.length > 0 || !$apollo.loading">
-			<table class="table card-table table-vcenter text-nowrap">
-				<thead>
-					<tr>
-						<th class="sortable up">Автомат</th>
-						<th class="sortable">Кол-во продаж</th>
-						<th class="sortable">Сумма</th>
-						<th class="sortable">Безнал</th>
-						<!--
-						<th>Терминал</th>
-						<th>Кошелек</th>
-						-->
-						<th class="sortable">Наличные</th>
-						<!--
-						<th>Купюры</th>
-						<th>Монеты</th>
-						-->
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="({ id, name, overallSalesSummary }) in controllers" :key="id">
-						<template v-if="overallSalesSummary">
-							<td class="f-b"><router-link :to="`/stats/${id}`">{{ name }}</router-link></td>
-							<td>{{ overallSalesSummary.salesCount }}</td>
-							<td>{{ overallSalesSummary.overallAmount }}</td>
-							<td>{{ overallSalesSummary.cashlessAmount }}</td>
-							<!--
-							<td>500</td>
-							<td>200</td>
-							-->
-							<td>{{ overallSalesSummary.cashAmount }}</td>
-							<!--
-							<td>200</td>
-							<td>100</td>
-							-->
-						</template>
-						<template v-else>
-							<td class="f-b">{{ name }}</td>
-							<td>-</td>
-							<td>-</td>
-							<td>-</td>
-							<td>-</td>
-							<!--
-							<td>-</td>
-							<td>-</td>
-							<td>-</td>
-							<td>-</td>
-							-->
-						</template>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
+		<Table
+			v-if="controllers.length > 0 || !$apollo.loading"
+			:headers="getTableHeaders"
+			:fields="getTableFields"
+			className="stats-table"
+		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
         <div v-else class="aligned-text">Нет автоматов</div>
 	</div>
@@ -115,15 +67,20 @@
 <script>
 	import gql from 'graphql-tag';
 
+	import { map } from 'ramda';
+
 	import datepicker from 'vuejs-datepicker';
 	import { ru } from 'vuejs-datepicker/dist/locale';
 
-	const MILLISECONDS_IN_DAY = 86400000;
+	import Table from '@/modules/Table';
+	import { getTableHeaders, getTableFields } from '@/utils/mappers/StatsFinance';
 
+	const MILLISECONDS_IN_DAY = 86400000;
 	export default {
 		name: 'Finance',
 		components: {
-			datepicker
+			datepicker,
+			Table
 		},
 		data: () => ({
 			controllers: [],
@@ -193,7 +150,10 @@
 						to: this.calendar.to ? this.calendar.to.getTime() : Date.now()
 					};
 				}
-			}
+			},
+
+			getTableHeaders,
+			getTableFields () { return getTableFields(this.controllers); }
 		}
 	}
 </script>
