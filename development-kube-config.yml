@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: frontend
+  namespace: development
   labels:
     app: frontend
 spec:
@@ -11,12 +12,13 @@ spec:
       app: frontend
   template:
     metadata:
+      namespace: development
       labels:
         app: frontend
     spec:
       containers:
       - name: frontend
-        image: registry.gitlab.com/pshenmic/ivend/frontend
+        image: registry.gitlab.com/pshenmic/ivend/frontend:develop
         ports:
         - containerPort: 80
       imagePullSecrets:

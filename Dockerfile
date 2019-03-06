@@ -6,6 +6,7 @@ COPY src /src/src
 COPY .env /src
 COPY index.html /src
 COPY main.js /src
+COPY babel.config.js /src
 COPY package-lock.json /src
 COPY package.json /src
 WORKDIR /src
