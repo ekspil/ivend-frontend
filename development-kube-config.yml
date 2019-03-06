@@ -19,6 +19,7 @@ spec:
       containers:
       - name: frontend
         image: registry.gitlab.com/pshenmic/ivend/frontend:develop
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
       imagePullSecrets:
