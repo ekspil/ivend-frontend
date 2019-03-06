@@ -61,7 +61,7 @@
                                         <a href="#" :class="activeTab === 'Services' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Services')">Услуги</a>
                                     </li>
                                     <li>
-                                        <a href="#" :class="activeTab === 'History' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('History')">История пополнений</a>
+                                        <a href="#" :class="activeTab === 'History' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('History')">Платежи</a>
                                     </li>
                                 </ul>
                             </div>

@@ -1,16 +1,5 @@
 <template>
 	<form name="notifications" action="POST" v-if="profile">
-		<div class="text-wrap">
-			<div class="example top-buttons-container top-buttons">
-				<div class="top-buttons__right-container">
-					<div class="row gutters-xs">
-						<span class="col-auto">
-							<button class="btn btn-primary" type="button" @click.prevent="save">Сохранить</button>
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="table-responsive notification-table">
 			<table class="table card-table table-vcenter text-nowrap notification-table">
 				<thead>
@@ -28,12 +17,12 @@
 				<tbody>
 
 					<tr v-for="({ type, email, sms }, index) in profile.notificationSettings" :key="index">
-						<td>Нет связи с автоматом</td>
+						<td>{{ getType(type) }}</td>
 
 						<td class="checkbox-cel">
 							<label class="default-checkbox" for="checkbox-11">
 								<input class="auth-block__checkbox" type="checkbox"
-								id="checkbox-11" v-model="profile.notificationSettings[index].email">
+								id="checkbox-11" v-model="profile.notificationSettings[index].email" @change="save(index)"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
@@ -41,7 +30,7 @@
 						<td class="checkbox-cel">
 							<label class="default-checkbox" for="checkbox-12">
 								<input class="auth-block__checkbox" type="checkbox"
-								id="checkbox-12" v-model="profile.notificationSettings[index].sms">
+								id="checkbox-12" v-model="profile.notificationSettings[index].sms" @change="save(index)"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
@@ -56,8 +45,7 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { isEmpty } from 'ramda';
-	import { convertServerError } from '@/utils';
+	import { omit } from 'ramda';
 
 	export default {
 		name: 'Notifications',
@@ -88,10 +76,16 @@
 			}
 		}),
 		methods: {
-			async save () {
-				const notification = this.profile.notificationSettings[0];
+			getType (type) {
+				switch (type) {
+					case 'CONTROLLER_NO_CONNECTION': return 'Нет связи с автоматом';
+					default: return 'Неизвестный тип уведомления';
+				}
+			},
+			async save (index) {
+				const notification = this.profile.notificationSettings[index];
 
-				const { errors } = await this.$apollo.mutate({
+				await this.$apollo.mutate({
 					mutation: gql`
 					mutation EditSettings ($data: UpdateNotificationSettingInput!) {
 						updateNotificationSetting(input: $data) {
@@ -100,11 +94,7 @@
 					}
 					`,
 					variables: {
-						data: {
-							type: notification.type,
-							email: notification.email,
-							sms: notification.sms
-						}
+						data: omit(['__typename'], notification)
 					}
 				});
 			}

@@ -4,7 +4,6 @@ import VueRouter from "vue-router";
 import Login from '@/components/auth/Login';
 import Registration from '@/components/auth/Registration';
 
-import Controllers from '@/components/controllers/Controllers';
 import EditController from '@/components/controllers/EditController';
 import AddController from '@/components/controllers/AddController';
 
@@ -31,7 +30,6 @@ const routes = [
     { path: '/', redirect: '/home' },
     { path: '/home', component: Home },
 
-    { path: '/controllers', component: Controllers },
     { path: '/controllers/edit/:id', component: EditController },
     { path: '/controllers/add', component: AddController },
 

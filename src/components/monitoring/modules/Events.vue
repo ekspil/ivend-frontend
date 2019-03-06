@@ -14,35 +14,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="table-responsive monitoring-table" v-if="controllers.length > 0 || !$apollo.loading">
-			<table class="table card-table table-vcenter text-nowrap">
-				<thead>
-					<tr>
-						<th class="sortable up">Автомат</th>
-						<th class="sortable">Связь</th>
-						<th class="sortable">Продажи</th>
-						<th class="sortable">Ошибки</th>
-						<th class="sortable">Аудит1</th>
-						<th class="sortable">Аудит2</th>
-						<th class="sortable">Инкасация</th>
-						<th class="sortable">Загрузка</th>
-					</tr>
-				</thead>
-				<tbody>
-						<tr v-for="({ id, name, lastState, lastSaleTime, lastErrorTime }) in controllers" :key="id">
-							<td class="f-b">{{ name }}</td>
 
-							<td class="ok-cel">{{ (lastState && lastState.signalStrength) || '-' }}</td>
-							<td class="warning-cel">{{ getTimestamp(lastSaleTime) }}</td>
-							<td class="ok-cel">{{ getTimestamp(lastErrorTime) }}</td>
-							<td class="disabled-cel">-</td>
-							<td class="disabled-cel">-</td>
-							<td class="disabled-cel">-</td>
-							<td class="disabled-cel">-</td>
-						</tr>
-				</tbody>
-			</table>
-		</div>
+		<Table
+			v-if="controllers.length > 0 || !$apollo.loading"
+			:headers="getTableHeaders"
+			:fields="getTableFields"
+			className="monitoring-table"
+		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
         <div v-else class="aligned-text">Нет контроллеров</div>
 	</div>
@@ -51,10 +29,14 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { getMonthName } from '@/utils';
+	import Table from '@/modules/Table';
+	import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringEvents';
 
 	export default {
 		name: 'Events',
+		components: {
+			Table
+		},
 		data: () => ({
 			controllers: []
 		}),
@@ -76,15 +58,9 @@
 				update: data => data.getControllers
 			}
 		},
-		methods: {
-			getTimestamp (time) {
-				if (time) {
-					const date = new Date(time);
-					return `${date.getDate()} ${getMonthName(date.getMonth()).toLowerCase()}`;
-				}
-
-				return '-';
-			}
+		computed: {
+			getTableHeaders,
+			getTableFields () { return getTableFields(this.controllers); }
 		}
 	}
 </script>

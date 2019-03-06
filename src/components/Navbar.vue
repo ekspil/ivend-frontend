@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item with-sub">
+                <li class="nav-item with-sub" v-if="false">
                     <a :class="['nav-link', /^\/controllers/.test($route.path) ? 'active' : '']" data-toggle="dropdown" href="#"><i class="fas fa-hdd"></i>
                         <span>Оборудование</span></a>
                     <div class="sub-item">
