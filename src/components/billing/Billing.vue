@@ -171,10 +171,9 @@
                         const error = head(errors).message || 'Ошибка сервера.';
                         this.$refs.depositHint.show(convertServerError(error));
                     } else {
-                        this.depositStatus = data.status;
-
-                        if (data.redirectUrl) {
-                            window.location.href = data.redirectUrl;
+                        this.depositStatus = data.requestDeposit.status;
+                        if (data.requestDeposit.redirectUrl) {
+                            window.location.href = data.requestDeposit.redirectUrl;
                         }
                     }
                 } catch (error) {
