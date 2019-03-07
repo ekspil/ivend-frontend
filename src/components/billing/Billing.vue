@@ -20,7 +20,7 @@
                         <i class="far fa-calendar-alt"></i>
                     </div>
                 </div>
-                <div class="balance-info-block balance-info-block--attention balance-info__block">
+                <div :class="['balance-info-block', 'balance-info__block', hasEnoughDays ? '' : 'balance-info-block--attention']">
                     <div class="balance-info-block__info-container">
                         <div class="balance-info-block__count">{{ billing.daysLeft }}</div>
                         <div class="balance-info-block__title">Осталось дней</div>
@@ -30,16 +30,13 @@
                     </div>
                 </div>
                 <div class="balance-info-block balance-info__block ">
-                    <form class="balance-info-block__recharge-form">
-                        <transition name="fade">
-                            <input
-                                class="balance-info-block__recharge-input"
-                                type="number"
-                                placeholder="Сумма"
-                                v-model="depositSum"
-                                v-if="depositRequested"
-                            />
-                        </transition>
+                    <form :class="['balance-info-block__recharge-form', depositRequested && 'active']">
+                        <input
+                            class="balance-info-block__recharge-input"
+                            type="number"
+                            placeholder="Сумма"
+                            v-model="depositSum"
+                        />
                         <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="submitDeposit">Пополнить баланс</button>
                     </form>
 
@@ -143,6 +140,14 @@
                 }
 
                 return false;
+            },
+            hasEnoughDays () {
+                const billing = this.billing;
+                if (billing && process.env.VUE_APP_WARN_BALANCE_DAYS >= billing.daysLeft) {
+                    return false;
+                }
+
+                return true;
             }
         },
         methods: {
@@ -168,7 +173,7 @@
                     });
 
                     if (errors && !isEmpty(errors)) {
-                        const error = head(errors).message || 'Ошибка сервера.';
+                        const error = head(errors).message || 'Ошибка сервера';
                         this.$refs.depositHint.show(convertServerError(error));
                     } else {
                         this.depositStatus = data.requestDeposit.status;
@@ -186,10 +191,11 @@
                     if (this.depositSum > 0) {
                         this.requestDeposit();
                     } else {
-                        this.$refs.depositHint.show('Некорректная сумма.');
+                        this.$refs.depositHint.show('Некорректная сумма');
                     }
                 } else {
                     this.depositRequested = true;
+                    this.$refs.depositHint.show('Введите сумму для пополнения');
                 }
             }
         }
@@ -201,8 +207,7 @@
 		margin-top: 50px;
         &-block__recharge-form {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            align-items: center;
         }
 	}
 </style>
