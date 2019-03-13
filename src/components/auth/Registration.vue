@@ -79,29 +79,29 @@ export default {
     methods: {
         async register() {
             if (this.step === 1) {
-                this.step++;
-            } else {
-                const cache = this.$store.getters['cache/data'];
+                return this.step++;
+            }
+            
+            const cache = this.$store.getters['cache/data'];
 
-                try {
-                    const { errors, data } = await this.$apollo.mutate({
-                        mutation: gql `
+            try {
+                const { errors, data } = await this.$apollo.mutate({
+                    mutation: gql `
                             mutation registerUser ($regData: CreateUserInput!) {
                                 registerUser(input: $regData) { email }
                             }
                         `,
-                        variables: {
-                            regData: {
-                                ...(omit(['agreement', 'rePassword'], cache)),
-                                phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
-                            }
+                    variables: {
+                        regData: {
+                            ...(omit(['agreement', 'rePassword'], cache)),
+                            phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
                         }
-                    });
+                    }
+                });
 
-                    this.$refs.register.process({ errors, data, success: 'Переадресация...' });
-                } catch (error) {
-                    this.$refs.register.showMessage('error', convertServerError(error.message));
-                }
+                this.$refs.register.process({ errors, data, success: 'Переадресация...' });
+            } catch (error) {
+                this.$refs.register.showMessage('error', convertServerError(error.message));
             }
         },
         async onSuccess({ token }) {
