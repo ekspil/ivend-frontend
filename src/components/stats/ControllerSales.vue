@@ -195,7 +195,10 @@
 			getTimestamp (time) {
 				if (time) {
 					const date = new Date(time);
-					return `${date.getDay() + 1} ${getMonthName(date.getMonth()).toLowerCase().slice(0, 3)} ${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
+					return `${date.getDay() + 1} ${getMonthName(date.getMonth()).toLowerCase().slice(0, 3)} ${date.toLocaleTimeString('ru-RU', {
+						hour: '2-digit',
+						minute: '2-digit'
+					})}`;
 				}
 
 				return '-';
