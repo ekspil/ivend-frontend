@@ -27,7 +27,7 @@
                     <div class="auth-block__field-container auth-block__field-container--pass" v-if="step > 1">
                         <Field className="auth-block__field" type="password" name="rePassword" placeholder="Повторите пароль" formName="register" />
                     </div>
-                    <button class="auth-block__submit-btn btn btn-primary" type="submit" @click.prevent="$refs.register.submit">Зарегистрироваться</button>
+                    <button class="auth-block__submit-btn btn btn-primary" type="submit" @click.prevent="incrementStep">Зарегистрироваться</button>
                     <Field type="checkbox" name="agreement" formName="register" className="default-checkbox" v-if="step > 1">
                         <template slot="label">
                             Я согласен с <a class="auth-block__link" href="#">условиями соглашения</a>
@@ -77,11 +77,14 @@ export default {
         step: 1
     }),
     methods: {
-        async register() {
+        incrementStep () {
             if (this.step === 1) {
                 return this.step++;
             }
-            
+
+            this.$refs.register.submit();
+        },
+        async register() {
             const cache = this.$store.getters['cache/data'];
 
             try {
