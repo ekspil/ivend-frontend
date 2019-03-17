@@ -79,6 +79,7 @@
     line-height: 1.84615385;
     -moz-appearance:textfield;
     transition: left .15s, transform .15s, padding-right .15s, width .15s;
+    opacity: 0;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -87,6 +88,7 @@
     }
 
     .active & {
+      opacity: 1;
       left: 24px;
       padding-right: 175px;
       transform: translate(0, -50%);
