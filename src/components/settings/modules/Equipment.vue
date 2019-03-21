@@ -18,9 +18,7 @@
                                         </span>
 
                                         <span class="col-auto">
-                                            <button class="btn btn-primary" type="button"><i
-                                                class="fe fe-download"></i>
-                                            </button>
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                                         </span>
 
                                         <span class="col-auto">
@@ -52,13 +50,15 @@
 <script>
     import gql from 'graphql-tag';
 
-    import Table from '@/modules/Table';
+    import Table from '@/modules/table/Table';
+    import ExportExcel from '@/modules/table/ExportExcel';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/Controllers';
 
     export default {
         name: 'ControllersList',
         components: {
-            Table
+            Table,
+            ExportExcel
         },
         data: () => ({
             controllers: []
