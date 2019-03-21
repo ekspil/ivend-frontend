@@ -80,52 +80,31 @@
 					}
 				`,
 				variables () {
-					const notCustomDate = !this.calendar.from && !this.calendar.to;
+					const notCustomDate = !this.period.from && !this.period.to;
 					if (notCustomDate) {
 						return {
 							period: {
-								from: this.getPeriod,
+								from: this.period,
 								to: Date.now()
 							}
 						};
 					}
 
 					return {
-						period: this.getPeriod
+						period: this.period
 					};
 				},
 				update: data => data.getControllers
 			}
 		},
-		methods: {
-			setPeriod (period = 'Неделя') {
-				this.calendar = {
-					from: undefined,
-					to: undefined
-				};
-				this.period = period;
-			},
-			setPeriodToNull () {
-				this.period = null;
-			}
-		},
 		computed: {
-			getPeriod () {
-				switch (this.period) {
-					case 'Всего': return 0;
-					case 'Месяц': return Date.now() - MILLISECONDS_IN_DAY * 30;
-					case 'Неделя': return Date.now() - MILLISECONDS_IN_DAY * 7;
-					case 'День': return Date.now() - MILLISECONDS_IN_DAY;
-
-					default: return {
-						from: this.calendar.from ? this.calendar.from.getTime() : 0,
-						to: this.calendar.to ? this.calendar.to.getTime() : Date.now()
-					};
-				}
-			},
-
 			getTableHeaders,
 			getTableFields () { return getTableFields(this.controllers); }
+		},
+		methods: {
+			onPeriodChange (period) {
+				this.period = period;
+			}
 		}
 	}
 </script>
