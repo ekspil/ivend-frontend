@@ -7,14 +7,12 @@
 
 					<div class="">
 						<div class="row gutters-xs">
-							<button class="btn btn-primary" type="button">Выгрузить &#032;<i
-								class="fe fe-download"></i>
-							</button>
+							<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 			<Table :headers="getTableHeaders" :fields="getTableFields" className="monitoring-table" />
 		</template>
 
@@ -28,13 +26,15 @@
 
 	import { getMonthName } from '@/utils';
 
-	import Table from '@/modules/Table';
+	import Table from '@/modules/table/Table';
+	import ExportExcel from '@/modules/table/ExportExcel';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringState';
 
 	export default {
 		name: 'State',
 		components: {
-			Table
+			Table,
+			ExportExcel
 		},
 		data: () => ({
 			controllers: []

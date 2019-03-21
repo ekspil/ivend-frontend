@@ -6,10 +6,7 @@
 
 				<div class="">
 					<div class="row gutters-xs">
-
-						<button class="btn btn-primary" type="button">Выгрузить &#032;<i
-							class="fe fe-download"></i>
-						</button>
+						<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 					</div>
 				</div>
 			</div>
@@ -29,13 +26,15 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import Table from '@/modules/Table';
+	import Table from '@/modules/table/Table';
+	import ExportExcel from '@/modules/table/ExportExcel';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringEvents';
 
 	export default {
 		name: 'Events',
 		components: {
-			Table
+			Table,
+			ExportExcel
 		},
 		data: () => ({
 			controllers: []

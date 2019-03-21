@@ -18,38 +18,10 @@
 						<!--<button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>-->
 						<datepicker placeholder="до" v-model="calendar.to" :language="pickerLanguage" input-class="stats-top-menu__item stats-top-menu__item--date" @selected="setPeriodToNull" />
 
-						<form id="calendar" class="calendar disabled-block" tabindex="-1">
-							<div class="v-cal" id="v-cal-from" >
-								<div class="vcal-header">
-									<div class="vcal-btn--prev" data-calendar-toggle="previous">
-									</div>
-
-									<div class="vcal-header__label" data-calendar-label="month">
-										Февраль 2018
-									</div>
-
-									<div class="vcal-btn--next" data-calendar-toggle="next"></div>
-								</div>
-
-								<div class="vcal-week">
-									<span>Пн</span>
-									<span>Вт</span>
-									<span>Ср</span>
-									<span>Чт</span>
-									<span>Пт</span>
-									<span>Сб</span>
-									<span>Вс</span>
-								</div>
-								<div class="vcal-body" data-calendar-area="month"></div>
-							</div>
-						</form>
-
 					</div>
 				</div>
 
-				<button class="btn btn-primary" type="button"><i
-					class="fe fe-download"></i>
-				</button>
+				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
 		</div>
 
@@ -67,12 +39,11 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { map } from 'ramda';
-
 	import datepicker from 'vuejs-datepicker';
 	import { ru } from 'vuejs-datepicker/dist/locale';
 
-	import Table from '@/modules/Table';
+	import Table from '@/modules/table/Table';
+	import ExportExcel from '@/modules/table/ExportExcel';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/StatsFinance';
 
 	const MILLISECONDS_IN_DAY = 86400000;
@@ -80,7 +51,8 @@
 		name: 'Finance',
 		components: {
 			datepicker,
-			Table
+			Table,
+			ExportExcel
 		},
 		data: () => ({
 			controllers: [],
