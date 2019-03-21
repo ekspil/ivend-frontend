@@ -107,7 +107,7 @@ export default {
                 this.$refs.register.showMessage('error', convertServerError(error.message));
             }
         },
-        async onSuccess({ token }) {
+        async onSuccess() {
             const cache = this.$store.getters['cache/data'];
 
             const { data } = await this.$apollo.mutate({
