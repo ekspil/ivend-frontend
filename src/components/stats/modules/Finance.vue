@@ -46,7 +46,6 @@
 	import ExportExcel from '@/modules/table/ExportExcel';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/StatsFinance';
 
-	const MILLISECONDS_IN_DAY = 86400000;
 	export default {
 		name: 'Finance',
 		components: {
