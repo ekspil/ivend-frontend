@@ -14,5 +14,5 @@ export const getTableFields = data => map(controller => ({
 	lastErrorTime: getTimestamp(controller.lastErrorTime),
 	signalStrength: controller.lastState?.signalStrength || '-',
 
-	route: `/monitoring/${id}`
+	route: `/monitoring/${controller.id}`
 }), data);

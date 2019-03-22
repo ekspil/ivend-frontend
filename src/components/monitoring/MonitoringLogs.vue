@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
-
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
 import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringLogs';
