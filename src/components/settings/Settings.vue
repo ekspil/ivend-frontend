@@ -17,6 +17,9 @@
 										<a href="#" :class="activeTab === 'Equipment' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Equipment')">Оборудование</a>
 									</li>
 									<li>
+										<a href="#" :class="activeTab === 'Machines' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Machines')">Автоматы</a>
+									</li>
+									<li>
 										<a href="#" :class="activeTab === 'Notifications' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Notifications')">Уведомления</a>
 									</li>
 									<li>
@@ -28,16 +31,15 @@
 
 						<component :is="getActiveTab"></component>
 					</div>
-					<!-- section-wrapper -->
-
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </template>
 
 <script>
 	import Equipment from './modules/Equipment';
+	import Machines from './modules/Machines/Machines';
 	import Notifications from './modules/Notifications';
 	import Company from './modules/Company';
 
@@ -50,6 +52,7 @@
             getActiveTab () {
                 switch (this.activeTab) {
                     case 'Equipment': return Equipment;
+										case 'Machines': return Machines;
                     case 'Notifications': return Notifications;
                     case 'Company': return Company;
 
@@ -58,7 +61,7 @@
             }
         },
         methods: {
-            setActiveTab (tabName = 'Notifications') {
+            setActiveTab (tabName = 'Equipment') {
                 this.activeTab = tabName;
             }
         }
