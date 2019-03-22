@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label class="form-label f-b">Группа автомата</label>
                                     <select class="form-control custom-select" v-model="input.equipmentId">
-                                        <option v-for="equipment in equipments"
+                                        <option v-for="equipment in machine.equipments"
                                         :key="equipment.id" :value="equipment.id">
                                         {{ equipment.name }}
                                         </option>
@@ -50,6 +50,8 @@
 																			className="form-control"
 																			:initialValue="input.groupId"
 																			:options="machine.groups"
+																			@onSelect="onGroupSelect"
+																			@onBlur="onGroupAppend"
 																		/>
                                 </div>
                                 <div class="form-group">
@@ -113,16 +115,26 @@
 			machine: {
 				query: gql`
 					query {
+						getMachineGroups {
+							id
+							name
+						}
+						getMachineTypes {
+							id
+							name
+						}
 						getEquipments {
-							id,
+							id
 							name
 						}
 					}
 				`,
 				update (data) {
 					return {
-                        equipments: data.getEquipments
-                    };
+						types: data.getMachineTypes,
+						groups: data.getMachineGroups,
+            equipments: data.getEquipments
+          };
 				}
 			}
 		},
@@ -155,7 +167,32 @@
             onSuccess () {
                 const router = this.$router;
                 setTimeout(function () { router.push('/settings'); }, 1000);
-            }
+            },
+
+						onGroupSelect (group) {
+							this.input.groupId = group.id;
+						},
+						async onGroupAppend (name) {
+							if (name && name !== this.input.groupId) {
+								const { errors, data } = await this.$apollo.mutate({
+									mutation: gql`
+										mutation ($input: CreateMachineGroupInput!) {
+											createMachineGroup(input: $input) {
+												id,
+												name
+											}
+										}
+									`,
+									variables: {
+										input: {
+											name
+										}
+									}
+								});
+
+								this.machine.groups.push(data.createMachineGroup);
+							}
+						}
         }
 	}
 </script>
