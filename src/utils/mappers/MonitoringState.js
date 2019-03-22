@@ -2,7 +2,7 @@ import { map } from 'ramda';
 import { getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
-	{ name: 'Автомат', key: 'name' },
+	{ name: 'Автомат', key: 'name', link: true },
 	{ name: 'Связь', key: 'signalStrength' },
 	{ name: 'Продажи', key: 'lastSaleTime' },
 	{ name: 'Контроллер', key: 'uid' },
@@ -18,5 +18,6 @@ export const getTableFields = data => map(controller => ({
 
 	signalStrength: controller.lastState?.signalStrength || '-',
 	coinAmount: controller.lastState?.coinAmount || '-',
-	billAmount: controller.lastState?.billAmount || '-'
+	billAmount: controller.lastState?.billAmount || '-',
+	route: `/monitoring/${controller.id}`
 }), data);
