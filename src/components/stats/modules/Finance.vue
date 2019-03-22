@@ -3,22 +3,7 @@
 		<div class="stats-top-menu">
 			<div class="stats-top-menu__content-container">
 				<div class="stats-top-menu__date-buttons">
-					<button :class="['stats-top-menu__item', period === 'Всего' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('Всего')">Всего</button>
-					<button :class="['stats-top-menu__item', period === 'День' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('День')">День</button>
-					<button :class="['stats-top-menu__item', period === 'Неделя' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('Неделя')">Неделя</button>
-					<button :class="['stats-top-menu__item', period === 'Месяц' ? 'stats-top-menu__item--active' : '']" @click="setPeriod('Месяц')">Месяц</button>
-
-
-					<div id="periodinput" class="stats-top-menu__date-period">
-						<!--<button id="btn1" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'from')" data-calendar-label="" data-calendar-area="">от</button>-->
-						<datepicker placeholder="от" v-model="calendar.from" :language="pickerLanguage" input-class="stats-top-menu__item stats-top-menu__item--date" @selected="setPeriodToNull" />
-
-						<div class="stats-top-menu__date-separator"></div>
-
-						<!--<button id="btn2" class="stats-top-menu__item stats-top-menu__item--date" onclick="selectedInput(this, 'to')" data-calendar-label="" data-calendar-area="">до</button>-->
-						<datepicker placeholder="до" v-model="calendar.to" :language="pickerLanguage" input-class="stats-top-menu__item stats-top-menu__item--date" @selected="setPeriodToNull" />
-
-					</div>
+					<Period @onChange="onPeriodChange"/>
 				</div>
 
 				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
@@ -32,35 +17,35 @@
 			className="stats-table"
 		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-        <div v-else class="aligned-text">Нет автоматов</div>
+    <div v-else class="aligned-text">Нет автоматов</div>
 	</div>
 </template>
 
 <script>
 	import gql from 'graphql-tag';
 
-	import datepicker from 'vuejs-datepicker';
-	import { ru } from 'vuejs-datepicker/dist/locale';
-
 	import Table from '@/modules/table/Table';
 	import ExportExcel from '@/modules/table/ExportExcel';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/StatsFinance';
 
+	import Period from '@/modules/Period';
+
 	export default {
 		name: 'Finance',
 		components: {
-			datepicker,
+			Period,
 			Table,
 			ExportExcel
 		},
 		data: () => ({
 			controllers: [],
-			period: 'Неделя',
-			calendar: {
-				from: undefined,
-				to: undefined
-			},
-			pickerLanguage: ru
+			period: {
+	      calendar: {
+	        from: null,
+	        to: null
+	      },
+	      value: null
+	    }
 		}),
 		apollo: {
 			controllers: {
