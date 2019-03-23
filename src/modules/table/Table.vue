@@ -97,3 +97,9 @@
 		}
 	}
 </script>
+
+<style scoepd lang="scss">
+	.settings-table td:first-child {
+		font-weight: normal;
+	}
+</style>

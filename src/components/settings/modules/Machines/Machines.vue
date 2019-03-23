@@ -7,7 +7,7 @@
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
                                 <div class="top-buttons__left-container">
-                                    <router-link to="/controllers/add" class="btn btn-primary">Добавить контроллер</router-link>
+                                    <router-link to="/machine/add" class="btn btn-primary">Добавить автомат</router-link>
                                 </div>
                                 <div class="">
                                     <div class="row gutters-xs">
@@ -22,8 +22,7 @@
                                         </span>
 
                                         <span class="col-auto">
-                                            <button class="btn btn-primary" type="button">Сохранить
-                                            </button>
+                                            <button class="btn btn-primary" type="button">Сохранить</button>
                                         </span>
                                     </div>
                                 </div>
@@ -31,16 +30,15 @@
                         </div>
 
                         <Table
-                            v-if="controllers && controllers.length > 0"
+                            v-if="machines && machines.length > 0"
                             :headers="getTableHeaders"
                             :fields="getTableFields"
                             className="settings-table"
                         />
 
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-                        <div v-else class="aligned-text">Нет контроллеров</div>
+                        <div v-else class="aligned-text">Нет автоматов</div>
                     </div>
-                    <!-- section-wrapper -->
                 </div>
             </div>
         </div>
@@ -52,44 +50,35 @@
 
     import Table from '@/modules/table/Table';
     import ExportExcel from '@/modules/table/ExportExcel';
-    import { getTableHeaders, getTableFields } from '@/utils/mappers/Controllers';
+    import { getTableHeaders, getTableFields } from '@/utils/mappers/Machines';
 
     export default {
-        name: 'Equipment',
+        name: 'Machines',
         components: {
             Table,
             ExportExcel
         },
         data: () => ({
-            controllers: []
+            machines: []
         }),
         apollo: {
-            controllers: {
+            machines: {
                 query: gql`
                     query {
-                      getControllers {
+                      getMachines {
                         id
                         name
-                        uid
-                        mode
-                        revision {
-                            name
+                        number
+                        place
+                        group {
+                          id
+                          name
                         }
-                        status
                         equipment {
+                          id
                           name
                         }
-                        bankTerminal {
-                          name
-                        }
-                        fiscalRegistrar {
-                          name
-                        }
-                        lastState {
-                            firmwareId
-                        }
-
-                        machine {
+                        type {
                           id
                           name
                         }
@@ -97,24 +86,13 @@
                     }
                 `,
                 update (data) {
-                    return data.getControllers;
-                }
-            }
-        },
-        methods: {
-            getStatus (status) {
-                switch (status) {
-                    case 'ENABLED': return '<span class="status-icon bg-success"></span> Активирован';
-                    case 'DISABLED': return '<span class="status-icon bg-danger"></span> Деактивирован';
-                    case 'PAUSED': return '<span class="status-icon bg-secondary"></span> Приостановлен';
-                    case 'DEBUG': return '<span class="status-icon bg-yellow"></span> Отладка';
-                    case 'TRAINING': return '<span class="status-icon bg-info"></span> Обучение';
+                    return data.getMachines;
                 }
             }
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.controllers); }
+            getTableFields () { return getTableFields(this.machines); }
         }
     }
 </script>

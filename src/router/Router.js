@@ -16,6 +16,7 @@ import Monitoring from '@/components/monitoring/Monitoring';
 import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
 
 import Settings from '@/components/settings/Settings';
+import AddMachine from '@/components/settings/modules/Machines/AddMachine';
 
 import Billing from '@/components/billing/Billing';
 
@@ -43,6 +44,7 @@ const routes = [
     { path: '/monitoring/:id', component: MonitoringLogs },
 
     { path: '/settings', component: Settings },
+    { path: '/machine/add', component: AddMachine },
 
     { path: '/billing', component: Billing },
 
