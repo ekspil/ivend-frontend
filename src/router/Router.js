@@ -13,6 +13,7 @@ import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
 
 import Monitoring from '@/components/monitoring/Monitoring';
+import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
 
 import Settings from '@/components/settings/Settings';
 
@@ -39,6 +40,7 @@ const routes = [
     { path: '/stats/:id', component: ControllerSales },
 
     { path: '/monitoring', component: Monitoring },
+    { path: '/monitoring/:id', component: MonitoringLogs },
 
     { path: '/settings', component: Settings },
 
