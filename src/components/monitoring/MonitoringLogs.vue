@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
+
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
 import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringLogs';
@@ -55,16 +57,39 @@ export default {
     ExportExcel
   },
   apollo: {
-    /*machine: {
+    machine: {
       query: gql`
         query ($id: Int!) {
-
+          getMachineById (id: $id) {
+            id
+            number
+            name
+            place
+            group {
+              id
+              name
+            }
+            equipment {
+              id
+              name
+            }
+            type {
+              id
+              name
+            }
+            logs {
+              type
+              message
+              time
+            }
+          }
         }
       `,
       variables () {
         const notCustomDate = !this.period.from && !this.period.to;
         if (notCustomDate) {
           return {
+            id: Number(this.$route.params.id),
             period: {
               from: this.period,
               to: Date.now()
@@ -73,13 +98,14 @@ export default {
         }
 
         return {
-          period: this.period
+          period: this.period,
+          id: Number(this.$route.params.id)
         };
       },
-      update: { getMachineById } => ({
+      update: ({ getMachineById }) => ({
         ...getMachineById
       })
-    }*/
+    }
   },
   data: () => ({
     machine: {
