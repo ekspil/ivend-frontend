@@ -174,7 +174,7 @@
 						},
 						async onGroupAppend (name) {
 							if (name && name !== this.input.groupId) {
-								const { errors, data } = await this.$apollo.mutate({
+								const { data } = await this.$apollo.mutate({
 									mutation: gql`
 										mutation ($input: CreateMachineGroupInput!) {
 											createMachineGroup(input: $input) {

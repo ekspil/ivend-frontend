@@ -22,6 +22,7 @@ export const getTableHeaders = () => [
     { name: 'Состояние', key: 'status', unsortable: true, raw: true },
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: true },
+    { name: 'Автомат', key: 'machine', unsortable: true },
     { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true }
 ];
 
@@ -33,6 +34,7 @@ export const getTableFields = data => map(controller => ({
     firmwareId: controller.lastState?.firmwareId || '-',
     mode: controller.mode || '-',
     fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
+    machine: controller.machine.name,
 
     route: `/controllers/edit/${controller.id}`
 }), data);

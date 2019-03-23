@@ -88,6 +88,11 @@
                         lastState {
                             firmwareId
                         }
+
+                        machine {
+                          id
+                          name
+                        }
                       }
                     }
                 `,
