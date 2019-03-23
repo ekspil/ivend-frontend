@@ -14,7 +14,7 @@
 			</thead>
 			<tbody>
 				<tr v-for="field in getFields" :key="field.id">
-					<td v-for="(header, index) in headers" :key="index">
+					<td v-for="(header, index) in headers" :key="index" :class="field.class">
 						<router-link v-if="header.link && field.route" :to="field.route" class="f-b">
 							{{ field[header.key] }}
 						</router-link>
