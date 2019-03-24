@@ -7,7 +7,11 @@ export const getTableHeaders = () => [
 	{ name: 'Продажи', key: 'lastSaleTime' },
 	{ name: 'Контроллер', key: 'uid' },
 	{ name: 'Монетник', key: 'coinAmount' },
-	{ name: 'Купюрник', key: 'billAmount' }
+	{ name: 'Купюрник', key: 'billAmount' },
+	{ name: 'Терминал', key: 'terminal' },
+	{ name: 'Касса', key: 'cashbox' },
+	{ name: 'Аудит 1', key: 'audit1' },
+	{ name: 'Аудит 2', key: 'audit2' }
 ];
 
 export const getTableFields = data => map(controller => ({
@@ -19,5 +23,11 @@ export const getTableFields = data => map(controller => ({
 	signalStrength: controller.lastState?.signalStrength || '-',
 	coinAmount: controller.lastState?.coinAmount || '-',
 	billAmount: controller.lastState?.billAmount || '-',
+
+	terminal: 'ОТКЛ',
+	cashbox: 'ОТКЛ',
+	audit1: 'ОТКЛ',
+	audit2: 'ОТКЛ',
+
 	route: `/monitoring/${controller.id}`
 }), data);
