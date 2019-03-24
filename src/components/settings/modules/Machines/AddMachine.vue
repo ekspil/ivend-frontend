@@ -124,7 +124,12 @@
 					}
 				`,
 				update ({ getMachineTypes, getMachineGroups, getEquipments }) {
-					this.input.groupId = getMachineGroups[0].id;
+					this.input = {
+						equipmentId: getEquipments[0].id,
+						groupId: getMachineGroups[0].id,
+						typeId: getMachineTypes[0].id
+					};
+					
 					return {
 						types: getMachineTypes,
 						groups: getMachineGroups,
