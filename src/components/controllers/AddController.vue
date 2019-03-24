@@ -22,16 +22,6 @@
 									<Field name="uid" formName="addController" className="form-control" placeholder="Введите номер контроллера"/>
 								</div>
 
-								<div class="form-group">
-									<label class="form-label f-b">Модель автомата</label>
-									<select class="form-control custom-select" v-model="input.equipmentId">
-										<option v-for="equipment in controller.equipments"
-										:key="equipment.id" :value="equipment.id">
-										{{ equipment.name }}
-									</option>
-								</select>
-							</div>
-
 							<div class="form-group">
 								<label class="form-label f-b">Состояние</label>
 								<div class="selectgroup w-100">
