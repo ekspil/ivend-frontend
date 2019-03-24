@@ -1,4 +1,3 @@
-import { map } from 'ramda';
 import { getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
@@ -14,7 +13,7 @@ export const getTableHeaders = () => [
   { name: 'Монеты', key: 'coinAmount' }
 ];
 
-export const getTableFields = data => map(({ item, salesSummary, lastSaleTime }) => ({
+export const getTableFields = data => data.map(({ item, salesSummary, lastSaleTime }) => ({
 	id: item.id,
 	name: item.name,
 	lastSaleTime: getTimestamp(lastSaleTime),
@@ -24,4 +23,4 @@ export const getTableFields = data => map(({ item, salesSummary, lastSaleTime })
 	coinAmount: 'ОТКЛ',
 	terminal: 'ОТКЛ',
 	wallet: 'ОТКЛ'
-}), data);
+}));

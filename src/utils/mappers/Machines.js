@@ -1,5 +1,3 @@
-import { map } from 'ramda';
-
 export const getTableHeaders = () => [
     { name: 'Автомат', key: 'number' },
     { name: 'Название', key: 'name' },
@@ -9,11 +7,11 @@ export const getTableHeaders = () => [
     { name: 'Модель', key: 'equipmentName' }
 ];
 
-export const getTableFields = data => map(({ name, place, number, group, type, equipment }) => ({
+export const getTableFields = data => data.map(({ name, place, number, group, type, equipment }) => ({
     name,
     number,
     place,
     groupName: group.name,
     typeName: type.name,
     equipmentName: equipment.name
-}), data);
+}));

@@ -1,4 +1,3 @@
-import { map } from 'ramda';
 import { getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
@@ -7,9 +6,9 @@ export const getTableHeaders = () => [
     { name: 'Причина', key: 'message' }
 ];
 
-export const getTableFields = data => map(({ type, time, message }) => ({
+export const getTableFields = data => data.map(({ type, time, message }) => ({
     type,
     time: getTimestamp(time),
     message,
     class: ''
-}), data);
+}));

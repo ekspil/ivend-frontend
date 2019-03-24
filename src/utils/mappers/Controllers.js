@@ -1,5 +1,3 @@
-import { map } from 'ramda';
-
 const getStatus = status => {
     switch (status) {
         case 'ENABLED':
@@ -26,7 +24,7 @@ export const getTableHeaders = () => [
     { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true }
 ];
 
-export const getTableFields = data => map(controller => ({
+export const getTableFields = data => data.map(controller => ({
     name: controller.name,
     uid: controller.uid,
     equipmentName: controller.equipment?.equipmentName || '-',
@@ -37,4 +35,4 @@ export const getTableFields = data => map(controller => ({
     machine: controller.machine.name,
 
     route: `/controllers/edit/${controller.id}`
-}), data);
+}));
