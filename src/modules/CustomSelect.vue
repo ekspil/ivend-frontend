@@ -14,12 +14,12 @@
       <option
         v-for="option in options"
         :key="option.id"
-        :value="option.name"
+        :value="option.id"
         @click="$emit('onSelect', option)"
       >
         {{ option.name }}
       </option>
-      <option value="own" @click="toggleInput">Добавить ещё...</option>
+      <option value="own">Добавить ещё...</option>
     </select>
   </div>
 </template>
@@ -42,6 +42,13 @@ export default {
     value: '',
     inputShown: false
   }),
+  watch: {
+    value (newVal) {
+      if (newVal === 'own') {
+        this.toggleInput();
+      }
+    }
+  },
   methods: {
     toggleInput () {
       this.inputShown = !this.inputShown;
