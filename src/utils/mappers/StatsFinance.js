@@ -6,7 +6,7 @@ export const getTableHeaders = () => [
 	{ name: 'Наличные', key: 'cashAmount' }
 ];
 
-export const getTableFields = data => data.map(({ id, name, overallSalesSummary, machine }) => ({
+export const getTableFields = data => data.map(({ id, overallSalesSummary, machine }) => ({
 	id,
 	name: machine.name,
 	...overallSalesSummary,
