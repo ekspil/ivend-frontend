@@ -8,7 +8,7 @@
         placeholder="Ввод"
         @blur="$emit('onBlur', value)"
       />
-      <img src="/assets/images/icons/cancel.svg" alt="Return" class="close-input" @click="toggleInput"/>
+      <img src="/assets/images/icons/cancel.svg" alt="Return" class="close-input" @click="hideInput"/>
     </div>
     <select :class="['custom-select', className]" v-if="!inputShown" v-model="value">
       <option
@@ -19,12 +19,14 @@
       >
         {{ option.name }}
       </option>
-      <option value="own">Добавить ещё...</option>
+      <option value="ADD_ANOTHER_GROUP">Добавить ещё...</option>
     </select>
   </div>
 </template>
 
 <script>
+import { propEq, find } from 'ramda';
+
 export default {
   name: 'CustomSelect',
   props: {
@@ -44,15 +46,21 @@ export default {
   }),
   watch: {
     value (newVal) {
-      if (newVal === 'own') {
-        this.toggleInput();
+      if (newVal === 'ADD_ANOTHER_GROUP') {
+        this.showInput();
       }
     }
   },
   methods: {
-    toggleInput () {
-      this.inputShown = !this.inputShown;
+    showInput () {
+      this.inputShown = true;
       this.value = '';
+    },
+    hideInput () {
+      this.inputShown = false;
+
+      const newOptionId = find(propEq('name', this.value))(this.options);
+      this.value = newOptionId ? newOptionId.id : this.initialValue;
     }
   },
   created () {
