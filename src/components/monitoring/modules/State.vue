@@ -44,15 +44,19 @@
 				query: gql`
 					query {
 						getControllers {
-							id,
-							uid,
-							name,
-							lastSaleTime,
+							id
+							uid
+							name
+							lastSaleTime
 							lastState {
-								signalStrength,
-								billAmount,
-								registrationTime,
+								signalStrength
+								billAmount
+								registrationTime
 								coinAmount
+							}
+
+							machine {
+								id
 							}
 						}
 					}

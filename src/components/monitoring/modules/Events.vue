@@ -44,12 +44,16 @@
 				query: gql`
 					query {
 						getControllers {
-							id,
-							name,
-							lastSaleTime,
-							lastErrorTime,
+							id
+							name
+							lastSaleTime
+							lastErrorTime
 							lastState {
 								signalStrength
+							}
+
+							machine {
+								id
 							}
 						}
 					}

@@ -1,5 +1,3 @@
-import { map } from 'ramda';
-
 export const getTableHeaders = () => [
 	{ name: 'Автомат', key: 'name', link: true },
 	{ name: 'Кол-во продаж', key: 'salesCount' },
@@ -8,10 +6,10 @@ export const getTableHeaders = () => [
 	{ name: 'Наличные', key: 'cashAmount' }
 ];
 
-export const getTableFields = data => map(({ id, name, overallSalesSummary }) => ({
+export const getTableFields = data => data.map(({ id, overallSalesSummary, machine }) => ({
 	id,
-	name,
+	name: machine.name,
 	...overallSalesSummary,
-	
+
 	route: `/stats/${id}`
-}), data);
+}));

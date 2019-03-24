@@ -1,4 +1,3 @@
-import { map } from 'ramda';
 import { getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
@@ -12,7 +11,7 @@ export const getTableHeaders = () => [
 	{ name: 'Загрузка', key: 'load' }
 ];
 
-export const getTableFields = data => map(controller => ({
+export const getTableFields = data => data.map(controller => ({
 	name: controller.name,
 	lastSaleTime: getTimestamp(controller.lastSaleTime),
 	lastErrorTime: getTimestamp(controller.lastErrorTime),
@@ -23,5 +22,5 @@ export const getTableFields = data => map(controller => ({
 	audit1: 'ОТКЛ',
 	audit2: 'ОТКЛ',
 
-	route: `/monitoring/${controller.id}`
-}), data);
+	route: `/monitoring/${controller.machine.id}`
+}));

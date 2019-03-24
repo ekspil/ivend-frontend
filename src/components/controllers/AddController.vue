@@ -22,16 +22,6 @@
 									<Field name="uid" formName="addController" className="form-control" placeholder="Введите номер контроллера"/>
 								</div>
 
-								<div class="form-group">
-									<label class="form-label f-b">Модель автомата</label>
-									<select class="form-control custom-select" v-model="input.equipmentId">
-										<option v-for="equipment in controller.equipments"
-										:key="equipment.id" :value="equipment.id">
-										{{ equipment.name }}
-									</option>
-								</select>
-							</div>
-
 							<div class="form-group">
 								<label class="form-label f-b">Состояние</label>
 								<div class="selectgroup w-100">
@@ -85,7 +75,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы</label>
+								<label class="form-label f-b">Режим работы контроллера</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option value="mdb">mdb</option>
 									<option value="exe">exe</option>
@@ -110,7 +100,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим безналичного устройства</label>
+								<label class="form-label f-b">Режим считывания статистики</label>
 								<select class="form-control custom-select">
 									<option value="0" selected>Выберите режим</option>
 									<option value="1">Монетник</option>

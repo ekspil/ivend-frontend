@@ -52,13 +52,17 @@ export default {
 			query: gql`
 			query ($period: Period) {
 				getControllers {
-					id,
-					name,
+					id
+					name
 					overallSalesSummary (period: $period) {
-						salesCount,
-						overallAmount,
-						cashAmount,
+						salesCount
+						overallAmount
+						cashAmount
 						cashlessAmount
+					}
+
+					machine {
+						name
 					}
 				}
 			}
