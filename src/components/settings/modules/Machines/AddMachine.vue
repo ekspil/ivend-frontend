@@ -123,11 +123,12 @@
 						}
 					}
 				`,
-				update (data) {
+				update ({ getMachineTypes, getMachineGroups, getEquipments }) {
+					this.input.groupId = getMachineGroups[0].id;
 					return {
-						types: data.getMachineTypes,
-						groups: data.getMachineGroups,
-            equipments: data.getEquipments
+						types: getMachineTypes,
+						groups: getMachineGroups,
+            equipments: getEquipments
           };
 				}
 			}

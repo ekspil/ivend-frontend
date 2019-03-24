@@ -7,12 +7,21 @@ export const getTableHeaders = () => [
 	{ name: 'Кол-во', key: 'salesCount' },
 	{ name: 'Сумма', key: 'overallAmount' },
 	{ name: 'Безнал', key: 'cashlessAmount' },
-  { name: 'Наличные', key: 'cashAmount' }
+	{ name: 'Терминал', key: 'terminal' },
+	{ name: 'Кошелек', key: 'wallet' },
+  { name: 'Наличные', key: 'cashAmount' },
+	{ name: 'Купюры', key: 'billAmount' },
+  { name: 'Монеты', key: 'coinAmount' }
 ];
 
 export const getTableFields = data => map(({ item, salesSummary, lastSaleTime }) => ({
 	id: item.id,
 	name: item.name,
 	lastSaleTime: getTimestamp(lastSaleTime),
-  ...salesSummary
+  ...salesSummary,
+
+	billAmount: 'ОТКЛ',
+	coinAmount: 'ОТКЛ',
+	terminal: 'ОТКЛ',
+	wallet: 'ОТКЛ'
 }), data);
