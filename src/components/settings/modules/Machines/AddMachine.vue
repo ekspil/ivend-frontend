@@ -38,6 +38,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label f-b">Тип автомата</label>
+                                    <select class="form-control custom-select" v-model="input.typeId">
+                                        <option v-for="type in machine.types"
+                                                :key="type.id" :value="type.id">
+                                            {{ type.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="form-label f-b">Модель автомата</label>
                                     <select class="form-control custom-select" v-model="input.equipmentId">
                                         <option v-for="equipment in machine.equipments"
@@ -47,15 +57,6 @@
                                   </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label f-b">Тип автомата</label>
-                                    <select class="form-control custom-select" v-model="input.typeId">
-                                        <option v-for="type in machine.types"
-                                        :key="type.id" :value="type.id">
-                                        {{ type.name }}
-                                        </option>
-                                  </select>
-                                </div>
                               </div>
                             </div>
                         </template>
