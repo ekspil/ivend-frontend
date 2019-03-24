@@ -15,14 +15,6 @@
                         <Field className="form-control" name="name" formName="editControllerSettings" placeholder="Введите название" :value="controller.data.name" />
                     </div>
                     <div class="form-group">
-                        <label class="form-label f-b">Модель автомата</label>
-                        <select class="form-control select2-show-search" data-placeholder="Выберите из списка" v-model="controller.data.equipment.id">
-                            <option v-for="equipment in controller.equipments" :key="equipment.id" :value="equipment.id">
-                                {{ equipment.name }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label f-b">Номер контроллера UID</label>
                         <Field className="form-control" :value="controller.data.uid" disabled name="uid" formName="editControllerSettings" placeholder="Введите UID"/>
                     </div>
@@ -62,10 +54,25 @@
                     <div class="form-group">
                         <label class="form-label f-b">Режим работы</label>
                         <select class="form-control custom-select" v-model="controller.data.mode">
-                            <option value="MDB" selected>MDB</option>
-                            <option value="EXE">EXE</option>
-                            <option value="CASHLESS">Cashless</option>
-                            <option value="CASHLESS_FREE">Cashless free</option>
+                          <option value="mdb">mdb</option>
+        									<option value="exe">exe</option>
+        									<option value="cashless" selected>cashless</option>
+        									<option value="cashless_free">cashless_free</option>
+        									<option value="exe_ph">exe_ph</option>
+        									<option value="mdb_D">mdb_D</option>
+        									<option value="exe_D">exe_D</option>
+        									<option value="exe_ph_D">exe_ph_D</option>
+        									<option value="cashless_D">cashless_D</option>
+        									<option value="mdb_C">mdb_C</option>
+        									<option value="exe_C">exe_C</option>
+        									<option value="exe_ph_C">exe_ph_C</option>
+        									<option value="cashless_C">cashless_C</option>
+        									<option value="ps_p">ps_p</option>
+        									<option value="ps_m_D">ps_m_D</option>
+        									<option value="ps_M_D">ps_M_D</option>
+        									<option value="ps_m_C">ps_m_C</option>
+        									<option value="ps_M_C">ps_M_C</option>
+        									<option value="mdb2">mdb2</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -161,6 +168,7 @@ export default {
        }
        `,
             update(data) {
+              console.log(data);
                 return {
                     data: data.controller,
                     equipments: data.equipments,

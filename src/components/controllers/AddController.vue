@@ -75,7 +75,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы</label>
+								<label class="form-label f-b">Режим работы контроллера</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option value="mdb">mdb</option>
 									<option value="exe">exe</option>
@@ -100,7 +100,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим безналичного устройства</label>
+								<label class="form-label f-b">Режим считывания статистики</label>
 								<select class="form-control custom-select">
 									<option value="0" selected>Выберите режим</option>
 									<option value="1">Монетник</option>
