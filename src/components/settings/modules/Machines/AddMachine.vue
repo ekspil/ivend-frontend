@@ -18,23 +18,25 @@
                                     <Field name="number" formName="addMachine" className="form-control" placeholder="Введите номер автомата"/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label f-b">Имя автомата</label>
-                                    <Field name="name" formName="addMachine" className="form-control" placeholder="Введите имя автомата"/>
+                                    <label class="form-label f-b">Название автомата</label>
+                                    <Field name="name" formName="addMachine" className="form-control" placeholder="Введите название автомата"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label f-b">Место установки автомата</label>
-                                    <Field name="place" formName="addMachine" className="form-control" placeholder="Введите имя автомата"/>
+                                    <Field name="place" formName="addMachine" className="form-control" placeholder="Введите место установки автомата"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label f-b">Группа автомата</label>
-                                    <select class="form-control custom-select" v-model="input.equipmentId">
-                                        <option v-for="equipment in machine.equipments"
-                                        :key="equipment.id" :value="equipment.id">
-                                        {{ equipment.name }}
-                                        </option>
-                                  </select>
+                                    <CustomSelect
+                                            className="form-control"
+                                            :initialValue="input.groupId"
+                                            :options="machine.groups"
+                                            @onSelect="onGroupSelect"
+                                            @onBlur="onGroupAppend"
+                                    />
                                 </div>
+
                                 <div class="form-group">
                                     <label class="form-label f-b">Модель автомата</label>
                                     <select class="form-control custom-select" v-model="input.equipmentId">
@@ -44,16 +46,7 @@
                                         </option>
                                   </select>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label f-b">Группа автомата</label>
-																		<CustomSelect
-																			className="form-control"
-																			:initialValue="input.groupId"
-																			:options="machine.groups"
-																			@onSelect="onGroupSelect"
-																			@onBlur="onGroupAppend"
-																		/>
-                                </div>
+
                                 <div class="form-group">
                                     <label class="form-label f-b">Тип автомата</label>
                                     <select class="form-control custom-select" v-model="input.typeId">
