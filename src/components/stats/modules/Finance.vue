@@ -72,9 +72,9 @@ export default {
 				if (notCustomDate) {
 					return {
 						period: {
-							from: this.period,
-							to: Date.now()
-						}
+              from: 0,
+              to: Date.now()
+            }
 					};
 				}
 

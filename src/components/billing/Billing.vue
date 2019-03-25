@@ -123,7 +123,7 @@ export default {
         if (notCustomDate) {
           return {
             period: {
-              from: this.period,
+              from: 0,
               to: Date.now()
             }
           };

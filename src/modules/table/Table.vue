@@ -84,14 +84,14 @@
 					return sort((a, b) => {
 						const { firstCritery, secondCritery } = convertCriteries(a, b, critery);
 
-						return lt(firstCritery, secondCritery)
+						return lt(firstCritery, secondCritery) ? -1 : 1;
 					}, this.fields);
 				}
 
 				return sort((a, b) => {
 					const { firstCritery, secondCritery } = convertCriteries(a, b, critery);
 
-					return gt(firstCritery, secondCritery)
+					return lt(firstCritery, secondCritery) ? 1 : -1;
 				}, this.fields);
 			}
 		}
