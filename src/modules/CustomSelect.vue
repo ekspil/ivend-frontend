@@ -15,7 +15,6 @@
         v-for="option in options"
         :key="option.id"
         :value="option.id"
-        @click="$emit('onSelect', option)"
       >
         {{ option.name }}
       </option>
@@ -48,6 +47,8 @@ export default {
     value (newVal) {
       if (newVal === 'ADD_ANOTHER_GROUP') {
         this.showInput();
+      } else if (newVal !== '' && typeof(newVal) === 'number') {
+        this.$emit('onSelect', find(propEq('id', newVal))(this.options));
       }
     }
   },
@@ -55,12 +56,16 @@ export default {
     showInput () {
       this.inputShown = true;
       this.value = '';
+
+      this.$emit('onInputToggle');
     },
     hideInput () {
       this.inputShown = false;
 
       const newOptionId = find(propEq('name', this.value))(this.options);
       this.value = newOptionId ? newOptionId.id : this.initialValue;
+
+      this.$emit('onSelectToggle');
     }
   },
   created () {

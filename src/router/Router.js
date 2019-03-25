@@ -17,6 +17,7 @@ import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
 
 import Settings from '@/components/settings/Settings';
 import AddMachine from '@/components/settings/modules/Machines/AddMachine';
+import EditMachine from '@/components/settings/modules/Machines/EditMachine';
 
 import Billing from '@/components/billing/Billing';
 
@@ -45,6 +46,7 @@ const routes = [
 
     { path: '/settings', component: Settings },
     { path: '/machine/add', component: AddMachine },
+    { path: '/machine/edit/:id', component: EditMachine },
 
     { path: '/billing', component: Billing },
 

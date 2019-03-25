@@ -1,154 +1,219 @@
 <template>
-    <div class="container">
-        <div class="side-app">
-            <div class="row mt-5">
-                <div class="col-lg-10 offset-lg-1 col-md-12">
-                    <Validate
-                    	class="card"
-                    	title="Добавление товара в матрицу товаров"
-                    	ref="form"
-                    	formName="addGoods"
-                    	:schema="schema"
-                    	@onSubmit="save"
-                    	@onSuccess="onSuccess"
-                    >
-                        <template slot="form">
-                            <div class="table-responsive product-matrix-table product-matrix-table--add-rproduct">
-                                <table class="table card-table table-vcenter text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th class="">ID</th>
-                                            <th class="">Название товара</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="input-cel">
-                                                <Field type="text" formName="addGoods" name="buttonId" placeholder="Введите ID кнопки" />
-                                            </td>
-                                            <td class="input-cel">
-                                                <select data-placeholder="Выберите товар" v-model="item.id">
-                                                    <option v-for="good in data.goods" :key="good.id" :value="good.id">
-                                                        {{ good.name }}
-                                                    </option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </template>
-                        <template slot="submit">
-                            <button type="submit" class="btn btn-primary ml-auto">Добавить товар</button>
-                        </template>
-                    </Validate>
-                </div>
+  <div class="container">
+    <div class="side-app">
+      <div class="row mt-5">
+        <div class="col-lg-10 offset-lg-1 col-md-12">
+          <Validate
+          class="card"
+          title="Добавление товара в матрицу товаров"
+          ref="form"
+          formName="addGoods"
+          :schema="schema"
+          @onSubmit="save"
+          @onSuccess="onSuccess"
+          >
+          <template slot="form">
+            <div class="table-responsive product-matrix-table product-matrix-table--add-rproduct">
+              <table class="table card-table table-vcenter text-nowrap">
+                <thead>
+                  <tr>
+                    <th class="">ID</th>
+                    <th class="">Название товара</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="input-cel">
+                      <Field type="text" formName="addGoods" name="buttonId" placeholder="Введите ID кнопки" />
+                    </td>
+                    <td class="input-cel">
+                      <CustomSelect
+                      :initialValue="item.id"
+                      :options="data.goods"
+                      @onSelect="onGoodSelect"
+                      @onBlur="onGoodAppend"
+                      @onInputToggle="disableSubmit"
+                      @onSelectToggle="enableSubmit"
+                      ref="goodSelect"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-        </div>
+          </template>
+          <template slot="submit">
+            <button
+            type="submit"
+            :class="['btn', 'btn-primary', 'ml-auto', submitDisabled && 'disabled']"
+            >
+            Добавить товар
+          </button>
+        </template>
+      </Validate>
     </div>
+  </div>
+</div>
+</div>
 </template>
 
 <script>
-	import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
-	import { any } from 'ramda';
-	import { convertServerError } from '@/utils';
-	import { required } from '@/utils/validation';
+import { propEq, find } from 'ramda';
+import { convertServerError } from '@/utils';
+import { required } from '@/utils/validation';
 
-	import Validate from '@/modules/validation/Validate';
-	import Field from '@/modules/validation/Field';
+import Validate from '@/modules/validation/Validate';
+import Field from '@/modules/validation/Field';
 
-	export default {
-		name: 'AddGoods',
-		components: {
-			Validate,
-			Field
-		},
-		apollo: {
-			data: {
-				query: gql`
-					query GetGoods ($id: Int!) {
-						buttons: getItemMatrix (id: $id) {
-							id,
-							buttons {
-								buttonId,
-								item {
-									id,
-									name
-								}
-							}
-						}
+import CustomSelect from '@/modules/CustomSelect';
 
-						items: getProfile {
-							items {
-								id,
-								name
-							}
-						}
-					}
-				`,
+export default {
+  name: 'AddGoods',
+  components: {
+    Validate,
+    Field,
+    CustomSelect
+  },
+  apollo: {
+    data: {
+      query: gql`
+      query GetGoods ($id: Int!) {
+        buttons: getItemMatrix (id: $id) {
+          id,
+          buttons {
+            buttonId,
+            item {
+              id,
+              name
+            }
+          }
+        }
 
-				variables () {
-					return { id: Number(this.$route.params.id) };
-				},
+        getProfile {
+          items {
+            id,
+            name
+          }
+        }
+      }
+      `,
 
-				update: data => ({
-					buttons: data.buttons.buttons,
-					goods: data.items.items
-				})
-			}
-		},
+      variables () {
+        return { id: Number(this.$route.params.id) };
+      },
 
-		data: () => ({
-			item: {
-				id: 0
-			},
+      update (data) {
+        this.item.id = data.getProfile.items[0].id;
 
-			schema: {
-				buttonId: [required]
-			},
-			data: {}
-		}),
+        return {
+          buttons: data.buttons.buttons,
+          goods: data.getProfile.items
+        };
+      }
+    }
+  },
 
-		methods: {
-			async save () {
-				const cache = this.$store.getters['cache/data'];
-			
-				try {
-					const { errors, data } = await this.$apollo.mutate({
-						mutation: gql`
-							mutation addButton ($data: AddButtonToItemMatrixInput!) {
-								addButtonToItemMatrix (input: $data) {
-									buttons {
-										buttonId,
-										item {
-											id,
-											name
-										}
-									}
-								}
-							}
-						`,
+  data: () => ({
+    item: {
+      id: 1
+    },
 
-						variables: {
-							data: {
-								itemMatrixId: Number(this.$route.params.id),
-								buttonId: Number(cache.buttonId),
-								itemId: this.item.id
-							}
-						},
+    schema: {
+      buttonId: [required]
+    },
 
-						update: data => data.buttons
-					});
-					this.$refs.form.process({ errors, success: 'Товар успешно добавлен.' });
-				} catch (error) {
-					this.$refs.form.showMessage('error', convertServerError(error.message));
-				}
-			},
+    submitDisabled: false
+  }),
 
-			onSuccess () {
-				this.$router.push(`/controllers/edit/${this.$route.params.id}`);
-			}
-		}
-	}
+  methods: {
+    async save () {
+      if (!this.submitDisabled) {
+        const cache = this.$store.getters['cache/data'];
+
+        /* Забираем значение из CustomSelect */
+        const newGoodLabel = this.$refs.goodSelect.value;
+        if (typeof(newGoodLabel) === 'string') {
+          this.item.id = find(propEq('name', newGoodLabel))(this.data.goods).id;
+        } else {
+          this.item.id = find(propEq('id', newGoodLabel))(this.data.goods).id;
+        }
+
+        try {
+          const { errors } = await this.$apollo.mutate({
+            mutation: gql`
+            mutation addButton ($data: AddButtonToItemMatrixInput!) {
+              addButtonToItemMatrix (input: $data) {
+                buttons {
+                  buttonId,
+                  item {
+                    id,
+                    name
+                  }
+                }
+              }
+            }
+            `,
+
+            variables: {
+              data: {
+                itemMatrixId: Number(this.$route.params.id),
+                buttonId: Number(cache.buttonId),
+                itemId: this.item.id
+              }
+            },
+
+            update: data => data.buttons
+          });
+          this.$refs.form.process({ errors, success: 'Товар успешно добавлен.' });
+        } catch (error) {
+          this.$refs.form.showMessage('error', convertServerError(error.message));
+        }
+      }
+    },
+
+    onSuccess () {
+      this.$router.push(`/controllers/edit/${this.$route.params.id}`);
+    },
+
+    onGoodSelect (good) {
+      this.item.id = good.id;
+    },
+    async onGoodAppend (name) {
+      this.disableSubmit();
+
+      const isAlreadyExist = find(propEq('name', name))(this.data.goods);
+      if (name && !isAlreadyExist) {
+        const { data } = await this.$apollo.mutate({
+          mutation: gql`
+          mutation ($input: CreateItemInput!) {
+            createItem(input: $input) {
+              id,
+              name
+            }
+          }
+          `,
+          variables: {
+            input: {
+              name
+            }
+          }
+        });
+
+        const newItem = data.createItem;
+        this.data.goods.push(newItem);
+
+        this.enableSubmit();
+      }
+    },
+
+    disableSubmit () {
+      this.submitDisabled = true;
+    },
+    enableSubmit () {
+      this.submitDisabled = false;
+    }
+  }
+}
 </script>
