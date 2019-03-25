@@ -8,18 +8,18 @@
                             <h3 class="card-title f-b">Настройки товарной матрицы</h3>
                         </div>
                         <div class="card-header-links">
-                            <router-link to="/controllers" class="card-header-links__item">Вернуться назад</router-link>
+                            <router-link to="/settings" class="card-header-links__item">Вернуться назад</router-link>
                         </div>
                         <div class="top-buttons top-buttons--product-matrix">
                             <div class="top-buttons__left-container">
                                 <router-link :to="`/goods/add/${$route.params.id}`" class="btn btn-primary">Добавить товар</router-link>
                             </div>
                             <div class="top-buttons__content-container">
-                                <button class="default-green-button btn btn-primary">Выбрать матрицу</button>
-                                <button class="default-green-button btn btn-primary">Сохранить</button>
+                                <button class="default-green-button btn btn-primary" v-if="false">Выбрать матрицу</button>
+                                <button class="default-green-button btn btn-primary" v-if="false">Сохранить</button>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" v-if="false">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
@@ -102,7 +102,7 @@
                             </div>
                             <div class="aligned-text" v-else>Нет товаров</div>
                         </div>
-                        <div class="card-footer text-right">
+                        <div class="card-footer text-right" v-if="false">
                             <div class="d-flex">
                                 <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
                             </div>
@@ -183,7 +183,7 @@ export default {
               }
             }
           });
-          
+
           this.data.buttons = data.matrix.buttons;
         }
     }
