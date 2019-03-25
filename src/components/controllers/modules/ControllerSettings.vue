@@ -144,10 +144,6 @@ export default {
             name
           },
           status,
-          equipment {
-            id,
-            name
-          },
           bankTerminal {
             name
           },
@@ -181,7 +177,6 @@ export default {
       try {
         const controllerData = {
           name: this.$store.getters['cache/data'].name,
-          equipmentId: this.controller.data.equipment.id,
           revisionId: this.controller.data.revision.id,
           status: this.controller.data.status,
           mode: this.controller.data.mode
@@ -208,7 +203,7 @@ export default {
     },
     onSuccess () {
       const router = this.$router;
-      setTimeout(function () { router.push('/controllers'); }, 1000);
+      setTimeout(function () { router.push('/settings'); }, 1000);
     }
   }
 }
