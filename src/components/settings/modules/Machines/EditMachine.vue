@@ -35,6 +35,9 @@
                   :options="data.groups"
                   @onSelect="onGroupSelect"
                   @onBlur="onGroupAppend"
+                  @onInputToggle="disableSubmit"
+                  @onSelectToggle="enableSubmit"
+                  ref="goodSelect"
                   />
                 </div>
 
@@ -62,7 +65,12 @@
         </div>
       </template>
       <template slot="submit">
-        <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+        <button
+          type="submit"
+          :class="['btn', 'btn-primary', 'ml-auto', submitDisabled && 'disabled']"
+        >
+          Сохранить
+        </button>
       </template>
     </Validate>
   </div>
@@ -73,6 +81,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import { propEq, find } from 'ramda';
 
 import CustomSelect from '@/modules/CustomSelect';
 
@@ -95,7 +104,9 @@ export default {
       name: [required],
       number: [required],
       place: [required]
-    }
+    },
+
+    submitDisabled: false
   }),
   apollo: {
     data: {
@@ -153,29 +164,42 @@ export default {
   },
   methods: {
     async save () {
-      try {
-        const { errors } = await this.$apollo.mutate({
-          mutation: gql`
-          mutation editMachine ($data: EditMachineInput!) {
-            editMachine (input: $data) {
-              name
-            }
-          }
-          `,
-          variables: {
-              data: {
-                machineId: this.data.machine.id,
-                groupId: this.data.machine.group.id,
-                typeId: this.data.machine.type.id,
+      if (!this.submitDisabled) {
+        /* Забираем значение из CustomSelect */
+        const newGoodLabel = this.$refs.goodSelect.value;
+        if (typeof(newGoodLabel) === 'string') {
+          this.data.machine.group.id = find(propEq('name', newGoodLabel))(this.data.groups).id;
+        } else {
+          this.data.machine.group.id = find(propEq('id', newGoodLabel))(this.data.groups).id;
+        }
 
-                ...this.$store.getters['cache/data']
+        try {
+          const { errors } = await this.$apollo.mutate({
+            mutation: gql`
+            mutation editMachine ($data: EditMachineInput!) {
+              editMachine (input: $data) {
+                name
+                type {
+                  id
+                }
               }
-          }
-        });
+            }
+            `,
+            variables: {
+                data: {
+                  machineId: this.data.machine.id,
+                  groupId: this.data.machine.group.id,
+                  typeId: this.data.machine.type.id,
 
-        this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
-      } catch (error) {
-        this.$refs.form.showMessage('error', 'Ошибка сервера.');
+                  ...this.$store.getters['cache/data']
+                }
+            }
+          });
+
+          this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+        } catch (error) {
+          this.$refs.form.showMessage('error', 'Ошибка сервера.');
+        }
       }
     },
     onSuccess () {
@@ -184,11 +208,11 @@ export default {
     },
 
     onGroupSelect (group) {
-      console.log(this.data.machine.group.id);
-      this.data.machine.group.id = group.id;
-      console.log(this.data.machine.group.id);
+      this.data.machine.group = group;
     },
     async onGroupAppend (name) {
+      this.disableSubmit();
+
       if (name && name !== this.data.machine.group.id) {
         const { data } = await this.$apollo.mutate({
           mutation: gql`
@@ -207,7 +231,16 @@ export default {
         });
 
         this.data.groups.push(data.createMachineGroup);
+
+        this.enableSubmit();
       }
+    },
+
+    disableSubmit () {
+      this.submitDisabled = true;
+    },
+    enableSubmit () {
+      this.submitDisabled = false;
     }
   }
 }
