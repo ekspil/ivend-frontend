@@ -22,7 +22,7 @@ td.f-b a, a.f-b {
   color: black;
 }
 
-button:disabled {
+button:disabled, button.disabled {
   cursor: not-allowed;
 }
 

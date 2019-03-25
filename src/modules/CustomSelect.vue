@@ -55,12 +55,16 @@ export default {
     showInput () {
       this.inputShown = true;
       this.value = '';
+
+      this.$emit('onInputToggle');
     },
     hideInput () {
       this.inputShown = false;
 
       const newOptionId = find(propEq('name', this.value))(this.options);
       this.value = newOptionId ? newOptionId.id : this.initialValue;
+
+      this.$emit('onSelectToggle');
     }
   },
   created () {
