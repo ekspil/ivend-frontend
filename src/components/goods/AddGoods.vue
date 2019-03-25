@@ -27,11 +27,15 @@
                                                 <Field type="text" formName="addGoods" name="buttonId" placeholder="Введите ID кнопки" />
                                             </td>
                                             <td class="input-cel">
-                                                <select data-placeholder="Выберите товар" v-model="item.id">
-                                                    <option v-for="good in data.goods" :key="good.id" :value="good.id">
-                                                        {{ good.name }}
-                                                    </option>
-                                                </select>
+                                                <CustomSelect
+                                                      :initialValue="item.id"
+                                                      :options="data.goods"
+                                                      @onSelect="onGoodSelect"
+                                                      @onBlur="onGoodAppend"
+                                                      @onInputToggle="disableSubmit"
+                                                      @onSelectToggle="enableSubmit"
+                                                      ref="goodSelect"
+                                                />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -39,7 +43,12 @@
                             </div>
                         </template>
                         <template slot="submit">
-                            <button type="submit" class="btn btn-primary ml-auto">Добавить товар</button>
+                            <button
+                              type="submit"
+                              :class="['btn', 'btn-primary', 'ml-auto', submitDisabled && 'disabled']"
+                            >
+                              Добавить товар
+                            </button>
                         </template>
                     </Validate>
                 </div>
@@ -51,18 +60,21 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { any } from 'ramda';
+	import { any, propEq, find } from 'ramda';
 	import { convertServerError } from '@/utils';
 	import { required } from '@/utils/validation';
 
 	import Validate from '@/modules/validation/Validate';
 	import Field from '@/modules/validation/Field';
 
+  import CustomSelect from '@/modules/CustomSelect';
+
 	export default {
 		name: 'AddGoods',
 		components: {
 			Validate,
-			Field
+			Field,
+      CustomSelect
 		},
 		apollo: {
 			data: {
@@ -79,7 +91,7 @@
 							}
 						}
 
-						items: getProfile {
+						getProfile {
 							items {
 								id,
 								name
@@ -92,63 +104,116 @@
 					return { id: Number(this.$route.params.id) };
 				},
 
-				update: data => ({
-					buttons: data.buttons.buttons,
-					goods: data.items.items
-				})
+				update (data) {
+          this.item.id = data.getProfile.items[0].id;
+
+          return {
+			       buttons: data.buttons.buttons,
+		         goods: data.getProfile.items
+				  };
+        }
 			}
 		},
 
 		data: () => ({
 			item: {
-				id: 0
+				id: 1
 			},
 
 			schema: {
 				buttonId: [required]
 			},
-			data: {}
+
+      submitDisabled: false
 		}),
 
 		methods: {
 			async save () {
-				const cache = this.$store.getters['cache/data'];
-			
-				try {
-					const { errors, data } = await this.$apollo.mutate({
-						mutation: gql`
-							mutation addButton ($data: AddButtonToItemMatrixInput!) {
-								addButtonToItemMatrix (input: $data) {
-									buttons {
-										buttonId,
-										item {
-											id,
-											name
-										}
-									}
-								}
-							}
-						`,
+        if (!this.submitDisabled) {
+          const cache = this.$store.getters['cache/data'];
 
-						variables: {
-							data: {
-								itemMatrixId: Number(this.$route.params.id),
-								buttonId: Number(cache.buttonId),
-								itemId: this.item.id
-							}
-						},
+          /* Забираем значение из CustomSelect */
+          const newGoodLabel = this.$refs.goodSelect.value;
+          if (typeof(newGoodLabel) === 'string') {
+            this.item.id = find(propEq('name', newGoodLabel))(this.data.goods).id;
+          } else {
+            this.item.id = find(propEq('id', newGoodLabel))(this.data.goods).id;
+          }
 
-						update: data => data.buttons
-					});
-					this.$refs.form.process({ errors, success: 'Товар успешно добавлен.' });
-				} catch (error) {
-					this.$refs.form.showMessage('error', convertServerError(error.message));
-				}
+  				try {
+  					const { errors, data } = await this.$apollo.mutate({
+  						mutation: gql`
+  							mutation addButton ($data: AddButtonToItemMatrixInput!) {
+  								addButtonToItemMatrix (input: $data) {
+  									buttons {
+  										buttonId,
+  										item {
+  											id,
+  											name
+  										}
+  									}
+  								}
+  							}
+  						`,
+
+  						variables: {
+  							data: {
+  								itemMatrixId: Number(this.$route.params.id),
+  								buttonId: Number(cache.buttonId),
+  								itemId: this.item.id
+  							}
+  						},
+
+  						update: data => data.buttons
+  					});
+  					this.$refs.form.process({ errors, success: 'Товар успешно добавлен.' });
+  				} catch (error) {
+  					this.$refs.form.showMessage('error', convertServerError(error.message));
+  				}
+        }
 			},
 
 			onSuccess () {
 				this.$router.push(`/controllers/edit/${this.$route.params.id}`);
-			}
+			},
+
+      onGoodSelect (good) {
+        this.item.id = good.id;
+      },
+      async onGoodAppend (name) {
+        this.disableSubmit();
+
+        const isAlreadyExist = find(propEq('name', name))(this.data.goods);
+        if (name && !isAlreadyExist) {
+          const { data } = await this.$apollo.mutate({
+            mutation: gql`
+              mutation ($input: CreateItemInput!) {
+                createItem(input: $input) {
+                  id,
+                  name
+                }
+              }
+            `,
+            variables: {
+              input: {
+                name
+              }
+            }
+          });
+
+          const newItem = data.createItem;
+          this.data.goods.push(newItem);
+
+          this.enableSubmit();
+        }
+      },
+
+      disableSubmit () {
+        this.submitDisabled = true;
+      },
+      enableSubmit () {
+        this.submitDisabled = false;
+      }
 		}
 	}
 </script>
