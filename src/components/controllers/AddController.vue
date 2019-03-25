@@ -197,7 +197,6 @@ export default {
 		input: {
 			status: "ENABLED",
 			mode: "cashless",
-			equipmentId: 1,
 			revisionId: 1,
 			serviceIds: [],
 			machineId: 1
@@ -280,7 +279,7 @@ export default {
 		},
 		onSuccess () {
 			const router = this.$router;
-			setTimeout(function () { router.push('/controllers'); }, 1000);
+			setTimeout(function () { router.push('/settings'); }, 1000);
 		},
 
 		getBillingAbbr (date) {
