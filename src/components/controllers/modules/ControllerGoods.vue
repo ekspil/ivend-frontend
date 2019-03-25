@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="table-responsive product-matrix-table">
-                            <table class="table card-table table-vcenter text-nowrap">
+                            <table class="table card-table table-vcenter text-nowrap" v-if="buttons.length > 0 && !$apollo.loading">
                                 <thead>
                                     <tr>
                                         <th class="sortable up">ID</th>
@@ -96,6 +96,11 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <div class="aligned-text" v-else-if="$apollo.loading">
+                              Загрузка...
+                            </div>
+                            <div class="aligned-text" v-else>Нет товаров</div>
                         </div>
                         <div class="card-footer text-right">
                             <div class="d-flex">
@@ -116,15 +121,17 @@ export default {
     apollo: {
         buttons: {
             query: gql `
-                    query GetInfo ($id: Int!) {
-                        buttons: getItemMatrix (id: $id) {
+                    query ($id: Int!) {
+                        getController (id: $id) {
+                          itemMatrix {
                             buttons {
-                                buttonId,
-                                item {
-                                    id,
-                                    name
-                                }
+                              buttonId
+                              item {
+                                id
+                                name
+                              }
                             }
+                          }
                         }
                     }
                 `,
@@ -135,7 +142,7 @@ export default {
                 };
             },
 
-            update: data => data.buttons.buttons
+            update: data => data.getController.itemMatrix.buttons
         }
     },
     data: () => ({

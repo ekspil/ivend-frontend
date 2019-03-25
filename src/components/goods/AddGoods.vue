@@ -11,6 +11,7 @@
           :schema="schema"
           @onSubmit="save"
           @onSuccess="onSuccess"
+          v-if="!$apollo.loading && data"
           >
           <template slot="form">
             <div class="table-responsive product-matrix-table product-matrix-table--add-rproduct">
@@ -51,6 +52,10 @@
           </button>
         </template>
       </Validate>
+
+      <div class="aligned-text" v-else-if="$apollo.loading">
+        Загрузка...
+      </div>
     </div>
   </div>
 </div>
@@ -79,14 +84,14 @@ export default {
   apollo: {
     data: {
       query: gql`
-      query GetGoods ($id: Int!) {
-        buttons: getItemMatrix (id: $id) {
-          id,
-          buttons {
-            buttonId,
-            item {
-              id,
-              name
+      query ($id: Int!) {
+        getController (id: $id) {
+          itemMatrix {
+            id
+            buttons {
+              item {
+                name
+              }
             }
           }
         }
@@ -105,10 +110,13 @@ export default {
       },
 
       update (data) {
-        this.item.id = data.getProfile.items[0].id;
+        if (data.getProfile.items.length > 0) {
+          this.item.id = data.getProfile.items[0].id;
+        }
 
         return {
-          buttons: data.buttons.buttons,
+          matrixId: data.getController.itemMatrix.id,
+          buttons: data.getController.itemMatrix.buttons,
           goods: data.getProfile.items
         };
       }
@@ -158,7 +166,7 @@ export default {
 
             variables: {
               data: {
-                itemMatrixId: Number(this.$route.params.id),
+                itemMatrixId: this.data.matrixId,
                 buttonId: Number(cache.buttonId),
                 itemId: this.item.id
               }
@@ -217,3 +225,9 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .input-cel div {
+    min-height: 74px;
+  }
+</style>
