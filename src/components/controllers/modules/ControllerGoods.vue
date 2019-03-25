@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="table-responsive product-matrix-table">
-                            <table class="table card-table table-vcenter text-nowrap" v-if="buttons.length > 0 && !$apollo.loading">
+                            <table class="table card-table table-vcenter text-nowrap" v-if="data.buttons.length > 0 && !$apollo.loading">
                                 <thead>
                                     <tr>
                                         <th class="sortable up">ID</th>
@@ -85,13 +85,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="({ buttonId, item }) in buttons" :key="buttonId">
+                                    <tr v-for="({ buttonId, item }) in data.buttons" :key="buttonId">
                                         <td class="input-cel">{{ buttonId }}</td>
                                         <td class="input-cel">
                                             {{ item.name }}
                                         </td>
                                         <td class="delete-cel-btn">
-                                            <button class=""><i class="far fa-trash-alt"></i></button>
+                                            <button @click.prevent="removeItem(buttonId)"><i class="far fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -119,11 +119,12 @@ import gql from 'graphql-tag';
 export default {
     name: 'ControllerGoods',
     apollo: {
-        buttons: {
+        data: {
             query: gql `
                     query ($id: Int!) {
                         getController (id: $id) {
                           itemMatrix {
+                            id
                             buttons {
                               buttonId
                               item {
@@ -142,15 +143,48 @@ export default {
                 };
             },
 
-            update: data => data.getController.itemMatrix.buttons
+            update: data => ({
+              buttons: data.getController.itemMatrix.buttons,
+              matrixId: data.getController.itemMatrix.id
+            })
         }
     },
     data: () => ({
-        buttons: []
+        data: {
+          buttons: [],
+          matrixId: null
+        }
     }),
     methods: {
         getRandomKey() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        },
+
+        async removeItem (id) {
+          const { data } = await this.$apollo.mutate({
+            mutation: gql`
+              mutation ($data: RemoveButtonFromItemMatrixInput!) {
+                matrix: removeButtonFromItemMatrix (input: $data) {
+                  buttons {
+                    buttonId
+                    item {
+                      id
+                      name
+                    }
+                  }
+                }
+              }
+            `,
+
+            variables: {
+              data: {
+                itemMatrixId: this.data.matrixId,
+                buttonId: id
+              }
+            }
+          });
+          
+          this.data.buttons = data.matrix.buttons;
         }
     }
 }

@@ -101,6 +101,10 @@
     <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
   </template>
 </Validate>
+
+<div class="aligned-text" v-else-if="$apollo.loading">Загрузка...</div>
+<div class="aligned-text" v-else>Ошибка загрузки контроллера</div>
+
 </template>
 
 <script>
