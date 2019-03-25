@@ -8,7 +8,7 @@
                             <h3 class="card-title f-b">Настройки товарной матрицы</h3>
                         </div>
                         <div class="card-header-links">
-                            <router-link to="/controllers" class="card-header-links__item">Вернуться назад</router-link>
+                            <router-link to="/settings" class="card-header-links__item">Вернуться назад</router-link>
                         </div>
                         <div class="top-buttons top-buttons--product-matrix">
                             <div class="top-buttons__left-container">
@@ -19,7 +19,7 @@
                                 <button class="default-green-button btn btn-primary" v-if="false">Сохранить</button>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" v-if="false">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
