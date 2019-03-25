@@ -76,18 +76,13 @@
                             name
                         }
                         status
-                        equipment {
-                          name
-                        }
                         bankTerminal {
                           name
                         }
                         fiscalRegistrar {
                           name
                         }
-                        lastState {
-                            firmwareId
-                        }
+                        firmwareId
 
                         machine {
                           id

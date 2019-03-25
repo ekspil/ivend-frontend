@@ -16,7 +16,6 @@ const getStatus = status => {
 export const getTableHeaders = () => [
     { name: 'Название', key: 'name', link: true },
     { name: 'Контроллер', key: 'uid' },
-    { name: 'Модель', key: 'equipmentName', unsortable: true },
     { name: 'Состояние', key: 'status', unsortable: true, raw: true },
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: true },
@@ -27,9 +26,8 @@ export const getTableHeaders = () => [
 export const getTableFields = data => data.map(controller => ({
     name: controller.name,
     uid: controller.uid,
-    equipmentName: controller.equipment?.equipmentName || '-',
     status: getStatus(controller.status),
-    firmwareId: controller.lastState?.firmwareId || '-',
+    firmwareId: controller.firmwareId || '-',
     mode: controller.mode || '-',
     fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
     machine: controller.machine.name,
