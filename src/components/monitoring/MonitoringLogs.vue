@@ -32,7 +32,7 @@
                         className="monitoring-table"
                       />
                       <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-                      <div v-else class="aligned-text">Ошибка загрузки логов автомата</div>
+                      <div v-else class="aligned-text">На данный момент логи отсутствуют</div>
                   </div>
               </div>
           </div>
@@ -91,7 +91,7 @@ export default {
           return {
             id: Number(this.$route.params.id),
             period: {
-              from: this.period,
+              from: 0,
               to: Date.now()
             }
           };
@@ -130,6 +130,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-</style>

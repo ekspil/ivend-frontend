@@ -144,7 +144,7 @@ export const prettifyPhone = phone => {
 export const getTimestamp = time => {
 	if (time) {
 		const date = new Date(time);
-		return `${date.getDate()} ${getMonthName(date.getMonth()).toLowerCase()}`;
+		return `${date.toLocaleDateString('ru-RU')} ${date.toLocaleTimeString('ru-RU')}`;
 	}
 
 	return '-';
