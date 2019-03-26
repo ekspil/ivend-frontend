@@ -30,7 +30,7 @@ export const getTableFields = data => data.map(controller => ({
     firmwareId: controller.firmwareId || '-',
     mode: controller.mode || '-',
     fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
-    machine: controller.machine.name,
+    machine: controller.machine?.name || '-',
 
     route: `/controllers/edit/${controller.id}`
 }));

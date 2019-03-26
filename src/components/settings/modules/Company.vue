@@ -5,13 +5,6 @@
 				<div class="top-buttons__left-container" v-if="false">
 					<a href="#" class="btn btn-primary">Управление сотрудниками</a>
 				</div>
-				<div class="top-buttons__right-container">
-					<div class="row gutters-xs">
-						<span class="col-auto">
-							<button class="btn btn-primary" type="button" @click.prevent="$refs.company.submit">Сохранить</button>
-						</span>
-					</div>
-				</div>
 			</div>
 		</div>
 
@@ -109,6 +102,12 @@
 					type="text" placeholder="Контактная почта" :value="info.contactEmail" name="contactEmail" />
 				</div>
 			</Validate>
+
+			<div class="row gutters-xs company__save-button">
+				<span class="col-auto">
+					<button class="btn btn-primary" type="button" @click.prevent="$refs.company.submit">Сохранить</button>
+				</span>
+			</div>
 		</div>
 	</div>
 </template>
@@ -224,6 +223,12 @@
 
 <style scoped lang="scss">
 	.top-buttons {
+		justify-content: flex-end;
+	}
+
+	.company__save-button {
+		padding: 0 1.5rem 20px;
+		display: flex;
 		justify-content: flex-end;
 	}
 </style>
