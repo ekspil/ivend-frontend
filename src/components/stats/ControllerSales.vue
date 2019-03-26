@@ -24,93 +24,93 @@
 						</div>
 
 						<Table
-							v-if="controller && controller.itemSaleStats.length > 0"
-							:headers="getTableHeaders"
-							:fields="getTableFields"
-							className="stats-table"
+						v-if="controller && controller.itemSaleStats.length > 0"
+						:headers="getTableHeaders"
+						:fields="getTableFields"
+						className="stats-table"
 						/>
 						<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
 						<div v-else class="aligned-text">Нет продаж</div>
+					</div>
+					<!-- section-wrapper -->
 				</div>
-				<!-- section-wrapper -->
 			</div>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>
-	import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
-	import Table from '@/modules/table/Table';
-	import ExportExcel from '@/modules/table/ExportExcel';
-	import { getTableHeaders, getTableFields } from '@/utils/mappers/ControllerSales';
+import Table from '@/modules/table/Table';
+import ExportExcel from '@/modules/table/ExportExcel';
+import { getTableHeaders, getTableFields } from '@/utils/mappers/ControllerSales';
 
-	import Period from '@/modules/Period';
+import Period from '@/modules/Period';
 
-	export default {
-		name: 'ControllerSales',
-		components: {
-			Table,
-			ExportExcel,
-			Period
-		},
-		data: () => ({
-			period: {
-				from: null,
-				to: null
-			}
-		}),
-		apollo: {
-			controller: {
-				query: gql`
-					query GetController ($id: Int!, $period: Period) {
-						controller: getController(id: $id) {
+export default {
+	name: 'ControllerSales',
+	components: {
+		Table,
+		ExportExcel,
+		Period
+	},
+	data: () => ({
+		period: {
+			from: null,
+			to: null
+		}
+	}),
+	apollo: {
+		controller: {
+			query: gql`
+			query GetController ($id: Int!, $period: Period) {
+				controller: getController(id: $id) {
+					id,
+					name,
+					itemSaleStats (period: $period) {
+						item {
 							id,
-							name,
-							itemSaleStats (period: $period) {
-								item {
-									id,
-									name
-								},
-								salesSummary {
-									salesCount,
-									overallAmount,
-									cashAmount,
-									cashlessAmount
-								},
-								lastSaleTime
-							}
-						}
+							name
+						},
+						salesSummary {
+							salesCount,
+							overallAmount,
+							cashAmount,
+							cashlessAmount
+						},
+						lastSaleTime
 					}
-				`,
-				variables () {
-					const notCustomDate = !this.period.from && !this.period.to;
-					if (notCustomDate) {
-						return {
-							id: Number(this.$route.params.id),
-							period: {
-	              from: this.period,
-	              to: Date.now()
-	            }
-						};
-					}
-
-					return {
-						id: Number(this.$route.params.id),
-						period: this.period
-					};
 				}
 			}
-		},
-		methods: {
-			onPeriodChange (period) {
-				this.period = period;
+			`,
+			variables () {
+				const notCustomDate = !this.period.from && !this.period.to;
+				if (notCustomDate) {
+					return {
+						id: Number(this.$route.params.id),
+						period: {
+							from: this.period,
+							to: Date.now()
+						}
+					};
+				}
+
+				return {
+					id: Number(this.$route.params.id),
+					period: this.period
+				};
 			}
-		},
-		computed: {
-			getTableHeaders,
-			getTableFields () { return getTableFields(this.controller.itemSaleStats); }
 		}
+	},
+	methods: {
+		onPeriodChange (period) {
+			this.period = period;
+		}
+	},
+	computed: {
+		getTableHeaders,
+		getTableFields () { return getTableFields(this.controller.itemSaleStats); }
 	}
+}
 </script>
