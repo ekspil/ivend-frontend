@@ -94,6 +94,17 @@
             <option value="4">Cashless free</option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label class="form-label f-b">Привязать автомат:</label>
+          <select class="form-control custom-select" v-model="controller.data.machine.id">
+            <option :value="null">Нет</option>
+            <option v-for="machine in controller.machines"
+            :key="machine.id" :value="machine.id">
+            {{ machine.name }}
+          </option>
+        </select>
+      </div>
       </div>
     </div>
   </template>
@@ -154,6 +165,10 @@ export default {
           fiscalRegistrar {
             name
           }
+
+          machine {
+            id
+          }
         }
 
         equipments: getEquipments {
@@ -165,13 +180,19 @@ export default {
           id,
           name
         }
+
+        machines: getMachines {
+          id
+          name
+        }
       }
       `,
       update(data) {
         return {
           data: data.controller,
           equipments: data.equipments,
-          revisions: data.revisions
+          revisions: data.revisions,
+          machines: data.machines
         };
       }
     }
@@ -183,7 +204,8 @@ export default {
           name: this.$store.getters['cache/data'].name,
           revisionId: this.controller.data.revision.id,
           status: this.controller.data.status,
-          mode: this.controller.data.mode
+          mode: this.controller.data.mode,
+          machineId: this.controller.data.machine.id
         };
 
         const { errors } = await this.$apollo.mutate({
