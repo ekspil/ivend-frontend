@@ -7,24 +7,7 @@
                         <h3 class="card-title f-b">Редактирование оборудования №{{controller.uid}}</h3>
                     </div>
 
-                    <div class="tab-menu-heading">
-                        <div class="tabs-menu1 ">
-                            <!-- Tabs -->
-                            <ul class="nav panel-tabs f-b">
-                                <li>
-                                    <a href="#" :class="activeTab === 'Settings' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Settings')">Настройки</a>
-                                </li>
-                                <li>
-                                    <a href="#" :class="activeTab === 'Fiscal' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Fiscal')">Фискальный регистратор</a>
-                                </li>
-                                <li>
-                                    <a href="#" :class="activeTab === 'Goods' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Goods')">Товары</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <component :is="getActiveTab"></component>
+                    <Tabs :tabs="tabs"/>
                 </div>
             </div>
         </div>
@@ -51,7 +34,10 @@
                 success: ''
             },
 
-            activeTab: 'Settings'
+            tabs: [
+              { name: 'Настройки', component: ControllerSettings, route: 'settings' },
+              { name: 'Товары', component: ControllerGoods, route: 'goods' }
+            ]
         }),
         apollo: {
             controller: {

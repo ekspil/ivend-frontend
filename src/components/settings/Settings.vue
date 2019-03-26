@@ -9,27 +9,7 @@
 							<div class="card-title f-b">Настройки</div>
 						</div>
 
-						<div class="tab-menu-heading">
-							<div class="tabs-menu1">
-								<!-- Tabs -->
-								<ul class="nav panel-tabs f-b">
-									<li>
-										<a href="#" :class="activeTab === 'Equipment' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Equipment')">Оборудование</a>
-									</li>
-									<li>
-										<a href="#" :class="activeTab === 'Machines' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Machines')">Автоматы</a>
-									</li>
-									<li>
-										<a href="#" :class="activeTab === 'Notifications' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Notifications')">Уведомления</a>
-									</li>
-									<li>
-										<a href="#" :class="activeTab === 'Company' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Company')">Компания</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-						<component :is="getActiveTab"></component>
+						<Tabs :tabs="tabs" />
 					</div>
 				</div>
 			</div>
@@ -38,32 +18,22 @@
 </template>
 
 <script>
-	import Equipment from './modules/Equipment';
-	import Machines from './modules/Machines/Machines';
-	import Notifications from './modules/Notifications';
-	import Company from './modules/Company';
+import Tabs from '@/modules/Tabs';
+import Equipment from './modules/Equipment';
+import Machines from './modules/Machines/Machines';
+import Notifications from './modules/Notifications';
+import Company from './modules/Company';
 
-	export default {
-		name: 'Settings',
-		data: () => ({
-            activeTab: 'Equipment'
-        }),
-        computed: {
-            getActiveTab () {
-                switch (this.activeTab) {
-                    case 'Equipment': return Equipment;
-										case 'Machines': return Machines;
-                    case 'Notifications': return Notifications;
-                    case 'Company': return Company;
-
-                    default: return Equipment;
-                }
-            }
-        },
-        methods: {
-            setActiveTab (tabName = 'Equipment') {
-                this.activeTab = tabName;
-            }
-        }
-	}
+export default {
+	name: 'Settings',
+	components: { Tabs },
+	data: () => ({
+		tabs: [
+			{ name: 'Оборудование', component: Equipment, route: 'equipment' },
+			{ name: 'Автоматы', component: Machines, route: 'machines' },
+			{ name: 'Уведомления', component: Notifications, route: 'notifications' },
+			{ name: 'Компания', component: Company, route: 'company' }
+		]
+	})
+}
 </script>
