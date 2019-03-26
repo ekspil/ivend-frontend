@@ -123,7 +123,7 @@ export default {
         if (notCustomDate) {
           return {
             period: {
-              from: 0,
+              from: this.period,
               to: Date.now()
             }
           };
@@ -144,11 +144,8 @@ export default {
     depositStatus: '',
     depositRequested: false,
     period: {
-      calendar: {
-        from: null,
-        to: null
-      },
-      value: null
+      from: null,
+      to: null
     }
   }),
   computed: {

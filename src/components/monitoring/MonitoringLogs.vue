@@ -91,7 +91,7 @@ export default {
           return {
             id: Number(this.$route.params.id),
             period: {
-              from: 0,
+              from: this.period,
               to: Date.now()
             }
           };
@@ -112,11 +112,8 @@ export default {
       logs: []
     },
     period: {
-      calendar: {
-        from: null,
-        to: null
-      },
-      value: null
+      from: null,
+      to: null
     }
   }),
   computed: {

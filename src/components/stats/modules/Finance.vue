@@ -40,11 +40,8 @@ export default {
 	data: () => ({
 		controllers: [],
 		period: {
-			calendar: {
-				from: null,
-				to: null
-			},
-			value: null
+			from: null,
+			to: null
 		}
 	}),
 	apollo: {
@@ -72,7 +69,7 @@ export default {
 				if (notCustomDate) {
 					return {
 						period: {
-              from: 0,
+              from: this.period,
               to: Date.now()
             }
 					};
