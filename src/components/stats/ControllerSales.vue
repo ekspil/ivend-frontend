@@ -57,11 +57,8 @@
 		},
 		data: () => ({
 			period: {
-				calendar: {
-					from: null,
-					to: null
-				},
-				value: null
+				from: null,
+				to: null
 			}
 		}),
 		apollo: {
@@ -93,7 +90,7 @@
 						return {
 							id: Number(this.$route.params.id),
 							period: {
-	              from: 0,
+	              from: this.period,
 	              to: Date.now()
 	            }
 						};
