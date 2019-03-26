@@ -50,31 +50,22 @@
             <div class="card-header">
               <div class="card-title f-b">Оплата</div>
             </div>
-            <div class="tab-menu-heading">
-              <div class="tabs-menu1 ">
-                <!-- Tabs -->
-                <ul class="nav panel-tabs f-b">
-                  <li>
-                    <a href="#" :class="activeTab === 'Services' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('Services')">Услуги</a>
-                  </li>
-                  <li>
-                    <a href="#" :class="activeTab === 'History' ? 'active' : ''" data-toggle="tab" @click="setActiveTab('History')">Платежи</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
 
-            <div class="stats-top-menu">
-              <div class="stats-top-menu__content-container">
-                <div class="stats-top-menu__date-buttons">
-                  <Period @onChange="onPeriodChange"/>
+            <Tabs
+              :tabs="tabs"
+              :props="{ deposits: billing.deposits }"
+            >
+              <template slot="top-menu">
+                <div class="stats-top-menu">
+                  <div class="stats-top-menu__content-container">
+                    <div class="stats-top-menu__date-buttons">
+                      <Period @onChange="onPeriodChange"/>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            <component :is="getActiveTab" :deposits="billing.deposits"></component>
+              </template>
+            </Tabs>
           </div>
-          <!-- section-wrapper -->
         </div>
       </div>
     </div>
@@ -89,6 +80,7 @@ import { convertServerError } from '@/utils';
 
 import Hint from '@/modules/Hint';
 
+import Tabs from '@/modules/Tabs';
 import BillingHistory from './modules/BillingHistory';
 import BillingServices from './modules/BillingServices';
 
@@ -98,7 +90,8 @@ export default {
   name: 'Billing',
   components: {
     Hint,
-    Period
+    Period,
+    Tabs
   },
   apollo: {
     billing: {
@@ -137,7 +130,10 @@ export default {
     }
   },
   data: () => ({
-    activeTab: 'History',
+    tabs: [
+      { name: 'Услуги', component: BillingHistory, route: 'history' },
+      { name: 'Платежи', component: BillingServices, route: 'services' }
+    ],
     billing: null,
 
     depositSum: null,
@@ -152,13 +148,6 @@ export default {
     }
   }),
   computed: {
-    getActiveTab () {
-      switch (this.activeTab) {
-        case 'History': return BillingHistory;
-        case 'Services': return BillingServices;
-      }
-    },
-
     isDepositPending () {
       if (this.billing && this.billing.deposits) {
         return this.billing.deposits.some(deposit => deposit.status === 'PENDING') || this.depositStatus === 'PENDING';
@@ -184,10 +173,6 @@ export default {
     }
   },
   methods: {
-    setActiveTab (tabName = 'History') {
-      this.activeTab = tabName;
-    },
-
     async requestDeposit () {
       try {
         const { errors, data } = await this.$apollo.mutate({

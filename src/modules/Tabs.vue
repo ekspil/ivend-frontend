@@ -1,0 +1,83 @@
+<template>
+  <div class="tabs">
+    <div class="tab-menu-heading">
+      <div class="tabs-menu1">
+        <ul class="nav panel-tabs f-b">
+          <li v-for="(tab, index) in tabs" :key="index">
+            <a
+              href="#"
+              :class="activeTab === tab.name ? 'active' : ''"
+              data-toggle="tab"
+              @click="setActiveTab(tab.name)"
+            >{{ tab.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <slot name="top-menu"></slot>
+
+    <component :is="getActiveTab" class="tab-content" v-bind="props"/>
+  </div>
+</template>
+
+<script>
+import { not, find, propEq, head, tail } from 'ramda';
+
+export default {
+  name: 'Tabs',
+  props: {
+    tabs: {
+      type: Array,
+      default: () => []
+    },
+
+    initial: {
+      type: Object,
+      default () { return head(this.tabs); }
+    },
+
+    props: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data: () => ({
+    activeTab: ''
+  }),
+  computed: {
+    getActiveTab () {
+      const tabs = this.tabs;
+
+      // Find tab by activeTab name, if didn't found - set initial tab
+      let activeTab = find(propEq('name', this.activeTab))(tabs);
+      if (not(activeTab)) {
+        activeTab = this.initial;
+      }
+
+      this.setRouteHash(activeTab.route);
+      return activeTab.component;
+    }
+  },
+  methods: {
+    setActiveTab (tabName) {
+      this.activeTab = tabName || this.initial.name;
+    },
+
+    getTabByHash () {
+      const hash = window.location.hash;
+      if (hash) {
+        return find(propEq('route', tail(hash)))(this.tabs);
+      }
+
+      return this.initial;
+    },
+    setRouteHash (route) {
+      window.location.hash = `#${route}`;
+    }
+  },
+  created () {
+    this.activeTab = this.getTabByHash().name;
+  }
+}
+</script>
