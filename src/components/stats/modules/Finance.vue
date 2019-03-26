@@ -59,6 +59,7 @@ export default {
 					}
 
 					machine {
+						id
 						name
 					}
 				}
