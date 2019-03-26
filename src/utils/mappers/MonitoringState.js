@@ -16,7 +16,7 @@ export const getTableHeaders = () => [
 export const getTableFields = data => data.map(controller => ({
 	id: controller.id,
 	uid: controller.uid,
-	name: controller.name,
+	name: controller.machine?.name || '-',
 	lastSaleTime: getTimestamp(controller.lastSaleTime),
 
 	signalStrength: controller.lastState?.signalStrength || '-',

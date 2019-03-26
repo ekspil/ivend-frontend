@@ -12,7 +12,7 @@ export const getTableHeaders = () => [
 ];
 
 export const getTableFields = data => data.map(controller => ({
-	name: controller.name,
+	name: controller.machine?.name || '-',
 	lastSaleTime: getTimestamp(controller.lastSaleTime),
 	lastErrorTime: getTimestamp(controller.lastErrorTime),
 	signalStrength: controller.lastState?.signalStrength || '-',

@@ -57,6 +57,7 @@
 
 							machine {
 								id
+								name
 							}
 						}
 					}
