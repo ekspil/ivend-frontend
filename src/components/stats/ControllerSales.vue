@@ -86,7 +86,6 @@ export default {
 			`,
 			variables () {
 				const notCustomDate = !this.period.from && !this.period.to;
-				console.log(this.period);
 				if (notCustomDate) {
 					return {
 						id: Number(this.$route.params.id),
