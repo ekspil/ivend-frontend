@@ -228,7 +228,5 @@
 
 	.company__save-button {
 		padding: 0 1.5rem 20px;
-		display: flex;
-		justify-content: flex-end;
 	}
 </style>
