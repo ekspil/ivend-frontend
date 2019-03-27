@@ -19,6 +19,8 @@
 							{{ field[header.key] }}
 						</router-link>
 
+						<div v-else-if="header.critery" v-html="header.critery(field)"></div>
+
 						<div v-else-if="header.raw" v-html="field[header.key]"></div>
 						<template v-else>{{ field[header.key] }}</template>
 					</td>
@@ -29,7 +31,7 @@
 </template>
 
 <script>
-	import { lt, gt, sort, equals, not, or } from 'ramda';
+	import { lt, sort, equals, not, or } from 'ramda';
 	import { convertCriteries } from '@/utils';
 
 	export default {

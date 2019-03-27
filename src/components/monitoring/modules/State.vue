@@ -53,6 +53,9 @@
 								billAmount
 								registrationTime
 								coinAmount
+
+								coinAcceptorStatus
+								billAcceptorStatus
 							}
 
 							machine {
