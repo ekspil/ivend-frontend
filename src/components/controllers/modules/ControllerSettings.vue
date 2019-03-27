@@ -1,5 +1,6 @@
 <template>
   <Validate
+  routeBack="/settings"
   formName="editControllerSettings"
   ref="form"
   :schema="schema"

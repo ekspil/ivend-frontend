@@ -4,6 +4,7 @@
       <div class="row mt-5">
         <div class="col-lg-10 offset-lg-1 col-md-12">
           <Validate
+          goBack="/settings#machines"
           formName="editMachine"
           title="Редактирование автомата"
           :schema="schema" ref="form"
@@ -204,7 +205,7 @@ export default {
     },
     onSuccess () {
       const router = this.$router;
-      setTimeout(function () { router.push('/settings'); }, 1000);
+      setTimeout(function () { router.push('/settings#machines'); }, 1000);
     },
 
     onGroupSelect (group) {

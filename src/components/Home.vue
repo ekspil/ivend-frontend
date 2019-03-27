@@ -68,7 +68,7 @@
                                 </div>
                             </transition>
                             <br v-if="controllers.length" />
-                        
+
                         </div>
                         <div class="card-chart-bg">
                         </div>
@@ -328,6 +328,7 @@
 
     import { getWordEnding } from '@/utils';
 
+    const MILLISECONDS_IN_DAY = 86400000;
     export default {
         name: 'Home',
         data: () => ({
@@ -336,34 +337,36 @@
         apollo: {
             controllers: {
                 query: gql`
-                    query {
+                    query ($period: Period) {
                         getControllers {
                             uid,
                             mode,
-                            overallSalesSummary {
+                            overallSalesSummary (period: $period) {
                                 salesCount,
                                 overallAmount
                             }
                         }
                     }
                 `,
+                variables: {
+                  period: {
+                    from: Date.now() - MILLISECONDS_IN_DAY,
+                    to: Date.now()
+                  }
+                },
                 update: data => data.getControllers
             }
         },
         computed: {
             getOverallSalesSummary () {
-                if (this.controllers) {
-                    return this.controllers.reduce((acc, controller) => {
-                        return acc + controller.overallSalesSummary.overallAmount;
-                    }, 0);
-                }
+                  return this.controllers.reduce((acc, controller) => {
+                      return acc + controller.overallSalesSummary.overallAmount;
+                  }, 0);
             },
             getOverallSalesCount () {
-                if (this.controllers) {
-                    return this.controllers.reduce((acc, controller) => {
-                        return acc + controller.overallSalesSummary.salesCount;
-                    }, 0);
-                }
+                  return this.controllers.reduce((acc, controller) => {
+                      return acc + controller.overallSalesSummary.salesCount;
+                  }, 0);
             }
         },
         methods: {
