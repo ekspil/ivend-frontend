@@ -18,6 +18,14 @@
 @import "payment-table";
 @import "controller-service-table";
 
+.badge {
+  font-weight: 500;
+  &.badge-gray {
+      color: #fff;
+      background-color: #adadad;
+  }
+}
+
 td.f-b a, a.f-b {
   color: black;
 }

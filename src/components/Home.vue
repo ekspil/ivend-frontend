@@ -63,7 +63,7 @@
                             <transition name="fade">
                                 <div v-if="!$apollo.loading">
                                     <h3 class="mb-1  text-primary counter font-30">{{ controllers.length }}</h3>
-                                    <div class="f-b">Контроллер{{ getWordEnding(controllers.length) }}</div>
+                                    <div class="f-b">{{ getWordEnding(controllers.length, 'Контроллер') }}</div>
                                     <router-link to="/controllers/add" class="f-b" v-if="controllers.length <= 0">Добавить контроллер</router-link>
                                 </div>
                             </transition>
@@ -370,7 +370,7 @@
             }
         },
         methods: {
-            getWordEnding (number) { return getWordEnding(number); }
+            getWordEnding (number, word) { return getWordEnding(number, word); }
         }
     }
 </script>

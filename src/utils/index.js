@@ -1,8 +1,17 @@
 import {
 	map, head, last, all, equals, filter, pluck,
 	split, prepend, insertAll, flatten, join, is,
-	or
+	or, endsWith, not, includes
 } from 'ramda';
+
+
+/** Временные градации */
+const MEASURES = {
+	MS_IN_MINUTE: 60000,
+	MS_IN_HOUR: 3600000,
+	MS_IN_DAY: 86400000
+};
+Object.freeze(MEASURES);
 
 /**
 	Вытащить пару ключ/значение из массива от Object.entries
@@ -28,24 +37,70 @@ export const purgeSuccessValidators = arr => filter(val => val !== null, pluck('
 
 /**
 	Функция возвращает окончание для существительных при числительных
+	Она не совершенна, валидны значения для слов час, день, минута,
+	а также для слов, оканчивающихся на согласную букву
 	@author Samir Amirseidov
 */
-export const getWordEnding = number => {
+const VOWELS = ['а', 'я', 'у', 'и', 'ы', 'е', 'о', 'э', 'ю'];
+export const getWordEnding = (number, word) => {
 	const lastNum = last(number.toString());
-	switch (lastNum) {
-		case "0":
-		case "5":
-		case "6":
-		case "7":
-		case "8":
-		case "9":
-			return 'ов';
-		case "1":
-			return "";
-		case "2":
-		case "3":
-		case "4":
-			return "а";
+
+	switch (true) {
+		case endsWith('a', word):
+			switch (lastNum) {
+				case "0":
+				case "5":
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+					return word;
+				case "1":
+					return `${word.slice(0, word.length - 1)}а`;
+				case "2":
+				case "3":
+				case "4":
+					return `${word.slice(0, word.length - 1)}ы`;
+			}
+			break;
+
+		case endsWith('ь', word):
+			switch (lastNum) {
+				case "0":
+				case "5":
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+					return `${word[0] + word[2]}ей`;
+				case "1":
+					return word;
+				case "2":
+				case "3":
+				case "4":
+					return `${word[0] + word[2]}я`;
+			}
+			break;
+
+		case not(includes(last(word), VOWELS)):
+			switch (lastNum) {
+				case "0":
+				case "5":
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+					return `${word}ов`;
+				case "1":
+					return word;
+				case "2":
+				case "3":
+				case "4":
+					return `${word}а`;
+			}
+			break;
+
+		default: return word;
 	}
 };
 
@@ -148,11 +203,57 @@ export const getTimestamp = time => {
 	}
 
 	return '-';
-}
+};
 
 export const convertCriteries = (a, b, critery) => {
 	return {
 		firstCritery: is(String, b[critery]) ? a[critery] : or(a[critery], null),
 		secondCritery: is(String, a[critery]) ? b[critery] : or(b[critery], null)
 	};
-}
+};
+
+/**
+ * Функция возвращает градации по времени
+ * (сколько минут, часов и дней в миллисекундах)
+ * @author Samir Amirseidov
+ */
+export const getGradation = ms => ({
+	minutes: Math.round(ms / MEASURES.MS_IN_MINUTE),
+	hours: Math.round(ms / MEASURES.MS_IN_HOUR),
+	days: Math.round(ms / MEASURES.MS_IN_DAY)
+});
+
+/**
+ * Функция возвращает строку в стилизованном tooltip для табличных полей
+ * @param  {[string]} type   Тип tooltip
+ * @param  {[string]} string Содержимое tooltip
+ * @return {[string]} Tooltip
+ * @author Samir Amirseidov
+ */
+export const createTooltip = (type, string) => {
+	switch (type) {
+		case 'alert':
+			return `
+				<span class="badge badge-danger">
+					<i class="fas fa-times text-white mr-1"></i>
+					${string}
+				</span>
+			`;
+		case 'warning':
+			return `
+				<span class="badge badge-warning">
+					<i class="fas fa-exclamation text-white mr-1"></i>
+					${string}
+				</span>
+			`;
+		case 'primary':
+			return `
+				<span class="badge badge-primary">
+					<i class="fas fa-check text-white mr-1"></i>
+					${string}
+				</span>
+			`;
+		default:
+			return `<span class="badge badge-gray">${string}</span>`;
+	}
+};
