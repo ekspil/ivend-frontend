@@ -1,12 +1,12 @@
 <template>
-	<div class="container" v-if="controller">
+	<div class="container">
 		<div class="side-app">
 			<div class="row mt-5">
 				<div class="col-md-12 col-lg-12">
 					<div class="card">
 						<div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
 						<div class="card-header">
-							<div class="card-title f-b">Продажи автомата {{ controller.name }}</div>
+							<div class="card-title f-b" v-if="controller">Продажи автомата {{ controller.name }}</div>
 						</div>
 
 						<div class="card-header-links">
@@ -19,7 +19,7 @@
 									<Period @onChange="onPeriodChange"/>
 								</div>
 
-								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="controller"/>
 							</div>
 						</div>
 
@@ -86,6 +86,7 @@ export default {
 			`,
 			variables () {
 				const notCustomDate = !this.period.from && !this.period.to;
+				console.log(this.period);
 				if (notCustomDate) {
 					return {
 						id: Number(this.$route.params.id),
@@ -100,7 +101,8 @@ export default {
 					id: Number(this.$route.params.id),
 					period: this.period
 				};
-			}
+			},
+			update: data => data.controller
 		}
 	},
 	methods: {
