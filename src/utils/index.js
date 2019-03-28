@@ -1,7 +1,7 @@
 import {
 	map, head, last, all, equals, filter, pluck,
 	split, prepend, insertAll, flatten, join, is,
-	or, endsWith, not, includes
+	or, not, includes
 } from 'ramda';
 
 
@@ -44,27 +44,25 @@ export const purgeSuccessValidators = arr => filter(val => val !== null, pluck('
 const VOWELS = ['а', 'я', 'у', 'и', 'ы', 'е', 'о', 'э', 'ю'];
 export const getWordEnding = (number, word) => {
 	const lastNum = last(number.toString());
+	const lastLetter = last(word);
 
 	switch (true) {
-		case endsWith('a', word):
-			switch (lastNum) {
-				case "0":
-				case "5":
-				case "6":
-				case "7":
-				case "8":
-				case "9":
-					return word;
-				case "1":
-					return `${word.slice(0, word.length - 1)}а`;
-				case "2":
-				case "3":
-				case "4":
-					return `${word.slice(0, word.length - 1)}ы`;
+		case equals(lastLetter, 'а'):
+			if (lastNum === '1' && number !== 11) {
+				return word;
 			}
-			break;
 
-		case endsWith('ь', word):
+			switch (lastNum) {
+				case '2':
+				case '3':
+				case '4':
+					return `${word.slice(0, word.length - 1)}ы`;
+
+				default:
+					return word.slice(0, word.length - 1);
+			}
+
+		case equals('ь', lastLetter):
 			switch (lastNum) {
 				case "0":
 				case "5":
