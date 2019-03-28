@@ -11,5 +11,5 @@ export const getTableFields = data => data.map(({ id, overallSalesSummary, machi
 	name: machine.name,
 	...overallSalesSummary,
 
-	route: `/stats/${machine.id}`
+	route: `/stats/${id}`
 }));
