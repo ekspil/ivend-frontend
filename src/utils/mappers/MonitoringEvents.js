@@ -16,7 +16,9 @@ export const getTableHeaders = () => [
 			if (localeTimestamp !== '-') {
 				const gradation = getGradation(Date.now() - latestTime);
 
-				if (gradation.minutes <= 60) {
+				if (gradation.seconds <= 60) {
+					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'секунда')} назад`);
+				}  else if (gradation.minutes <= 60) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')} назад`);
 				} else if (gradation.hours < 24) {
 					return createTooltip('primary', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')} назад`);
