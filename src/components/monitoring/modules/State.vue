@@ -49,7 +49,6 @@
 							name
 							lastSaleTime
 							lastState {
-								signalStrength
 								billAmount
 								registrationTime
 								coinAmount

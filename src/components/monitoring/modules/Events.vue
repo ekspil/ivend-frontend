@@ -49,7 +49,7 @@
 							lastSaleTime
 							lastErrorTime
 							lastState {
-								signalStrength
+								registrationTime
 							}
 
 							machine {
