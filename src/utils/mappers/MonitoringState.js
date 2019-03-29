@@ -54,8 +54,8 @@ export const getTableHeaders = () => [
 	{
 		name: 'Контроллер',
 		key: 'controllerRegistrationTime',
-		critery ({ registrationTime }) {
-			const localeTimestamp = getTimestamp(registrationTime);
+		critery ({ controllerRegistrationTime }) {
+			const localeTimestamp = getTimestamp(controllerRegistrationTime);
 			if (localeTimestamp !== '-') {
 				return createTooltip('primary', localeTimestamp);
 			}
