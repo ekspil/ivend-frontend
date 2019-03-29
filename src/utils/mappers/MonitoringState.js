@@ -53,7 +53,15 @@ export const getTableHeaders = () => [
 	},
 	{
 		name: 'Контроллер',
-		key: 'uid'
+		key: 'controllerRegistrationTime',
+		critery ({ registrationTime }) {
+			const localeTimestamp = getTimestamp(registrationTime);
+			if (localeTimestamp !== '-') {
+				return createTooltip('primary', localeTimestamp);
+			}
+
+			return createTooltip('info', 'ОТКЛ');
+		}
 	},
 	{
 		name: 'Монетник',
@@ -109,7 +117,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(controller => ({
 	id: controller.id,
-	uid: controller.uid,
+	controllerRegistrationTime: controller.registrationTime,
 	name: controller.machine?.name || '-',
 	lastSaleTime: controller.lastSaleTime,
 

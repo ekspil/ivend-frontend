@@ -45,7 +45,7 @@
 					query {
 						getControllers {
 							id
-							uid
+							registrationTime
 							name
 							lastSaleTime
 							lastState {
