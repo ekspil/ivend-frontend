@@ -7,6 +7,7 @@ import {
 
 /** Временные градации */
 const MEASURES = {
+	MS_IN_SECOND: 1000,
 	MS_IN_MINUTE: 60000,
 	MS_IN_HOUR: 3600000,
 	MS_IN_DAY: 86400000
@@ -216,6 +217,7 @@ export const convertCriteries = (a, b, critery) => {
  * @author Samir Amirseidov
  */
 export const getGradation = ms => ({
+	seconds: Math.round(ms / MEASURES.MS_IN_SECOND),
 	minutes: Math.round(ms / MEASURES.MS_IN_MINUTE),
 	hours: Math.round(ms / MEASURES.MS_IN_HOUR),
 	days: Math.round(ms / MEASURES.MS_IN_DAY)
