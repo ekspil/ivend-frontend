@@ -40,12 +40,12 @@ export const getTableHeaders = () => [
 				const gradation = getGradation(Date.now() - lastSaleTime);
 
 				if (gradation.minutes <= 60) {
-					return createTooltip('primary', `${getTimestamp(lastSaleTime)}`);
+					return createTooltip('primary', localeTimestamp);
 				} else if (gradation.hours < 24) {
-					return createTooltip('warning', `${getTimestamp(lastSaleTime)}`);
+					return createTooltip('warning', localeTimestamp);
 				}
 
-				return createTooltip('alert', `${getTimestamp(lastSaleTime)}`);
+				return createTooltip('alert', localeTimestamp);
 			}
 
 			return createTooltip('info', 'НЕТ');
