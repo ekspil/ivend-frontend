@@ -135,7 +135,7 @@
 <script>
 import gql from 'graphql-tag';
 
-import { find, propEq, map, filter } from 'ramda';
+import { find, propEq } from 'ramda';
 
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
