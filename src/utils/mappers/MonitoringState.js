@@ -17,7 +17,7 @@ export const getTableHeaders = () => [
 				const gradation = getGradation(Date.now() - latestTime);
 
 				if (gradation.seconds <= 60) {
-					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'секунда')}`);
+					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
 				} else if (gradation.minutes <= 60) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				} else if (gradation.hours < 24) {
@@ -53,15 +53,7 @@ export const getTableHeaders = () => [
 	},
 	{
 		name: 'Контроллер',
-		key: 'controllerRegistrationTime',
-		critery ({ controllerRegistrationTime }) {
-			const localeTimestamp = getTimestamp(controllerRegistrationTime);
-			if (localeTimestamp !== '-') {
-				return createTooltip('primary', localeTimestamp);
-			}
-
-			return createTooltip('info', 'ОТКЛ');
-		}
+		key: 'uid'
 	},
 	{
 		name: 'Монетник',
@@ -117,7 +109,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(controller => ({
 	id: controller.id,
-	controllerRegistrationTime: controller.registrationTime,
+	uid: controller.uid,
 	name: controller.machine?.name || '-',
 	lastSaleTime: controller.lastSaleTime,
 

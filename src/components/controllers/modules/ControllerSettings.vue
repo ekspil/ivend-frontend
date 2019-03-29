@@ -6,23 +6,23 @@
   :schema="schema"
   @onSubmit="save"
   @onSuccess="onSuccess"
-  v-if="controller"
+  v-if="data"
   >
   <template slot="form">
     <div class="row">
       <div class="col-md-12 col-lg-12">
         <div class="form-group">
           <label class="form-label f-b">Название контроллера</label>
-          <Field className="form-control" name="name" formName="editControllerSettings" placeholder="Введите название" :value="controller.data.name" />
+          <Field className="form-control" name="name" formName="editControllerSettings" placeholder="Введите название" :value="data.controller.name" />
         </div>
         <div class="form-group">
           <label class="form-label f-b">Номер контроллера UID</label>
-          <Field className="form-control" :value="controller.data.uid" disabled name="uid" formName="editControllerSettings" placeholder="Введите UID"/>
+          <Field className="form-control" :value="data.controller.uid" disabled name="uid" formName="editControllerSettings" placeholder="Введите UID"/>
         </div>
         <div class="form-group">
           <label class="form-label f-b">Версия контроллера</label>
-          <select class="form-control custom-select" v-model="controller.data.revision.id">
-            <option v-for="revision in controller.revisions" :key="revision.id" :value="revision.id">
+          <select class="form-control custom-select" v-model="data.controller.revision.id">
+            <option v-for="revision in data.revisions" :key="revision.id" :value="revision.id">
               {{ revision.name }}
             </option>
           </select>
@@ -31,30 +31,30 @@
           <label class="form-label f-b">Состояние контроллера</label>
           <div class="selectgroup w-100">
             <label class="selectgroup-item">
-              <input type="radio" name="value" value="ENABLED" class="selectgroup-input" checked v-model="controller.data.status" />
+              <input type="radio" name="value" value="ENABLED" class="selectgroup-input" checked v-model="data.controller.status" />
               <span class="selectgroup-button">Активирован</span>
             </label>
             <label class="selectgroup-item">
-              <input type="radio" name="value" value="DISABLED" class="selectgroup-input" v-model="controller.data.status" />
+              <input type="radio" name="value" value="DISABLED" class="selectgroup-input" v-model="data.controller.status" />
               <span class="selectgroup-button">Деактивирован</span>
             </label>
             <label class="selectgroup-item">
-              <input type="radio" name="value" value="TRAINING" class="selectgroup-input" v-model="controller.data.status" />
+              <input type="radio" name="value" value="TRAINING" class="selectgroup-input" v-model="data.controller.status" />
               <span class="selectgroup-button">Обучение</span>
             </label>
             <label class="selectgroup-item">
-              <input type="radio" name="value" value="PAUSED" class="selectgroup-input" v-model="controller.data.status" />
+              <input type="radio" name="value" value="PAUSED" class="selectgroup-input" v-model="data.controller.status" />
               <span class="selectgroup-button">Приостановлен</span>
             </label>
             <label class="selectgroup-item">
-              <input type="radio" name="value" value="DEBUG" class="selectgroup-input" v-model="controller.data.status" />
+              <input type="radio" name="value" value="DEBUG" class="selectgroup-input" v-model="data.controller.status" />
               <span class="selectgroup-button">Отладка</span>
             </label>
           </div>
         </div>
         <div class="form-group">
           <label class="form-label f-b">Режим работы</label>
-          <select class="form-control custom-select" v-model="controller.data.mode">
+          <select class="form-control custom-select" v-model="data.controller.mode">
             <option value="mdb">mdb</option>
             <option value="exe">exe</option>
             <option value="cashless" selected>cashless</option>
@@ -98,13 +98,26 @@
 
         <div class="form-group">
           <label class="form-label f-b">Привязать автомат:</label>
-          <select class="form-control custom-select" v-model="controller.data.machine.id">
+          <select class="form-control custom-select" v-model="data.controller.machine.id">
             <option :value="null">Нет</option>
-            <option v-for="machine in controller.machines"
+            <option v-for="machine in data.machines"
             :key="machine.id" :value="machine.id">
             {{ machine.name }}
           </option>
         </select>
+      </div>
+
+      <div class="form-group select-services">
+        <label class="form-label f-b">Услуги</label>
+
+        <label class="toggle-checkbox" v-for="(service, index) in data.services" :key="service.id">
+          <input
+            type="checkbox"
+            v-model="input.serviceIds[index].checked"
+          />
+          <span class="slider round"> </span>
+          <span class="label-text">{{ service.name }} ({{ service.price }} руб/{{ getBillingAbbr(service.billingType) }})</span>
+        </label>
       </div>
       </div>
     </div>
@@ -122,6 +135,8 @@
 <script>
 import gql from 'graphql-tag';
 
+import { find, propEq, map, filter } from 'ramda';
+
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 
@@ -135,14 +150,19 @@ export default {
   },
   data: () => ({
     controller: null,
+    input: {
+      serviceIds: []
+    },
 
     schema: {
       name: [required],
       uid: [required]
-    }
+    },
+
+    controllerUploading: false
   }),
   apollo: {
-    controller: {
+    data: {
       variables() {
         return {
           id: Number(this.$route.params.id),
@@ -170,6 +190,10 @@ export default {
           machine {
             id
           }
+
+          services {
+            id
+          }
         }
 
         equipments: getEquipments {
@@ -186,14 +210,38 @@ export default {
           id
           name
         }
+
+        services: getAvailableServices {
+          controller {
+            id,
+            name,
+            price,
+            billingType
+          }
+        }
       }
       `,
       update(data) {
+        if (!this.controllerUploading) {
+          if (data.controller.services.length > 0) {
+            this.input.serviceIds = data.controller.services.map(service => ({
+              ...service,
+              checked: find(propEq('id', service.id))(data.controller.services)
+            }));
+          } else {
+            this.input.serviceIds = data.services.controller.map(service => ({
+              id: service.id,
+              checked: false
+            }));
+          }
+        }
+
         return {
-          data: data.controller,
+          controller: data.controller,
           equipments: data.equipments,
           revisions: data.revisions,
-          machines: data.machines
+          machines: data.machines,
+          services: data.services.controller
         };
       }
     }
@@ -201,12 +249,16 @@ export default {
   methods: {
     async save() {
       try {
+        this.controllerUploading = true;
+
+        const controller = this.data.controller;
         const controllerData = {
           name: this.$store.getters['cache/data'].name,
-          revisionId: this.controller.data.revision.id,
-          status: this.controller.data.status,
-          mode: this.controller.data.mode,
-          machineId: this.controller.data.machine.id
+          revisionId: controller.revision.id,
+          status: controller.status,
+          mode: controller.mode,
+          machineId: controller.machine.id,
+          serviceIds: this.input.serviceIds.map(service => service.checked ? service.id : null).filter(id => id !== null)
         };
 
         const { errors } = await this.$apollo.mutate({
@@ -218,7 +270,7 @@ export default {
           }
           `,
           variables: {
-            id: this.controller.data.id,
+            id: controller.id,
             data: controllerData
           }
         });
@@ -226,11 +278,21 @@ export default {
         this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
       } catch (error) {
         this.$refs.form.showMessage('error', 'Ошибка сохранения.');
+      } finally {
+        this.controllerUploading = false;
       }
     },
     onSuccess () {
       const router = this.$router;
       setTimeout(function () { router.push('/settings'); }, 1000);
+    },
+
+    getBillingAbbr (date) {
+      if (date === 'DAILY') {
+        return 'день';
+      } else if (date === 'MONTHLY') {
+        return 'мес.';
+      }
     }
   }
 }
