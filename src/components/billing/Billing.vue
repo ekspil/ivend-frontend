@@ -131,8 +131,8 @@ export default {
   },
   data: () => ({
     tabs: [
-      { name: 'Услуги', component: BillingHistory, route: 'history' },
-      { name: 'Платежи', component: BillingServices, route: 'services' }
+      { name: 'Услуги', component: BillingServices, route: 'services' },
+      { name: 'Платежи', component: BillingHistory, route: 'history' }
     ],
     billing: null,
 
