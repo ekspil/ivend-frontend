@@ -17,7 +17,7 @@ export const getTableHeaders = () => [
 				const gradation = getGradation(Date.now() - latestTime);
 
 				if (gradation.seconds <= 60) {
-					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'секунда')} назад`);
+					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')} назад`);
 				}  else if (gradation.minutes <= 60) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')} назад`);
 				} else if (gradation.hours < 24) {
@@ -40,12 +40,12 @@ export const getTableHeaders = () => [
 				const gradation = getGradation(Date.now() - lastSaleTime);
 
 				if (gradation.minutes <= 60) {
-					return createTooltip('primary', localeTimestamp);
+					return createTooltip('primary', `${getTimestamp(lastSaleTime)}`);
 				} else if (gradation.hours < 24) {
-					return createTooltip('warning', localeTimestamp);
+					return createTooltip('warning', `${getTimestamp(lastSaleTime)}`);
 				}
 
-				return createTooltip('alert', localeTimestamp);
+				return createTooltip('alert', `${getTimestamp(lastSaleTime)}`);
 			}
 
 			return createTooltip('info', 'НЕТ');
