@@ -81,6 +81,9 @@ export const getWordEnding = (number, word) => {
 			}
 			break;
 
+		case number > 9 && number.toString()[number.length - 1] === '1' && not(includes(last(word), VOWELS)):
+			return `${word}ов`;
+
 		case not(includes(last(word), VOWELS)):
 			switch (lastNum) {
 				case "0":
