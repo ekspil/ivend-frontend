@@ -1,23 +1,21 @@
 <template>
 	<div>
 		<div class="stats-top-menu">
-			<div class="stats-top-menu__content-container">
-				<div class="stats-top-menu__date-buttons">
-					<Period @onChange="onPeriodChange"/>
-				</div>
+			<div class="stats-top-menu__date-buttons">
+				<Period @onChange="onPeriodChange"/>
 
 				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
 		</div>
 
 		<Table
-		v-if="machines.length > 0 || !$apollo.loading"
+		v-if="goods.length > 0 && !$apollo.loading"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
 		className="stats-table"
 		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-		<div v-else class="aligned-text">Нет автоматов</div>
+		<div v-else class="aligned-text">Нет продаж</div>
 	</div>
 </template>
 
@@ -26,36 +24,47 @@ import gql from 'graphql-tag';
 
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
-import { getTableHeaders, getTableFields } from '@/utils/mappers/StatsFinance';
+import { getTableHeaders, getTableFields } from '@/utils/mappers/StatsSales';
 
 import Period from '@/modules/Period';
 
 export default {
-	name: 'Finance',
+	name: 'Sales',
 	components: {
 		Period,
 		Table,
 		ExportExcel
 	},
 	data: () => ({
-		machines: [],
+		goods: [],
 		period: {
 			from: null,
 			to: null
 		}
 	}),
 	apollo: {
-		machines: {
+		goods: {
 			query: gql`
-			query ($period: Period) {
+			query {
 				getMachines {
 					id
 					name
-					salesSummary (period: $period) {
-						salesCount
-						overallAmount
-						cashAmount
-						cashlessAmount
+					itemMatrix {
+						id
+						buttons {
+							buttonId
+							item {
+								id
+								name
+								salesSummary {
+									salesCount
+									overallAmount
+									cashAmount
+									cashlessAmount
+								}
+								lastSaleTime
+							}
+						}
 					}
 				}
 			}
@@ -75,12 +84,12 @@ export default {
 					period: this.period
 				};
 			},
-			update: data => data.getMachines
+			update: data => data.getMachines.itemMatrix?.buttons || []
 		}
 	},
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.machines); }
+		getTableFields () { return getTableFields(this.goods); }
 	},
 	methods: {
 		onPeriodChange (period) {
@@ -93,5 +102,11 @@ export default {
 <style scoped lang="scss">
 .card-table td a {
 	color: black;
+}
+
+.stats-top-menu__date-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 </style>

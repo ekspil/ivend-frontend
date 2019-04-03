@@ -117,12 +117,12 @@
 import gql from 'graphql-tag';
 
 export default {
-    name: 'ControllerGoods',
+    name: 'MachineGoods',
     apollo: {
         data: {
             query: gql `
                     query ($id: Int!) {
-                        getController (id: $id) {
+                        getMachineById (id: $id) {
                           itemMatrix {
                             id
                             buttons {
@@ -144,8 +144,8 @@ export default {
             },
 
             update: data => ({
-              buttons: data.getController.itemMatrix.buttons,
-              matrixId: data.getController.itemMatrix.id
+              buttons: data.getMachineById.itemMatrix?.buttons || [],
+              matrixId: data.getMachineById.itemMatrix?.id || null
             })
         }
     },

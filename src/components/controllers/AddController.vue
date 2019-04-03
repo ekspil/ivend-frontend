@@ -14,43 +14,19 @@
 						<div class="row">
 							<div class="col-md-12 col-lg-12">
 								<div class="form-group">
-									<label class="form-label f-b">Название точки продажи</label>
-									<Field name="name" formName="addController" className="form-control" placeholder="Введите название точки продажи"/>
-								</div>
-								<div class="form-group">
 									<label class="form-label f-b">Номер контроллера</label>
 									<Field name="uid" formName="addController" className="form-control" placeholder="Введите номер контроллера"/>
 								</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Состояние</label>
-								<div class="selectgroup w-100">
-									<label class="selectgroup-item">
-										<input type="radio" name="state" value="ENABLED"
-										class="selectgroup-input" checked v-model="input.status"/>
-										<span class="selectgroup-button">Активирован</span>
-									</label>
-									<label class="selectgroup-item">
-										<input type="radio" name="state" value="DISABLED"
-										class="selectgroup-input" v-model="input.status"/>
-										<span class="selectgroup-button">Деактивирован</span>
-									</label>
-									<label class="selectgroup-item">
-										<input type="radio" name="state" value="TRAINING"
-										class="selectgroup-input" v-model="input.status"/>
-										<span class="selectgroup-button">Обучение</span>
-									</label>
-									<label class="selectgroup-item">
-										<input type="radio" name="state" value="PAUSED"
-										class="selectgroup-input" v-model="input.status"/>
-										<span class="selectgroup-button">Приостановлен</span>
-									</label>
-									<label class="selectgroup-item">
-										<input type="radio" name="state" value="DEBUG"
-										class="selectgroup-input" v-model="input.status"/>
-										<span class="selectgroup-button">Отладка</span>
-									</label>
-								</div>
+								<label class="form-label f-b">Состояние контроллера</label>
+								<select v-model="input.status" class="form-control custom-select">
+									<option value="ENABLED">Активирован</option>
+									<option value="DISABLED">Деактивирован</option>
+									<option value="TRAINING">Обучение</option>
+									<option value="PAUSED">Приостановлен</option>
+									<option value="DEBUG">Отладка</option>
+								</select>
 							</div>
 
 							<div class="form-group">
@@ -75,7 +51,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы контроллера</label>
+								<label class="form-label f-b">Режим работы терминала</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option value="mdb">mdb</option>
 									<option value="exe">exe</option>

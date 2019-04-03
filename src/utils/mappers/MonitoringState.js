@@ -16,12 +16,10 @@ export const getTableHeaders = () => [
 			if (localeTimestamp !== '-') {
 				const gradation = getGradation(Date.now() - latestTime);
 
-				if (gradation.seconds <= 60) {
-					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
-				} else if (gradation.minutes <= 60) {
+				if (gradation.minutes < 15) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
-				} else if (gradation.hours < 24) {
-					return createTooltip('primary', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`);
+				} else if (gradation.minutes >= 15 && gradation.minutes <= 30) {
+					return createTooltip('warning', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				}
 
 				return createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
@@ -35,7 +33,6 @@ export const getTableHeaders = () => [
 		key: 'lastSaleTime',
 		critery ({ lastSaleTime }) {
 			const localeTimestamp = getTimestamp(lastSaleTime);
-
 			if (localeTimestamp !== '-') {
 				const gradation = getGradation(Date.now() - lastSaleTime);
 
@@ -53,7 +50,15 @@ export const getTableHeaders = () => [
 	},
 	{
 		name: 'Контроллер',
-		key: 'uid'
+		key: 'controllerRegistrationTime',
+		critery ({ controllerRegistrationTime }) {
+			const localeTimestamp = getTimestamp(controllerRegistrationTime);
+			if (localeTimestamp !== '-') {
+				return createTooltip('primary', localeTimestamp);
+			}
+
+			return createTooltip('info', 'ОТКЛ');
+		}
 	},
 	{
 		name: 'Монетник',
@@ -107,18 +112,18 @@ export const getTableHeaders = () => [
 	}
 ];
 
-export const getTableFields = data => data.map(controller => ({
-	id: controller.id,
-	uid: controller.uid,
-	name: controller.machine?.name || '-',
-	lastSaleTime: controller.lastSaleTime,
+export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller }) => ({
+	id,
+	controllerRegistrationTime: controller?.registrationTime,
+	name,
+	lastSaleTime,
 
-	registrationTime: controller.lastState?.registrationTime,
-	coinAmount: controller.lastState?.coinAmount,
-	billAmount: controller.lastState?.billAmount,
+	registrationTime: controller?.lastState?.registrationTime,
+	coinAmount: controller?.lastState?.coinAmount,
+	billAmount: controller?.lastState?.billAmount,
 
-	coinAcceptorStatus: controller.lastState?.coinAcceptorStatus,
-	billAcceptorStatus: controller.lastState?.billAcceptorStatus,
+	coinAcceptorStatus: controller?.lastState?.coinAcceptorStatus,
+	billAcceptorStatus: controller?.lastState?.billAcceptorStatus,
 
-	route: `/monitoring/${controller.machine.id}`
+	route: `/monitoring/${id}`
 }));
