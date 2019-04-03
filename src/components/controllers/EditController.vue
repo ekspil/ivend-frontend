@@ -262,7 +262,9 @@ export default {
           revisionId: controller.revision.id,
           status: controller.status,
           mode: controller.mode,
-          machineId: controller.machine.id,
+          // machineId: controller.machine.id,
+          fiscalRegistrarId: 0,
+          bankTerminalId: 0,
           serviceIds: this.input.serviceIds.map(service => service.checked ? service.id : null).filter(id => id !== null)
         };
 
