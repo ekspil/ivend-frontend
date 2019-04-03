@@ -20,6 +20,7 @@
 <script>
 import Tabs from '@/modules/Tabs';
 import Finance from './modules/Finance';
+import Sales from './modules/Sales';
 
 export default {
   name: 'Stats',
@@ -28,7 +29,8 @@ export default {
   },
   data: () => ({
     tabs: [
-      { name: 'Финансы и продажи', component: Finance, route: 'finance' }
+      { name: 'Финансы', component: Finance, route: 'finance' },
+      { name: 'Продажи', component: Sales, route: 'sales' }
     ]
   })
 }

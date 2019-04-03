@@ -13,7 +13,7 @@
 		</div>
 
 		<Table
-			v-if="controllers.length > 0 || !$apollo.loading"
+			v-if="machines.length > 0 || !$apollo.loading"
 			:headers="getTableHeaders"
 			:fields="getTableFields"
 			className="monitoring-table"
@@ -37,34 +37,31 @@
 			ExportExcel
 		},
 		data: () => ({
-			controllers: []
+			machines: []
 		}),
 		apollo: {
-			controllers: {
+			machines: {
 				query: gql`
-					query {
-						getControllers {
-							id
-							name
-							lastSaleTime
+				query {
+					getMachines {
+						id
+						name
+						lastSaleTime
+						controller {
 							lastErrorTime
 							lastState {
 								registrationTime
 							}
-
-							machine {
-								id
-								name
-							}
 						}
 					}
+				}
 				`,
-				update: data => data.getControllers
+				update: data => data.getMachines
 			}
 		},
 		computed: {
 			getTableHeaders,
-			getTableFields () { return getTableFields(this.controllers); }
+			getTableFields () { return getTableFields(this.machines); }
 		}
 	}
 </script>

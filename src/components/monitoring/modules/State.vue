@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<template v-if="controllers.length > 0 || !$apollo.loading">
+		<template v-if="machines.length > 0 && !$apollo.loading">
 			<div class="text-wrap">
 				<div class="example top-buttons-container top-buttons">
 					<div class="top-buttons__left-container"></div>
@@ -17,7 +17,7 @@
 		</template>
 
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-        <div v-else class="aligned-text">Нет контроллеров</div>
+        <div v-else class="aligned-text">Нет автоматов</div>
 	</div>
 </template>
 
@@ -37,49 +37,36 @@
 			ExportExcel
 		},
 		data: () => ({
-			controllers: []
+			machines: []
 		}),
 		apollo: {
-			controllers: {
+			machines: {
 				query: gql`
 					query {
-						getControllers {
+						getMachines {
 							id
-							registrationTime
 							name
 							lastSaleTime
-							lastState {
-								billAmount
+							controller {
 								registrationTime
-								coinAmount
+								lastState {
+									billAmount
+									registrationTime
+									coinAmount
 
-								coinAcceptorStatus
-								billAcceptorStatus
-							}
-
-							machine {
-								id
-								name
+									coinAcceptorStatus
+									billAcceptorStatus
+								}
 							}
 						}
 					}
 				`,
-				update: data => data.getControllers
-			}
-		},
-		methods: {
-			getTimestamp (time) {
-				if (time) {
-					const date = new Date(time);
-					return `${date.getDate()} ${getMonthName(date.getMonth()).toLowerCase()}`;
-				}
-
-				return '-';
+				update: data => data.getMachines
 			}
 		},
 		computed: {
 			getTableHeaders,
-			getTableFields () { return getTableFields(this.controllers); }
+			getTableFields () { return getTableFields(this.machines); }
 		}
 	}
 </script>

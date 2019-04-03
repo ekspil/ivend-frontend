@@ -77,16 +77,16 @@ export const getTableHeaders = () => [
 	}
 ];
 
-export const getTableFields = data => data.map(controller => ({
-	name: controller.machine?.name || '-',
-	lastSaleTime: controller.lastSaleTime,
-	lastErrorTime: getTimestamp(controller.lastErrorTime),
-	registrationTime: controller.lastState?.registrationTime,
+export const getTableFields = data => data.map(machine => ({
+	name: machine.name,
+	lastSaleTime: machine.lastSaleTime,
+	lastErrorTime: getTimestamp(machine.controller?.lastErrorTime),
+	registrationTime: machine.controller?.lastState?.registrationTime,
 
 	collection: 'ОТКЛ',
 	load: 'ОТКЛ',
 	audit1: 'ОТКЛ',
 	audit2: 'ОТКЛ',
 
-	route: `/monitoring/${controller.machine.id}`
+	route: `/monitoring/${machine.id}`
 }));
