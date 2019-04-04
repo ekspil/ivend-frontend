@@ -85,7 +85,7 @@ export default {
     data: {
       query: gql`
       query ($id: Int!) {
-        getController (id: $id) {
+        getMachineById (id: $id) {
           itemMatrix {
             id
             buttons {
@@ -115,8 +115,8 @@ export default {
         }
 
         return {
-          matrixId: data.getController.itemMatrix.id,
-          buttons: data.getController.itemMatrix.buttons,
+          matrixId: data.getMachineById.itemMatrix.id,
+          buttons: data.getMachineById.itemMatrix.buttons,
           goods: data.getProfile.items
         };
       }
