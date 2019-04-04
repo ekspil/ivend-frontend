@@ -12,7 +12,7 @@
                         <table class="controller-service-table">
                             <thead :class="!controllers[index].hidden && 'active'" @click="toggleController(index)">
                                 <tr>
-                                    <th colspan="3">{{ controller.name }}</th>
+                                    <th colspan="3">{{ controller.uid }}</th>
                                 </tr>
                             </thead>
                             <tr
@@ -49,12 +49,12 @@
                 query: gql`
                     query getServices {
                         getControllers {
-                            id,
-                            name,
+                            id
+                            uid
                             services {
-                                id,
-                                name,
-                                price,
+                                id
+                                name
+                                price
                                 billingType
                             }
                         }
