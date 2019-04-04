@@ -57,6 +57,16 @@
 							</select>
 						</div>
 
+						<div class="form-group">
+							<label class="form-label f-b">Привязать контроллер</label>
+							<select class="form-control custom-select" v-model="input.controllerId">
+								<option v-for="controller in machine.controllers"
+								:key="controller.id" :value="controller.id">
+								{{ controller.uid }}
+							</option>
+						</select>
+					</div>
+
 					</div>
 				</div>
 				<div class="aligned-text" v-else>Загрузка...</div>
@@ -106,7 +116,9 @@ export default {
 			name: [required],
 			number: [required],
 			place: [required]
-		}
+		},
+
+		machineUploading: false
 	}),
 	apollo: {
 		machine: {
@@ -124,19 +136,28 @@ export default {
 					id
 					name
 				}
+
+				getControllers {
+					id
+					uid
+				}
 			}
 			`,
-			update ({ getMachineTypes, getMachineGroups, getEquipments }) {
-				this.input = {
-					equipmentId: getEquipments[0].id,
-					groupId: getMachineGroups[0].id,
-					typeId: getMachineTypes[0].id
-				};
+			update ({ getMachineTypes, getMachineGroups, getEquipments, getControllers }) {
+				if (!this.machineUploading) {
+					this.input = {
+						equipmentId: getEquipments[0].id,
+						groupId: getMachineGroups[0].id,
+						typeId: getMachineTypes[0].id,
+						controllerId: getControllers[0].id
+					};
+				}
 
 				return {
 					types: getMachineTypes,
 					groups: getMachineGroups,
-					equipments: getEquipments
+					equipments: getEquipments,
+					controllers: getControllers
 				};
 			}
 		}
@@ -149,6 +170,8 @@ export default {
 			};
 
 			try {
+				this.machineUploading = true;
+
 				const { errors } = await this.$apollo.mutate({
 					mutation: gql`
 					mutation saveMachine ($data: CreateMachineInput!) {
@@ -168,6 +191,8 @@ export default {
 			}
 		},
 		onSuccess () {
+			this.machineUploading = false;
+
 			const router = this.$router;
 			setTimeout(function () { router.push('/settings'); }, 1000);
 		},

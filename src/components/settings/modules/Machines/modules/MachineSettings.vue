@@ -58,6 +58,16 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <label class="form-label f-b">Привязать контроллер</label>
+      <select class="form-control custom-select" v-model="input.controllerId">
+        <option v-for="controller in data.controllers"
+        :key="controller.id" :value="controller.id">
+        {{ controller.uid }}
+      </option>
+    </select>
+  </div>
+
   </div>
 </div>
 </template>
@@ -93,13 +103,18 @@ export default {
   data: () => ({
     data: null,
 
+    input: {
+      controllerId: 1
+    },
+
     schema: {
       name: [required],
       number: [required],
       place: [required]
     },
 
-    submitDisabled: false
+    submitDisabled: false,
+    machineUpdating: false
   }),
   apollo: {
     data: {
@@ -122,6 +137,11 @@ export default {
             id
             name
           }
+
+          controller {
+            id
+            uid
+          }
         }
 
         getMachineGroups {
@@ -138,6 +158,11 @@ export default {
           id
           name
         }
+
+        getControllers {
+          id
+          uid
+        }
       }
       `,
 
@@ -147,17 +172,26 @@ export default {
         };
       },
 
-      update: data => ({
-        machine: data.getMachineById,
-        groups: data.getMachineGroups,
-        equipments: data.getEquipments,
-        types: data.getMachineTypes
-      })
+      update (data) {
+        if (!this.machineUpdating && data.getMachineById.controller) {
+          this.input.controllerId = data.getMachineById.controller.id;
+        }
+
+        return {
+          machine: data.getMachineById,
+          groups: data.getMachineGroups,
+          equipments: data.getEquipments,
+          types: data.getMachineTypes,
+          controllers: data.getControllers
+        };
+      }
     }
   },
   methods: {
     async save () {
       if (!this.submitDisabled) {
+        this.machineUpdating = true;
+
         /* Забираем значение из CustomSelect */
         const newGoodLabel = this.$refs.goodSelect.value;
         if (typeof(newGoodLabel) === 'string') {
@@ -183,6 +217,7 @@ export default {
                   machineId: this.data.machine.id,
                   groupId: this.data.machine.group.id,
                   typeId: this.data.machine.type.id,
+                  controllerId: this.input.controllerId,
 
                   ...this.$store.getters['cache/data']
                 }
@@ -196,6 +231,8 @@ export default {
       }
     },
     onSuccess () {
+      this.machineUpdating = false;
+
       const router = this.$router;
       setTimeout(function () { router.push('/settings#machines'); }, 1000);
     },

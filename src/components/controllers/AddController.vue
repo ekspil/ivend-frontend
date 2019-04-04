@@ -77,24 +77,32 @@
 
 							<div class="form-group">
 								<label class="form-label f-b">Режим считывания статистики</label>
-								<select class="form-control custom-select">
-									<option value="0" selected>Выберите режим</option>
-									<option value="1">Монетник</option>
-									<option value="2">Автомат</option>
-									<option value="3">Монетник+автомат</option>
+								<select class="form-control custom-select" v-model="input.readStatMode">
+									<option value="COINBOX">Монетник</option>
+									<option value="MACHINE">Автомат</option>
+									<option value="COINBOX_MACHINE">Монетник+автомат</option>
 								</select>
 							</div>
 
 							<div class="form-group">
 								<label class="form-label f-b">Режим работы</label>
-								<select class="form-control custom-select">
-									<option value="0" selected>Нет</option>
-									<option value="1">ИНПАС</option>
-									<option value="2">Сбербанк</option>
+								<select class="form-control custom-select" v-model="input.bankTerminalMode">
+									<option value="NO_BANK_TERMINAL">Нет</option>
+									<option value="INPAS">ИНПАС</option>
+									<option value="SBERBANK">Сбербанк</option>
 								</select>
 							</div>
 
 							<div class="form-group">
+								<label class="form-label f-b">Режим фискализации</label>
+								<select class="form-control custom-select" v-model="input.fiscalizationMode">
+									<option value="NO_FISCAL">Нефискальный</option>
+									<option value="UNAPPROVED">Без подтверждения</option>
+									<option value="APPROVED">С подтверждением</option>
+								</select>
+							</div>
+
+							<div class="form-group" v-if="false">
 								<label class="form-label f-b">Версия контроллера</label>
 								<select class="form-control custom-select" v-model="input.revisionId">
 									<option v-for="revision in controller.revisions"
@@ -103,16 +111,6 @@
 								</option>
 							</select>
 						</div>
-
-						<div class="form-group">
-							<label class="form-label f-b">Привязать автомат:</label>
-							<select class="form-control custom-select" v-model="input.machineId">
-								<option v-for="machine in controller.machines"
-								:key="machine.id" :value="machine.id">
-								{{ machine.name }}
-							</option>
-						</select>
-					</div>
 
 					<div class="form-group">
 						<label class="form-label f-b">Фискальный регистратор</label>
@@ -128,7 +126,6 @@
 
 					<div class="form-group select-services">
 						<label class="form-label f-b">Услуги</label>
-
 
 						<label class="toggle-checkbox" v-for="service in controller.services.controller" :key="service.id">
 							<input type="checkbox" v-model="input.serviceIds[service.id]"/>
@@ -175,7 +172,9 @@ export default {
 			mode: "cashless",
 			revisionId: 1,
 			serviceIds: [],
-			machineId: 1
+			readStatMode: "COINBOX",
+			bankTerminalMode: "NO_BANK_TERMINAL",
+			fiscalizationMode: "NO_FISCAL"
 		},
 
 		schema: {
@@ -213,10 +212,6 @@ export default {
 			}
 			`,
 			update ({ getEquipments, getRevisions, getAvailableServices, getMachines }) {
-				if (getMachines.length > 0) {
-					this.input.machineId = getMachines[0].id;
-				}
-
 				return {
 					equipments:getEquipments,
 					revisions: getRevisions,
@@ -239,7 +234,7 @@ export default {
 					mutation: gql`
 					mutation saveController ($data: CreateControllerInput!) {
 						createController (input: $data) {
-							name
+							uid
 						}
 					}
 					`,

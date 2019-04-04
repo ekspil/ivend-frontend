@@ -69,19 +69,14 @@
                     query {
                       getControllers {
                         id
-                        name
                         uid
                         mode
                         revision {
                             name
                         }
                         status
-                        bankTerminal {
-                          name
-                        }
-                        fiscalRegistrar {
-                          name
-                        }
+                        bankTerminalMode
+                        fiscalizationMode
                         firmwareId
 
                         machine {

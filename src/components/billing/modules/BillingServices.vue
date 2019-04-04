@@ -3,7 +3,7 @@
         <table class="table card-table table-vcenter text-nowrap">
             <thead>
                 <th class="service-name-cel sortable up">Название</th>
-                <th class="service-price-cel sortable">Стоимость р/день</th>
+                <th class="service-price-cel sortable">Стоимость р/месяц</th>
                 <th></th>
             </thead>
             <tbody>

@@ -20,14 +20,10 @@
             <div class="row">
               <div class="col-md-12 col-lg-12">
                 <div class="form-group">
-                  <label class="form-label f-b">Название контроллера</label>
-                  <Field className="form-control" name="name" formName="editControllerSettings" placeholder="Введите название" :value="data.controller.name" />
-                </div>
-                <div class="form-group">
                   <label class="form-label f-b">Номер контроллера UID</label>
                   <Field className="form-control" :value="data.controller.uid" disabled name="uid" formName="editControllerSettings" placeholder="Введите UID"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group" v-if="false">
                   <label class="form-label f-b">Версия контроллера</label>
                   <select class="form-control custom-select" v-model="data.controller.revision.id">
                     <option v-for="revision in data.revisions" :key="revision.id" :value="revision.id">
@@ -70,6 +66,33 @@
                   </select>
                 </div>
                 <div class="form-group">
+                  <label class="form-label f-b">Режим считывания статистики</label>
+                  <select class="form-control custom-select" v-model="data.controller.readStatMode">
+                    <option value="COINBOX">Монетник</option>
+                    <option value="MACHINE">Автомат</option>
+                    <option value="COINBOX_MACHINE">Монетник+автомат</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label f-b">Режим работы</label>
+                  <select class="form-control custom-select" v-model="data.controller.bankTerminalMode">
+                    <option value="NO_BANK_TERMINAL">Нет</option>
+                    <option value="INPAS">ИНПАС</option>
+                    <option value="SBERBANK">Сбербанк</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label f-b">Режим фискализации</label>
+                  <select class="form-control custom-select" v-model="data.controller.fiscalizationMode">
+                    <option value="NO_FISCAL">Нефискальный</option>
+                    <option value="UNAPPROVED">Без подтверждения</option>
+                    <option value="APPROVED">С подтверждением</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
                   <label class="form-label f-b">Фискальный регистратор</label>
                   <div class="input-group">
                     <input type="text" class="form-control" value="ККТ Казначей ФА" placeholder="Выберите регистратор">
@@ -78,40 +101,19 @@
                     </span>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label f-b">Банковские терминалы</label>
-                  <select class="form-control custom-select">
-                    <option value="0">Выберите режим</option>
-                    <option value="1">MDB</option>
-                    <option value="2">EXE</option>
-                    <option value="3" selected>PAX D200</option>
-                    <option value="4">Cashless free</option>
-                  </select>
-                </div>
 
-                <div class="form-group">
-                  <label class="form-label f-b">Привязать автомат:</label>
-                  <select class="form-control custom-select" v-model="data.controller.machine.id">
-                    <option :value="null">Нет</option>
-                    <option v-for="machine in data.machines"
-                    :key="machine.id" :value="machine.id">
-                    {{ machine.name }}
-                  </option>
-                </select>
-              </div>
+                <div class="form-group select-services">
+                  <label class="form-label f-b">Услуги</label>
 
-              <div class="form-group select-services">
-                <label class="form-label f-b">Услуги</label>
-
-                <label class="toggle-checkbox" v-for="(service, index) in data.services" :key="service.id">
-                  <input
+                  <label class="toggle-checkbox" v-for="(service, index) in data.services" :key="service.id">
+                    <input
                     type="checkbox"
                     v-model="input.serviceIds[index].checked"
-                  />
-                  <span class="slider round"> </span>
-                  <span class="label-text">{{ service.name }} ({{ service.price }} руб/{{ getBillingAbbr(service.billingType) }})</span>
-                </label>
-              </div>
+                    />
+                    <span class="slider round"> </span>
+                    <span class="label-text">{{ service.name }} ({{ service.price }} руб/{{ getBillingAbbr(service.billingType) }})</span>
+                  </label>
+                </div>
               </div>
             </div>
           </template>
@@ -123,10 +125,10 @@
         <div class="aligned-text" v-else-if="$apollo.loading">Загрузка...</div>
         <div class="aligned-text" v-else>Ошибка загрузки контроллера</div>
 
-        </div>
       </div>
     </div>
   </div>
+</div>
 
 </template>
 
@@ -154,7 +156,6 @@ export default {
     },
 
     schema: {
-      name: [required],
       uid: [required]
     },
 
@@ -170,25 +171,17 @@ export default {
       query: gql `
       query GetController($id: Int!) {
         controller: getController(id: $id) {
-          id,
-          name,
-          uid,
-          mode,
+          id
+          uid
+          mode
           revision {
             id,
             name
-          },
-          status,
-          bankTerminal {
-            name
-          },
-          fiscalRegistrar {
-            name
           }
-
-          machine {
-            id
-          }
+          status
+          bankTerminalMode
+          readStatMode
+          fiscalizationMode
 
           services {
             id
@@ -233,12 +226,6 @@ export default {
               checked: false
             }));
           }
-
-          if (!data.controller.machine) {
-            data.controller.machine = {
-              id: null
-            };
-          }
         }
 
         return {
@@ -258,11 +245,12 @@ export default {
 
         const controller = this.data.controller;
         const controllerData = {
-          name: this.$store.getters['cache/data'].name,
-          revisionId: controller.revision.id,
+          revisionId: 1,
           status: controller.status,
           mode: controller.mode,
-          machineId: controller.machine.id,
+          fiscalizationMode: controller.fiscalizationMode,
+          bankTerminalMode: controller.bankTerminalMode,
+          readStatMode: controller.readStatMode,
           serviceIds: this.input.serviceIds.map(service => service.checked ? service.id : null).filter(id => id !== null)
         };
 
@@ -270,7 +258,7 @@ export default {
           mutation: gql `
           mutation saveController ($id: Int, $data: EditControllerInput!) {
             editController (id: $id, input: $data) {
-              name
+              uid
             }
           }
           `,
