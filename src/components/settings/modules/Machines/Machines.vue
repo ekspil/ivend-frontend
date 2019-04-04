@@ -82,6 +82,10 @@
                           id
                           name
                         }
+
+                        controller {
+                          uid
+                        }
                       }
                     }
                 `,

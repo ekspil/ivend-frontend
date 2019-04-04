@@ -24,8 +24,6 @@
 <script>
 	import gql from 'graphql-tag';
 
-	import { getMonthName } from '@/utils';
-
 	import Table from '@/modules/table/Table';
 	import ExportExcel from '@/modules/table/ExportExcel';
 	import { getTableHeaders, getTableFields } from '@/utils/mappers/MonitoringState';
