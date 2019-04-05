@@ -184,6 +184,8 @@
 		methods: {
 			async save () {
 				try {
+					const cache = this.$store.getters['cache/data'];
+
 					const { errors, data } = await this.$apollo.mutate({
 						mutation: gql`
 							mutation saveCompanyInfo ($input: LegalInfoInput!) {
@@ -204,7 +206,11 @@
 							}
 						`,
 						variables: {
-							input: this.$store.getters['cache/data']
+							input: {
+								...cache,
+								directorPhone: cache.directorPhone.replace(/[()+\s-]/gi, '').slice(1),
+								contactPhone: cache.contactPhone.replace(/[()+\s-]/gi, '').slice(1)
+							}
 						}
 					});
 

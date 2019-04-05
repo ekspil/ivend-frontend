@@ -182,7 +182,7 @@ export default {
     },
 
     onSuccess () {
-      this.$router.push(`/controllers/edit/${this.$route.params.id}`);
+      this.$router.push(`/machine/edit/${this.$route.params.id}#goods`);
     },
 
     onGoodSelect (good) {
