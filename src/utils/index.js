@@ -64,6 +64,10 @@ export const getWordEnding = (number, word) => {
 			}
 
 		case equals('ь', lastLetter):
+			if (lastNum === '1' && number !== 11) {
+				return word;
+			}
+
 			switch (lastNum) {
 				case "0":
 				case "5":
@@ -77,6 +81,9 @@ export const getWordEnding = (number, word) => {
 				case "2":
 				case "3":
 				case "4":
+					if (number > 9) {
+						return `${word[0] + word[2]}ей`;
+					}
 					return `${word[0] + word[2]}я`;
 			}
 			break;
