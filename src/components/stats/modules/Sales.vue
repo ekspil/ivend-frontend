@@ -9,7 +9,7 @@
 		</div>
 
 		<Table
-		v-if="goods.length > 0 && !$apollo.loading"
+		v-if="machines.length > 0 && !$apollo.loading"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
 		className="stats-table"
@@ -21,6 +21,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import { findIndex, propEq } from 'ramda';
 
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
@@ -36,14 +37,14 @@ export default {
 		ExportExcel
 	},
 	data: () => ({
-		goods: [],
+		machines: [],
 		period: {
 			from: null,
 			to: null
 		}
 	}),
 	apollo: {
-		goods: {
+		machines: {
 			query: gql`
 			query {
 				getMachines {
@@ -84,12 +85,31 @@ export default {
 					period: this.period
 				};
 			},
-			update: data => data.getMachines.itemMatrix?.buttons || []
+			update: data => {
+				const machines = data.getMachines;
+
+				return machines.reduce((goods, { itemMatrix }) => {
+					itemMatrix.buttons.forEach(({ item }) => {
+						const goodIndex = findIndex(propEq('name', item.name))(goods);
+						if (goodIndex !== -1) {
+							for (let key in item.salesSummary) {
+								goods[goodIndex][key] += item.salesSummary[key];
+							}
+						} else {
+							goods.push(item);
+						}
+					});
+
+					return goods;
+				}, []);
+			}
 		}
 	},
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.goods); }
+		getTableFields () {
+			return getTableFields(this.machines);
+		}
 	},
 	methods: {
 		onPeriodChange (period) {
