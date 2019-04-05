@@ -42,7 +42,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label f-b">Режим работы терминала</label>
+                  <label class="form-label f-b">Режим работы</label>
                   <select class="form-control custom-select" v-model="data.controller.mode">
                     <option value="mdb">mdb</option>
                     <option value="exe">exe</option>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label f-b">Режим работы</label>
+                  <label class="form-label f-b">Режим работы терминала</label>
                   <select class="form-control custom-select" v-model="data.controller.bankTerminalMode">
                     <option value="NO_BANK_TERMINAL">Нет</option>
                     <option value="INPAS">ИНПАС</option>
