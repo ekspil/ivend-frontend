@@ -51,7 +51,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы терминала</label>
+								<label class="form-label f-b">Режим работы</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option value="mdb">mdb</option>
 									<option value="exe">exe</option>
@@ -85,7 +85,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы</label>
+								<label class="form-label f-b">Режим работы терминала</label>
 								<select class="form-control custom-select" v-model="input.bankTerminalMode">
 									<option value="NO_BANK_TERMINAL">Нет</option>
 									<option value="INPAS">ИНПАС</option>
@@ -111,18 +111,6 @@
 								</option>
 							</select>
 						</div>
-
-					<div class="form-group">
-						<label class="form-label f-b">Фискальный регистратор</label>
-						<div class="input-group">
-							<input type="text" class="form-control" value="ККТ Казначей ФА"
-							placeholder="Выберите регистратор">
-							<span class="input-group-append">
-								<button class="btn btn-dark"
-								type="button">Настроить</button>
-							</span>
-						</div>
-					</div>
 
 					<div class="form-group select-services">
 						<label class="form-label f-b">Услуги</label>
