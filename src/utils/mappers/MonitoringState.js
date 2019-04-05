@@ -16,10 +16,14 @@ export const getTableHeaders = () => [
 			if (localeTimestamp !== '-') {
 				const gradation = getGradation(Date.now() - latestTime);
 
-				if (gradation.minutes < 15) {
+				if (gradation.seconds < 60) {
+					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
+				} else if (gradation.minutes < 15) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				} else if (gradation.minutes >= 15 && gradation.minutes <= 30) {
 					return createTooltip('warning', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
+				} else if (gradation.minutes > 60 && gradation.hours < 24) {
+					return createTooltip('alert', `${gradation.hours} ${getWordEnding(gradation.minutes, 'час')}`)
 				}
 
 				return createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
@@ -36,7 +40,9 @@ export const getTableHeaders = () => [
 			if (localeTimestamp !== '-') {
 				const gradation = getGradation(Date.now() - lastSaleTime);
 
-				if (gradation.minutes <= 60) {
+				if (gradation.seconds < 60) {
+					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
+				} else if (gradation.minutes < 60) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				} else if (gradation.hours < 24) {
 					return createTooltip('warning', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`);
