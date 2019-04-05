@@ -92,16 +92,6 @@
                   </select>
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label f-b">Фискальный регистратор</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" value="ККТ Казначей ФА" placeholder="Выберите регистратор">
-                    <span class="input-group-append">
-                      <button class="btn btn-dark" type="button">Настроить</button>
-                    </span>
-                  </div>
-                </div>
-
                 <div class="form-group select-services">
                   <label class="form-label f-b">Услуги</label>
 
