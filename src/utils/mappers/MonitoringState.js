@@ -17,16 +17,16 @@ export const getTableHeaders = () => [
 				const gradation = getGradation(Date.now() - latestTime);
 
 				if (gradation.seconds < 60) {
-					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
+					return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.seconds, 'секунда')}`);
 				} else if (gradation.minutes < 15) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				} else if (gradation.minutes >= 15 && gradation.minutes <= 30) {
 					return createTooltip('warning', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				} else if (gradation.minutes > 60 && gradation.hours < 24) {
-					return createTooltip('alert', `${gradation.hours} ${getWordEnding(gradation.minutes, 'час')}`)
+					return createTooltip('alert', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`);
+				} else if (gradation.days > 0) {
+					createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
 				}
-
-				return createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
 			}
 
 			return createTooltip('info', 'НЕТ');
