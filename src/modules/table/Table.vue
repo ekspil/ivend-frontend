@@ -86,12 +86,24 @@
 					return sort((a, b) => {
 						const { firstCritery, secondCritery } = convertCriteries(a, b, critery);
 
+						const firstCriteryDate = Date.parse(firstCritery.split(' ')[0].split('.').reverse().join('.'));
+						const secondCriteryDate = Date.parse(secondCritery.split(' ')[0].split('.').reverse().join('.'));
+						if (!isNaN(firstCriteryDate) && !isNaN(secondCriteryDate)) {
+							return lt(firstCriteryDate, secondCriteryDate) ? -1 : 1;
+						}
+
 						return lt(firstCritery, secondCritery) ? -1 : 1;
 					}, this.fields);
 				}
 
 				return sort((a, b) => {
 					const { firstCritery, secondCritery } = convertCriteries(a, b, critery);
+
+					const firstCriteryDate = Date.parse(firstCritery.split(' ')[0].split('.').reverse().join('.'));
+					const secondCriteryDate = Date.parse(secondCritery.split(' ')[0].split('.').reverse().join('.'));
+					if (!isNaN(firstCriteryDate) && !isNaN(secondCriteryDate)) {
+						return lt(firstCriteryDate, secondCriteryDate) ? 1 : -1;
+					}
 
 					return lt(firstCritery, secondCritery) ? 1 : -1;
 				}, this.fields);
