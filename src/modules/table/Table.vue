@@ -14,7 +14,7 @@
 			</thead>
 			<tbody>
 				<tr v-for="field in getFields" :key="field.id">
-					<td v-for="(header, index) in headers" :key="index" :class="field.class">
+					<td v-for="(header, index) in headers" :key="index" :class="field.class" v-if="field.invisible ? !field.invisible() : true">
 						<router-link v-if="header.link && field.route" :to="field.route" class="f-b">
 							{{ field[header.key] }}
 						</router-link>
@@ -86,10 +86,14 @@
 					return sort((a, b) => {
 						const { firstCritery, secondCritery } = convertCriteries(a, b, critery);
 
-						const firstCriteryDate = Date.parse(firstCritery.split(' ')[0].split('.').reverse().join('.'));
-						const secondCriteryDate = Date.parse(secondCritery.split(' ')[0].split('.').reverse().join('.'));
-						if (!isNaN(firstCriteryDate) && !isNaN(secondCriteryDate)) {
-							return lt(firstCriteryDate, secondCriteryDate) ? -1 : 1;
+						if (firstCritery && secondCritery &&
+							typeof(firstCritery) === 'string' && typeof(secondCritery) === 'string'
+						) {
+							const firstCriteryDate = Date.parse(firstCritery.split(' ')[0].split('.').reverse().join('.'));
+							const secondCriteryDate = Date.parse(secondCritery.split(' ')[0].split('.').reverse().join('.'));
+							if (!isNaN(firstCriteryDate) && !isNaN(secondCriteryDate)) {
+								return lt(firstCriteryDate, secondCriteryDate) ? -1 : 1;
+							}
 						}
 
 						return lt(firstCritery, secondCritery) ? -1 : 1;
@@ -99,10 +103,14 @@
 				return sort((a, b) => {
 					const { firstCritery, secondCritery } = convertCriteries(a, b, critery);
 
-					const firstCriteryDate = Date.parse(firstCritery.split(' ')[0].split('.').reverse().join('.'));
-					const secondCriteryDate = Date.parse(secondCritery.split(' ')[0].split('.').reverse().join('.'));
-					if (!isNaN(firstCriteryDate) && !isNaN(secondCriteryDate)) {
-						return lt(firstCriteryDate, secondCriteryDate) ? 1 : -1;
+					if (firstCritery && secondCritery &&
+						typeof(firstCritery) === 'string' && typeof(secondCritery) === 'string'
+					) {
+						const firstCriteryDate = Date.parse(firstCritery.split(' ')[0].split('.').reverse().join('.'));
+						const secondCriteryDate = Date.parse(secondCritery.split(' ')[0].split('.').reverse().join('.'));
+						if (!isNaN(firstCriteryDate) && !isNaN(secondCriteryDate)) {
+							return lt(firstCriteryDate, secondCriteryDate) ? 1 : -1;
+						}
 					}
 
 					return lt(firstCritery, secondCritery) ? 1 : -1;
