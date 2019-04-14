@@ -30,27 +30,6 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Тип связи</label>
-								<div class="selectgroup w-100">
-									<label class="selectgroup-item">
-										<input type="radio" name="connection" value="01"
-										class="selectgroup-input" checked>
-										<span class="selectgroup-button">3G</span>
-									</label>
-									<label class="selectgroup-item">
-										<input type="radio" name="connection" value="02"
-										class="selectgroup-input">
-										<span class="selectgroup-button">WiFi</span>
-									</label>
-									<label class="selectgroup-item">
-										<input type="radio" name="connection" value="03"
-										class="selectgroup-input">
-										<span class="selectgroup-button">Ethernet</span>
-									</label>
-								</div>
-							</div>
-
-							<div class="form-group">
 								<label class="form-label f-b">Режим работы</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option value="mdb">mdb</option>
