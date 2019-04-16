@@ -106,6 +106,7 @@ export default {
               id,
               amount,
               status,
+              timestamp,
               redirectUrl
             }
           }
