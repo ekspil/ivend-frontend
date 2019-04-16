@@ -1,6 +1,6 @@
 <template>
     <header class="app-header header shadow-none relative">
-        <particles/>
+        <div id="particles-js"></div>
         <div class="container">
 
             <div id="canvas" class="gradient"></div>
@@ -86,16 +86,10 @@
 <script>
     import gql from 'graphql-tag';
 
-    import particles from '@/components/particles';
-
-
     import { prettifyPhone } from '@/utils';
 
     export default {
         name: 'Header',
-        components: {
-            particles
-        },
         apollo: {
             user: {
                 query: gql`
