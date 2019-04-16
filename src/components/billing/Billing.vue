@@ -105,7 +105,8 @@ export default {
             deposits (period: $period) {
               id,
               amount,
-              status
+              status,
+              redirectUrl
             }
           }
         }
