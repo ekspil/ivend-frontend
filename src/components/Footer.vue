@@ -3,8 +3,8 @@
         <div class="container">
             <div class="row align-items-center text-center">
                 <div class="col-lg-12 text-center privacy">
-                    <a href="#" class="btn btn-link">Тарифы и реквизиты</a>
-                    <a href="#" class="btn btn-link">Договор оферты</a>
+                    <a href="/tariffs" class="btn btn-link">Тарифы и реквизиты</a>
+                    <a href="/assets/uploads/oferta.pdf" class="btn btn-link">Договор оферты</a>
                 </div>
             </div>
             <div class="row align-items-center flex-row-reverse">

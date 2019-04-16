@@ -20,6 +20,7 @@ import AddMachine from '@/components/settings/modules/Machines/AddMachine';
 import EditMachine from '@/components/settings/modules/Machines/EditMachine';
 
 import Billing from '@/components/billing/Billing';
+import Tariffs from '@/components/tariffs/Tariffs';
 
 import Home from '@/components/Home';
 
@@ -49,6 +50,8 @@ const routes = [
     { path: '/machine/edit/:id', component: EditMachine },
 
     { path: '/billing', component: Billing },
+
+    { path: '/tariffs', component: Tariffs },
 
     { path: '/login', component: Login },
     { path: '/register', component: Registration }
