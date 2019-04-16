@@ -29,7 +29,7 @@ export default {
 	components: { Tabs },
 	data: () => ({
 		tabs: [
-			{ name: 'Оборудование', component: Equipment, route: 'equipment' },
+			{ name: 'Контроллеры', component: Equipment, route: 'equipment' },
 			{ name: 'Автоматы', component: Machines, route: 'machines' },
 			{ name: 'Уведомления', component: Notifications, route: 'notifications' },
 			{ name: 'Компания', component: Company, route: 'company' }

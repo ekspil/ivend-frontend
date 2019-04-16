@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-sm-12 col-lg-4">
-                    <a href="/stats#sales">
+                    <router-link to="/stats#sales">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -27,11 +27,11 @@
                             <div id="chart-bg-users-1"></div>
                         </div>
                     </div>
-                    </a>
+                    </router-link>
                 </div>
 
                 <div class="col-sm-12 col-lg-4">
-                    <a href="/stats#sales">
+                    <router-link to="/stats">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -51,12 +51,12 @@
                             <div id="chart-bg-users-4"></div>
                         </div>
                     </div>
-                    </a>
+                    </router-link>
 
                 </div>
 
                 <div class="col-sm-12 col-lg-4">
-                    <a href="/settings#machines">
+                    <router-link to="/settings#machines">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -78,7 +78,7 @@
                         <div class="card-chart-bg" v-if="false">
                         </div>
                     </div>
-                    </a>
+                    </router-link>
                 </div>
 
 
