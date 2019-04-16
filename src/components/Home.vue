@@ -72,7 +72,7 @@
                                     <router-link to="/machines/add" class="f-b" v-if="false">Добавить контроллер</router-link>
                                 </div>
                             </transition>
-                            <br v-if="machines.length" />
+                            <br v-if="false" />
 
                         </div>
                         <div class="card-chart-bg" v-if="false">
