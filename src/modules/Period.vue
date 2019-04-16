@@ -40,7 +40,7 @@
 		},
 		data: () => ({
 			periods: ['Всего', 'День', 'Неделя', 'Месяц'],
-			period: 'Неделя',
+			period: 'День',
 			calendar: {
 				from: undefined,
 				to: undefined

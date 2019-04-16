@@ -6,7 +6,8 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-4">
+                    <a href="/stats#sales">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -22,13 +23,15 @@
                                 </div>
                             </transition>
                         </div>
-                        <div class="card-chart-bg">
+                        <div class="card-chart-bg" v-if="false">
                             <div id="chart-bg-users-1"></div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
-                <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-4">
+                    <a href="/stats#sales">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -44,14 +47,16 @@
                                 </div>
                             </transition>
                         </div>
-                        <div class="card-chart-bg">
+                        <div class="card-chart-bg" v-if="false">
                             <div id="chart-bg-users-4"></div>
                         </div>
                     </div>
+                    </a>
 
                 </div>
 
-                <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-4">
+                    <a href="/settings#machines">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -63,20 +68,21 @@
                             <transition name="fade">
                                 <div v-if="!$apollo.loading">
                                     <h3 class="mb-1  text-primary counter font-30">{{ machines.length }}</h3>
-                                    <div class="f-b">{{ getWordEnding(machines.length, 'Контроллер') }}</div>
+                                    <div class="f-b">{{ getWordEnding(machines.length, 'Автомат') }}</div>
                                     <router-link to="/machines/add" class="f-b" v-if="machines.length <= 0">Добавить контроллер</router-link>
                                 </div>
                             </transition>
                             <br v-if="machines.length" />
 
                         </div>
-                        <div class="card-chart-bg">
+                        <div class="card-chart-bg" v-if="false">
                         </div>
                     </div>
+                    </a>
                 </div>
 
 
-                <div class="col-sm-12 col-lg-3">
+                <div class="col-sm-12 col-lg-3" v-if="false">
                     <div class="card bg-gradient">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">
@@ -121,7 +127,7 @@
             </div>
             -->
 
-            <div class="row">
+            <div class="row" v-if="false">
 
                 <div class="col-lg-6 col-md-12">
                     <div class="card">
@@ -259,7 +265,7 @@
                 </div>
             </div>
 
-            <div class="row mg-t-20" v-if="false">
+            <div class="row mg-t-20">
                 <div class="col-12 grid-margin">
                     <div class="card">
                         <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
@@ -270,14 +276,26 @@
                             <div class="fluid-container">
                                 <div class="row ticket-card  pb-2 border-bottom pb-3 mb-3">
                                     <div class="ticket-details col-md-12">
-                                        <p class="mb-0 mr-2 text-muted">19.09.2018</p>
+                                        <p class="mb-2 mr-2 text-muted">16.03.2019</p>
 
                                         <div class="d-flex">
-                                            <p class="text-black f-b mr-2 mb-0 no-wrap">Новый функционал в кабинете
-                                                вендора</p>
+                                            <p class="text-black f-b mr-2 mb-2 no-wrap">Бюджетная фискализация</p>
                                         </div>
-                                        <p class="text-black mb-2">Donec rutrum congue leo eget malesuada. Quisque velit
-                                            nisi, pretium ut lacinia in, elementum id enim vivamus.</p>
+                                        <p class="text-black mb-2">Компания IVEND предлагает услуги в сфере электронного вендинга.
+                                            Благодаря разработанным решениям фискализации и модернизации торговых автоматов, клиенты
+                                            компании могут отвечать стандартам современности, становиться гибкими, адаптивными и удобными для потребителя.
+                                        </p>
+
+                                        <p class="text-black mb-2">Уменьшить расходы при фискализации вендинговой сети – это главная задача
+                                            компании «Интернет вендинг», и для этого компания реализовала четыре варианта фискализации
+                                            торговых автоматов, среди которых можно выбрать лучшие экономические решения под нужды
+                                            и возможности каждой компании.
+                                        </p>
+
+                                        <p class="text-black mb-2">О разных вариантах фискализации и о многих других возможностях по модернизации
+                                            ваших торговых автоматов с помощью Универсального Вендингового Контроллера iVend, Вы узнаете,
+                                            посетив стенд C502 на выставке VendExpo 2018.
+                                        </p>
 
 
                                     </div>
@@ -285,34 +303,27 @@
                                 </div>
                                 <div class="row ticket-card  pb-2 border-bottom pb-3 mb-3">
                                     <div class="ticket-details col-md-12">
-                                        <p class="mb-0 mr-2 text-muted">19.09.2018</p>
+                                        <p class="mb-2 mr-2 text-muted">24.02.2019</p>
 
                                         <div class="d-flex">
-                                            <p class="text-black f-b mr-2 mb-0 no-wrap">Новый функционал в кабинете
-                                                вендора</p>
+                                            <p class="text-black f-b mr-2 mb-2 no-wrap">«Фискализируем даже слона!»</p>
                                         </div>
-                                        <p class="text-black mb-2">Donec rutrum congue leo eget malesuada. Quisque velit
-                                            nisi, pretium ut lacinia in, elementum id enim vivamus.</p>
+                                        <p class="text-black mb-2">Компания iVend – это производитель контроллера фискализации для любых видов импульсных автоматов.
+                                            Контроллер можно установить в разменные автоматы, аттракционы - качалки, кран - машины, массажные кресла, автомойки
+                                            самообслуживания и многие другие устройства. </p>
+
+                                        <p class="text-black mb-2">Система iVend Pulse состоит из трех составляющих: контроллер в автомате, личный кабинет в
+                                            Интернете, онлайн касса в облаке. Система решает сразу четыре задачи: мониторинг автоматов, статистика продаж,
+                                            фискализация продаж, эквайринг платежей. С 1 июля 2019 года по 54-ФЗ ко всем автоматам, включая импульсные, должны
+                                            быть подключены онлайн кассы, а с 1 февраля 2020 года автоматы будут обязаны отображать QR коды: iVend полностью
+                                            соответствует 54-ФЗ и уже имеет готовые дисплеи QR кода.
+                                        </p>
 
 
                                     </div>
 
                                 </div>
-                                <div class="row ticket-card  pb-2 border-bottom pb-3 mb-3">
-                                    <div class="ticket-details col-md-12">
-                                        <p class="mb-0 mr-2 text-muted">19.09.2018</p>
 
-                                        <div class="d-flex">
-                                            <p class="text-black f-b mr-2 mb-0 no-wrap">Новый функционал в кабинете
-                                                вендора</p>
-                                        </div>
-                                        <p class="text-black mb-2">Donec rutrum congue leo eget malesuada. Quisque velit
-                                            nisi, pretium ut lacinia in, elementum id enim vivamus.</p>
-
-
-                                    </div>
-
-                                </div>
                             </div>
                         </div>
                     </div>
