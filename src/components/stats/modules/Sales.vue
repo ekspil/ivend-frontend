@@ -12,6 +12,7 @@
 		v-if="machines.length > 0 && !$apollo.loading"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
+		sortBy="salesCount"
 		className="stats-table"
 		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
