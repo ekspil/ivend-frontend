@@ -68,8 +68,8 @@
                             <transition name="fade">
                                 <div v-if="!$apollo.loading">
                                     <h3 class="mb-1  text-primary counter font-30">{{ machines.length }}</h3>
-                                    <div class="f-b">{{ getWordEnding(machines.length, 'Автомат') }}</div>
-                                    <router-link to="/machines/add" class="f-b" v-if="machines.length <= 0">Добавить контроллер</router-link>
+                                    <div class="f-b">{{ getWordEnding(machines.length, 'Автомат') }}</div><br/>
+                                    <router-link to="/machines/add" class="f-b" v-if="false">Добавить контроллер</router-link>
                                 </div>
                             </transition>
                             <br v-if="machines.length" />
