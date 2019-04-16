@@ -10,7 +10,7 @@
                 <tr v-for="deposit in deposits" :key="deposit.id" :class="(getStatusClass(deposit.status)).class">
                     <td class="service-date-cel">10.02.2019 13:30</td>
                     <td class="service-price-cel">{{ deposit.amount }}</td>
-                    <td class="service-status-cel">{{ (getStatusClass(deposit.status)).text }}</td>
+                    <td class="service-status-cel">{{ (getStatusClass(deposit.status)).text }} <a v-if="deposit.status === 'PENDING'" :href="deposit.redirectUrl" target="_blank" class="btn btn-white btn-block ml-2" style="min-width: max-content;">Оплатить</a></td>
                 </tr>
             </tbody>
         </table>
