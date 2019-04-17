@@ -47,10 +47,11 @@
 				default: () => []
 			},
 
+			sortBy: String,
 			className: String
 		},
 		data () {
-			const critery = this.headers[0].key;
+			const critery = this.sortBy || this.headers[0].key;
 			return {
 				critery,
 				ltOrder: false
