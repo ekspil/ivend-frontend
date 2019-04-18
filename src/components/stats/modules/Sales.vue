@@ -47,12 +47,12 @@ export default {
 	apollo: {
 		machines: {
 			query: gql`
-			query {
+			query ($period: Period) {
 				getProfile {
 					items {
 						id
 						name
-						salesSummary {
+						salesSummary (period: $period) {
 							salesCount
 							overallAmount
 							cashAmount
