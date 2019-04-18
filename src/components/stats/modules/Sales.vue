@@ -48,25 +48,17 @@ export default {
 		machines: {
 			query: gql`
 			query {
-				getMachines {
-					id
-					name
-					itemMatrix {
+				getProfile {
+					items {
 						id
-						buttons {
-							buttonId
-							item {
-								id
-								name
-								salesSummary {
-									salesCount
-									overallAmount
-									cashAmount
-									cashlessAmount
-								}
-								lastSaleTime
-							}
+						name
+						salesSummary {
+							salesCount
+							overallAmount
+							cashAmount
+							cashlessAmount
 						}
+						lastSaleTime
 					}
 				}
 			}
@@ -86,24 +78,7 @@ export default {
 					period: this.period
 				};
 			},
-			update: data => {
-				const machines = data.getMachines;
-
-				return machines.reduce((goods, { itemMatrix }) => {
-					itemMatrix.buttons.forEach(({ item }) => {
-						const goodIndex = findIndex(propEq('name', item.name))(goods);
-						if (goodIndex !== -1) {
-							for (let key in item.salesSummary) {
-								goods[goodIndex][key] += item.salesSummary[key];
-							}
-						} else {
-							goods.push(item);
-						}
-					});
-
-					return goods;
-				}, []);
-			}
+			update: data => data.getProfile.items
 		}
 	},
 	computed: {
