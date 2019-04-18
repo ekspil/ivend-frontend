@@ -78,22 +78,7 @@ export default {
 					period: this.period
 				};
 			},
-			update: data => {
-				const items = data.getProfile.items;
-
-				return items.reduce((goods, item) => {
-					const goodIndex = findIndex(propEq('name', item.name))(goods);
-					if (goodIndex !== -1) {
-						for (let key in item.salesSummary) {
-							goods[goodIndex][key] += item.salesSummary[key];
-						}
-					} else {
-						goods.push(item);
-					}
-
-					return goods;
-				}, []);
-			}
+			update: data => data.getProfile.items
 		}
 	},
 	computed: {
