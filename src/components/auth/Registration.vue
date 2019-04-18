@@ -33,11 +33,17 @@
                         className="auth-block__field"
                         wrapperClassName="auth-block__field--phone-code"
                         type="text"
-                        name="telCode"
+                        name="code"
                         formName="register"
                         placeholder="Код из SMS"
                     />
-                    <button class="auth-block__phone-code-btn" @click="sendCode" :disabled="allowSmsSend">Выслать повторно</button>
+                    <button
+                        :class="['auth-block__phone-code-btn', !allowSmsSend && 'btn disabled']"
+                        @click="sendCode"
+                        :disabled="!allowSmsSend"
+                    >
+                        Выслать повторно
+                    </button>
                     <div class="auth-block__code-message">
                         Код подтверждения отправлен на номер<br />
                         {{ postData.tel }}
@@ -54,7 +60,7 @@
                     <button class="auth-block__submit-btn btn btn-primary" type="submit" @click.prevent="incrementStep">Зарегистрироваться</button>
                     <Field type="checkbox" name="agreement" formName="register" className="default-checkbox" v-if="step > 1">
                         <template slot="label">
-                            Я согласен с <a class="auth-block__link" href="#">условиями соглашения</a>
+                            Я согласен с <a class="auth-block__link" href="#" @click.prevent>условиями соглашения</a>
                         </template>
                     </Field>
                 </div>
@@ -114,24 +120,32 @@ export default {
             if (this.step === 1) {
                 this.postData.tel = this.$refs.tel.input;
 
-                const { data } = await this.$apollo.mutate({
-                    mutation: gql`
-                        mutation ($input: Registration1StepInput!) {
-                            timestamp: requestRegistrationSms (input: $input)
+                try {
+                    const { data } = await this.$apollo.mutate({
+                        mutation: gql`
+                            mutation ($input: Registration1StepInput!) {
+                                timestamp: requestRegistrationSms (input: $input)
+                            }
+                        `,
+                        variables: {
+                            input: {
+                                phone: this.postData.tel.replace(/[()+\s-]/gi, '').slice(1)
+                            }
                         }
-                    `,
-                    variables: {
-                        input: {
-                            phone: this.postData.tel.replace(/[()+\s-]/gi, '').slice(1)
+                    });
+
+                    smsInterval = setInterval(function () {
+                        vm.allowSmsSend = Date.now() > data.timestamp;
+
+                        if (vm.allowSmsSend) {
+                            clearInterval(smsInterval);
                         }
-                    }
-                });
+                    }, 1000);
 
-                smsInterval = setInterval(function () {
-                    vm.allowSmsSend = Date.now() > data.timestamp;
-                }, 1000);
-
-                return this.step++;
+                    return this.step++;
+                } catch (error) {
+                    return this.$refs.register.showMessage('error', convertServerError(error.message));
+                }
             }
 
             this.$refs.register.submit();
@@ -156,7 +170,7 @@ export default {
 
                 this.$refs.register.process({ errors, data, success: 'Переадресация...' });
             } catch (error) {
-                this.$refs.register.showMessage('error', convertServerError(error.message));
+                return this.$refs.register.showMessage('error', convertServerError(error.message));
             }
         },
         async onSuccess() {
@@ -170,7 +184,7 @@ export default {
                 `,
                 variables: {
                     logData: {
-                        ...(omit(['agreement', 'rePassword', 'email'], cache)),
+                        ...(omit(['agreement', 'rePassword', 'code', 'email'], cache)),
                         phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
                     }
                 }
@@ -191,7 +205,7 @@ export default {
             email: [required, email],
             phone: [required],
             password: [required],
-            telCode: [required],
+            code: [required],
             rePassword: [required, rePasswordValidator],
             agreement: [check]
         };
@@ -201,3 +215,13 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+    .auth-block__field--phone-code, .auth-block__phone-code-btn {
+        width: 50%;
+    }
+
+    .btn.disabled {
+        cursor: not-allowed;
+    }
+</style>
