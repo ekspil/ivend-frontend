@@ -6,17 +6,41 @@
             <div class="auth-block__title">Регистрация</div>
             <Validate v-if="schema" formName="register" :schema="schema" ref="register" :card="false" @onSubmit="register" @onSuccess="onSuccess">
                 <div class="auth-block__field-container auth-block__field-container--email">
-                    <Field className="auth-block__field" type="email" name="email" formName="register" placeholder="E-Mail" />
+                    <Field
+                        className="auth-block__field"
+                        type="email"
+                        name="email"
+                        formName="register"
+                        placeholder="E-Mail"
+                        :disabled="step === 2"
+                    />
                 </div>
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <Field :masked="true" className="auth-block__field" type="tel" name="phone" placeholder="Телефон" mask="\+\7 (111) 111 11-11" formName="register" />
+                    <Field
+                        :masked="true"
+                        className="auth-block__field"
+                        type="tel"
+                        name="phone"
+                        placeholder="Телефон"
+                        mask="\+\7 (111) 111 11-11"
+                        formName="register"
+                        ref="tel"
+                        :disabled="step === 2"
+                    />
                 </div>
                 <div class="auth-block__field-container auth-block__field-container--phone-code" v-if="step > 1">
-                    <input class="auth-block__field auth-block__field--phone-code" type="text" name="tel-code" placeholder="Код из смс" required disabled>
-                    <button class="auth-block__phone-code-btn">Выслать код</button>
+                    <Field
+                        className="auth-block__field"
+                        wrapperClassName="auth-block__field--phone-code"
+                        type="text"
+                        name="telCode"
+                        formName="register"
+                        placeholder="Код из SMS"
+                    />
+                    <button class="auth-block__phone-code-btn" @click="sendCode" :disabled="allowSmsSend">Выслать повторно</button>
                     <div class="auth-block__code-message">
                         Код подтверждения отправлен на номер<br />
-                        +7 (999) 999 9999
+                        {{ postData.tel }}
                     </div>
                 </div>
                 <!-- Второй шаг регистрации -->
@@ -64,6 +88,7 @@ import {
     check
 } from '@/utils/validation';
 
+let smsInterval;
 export default {
     name: 'Registration',
     components: {
@@ -72,13 +97,40 @@ export default {
     },
     data: () => ({
         schema: null,
-        postData: null,
+        postData: {
+            tel: ''
+        },
+        allowSmsSend: false,
 
         step: 1
     }),
     methods: {
-        incrementStep () {
+        async sendCode () {
+
+        },
+        async incrementStep () {
+            const vm = this;
+
             if (this.step === 1) {
+                this.postData.tel = this.$refs.tel.input;
+
+                const { data } = await this.$apollo.mutate({
+                    mutation: gql`
+                        mutation ($input: Registration1StepInput!) {
+                            timestamp: requestRegistrationSms (input: $input)
+                        }
+                    `,
+                    variables: {
+                        input: {
+                            phone: this.postData.tel.replace(/[()+\s-]/gi, '').slice(1)
+                        }
+                    }
+                });
+
+                smsInterval = setInterval(function () {
+                    vm.allowSmsSend = Date.now() > data.timestamp;
+                }, 1000);
+
                 return this.step++;
             }
 
@@ -128,6 +180,7 @@ export default {
             this.$router.push('/home');
         }
     },
+
     created() {
         const rePasswordValidator = bind(function(rePassword) {
             const cache = this.$store.state.cache.register.data;
@@ -138,9 +191,13 @@ export default {
             email: [required, email],
             phone: [required],
             password: [required],
+            telCode: [required],
             rePassword: [required, rePasswordValidator],
             agreement: [check]
         };
+    },
+    beforeDestroy () {
+        clearInterval(smsInterval);
     }
 }
 </script>

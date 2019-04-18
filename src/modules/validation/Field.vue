@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="wrapperClassName">
 		<label v-if="type === 'checkbox'" :class="[className, validation[name] ? 'default-checkbox__error' : '']" :for="name">
 			<input class="auth-block__checkbox" type="checkbox" :id="name" v-model="input"/>
 			<span class="auth-block__checkbox-label">
@@ -43,22 +43,13 @@
 				type: String,
 				default: 'text'
 			},
-			name: {
-				type: String,
-				default: ''
-			},
-			formName: {
-				type: String,
-				default: ''
-			},
-			className: {
-				type: String,
-				default: ''
-			},
-			value: {
-				type: String,
-				default: ''
-			},
+			name: String,
+			formName: String,
+
+			className: String,
+			wrapperClassName: String,
+			
+			value: String,
 			disabled: {
 				type: Boolean,
 				default: false
@@ -67,10 +58,7 @@
 				type: Boolean,
 				default: false
 			},
-			mask: {
-				type: String,
-				default: ''
-			},
+			mask: String,
 			array: {
 				type: Boolean,
 				default: false
