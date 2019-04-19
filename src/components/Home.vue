@@ -67,8 +67,8 @@
 
                             <transition name="fade">
                                 <div v-if="!$apollo.loading">
-                                    <h3 class="mb-1  text-primary counter font-30">{{ machines.length }}</h3>
-                                    <div class="f-b">{{ getWordEnding(machines.length, 'Автомат') }}</div><br/>
+                                    <h3 class="mb-1  text-primary counter font-30">{{ data.machines.length }}</h3>
+                                    <div class="f-b">{{ getWordEnding(data.machines.length, 'Автомат') }}</div><br/>
                                     <router-link to="/machines/add" class="f-b" v-if="false">Добавить контроллер</router-link>
                                 </div>
                             </transition>
@@ -343,16 +343,22 @@
     export default {
         name: 'Home',
         data: () => ({
-            machines: []
+            data: null
         }),
         apollo: {
-            machines: {
+            data: {
                 query: gql`
                     query ($period: Period) {
                         getMachines {
-                            salesSummary (period: $period) {
-                                salesCount
-                                overallAmount
+                            id
+                        }
+
+                        getProfile {
+                            items {
+                                salesSummary (period: $period) {
+                                    salesCount
+                                    overallAmount
+                                }
                             }
                         }
                     }
@@ -363,18 +369,21 @@
                     to: Date.now()
                   }
                 },
-                update: data => data.getMachines
+                update: data => ({
+                    machines: data.getMachines,
+                    items: data.getProfile.items
+                })
             }
         },
         computed: {
             getOverallSalesSummary () {
-                  return this.machines.reduce((acc, controller) => {
-                      return acc + controller.salesSummary.overallAmount;
+                  return this.data.items.reduce((acc, item) => {
+                      return acc + item.salesSummary.overallAmount;
                   }, 0);
             },
             getOverallSalesCount () {
-                  return this.machines.reduce((acc, controller) => {
-                      return acc + controller.salesSummary.salesCount;
+                  return this.data.items.reduce((acc, item) => {
+                      return acc + item.salesSummary.salesCount;
                   }, 0);
             }
         },
