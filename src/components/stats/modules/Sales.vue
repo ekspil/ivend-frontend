@@ -22,7 +22,6 @@
 
 <script>
 import gql from 'graphql-tag';
-import { findIndex, propEq } from 'ramda';
 
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
