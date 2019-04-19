@@ -144,6 +144,7 @@ export const convertServerError = error => {
 		'Phone and password does not match': 'Логин и пароль не совпадают.',
 		'Another deposit already in process': 'Завершите существующий депозит.',
 		'Such buttonId already bound to this ItemMatrix': 'Введённый ID товара уже привязан к этой матрице.',
+		'SMS code does not match': 'Введённый код не совпадает с отправленным.',
 		default: 'Неизвестная ошибка сервера.'
 	}
 
