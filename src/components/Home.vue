@@ -18,7 +18,7 @@
 
                             <transition name="fade">
                                 <div v-if="!$apollo.loading">
-                                    <h3 class="mb-1 text-primary counter font-30">{{ getOverallSalesCount }}</h3>
+                                    <h3 class="mb-1 text-primary counter font-30">{{ data.salesSummary.salesCount }}</h3>
                                     <div class="f-b">Продаж сегодня</div><br/>
                                 </div>
                             </transition>
@@ -42,7 +42,7 @@
 
                             <transition name="fade">
                                 <div v-if="!$apollo.loading">
-                                    <h3 class="mb-1  text-primary font-30"><span class="counter">{{ getOverallSalesSummary }}</span></h3>
+                                    <h3 class="mb-1  text-primary font-30"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
                                     <div class="f-b">Выручка сегодня</div><br/>
                                 </div>
                             </transition>
@@ -354,11 +354,9 @@
                         }
 
                         getProfile {
-                            items {
-                                salesSummary (period: $period) {
-                                    salesCount
-                                    overallAmount
-                                }
+                            salesSummary (period: $period) {
+                                salesCount
+                                overallAmount
                             }
                         }
                     }
@@ -371,20 +369,8 @@
                 },
                 update: data => ({
                     machines: data.getMachines,
-                    items: data.getProfile.items
+                    salesSummary: data.getProfile.salesSummary
                 })
-            }
-        },
-        computed: {
-            getOverallSalesSummary () {
-                  return this.data.items.reduce((acc, item) => {
-                      return acc + item.salesSummary.overallAmount;
-                  }, 0);
-            },
-            getOverallSalesCount () {
-                  return this.data.items.reduce((acc, item) => {
-                      return acc + item.salesSummary.salesCount;
-                  }, 0);
             }
         },
         methods: {
