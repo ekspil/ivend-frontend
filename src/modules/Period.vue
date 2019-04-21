@@ -76,7 +76,13 @@
 					case 'Всего': return 0;
 					case 'Месяц': return Date.now() - MILLISECONDS_IN_DAY * 30;
 					case 'Неделя': return Date.now() - MILLISECONDS_IN_DAY * 7;
-					case 'День': return Date.now() - MILLISECONDS_IN_DAY;
+					case 'День':
+						const currentDate = new Date();
+						const reversedDate = currentDate.toLocaleDateString().split('.').reverse().join('.');
+						return {
+							from: new Date(`${reversedDate} 00:00:00`).getTime(),
+							to: Date.now()
+						};
 
 					default: return {
 						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
