@@ -90,16 +90,6 @@
 								</option>
 							</select>
 						</div>
-
-					<div class="form-group select-services">
-						<label class="form-label f-b">Услуги</label>
-
-						<label class="toggle-checkbox" v-for="service in controller.services.controller" :key="service.id">
-							<input type="checkbox" v-model="input.serviceIds[service.id]"/>
-							<span class="slider round"> </span>
-							<span class="label-text">{{ service.name }} ({{ service.price }} руб/{{ getBillingAbbr(service.billingType) }})</span>
-						</label>
-					</div>
 				</div>
 			</div>
 		</template>
@@ -116,6 +106,7 @@
 <script>
 import gql from 'graphql-tag';
 
+import { convertServerError } from '@/utils';
 import { required } from '@/utils/validation';
 
 import Validate from '@/modules/validation/Validate';
@@ -131,14 +122,12 @@ export default {
 		controller: {
 			revisions: [],
 			equipments: [],
-			services: {},
 			machines: []
 		},
 		input: {
 			status: "ENABLED",
 			mode: "cashless",
 			revisionId: 1,
-			serviceIds: [],
 			readStatMode: "COINBOX",
 			bankTerminalMode: "NO_BANK_TERMINAL",
 			fiscalizationMode: "NO_FISCAL"
@@ -163,15 +152,6 @@ export default {
 					name
 				},
 
-				getAvailableServices {
-					controller {
-						id,
-						name,
-						price,
-						billingType
-					}
-				},
-
 				getMachines {
 					id,
 					name
@@ -182,7 +162,6 @@ export default {
 				return {
 					equipments:getEquipments,
 					revisions: getRevisions,
-					services: getAvailableServices,
 					machines: getMachines
 				};
 			}
@@ -192,8 +171,7 @@ export default {
 		async save () {
 			const data = {
 				...this.input,
-				...this.$store.getters['cache/data'],
-				serviceIds: this.input.serviceIds.map((id, index) => index).filter(id => id)
+				...this.$store.getters['cache/data']
 			};
 
 			try {
@@ -212,7 +190,7 @@ export default {
 
 				this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
 			} catch (error) {
-				this.$refs.form.showMessage('error', 'Ошибка сервера.');
+				this.$refs.form.showMessage('error', convertServerError(error.message));
 			}
 		},
 		onSuccess () {
