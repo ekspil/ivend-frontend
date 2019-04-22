@@ -145,6 +145,7 @@ export const convertServerError = error => {
 		'Another deposit already in process': 'Завершите существующий депозит.',
 		'Such buttonId already bound to this ItemMatrix': 'Введённый ID товара уже привязан к этой матрице.',
 		'SMS code does not match': 'Введённый код не совпадает с отправленным.',
+		'Controller with such UID exist': 'Контроллер с таким UID уже существует.',
 		default: 'Неизвестная ошибка сервера.'
 	}
 
