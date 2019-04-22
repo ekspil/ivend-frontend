@@ -179,7 +179,7 @@ export default {
     },
 
     isRedirectedFromYandex () {
-      return this.$route.query.from === 'yandex_kassa';
+      return this.$route.query.from === YANDEX_REDIRECT_KEY;
     }
   },
   methods: {
