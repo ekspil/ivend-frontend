@@ -1,6 +1,8 @@
 <template>
   <div class="container" v-if="billing">
     <div class="side-app">
+      <Alert message="Ваш платеж будет подтверждён в ближайшее время." v-if="isRedirectedFromYandex" class="balance-alert" />
+
       <div class="balance-info">
         <div :class="['balance-info-block', 'balance-info__block', hasEnoughMoney ? '' : 'balance-info-block--attention']">
           <div class="balance-info-block__info-container">
@@ -78,6 +80,7 @@ import gql from 'graphql-tag';
 import { head, isEmpty } from 'ramda';
 import { convertServerError } from '@/utils';
 
+import Alert from '@/modules/Alert';
 import Hint from '@/modules/Hint';
 
 import Tabs from '@/modules/Tabs';
@@ -86,9 +89,13 @@ import BillingServices from './modules/BillingServices';
 
 import Period from '@/modules/Period';
 
+// Query key for marking redirects from Yandex Kassa e.g. ?from=yandex_kassa
+const YANDEX_REDIRECT_KEY = 'yandex_kassa';
+
 export default {
   name: 'Billing',
   components: {
+    Alert,
     Hint,
     Period,
     Tabs
@@ -169,6 +176,10 @@ export default {
       }
 
       return true;
+    },
+
+    isRedirectedFromYandex () {
+      return this.$route.query.from === YANDEX_REDIRECT_KEY;
     }
   },
   methods: {
@@ -230,8 +241,11 @@ export default {
 .payment-table {
   margin-top: 30px;
 }
+
+.balance-alert, .balance-info {
+  margin-top: 1em;
+}
 .balance-info {
-  margin-top: 50px;
   &-block__recharge-form {
     display: flex;
     align-items: center;
