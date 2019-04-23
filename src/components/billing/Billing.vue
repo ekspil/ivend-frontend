@@ -22,7 +22,7 @@
             <i class="far fa-calendar-alt"></i>
           </div>
         </div>
-        <div :class="['balance-info-block', 'balance-info__block', hasEnoughDays ? '' : 'balance-info-block--attention']">
+        <div :class="['balance-info-block', 'balance-info__block', hasEnoughDays && billing.dailyBill > 0 ? '' : 'balance-info-block--attention']">
           <div class="balance-info-block__info-container">
             <div class="balance-info-block__count">{{ billing.daysLeft }}</div>
             <div class="balance-info-block__title">Осталось дней</div>

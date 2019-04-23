@@ -158,7 +158,7 @@ export default {
 				}
 			}
 			`,
-			update ({ getEquipments, getRevisions, getAvailableServices, getMachines }) {
+			update ({ getEquipments, getRevisions, getMachines }) {
 				return {
 					equipments:getEquipments,
 					revisions: getRevisions,

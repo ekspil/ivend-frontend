@@ -91,19 +91,6 @@
                     <option value="APPROVED">С подтверждением</option>
                   </select>
                 </div>
-
-                <div class="form-group select-services">
-                  <label class="form-label f-b">Услуги</label>
-
-                  <label class="toggle-checkbox" v-for="(service, index) in data.services" :key="service.id">
-                    <input
-                    type="checkbox"
-                    v-model="input.serviceIds[index].checked"
-                    />
-                    <span class="slider round"> </span>
-                    <span class="label-text">{{ service.name }} ({{ service.price }} руб/{{ getBillingAbbr(service.billingType) }})</span>
-                  </label>
-                </div>
               </div>
             </div>
           </template>
@@ -126,8 +113,6 @@
 <script>
 import gql from 'graphql-tag';
 
-import { find, propEq } from 'ramda';
-
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 
@@ -140,10 +125,6 @@ export default {
   },
   data: () => ({
     data: null,
-
-    input: {
-      serviceIds: []
-    },
 
     schema: {
       uid: [required]
@@ -172,10 +153,6 @@ export default {
           bankTerminalMode
           readStatMode
           fiscalizationMode
-
-          services {
-            id
-          }
         }
 
         equipments: getEquipments {
@@ -192,38 +169,14 @@ export default {
           id
           name
         }
-
-        services: getAvailableServices {
-          controller {
-            id,
-            name,
-            price,
-            billingType
-          }
-        }
       }
       `,
       update(data) {
-        if (!this.controllerUploading) {
-          if (data.controller.services.length > 0) {
-            this.input.serviceIds = data.controller.services.map(service => ({
-              ...service,
-              checked: find(propEq('id', service.id))(data.controller.services)
-            }));
-          } else {
-            this.input.serviceIds = data.services.controller.map(service => ({
-              id: service.id,
-              checked: false
-            }));
-          }
-        }
-
         return {
           controller: data.controller,
           equipments: data.equipments,
           revisions: data.revisions,
-          machines: data.machines,
-          services: data.services.controller
+          machines: data.machines
         };
       }
     }
@@ -240,8 +193,7 @@ export default {
           mode: controller.mode,
           fiscalizationMode: controller.fiscalizationMode,
           bankTerminalMode: controller.bankTerminalMode,
-          readStatMode: controller.readStatMode,
-          serviceIds: this.input.serviceIds.map(service => service.checked ? service.id : null).filter(id => id !== null)
+          readStatMode: controller.readStatMode
         };
 
         const { errors } = await this.$apollo.mutate({
