@@ -58,12 +58,14 @@
 				this.$emit('onChange', this.getPeriod);
 			},
 			setPeriodFrom (date) {
+				date.setHours(0, 0, 0, 0);
 				this.calendar.from = date;
 				this.period = null;
 
 				this.$emit('onChange', this.getPeriod);
 			},
 			setPeriodTo (date) {
+				date.setHours(23, 59, 59, 0);
 				this.calendar.to = date;
 				this.period = null;
 
@@ -72,11 +74,30 @@
 		},
 		computed: {
 			getPeriod () {
+				let date;
 				switch (this.period) {
 					case 'Всего': return 0;
-					case 'Месяц': return Date.now() - MILLISECONDS_IN_DAY * 30;
-					case 'Неделя': return Date.now() - MILLISECONDS_IN_DAY * 7;
-					case 'День': return Date.now() - MILLISECONDS_IN_DAY;
+					case 'Месяц':
+						date = new Date();
+						date.setDate(date.getMonth() - 1);
+						return {
+							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+							to: Date.now()
+						};
+					case 'Неделя':
+						date = new Date();
+						date.setDate(date.getDate() - 7);
+						return {
+							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+							to: Date.now()
+						};
+
+					case 'День':
+						date = new Date();
+						return {
+							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+							to: Date.now()
+						};
 
 					default: return {
 						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
