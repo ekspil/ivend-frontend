@@ -96,7 +96,7 @@
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.machines); }
+            getTableFields () { return getTableFields(this.machines, this.$apollo); }
         }
     }
 </script>

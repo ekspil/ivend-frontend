@@ -104,7 +104,7 @@
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.controllers); }
+            getTableFields () { return getTableFields(this.controllers, this.$apollo); }
         }
     }
 </script>

@@ -1,3 +1,5 @@
+import gql from 'graphql-tag';
+
 export const getTableHeaders = () => [
     { name: 'Автомат', key: 'number', link: true },
     { name: 'Название', key: 'name' },
@@ -8,7 +10,8 @@ export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'controllerName' }
 ];
 
-export const getTableFields = data => data.map(({ id, name, place, number, group, type, equipment, controller }) => ({
+export const getTableFields = (data, apollo) => data.map(({ id, name, place, number, group, type, equipment, controller }) => ({
+    id,
     name,
     number,
     place,
@@ -17,5 +20,21 @@ export const getTableFields = data => data.map(({ id, name, place, number, group
     equipmentName: equipment.name,
     controllerName: controller?.uid || '-',
 
+    props: {
+        removable: async callback => {
+            await apollo.mutate({
+                mutation: gql`
+                    mutation ($id: Int!) {
+                        deleteMachine (id: $id) {
+                            name
+                        }
+                    }
+                `,
+                variables: { id }
+            });
+
+            callback();
+        }
+    },
     route: `/machine/edit/${id}`
 }));

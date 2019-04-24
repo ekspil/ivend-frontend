@@ -24,6 +24,19 @@
 						<div v-else-if="header.raw" v-html="field[header.key]"></div>
 						<template v-else>{{ field[header.key] }}</template>
 					</td>
+
+                    <td class="text-right" v-if="field.props && field.props.removable">
+                        <div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon">
+                            	<i class="fe fe-more-vertical"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#" class="dropdown-item" @click.prevent="field.props.removable(() => removeController(field.id))">
+                                	<i class="dropdown-icon fe fe-x"></i> Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </td>
 				</tr>
 			</tbody>
 		</table>
@@ -53,11 +66,15 @@
 		data () {
 			const critery = this.sortBy || this.headers[0].key;
 			return {
+				removed: [],
+
 				critery,
 				ltOrder: false
 			};
 		},
 		methods: {
+			removeController (id) { return id && this.removed.push(id); },
+
 			getHeaderClass (header) {
 				return {
 					up: not(header.unsortable) && equals(header.key, this.critery) && not(this.ltOrder),
@@ -82,6 +99,7 @@
 		computed: {
 			getFields () {
 				const critery = this.critery;
+				const fields = this.fields.filter(field => !this.removed.includes(field.id));
 
 				if (this.ltOrder) {
 					return sort((a, b) => {
@@ -98,7 +116,7 @@
 						}
 
 						return lt(firstCritery, secondCritery) ? -1 : 1;
-					}, this.fields);
+					}, fields);
 				}
 
 				return sort((a, b) => {
@@ -115,7 +133,7 @@
 					}
 
 					return lt(firstCritery, secondCritery) ? 1 : -1;
-				}, this.fields);
+				}, fields);
 			}
 		}
 	}
