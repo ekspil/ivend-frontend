@@ -11,6 +11,7 @@ import AddGoods from '@/components/goods/AddGoods';
 
 import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
+import GoodSales from '@/components/stats/GoodSales';
 
 import Monitoring from '@/components/monitoring/Monitoring';
 import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
@@ -41,6 +42,7 @@ const routes = [
 
     { path: '/stats', component: Stats },
     { path: '/stats/:id', component: ControllerSales },
+    { path: '/stats/good/:id', component: GoodSales },
 
     { path: '/monitoring', component: Monitoring },
     { path: '/monitoring/:id', component: MonitoringLogs },
