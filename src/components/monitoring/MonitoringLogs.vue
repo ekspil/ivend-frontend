@@ -80,7 +80,7 @@ export default {
             logs {
               type
               message
-              time
+              timestamp
             }
           }
         }
