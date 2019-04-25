@@ -24,6 +24,7 @@ import Billing from '@/components/billing/Billing';
 import Tariffs from '@/components/tariffs/Tariffs';
 
 import Home from '@/components/Home';
+import Confirm from '@/components/Confirm';
 
 import { includes } from 'ramda';
 
@@ -34,6 +35,7 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', redirect: '/home' },
     { path: '/home', component: Home },
+    { path: '/confirm', component: Confirm },
 
     { path: '/controllers/edit/:id', component: EditController },
     { path: '/controllers/add', component: AddController },
@@ -66,17 +68,20 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const isSecured = !includes(to.path, ['/login', '/register']);
-    
-    if (isSecured && !store.state.auth.token) {
-        return next('/login');
-    }
-    
-    if (store.state.user?.profile?.role === 'VENDOR_NOT_CONFIRMED') {
-        return next('/confirm');
-    } else if (store.state.auth.token && (to.path === '/confirm' || !isSecured)) {
-        return next('/home');
-    }
+     const isSecured = !includes(to.path, ['/login', '/register']);
+     const token = store.state.auth.token, role = store.state.user?.profile?.role;
+     
+     if (isSecured && !token) {
+         return next('/login');
+     } else if (!isSecured && token || token && role !== 'VENDOR') {
+        if (role === 'VENDOR_NEGATIVE_BALANCE' && to.path !== '/billing') {
+            return next('/billing');
+        } else if (role === 'VENDOR_NO_LEGAL_INFO' && !['/billing', '/settings'].includes(to.path)) {
+            return next('/settings');
+        } else if (role === 'VENDOR_NOT_CONFIRMED' && to.path !== '/confirm') {
+            return next('/confirm');
+        }
+     }
 
     return next();
 })

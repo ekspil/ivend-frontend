@@ -3,13 +3,18 @@
         <div class="container">
             <ul class="nav">
                 <li class="nav-item">
-                    <router-link :class="['nav-link', /^\/home/.test($route.path) ? 'active' : '']" to="/home">
+                    <router-link :class="['nav-link', isDisabled('/home')]" to="/home" activeClass="active" :event="isDisabled('/home') ? '' : 'click'">
                         <i class="fas fa-home"></i>
                         Главная
                     </router-link>
                 </li>
+
                 <li class="nav-item">
-                    <router-link to="/monitoring" :class="['nav-link', /^\/monitoring/.test($route.path) ? 'active' : '']"><i class="fas fa-desktop"></i> <span>Мониторинг</span></router-link>
+                    <router-link to="/monitoring" :class="['nav-link', isDisabled('/monitoring')]" activeClass="active" :event="isDisabled('/monitoring') ? '' : 'click'">
+                        <i class="fas fa-desktop"></i> <span>Мониторинг</span>
+                    </router-link>
+
+                    <!-- Removed -->
                     <div class="sub-item" v-if="false">
                         <ul>
                             <li>
@@ -20,12 +25,19 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- ------- -->
                 </li>
+
                 <li class="nav-item">
-                    <router-link to="/stats" :class="['nav-link', /^\/stats/.test($route.path) ? 'active' : '']"><i class="fas fa-chart-bar"></i><span>Статистика</span></router-link>
+                    <router-link to="/stats" :class="['nav-link', isDisabled('/stats')]" activeClass="active" :event="isDisabled('/stats') ? '' : 'click'">
+                        <i class="fas fa-chart-bar"></i> <span>Статистика</span>
+                    </router-link>
                 </li>
+
+                <!-- Removed -->
                 <li class="nav-item with-sub" v-if="false">
-                    <a class="nav-link" href="#"><i class="fas fa-cog"></i><span>Обслуживание</span></a>
+                    <a class="nav-link" href="#"><i class="fas fa-cog"></i> <span>Обслуживание</span></a>
+
                     <div class="sub-item" v-if="false">
                         <ul>
                             <li>
@@ -44,8 +56,10 @@
                     </div>
                 </li>
                 <li class="nav-item with-sub" v-if="false">
-                    <a :class="['nav-link', /^\/controllers/.test($route.path) ? 'active' : '']" data-toggle="dropdown" href="#"><i class="fas fa-hdd"></i>
-                        <span>Оборудование</span></a>
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fas fa-hdd"></i> <span>Оборудование</span>
+                    </a>
+
                     <div class="sub-item">
                         <ul>
                             <li>
@@ -63,16 +77,23 @@
                         </ul>
                     </div>
                 </li>
+                <!-- ------ -->
+
                 <li class="nav-item">
-                    <router-link :class="['nav-link', /^\/settings/.test($route.path) ? 'active' : '']" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
+                    <router-link :class="['nav-link', isDisabled('/settings')]" to="/settings" activeClass="active" :event="isDisabled('/settings') ? '' : 'click'">
+                        <i class="fas fa-sliders-h"></i> <span>Настройки</span>
+                    </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :class="['nav-link', /^\/billing/.test($route.path) ? 'active' : '']" to="/billing"><i class="fas fa-money-check"></i> <span>Оплата</span></router-link>
+                    <router-link :class="['nav-link', isDisabled('/billing')]" to="/billing" activeClass="active" :event="isDisabled('/billing') ? '' : 'click'">
+                        <i class="fas fa-money-check"></i> <span>Оплата</span>
+                    </router-link>
                 </li>
             </ul>
         </div>
     </div>
 </template>
+
 <script>
     export default {
         name: 'Navbar',
@@ -81,21 +102,27 @@
                 const role = this.$store.state.user?.profile?.role;
 
                 switch (role) {
-                    case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing';
-                    case 'VENDOR_NO_LEGAL_INFO': return !['/billing', '/settings'].includes(link);
+                    case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing' && 'disabled';
+                    case 'VENDOR_NO_LEGAL_INFO': return !['/billing', '/settings'].includes(link) && 'disabled';
 
-                    case 'VENDOR_NOT_CONFIRMED': return true;
+                    case 'VENDOR_NOT_CONFIRMED': return true && 'disabled';
                     case 'VENDOR':
                     default:
                         return false;
                 }
-            },
-
-            isActive (link) {
-                const route = this.$route.path;
-
-                return new RegExp(`^${link}`).test(route) && 'active';
             }
         }
     }
 </script>
+
+<style scoped lang="scss">
+    .nav-link.disabled {
+        color: #666666;
+        cursor: not-allowed;
+
+        &:hover, &:focus {
+            background: transparent;
+            color: #666666;
+        }
+    }
+</style>
