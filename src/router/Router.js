@@ -11,6 +11,7 @@ import AddGoods from '@/components/goods/AddGoods';
 
 import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
+import GoodSales from '@/components/stats/GoodSales';
 
 import Monitoring from '@/components/monitoring/Monitoring';
 import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
@@ -23,7 +24,6 @@ import Billing from '@/components/billing/Billing';
 import Tariffs from '@/components/tariffs/Tariffs';
 
 import Home from '@/components/Home';
-import Confirm from '@/components/Confirm';
 
 import { includes } from 'ramda';
 
@@ -34,7 +34,6 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', redirect: '/home' },
     { path: '/home', component: Home },
-    { path: '/confirm', component: Confirm },
 
     { path: '/controllers/edit/:id', component: EditController },
     { path: '/controllers/add', component: AddController },
@@ -43,6 +42,7 @@ const routes = [
 
     { path: '/stats', component: Stats },
     { path: '/stats/:id', component: ControllerSales },
+    { path: '/stats/good/:id', component: GoodSales },
 
     { path: '/monitoring', component: Monitoring },
     { path: '/monitoring/:id', component: MonitoringLogs },
@@ -79,6 +79,6 @@ router.beforeEach((to, from, next) => {
      }
 
     return next();
-});
+})
 
 export default router;

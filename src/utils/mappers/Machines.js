@@ -8,7 +8,8 @@ export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'controllerName' }
 ];
 
-export const getTableFields = data => data.map(({ id, name, place, number, group, type, equipment, controller }) => ({
+export const getTableFields = (data, props) => data.map(({ id, name, place, number, group, type, equipment, controller }) => ({
+    id,
     name,
     number,
     place,
@@ -17,5 +18,6 @@ export const getTableFields = data => data.map(({ id, name, place, number, group
     equipmentName: equipment.name,
     controllerName: controller?.uid || '-',
 
+    props,
     route: `/machine/edit/${id}`
 }));

@@ -22,7 +22,8 @@ export const getTableHeaders = () => [
     { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true }
 ];
 
-export const getTableFields = data => data.map(controller => ({
+export const getTableFields = (data, props) => data.map(controller => ({
+    id: controller.id,
     uid: controller.uid,
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',
@@ -30,5 +31,6 @@ export const getTableFields = data => data.map(controller => ({
     fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
     machine: controller.machine?.name || '-',
 
+    props,
     route: `/controllers/edit/${controller.id}`
 }));

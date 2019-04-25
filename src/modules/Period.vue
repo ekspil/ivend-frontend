@@ -32,7 +32,6 @@
 	import datepicker from 'vuejs-datepicker';
 	import { ru } from 'vuejs-datepicker/dist/locale';
 
-	const MILLISECONDS_IN_DAY = 86400000;
 	export default {
 		name: 'Period',
 		components: {

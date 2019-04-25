@@ -94,9 +94,29 @@
                 }
             }
         },
+        methods: {
+            async removeMachine (id) {
+                await this.$apollo.mutate({
+                    mutation: gql`
+                        mutation ($id: Int!) {
+                            deleteMachine (id: $id) {
+                                name
+                            }
+                        }
+                    `,
+                    variables: { id }
+                });
+
+                this.machines = this.machines.filter(machine => machine.id !== id);
+            }
+        },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.machines); }
+            getTableFields () {
+                return getTableFields(this.machines, {
+                    remove: this.removeMachine
+                });
+            }
         }
     }
 </script>
