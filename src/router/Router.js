@@ -67,13 +67,18 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     const isSecured = !includes(to.path, ['/login', '/register']);
+    
     if (isSecured && !store.state.auth.token) {
-        next('/login');
-    } else if (!isSecured && store.state.auth.token) {
-        next('/home');
-    } else {
-        next();
+        return next('/login');
     }
+    
+    if (store.state.user?.profile?.role === 'VENDOR_NOT_CONFIRMED') {
+        return next('/confirm');
+    } else if (store.state.auth.token && (to.path === '/confirm' || !isSecured)) {
+        return next('/home');
+    }
+
+    return next();
 })
 
 export default router;

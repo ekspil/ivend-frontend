@@ -75,6 +75,27 @@
 </template>
 <script>
     export default {
-    }
+        name: 'Navbar',
+        methods: {
+            isDisabled (link) {
+                const role = this.$store.state.user?.profile?.role;
 
+                switch (role) {
+                    case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing';
+                    case 'VENDOR_NO_LEGAL_INFO': return !['/billing', '/settings'].includes(link);
+
+                    case 'VENDOR_NOT_CONFIRMED': return true;
+                    case 'VENDOR':
+                    default:
+                        return false;
+                }
+            },
+
+            isActive (link) {
+                const route = this.$route.path;
+
+                return new RegExp(`^${link}`).test(route) && 'active';
+            }
+        }
+    }
 </script>
