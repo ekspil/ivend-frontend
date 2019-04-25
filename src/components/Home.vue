@@ -363,7 +363,7 @@
                 `,
                 variables: {
                   period: {
-                    from: new Date().setHours(3,0,0,0),
+                    from: new Date().setHours(0,0,0,0),
                     to: Date.now()
                   }
                 },
