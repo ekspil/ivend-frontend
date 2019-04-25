@@ -99,7 +99,7 @@
         name: 'Navbar',
         methods: {
             isDisabled (link) {
-                const role = this.$store.state.user.profile.role;
+                const role = this.$store.state.user.profile?.role;
 
                 switch (role) {
                     case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing';
