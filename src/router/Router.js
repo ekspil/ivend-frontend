@@ -76,7 +76,7 @@ router.beforeEach((to, from, next) => {
     
     if (store.state.user.profile.role === 'VENDOR_NOT_CONFIRMED') {
         return next('/confirm');
-    } else if (to.path === '/confirm' || !isSecured) {
+    } else if (store.state.auth.token && (to.path === '/confirm' || !isSecured)) {
         return next('/home');
     }
 
