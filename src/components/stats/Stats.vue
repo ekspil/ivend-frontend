@@ -29,8 +29,8 @@ export default {
   },
   data: () => ({
     tabs: [
-      { name: 'Финансы', component: Finance, route: 'finance' },
-      { name: 'Продажи', component: Sales, route: 'sales' }
+      { name: 'По автоматам', component: Finance, route: 'finance' },
+      { name: 'По товарам', component: Sales, route: 'sales' }
     ]
   })
 }
