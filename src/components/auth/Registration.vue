@@ -190,7 +190,7 @@ export default {
                 }
             });
 
-            this.$store.commit('auth/setToken', data.token);
+            this.$store.dispatch('auth/requestUserData', data.token);
             this.$router.push('/home');
         }
     },

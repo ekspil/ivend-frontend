@@ -23,6 +23,7 @@ import Billing from '@/components/billing/Billing';
 import Tariffs from '@/components/tariffs/Tariffs';
 
 import Home from '@/components/Home';
+import Confirm from '@/components/Confirm';
 
 import { includes } from 'ramda';
 
@@ -33,6 +34,7 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', redirect: '/home' },
     { path: '/home', component: Home },
+    { path: '/confirm', component: Confirm },
 
     { path: '/controllers/edit/:id', component: EditController },
     { path: '/controllers/add', component: AddController },
@@ -65,13 +67,18 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     const isSecured = !includes(to.path, ['/login', '/register']);
+
     if (isSecured && !store.state.auth.token) {
-        next('/login');
-    } else if (!isSecured && store.state.auth.token) {
-        next('/home');
-    } else {
-        next();
+        return next('/login');
     }
-})
+    
+    if (store.state.user.profile.role === 'VENDOR_NOT_CONFIRMED') {
+        return next('/confirm');
+    } else if (to.path === '/confirm' || !isSecured) {
+        return next('/home');
+    }
+
+    return next();
+});
 
 export default router;
