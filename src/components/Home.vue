@@ -339,7 +339,6 @@
 
     import { getWordEnding } from '@/utils';
 
-    //const MILLISECONDS_IN_DAY = 86400000;
     export default {
         name: 'Home',
         data: () => ({
