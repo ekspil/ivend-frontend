@@ -1,5 +1,5 @@
 import Bus from '@/bus';
-import router from '@/router';
+import router from '@/router/Router';
 
 import gql from 'graphql-tag';
 
