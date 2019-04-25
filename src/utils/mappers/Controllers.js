@@ -1,5 +1,3 @@
-import gql from 'graphql-tag';
-
 const getStatus = status => {
     switch (status) {
         case 'ENABLED':
@@ -24,7 +22,7 @@ export const getTableHeaders = () => [
     { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true }
 ];
 
-export const getTableFields = (data, apollo) => data.map(controller => ({
+export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
     uid: controller.uid,
     status: getStatus(controller.status),
@@ -33,21 +31,6 @@ export const getTableFields = (data, apollo) => data.map(controller => ({
     fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
     machine: controller.machine?.name || '-',
 
-    props: {
-        removable: async callback => {
-            await apollo.mutate({
-                mutation: gql`
-                    mutation ($id: Int!) {
-                        deleteController (id: $id) {
-                            name
-                        }
-                    }
-                `,
-                variables: { id: controller.id }
-            });
-
-            callback();
-        }
-    },
+    props,
     route: `/controllers/edit/${controller.id}`
 }));

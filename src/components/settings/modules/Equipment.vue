@@ -100,11 +100,30 @@
                     case 'DEBUG': return '<span class="status-icon bg-yellow"></span> Отладка';
                     case 'TRAINING': return '<span class="status-icon bg-info"></span> Обучение';
                 }
+            },
+
+            async removeController (id) {
+                await this.$apollo.mutate({
+                    mutation: gql`
+                        mutation ($id: Int!) {
+                            deleteController (id: $id) {
+                                name
+                            }
+                        }
+                    `,
+                    variables: { id }
+                });
+
+                this.controllers = this.controllers.filter(controller => controller.id !== id);
             }
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.controllers, this.$apollo); }
+            getTableFields () {
+                return getTableFields(this.controllers, {
+                    remove: this.removeController
+                });
+            }
         }
     }
 </script>
