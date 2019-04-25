@@ -11,7 +11,6 @@ import AddGoods from '@/components/goods/AddGoods';
 
 import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
-import GoodSales from '@/components/stats/GoodSales';
 
 import Monitoring from '@/components/monitoring/Monitoring';
 import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
@@ -44,7 +43,6 @@ const routes = [
 
     { path: '/stats', component: Stats },
     { path: '/stats/:id', component: ControllerSales },
-    { path: '/stats/good/:id', component: GoodSales },
 
     { path: '/monitoring', component: Monitoring },
     { path: '/monitoring/:id', component: MonitoringLogs },
@@ -76,7 +74,7 @@ router.beforeEach((to, from, next) => {
     
     if (store.state.user.profile.role === 'VENDOR_NOT_CONFIRMED') {
         return next('/confirm');
-    } else if (to.path === '/confirm' || !isSecured) {
+    } else if (store.state.auth.token && (to.path === '/confirm' || !isSecured)) {
         return next('/home');
     }
 
