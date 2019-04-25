@@ -30,7 +30,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
   return forward(operation).map(resp => {
     if (resp.errors && find(propEq('message', 'Not authorized'))(resp.errors)) {
-      store.commit('auth/setToken', null)
+      store.commit('auth/setToken', null);
+      store.commit('user/clear');
     }
 
     return resp

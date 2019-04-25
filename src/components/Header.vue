@@ -112,6 +112,7 @@
         methods: {
             exit () {
                 this.$store.commit('auth/setToken', null);
+                this.$store.commit('user/clear');
                 this.$router.push('/login');
             }
         },

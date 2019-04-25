@@ -191,7 +191,6 @@ export default {
             });
 
             this.$store.dispatch('auth/requestUserData', data.token);
-            this.$router.push('/home');
         }
     },
 

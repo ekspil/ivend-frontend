@@ -1,4 +1,6 @@
 import Bus from '@/bus';
+import router from '@/router/Router';
+
 import gql from 'graphql-tag';
 
 const state = () => ({
@@ -27,7 +29,10 @@ const actions = {
 			`
 		});
 
-		commit('set', data.getProfile);
+		commit('set', {
+			role: 'VENDOR_NEGATIVE_BALANCE'
+		});
+		router.push('/home');
 	}
 };
 
