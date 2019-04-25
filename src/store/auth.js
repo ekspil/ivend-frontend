@@ -13,19 +13,8 @@ const mutations = {
 	}
 };
 
-const actions = {
-	requestUserData ({ commit, dispatch }, token = null) {
-		commit('setToken', token);
-
-		dispatch('user/fetch', null, {
-			root: true
-		});
-	}
-}
-
 export default {
 	namespaced: true,
 	state,
-	mutations,
-	actions
+	mutations
 }

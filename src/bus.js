@@ -1,8 +1,5 @@
 import Vue from 'vue';
-import apolloProvider from "@/factory/ApolloProviderFactory";
 
-const bus = new Vue({
-	apolloProvider
-});
+const bus = new Vue();
 
 export default bus;

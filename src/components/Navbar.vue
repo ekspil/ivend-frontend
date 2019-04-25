@@ -3,18 +3,13 @@
         <div class="container">
             <ul class="nav">
                 <li class="nav-item">
-                    <router-link :class="['nav-link', isActive('/home'), isDisabled('/home')]" to="/home">
+                    <router-link :class="['nav-link', /^\/home/.test($route.path) ? 'active' : '']" to="/home">
                         <i class="fas fa-home"></i>
                         Главная
                     </router-link>
                 </li>
-
                 <li class="nav-item">
-                    <router-link to="/monitoring" :class="['nav-link', isActive('/monitoring'), isDisabled('/monitoring')]">
-                        <i class="fas fa-desktop"></i> <span>Мониторинг</span>
-                    </router-link>
-
-                    <!-- Removed -->
+                    <router-link to="/monitoring" :class="['nav-link', /^\/monitoring/.test($route.path) ? 'active' : '']"><i class="fas fa-desktop"></i> <span>Мониторинг</span></router-link>
                     <div class="sub-item" v-if="false">
                         <ul>
                             <li>
@@ -25,19 +20,12 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- ------- -->
                 </li>
-
                 <li class="nav-item">
-                    <router-link to="/stats" :class="['nav-link', isActive('/stats'), isDisabled('/stats')]">
-                        <i class="fas fa-chart-bar"></i> <span>Статистика</span>
-                    </router-link>
+                    <router-link to="/stats" :class="['nav-link', /^\/stats/.test($route.path) ? 'active' : '']"><i class="fas fa-chart-bar"></i><span>Статистика</span></router-link>
                 </li>
-
-                <!-- Removed -->
                 <li class="nav-item with-sub" v-if="false">
-                    <a class="nav-link" href="#"><i class="fas fa-cog"></i> <span>Обслуживание</span></a>
-
+                    <a class="nav-link" href="#"><i class="fas fa-cog"></i><span>Обслуживание</span></a>
                     <div class="sub-item" v-if="false">
                         <ul>
                             <li>
@@ -56,10 +44,8 @@
                     </div>
                 </li>
                 <li class="nav-item with-sub" v-if="false">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fas fa-hdd"></i> <span>Оборудование</span>
-                    </a>
-
+                    <a :class="['nav-link', /^\/controllers/.test($route.path) ? 'active' : '']" data-toggle="dropdown" href="#"><i class="fas fa-hdd"></i>
+                        <span>Оборудование</span></a>
                     <div class="sub-item">
                         <ul>
                             <li>
@@ -77,23 +63,16 @@
                         </ul>
                     </div>
                 </li>
-                <!-- ------ -->
-
                 <li class="nav-item">
-                    <router-link :class="['nav-link', isActive('/settings'), isDisabled('/settings')]" to="/settings">
-                        <i class="fas fa-sliders-h"></i> <span>Настройки</span>
-                    </router-link>
+                    <router-link :class="['nav-link', /^\/settings/.test($route.path) ? 'active' : '']" to="/settings"><i class="fas fa-sliders-h"></i> <span>Настройки</span></router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link :class="['nav-link', isActive('/billing'), isDisabled('/billing')]" to="/billing">
-                        <i class="fas fa-money-check"></i> <span>Оплата</span>
-                    </router-link>
+                    <router-link :class="['nav-link', /^\/billing/.test($route.path) ? 'active' : '']" to="/billing"><i class="fas fa-money-check"></i> <span>Оплата</span></router-link>
                 </li>
             </ul>
         </div>
     </div>
 </template>
-
 <script>
     export default {
         name: 'Navbar',
@@ -119,15 +98,3 @@
         }
     }
 </script>
-
-<style scoped lang="scss">
-    .nav-link.disabled {
-        color: #666666;
-        cursor: not-allowed;
-
-        &:hover {
-            background: transparent;
-            color: #666666;
-        }
-    }
-</style>
