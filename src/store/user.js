@@ -30,7 +30,7 @@ const actions = {
 		});
 
 		commit('set', data.getProfile);
-		router.$push('/home');
+		router.push('/home');
 	}
 };
 
