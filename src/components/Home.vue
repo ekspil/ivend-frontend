@@ -339,7 +339,7 @@
 
     import { getWordEnding } from '@/utils';
 
-    const MILLISECONDS_IN_DAY = 86400000;
+    //const MILLISECONDS_IN_DAY = 86400000;
     export default {
         name: 'Home',
         data: () => ({
@@ -363,7 +363,7 @@
                 `,
                 variables: {
                   period: {
-                    from: Date.now() - MILLISECONDS_IN_DAY,
+                    from: new Date().setHours(3,0,0,0),
                     to: Date.now()
                   }
                 },
