@@ -51,7 +51,7 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
-            docker build -t "registry.gitlab.com/pshenmic/ivend/frontend:$CIRCLE_SHA1" .
+            docker build -t "registry.gitlab.com/pshenmic/ivend/frontend:$CIRCLE_SHA1" --build-arg VUE_APP_GRAPHQL_API=https://graphql.p-factory.ru .
             docker login registry.gitlab.com -u "pshenmic" -p "$GITLAB_TOKEN"
             docker push "registry.gitlab.com/pshenmic/ivend/frontend:$CIRCLE_SHA1"
 
