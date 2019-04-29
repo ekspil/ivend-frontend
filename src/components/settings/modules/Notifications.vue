@@ -17,12 +17,12 @@
 				<tbody>
 
 					<tr v-for="({ type, email, sms }, index) in profile.notificationSettings" :key="index">
-						<td>Нет связи с автоматом</td>
+						<td>{{ getType(type) }}</td>
 
 						<td class="checkbox-cel">
 							<label class="default-checkbox" for="checkbox-11">
 								<input class="auth-block__checkbox" type="checkbox"
-								id="checkbox-11" v-model="profile.notificationSettings[index].email">
+								id="checkbox-11" v-model="profile.notificationSettings[index].email" @change="save(index)"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
@@ -30,7 +30,7 @@
 						<td class="checkbox-cel">
 							<label class="default-checkbox" for="checkbox-12">
 								<input class="auth-block__checkbox" type="checkbox"
-								id="checkbox-12" v-model="profile.notificationSettings[index].sms">
+								id="checkbox-12" v-model="profile.notificationSettings[index].sms" @change="save(index)"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
@@ -44,6 +44,8 @@
 
 <script>
 	import gql from 'graphql-tag';
+
+	import { omit } from 'ramda';
 
 	export default {
 		name: 'Notifications',
@@ -66,28 +68,42 @@
 			}
 		},
 		data: () => ({
-			profile: null
+			profile: null,
+
+			status: {
+				error: null,
+				success: null
+			}
 		}),
 		methods: {
-			async save () {
-				const notification = this.profile.notificationSettings[0];
+			getType (type) {
+				switch (type) {
+					case 'CONTROLLER_NO_CONNECTION': return 'Нет связи с автоматом';
+					default: return 'Неизвестный тип уведомления';
+				}
+			},
+			async save (index) {
+				const notification = this.profile.notificationSettings[index];
+
 				await this.$apollo.mutate({
 					mutation: gql`
-						mutation EditSettings ($data: UpdateNotificationSettingInput!) {
-							updateNotificationSetting(input: $data) {
-								type
-							}
+					mutation EditSettings ($data: UpdateNotificationSettingInput!) {
+						updateNotificationSetting(input: $data) {
+							type
 						}
+					}
 					`,
 					variables: {
-						data: {
-							type: notification.type,
-							email: notification.email,
-							sms: notification.sms
-						}
+						data: omit(['__typename'], notification)
 					}
 				});
 			}
 		}
 	}
 </script>
+
+<style scoped lang="scss">
+	.top-buttons {
+		justify-content: flex-end;
+	}
+</style>

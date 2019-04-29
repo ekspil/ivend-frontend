@@ -8,18 +8,18 @@
                             <h3 class="card-title f-b">Настройки товарной матрицы</h3>
                         </div>
                         <div class="card-header-links">
-                            <router-link to="/controllers" class="card-header-links__item">Вернуться назад</router-link>
+                            <router-link to="/settings" class="card-header-links__item">Вернуться назад</router-link>
                         </div>
                         <div class="top-buttons top-buttons--product-matrix">
                             <div class="top-buttons__left-container">
                                 <router-link :to="`/goods/add/${$route.params.id}`" class="btn btn-primary">Добавить товар</router-link>
                             </div>
                             <div class="top-buttons__content-container">
-                                <button class="default-green-button btn btn-primary">Выбрать матрицу</button>
-                                <button class="default-green-button btn btn-primary">Сохранить</button>
+                                <button class="default-green-button btn btn-primary" v-if="false">Выбрать матрицу</button>
+                                <button class="default-green-button btn btn-primary" v-if="false">Сохранить</button>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" v-if="false">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="table-responsive product-matrix-table">
-                            <table class="table card-table table-vcenter text-nowrap">
+                            <table class="table card-table table-vcenter text-nowrap" v-if="data.buttons.length > 0 && !$apollo.loading">
                                 <thead>
                                     <tr>
                                         <th class="sortable up">ID</th>
@@ -85,19 +85,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="({ buttonId, item }) in buttons" :key="buttonId">
+                                    <tr v-for="({ buttonId, item }) in data.buttons" :key="buttonId">
                                         <td class="input-cel">{{ buttonId }}</td>
                                         <td class="input-cel">
                                             {{ item.name }}
                                         </td>
                                         <td class="delete-cel-btn">
-                                            <button class=""><i class="far fa-trash-alt"></i></button>
+                                            <button @click.prevent="removeItem(buttonId)"><i class="far fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <div class="aligned-text" v-else-if="$apollo.loading">
+                              Загрузка...
+                            </div>
+                            <div class="aligned-text" v-else>Нет товаров</div>
                         </div>
-                        <div class="card-footer text-right">
+                        <div class="card-footer text-right" v-if="false">
                             <div class="d-flex">
                                 <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
                             </div>
@@ -112,19 +117,22 @@
 import gql from 'graphql-tag';
 
 export default {
-    name: 'ControllerGoods',
+    name: 'MachineGoods',
     apollo: {
-        buttons: {
+        data: {
             query: gql `
-                    query GetInfo ($id: Int!) {
-                        buttons: getItemMatrix (id: $id) {
+                    query ($id: Int!) {
+                        getMachineById (id: $id) {
+                          itemMatrix {
+                            id
                             buttons {
-                                buttonId,
-                                item {
-                                    id,
-                                    name
-                                }
+                              buttonId
+                              item {
+                                id
+                                name
+                              }
                             }
+                          }
                         }
                     }
                 `,
@@ -135,15 +143,48 @@ export default {
                 };
             },
 
-            update: data => data.buttons.buttons
+            update: data => ({
+              buttons: data.getMachineById.itemMatrix?.buttons || [],
+              matrixId: data.getMachineById.itemMatrix?.id || null
+            })
         }
     },
     data: () => ({
-        buttons: []
+        data: {
+          buttons: [],
+          matrixId: null
+        }
     }),
     methods: {
         getRandomKey() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        },
+
+        async removeItem (id) {
+          const { data } = await this.$apollo.mutate({
+            mutation: gql`
+              mutation ($data: RemoveButtonFromItemMatrixInput!) {
+                matrix: removeButtonFromItemMatrix (input: $data) {
+                  buttons {
+                    buttonId
+                    item {
+                      id
+                      name
+                    }
+                  }
+                }
+              }
+            `,
+
+            variables: {
+              data: {
+                itemMatrixId: this.data.matrixId,
+                buttonId: id
+              }
+            }
+          });
+
+          this.data.buttons = data.matrix.buttons;
         }
     }
 }

@@ -85,8 +85,7 @@ export default {
             }
         },
         onSuccess({ token }) {
-            this.$store.commit('auth/setToken', token);
-            this.$router.push('/home');
+            this.$store.dispatch('auth/requestUserData', token);
         }
     },
 }

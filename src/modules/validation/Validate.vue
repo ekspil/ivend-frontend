@@ -57,7 +57,13 @@
 			card: {
 				type: Boolean,
 				default: true
-			}
+			},
+
+      // Роут при нажатии "Вернуться назад"
+      routeBack: {
+        type: String,
+        default: ''
+      }
 		},
 		data: () => ({
 			status: {
@@ -67,6 +73,11 @@
 		}),
 		methods: {
 			goBack () {
+        const routeBack = this.routeBack;
+        if (routeBack) {
+          return this.$router.push(routeBack);
+        }
+
 				this.$router.go(-1);
 			},
 
@@ -110,5 +121,5 @@
 	.validation-error.auth, .success-message.auth {
 		text-align: center;
 		margin: .25em 0;
-	}	
+	}
 </style>
