@@ -155,7 +155,6 @@
                         kktRegNumber: kkt.kktRegNumber,
                         kktFNNumber: kkt.kktFNNumber,
                         kktActivationDate: kkt.kktActivationDate,
-                        kktBillsCount: kkt.kktBillsCount,
                         kktOFDRegKey: kkt.kktOFDRegKey
                     };
 

@@ -2,13 +2,13 @@ const getStatus = status => {
     //Проверку оставшихся дней после того как установлю формат
 
     if(!status){
-        return '<span class="status-icon bg-secondary"></span>Ожидание регистрации';
+        return 'Ожидание регистрации';
     }
     else if(status){
-        return '<span class="status-icon bg-success"></span>'+status;
+        return 'Активирована '+status;
     }
     else {
-        return '<span class="status-icon bg-danger"></span>Ошибка';
+        return 'Ошибка';
     }
 
 
@@ -29,14 +29,14 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(kkt => ({
     id: kkt.id,
-    model: kkt.model || '-',
-    factoryNum: kkt.factoryNum || '-',
-    regNum: kkt.regNum || '-',
+    model: kkt.kktModel || '-',
+    factoryNum: kkt.kktFactoryNumber || '-',
+    regNum: kkt.kktRegNumber || '-',
     lastBillDate: kkt.lastBillDate || '-',
-    fiscalNum: kkt.fiscalNum || '-',
-    countToDie: kkt.countToDie || '-',
-    timeToDie: kkt.timeToDie || '-',
-    ofdKey: kkt.ofdKey || 'ОТКЛ',
-    activationDate: getStatus(kkt.activationDate),
-    route: `/fiscal/edit/${kkt.id}`
+    fiscalNum: kkt.kktFNNumber || '-',
+    countToDie: kkt.kktBillsCount || '-',
+    timeToDie: kkt.kktActivationDate || '-',
+    ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
+    activationDate: getStatus(kkt.kktActivationDate),
+    route: `/fiscalAll/edit/${kkt.id}`
 }));

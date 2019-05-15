@@ -107,10 +107,8 @@
         },
         methods: {
             async save () {
-                const data = {
-                    ...this.input,
-                    ...this.$store.getters['cache/data']
-                };
+                const data = this.input;
+
 
                 try {
                     const { errors } = await this.$apollo.mutate({
