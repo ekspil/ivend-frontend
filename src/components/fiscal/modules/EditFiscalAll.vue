@@ -148,15 +148,14 @@
                     const kkt = this.data.kkt;
                     const kktData = {
                         id: kkt.id,
-                        inn: kkt.inn,
-                        companyName: kkt.companyName,
-                        kktModel: kkt.kktModel,
-                        kktFactoryNumber: kkt.kktFactoryNumber,
-                        kktRegNumber: kkt.kktRegNumber,
-                        kktFNNumber: kkt.kktFNNumber,
-                        kktActivationDate: kkt.kktActivationDate,
-                        kktBillsCount: kkt.kktBillsCount,
-                        kktOFDRegKey: kkt.kktOFDRegKey
+                        inn: String(kkt.inn),
+                        companyName: String(kkt.companyName),
+                        kktModel: String(kkt.kktModel),
+                        kktFactoryNumber: String(kkt.kktFactoryNumber),
+                        kktRegNumber: String(kkt.kktRegNumber),
+                        kktFNNumber: String(kkt.kktFNNumber),
+                        kktActivationDate: String(kkt.kktActivationDate),
+                        kktOFDRegKey: String(kkt.kktOFDRegKey)
                     };
 
                     const { errors } = await this.$apollo.mutate({
