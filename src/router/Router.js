@@ -20,6 +20,13 @@ import Settings from '@/components/settings/Settings';
 import AddMachine from '@/components/settings/modules/Machines/AddMachine';
 import EditMachine from '@/components/settings/modules/Machines/EditMachine';
 
+import Fiscal from '@/components/fiscal/Fiscal';
+import FiscalAll from '@/components/fiscal/FiscalAll';
+import EditFiscal from '@/components/fiscal/modules/EditFiscal';
+import EditFiscalAll from '@/components/fiscal/modules/EditFiscalAll';
+import AddFiscal from '@/components/fiscal/modules/AddFiscal';
+import AddFiscalAll from '@/components/fiscal/modules/AddFiscalAll';
+
 import Billing from '@/components/billing/Billing';
 import Tariffs from '@/components/tariffs/Tariffs';
 
@@ -56,6 +63,13 @@ const routes = [
     { path: '/billing', component: Billing },
 
     { path: '/tariffs', component: Tariffs },
+
+    { path: '/fiscal', component: Fiscal },
+    { path: '/fiscalAll', component: FiscalAll },
+    { path: '/fiscal/edit/:id', component: EditFiscal },
+    { path: '/fiscalAll/edit/:id', component: EditFiscalAll },
+    { path: '/fiscal/add', component: AddFiscal },
+    { path: '/fiscalAll/add', component: AddFiscalAll },
 
     { path: '/login', component: Login },
     { path: '/register', component: Registration }
