@@ -16,7 +16,7 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель фискального регистратора</label>
-                                        <select v-model="input.kktModel" class="form-control custom-select">
+                                        <select v-model="input.kktModel" class="form-control custom-select" name="kktModel">
                                             <option value="UMKA">Стандартный</option>
 
                                         </select>
@@ -24,15 +24,15 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
-                                        <select class="form-control custom-select" v-model="input.inn">
-                                            <option :value="input.inn">{{input.inn}}</option>
+                                        <select class="form-control custom-select" v-model="input.inn" name="inn">
+                                            <option :value="kkt.inn">{{kkt.inn}}</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Компания</label>
-                                        <select class="form-control custom-select" v-model="input.companyName">
-                                            <option :value="input.companyName">{{input.companyName}}</option>
+                                        <select class="form-control custom-select" v-model="input.companyName" name="companyName">
+                                            <option :value="kkt.companyName">{{kkt.companyName}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
     import Field from '@/modules/validation/Field';
 
     export default {
-        name: 'AddController',
+        name: 'AddFiscal',
         components: {
             Validate,
             Field
@@ -75,8 +75,9 @@
             },
 
             schema: {
-                name: [required],
-                uid: [required]
+                kktModel: [required],
+                inn: [required],
+                companyName: [required]
             }
         }),
         apollo: {
@@ -93,7 +94,7 @@
 			`,
                 update ({ getProfile}) {
 
-                        this.input = {
+                        this.kkt = {
                             inn: getProfile.legalInfo.inn,
                             companyName: getProfile.legalInfo.companyName
                         };
@@ -101,32 +102,38 @@
 
                     return {
                         profile: getProfile
+
                     };
                 }
             }
         },
         methods: {
             async save () {
-                const data = this.input;
+                console.log(this.input);
+                let input = this.input;
+                input.inn = String(input.inn);
+                input.companyName = String(input.companyName);
+                input.kktModel = String(input.kktModel);
 
 
                 try {
                     const { errors } = await this.$apollo.mutate({
                         mutation: gql`
-					mutation saveKkt ($data: CreateKktInput!) {
-						createKkt (input: $data) {
+					mutation saveKkt ($input: CreateKktInput!) {
+						createKkt (input: $input) {
 							id
 						}
 					}
 					`,
                         variables: {
-                            data
+                            input: input
                         }
                     });
 
                     this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
                 } catch (error) {
                     this.$refs.form.showMessage('error', convertServerError(error.message));
+                    console.log(error);
                 }
             },
             onSuccess () {
