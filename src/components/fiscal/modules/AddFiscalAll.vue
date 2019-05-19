@@ -24,12 +24,12 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
-                                        <Field className="form-control" :value="kkt.profile.legalInfo.inn"  disabled name="inn" formName="addFiscal" placeholder="Введите ИНН"/>
+                                        <Field className="form-control" :value="kkt.profile.legalInfo.inn"  name="inn" formName="addFiscal" placeholder="Введите ИНН"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Компания</label>
-                                        <Field className="form-control" :value="kkt.profile.legalInfo.companyName" disabled name="companyName" formName="addFiscal" placeholder="Компания"/>
+                                        <Field className="form-control" :value="kkt.profile.legalInfo.companyName" name="companyName" formName="addFiscal" placeholder="Компания"/>
                                     </div>
                                 </div>
                             </div>
