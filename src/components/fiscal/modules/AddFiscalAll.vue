@@ -22,12 +22,12 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="kkt.profile">
                                         <label class="form-label f-b">ИНН</label>
                                         <Field className="form-control" :value="kkt.profile.legalInfo.inn"  name="inn" formName="addFiscal" placeholder="Введите ИНН"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="kkt.profile">
                                         <label class="form-label f-b">Компания</label>
                                         <Field className="form-control" :value="kkt.profile.legalInfo.companyName" name="companyName" formName="addFiscal" placeholder="Компания"/>
                                     </div>
@@ -61,7 +61,7 @@
         },
         data: () => ({
             kkt: {
-                profile: {}
+                profile: null
             },
             input: {
                 kktModel: "UMKA"
