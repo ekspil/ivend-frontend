@@ -18,7 +18,7 @@ export const getTableHeaders = () => [
     { name: 'Модель', key: 'model', unsortable: true },
     { name: 'Заводской №', key: 'factoryNum', unsortable: true },
     { name: 'Рег. №', key: 'regNum', unsortable: true },
-    { name: 'Крайний чек', key: 'lastBillDate', unsortable: true },
+    { name: 'Крайний чек', key: 'lastBillDate', unsortable: false },
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'Заполнение', key: 'countToDie', unsortable: true },
     { name: 'Время жизни', key: 'timeToDie', unsortable: true },
