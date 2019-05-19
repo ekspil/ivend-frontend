@@ -7,15 +7,7 @@
                         <h3 class="card-title f-b">Редактирование ККТ №{{data.kkt.id}}</h3>
                     </div>
 
-                    <Validate
-                            routeBack="/fiscalAll"
-                            formName="editFiscal"
-                            ref="form"
-                            :schema="schema"
-                            @onSubmit="save"
-                            @onSuccess="onSuccess"
 
-                    >
                         <template slot="form">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
@@ -72,9 +64,9 @@
                             </div>
                         </template>
                         <template slot="submit">
-                            <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+                            <button v-on:click="save"  type="submit" class="btn btn-primary ml-auto">Сохранить</button>
                         </template>
-                    </Validate>
+
 
                     <div class="aligned-text" v-else-if="$apollo.loading">Загрузка...</div>
                     <div class="aligned-text" v-else>Ошибка загрузки контроллера</div>
@@ -116,14 +108,6 @@
                 }
             },
             schema: {
-                id: [required],
-                inn: [required],
-                companyName: [required],
-                kktModel: [required],
-                kktFactoryNumber: [required],
-                kktRegNumber: [required],
-                kktFNNumber: [required],
-                kktActivationDate: [required]
             },
 
             kktUploading: false
@@ -193,6 +177,8 @@
                     });
 
                     this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+                    const router = this.$router;
+                    setTimeout(function () { router.push('/fiscalAll'); }, 1000);
                 } catch (error) {
                     this.$refs.form.showMessage('error', 'Ошибка сохранения.');
                 } finally {
