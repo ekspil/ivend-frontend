@@ -7,7 +7,7 @@
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
                                 <div class="top-buttons__left-container">
-                                    <router-link to="/fiscal/add" class="btn btn-primary">Добавить фискальный регистратор</router-link>
+                                    <router-link to="/fiscalAdd/add" class="btn btn-primary">Добавить фискальный регистратор</router-link>
                                 </div>
 
 
@@ -26,6 +26,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </template>
 
 <script>
