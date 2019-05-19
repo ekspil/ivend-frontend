@@ -14,59 +14,59 @@
                             :schema="schema"
                             @onSubmit="save"
                             @onSuccess="onSuccess"
-                            v-if="data"
+
                     >
                         <template slot="form">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label class="form-label f-b">Номер контроллера ID</label>
-                                        <Field className="form-control" v-model="data.kkt.id" disabled name="id" formName="editFiscal" placeholder="Введите ID"/>
+                                        <input class="form-control" v-model="data.kkt.id" disabled name="id" formName="editFiscal" placeholder="Введите ID"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
-                                        <Field className="form-control"  v-model="data.kkt.inn" disabled name="inn" formName="editFiscal" placeholder="Введите ИНН"/>
+                                        <input class="form-control"  v-model="data.kkt.inn" disabled name="inn" formName="editFiscal" placeholder="Введите ИНН"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Компания</label>
-                                        <Field className="form-control"  v-model="data.kkt.companyName" disabled name="companyName" formName="editFiscal" placeholder="Компания"/>
+                                        <input class="form-control"  v-model="data.kkt.companyName" disabled name="companyName" formName="editFiscal" placeholder="Компания"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель ККТ</label>
-                                        <Field className="form-control"  v-model="data.kkt.kktModel" name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
+                                        <input class="form-control"  v-model="data.kkt.kktModel" name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Заводской номер</label>
-                                        <Field className="form-control"  v-model="data.kkt.kktFactoryNumber" name="kktFactoryNumber" formName="editFiscal" placeholder="Заводской номер"/>
+                                        <input class="form-control"  v-model="data.kkt.kktFactoryNumber" name="kktFactoryNumber" formName="editFiscal" placeholder="Заводской номер"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Регистрационный номер</label>
-                                        <Field className="form-control"  v-model="data.kkt.kktRegNumber" name="kktRegNumber" formName="editFiscal" placeholder="Регистрационный номер"/>
+                                        <input class="form-control"  v-model="data.kkt.kktRegNumber" name="kktRegNumber" formName="editFiscal" placeholder="Регистрационный номер"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Номер ФН</label>
-                                        <Field className="form-control"  v-model="data.kkt.kktFNNumber" name="kktFNNumber" formName="editFiscal" placeholder="Номер ФН"/>
+                                        <input class="form-control"  v-model="data.kkt.kktFNNumber" name="kktFNNumber" formName="editFiscal" placeholder="Номер ФН"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Дата активации</label>
-                                        <Field className="form-control"  v-model="data.kkt.kktActivationDate" name="kktActivationDate" formName="editFiscal" placeholder="Дата активации, если заполнено - чеки будут пытаться отправляться"/>
+                                        <input class="form-control"  v-model="data.kkt.kktActivationDate" name="kktActivationDate" formName="editFiscal" placeholder="Дата активации, если заполнено - чеки будут пытаться отправляться"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Количество чеков</label>
-                                        <Field className="form-control" v-model="data.kkt.kktBillsCount" disabled name="kktBillsCount" formName="editFiscal" placeholder=""/>
+                                        <input class="form-control" v-model="data.kkt.kktBillsCount" disabled name="kktBillsCount" formName="editFiscal" placeholder=""/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Регистрационный номер ОФД</label>
-                                        <Field className="form-control"  v-model="data.kkt.kktOFDRegKey" name="kktOFDRegKey" formName="editFiscal" placeholder="Регистрационный номер ОФД"/>
+                                        <input class="form-control"  v-model="data.kkt.kktOFDRegKey" name="kktOFDRegKey" formName="editFiscal" placeholder="Регистрационный номер ОФД"/>
                                     </div>
                                 </div>
                             </div>
@@ -153,6 +153,7 @@
       }
       `,
                 update(data) {
+
                     return {
                         kkt: data.kkt
                     };

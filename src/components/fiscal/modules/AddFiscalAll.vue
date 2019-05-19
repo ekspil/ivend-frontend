@@ -66,7 +66,9 @@
         },
         data: () => ({
             kkt: {
-                profile: {}
+                profile: {},
+                inn: "",
+                companyName: ""
             },
             input: {
                 kktModel: "",
@@ -96,6 +98,10 @@
                 update ({ getProfile}) {
 
                     this.kkt = {
+                        inn: getProfile.legalInfo.inn,
+                        companyName: getProfile.legalInfo.companyName
+                    };
+                    this.input = {
                         inn: getProfile.legalInfo.inn,
                         companyName: getProfile.legalInfo.companyName
                     };
