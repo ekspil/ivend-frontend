@@ -29,10 +29,18 @@
                                         <Field className="form-control" :value="data.kkt.companyName" disabled name="companyName" formName="editFiscal" placeholder="Компания"/>
                                     </div>
 
+
                                     <div class="form-group">
-                                        <label class="form-label f-b">Модель ККТ</label>
-                                        <Field className="form-control" :value="data.kkt.kktModel"  name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
+                                        <label class="form-label f-b">Модель фискального регистратора</label>
+                                        <select v-model="data.kkt.kktModel" class="form-control custom-select">
+                                            <option value="UMKA">Стандартный</option>
+                                            <option value="IVEND">IVEND</option>
+                                        </select>
                                     </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label class="form-label f-b">Модель ККТ</label>-->
+                                        <!--<Field className="form-control" :value="data.kkt.kktModel"  name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>-->
+                                    <!--</div>-->
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Заводской номер</label>
@@ -71,8 +79,7 @@
                         </template>
                     </Validate>
 
-                    <div class="aligned-text" v-else-if="$apollo.loading">Загрузка...</div>
-                    <div class="aligned-text" v-else>Ошибка загрузки контроллера</div>
+                    <div class="aligned-text" v-if="$apollo.loading">Загрузка...</div>
 
                 </div>
             </div>
@@ -101,11 +108,9 @@
             schema: {
                 inn: [required],
                 companyName: [required],
-                kktModel: [required],
                 kktFactoryNumber: [required],
                 kktRegNumber: [required],
-                kktFNNumber: [required],
-                kktActivationDate: [required]
+                kktFNNumber: [required]
 
             },
 
@@ -146,9 +151,12 @@
             async save() {
                 try {
                     this.kktUploading = true;
-
+                    if(!this.$store.getters['cache/data'].kktBillsCount){
+                        this.$store.getters['cache/data'].kktBillsCount = 0;
+                    }
                     const data = {
                         id: Number(this.data.kkt.id),
+                        kktModel: this.data.kkt.kktModel,
                         ...this.$store.getters['cache/data']
                     };
 
