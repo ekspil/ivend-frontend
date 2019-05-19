@@ -3,15 +3,21 @@
         <div class="side-app">
             <div class="row mt-5">
                 <div class="col-lg-10 offset-lg-1 col-md-12">
-
+                    <Validate
+                            formName="addFiscal"
+                            title="Добавление фискального аппарата"
+                            :schema="schema" ref="form"
+                            @onSubmit="save"
+                            @onSuccess="onSuccess"
+                    >
                         <template slot="form">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель фискального регистратора</label>
-                                        <select v-model="input.kktModel" class="form-control custom-select" name="kktModel">
-                                            <option value="UMKA">UMKA</option>
+                                        <select v-model="input.kktModel" class="form-control custom-select">
+                                            <option value="UMKA">Стандартный</option>
                                             <option value="IVEND">IVEND</option>
 
                                         </select>
@@ -19,19 +25,20 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
-                                        <input class="form-control"  v-model="input.inn" disabled name="inn" formName="editFiscal" placeholder="Введите ИНН"/>
+                                        <Field className="form-control" :value="input.inn"  disabled name="inn" formName="editFiscal" placeholder="Введите ИНН"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Компания</label>
-                                        <input class="form-control"  v-model="input.companyName" disabled name="companyName" formName="editFiscal" placeholder="Компания"/>
+                                        <Field className="form-control" :value="input.companyName" disabled name="companyName" formName="editFiscal" placeholder="Компания"/>
                                     </div>
                                 </div>
                             </div>
                         </template>
                         <template slot="submit">
-                            <button v-on:click="save"  type="submit" class="btn btn-primary ml-auto">Отправить заявку на подключение</button>
+                            <button type="submit" class="btn btn-primary ml-auto">Отправить заявку на подключение</button>
                         </template>
+                    </Validate>
                 </div>
             </div>
         </div>
@@ -48,23 +55,25 @@
     import Field from '@/modules/validation/Field';
 
     export default {
-        name: 'AddFiscal',
+        name: 'AddController',
         components: {
             Validate,
             Field
         },
         data: () => ({
             kkt: {
-              profile: {}
+                profile: {}
             },
             input: {
-                kktModel: "",
+                kktModel: "UMKA",
                 inn: "",
                 companyName: ""
 
             },
 
             schema: {
+                inn: [required],
+                companyName: [required]
             }
         }),
         apollo: {
@@ -81,50 +90,47 @@
 			`,
                 update ({ getProfile}) {
 
-
-                        this.input = {
-                            inn: getProfile.legalInfo.inn,
-                            companyName: getProfile.legalInfo.companyName
-                        };
+                    this.input = {
+                        inn: getProfile.legalInfo.inn,
+                        companyName: getProfile.legalInfo.companyName
+                    };
 
 
                     return {
                         profile: getProfile
-
                     };
                 }
             }
         },
         methods: {
             async save () {
+                const data = {
+                    kktModel: this.input.kktModel,
+                    ...this.$store.getters['cache/data']
+                };
 
                 try {
                     const { errors } = await this.$apollo.mutate({
                         mutation: gql`
-					mutation saveKkt ($input: CreateKktInput!) {
-						createKkt (input: $input) {
+					mutation saveKkt ($data: CreateKktInput!) {
+						createKkt (input: $data) {
 							id
 						}
 					}
 					`,
                         variables: {
-                            input: {
-                                kktModel: this.input.kktModel,
-                                inn: this.input.inn,
-                                companyName: this.input.companyName
-                            }
+                            data: data
                         }
                     });
 
                     this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
-                    const router = this.$router;
-                    setTimeout(function () { router.push('/fiscal'); }, 3000);
                 } catch (error) {
                     this.$refs.form.showMessage('error', convertServerError(error.message));
                 }
             },
             onSuccess () {
-
+                const router = this.$router;
+                setTimeout(function () { router.push('/fiscal'); }, 1000);
             },
 
             getBillingAbbr (date) {
