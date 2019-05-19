@@ -16,23 +16,24 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель фискального регистратора</label>
-                                        <select v-model="input.kktModel" class="form-control custom-select">
-                                            <option value="UMKA">Стандартный</option>
+                                        <select v-model="input.kktModel" class="form-control custom-select" name="kktModel">
+                                            <option value="UMKA">UMKA</option>
+                                            <option value="IVEND">IVEND</option>
 
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
-                                        <select class="form-control custom-select" v-model="input.inn">
-                                            <option :value="input.inn">{{input.inn}}</option>
+                                        <select class="form-control custom-select" v-model="input.inn" name="inn">
+                                            <option :value="kkt.inn">{{kkt.inn}}</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Компания</label>
-                                        <select class="form-control custom-select" v-model="input.companyName">
-                                            <option :value="input.companyName">{{input.companyName}}</option>
+                                        <select class="form-control custom-select" v-model="input.companyName" name="companyName">
+                                            <option :value="kkt.companyName">{{kkt.companyName}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -58,7 +59,7 @@
     import Field from '@/modules/validation/Field';
 
     export default {
-        name: 'AddController',
+        name: 'AddFiscal',
         components: {
             Validate,
             Field
@@ -68,15 +69,16 @@
               profile: {}
             },
             input: {
-                kktModel: "UMKA",
+                kktModel: "",
                 inn: "",
                 companyName: ""
 
             },
 
             schema: {
-                name: [required],
-                uid: [required]
+                kktModel: [required],
+                inn: [required],
+                companyName: [required]
             }
         }),
         apollo: {
@@ -93,7 +95,7 @@
 			`,
                 update ({ getProfile}) {
 
-                        this.input = {
+                        this.kkt = {
                             inn: getProfile.legalInfo.inn,
                             companyName: getProfile.legalInfo.companyName
                         };
@@ -101,26 +103,29 @@
 
                     return {
                         profile: getProfile
+
                     };
                 }
             }
         },
         methods: {
             async save () {
-                const data = this.input;
-
 
                 try {
                     const { errors } = await this.$apollo.mutate({
                         mutation: gql`
-					mutation saveKkt ($data: CreateKktInput!) {
-						createKkt (input: $data) {
+					mutation saveKkt ($input: CreateKktInput!) {
+						createKkt (input: $input) {
 							id
 						}
 					}
 					`,
                         variables: {
-                            data
+                            input: {
+                                kktModel: this.input.kktModel,
+                                inn: this.input.inn,
+                                companyName: this.input.companyName
+                            }
                         }
                     });
 
