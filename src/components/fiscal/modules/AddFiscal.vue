@@ -17,7 +17,8 @@
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель фискального регистратора</label>
                                         <select v-model="input.kktModel" class="form-control custom-select" name="kktModel">
-                                            <option value="UMKA">Стандартный</option>
+                                            <option value="UMKA">UMKA</option>
+                                            <option value="IVEND">IVEND</option>
 
                                         </select>
                                     </div>
@@ -68,7 +69,7 @@
               profile: {}
             },
             input: {
-                kktModel: "UMKA",
+                kktModel: "",
                 inn: "",
                 companyName: ""
 
@@ -109,12 +110,6 @@
         },
         methods: {
             async save () {
-                console.log(this.input);
-                let input = this.input;
-                input.inn = String(input.inn);
-                input.companyName = String(input.companyName);
-                input.kktModel = String(input.kktModel);
-
 
                 try {
                     const { errors } = await this.$apollo.mutate({
@@ -126,14 +121,17 @@
 					}
 					`,
                         variables: {
-                            input: input
+                            input: {
+                                kktModel: this.input.kktModel,
+                                inn: this.input.inn,
+                                companyName: this.input.companyName
+                            }
                         }
                     });
 
                     this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
                 } catch (error) {
                     this.$refs.form.showMessage('error', convertServerError(error.message));
-                    console.log(error);
                 }
             },
             onSuccess () {

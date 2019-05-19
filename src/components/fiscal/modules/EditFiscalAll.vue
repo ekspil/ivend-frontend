@@ -21,52 +21,52 @@
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label class="form-label f-b">Номер контроллера ID</label>
-                                        <Field className="form-control" :value="data.kkt.id" v-model="data.kkt.id" disabled name="uid" formName="editFiscal" placeholder="Введите ID"/>
+                                        <Field className="form-control" v-model="data.kkt.id" disabled name="id" formName="editFiscal" placeholder="Введите ID"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
-                                        <Field className="form-control" :value="data.kkt.inn" v-model="data.kkt.inn" disabled name="uid" formName="editFiscal" placeholder="Введите ИНН"/>
+                                        <Field className="form-control"  v-model="data.kkt.inn" disabled name="inn" formName="editFiscal" placeholder="Введите ИНН"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Компания</label>
-                                        <Field className="form-control" :value="data.kkt.companyName" v-model="data.kkt.companyName" disabled name="uid" formName="editFiscal" placeholder="Компания"/>
+                                        <Field className="form-control"  v-model="data.kkt.companyName" disabled name="companyName" formName="editFiscal" placeholder="Компания"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель ККТ</label>
-                                        <Field className="form-control" :value="data.kkt.kktModel"  v-model="data.kkt.kktModel" name="uid" formName="editFiscal" placeholder="Модель ККТ"/>
+                                        <Field className="form-control"  v-model="data.kkt.kktModel" name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Заводской номер</label>
-                                        <Field className="form-control" :value="data.kkt.kktFactoryNumber" v-model="data.kkt.kktFactoryNumber" name="uid" formName="editFiscal" placeholder="Заводской номер"/>
+                                        <Field className="form-control"  v-model="data.kkt.kktFactoryNumber" name="kktFactoryNumber" formName="editFiscal" placeholder="Заводской номер"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Регистрационный номер</label>
-                                        <Field className="form-control" :value="data.kkt.kktRegNumber" v-model="data.kkt.kktRegNumber" name="uid" formName="editFiscal" placeholder="Регистрационный номер"/>
+                                        <Field className="form-control"  v-model="data.kkt.kktRegNumber" name="kktRegNumber" formName="editFiscal" placeholder="Регистрационный номер"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Номер ФН</label>
-                                        <Field className="form-control" :value="data.kkt.kktFNNumber" v-model="data.kkt.kktFNNumber" name="uid" formName="editFiscal" placeholder="Номер ФН"/>
+                                        <Field className="form-control"  v-model="data.kkt.kktFNNumber" name="kktFNNumber" formName="editFiscal" placeholder="Номер ФН"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Дата активации</label>
-                                        <Field className="form-control" :value="data.kkt.kktActivationDate" v-model="data.kkt.kktActivationDate" name="uid" formName="editFiscal" placeholder="Дата активации, если заполнено - чеки будут пытаться отправляться"/>
+                                        <Field className="form-control"  v-model="data.kkt.kktActivationDate" name="kktActivationDate" formName="editFiscal" placeholder="Дата активации, если заполнено - чеки будут пытаться отправляться"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Количество чеков</label>
-                                        <Field className="form-control" :value="data.kkt.kktBillsCount" v-model="data.kkt.kktBillsCount" disabled name="uid" formName="editFiscal" placeholder=""/>
+                                        <Field className="form-control" v-model="data.kkt.kktBillsCount" disabled name="kktBillsCount" formName="editFiscal" placeholder=""/>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Регистрационный номер ОФД</label>
-                                        <Field className="form-control" :value="data.kkt.kktOFDRegKey" v-model="data.kkt.kktOFDRegKey" name="uid" formName="editFiscal" placeholder="Регистрационный номер ОФД"/>
+                                        <Field className="form-control"  v-model="data.kkt.kktOFDRegKey" name="kktOFDRegKey" formName="editFiscal" placeholder="Регистрационный номер ОФД"/>
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +101,29 @@
             Field
         },
         data: () => ({
-            data: null,
-
+            data: {
+                kkt: {
+                    id: null,
+                    inn: "",
+                    companyName: "",
+                    kktModel: "",
+                    kktFactoryNumber: "",
+                    kktRegNumber: "",
+                    kktFNNumber: "",
+                    kktActivationDate: "",
+                    kktBillsCount: 0,
+                    kktOFDRegKey: ""
+                }
+            },
             schema: {
-                uid: [required]
+                id: [required],
+                inn: [required],
+                companyName: [required],
+                kktModel: [required],
+                kktFactoryNumber: [required],
+                kktRegNumber: [required],
+                kktFNNumber: [required],
+                kktActivationDate: [required]
             },
 
             kktUploading: false
@@ -147,15 +166,16 @@
 
                     const kkt = this.data.kkt;
                     const kktData = {
-                        id: kkt.id,
-                        inn: String(kkt.inn),
-                        companyName: String(kkt.companyName),
-                        kktModel: String(kkt.kktModel),
-                        kktFactoryNumber: String(kkt.kktFactoryNumber),
-                        kktRegNumber: String(kkt.kktRegNumber),
-                        kktFNNumber: String(kkt.kktFNNumber),
-                        kktActivationDate: String(kkt.kktActivationDate),
-                        kktOFDRegKey: String(kkt.kktOFDRegKey)
+                        id: Number(kkt.id),
+                        inn: kkt.inn,
+                        companyName: kkt.companyName,
+                        kktModel: kkt.kktModel,
+                        kktFactoryNumber: kkt.kktFactoryNumber,
+                        kktRegNumber: kkt.kktRegNumber,
+                        kktFNNumber: kkt.kktFNNumber,
+                        kktActivationDate: kkt.kktActivationDate,
+                        kktBillsCount: Number(kkt.kktBillsCount),
+                        kktOFDRegKey: kkt.kktOFDRegKey
                     };
 
                     const { errors } = await this.$apollo.mutate({

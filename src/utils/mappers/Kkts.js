@@ -15,7 +15,7 @@ const getStatus = status => {
 };
 
 export const getTableHeaders = () => [
-    { name: 'ID', key: 'id', link: true },
+    { name: 'ID', key: 'id', link: false },
     { name: 'Модель', key: 'model', unsortable: true },
     { name: 'Заводской №', key: 'factoryNum', unsortable: true },
     { name: 'Рег. №', key: 'regNum', unsortable: true },
