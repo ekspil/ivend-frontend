@@ -68,11 +68,25 @@
             }
         },
         methods: {
+            async removeKkt (id) {
+                await this.$apollo.mutate({
+                    mutation: gql`
+                        mutation ($id: Int!) {
+                            deleteKkt (id: $id)
+                        }
+                    `,
+                    variables: { id }
+                });
+
+                this.kkts = this.kkts.filter(controller => controller.id !== id);
+            }
 
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.kkts); }
+            getTableFields () { return getTableFields(this.kkts, {
+                remove: this.removeKkt
+            }); }
         }
     }
 </script>

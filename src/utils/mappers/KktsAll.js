@@ -42,7 +42,7 @@ export const getTableHeaders = () => [
 
 ];
 
-export const getTableFields = data => data.map(kkt => ({
+export const getTableFields = (data, props) => data.map(kkt => ({
     id: kkt.id,
     companyName: kkt.companyName,
     model: kkt.kktModel || '-',
@@ -53,5 +53,6 @@ export const getTableFields = data => data.map(kkt => ({
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
     activationDate: getStatus(kkt),
+    props,
     route: `/fiscalAll/edit/${kkt.id}`
 }));
