@@ -154,6 +154,9 @@
                     if(!this.$store.getters['cache/data'].kktBillsCount){
                         this.$store.getters['cache/data'].kktBillsCount = 0;
                     }
+                    else{
+                        this.$store.getters['cache/data'].kktBillsCount = Number(this.$store.getters['cache/data'].kktBillsCount);
+                    }
                     const data = {
                         id: Number(this.data.kkt.id),
                         kktModel: this.data.kkt.kktModel,
