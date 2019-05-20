@@ -77,7 +77,7 @@
 					sortable: not(header.unsortable)
 				};
 			},
-			style (field) {
+            style (field) {
 
                 if(this.$route.path === "/fiscalAll"){
 
@@ -106,7 +106,7 @@
                     return "" ;
                 }else{
                     return "" ;
-				}
+                }
 
 
             },
