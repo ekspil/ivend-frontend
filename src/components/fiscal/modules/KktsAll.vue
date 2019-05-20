@@ -57,6 +57,7 @@
                             kktActivationDate
                             kktBillsCount
                             kktOFDRegKey
+                            companyName
 
                              }
                     }

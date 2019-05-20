@@ -31,9 +31,10 @@ const getStatus = field => {
 export const getTableHeaders = () => [
     { name: 'Статус', key: 'activationDate', unsortable: false },
     { name: 'ID', key: 'id', link: true },
+    { name: 'Контрагент', key: 'companyName', link: false },
     { name: 'Модель', key: 'model', unsortable: false },
     { name: 'Заводской №', key: 'factoryNum', unsortable: false },
-    { name: 'Рег. №', key: 'regNum', unsortable: false },
+    //{ name: 'Рег. №', key: 'regNum', unsortable: false },
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'КЧ', key: 'countToDie', unsortable: false },
     { name: 'Дата', key: 'timeToDie', unsortable: false },
@@ -43,6 +44,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(kkt => ({
     id: kkt.id,
+    companyName: kkt.companyName,
     model: kkt.kktModel || '-',
     factoryNum: kkt.kktFactoryNumber || '-',
     regNum: kkt.kktRegNumber || '-',
