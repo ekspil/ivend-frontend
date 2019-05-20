@@ -33,7 +33,7 @@
 <script>
     import gql from 'graphql-tag';
 
-    import Table from '@/modules/table/Table';
+    import Table from '@/modules/table/TableF';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/KktsAll';
 
     export default {

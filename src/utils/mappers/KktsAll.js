@@ -1,20 +1,35 @@
-const getStatus = status => {
+const getStatus = field => {
     //Проверку оставшихся дней после того как установлю формат
+    if(!field.kktActivationDate){
+        return "4:Регистрация" ;
+    }
+    let date =new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let yearF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[2];
+    let monthF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1];
 
-    if(!status){
-        return 'Ожидание';
+    if(year - yearF >= 1 && month - monthF >=2){
+        return "5:Ошибка" ;
     }
-    else if(status){
-        return 'Активирована';
+    if(Number(field.kktBillsCount) > 230000){
+        return "5:Ошибка" ;
     }
-    else {
-        return 'Ошибка';
+    if(year - yearF >= 1 && month - monthF >=0){
+        return "3:Внимание" ;
+    }
+    if(Number(field.kktBillsCount) > 220000){
+        return "3:Внимание" ;
     }
 
-};
+    return "0: НОРМА" ;
+    };
+
+
 
 
 export const getTableHeaders = () => [
+    { name: 'Статус', key: 'activationDate', unsortable: false },
     { name: 'ID', key: 'id', link: true },
     { name: 'Модель', key: 'model', unsortable: false },
     { name: 'Заводской №', key: 'factoryNum', unsortable: false },
@@ -22,8 +37,8 @@ export const getTableHeaders = () => [
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'КЧ', key: 'countToDie', unsortable: false },
     { name: 'Дата', key: 'timeToDie', unsortable: false },
-    { name: 'ОФД', key: 'ofdKey', unsortable: true, raw: true },
-    { name: 'Активация', key: 'activationDate', unsortable: false }
+    { name: 'ОФД', key: 'ofdKey', unsortable: true, raw: true }
+
 ];
 
 export const getTableFields = data => data.map(kkt => ({
@@ -35,6 +50,6 @@ export const getTableFields = data => data.map(kkt => ({
     countToDie: kkt.kktBillsCount || '-',
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
-    activationDate: getStatus(kkt.kktActivationDate),
+    activationDate: getStatus(kkt),
     route: `/fiscalAll/edit/${kkt.id}`
 }));
