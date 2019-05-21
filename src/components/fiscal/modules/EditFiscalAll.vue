@@ -109,7 +109,6 @@
                 inn: [required],
                 companyName: [required],
                 kktFactoryNumber: [required],
-                kktRegNumber: [required],
                 kktFNNumber: [required]
 
             },

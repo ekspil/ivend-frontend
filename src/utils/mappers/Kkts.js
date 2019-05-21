@@ -15,7 +15,7 @@ const getStatus = status => {
 };
 
 export const getTableHeaders = () => [
-    { name: 'ID', key: 'id', link: false },
+    { name: 'ID', key: 'id', link: true },
     { name: 'Модель', key: 'model', unsortable: true },
     { name: 'Заводской №', key: 'factoryNum', unsortable: true },
     { name: 'Рег. №', key: 'regNum', unsortable: true },
@@ -36,5 +36,5 @@ export const getTableFields = data => data.map(kkt => ({
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
     activationDate: getStatus(kkt.kktActivationDate),
-    route: `/fiscalAll/edit/${kkt.id}`
+    route: `/fiscal/edit/${kkt.id}`
 }));

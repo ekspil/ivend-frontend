@@ -38,7 +38,8 @@ export const getTableHeaders = () => [
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'КЧ', key: 'countToDie', unsortable: false },
     { name: 'Дата', key: 'timeToDie', unsortable: false },
-    { name: 'ОФД', key: 'ofdKey', unsortable: true, raw: true }
+    { name: 'ОФД', key: 'ofdKey', unsortable: true, raw: true },
+    { name: 'Последний чек', key: 'kktLastBill', unsortable: true, raw: true }
 
 ];
 
@@ -53,6 +54,7 @@ export const getTableFields = (data, props) => data.map(kkt => ({
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
     activationDate: getStatus(kkt),
+    kktLastBill: kkt.kktLastBill || '-',
     props,
     route: `/fiscalAll/edit/${kkt.id}`
 }));
