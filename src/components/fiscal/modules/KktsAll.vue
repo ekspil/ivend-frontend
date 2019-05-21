@@ -58,6 +58,7 @@
                             kktBillsCount
                             kktOFDRegKey
                             companyName
+                            kktLastBill
 
                              }
                     }

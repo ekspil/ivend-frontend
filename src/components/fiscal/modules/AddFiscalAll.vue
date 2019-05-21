@@ -17,8 +17,8 @@
                                     <div class="form-group">
                                         <label class="form-label f-b">Модель фискального регистратора</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
-                                            <option value="UMKA">Стандартный</option>
-                                            <option value="IVEND">IVEND</option>
+                                            <option value="ФН-1.1 исп. Ав15-2">ФН-1.1 исп. Ав15-2</option>
+                                            <option value="ФН-1.1 исп. Ав36-2">ФН-1.1 исп. Ав36-2</option>
                                         </select>
                                     </div>
 
