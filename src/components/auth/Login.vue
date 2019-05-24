@@ -14,7 +14,7 @@
                 @onSuccess="onSuccess"
             >
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <Field :masked="true" className="auth-block__field" type="tel" name="phone" placeholder="Телефон" mask="\+\7 (111) 111 11-11" formName="login" />
+                    <Field :masked="false" className="auth-block__field" type="tel" name="phone" placeholder="+7" mask="\+\7 111 111 11-11 11 11" formName="login" />
                 </div>
                 <div class="auth-block__field-container auth-block__field-container--pass">
                     <Field className="auth-block__field" type="password" name="password" placeholder="Пароль" formName="login" />
