@@ -6,6 +6,6 @@
 
 * Pass VUE_APP_GRAPHQL_API  when building Docker image and pass proper env on dev/prod
 
-# 1.0.2 - Release
+# 1.0.2 - Release (Failed due incorrect number of changes, messy build)
 
 * Removed mask on phone input on login page
