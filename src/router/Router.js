@@ -70,14 +70,14 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
      const isSecured = !includes(to.path, ['/login', '/register']);
      const token = store.state.auth.token, role = store.state.user?.profile?.role;
-     
+
      if (isSecured && !token) {
          return next('/login');
      } else if (!isSecured && token || token && role !== 'VENDOR') {
         if (role === 'VENDOR_NEGATIVE_BALANCE' && to.path !== '/billing') {
             return next('/billing');
         } else if (role === 'VENDOR_NO_LEGAL_INFO' && !['/billing', '/settings'].includes(to.path)) {
-            return next('/settings');
+            return next('/settings#company');
         } else if (role === 'VENDOR_NOT_CONFIRMED' && to.path !== '/confirm') {
             return next('/confirm');
         }
