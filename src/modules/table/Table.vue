@@ -14,7 +14,7 @@
 		</thead>
 		<tbody>
 			<tr v-for="field in getFields" :key="field.id">
-				<td v-for="(header, index) in headers" :key="index" :class="field.class" v-if="field.invisible ? !field.invisible() : true">
+				<td v-for="(header, index) in headers" :key="index" :class="field.class" :style="style(field)" v-if="field.invisible ? !field.invisible() : true">
 					<router-link v-if="header.link && field.route" :to="field.route" class="f-b">
 						{{ field[header.key] }}
 					</router-link>
@@ -77,6 +77,39 @@
 					sortable: not(header.unsortable)
 				};
 			},
+            style (field) {
+
+                if(this.$route.path === "/fiscalAll"){
+
+                    if(field.timeToDie === "-"){
+                        return "background:#c6df5f" ;
+                    }
+                    let date =new Date();
+                    let year = date.getFullYear();
+                    let month = date.getMonth() + 1;
+                    let yearF = field.timeToDie.replace(/[,-/ ]/g, ".").split('.')[2];
+                    let monthF = field.timeToDie.replace(/[,-/ ]/g, ".").split('.')[1];
+
+                    if(year - yearF >= 1 && month - monthF >=2){
+                        return "background:#f05457" ;
+                    }
+                    if(Number(field.countToDie) > 230000){
+                        return "background:#f05457" ;
+                    }
+                    if(year - yearF >= 1 && month - monthF >=0){
+                        return "background:#ffd000" ;
+                    }
+                    if(Number(field.countToDie) > 220000){
+                        return "background:#ffd000" ;
+                    }
+
+                    return "" ;
+                }else{
+                    return "" ;
+                }
+
+
+            },
 
 			setSortingCritery ({ key: newCritery, unsortable }) {
 				if (not(unsortable)) {

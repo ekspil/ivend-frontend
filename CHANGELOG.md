@@ -17,3 +17,11 @@
 # 1.0.4 - Hotfix
 
 * Redirect to edit legal info settings after login for users with role VENDOR_NO_LEGAL_INFO
+
+# 1.1.0 - Release
+
+* Added new button in navigation menu for VENDOR(Fiscalization)
+* Added new button in navigation menu for ADMIN(ALL KKTs)
+* Added new VENDOR functions(create new kkts and edit some fields own kkts)
+* Added new ADMIN functions(create any kkts and edit all their fields)
+* Changed table constructor (Table.vue), added color visualisation of dangers for admin
