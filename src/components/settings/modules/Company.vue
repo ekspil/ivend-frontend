@@ -214,7 +214,8 @@
 						}
 					});
 
-					this.$refs.company.process({ errors, data, success: 'Успешно сохранено.' });
+                  this.$store.dispatch('user/fetch')
+                  this.$refs.company.process({ errors, data, success: 'Успешно сохранено.' });
 				} catch (error) {
 					this.$refs.company.showMessage('error', 'Ошибка сохранения.');
 				}

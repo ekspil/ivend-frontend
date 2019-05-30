@@ -25,3 +25,8 @@
 * Added new VENDOR functions(create new kkts and edit some fields own kkts)
 * Added new ADMIN functions(create any kkts and edit all their fields)
 * Changed table constructor (Table.vue), added color visualisation of dangers for admin
+
+
+# 1.1.1 - Release
+
+* Added handler for confirmation url from email
