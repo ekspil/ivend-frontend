@@ -30,3 +30,7 @@
 # 1.1.1 - Release
 
 * Added handler for confirmation url from email
+
+# 1.1.2 - Hotfix
+
+* Add filter by machineId in GraphQL query in ControllerSales

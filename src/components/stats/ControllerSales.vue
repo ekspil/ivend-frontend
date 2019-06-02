@@ -74,7 +74,7 @@ export default {
 								id
 								name
 								lastSaleTime
-								salesSummary (period: $period) {
+								salesSummary (machineId: $id, period: $period) {
 									salesCount
 									overallAmount
 									cashAmount
