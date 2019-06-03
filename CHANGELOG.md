@@ -34,3 +34,7 @@
 # 1.1.2 - Hotfix
 
 * Add filter by machineId in GraphQL query in ControllerSales
+
+# 1.1.3 - Hotfix
+
+* Update text on Confirm page
