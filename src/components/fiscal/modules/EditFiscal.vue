@@ -8,7 +8,7 @@
                     </div>
 
                     <Validate
-                            routeBack="/fiscal"
+                            routeBack="/settings#fiscal"
                             formName="editFiscal"
                             ref="form"
                             :schema="schema"

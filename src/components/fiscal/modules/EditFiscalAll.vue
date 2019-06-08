@@ -71,6 +71,11 @@
                                         <label class="form-label f-b">Регистрационный номер ОФД</label>
                                         <Field className="form-control" :value="data.kkt.kktOFDRegKey" name="kktOFDRegKey" formName="editFiscal" placeholder="Регистрационный номер ОФД"/>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Сервер</label>
+                                        <Field className="form-control" :value="data.kkt.server" name="server" formName="editFiscal" placeholder="Сервер"/>
+                                    </div>
                                 </div>
                             </div>
                         </template>
@@ -135,6 +140,7 @@
                 kktActivationDate
                 kktBillsCount
                 kktOFDRegKey
+                server
             }
 
       }
