@@ -23,6 +23,7 @@ import Equipment from './modules/Equipment';
 import Machines from './modules/Machines/Machines';
 import Notifications from './modules/Notifications';
 import Company from './modules/Company';
+import Fiscal from '../fiscal/modules/Kkts';
 
 export default {
 	name: 'Settings',
@@ -32,7 +33,8 @@ export default {
 			{ name: 'Контроллеры', component: Equipment, route: 'equipment' },
 			{ name: 'Автоматы', component: Machines, route: 'machines' },
 			{ name: 'Уведомления', component: Notifications, route: 'notifications' },
-			{ name: 'Компания', component: Company, route: 'company' }
+			{ name: 'Компания', component: Company, route: 'company' },
+			{ name: 'Фискализация', component: Fiscal, route: 'fiscal' }
 		]
 	})
 }

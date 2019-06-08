@@ -59,6 +59,7 @@
                             kktOFDRegKey
                             companyName
                             kktLastBill
+                            server
 
                              }
                     }
