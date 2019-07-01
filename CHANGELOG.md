@@ -30,3 +30,12 @@
 # 1.1.1 - Release
 
 * Added handler for confirmation url from email
+
+
+# 1.1.2 - Release
+
+* Added SNO in company settings
+* Added new field (server) in admin interface
+* Changed fiscalization path (moved into settings)
+* Changed schema of fiscalisation
+
