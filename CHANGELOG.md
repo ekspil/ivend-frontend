@@ -31,8 +31,15 @@
 
 * Added handler for confirmation url from email
 
+# 1.1.2 - Hotfix
 
-# 1.1.2 - Release
+* Add filter by machineId in GraphQL query in ControllerSales
+
+# 1.1.3 - Hotfix
+
+* Update text on Confirm page
+
+# 1.1.4 - Release
 
 * Added SNO in company settings
 * Added new field (server) in admin interface
