@@ -53,6 +53,19 @@
 				</div>
 
 				<div class="company-settings__field-container">
+					<label for="company-sno" class="company-settings__field-label">Система налогооблажения</label>
+					<select id="company-sno" v-model="info.sno" class="form-control custom-select">
+						<option value="usn_income">УСН доходы</option>
+						<option value="usn_income_outcome">УСН доходы-расходы</option>
+						<option value="envd">ЕНВД</option>
+						<option value="patent">Патент</option>
+						<option value="osn">ОСН</option>
+						<option value="esn">ЕСН</option>
+
+					</select>
+				</div>
+
+				<div class="company-settings__field-container">
 					<label for="company-legal-address" class="company-settings__field-label">Адрес
 					юридический</label>
 					<Field id="company-legal-address" className="company-settings__field" formName="company"
@@ -143,7 +156,8 @@
 								directorEmail,
 								contactPerson,
 								contactPhone,
-								contactEmail
+								contactEmail,
+								sno
 							}
 						}
 					}
@@ -160,7 +174,8 @@
 					directorEmail: '',
 					contactPerson: '',
 					contactPhone: '',
-					contactEmail: ''
+					contactEmail: '',
+					sno: ''
 				}
 			}
 		},
@@ -178,7 +193,8 @@
 				directorEmail: [required, email],
 				contactPerson: [required],
 				contactPhone: [required],
-				contactEmail: [required, email]
+				contactEmail: [required, email],
+				sno: [required]
 			}
 		}),
 		methods: {
@@ -201,7 +217,8 @@
 									directorEmail,
 									contactPerson,
 									contactPhone,
-									contactEmail
+									contactEmail,
+									sno
 								}
 							}
 						`,
@@ -209,7 +226,8 @@
 							input: {
 								...cache,
 								directorPhone: cache.directorPhone.replace(/[()+\s-]/gi, '').slice(1),
-								contactPhone: cache.contactPhone.replace(/[()+\s-]/gi, '').slice(1)
+								contactPhone: cache.contactPhone.replace(/[()+\s-]/gi, '').slice(1),
+								sno: this.info.sno
 							}
 						}
 					});

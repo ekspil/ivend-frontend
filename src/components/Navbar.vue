@@ -89,7 +89,7 @@
                         <i class="fas fa-money-check"></i> <span>Оплата</span>
                     </router-link>
                 </li>
-                <li class="nav-item" v-if="true">
+                <li class="nav-item" v-if="false">
                     <router-link to="/fiscal" :class="['nav-link', isDisabled('/fiscal')]" activeClass="active" :event="isDisabled('/fiscal') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Фискализация</span></router-link>
                 </li>
                 <li class="nav-item" v-if="isAdmin()">

@@ -122,7 +122,7 @@
             },
             onSuccess () {
                 const router = this.$router;
-                setTimeout(function () { router.push('/fiscal'); }, 1000);
+                setTimeout(function () { router.push('/settings#fiscal'); }, 1000);
             },
 
             getBillingAbbr (date) {
