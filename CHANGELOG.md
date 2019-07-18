@@ -46,3 +46,7 @@
 * Changed fiscalization path (moved into settings)
 * Changed schema of fiscalisation
 
+
+# 1.1.5 - Release
+
+* Added remotePrinterId in edit Controller and controllers table
