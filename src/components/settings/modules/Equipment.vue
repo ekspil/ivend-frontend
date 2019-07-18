@@ -78,6 +78,7 @@
                         bankTerminalMode
                         fiscalizationMode
                         firmwareId
+                        remotePrinterId
 
                         machine {
                           id

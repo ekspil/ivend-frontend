@@ -19,7 +19,8 @@ export const getTableHeaders = () => [
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: true },
     { name: 'Автомат', key: 'machine', unsortable: true },
-    { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true }
+    { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true },
+    { name: 'Удалённый принтер', key: 'remotePrinterId', unsortable: true },
 ];
 
 export const getTableFields = (data, props) => data.map(controller => ({
@@ -30,6 +31,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     mode: controller.mode || '-',
     fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
     machine: controller.machine?.name || '-',
+    remotePrinterId: controller.remotePrinterId,
 
     props,
     route: `/controllers/edit/${controller.id}`

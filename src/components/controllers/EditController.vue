@@ -91,6 +91,12 @@
                     <option value="APPROVED">С подтверждением</option>
                   </select>
                 </div>
+
+                <div class="form-group">
+                  <label class="form-label f-b">Номер удалённого принтера</label>
+                  <Field className="form-control" :value="data.controller.remotePrinterId" name="remotePrinterId" formName="editControllerSettings" placeholder="Введите номер удалённого принтера"/>
+                </div>
+
               </div>
             </div>
           </template>
@@ -153,6 +159,7 @@ export default {
           bankTerminalMode
           readStatMode
           fiscalizationMode
+          remotePrinterId
         }
 
         equipments: getEquipments {
@@ -186,6 +193,11 @@ export default {
       try {
         this.controllerUploading = true;
 
+        const inputData = {
+          ...this.input,
+          ...this.$store.getters['cache/data']
+        };
+
         const controller = this.data.controller;
         const controllerData = {
           revisionId: 1,
@@ -193,7 +205,8 @@ export default {
           mode: controller.mode,
           fiscalizationMode: controller.fiscalizationMode,
           bankTerminalMode: controller.bankTerminalMode,
-          readStatMode: controller.readStatMode
+          readStatMode: controller.readStatMode,
+          remotePrinterId: inputData.remotePrinterId
         };
 
         const { errors } = await this.$apollo.mutate({
