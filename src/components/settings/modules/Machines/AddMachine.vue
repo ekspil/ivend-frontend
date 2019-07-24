@@ -66,6 +66,18 @@
 							</option>
 						</select>
 					</div>
+						<div class="form-group">
+							<label class="form-label f-b">Привязать KKT</label>
+							<select class="form-control custom-select" v-model="input.kktId">
+								<option key="" value="">
+									Распределять нагрузку
+								</option>
+								<option v-for="kkt in machine.kkts"
+								:key="kkt.id" :value="kkt.id">
+								{{ kkt.kktRegNumber }}
+							</option>
+						</select>
+					</div>
 
 					</div>
 				</div>
@@ -109,7 +121,8 @@ export default {
 		input: {
 			equipmentId: 1,
 			groupId: 1,
-			typeId: 1
+			typeId: 1,
+			kktId: ''
 		},
 
 		schema: {
@@ -141,6 +154,11 @@ export default {
 					id
 					uid
 				}
+				getUserKkts {
+					id
+					kktFactoryNumber
+        			kktRegNumber
+				}
 			}
 			`,
 			update ({ getMachineTypes, getMachineGroups, getEquipments, getControllers }) {
@@ -157,7 +175,8 @@ export default {
 					types: getMachineTypes,
 					groups: getMachineGroups,
 					equipments: getEquipments,
-					controllers: getControllers
+					controllers: getControllers,
+					kkts: getUserKkts
 				};
 			}
 		}

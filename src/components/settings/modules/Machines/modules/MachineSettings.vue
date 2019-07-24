@@ -68,6 +68,19 @@
     </select>
   </div>
 
+        <div class="form-group">
+          <label class="form-label f-b">Привязать KKT</label>
+          <select class="form-control custom-select" v-model="data.machine.kktId">
+            <option key="" value="">
+              Распределять нагрузку
+            </option>
+            <option v-for="kkt in data.kkts"
+                    :key="kkt.id" :value="kkt.id">
+              {{ kkt.kktRegNumber }}
+            </option>
+          </select>
+        </div>
+
   </div>
 </div>
 </template>
@@ -104,7 +117,8 @@ export default {
     data: null,
 
     input: {
-      controllerId: 1
+      controllerId: 1,
+      kktId: ''
     },
 
     schema: {
@@ -125,6 +139,7 @@ export default {
           number
           name
           place
+          kktId
           group {
             id
             name
@@ -163,6 +178,12 @@ export default {
           id
           uid
         }
+
+		getUserKkts {
+		  id
+		  kktFactoryNumber
+          kktRegNumber
+		}
       }
       `,
 
@@ -182,7 +203,8 @@ export default {
           groups: data.getMachineGroups,
           equipments: data.getEquipments,
           types: data.getMachineTypes,
-          controllers: data.getControllers
+          controllers: data.getControllers,
+          kkts: data.getUserKkts
         };
       }
     }
@@ -218,6 +240,8 @@ export default {
                   groupId: this.data.machine.group.id,
                   typeId: this.data.machine.type.id,
                   controllerId: this.input.controllerId,
+                  kktId: this.input.kktId,
+
 
                   ...this.$store.getters['cache/data']
                 }
