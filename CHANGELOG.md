@@ -50,3 +50,8 @@
 # 1.1.5 - Release
 
 * Added remotePrinterId in edit Controller and controllers table
+
+
+# 1.1.6 - Release
+
+* Updated terms of service
