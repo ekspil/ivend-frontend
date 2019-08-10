@@ -161,7 +161,7 @@ export default {
 				}
 			}
 			`,
-			update ({ getMachineTypes, getMachineGroups, getEquipments, getControllers }) {
+			update ({ getMachineTypes, getMachineGroups, getEquipments, getControllers, getUserKkts }) {
 				if (!this.machineUploading) {
 					this.input = {
 						equipmentId: getEquipments[0].id,

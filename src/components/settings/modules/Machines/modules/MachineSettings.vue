@@ -70,8 +70,8 @@
 
         <div class="form-group">
           <label class="form-label f-b">Привязать KKT</label>
-          <select class="form-control custom-select" v-model="data.machine.kktId">
-            <option key="" value="">
+          <select class="form-control custom-select" v-model="input.kktId">
+            <option key="0" value="0">
               Распределять нагрузку
             </option>
             <option v-for="kkt in data.kkts"
@@ -118,7 +118,7 @@ export default {
 
     input: {
       controllerId: 1,
-      kktId: ''
+      kktId: 0
     },
 
     schema: {
@@ -139,7 +139,9 @@ export default {
           number
           name
           place
-          kktId
+          kkt {
+          id
+          }
           group {
             id
             name
@@ -197,6 +199,9 @@ export default {
         if (!this.machineUpdating && data.getMachineById.controller) {
           this.input.controllerId = data.getMachineById.controller.id;
         }
+        if (!this.machineUpdating && data.getMachineById.kkt) {
+          this.input.kktId = data.getMachineById.kkt.id;
+        }
 
         return {
           machine: data.getMachineById,
@@ -240,7 +245,7 @@ export default {
                   groupId: this.data.machine.group.id,
                   typeId: this.data.machine.type.id,
                   controllerId: this.input.controllerId,
-                  kktId: this.input.kktId,
+                  kktId: Number(this.input.kktId),
 
 
                   ...this.$store.getters['cache/data']
