@@ -70,11 +70,11 @@
 							<label class="form-label f-b">Привязать KKT</label>
 							<select class="form-control custom-select" v-model="input.kktId">
 								<option key="0" value="0">
-									Распределять нагрузку
+									Все ККМ
 								</option>
 								<option v-for="kkt in machine.kkts"
 								:key="kkt.id" :value="kkt.id">
-								{{ kkt.kktRegNumber }}
+								{{ kkt.kktFactoryNumber}}
 							</option>
 						</select>
 					</div>
