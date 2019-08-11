@@ -78,8 +78,10 @@
 				};
 			},
             style (field) {
-
-                if(this.$route.path === "/fiscalAll"){
+				if(field.phone && field.email){
+					//did nothing
+				}
+                else if(this.$route.path === "/fiscalAll"){
 
                     if(field.timeToDie === "-"){
                         return "background:#c6df5f" ;

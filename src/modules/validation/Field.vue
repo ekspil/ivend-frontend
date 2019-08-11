@@ -49,7 +49,9 @@
 			className: String,
 			wrapperClassName: String,
 			
-			value: String,
+			value: {
+                default: 'text'
+            },
 			disabled: {
 				type: Boolean,
 				default: false
