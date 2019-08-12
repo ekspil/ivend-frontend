@@ -50,7 +50,7 @@
 			wrapperClassName: String,
 			
 			value: {
-                default: 'text'
+                default: ''
             },
 			disabled: {
 				type: Boolean,
