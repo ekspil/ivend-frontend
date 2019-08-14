@@ -35,7 +35,6 @@ export default {
     },
     className: String,
     initialValue: {
-      type: String,
       default: ''
     }
   },
