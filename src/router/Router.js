@@ -24,6 +24,7 @@ import Fiscal from '@/components/fiscal/Fiscal';
 import FiscalAll from '@/components/fiscal/FiscalAll';
 import EditFiscal from '@/components/fiscal/modules/EditFiscal';
 import EditFiscalAll from '@/components/fiscal/modules/EditFiscalAll';
+import EditUserAll from '@/components/fiscal/modules/EditUserAll';
 import AddFiscal from '@/components/fiscal/modules/AddFiscal';
 import AddFiscalAll from '@/components/fiscal/modules/AddFiscalAll';
 
@@ -68,6 +69,7 @@ const routes = [
     { path: '/fiscalAll', component: FiscalAll },
     { path: '/fiscal/edit/:id', component: EditFiscal },
     { path: '/fiscalAll/edit/:id', component: EditFiscalAll },
+    { path: '/fiscalAll/user/:id', component: EditUserAll },
     { path: '/fiscal/add', component: AddFiscal },
     { path: '/fiscalAll/add', component: AddFiscalAll },
 

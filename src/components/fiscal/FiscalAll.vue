@@ -20,6 +20,7 @@
 <script>
     import Tabs from '@/modules/Tabs';
     import Kkts from './modules/KktsAll';
+    import Users from './modules/UsersAll';
 
 
     export default {
@@ -27,7 +28,8 @@
         components: { Tabs },
         data: () => ({
             tabs: [
-                { name: 'Фискальные аппараты', component: Kkts, route: 'kktsAll' }
+                { name: 'Фискальные аппараты', component: Kkts, route: 'kktsAll' },
+                { name: 'Пользователи', component: Users, route: 'usersAll' }
             ]
         })
     }
