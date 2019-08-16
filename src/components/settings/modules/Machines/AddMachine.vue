@@ -69,12 +69,12 @@
 						<div class="form-group">
 							<label class="form-label f-b">Привязать KKT</label>
 							<select class="form-control custom-select" v-model="input.kktId">
-								<option key="" value="">
-									Распределять нагрузку
+								<option key="0" value="0">
+									Все ККМ
 								</option>
 								<option v-for="kkt in machine.kkts"
 								:key="kkt.id" :value="kkt.id">
-								{{ kkt.kktRegNumber }}
+								{{ kkt.kktFactoryNumber}}
 							</option>
 						</select>
 					</div>
@@ -122,7 +122,7 @@ export default {
 			equipmentId: 1,
 			groupId: 1,
 			typeId: 1,
-			kktId: ''
+			kktId: 0
 		},
 
 		schema: {
@@ -161,13 +161,14 @@ export default {
 				}
 			}
 			`,
-			update ({ getMachineTypes, getMachineGroups, getEquipments, getControllers }) {
+			update ({ getMachineTypes, getMachineGroups, getEquipments, getControllers, getUserKkts }) {
 				if (!this.machineUploading) {
 					this.input = {
 						equipmentId: getEquipments[0].id,
 						groupId: getMachineGroups[0].id,
 						typeId: getMachineTypes[0].id,
-						controllerId: getControllers[0].id
+						controllerId: getControllers[0].id,
+						kktId: 0
 					};
 				}
 
@@ -183,6 +184,7 @@ export default {
 	},
 	methods: {
 		async save () {
+            this.input.kktId = Number(this.input.kktId)
 			const data = {
 				...this.input,
 				...this.$store.getters['cache/data']
