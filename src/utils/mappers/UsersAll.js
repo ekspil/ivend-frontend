@@ -2,9 +2,9 @@
 
 
 export const getTableHeaders = () => [
-    { name: 'Компания', key: 'inn', unsortable: false , link: true },
-    { name: 'ИНН', key: 'companyName', unsortable: false  },
-    { name: 'Телефон', key: 'phone', unsortable: false , link: true},
+    { name: 'Компания', key: 'companyName', unsortable: false , link: true },
+    { name: 'ИНН', key: 'inn', unsortable: false  },
+    { name: 'Телефон', key: 'phone', unsortable: false},
     { name: 'Почта', key: 'email', unsortable: false  },
     { name: 'Роль', key: 'role', link: false },
 
