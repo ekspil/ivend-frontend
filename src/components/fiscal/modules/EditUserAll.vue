@@ -18,20 +18,51 @@
                         <template slot="form">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Компания</label>
+                                        <Field className="form-control" :value="user.legalInfo.companyName" disabled name="companyName" formName="editUser" placeholder="У компании не указано название"/>
+                                    </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">ИНН</label>
                                         <Field className="form-control" :value="user.legalInfo.inn"  disabled name="inn" formName="editUser" placeholder="У компании не указан ИНН"/>
                                     </div>
 
+
+
                                     <div class="form-group">
-                                        <label class="form-label f-b">Компания</label>
-                                        <Field className="form-control" :value="user.legalInfo.companyName" disabled name="companyName" formName="editUser" placeholder="У компании не указано название"/>
+                                        <label class="form-label f-b">ОГРН</label>
+                                        <Field className="form-control" :value="user.legalInfo.ogrn" disabled name="companyName" formName="editUser" placeholder="У компании не указан ОГРН"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Юридический адрес</label>
+                                        <Field className="form-control" :value="user.legalInfo.legalAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан юр.адрес"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Фактический адрес</label>
+                                        <Field className="form-control" :value="user.legalInfo.actualAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан фактический адрес"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Директор</label>
+                                        <Field className="form-control" :value="user.legalInfo.director" disabled name="companyName" formName="editUser" placeholder="У компании не указан директор"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Телефон директора</label>
+                                        <Field className="form-control" :value="user.legalInfo.directorPhone" disabled name="companyName" formName="editUser" placeholder="У компании не указан телефон директора"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Почта директора</label>
+                                        <Field className="form-control" :value="user.legalInfo.directorEmail" disabled name="companyName" formName="editUser" placeholder="У компании не указана почта директора"/>
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Начислить( -Списать )</label>
+                                        <label class="form-label f-b">Изменить баланс компании: Начислить( -Списать )</label>
                                         <Field className="form-control" :value="sum" name="sum" formName="editUser" placeholder="Введите сумму для начисления"/>
                                     </div>
                                 </div>
@@ -84,8 +115,16 @@
                             email
                             role
                             legalInfo{
-                                inn
-                                companyName
+                                    inn
+                                    ogrn
+                                    city
+                                    companyName
+                                    sno
+                                    actualAddress
+                                    legalAddress
+                                    director
+                                    directorPhone
+                                    directorEmail
                                 }
                              }
                     }

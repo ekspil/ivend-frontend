@@ -55,3 +55,11 @@
 # 1.1.6 - Release
 
 * Updated terms of service
+
+
+# 1.1.7 - Release
+
+* Added machine's kkm selection
+* Added all users list with legal info
+* Added change balance function
+
