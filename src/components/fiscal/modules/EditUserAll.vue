@@ -36,6 +36,11 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label class="form-label f-b">СНО</label>
+                                        <Field className="form-control" :value="snoString" disabled name="sno" formName="editUser" placeholder="У компании не указана СНО"/>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="form-label f-b">Юридический адрес</label>
                                         <Field className="form-control" :value="user.legalInfo.legalAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан юр.адрес"/>
                                     </div>
@@ -174,6 +179,27 @@
                     return 'день';
                 } else if (date === 'MONTHLY') {
                     return 'мес.';
+                }
+            }
+        },
+        computed: {
+            snoString: function (){
+                switch (this.user.legalInfo.sno){
+                    case "usn_income":
+                        return "УСН доходы"
+                    case "usn_income_outcome":
+                        return "УСН доходы-расходы"
+                    case "envd":
+                        return "ЕНВД"
+                    case "patent":
+                        return "Патент"
+                    case "osn":
+                        return "ОСН"
+                    case "esn":
+                        return "ЕСН"
+                    default:
+                        return "Не указана СНО"
+
                 }
             }
         }
