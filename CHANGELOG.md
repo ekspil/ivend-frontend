@@ -63,3 +63,7 @@
 * Added all users list with legal info
 * Added change balance function
 
+# 1.1.8 - Release
+
+* Added SNO to EditUser
+
