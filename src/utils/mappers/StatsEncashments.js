@@ -15,5 +15,5 @@ export const getTableFields = data => data.map(({ id, name, lastEncashment, sale
 	encashmentDate: lastEncashment ? getDateStr(new Date(lastEncashment.timestamp)): null,
 	...salesByEncashment,
 
-	route: `/stats/${id}`
+	route: `/machine/${id}/encashments`
 }));
