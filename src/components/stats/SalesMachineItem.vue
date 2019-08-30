@@ -6,11 +6,11 @@
 					<div class="card">
 						<div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
 						<div class="card-header">
-							<div class="card-title f-b" v-if="machine">Продажи автомата {{ machine.name }}</div>
+							<div class="card-title f-b" v-if="data && data.machine">Продажи автомата {{data.machine.name}} </div>
 						</div>
 
 						<div class="card-header-links">
-							<router-link to="/stats" class="card-header-links__item">Вернуться назад</router-link>
+							<router-link :to="`/stats/${$route.params.machineId}`" class="card-header-links__item">Вернуться назад</router-link>
 						</div>
 
 						<div class="stats-top-menu">
@@ -19,12 +19,12 @@
 									<Period @onChange="onPeriodChange"/>
 								</div>
 
-								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="machine"/>
+								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data"/>
 							</div>
 						</div>
 
 						<Table
-						v-if="machine && machine.itemMatrix && machine.itemMatrix.buttons"
+						v-if="data"
 						:headers="getTableHeaders"
 						:fields="getTableFields"
 						className="stats-table"
@@ -44,47 +44,45 @@ import gql from 'graphql-tag';
 
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
-import { getTableHeaders, getTableFields } from '@/utils/mappers/MachineSales';
+import { getTableHeaders, getTableFields } from '@/utils/mappers/MachineItemSales';
 
 import Period from '@/modules/Period';
 
 export default {
-	name: 'machineSales',
+	name: 'salesMachineItem',
 	components: {
 		Table,
 		ExportExcel,
 		Period
 	},
 	data: () => ({
+		machine: null,
 		period: {
 			from: null,
 			to: null
 		}
 	}),
 	apollo: {
-		machine: {
+		data: {
 			query: gql`
-			query ($id: Int!, $period: Period) {
-				machine: getMachineById (id: $id) {
-					id
-					name
-					itemMatrix {
-						buttons {
-							item {
-								id
-								name
-								lastSaleTime
-								salesSummary (machineId: $id, period: $period) {
-									salesCount
-									overallAmount
-									cashAmount
-									cashlessAmount
-								}
-							}
+				query ($offset: Int!, $limit: Int!, $machineId: Int, $itemId: Int, $machineIdRequired: Int!) {
+					sales: getSales(offset: $offset, limit: $limit, machineId: $machineId, itemId: $itemId) {
+						id
+						price
+						createdAt
+						item {
+							name
 						}
+						receipt {
+							timestamp
+							status
+						}
+					},
+					machine: getMachineById (id: $machineIdRequired) {
+						id
+						name
 					}
 				}
-			}
 			`,
 			variables () {
 				const notCustomDate = !this.period.from && !this.period.to;
@@ -92,6 +90,11 @@ export default {
 					return {
 						id: Number(this.$route.params.id),
 						period: {
+							machineId: Number(this.$route.params.machineId),
+							machineIdRequired: Number(this.$route.params.machineId),
+							itemId: Number(this.$route.params.itemId),
+							offset:0,
+							limit:0,
 							from: this.period,
 							to: Date.now()
 						}
@@ -99,11 +102,20 @@ export default {
 				}
 
 				return {
-					id: Number(this.$route.params.id),
+					machineId: Number(this.$route.params.machineId),
+					machineIdRequired: Number(this.$route.params.machineId),
+					itemId: Number(this.$route.params.itemId),
+					offset:0,
+					limit:0,
 					period: this.period
 				};
 			},
-			update: data => data.machine
+			update ({ sales, machine}) {
+				return {
+					sales,
+					machine
+				};
+			}
 		}
 	},
 	methods: {
@@ -113,7 +125,7 @@ export default {
 	},
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.machine.itemMatrix?.buttons || [], this.machine.id); }
+		getTableFields () { return getTableFields(this.data); }
 	}
 }
 </script>

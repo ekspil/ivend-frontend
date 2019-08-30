@@ -22,6 +22,5 @@ export const getTableFields = data => data.map(({id, name, lastEncashment, sales
   name,
   encashmentTimestamp: lastEncashment ? new Date(lastEncashment.timestamp) : null,
   ...salesByEncashment,
-
   route: `/machine/${id}/encashments`
 }));

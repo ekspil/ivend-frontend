@@ -1,7 +1,7 @@
 import { getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
-	{ name: 'Товар', key: 'name' },
+	{ name: 'Товар', key: 'name', link: true },
 	{ name: 'Продажа', key: 'lastSaleTime' },
 	{ name: 'Кол-во', key: 'salesCount' },
 	{ name: 'Сумма', key: 'overallAmount' },
@@ -13,7 +13,7 @@ export const getTableHeaders = () => [
 	{ name: 'Монеты', key: 'coinAmount' }
 ];
 
-export const getTableFields = data => data.map(({ item }) => ({
+export const getTableFields = (data, machineId) => data.map(({ item }) => ({
 	id: item.id,
 	name: item.name,
 	lastSaleTime: getTimestamp(item.lastSaleTime),
@@ -24,5 +24,6 @@ export const getTableFields = data => data.map(({ item }) => ({
 	billAmount: 'ОТКЛ',
 	coinAmount: 'ОТКЛ',
 	terminal: 'ОТКЛ',
-	wallet: 'ОТКЛ'
+	wallet: 'ОТКЛ',
+	route: `/sales/machine/${machineId}/item/${item.id}`
 }));
