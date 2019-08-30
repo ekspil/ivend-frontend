@@ -13,12 +13,8 @@
 							<router-link :to="`/stats/${$route.params.machineId}`" class="card-header-links__item">Вернуться назад</router-link>
 						</div>
 
-						<div class="stats-top-menu">
+						<div class="stats-top-menu" v-if="false">
 							<div class="stats-top-menu__content-container">
-								<div class="stats-top-menu__date-buttons">
-									<Period @onChange="onPeriodChange"/>
-								</div>
-
 								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data"/>
 							</div>
 						</div>
@@ -46,21 +42,14 @@ import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
 import { getTableHeaders, getTableFields } from '@/utils/mappers/MachineItemSales';
 
-import Period from '@/modules/Period';
-
 export default {
 	name: 'salesMachineItem',
 	components: {
 		Table,
 		ExportExcel,
-		Period
 	},
 	data: () => ({
 		machine: null,
-		period: {
-			from: null,
-			to: null
-		}
 	}),
 	apollo: {
 		data: {
@@ -85,29 +74,12 @@ export default {
 				}
 			`,
 			variables () {
-				const notCustomDate = !this.period.from && !this.period.to;
-				if (notCustomDate) {
-					return {
-						id: Number(this.$route.params.id),
-						period: {
-							machineId: Number(this.$route.params.machineId),
-							machineIdRequired: Number(this.$route.params.machineId),
-							itemId: Number(this.$route.params.itemId),
-							offset:0,
-							limit:0,
-							from: this.period,
-							to: Date.now()
-						}
-					};
-				}
-
 				return {
 					machineId: Number(this.$route.params.machineId),
 					machineIdRequired: Number(this.$route.params.machineId),
 					itemId: Number(this.$route.params.itemId),
 					offset:0,
-					limit:0,
-					period: this.period
+					limit:0
 				};
 			},
 			update ({ sales, machine}) {
@@ -119,9 +91,6 @@ export default {
 		}
 	},
 	methods: {
-		onPeriodChange (period) {
-			this.period = period;
-		}
 	},
 	computed: {
 		getTableHeaders,
