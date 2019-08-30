@@ -10,7 +10,7 @@
 						</div>
 
 						<div class="card-header-links">
-							<router-link to="/stats" class="card-header-links__item">Вернуться назад</router-link>
+							<router-link :to="`/stats#encashments`" class="card-header-links__item">Вернуться назад</router-link>
 						</div>
 
 						<Table
