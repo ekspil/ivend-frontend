@@ -4,6 +4,11 @@ export const getTableHeaders = () => [
     name: 'Инкассация', key: 'encashmentTimestamp',
     critery(encashmentSummary) {
       const {encashmentTimestamp} = encashmentSummary
+
+      if(!encashmentTimestamp) {
+        return ""
+      }
+
       return `${encashmentTimestamp.toLocaleDateString('ru-RU')} ${encashmentTimestamp.toLocaleTimeString('ru-RU')}`;
     }
   },
