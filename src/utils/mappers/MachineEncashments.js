@@ -18,8 +18,6 @@ export const getTableHeaders = () => [
   {name: 'Безнал', key: 'cashlessAmount'},
 ];
 
-const getDateStr = (date) => `${date.toLocaleDateString('ru-RU')} ${date.toLocaleTimeString('ru-RU')}`
-
 export const getTableFields = (machine) => {
     return machine.encashmentsSummaries.map(encashmentSummary => {
       const {salesSummary, encashment} = encashmentSummary
@@ -28,7 +26,7 @@ export const getTableFields = (machine) => {
       return {
         machineId: machine.id,
         machineName: machine.name,
-        encashmentTimestamp: getDateStr(new Date(timestamp)),
+        encashmentTimestamp: new Date(timestamp),
         ...salesSummary
       }
     })
