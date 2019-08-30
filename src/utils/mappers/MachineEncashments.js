@@ -1,6 +1,12 @@
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'machineName'},
-  {name: 'Инкассация', key: 'encashmentTimestamp'},
+  {
+    name: 'Инкассация', key: 'encashmentTimestamp',
+    critery(encashmentSummary) {
+      const {encashmentTimestamp} = encashmentSummary
+      return `${encashmentTimestamp.toLocaleDateString('ru-RU')} ${encashmentTimestamp.toLocaleTimeString('ru-RU')}`;
+    }
+  },
   {name: 'Кол-во', key: 'salesCount'},
   {name: 'Сумма', key: 'overallAmount'},
   {name: 'Нал', key: 'cashAmount'},
