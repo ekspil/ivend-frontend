@@ -113,7 +113,7 @@ export default {
 	},
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.machine.itemMatrix?.buttons || []); }
+		getTableFields () { return getTableFields(this.machine.itemMatrix?.buttons || [], this.machine.id); }
 	}
 }
 </script>

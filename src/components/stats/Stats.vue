@@ -21,6 +21,7 @@
 import Tabs from '@/modules/Tabs';
 import Finance from './modules/Finance';
 import Sales from './modules/Sales';
+import Encashments from './modules/Encashments';
 
 export default {
   name: 'Stats',
@@ -30,7 +31,8 @@ export default {
   data: () => ({
     tabs: [
       { name: 'По автоматам', component: Finance, route: 'finance' },
-      { name: 'По товарам', component: Sales, route: 'sales' }
+      { name: 'По товарам', component: Sales, route: 'sales' },
+      { name: 'Инкассация', component: Encashments, route: 'encashments' }
     ]
   })
 }

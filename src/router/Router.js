@@ -12,6 +12,8 @@ import AddGoods from '@/components/goods/AddGoods';
 import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
 import GoodSales from '@/components/stats/GoodSales';
+import MachineEncashments from '@/components/stats/MachineEncashments';
+import SalesMachineItem from '@/components/stats/SalesMachineItem';
 
 import Monitoring from '@/components/monitoring/Monitoring';
 import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
@@ -60,6 +62,9 @@ const routes = [
     { path: '/settings', component: Settings },
     { path: '/machine/add', component: AddMachine },
     { path: '/machine/edit/:id', component: EditMachine },
+    { path: '/machine/:id/encashments', component: MachineEncashments },
+
+    { path: '/sales/machine/:machineId/item/:itemId', component: SalesMachineItem },
 
     { path: '/billing', component: Billing },
 
