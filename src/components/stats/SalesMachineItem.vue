@@ -19,14 +19,26 @@
 							</div>
 						</div>
 
-						<Table
-						v-if="data"
-						:headers="getTableHeaders"
-						:fields="getTableFields"
-						className="stats-table"
-						/>
+
+                        <div v-if="data">
+                            <Table
+                                    :headers="getTableHeaders"
+                                    :fields="getTableFields"
+                                    sortBy="timestamp"
+                                    className="stats-table"
+                            />
+                            <div class="card-body">
+                                <ul class="pagination ">
+                                    <li class="page-item page-prev"> <a class="page-link" v-on:click="prevPage()">Пред</a> </li>
+                                    <li class="page-item page-next"> <a class="page-link" v-on:click="nextPage()">След</a> </li>
+                                </ul>
+                                <div>{{(this.offset/this.limit) + 1}} страница</div>
+                            </div>
+                        </div>
+
 						<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
 						<div v-else class="aligned-text">Нет продаж</div>
+
 					</div>
 					<!-- section-wrapper -->
 				</div>
@@ -49,6 +61,10 @@ export default {
 		ExportExcel,
 	},
 	data: () => ({
+        offset: 0,
+        limit:25,
+        sales: null,
+        data: null,
 		machine: null,
 	}),
 	apollo: {
@@ -78,8 +94,8 @@ export default {
 					machineId: Number(this.$route.params.machineId),
 					machineIdRequired: Number(this.$route.params.machineId),
 					itemId: Number(this.$route.params.itemId),
-					offset:0,
-					limit:0
+					offset: this.offset,
+					limit: this.limit
 				};
 			},
 			update ({ sales, machine}) {
@@ -91,7 +107,20 @@ export default {
 		}
 	},
 	methods: {
-	},
+	  nextPage() {
+	    if(!this.data || !this.data.sales || !this.data.sales.length) {
+	      return
+        }
+	    this.offset += this.limit
+      },
+	  prevPage() {
+	    if(this.offset - this.limit < 0) {
+	      return
+        }
+
+        this.offset -= this.limit
+      }
+    },
 	computed: {
 		getTableHeaders,
 		getTableFields () { return getTableFields(this.data); }

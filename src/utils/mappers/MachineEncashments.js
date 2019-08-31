@@ -1,15 +1,11 @@
+import { getTimestamp } from '@/utils';
+
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'machineName'},
   {
     name: 'Инкассация', key: 'encashmentTimestamp',
-    critery(encashmentSummary) {
-      const {encashmentTimestamp} = encashmentSummary
-
-      if(!encashmentTimestamp) {
-        return ""
-      }
-
-      return `${encashmentTimestamp.toLocaleDateString('ru-RU')} ${encashmentTimestamp.toLocaleTimeString('ru-RU')}`;
+    critery({encashmentTimestamp}) {
+      return getTimestamp(encashmentTimestamp);
     }
   },
   {name: 'Кол-во', key: 'salesCount'},
