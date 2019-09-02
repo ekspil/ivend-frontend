@@ -106,8 +106,7 @@
                         return user
                     })
                 } catch (error) {
-                    alert("Что-то не так, обратитесь к разработчкику для выяснения проблемы!")
-                    console.log(error)
+
                 }
             }
 
