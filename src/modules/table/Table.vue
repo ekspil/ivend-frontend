@@ -25,7 +25,7 @@
 					<template v-else>{{ field[header.key] }}</template>
 				</td>
 
-				<td class="text-right" v-if="field.props">
+				<td class="text-right" v-if="field.props.remove">
 					<div class="item-action dropdown">
 						<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
 							<i class="fe fe-more-vertical"></i>
@@ -33,6 +33,21 @@
 						<div class="dropdown-menu dropdown-menu-right">
 							<a href="#" class="dropdown-item" @click.prevent="field.props.remove(field.id)">
 								<i class="dropdown-icon fe fe-x"></i> Удалить
+							</a>
+						</div>
+					</div>
+				</td>
+
+				<td class="text-right" v-if="field.props.changeBalance">
+					<div class="item-action dropdown">
+						<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
+							<i class="fe fe-more-vertical"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right text-center">
+							<p> Введите сумму для начисления </p>
+							<input class="form-control" type="text" size="17" v-model="field.props.sum">
+							<a href="#" class="dropdown-item" @click.prevent="field.props.changeBalance(field.id, field.props.sum)">
+								<button class="btn btn-primary ml-auto">Начислить</button>
 							</a>
 						</div>
 					</div>

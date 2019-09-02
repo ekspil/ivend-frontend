@@ -53,6 +53,7 @@
                             id
                             email
                             role
+                            balance
                             legalInfo{
                                 inn
                                 companyName
@@ -78,24 +79,44 @@
                 }
             }
         },
-        // methods: {
-        //     async removeKkt (id) {
-        //         await this.$apollo.mutate({
-        //             mutation: gql`
-        //                 mutation ($id: Int!) {
-        //                     deleteKkt (id: $id)
-        //                 }
-        //             `,
-        //             variables: { id }
-        //         });
-        //
-        //         this.kkts = this.kkts.filter(controller => controller.id !== id);
-        //     }
-        //
-        // },
+        methods: {
+            async changeBalance (id, sum) {
+                try {
+                    const data = {
+                        id,
+                        sum: Number(sum)
+                    };
+
+                    const { errors } = await this.$apollo.mutate({
+                        mutation: gql `mutation change($data: ChangeUserBalanceInput! ){
+                                         changeUserBalance(input: $data)
+                                                }
+
+          `,
+                        variables: {
+                            data: data
+                        }
+                    });
+
+                    this.users = this.users.map(user => {
+                        if (user.id === id){
+                            user.balance = Number(user.balance) + Number(sum)
+                            return user
+                        }
+                        return user
+                    })
+                } catch (error) {
+
+                }
+            }
+
+        },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.users) }
+            getTableFields () { return getTableFields(this.users, {
+                changeBalance: this.changeBalance,
+                sum: 0
+            }) }
         }
     }
 </script>
