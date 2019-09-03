@@ -102,7 +102,7 @@
 
                     this.users = this.users.map(user => {
                         if (user.id === id){
-                            user.billing.balance = Number(user.billing.balance) + Number(sum)
+                            user.billing.balance = (Number(user.billing.balance) + Number(sum)).toFixed(2)
                             return user
                         }
                         return user
