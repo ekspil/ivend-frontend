@@ -16,7 +16,7 @@ export const getTableHeaders = () => [
 export const getTableFields = (data, props) => data.map(user => ({
     id: user.id,
     phone: user.phone,
-    balance: user.balance,
+    balance: user.billing.balance,
     email: user.email,
     role: user.role,
     inn: user.legalInfo ? user.legalInfo.inn : "Не указано",

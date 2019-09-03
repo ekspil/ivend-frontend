@@ -53,7 +53,9 @@
                             id
                             email
                             role
-                            balance
+                            billing{
+                                balance
+                                }
                             legalInfo{
                                 inn
                                 companyName
@@ -100,7 +102,7 @@
 
                     this.users = this.users.map(user => {
                         if (user.id === id){
-                            user.balance = Number(user.balance) + Number(sum)
+                            user.billing.balance = Number(user.billing.balance) + Number(sum)
                             return user
                         }
                         return user
