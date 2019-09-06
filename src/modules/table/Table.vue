@@ -25,7 +25,7 @@
 					<template v-else>{{ field[header.key] }}</template>
 				</td>
 
-				<td class="text-right" v-if="field.props.remove">
+				<td class="text-right" v-if="field && field.props && field.props.remove">
 					<div class="item-action dropdown">
 						<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
 							<i class="fe fe-more-vertical"></i>
@@ -38,7 +38,7 @@
 					</div>
 				</td>
 
-				<td class="text-right" v-if="field.props.changeBalance">
+				<td class="text-right" v-if="field && field.props && field.props.changeBalance">
 					<div class="item-action dropdown">
 						<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
 							<i class="fe fe-more-vertical"></i>
