@@ -67,3 +67,9 @@
 
 * Added SNO to EditUser
 
+# 1.2.0 - Release
+
+* Added add user balance
+* Added feature KKT delete
+* Added filtering by machine group in statistics
+* Added 2 Encashment pages
