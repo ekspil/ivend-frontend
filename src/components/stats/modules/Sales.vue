@@ -4,7 +4,7 @@
 			<div class="stats-top-menu__date-buttons">
 				<Period @onChange="onPeriodChange"/>
 				<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" data-placeholder="Выберите группу">
-					<option label="Выберите группу" value="no"></option>
+					<option label="Выберите группу" :value="null"></option>
 					<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
 				</select>
 				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
@@ -78,7 +78,7 @@ export default {
 				}
 
 				return {
-					machineGroupId: this.selectedGroupId === "no" ? null: this.selectedGroupId,
+					machineGroupId: this.selectedGroupId,
 					period: this.period
 				};
 			},
