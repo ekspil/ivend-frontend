@@ -6,6 +6,10 @@
 
 				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
+			<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" data-placeholder="Выберите группу">
+				<option label="Выберите группу" value="no"></option>
+				<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
+			</select>
 		</div>
 
 		<Table
@@ -37,6 +41,7 @@ export default {
 		ExportExcel
 	},
 	data: () => ({
+		selectedGroupId: null,
 		machines: [],
 		period: {
 			from: null,
@@ -46,12 +51,12 @@ export default {
 	apollo: {
 		machines: {
 			query: gql`
-			query ($period: Period) {
+			query ($machineGroupId: Int, $period: Period) {
 				getProfile {
 					items {
 						id
 						name
-						salesSummary (period: $period) {
+						salesSummary (machineGroupId: $machineGroupId, period: $period) {
 							salesCount
 							overallAmount
 							cashAmount
@@ -74,10 +79,22 @@ export default {
 				}
 
 				return {
+					machineGroupId: this.selectedGroupId === "no" ? null: this.selectedGroupId,
 					period: this.period
 				};
 			},
 			update: data => data.getProfile.items
+		},
+		groups: {
+			query: gql`
+			query {
+				getMachineGroups {
+					id
+					name
+				}
+			}
+			`,
+			update: data => data.getMachineGroups
 		}
 	},
 	computed: {

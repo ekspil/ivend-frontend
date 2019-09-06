@@ -43,6 +43,7 @@
 import gql from 'graphql-tag';
 
 import Table from '@/modules/table/Table';
+import CustomSelect from '@/modules/CustomSelect';
 import ExportExcel from '@/modules/table/ExportExcel';
 import { getTableHeaders, getTableFields } from '@/utils/mappers/GoodSales';
 
@@ -53,6 +54,7 @@ export default {
 	components: {
 		Table,
 		ExportExcel,
+		CustomSelect,
 		Period
 	},
 	data: () => ({
