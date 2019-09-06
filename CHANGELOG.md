@@ -73,3 +73,8 @@
 * Added feature KKT delete
 * Added filtering by machine group in statistics
 * Added 2 Encashment pages
+
+# 1.2.1 - Release
+
+* Fixed urgent npe error
+* Fixed Encashment select group markup
