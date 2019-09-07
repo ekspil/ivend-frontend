@@ -78,3 +78,7 @@
 
 * Fixed urgent npe error
 * Fixed Encashment select group markup
+
+# 1.2.2 - Release
+
+* Fixed stats machine group selection on first tabk
