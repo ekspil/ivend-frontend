@@ -78,7 +78,7 @@ export default {
 
 				return {
 					period: this.period,
-					machineGroupId
+					machineGroupId: this.selectedGroupId
 				};
 			},
 			update: data => data.getMachines
