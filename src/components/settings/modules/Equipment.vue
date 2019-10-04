@@ -75,7 +75,6 @@
                             name
                         }
                         status
-                        bankTerminalMode
                         fiscalizationMode
                         firmwareId
                         remotePrinterId

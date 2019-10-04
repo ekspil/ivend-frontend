@@ -81,4 +81,8 @@
 
 # 1.2.2 - Release
 
-* Fixed stats machine group selection on first tabk
+* Fixed stats machine group selection on first tab
+
+# 1.2.3 - Release
+
+* Added correct mapping for controller fiscalization mode in the settings
