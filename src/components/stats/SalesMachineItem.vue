@@ -80,6 +80,7 @@ export default {
 						}
 						receipt {
 							timestamp
+							paymentType
 							status
 						}
 					},

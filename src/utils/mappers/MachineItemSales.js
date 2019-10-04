@@ -29,5 +29,6 @@ export const getTableFields = ({sales}) => sales.map(({id, price, createdAt, ite
   itemName: item.name,
   timestamp: receipt ? new Date(receipt.timestamp) : new Date(createdAt),
   itemPrice: price,
-  receiptStatus: receipt ? receipt.status : null
+  receiptStatus: receipt ? receipt.status : null,
+  receiptPaymentType: receipt ? receipt.paymentType : null
 }));
