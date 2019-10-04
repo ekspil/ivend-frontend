@@ -78,7 +78,7 @@
 					case 'Всего': return 0;
 					case 'Месяц':
 						date = new Date();
-						date.setDate(date.getMonth() - 1);
+						date.setMonth(date.getMonth() - 1);
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
