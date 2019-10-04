@@ -12,4 +12,4 @@ export const getTableFields = data => data.map(({ id, name, salesSummary }) => (
 	...salesSummary,
 
 	route: `/stats/${id}`
-}));
+})).filter(e => e.salesCount);

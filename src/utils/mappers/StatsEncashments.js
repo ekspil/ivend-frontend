@@ -20,4 +20,4 @@ export const getTableFields = data => data.map(({id, name, lastEncashment, sales
   encashmentTimestamp: lastEncashment ? new Date(lastEncashment.timestamp) : null,
   ...salesByEncashment,
   route: `/machine/${id}/encashments`
-}));
+})).filter(e => e.salesCount);

@@ -16,10 +16,10 @@ export const getTableFields = data => data.map(({ id, name, salesSummary }) => (
 		const salesData = values(pickBy(val => {
 			return typeof(val) === 'number';
 		}, salesSummary));
-		
+
 		// Filter all zero numeric fields
 		return all(equals(0))(salesData);
 	},
 
 	route: `/stats/good/${id}`
-}));
+})).filter(e => e.salesCount);
