@@ -81,7 +81,7 @@
 
 # 1.2.2 - Release
 
-* Fixed stats machine group selection on first tabk
+* Fixed stats machine group selection on first tab
 
 # 1.3.0 - Release
 
@@ -89,3 +89,4 @@
 * Added total amount on stats pages 
 * When setting controller for machines, only show available controllers in select
 * Fixed last month in Period
+* Added correct mapping for controller fiscalization mode in the settings

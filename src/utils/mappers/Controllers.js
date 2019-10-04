@@ -13,13 +13,21 @@ const getStatus = status => {
     }
 };
 
+const mapFiscalizationMode = (mode) => {
+    return {
+        NO_FISCAL: "Нефискальный",
+        UNAPPROVED: "Без подтверждения",
+        APPROVED: "С подтверждением"
+    }[mode]
+}
+
 export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'uid', link: true },
     { name: 'Состояние', key: 'status', unsortable: true, raw: true },
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: true },
     { name: 'Автомат', key: 'machine', unsortable: true },
-    { name: 'Фискализация', key: 'fiscalRegistrar', unsortable: true },
+    { name: 'Фискализация', key: 'fiscalizationMode', unsortable: true },
     { name: 'Удалённый принтер', key: 'remotePrinterId', unsortable: true },
 ];
 
@@ -29,10 +37,9 @@ export const getTableFields = (data, props) => data.map(controller => ({
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',
     mode: controller.mode || '-',
-    fiscalRegistrar: controller.fiscalRegistrar?.name || '-',
+    fiscalizationMode: controller.fiscalizationMode ? mapFiscalizationMode(controller.fiscalizationMode) : '-',
     machine: controller.machine?.name || '-',
     remotePrinterId: controller.remotePrinterId,
-
     props,
     route: `/controllers/edit/${controller.id}`
 }));
