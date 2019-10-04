@@ -82,3 +82,8 @@
 # 1.2.2 - Release
 
 * Fixed stats machine group selection on first tabk
+
+# 1.3.0 - Release
+
+* On stats page, filter out empty rows
+* Added total amount on stats pages 
