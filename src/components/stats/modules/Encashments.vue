@@ -18,6 +18,7 @@
 				v-if="machines.length > 0 || !$apollo.loading"
 				:headers="getTableHeaders"
 				:fields="getTableFields"
+				stats
 				sortBy="machineId"
 				className="stats-table"
 		/>

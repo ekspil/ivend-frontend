@@ -15,6 +15,7 @@
 		v-if="machines.length > 0 && !$apollo.loading"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
+		stats
 		sortBy="salesCount"
 		className="stats-table"
 		/>

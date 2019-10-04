@@ -54,9 +54,9 @@
 				</td>
 			</tr>
 		</tbody>
-			<tr>
-				<th v-for="(header, index) in headers" :key="index">{{index === 0 ? "Итого": getTotal(header)}}</th>
-			</tr>
+		<tr v-if="stats">
+			<th v-for="(header, index) in headers" :key="index">{{index === 0 ? "Итого": getTotal(header)}}</th>
+		</tr>
 	</table>
 </div>
 </template>
@@ -72,7 +72,10 @@
 				type: Array,
 				default: () => []
 			},
-
+			stats: {
+				type: Boolean,
+				default: () => false
+			},
 			fields: {
 				type: Array,
 				default: () => []
