@@ -54,6 +54,9 @@
 				</td>
 			</tr>
 		</tbody>
+			<tr>
+				<th v-for="(header, index) in headers" :key="index">{{index === 0 ? "Итого": getTotal(header)}}</th>
+			</tr>
 	</table>
 </div>
 </template>
@@ -86,6 +89,12 @@
 			};
 		},
 		methods: {
+			getTotal(header) {
+				const {fields} = this
+				const {key} = header
+
+				return fields.reduce((acc, row) => acc + row[key] + 0, 0)
+			},
 			getHeaderClass (header) {
 				return {
 					up: not(header.unsortable) && equals(header.key, this.critery) && not(this.ltOrder),
