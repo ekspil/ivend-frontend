@@ -88,3 +88,4 @@
 * On stats page, filter out empty rows
 * Added total amount on stats pages 
 * When setting controller for machines, only show available controllers in select
+* Fixed last month in Period
