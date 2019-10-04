@@ -60,7 +60,8 @@
 						<div class="form-group">
 							<label class="form-label f-b">Привязать контроллер</label>
 							<select class="form-control custom-select" v-model="input.controllerId">
-								<option v-for="controller in getAvailableControllers(machine.controllers)"
+                                <option v-bind:value="null">Без контроллера</option>
+                                <option v-for="controller in getAvailableControllers(machine.controllers)"
 								:key="controller.id" :value="controller.id">
 								{{ controller.uid }}
 							</option>
