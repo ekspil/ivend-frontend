@@ -82,3 +82,7 @@
 # 1.2.2 - Release
 
 * Fixed stats machine group selection on first tabk
+
+# 1.2.3 - Release
+
+* Fixed last month in Period
