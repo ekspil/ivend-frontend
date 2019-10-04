@@ -90,3 +90,4 @@
 * When setting controller for machines, only show available controllers in select
 * Fixed last month in Period
 * Added correct mapping for controller fiscalization mode in the settings
+* Add option for unsetting controller for machine
