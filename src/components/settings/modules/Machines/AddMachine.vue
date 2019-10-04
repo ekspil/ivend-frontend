@@ -60,7 +60,7 @@
 						<div class="form-group">
 							<label class="form-label f-b">Привязать контроллер</label>
 							<select class="form-control custom-select" v-model="input.controllerId">
-								<option v-for="controller in machine.controllers"
+								<option v-for="controller in getAvailableControllers(machine.controllers)"
 								:key="controller.id" :value="controller.id">
 								{{ controller.uid }}
 							</option>
@@ -183,6 +183,9 @@ export default {
 		}
 	},
 	methods: {
+		getAvailableControllers(controllers) {
+			return controllers.filter(controller => !controller.machine)
+		},
 		async save () {
             this.input.kktId = Number(this.input.kktId)
 			const data = {
