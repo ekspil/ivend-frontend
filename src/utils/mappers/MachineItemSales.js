@@ -9,6 +9,7 @@ export const getTableHeaders = () => [
     },
   },
   {name: 'Сумма', key: 'itemPrice'},
+  {name: 'Тип платежа', key: 'receiptPaymentType'},
   {name: 'Чек', key: 'receiptStatus',
     critery ({receiptStatus}) {
       switch (receiptStatus) {
@@ -25,10 +26,17 @@ export const getTableHeaders = () => [
   },
 ];
 
+const getPaymentTypeStr = (paymentType) => {
+  return {
+    CASH: "наличные",
+    CASHLESS: "безнал"
+  }[paymentType]
+}
+
 export const getTableFields = ({sales}) => sales.map(({id, price, createdAt, item, receipt}) => ({
   itemName: item.name,
   timestamp: receipt ? new Date(receipt.timestamp) : new Date(createdAt),
   itemPrice: price,
   receiptStatus: receipt ? receipt.status : null,
-  receiptPaymentType: receipt ? receipt.paymentType : null
+  receiptPaymentType: receipt ? getPaymentTypeStr(receipt.paymentType) : null
 }));
