@@ -17,7 +17,7 @@ export const getTableHeaders = () => [
           return createTooltip('warning', 'В очереди');
         case "ERROR":
           return createTooltip('alert', 'Ошибка');
-        case "OK":
+        case "SUCCESS":
           return createTooltip('primary', 'OK');
         default:
           return createTooltip(null, 'Нет');
