@@ -91,3 +91,8 @@
 * Fixed last month in Period
 * Added correct mapping for controller fiscalization mode in the settings
 * Add option for unsetting controller for machine
+
+# 1.3.1 - Release
+
+* Add payment type of the receipt
+* Fix Table (add ternary for total)
