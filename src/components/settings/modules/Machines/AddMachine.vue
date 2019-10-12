@@ -154,6 +154,9 @@ export default {
 				getControllers {
 					id
 					uid
+					machine {
+						id
+					}
 				}
 				getUserKkts {
 					id
