@@ -96,3 +96,7 @@
 
 * Add payment type of the receipt
 * Fix Table (add ternary for total)
+
+# 1.3.2 - Release
+
+* Fix missing graphql subquery
