@@ -57,12 +57,11 @@
         </option>
       </select>
     </div>
-
     <div class="form-group">
       <label class="form-label f-b">Привязать контроллер</label>
       <select class="form-control custom-select" v-model="input.controllerId">
           <option v-bind:value="null">Без контроллера</option>
-          <option v-for="controller in getAvailableControllers(data.controllers)"
+          <option v-for="controller in getAvailableControllers(data.controllers, input.controllerId)"
         :key="controller.id" :value="controller.id">
         {{ controller.uid }}
       </option>
@@ -206,6 +205,9 @@ export default {
         if (!this.machineUpdating && data.getMachineById.kkt) {
           this.input.kktId = data.getMachineById.kkt.id;
         }
+        if (!this.machineUpdating && data.getMachineById.controller) {
+          this.input.controllerId = data.getMachineById.controller.id;
+        }
 
         return {
           machine: data.getMachineById,
@@ -219,8 +221,8 @@ export default {
     }
   },
   methods: {
-    getAvailableControllers(controllers) {
-      return controllers.filter(controller => !controller.machine)
+    getAvailableControllers(controllers, currentId) {
+      return controllers.filter(controller => !controller.machine || controller.id === currentId)
     },
     async save () {
       if (!this.submitDisabled) {
