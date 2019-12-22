@@ -8,6 +8,7 @@ import EditController from '@/components/controllers/EditController';
 import AddController from '@/components/controllers/AddController';
 
 import AddGoods from '@/components/goods/AddGoods';
+import EditGoods from '@/components/goods/EditGoods';
 
 import Stats from '@/components/stats/Stats';
 import ControllerSales from '@/components/stats/ControllerSales';
@@ -27,8 +28,11 @@ import FiscalAll from '@/components/fiscal/FiscalAll';
 import EditFiscal from '@/components/fiscal/modules/EditFiscal';
 import EditFiscalAll from '@/components/fiscal/modules/EditFiscalAll';
 import EditUserAll from '@/components/fiscal/modules/EditUserAll';
+import EditControllerAll from '@/components/fiscal/modules/edit/EditControllerAll';
+import EditNewsAll from '@/components/fiscal/modules/edit/EditNewsAll';
 import AddFiscal from '@/components/fiscal/modules/AddFiscal';
 import AddFiscalAll from '@/components/fiscal/modules/AddFiscalAll';
+import AddNewsAll from '@/components/fiscal/modules/add/AddNewsAll';
 
 import Billing from '@/components/billing/Billing';
 import Tariffs from '@/components/tariffs/Tariffs';
@@ -51,6 +55,7 @@ const routes = [
     { path: '/controllers/add', component: AddController },
 
     { path: '/goods/add/:id', component: AddGoods },
+    { path: '/goods/edit/:matrixId/:id', component: EditGoods },
 
     { path: '/stats', component: Stats },
     { path: '/stats/:id', component: ControllerSales },
@@ -75,8 +80,11 @@ const routes = [
     { path: '/fiscal/edit/:id', component: EditFiscal },
     { path: '/fiscalAll/edit/:id', component: EditFiscalAll },
     { path: '/fiscalAll/user/:id', component: EditUserAll },
+    { path: '/fiscalAll/controller/:id', component: EditControllerAll },
+    { path: '/fiscalAll/news/:id', component: EditNewsAll },
     { path: '/fiscal/add', component: AddFiscal },
     { path: '/fiscalAll/add', component: AddFiscalAll },
+    { path: '/fiscalAll/addNews', component: AddNewsAll },
 
     { path: '/login', component: Login },
     { path: '/register', component: Registration }

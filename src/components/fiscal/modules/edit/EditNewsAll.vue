@@ -1,0 +1,155 @@
+<template>
+    <div class="container">
+        <div class="side-app">
+            <div class="row mt-5">
+                <div class="col-lg-10 offset-lg-1 col-md-12">
+                    <Validate
+                            formName="addNews"
+                            title="Редактирование новости"
+                            :schema="schema" ref="form"
+                            @onSubmit="save"
+                            @onSuccess="onSuccess"
+                    >
+                        <template slot="form">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Новость активна</label>
+                                        <select v-model="input.active" class="form-control custom-select">
+                                            <option value=1>Да</option>
+                                            <option value=0>Нет</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Заголовок новости</label>
+                                        <Field className="form-control" :value="data.news.header"  name="header" formName="addNews" placeholder="Заголовок"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Дата</label>
+                                        <Field className="form-control" :value="data.news.date" name="date" formName="addNews" placeholder="Дата"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Текст (Используй в тексте: [P]  - он создаст новый параграф)</label>
+                                        <Field className="form-control" :value="data.news.text" name="text" formName="addNews" placeholder="Текст (Используй в тексте: [P]  - он создаст новый параграф)"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Ссылка на картинку</label>
+                                        <Field className="form-control" :value="data.news.link" name="link" formName="addNews" placeholder="Ссылка на изображение"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <template slot="submit">
+                            <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+                        </template>
+                    </Validate>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import gql from 'graphql-tag';
+
+    import { convertServerError } from '@/utils';
+    import { required } from '@/utils/validation';
+
+    import Validate from '@/modules/validation/Validate';
+    import Field from '@/modules/validation/Field';
+
+    export default {
+        name: 'addNews',
+        components: {
+            Validate,
+            Field
+        },
+        data: () => ({
+            input: {
+                active: 0,
+                id: null
+            },
+
+            schema: {
+                header: [required],
+                text: [required],
+                date: [required]
+            }
+        }),
+        apollo: {
+            data: {
+                variables() {
+                    return {
+                        id: Number(this.$route.params.id),
+                    }
+                },
+                query: gql `
+      query GetController($id: Int!) {
+        news: getNewsById(id: $id) {
+          id
+          active
+          header
+          text
+          link
+          date
+        }
+
+      }
+      `,
+                update(data) {
+                    this.input.id = data.news.id
+                    this.input.active = data.news.active
+                    return {
+                        news: data.news
+                    };
+                }
+            }
+        },
+        methods: {
+            async save () {
+                const data = {
+                    active: Number(this.input.active),
+                    id: Number(this.input.id),
+                    ...this.$store.getters['cache/data']
+                };
+
+
+                try {
+                    const { errors } = await this.$apollo.mutate({
+                        mutation: gql`
+					mutation saveNews ($data: NewsInput!) {
+						changeNews (input: $data) {
+							id
+						}
+					}
+					`,
+                        variables: {
+                            data: data
+                        }
+                    });
+
+                    this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+                } catch (error) {
+                    this.$refs.form.showMessage('error', convertServerError(error.message));
+                }
+            },
+            onSuccess () {
+                const router = this.$router;
+                setTimeout(function () { router.push('/fiscalAll#newsAll'); }, 1000);
+            },
+
+            getBillingAbbr (date) {
+                if (date === 'DAILY') {
+                    return 'день';
+                } else if (date === 'MONTHLY') {
+                    return 'мес.';
+                }
+            }
+        }
+    }
+</script>

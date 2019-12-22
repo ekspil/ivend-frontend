@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="stylesheet" type="text/css" href="order.css">
+</head>
+<body>
+
+
+<div class="main">
+    <table width="100%" style="font-family: Arial; text-align: center;">
+        <tr >
+            <td style="width: 100%;  padding: 20px 0;">
+                <div style="margin:0 auto; width: 80%; font-size: 11pt;">Внимание! Оплата данного счета означает согласие с условиями поставки товара. Счет действителен в течение 5(пяти) банковских дней, не считая дня выписки счета. Уведомление об оплате  обязательно, в противном случае НЕ ГАРАНТИРУЕТСЯ наличие товара на складе. Товар отпускается по факту прихода денег на р/с Поставщика, самовывозом, при наличии доверенности и паспорта.</div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <table width="100%" border="2" style="border-collapse: collapse; width: 100%; font-family: Arial;" cellpadding="2" cellspacing="2">
+        <tr style="">
+            <td colspan="2" rowspan="2" style="min-height:13mm; width: 105mm;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="height: 13mm;">
+                    <tr>
+                        <td valign="top">
+                            <div>ТОЧКА ПАО БАНКА "ФК ОТКРЫТИЕ" Г. МОСКВА<br></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="bottom" style="height: 3mm;">
+                            <div style="font-size:10pt;">Банк получателя</div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="min-height:7mm;height:auto; width: 25mm;">
+                <div>БИK</div>
+            </td>
+            <td rowspan="2" style="vertical-align: top; width: 60mm;">
+                <div style=" height: 7mm; line-height: 7mm; vertical-align: middle;">044525999</div>
+                <div>30101810845250000999</div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25mm;">
+                <div>Сч. №</div>
+            </td>
+        </tr>
+        <tr>
+            <td style="min-height:6mm; height:auto; width: 50mm;">
+                <div>ИНН 550703025815</div>
+            </td>
+            <td style="min-height:6mm; height:auto; width: 55mm;">
+                <div>КПП </div>
+            </td>
+            <td rowspan="2" style="min-height:19mm; height:auto; vertical-align: top; width: 25mm;">
+                <div>Сч. №</div>
+            </td>
+            <td rowspan="2" style="min-height:19mm; height:auto; vertical-align: top; width: 60mm;">
+                <div>40802810101500044458</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="min-height:13mm; height:auto;">
+
+                <table border="0" cellpadding="0" cellspacing="0" style="height: 13mm; width: 105mm;">
+                    <tr>
+                        <td valign="top">
+                            <div>ИП Бояринцев Дмитрий Анатольевич</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="bottom" style="height: 3mm;">
+                            <div style="font-size: 10pt;">Получатель</div>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+    <br/>
+
+    <div style="font-weight: bold; font-size: 25pt; padding-left:5px; font-family: Arial;">
+        Счет № 1000 от <span id="date"></span></div>
+    <br/>
+
+    <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>
+
+    <table width="100%" style="font-family: Arial;">
+        <tr>
+            <td style="width: 30mm; vertical-align: top;">
+                <div style=" padding-left:2px; ">Поставщик:    </div>
+            </td>
+            <td>
+                <div style="font-weight:bold;  padding-left:2px;">
+                    ИП Бояринцев Дмитрий Анатольевич ИНН 550703025815<br>
+                    <span style="font-weight: normal;">644123, Российская Федерация, г.Омск , ул.Дмитриева 5, кор. 4, кв. 186<br></span>          </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30mm; vertical-align: top;">
+                <div style=" padding-left:2px;">Покупатель:    </div>
+            </td>
+            <td>
+                <div style="font-weight:bold;  padding-left:2px;">
+                    <span id="companyName"> </span> ИНН <span id="inn"> </span><br><span style="font-weight: normal;"><br> </span>            </div>
+            </td>
+        </tr>
+    </table>
+
+
+    <table border="2" width="100%" cellpadding="2" cellspacing="2" style="border-collapse: collapse; width: 100%; font-family: Arial;">
+        <thead>
+        <tr>
+            <th style="width:13mm; ">№</th>
+
+            <th>Товары (работы, услуги)</th>
+            <th style="width:20mm; ">Кол-во</th>
+            <th style="width:17mm; ">Ед.</th>
+            <th style="width:27mm;  ">Цена</th>
+            <th style="width:27mm;  ">Сумма</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr>
+            <td style="width:13mm; ">№</td>
+
+            <td>Услуги телеметрии</td>
+            <td style="width:20mm; ">1</td>
+            <td style="width:17mm; ">Шт.</td>
+            <td style="width:27mm; text-align: center; " id="summa3"></td>
+            <td style="width:27mm; text-align: center; " id="summa4"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table style="font-family: Arial;" border="0" width="100%" cellpadding="1" cellspacing="1">
+        <tr>
+            <td></td>
+            <td style="width:27mm; font-weight:bold;  text-align:right;">Итого:</td>
+            <td style="width:27mm; font-weight:bold;  text-align: center; " id="summa1"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="width:27mm; font-weight:bold;  text-align:right;">Итого НДС:</td>
+            <td style="width:27mm; font-weight:bold;  text-align: center; ">0.00</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="width:37mm; font-weight:bold;  text-align:right;">Всего к оплате:</td>
+            <td style="width:27mm; font-weight:bold;  text-align: center; " id="summa2"></td>
+        </tr>
+    </table>
+
+    <br />
+    <div style="font-family: Arial;">
+        Всего наименований 1 на сумму <span id="summa"></span> рублей.<br />
+        </div>
+    <br /><br />
+    <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>
+    <br/>
+    <div style="font-family: Arial; font-size: 10pt;">
+        1. Счет действителен в течении 5 (пяти) банковских дней, не считая дня выписки счета. В случае нарушения срока оплаты сохранение цены на товар и наличие товара на складе НЕ ГАРАНТИРУЕТСЯ.<br />
+        2. Оплата данного счета означает согласие с условиями изложенными в п.1</div>
+    <br /><br />
+    <div style="background: url('');  background-repeat: no-repeat; padding: 30px 10px; width: 500px; height: 250px;">
+        <div style="margin: 30px 0">Руководитель  <img style="border-bottom: 1px solid black" src="sig.png" width=100px" height="40px" >  Бояринцев Д.А. </div>
+
+
+        <div style="width: 85mm;text-align:center;">М.П. </div>
+        <div style="width: 85mm;text-align:center; text-color: none;"> <img src="stamp.png" width=250px" height="250px" ></div>
+        <br/>
+    </div>
+    <br/>  <br /><br /><br/>  <br /><br /><br/>  <br /><br />
+</div>
+
+<script type="text/javascript">
+    console.log(location.href)
+    const data = new URL(location.href)
+    const date = new Date().toLocaleString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    document.getElementById("date").innerHTML=date
+    document.getElementById("summa").innerHTML=data.searchParams.get("summa");
+    document.getElementById("summa1").innerHTML=data.searchParams.get("summa");
+    document.getElementById("summa2").innerHTML=data.searchParams.get("summa");
+    document.getElementById("summa3").innerHTML=data.searchParams.get("summa");
+    document.getElementById("summa4").innerHTML=data.searchParams.get("summa");
+    document.getElementById("companyName").innerHTML=data.searchParams.get("companyName");
+    document.getElementById("inn").innerHTML=data.searchParams.get("inn");
+</script>
+</body>
+</html>

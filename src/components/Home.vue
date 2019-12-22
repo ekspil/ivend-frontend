@@ -273,56 +273,28 @@
                             <h3 class="card-title f-b">Новости ivend</h3>
                         </div>
                         <div class="card-body">
-                            <div class="fluid-container">
-                                <div class="row ticket-card  pb-2 border-bottom pb-3 mb-3">
+                            <div class="fluid-container" v-if="data">
+                                <div class="row ticket-card  pb-2 border-bottom pb-3 mb-3" v-for="ne in data.news">
                                     <div class="ticket-details col-md-12">
-                                        <p class="mb-2 mr-2 text-muted">16.03.2019</p>
+                                        <p class="mb-2 mr-2 text-muted">{{ne.date}}</p>
 
                                         <div class="d-flex">
-                                            <p class="text-black f-b mr-2 mb-2 no-wrap">Бюджетная фискализация</p>
+                                            <p class="text-black f-b mr-2 mb-2 no-wrap">{{ne.header}}</p>
                                         </div>
-                                        <p class="text-black mb-2">Компания IVEND предлагает услуги в сфере электронного вендинга.
-                                            Благодаря разработанным решениям фискализации и модернизации торговых автоматов, клиенты
-                                            компании могут отвечать стандартам современности, становиться гибкими, адаптивными и удобными для потребителя.
-                                        </p>
+                                        <div  class="row" v-if="ne.link">
 
-                                        <p class="text-black mb-2">Уменьшить расходы при фискализации вендинговой сети – это главная задача
-                                            компании «Интернет вендинг», и для этого компания реализовала четыре варианта фискализации
-                                            торговых автоматов, среди которых можно выбрать лучшие экономические решения под нужды
-                                            и возможности каждой компании.
-                                        </p>
+                                            <div class="col-sm-6" v-if="ne.link"><img :src="ne.link" /></div>
+                                            <div class="col-sm-6"><p class="text-black mb-2" v-for="par in splitP(ne.text)">{{par}}</p></div>
+                                        </div>
+                                        <p class="text-black mb-2" v-if="!ne.link" v-for="par in splitP(ne.text)">{{par}}</p>
 
-                                        <p class="text-black mb-2">О разных вариантах фискализации и о многих других возможностях по модернизации
-                                            ваших торговых автоматов с помощью Универсального Вендингового Контроллера iVend, Вы узнаете,
-                                            посетив стенд C502 на выставке VendExpo 2018.
-                                        </p>
+
 
 
                                     </div>
 
                                 </div>
-                                <div class="row ticket-card  pb-2 border-bottom pb-3 mb-3">
-                                    <div class="ticket-details col-md-12">
-                                        <p class="mb-2 mr-2 text-muted">24.02.2019</p>
 
-                                        <div class="d-flex">
-                                            <p class="text-black f-b mr-2 mb-2 no-wrap">«Фискализируем даже слона!»</p>
-                                        </div>
-                                        <p class="text-black mb-2">Компания iVend – это производитель контроллера фискализации для любых видов импульсных автоматов.
-                                            Контроллер можно установить в разменные автоматы, аттракционы - качалки, кран - машины, массажные кресла, автомойки
-                                            самообслуживания и многие другие устройства. </p>
-
-                                        <p class="text-black mb-2">Система iVend Pulse состоит из трех составляющих: контроллер в автомате, личный кабинет в
-                                            Интернете, онлайн касса в облаке. Система решает сразу четыре задачи: мониторинг автоматов, статистика продаж,
-                                            фискализация продаж, эквайринг платежей. С 1 июля 2019 года по 54-ФЗ ко всем автоматам, включая импульсные, должны
-                                            быть подключены онлайн кассы, а с 1 февраля 2020 года автоматы будут обязаны отображать QR коды: iVend полностью
-                                            соответствует 54-ФЗ и уже имеет готовые дисплеи QR кода.
-                                        </p>
-
-
-                                    </div>
-
-                                </div>
 
                             </div>
                         </div>
@@ -358,6 +330,17 @@
                                 overallAmount
                             }
                         }
+
+                        getNews {
+
+                            date
+                            text
+                            link
+                            header
+                            active
+                            }
+
+
                     }
                 `,
                 variables: {
@@ -368,12 +351,16 @@
                 },
                 update: data => ({
                     machines: data.getMachines,
-                    salesSummary: data.getProfile.salesSummary
+                    salesSummary: data.getProfile.salesSummary,
+                    news: data.getNews
                 })
             }
         },
         methods: {
-            getWordEnding (number, word) { return getWordEnding(number, word); }
+            getWordEnding (number, word) { return getWordEnding(number, word); },
+            splitP: function(text){
+                return text.split("[P]")
+            }
         }
     }
 </script>

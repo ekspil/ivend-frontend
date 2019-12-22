@@ -108,6 +108,9 @@
 				if(field.phone && field.email){
 					//did nothing
 				}
+				else if(!field.timeToDie){
+                    //did nothing
+				}
                 else if(this.$route.path === "/fiscalAll"){
 
                     if(field.timeToDie === "-"){

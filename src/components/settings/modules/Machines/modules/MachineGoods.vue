@@ -81,14 +81,18 @@
                                     <tr>
                                         <th class="sortable up">ID</th>
                                         <th class="sortable">Название товара</th>
+                                        <th class="sortable">Множетель</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="({ buttonId, item }) in data.buttons" :key="buttonId">
-                                        <td class="input-cel">{{ buttonId }}</td>
+                                    <tr v-for="({ buttonId, item, multiplier }) in data.buttons" :key="buttonId">
+                                        <td class="input-cel"><a :href="'/goods/edit/'+data.matrixId+'/'+buttonId">{{ buttonId }}</a> </td>
                                         <td class="input-cel">
                                             {{ item.name }}
+                                        </td><td class="input-cel">
+                                            {{ multiplier }}
+
                                         </td>
                                         <td class="delete-cel-btn">
                                             <button @click.prevent="removeItem(buttonId)"><i class="far fa-trash-alt"></i></button>
@@ -118,6 +122,7 @@ import gql from 'graphql-tag';
 
 export default {
     name: 'MachineGoods',
+
     apollo: {
         data: {
             query: gql `
@@ -126,6 +131,7 @@ export default {
                           itemMatrix {
                             id
                             buttons {
+                              multiplier
                               buttonId
                               item {
                                 id

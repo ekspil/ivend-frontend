@@ -41,6 +41,8 @@
                     return { class: 'payment-table__pending-row', text: 'В ожидании' };
                 } else if (status === 'CANCELLED') {
                     return { class: 'payment-table__cancelled-row', text: 'Отменено' };
+                } else if (status === 'ADMIN_EDIT') {
+                    return { class: 'payment-table__successed-row', text: 'Ручной ввод' };
                 }
             }
         }
