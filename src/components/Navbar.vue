@@ -93,7 +93,7 @@
                     <router-link to="/fiscal" :class="['nav-link', isDisabled('/fiscal')]" activeClass="active" :event="isDisabled('/fiscal') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Фискализация</span></router-link>
                 </li>
                 <li class="nav-item" v-if="isAdmin()">
-                    <router-link to="/fiscalAll" :class="['nav-link', isDisabled('/fiscalAll')]" activeClass="active" :event="isDisabled('/fiscalAll') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Все ККТ</span></router-link>
+                    <router-link to="/fiscalAll" :class="['nav-link', isDisabled('/fiscalAll')]" activeClass="active" :event="isDisabled('/fiscalAll') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Панель администратора</span></router-link>
                 </li>
             </ul>
         </div>

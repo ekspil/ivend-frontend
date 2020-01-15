@@ -12,28 +12,46 @@
 						<th>Telegram</th>
 						-->
 						<th>SMS</th>
+						<th>Telegram</th>
+						<th>Telegram номер чата</th>
 					</tr>
 				</thead>
 				<tbody>
 
-					<tr v-for="({ type, email, sms }, index) in profile.notificationSettings" :key="index">
+					<tr v-for="({ type, email, sms, telegram, telegramChat }, index) in profile.notificationSettings" :key="index">
 						<td>{{ getType(type) }}</td>
 
 						<td class="checkbox-cel">
-							<label class="default-checkbox" for="checkbox-11">
+							<label class="default-checkbox" :for="'checkbox-11'+index">
 								<input class="auth-block__checkbox" type="checkbox"
-								id="checkbox-11" v-model="profile.notificationSettings[index].email" @change="save(index)"/>
+								:id="'checkbox-11'+index" v-model="profile.notificationSettings[index].email" @change="save(index)"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
 						</td>
 						<td class="checkbox-cel">
-							<label class="default-checkbox" for="checkbox-12">
+							<label class="default-checkbox" :for="'checkbox-12'+index">
 								<input class="auth-block__checkbox" type="checkbox"
-								id="checkbox-12" v-model="profile.notificationSettings[index].sms" @change="save(index)"/>
+								:id="'checkbox-12'+index" v-model="profile.notificationSettings[index].sms" @change="save(index)"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
+						</td>
+
+						<td class="checkbox-cel">
+							<div>
+
+								<input  name="telegram" class="company-settings__field" type="text"
+									   placeholder="login в телеграм"  v-model="profile.notificationSettings[index].telegram" @change="save(index)"/>
+							</div>
+						</td>
+
+						<td class="checkbox-cel">
+							<div >
+
+								<input  name="telegramChat" class="company-settings__field" type="text"
+									   placeholder="Напишите боту @ivend_bot"  v-model="profile.notificationSettings[index].telegramChat" disabled="true"/>
+							</div>
 						</td>
 					</tr>
 				</tbody>
@@ -59,7 +77,9 @@
 							notificationSettings {
 								type,
 								email,
-								sms
+								sms,
+								telegram,
+								telegramChat
 							}
 						}
 					}
@@ -79,6 +99,10 @@
 			getType (type) {
 				switch (type) {
 					case 'CONTROLLER_NO_CONNECTION': return 'Нет связи с автоматом';
+					case 'CONTROLLER_NO_SALES': return 'Не было продаж за последние сутки';
+					case 'CONTROLLER_ENCASHMENT': return 'Произведена инкассация';
+					case 'USER_LOW_BALANCE': return 'Необходимо пополнить баланс';
+					case 'USER_WILL_BLOCK': return 'Возможность блокировки по балансу';
 					default: return 'Неизвестный тип уведомления';
 				}
 			},

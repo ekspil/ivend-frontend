@@ -43,6 +43,23 @@
           </form>
 
           <Hint ref="depositHint" className="billing-hint" />
+
+          <form :class="['balance-info-block__recharge-form2', depositRequested && 'active']">
+            <input
+            class="balance-info-block__recharge-input2"
+            type="number"
+            placeholder="Сумма"
+            v-model="depositSum"
+            />
+            <button id="recharge-submit-btn2" class="btn btn-primary balance-info-block__btn2" :disabled="isDepositPending" @click.prevent="submitOrder"> Получить счет </button>
+          </form>
+
+          <Hint ref="depositHint2" className="billing-hint" />
+
+
+
+
+
         </div>
       </div>
       <div class="row mt-5">
@@ -105,6 +122,10 @@ export default {
       query: gql`
       query ($period: Period!) {
         getProfile {
+          legalInfo{
+          inn
+          companyName
+          }
           billing {
             balance,
             dailyBill,
@@ -135,8 +156,37 @@ export default {
           period: this.period
         };
       },
-      update: data => data.getProfile ? data.getProfile.billing : {}
-    }
+      update: (data) => {
+          if (data.getProfile){
+              return data.getProfile.billing
+          } else {
+              return {}
+          }}
+    },
+      legalInfo: {
+          query: gql`
+			query {
+				getProfile {
+                    legalInfo{
+                        inn
+                        companyName
+            }
+          }
+			}
+			`,
+          update:(data) => {
+              if(data.getProfile.legalInfo){
+                  return data.getProfile.legalInfo
+              }
+              else {
+                  return {
+                      inn: "012345678",
+                      companyName: "ООО Не указано"
+                  }
+              }
+
+          }
+      }
   },
   data: () => ({
     tabs: [
@@ -144,7 +194,11 @@ export default {
       { name: 'Платежи', component: BillingHistory, route: 'history' }
     ],
     billing: null,
-
+    legalInfo: {
+        inn: "012345678",
+        companyName: "ООО Не указано"
+    },
+    sendQuery: false,
     depositSum: null,
     depositStatus: '',
     depositRequested: false,
@@ -155,6 +209,9 @@ export default {
   }),
   computed: {
     isDepositPending () {
+        if(this.sendQuery){
+            return true
+        }
       if (this.billing && this.billing.deposits) {
         return this.billing.deposits.some(deposit => deposit.status === 'PENDING') || this.depositStatus === 'PENDING';
       }
@@ -214,6 +271,41 @@ export default {
       }
     },
 
+       async requestOrder () {
+        this.sendQuery = true
+      try {
+        const { errors, data } = await this.$apollo.mutate({
+          mutation: gql`
+          mutation RequestOrder ($input: pdfInput!) {
+            generatePdf(input: $input) {
+              url
+            }
+          }
+          `,
+          variables: {
+            input: {
+                amount: parseFloat(this.depositSum),
+                inn: this.legalInfo.inn,
+                companyName: this.legalInfo.companyName,
+            }
+          }
+        });
+
+        if (errors && !isEmpty(errors)) {
+          const error = head(errors).message || 'Ошибка сервера';
+          this.$refs.depositHint2.show2(convertServerError(error));
+        } else {
+
+          if (data.generatePdf.url) {
+            window.location.href = data.generatePdf.url;
+            this.sendQuery = false
+          }
+        }
+      } catch (error) {
+        this.$refs.depositHint2.show2(convertServerError(error.message));
+      }
+    },
+
     submitDeposit () {
       if (this.depositRequested) {
         if (this.depositSum > 0) {
@@ -224,6 +316,19 @@ export default {
       } else {
         this.depositRequested = true;
         this.$refs.depositHint.show('Введите сумму для пополнения');
+      }
+    },
+
+    submitOrder () {
+      if (this.depositRequested) {
+        if (this.depositSum > 0) {
+          this.requestOrder();
+        } else {
+          this.$refs.depositHint2.show2('Некорректная сумма');
+        }
+      } else {
+        this.depositRequested = true;
+        this.$refs.depositHint2.show2('Введите сумму для пополнения');
       }
     },
 

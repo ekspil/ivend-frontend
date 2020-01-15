@@ -5,7 +5,7 @@
         <div class="col-lg-10 offset-lg-1 col-md-12">
           <Validate
           class="card"
-          title="Добавление товара в матрицу товаров"
+          title="Изменение товара"
           ref="form"
           formName="addGoods"
           :schema="schema"
@@ -26,11 +26,11 @@
                 <tbody>
                   <tr>
                     <td class="input-cel">
-                      <Field type="text" formName="addGoods" name="buttonId" placeholder="Введите ID кнопки" />
+                      <Field type="text" formName="addGoods" name="buttonId" :value="data.button.buttonId" placeholder="Введите ID кнопки" disabled />
                     </td>
                     <td class="input-cel">
                       <CustomSelect
-                      :initialValue="item.id"
+                      :initialValue="data.button.item.id"
                       :options="data.goods"
                       @onSelect="onGoodSelect"
                       @onBlur="onGoodAppend"
@@ -41,7 +41,7 @@
                     </td>
 
                     <td class="input-cel">
-                      <Field type="text" formName="addGoods" name="multiplier" placeholder="1 или не заполняйте" />
+                      <Field type="text" formName="addGoods" name="multiplier" :value="data.button.multiplier" placeholder="Множитель" />
                     </td>
                   </tr>
                 </tbody>
@@ -53,7 +53,7 @@
             type="submit"
             :class="['btn', 'btn-primary', 'ml-auto', submitDisabled && 'disabled']"
             >
-            Добавить товар
+            Сохранить
           </button>
         </template>
       </Validate>
@@ -94,8 +94,10 @@ export default {
           itemMatrix {
             id
             buttons {
+              buttonId,
               multiplier,
               item {
+                id
                 name
               }
             }
@@ -112,7 +114,7 @@ export default {
       `,
 
       variables () {
-        return { id: Number(this.$route.params.id) };
+        return { id: Number(this.$route.params.matrixId) };
       },
 
       update (data) {
@@ -122,7 +124,7 @@ export default {
 
         return {
           matrixId: data.getMachineById.itemMatrix.id,
-          buttons: data.getMachineById.itemMatrix.buttons,
+          button: data.getMachineById.itemMatrix.buttons.filter(but => but.buttonId == this.$route.params.id )[0],
           goods: data.getProfile.items
         };
       }
@@ -135,7 +137,8 @@ export default {
     },
 
     schema: {
-      buttonId: [required]
+      buttonId: [required],
+      multiplier: [required]
     },
 
     submitDisabled: false
@@ -157,8 +160,8 @@ export default {
         try {
           const { errors } = await this.$apollo.mutate({
             mutation: gql`
-            mutation addButton ($data: AddButtonToItemMatrixInput!) {
-              addButtonToItemMatrix (input: $data) {
+            mutation editButton ($data: EditButtonToItemMatrixInput!) {
+              editButtonToItemMatrix (input: $data) {
                 buttons {
                   buttonId,
                   multiplier,
@@ -175,14 +178,14 @@ export default {
               data: {
                 itemMatrixId: this.data.matrixId,
                 buttonId: Number(cache.buttonId),
-                multiplier: Number(cache.multiplier) || 1,
+                multiplier: Number(cache.multiplier),
                 itemId: this.item.id
               }
             },
 
             update: data => data.buttons
           });
-          this.$refs.form.process({ errors, success: 'Товар успешно добавлен.' });
+          this.$refs.form.process({ errors, success: 'Товар успешно изменен.' });
         } catch (error) {
           this.$refs.form.showMessage('error', convertServerError(error.message));
         }
@@ -190,7 +193,10 @@ export default {
     },
 
     onSuccess () {
-      this.$router.push(`/machine/edit/${this.$route.params.id}#goods`);
+        const router = this.$router
+        const route = this.$route
+
+        setTimeout(function () {router.push(`/machine/edit/${route.params.matrixId}#goods`);}, 1000)
     },
 
     onGoodSelect (good) {
