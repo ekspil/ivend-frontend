@@ -86,7 +86,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="({ buttonId, item, multiplier }) in data.buttons" :key="buttonId">
+                                    <tr v-for="( { buttonId, item, multiplier } ) in data.buttons" :key="buttonId">
                                         <td class="input-cel"><a :href="'/goods/edit/'+data.matrixId+'/'+buttonId">{{ buttonId }}</a> </td>
                                         <td class="input-cel">
                                             {{ item.name }}
@@ -173,6 +173,7 @@ export default {
                 matrix: removeButtonFromItemMatrix (input: $data) {
                   buttons {
                     buttonId
+                    multiplier
                     item {
                       id
                       name
@@ -185,7 +186,8 @@ export default {
             variables: {
               data: {
                 itemMatrixId: this.data.matrixId,
-                buttonId: id
+                buttonId: id,
+
               }
             }
           });

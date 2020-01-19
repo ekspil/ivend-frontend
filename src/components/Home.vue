@@ -283,8 +283,8 @@
                                         </div>
                                         <div  class="row" v-if="ne.link">
 
-                                            <div class="col-sm-6" v-if="ne.link"><img :src="ne.link" /></div>
-                                            <div class="col-sm-6"><p class="text-black mb-2" v-for="par in splitP(ne.text)">{{par}}</p></div>
+                                            <div class="col-sm-4" v-if="ne.link"><img :src="ne.link" /></div>
+                                            <div class="col-sm-8"><p class="text-black mb-2" v-for="par in splitP(ne.text)">{{par}}</p></div>
                                         </div>
                                         <p class="text-black mb-2" v-if="!ne.link" v-for="par in splitP(ne.text)">{{par}}</p>
 
@@ -349,11 +349,24 @@
                     to: Date.now()
                   }
                 },
-                update: data => ({
-                    machines: data.getMachines,
-                    salesSummary: data.getProfile.salesSummary,
-                    news: data.getNews
-                })
+                update: (data) => {
+                    function compare(a, b) {
+                        let dateA = a.date.split(/[\s|,\.!\-#]+/)
+                        dateA.reverse()
+                        let dateB = b.date.split(/[\s|,\.!\-#]+/)
+                        dateB.reverse()
+                        dateA.join('.')
+                        dateB.join('.')
+                        if (dateA > dateB) return -1; // если первое значение больше второго
+                        if (dateA == dateB) return 0; // если равны
+                        if (dateA < dateB) return 1; // если первое значение меньше второго
+                    }
+                    return {
+                        machines: data.getMachines,
+                        salesSummary: data.getProfile.salesSummary,
+                        news: data.getNews.sort(compare)
+                    }
+                }
             }
         },
         methods: {
