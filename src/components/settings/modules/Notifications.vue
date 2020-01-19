@@ -3,6 +3,8 @@
 		<div class="table-responsive notification-table">
 			<table class="table card-table table-vcenter text-nowrap notification-table">
 				<thead>
+
+
 					<tr>
 						<th>Событие</th>
 						<th>Email</th>
@@ -13,12 +15,32 @@
 						-->
 						<th>SMS</th>
 						<th>Telegram</th>
-						<th>Telegram номер чата</th>
 					</tr>
 				</thead>
 				<tbody>
+				<tr>
 
-					<tr v-for="({ type, email, sms, telegram, telegramChat }, index) in profile.notificationSettings" :key="index">
+					<td></td>
+					<td class="checkbox-cel">
+						<div >
+
+							<input  name="extraEmail" class="company-settings__field" type="text"
+									placeholder="Электронная почта"  v-model="extraEmail" @change="saveAll()" />
+						</div>
+					</td>
+					<td></td>
+
+					<td class="checkbox-cel">
+						<div>
+
+							<input  name="telegram" class="company-settings__field" type="text"
+									placeholder="login в телеграм"  v-model="telegram" @change="saveAll()"/>
+						</div>
+					</td>
+
+				</tr>
+
+					<tr v-for="({ type, email, sms, tlgrm, telegram, telegramChat }, index) in profile.notificationSettings" :key="index">
 						<td>{{ getType(type) }}</td>
 
 						<td class="checkbox-cel">
@@ -37,22 +59,15 @@
 								<span class="auth-block__checkbox-label"></span>
 							</label>
 						</td>
-
 						<td class="checkbox-cel">
-							<div>
+							<label class="default-checkbox" :for="'checkbox-13'+index">
+								<input class="auth-block__checkbox" type="checkbox"
+								:id="'checkbox-13'+index" v-model="profile.notificationSettings[index].tlgrm" @change="save(index)"/>
 
-								<input  name="telegram" class="company-settings__field" type="text"
-									   placeholder="login в телеграм"  v-model="profile.notificationSettings[index].telegram" @change="save(index)"/>
-							</div>
+								<span class="auth-block__checkbox-label"></span>
+							</label>
 						</td>
 
-						<td class="checkbox-cel">
-							<div >
-
-								<input  name="telegramChat" class="company-settings__field" type="text"
-									   placeholder="Напишите боту @ivend_bot"  v-model="profile.notificationSettings[index].telegramChat" disabled="true"/>
-							</div>
-						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -78,6 +93,8 @@
 								type,
 								email,
 								sms,
+								tlgrm,
+								extraEmail,
 								telegram,
 								telegramChat
 							}
@@ -89,7 +106,10 @@
 		},
 		data: () => ({
 			profile: null,
-
+			values: {
+				telegram: "",
+				extraEmail: ""
+			},
 			status: {
 				error: null,
 				success: null
@@ -104,6 +124,11 @@
 					case 'USER_LOW_BALANCE': return 'Необходимо пополнить баланс';
 					case 'USER_WILL_BLOCK': return 'Возможность блокировки по балансу';
 					default: return 'Неизвестный тип уведомления';
+				}
+			},
+			async saveAll () {
+				for(let i in this.profile.notificationSettings){
+					await this.save(i)
 				}
 			},
 			async save (index) {
@@ -122,7 +147,44 @@
 					}
 				});
 			}
-		}
+		},
+	computed: {
+			extraEmail:{
+				get () {
+					const [notifMail] = this.profile.notificationSettings.filter(notif => notif.extraEmail)
+					if(notifMail) {
+						this.values.extraEmail = notifMail.extraEmail
+					}
+					return this.values.extraEmail
+				},
+				set (value) {
+					this.profile.notificationSettings = this.profile.notificationSettings.map(notif =>{
+						notif.extraEmail = value
+						return notif
+					})
+					this.values.extraEmail = value
+				}
+			},
+			telegram:{
+				get () {
+
+					const [notifMail] = this.profile.notificationSettings.filter(notif => notif.telegram)
+					if(notifMail){
+						this.values.telegram = notifMail.telegram
+					}
+					return this.values.telegram
+				},
+				set (value) {
+					this.profile.notificationSettings = this.profile.notificationSettings.map(notif =>{
+						notif.telegram = value
+						return notif
+					})
+					this.values.telegram = value
+				}
+			},
+
+
+	}
 	}
 </script>
 
