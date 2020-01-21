@@ -12,8 +12,8 @@
 						<th>Viber</th>
 						<th>Whatsapp</th>
 						<th>Telegram</th>
-						-->
-						<th>SMS</th>
+
+						<th>SMS</th>-->
 						<th>Telegram</th>
 					</tr>
 				</thead>
@@ -28,7 +28,6 @@
 									placeholder="Электронная почта"  v-model="extraEmail" @change="saveAll()" />
 						</div>
 					</td>
-					<td></td>
 
 					<td class="checkbox-cel">
 						<div>
@@ -51,14 +50,14 @@
 								<span class="auth-block__checkbox-label"></span>
 							</label>
 						</td>
-						<td class="checkbox-cel">
-							<label class="default-checkbox" :for="'checkbox-12'+index">
-								<input class="auth-block__checkbox" type="checkbox"
-								:id="'checkbox-12'+index" v-model="profile.notificationSettings[index].sms" @change="save(index)"/>
+						<!--<td class="checkbox-cel">-->
+							<!--<label class="default-checkbox" :for="'checkbox-12'+index">-->
+								<!--<input class="auth-block__checkbox" type="checkbox"-->
+								<!--:id="'checkbox-12'+index" v-model="profile.notificationSettings[index].sms" @change="save(index)"/>-->
 
-								<span class="auth-block__checkbox-label"></span>
-							</label>
-						</td>
+								<!--<span class="auth-block__checkbox-label"></span>-->
+							<!--</label>-->
+						<!--</td>-->
 						<td class="checkbox-cel">
 							<label class="default-checkbox" :for="'checkbox-13'+index">
 								<input class="auth-block__checkbox" type="checkbox"
