@@ -100,3 +100,14 @@
 # 1.3.2 - Release
 
 * Fix missing graphql subquery
+
+# 1.3.3 - Release
+
+* Added news block in admin panel
+* Added controllers administration
+* Added bank order request
+* Added registration of admins balance corrections
+* Added notifications functions
+* Added multiplier in buttons
+
+
