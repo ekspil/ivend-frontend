@@ -32,7 +32,10 @@
           </div>
         </div>
         <div class="balance-info-block balance-info__block ">
-          <form :class="['balance-info-block__recharge-form', depositRequested && 'active']">
+          <div class="balance-info-block__info-container">
+            <div class="balance-info-block__count">
+            <p></p>
+              <form :class="['balance-info-block__recharge-form', depositRequested && 'active']">
             <input
             class="balance-info-block__recharge-input"
             type="number"
@@ -44,6 +47,9 @@
 
           <Hint ref="depositHint" className="billing-hint" />
 
+            </div>
+            <div class="balance-info-block__count">
+              <p></p>
           <form :class="['balance-info-block__recharge-form2', depositRequested && 'active']">
             <input
             class="balance-info-block__recharge-input2"
@@ -56,10 +62,10 @@
 
           <Hint ref="depositHint2" className="billing-hint" />
 
+            </div>
 
 
-
-
+          </div>
         </div>
       </div>
       <div class="row mt-5">
