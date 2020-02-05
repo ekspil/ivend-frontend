@@ -110,4 +110,8 @@
 * Added notifications functions
 * Added multiplier in buttons
 
+# 1.3.4 - Release
+
+* Fixed mobile version error
+
 
