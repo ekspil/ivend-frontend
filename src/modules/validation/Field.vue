@@ -12,6 +12,11 @@
 		v-model="input" :class="[className, validation[name] ? 'input-invalid' : '']"
 		:disabled="disabled"
 		/>
+		<input-mask
+		v-else-if="newmasked" :mask="mask" :type="type" :placeholder="placeholder || null"
+		v-model="input" :class="[className, validation[name] ? 'input-invalid' : '']"
+		:disabled="disabled"
+		/>
 
 		<input
 		v-else :type="type" :placeholder="placeholder || null"
@@ -26,6 +31,11 @@
 	import { mapGetters } from 'vuex';
 
 	import maskedInput from 'vue-masked-input';
+
+	import Vue from 'vue';
+	import InputMask from 'vue-input-mask';
+
+	Vue.component('input-mask', InputMask)
 
 	import bus from '@/bus';
 
@@ -57,6 +67,10 @@
 				default: false
 			},
 			masked: {
+				type: Boolean,
+				default: false
+			},
+			newmasked: {
 				type: Boolean,
 				default: false
 			},

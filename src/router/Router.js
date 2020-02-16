@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 import Login from '@/components/auth/Login';
 import Registration from '@/components/auth/Registration';
+import Remember from '@/components/auth/Remember';
+import NewPassword from '@/components/auth/NewPassword';
 
 import EditController from '@/components/controllers/EditController';
 import AddController from '@/components/controllers/AddController';
@@ -87,7 +89,9 @@ const routes = [
     { path: '/fiscalAll/addNews', component: AddNewsAll },
 
     { path: '/login', component: Login },
-    { path: '/register', component: Registration }
+    { path: '/register', component: Registration },
+    { path: '/remember', component: Remember },
+    { path: '/NewPassword/:id', component: NewPassword }
 ];
 
 
@@ -97,12 +101,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-     const isSecured = !includes(to.path, ['/login', '/register']);
-     const token = store.state.auth.token, role = store.state.user?.profile?.role;
+     const isSecured = !includes(to.path, ['/login', '/register', '/remember']);
+     const isLogin = includes(to.path, ['/login']);
+     const token = store.state.auth.token, role = store.state.user?.profile?.role, remember = store.state.auth.remember;
 
      if (isSecured && !token) {
          return next('/login');
-     } else if (!isSecured && token || token && role !== 'VENDOR') {
+     }else if(isLogin && token && remember){
+             return next('/home');
+
+     }
+     else if (!isSecured && token || token && role !== 'VENDOR') {
         if (role === 'VENDOR_NEGATIVE_BALANCE' && to.path !== '/billing') {
             return next('/billing');
         } else if (role === 'VENDOR_NO_LEGAL_INFO' && !['/billing', '/settings'].includes(to.path)) {
