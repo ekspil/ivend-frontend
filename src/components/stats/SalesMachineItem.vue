@@ -99,6 +99,7 @@ export default {
 					limit: this.limit
 				};
 			},
+            pollInterval: 60000,
 			update ({ sales, machine}) {
 				return {
 					sales,

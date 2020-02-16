@@ -349,6 +349,7 @@
                     to: Date.now()
                   }
                 },
+                pollInterval: 60000,
                 update: (data) => {
                     function compare(a, b) {
                         let dateA = a.date.split(/[\s|,\.!\-#]+/)

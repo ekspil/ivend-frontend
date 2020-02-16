@@ -77,6 +77,7 @@ export default {
 					id: Number(this.$route.params.id),
 				};
 			},
+            pollInterval: 60000,
 			update: data => data.machine
 		}
 	},
