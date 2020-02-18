@@ -88,7 +88,7 @@
                             }
                         }
                     });
-                    this.$refs.remember.showMessage('success', "Параль изменен! Переадрессация на страницу авторизации..");
+                    this.$refs.register.showMessage('success', "Параль изменен! Переадрессация на страницу авторизации..");
                     setTimeout(this.onSuccess, 4500)
                 } catch (error) {
                     return this.$refs.register.showMessage('error', convertServerError(error.message));
