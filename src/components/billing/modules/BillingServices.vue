@@ -60,6 +60,7 @@
                         }
                     }
                 `,
+                pollInterval: 60000,
 
                 update: data => data.getControllers
             }

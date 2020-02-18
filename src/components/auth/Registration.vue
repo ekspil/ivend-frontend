@@ -190,7 +190,7 @@ export default {
                 }
             });
 
-            this.$store.dispatch('auth/requestUserData', data.token);
+            this.$store.dispatch('auth/requestUserData', {token: data.token});
         }
     },
 

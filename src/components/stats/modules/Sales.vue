@@ -52,11 +52,11 @@ export default {
 		machines: {
 			query: gql`
 			query ($machineGroupId: Int, $period: Period) {
-				getProfile {
-					items {
+
+					getItemSales (machineGroupId: $machineGroupId, period: $period) {
 						id
 						name
-						salesSummary (machineGroupId: $machineGroupId, period: $period) {
+						salesSummary {
 							salesCount
 							overallAmount
 							cashAmount
@@ -64,7 +64,7 @@ export default {
 						}
 						lastSaleTime
 					}
-				}
+
 			}
 			`,
 			variables () {
@@ -83,7 +83,8 @@ export default {
 					period: this.period
 				};
 			},
-			update: data => data.getProfile.items
+            pollInterval: 60000,
+			update: data => data.getItemSales
 		},
 		groups: {
 			query: gql`

@@ -14,7 +14,8 @@
                 @onSuccess="onSuccess"
             >
                 <div class="auth-block__field-container auth-block__field-container--phone">
-                    <Field :masked="false" className="auth-block__field" type="tel" name="phone" placeholder="+7" mask="\+\7 (111) 111 11-11" formName="login" />
+
+                    <Field :newmasked="true" className="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" mask="\+9 (999) 999-99-99" formName="login"  />
                 </div>
                 <div class="auth-block__field-container auth-block__field-container--pass">
                     <Field className="auth-block__field" type="password" name="password" placeholder="Пароль" formName="login" />
@@ -22,10 +23,10 @@
                 <button class="auth-block__submit-btn btn btn-primary" type="submit" @click.prevent="$refs.login.submit">Войти</button>
                 <div class="auth-block__flex">
                     <label class="default-checkbox" for="remember-checkbox">
-                        <input class="auth-block__checkbox" type="checkbox" name="remember" id="remember-checkbox">
+                        <input class="auth-block__checkbox" type="checkbox" name="remember" id="remember-checkbox" v-model="remember">
                         <span class="auth-block__checkbox-label">Запомнить меня</span>
                     </label>
-                    <a class="auth-block__link" href="#">Вспомнить пароль</a>
+                    <a class="auth-block__link" href="/remember">Вспомнить пароль</a>
                 </div>
             </Validate>
             <div class="auth-block__link-container">
@@ -41,6 +42,10 @@ import gql from 'graphql-tag';
 
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
+import Vue from 'vue';
+import InputMask from 'vue-input-mask';
+
+Vue.component('input-mask', InputMask)
 
 import { convertServerError } from '@/utils';
 import {
@@ -57,7 +62,8 @@ export default {
         schema: {
             phone: [required],
             password: [required]
-        }
+        },
+        remember: false
     }),
     methods: {
         async login() {
@@ -85,7 +91,7 @@ export default {
             }
         },
         onSuccess({ token }) {
-            this.$store.dispatch('auth/requestUserData', token);
+            this.$store.dispatch('auth/requestUserData', {token, remember: this.remember});
         }
     },
 }

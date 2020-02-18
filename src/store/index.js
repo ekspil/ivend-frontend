@@ -15,7 +15,7 @@ const store = new Vuex.Store({
 		cache
 	},
 	plugins: [new createPersistedState({
-		paths: ['user', 'auth.token']
+		paths: ['user', 'auth.token', 'auth.remember']
 	})]
 });
 

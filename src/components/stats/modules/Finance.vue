@@ -82,6 +82,7 @@ export default {
 					machineGroupId: this.selectedGroupId
 				};
 			},
+            pollInterval: 60000,
 			update: data => data.getMachines
 		},
 		groups: {

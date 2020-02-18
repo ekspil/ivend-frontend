@@ -87,7 +87,7 @@
 				this.status[type] = message;
 				setTimeout(function () {
 					that.status[type] = null;
-				}, 2500);
+				}, 3500);
 			},
 
 			async submit () {
