@@ -41,7 +41,7 @@
                     </td>
 
                     <td class="input-cel">
-                      <Field type="text" formName="addGoods" name="multiplier" :value="data.button.multiplier" placeholder="Множитель" />
+                      <Field type="text" formName="addGoods" name="multiplier" :value="data.button.multiplier || 1" placeholder="Множитель" />
                     </td>
                   </tr>
                 </tbody>
