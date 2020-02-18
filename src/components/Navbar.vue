@@ -101,11 +101,45 @@
 </template>
 
 <script>
+
+    import gql from 'graphql-tag';
     export default {
         name: 'Navbar',
+
+        apollo: {
+            user: {
+                query: gql`
+                    query {
+                        user: getProfile {
+                              billing {
+                                       balance,
+
+                                       }
+                                      }
+                    }
+                `,
+
+                update: data => data.user
+            }
+        },
+
+        data: () => ({
+            user: {
+                billing: {
+                    balance: 1
+                }
+            },
+            role: null
+        }),
         methods: {
             isDisabled (link) {
-                const role = this.$store.state.user?.profile?.role;
+                if(Number(this.user.billing.balance) < -500 && this.$store.state.user?.profile?.role !== "ADMIN"){
+                    this.role = 'VENDOR_NEGATIVE_BALANCE'
+                    this.$router.push('/billing')
+                }else{
+                    this.role = this.$store.state.user?.profile?.role;
+                }
+                const role = this.role
 
                 switch (role) {
                     case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing' && 'disabled';

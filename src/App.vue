@@ -1,6 +1,6 @@
 <template>
     <div class="page-main">
-        <div v-if="!['login', 'register', 'remember'].includes($route.path.split('/')[1])">
+        <div v-if="!['login', 'register', 'remember', 'NewPassword'].includes($route.path.split('/')[1])">
             <Header/>
             <Navbar/>
         </div>

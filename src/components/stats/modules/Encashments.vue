@@ -58,6 +58,7 @@
 				getMachines {
 					id
 					name
+					place
 					lastEncashment {
 						timestamp
 					}

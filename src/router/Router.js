@@ -91,7 +91,7 @@ const routes = [
     { path: '/login', component: Login },
     { path: '/register', component: Registration },
     { path: '/remember', component: Remember },
-    { path: '/NewPassword/:id', component: NewPassword }
+    { path: '/NewPassword', component: NewPassword }
 ];
 
 
@@ -101,7 +101,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-     const isSecured = !includes(to.path, ['/login', '/register', '/remember']);
+     const isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword']);
      const isLogin = includes(to.path, ['/login']);
      const token = store.state.auth.token, role = store.state.user?.profile?.role, remember = store.state.auth.remember;
 

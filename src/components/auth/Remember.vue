@@ -79,14 +79,19 @@ export default {
                         data: input
                     }
                 });
+                if(data.rememberPasswordRequest){
+                    this.$refs.remember.showMessage('success', "Письмо с дальнейшими указаниями отправлено на почту");
+                    setTimeout(this.onSuccess, 4500)
+                }else{
+                    this.$refs.remember.showMessage('error', "Пользователь с такими данными не найден");
+                }
 
-                this.$refs.remember.showMessage('success', "Письмо с дальнейшими указаниями отправлено на почту");
             } catch (error) {
                 this.$refs.remember.showMessage('error', convertServerError(error.message));
             }
         },
-        onSuccess({ token }) {
-            this.$store.dispatch('auth/requestUserData', {token, remember: this.remember});
+        onSuccess() {
+            this.$router.push('/login');
         }
     },
 }

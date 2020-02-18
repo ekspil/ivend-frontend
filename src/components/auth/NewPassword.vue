@@ -1,100 +1,126 @@
 <template>
-    <div class="auth-page">
+    <div class="auth-page" v-if="token.length === 128">
         <img src="assets/images/brand/logo.png" class="auth-page__logo" />
-        <!-- Авторизация -->
-        <div v-if="isKey" class="auth-block">
-            <div class="auth-block__title">Восстановление пароля</div>
-            <Validate
-                v-if="schema"
-                formName="remember"
-                :schema="schema"
-                ref="remember"
-                :card="false"
-                @onSubmit="remember"
-                @onSuccess="onSuccess"
-            >
-                <div class="auth-block__field-container auth-block__field-container--phone">
+        <!-- Регистрация -->
+        <div class="auth-block">
+            <div class="auth-block__title">Установка нового пароля</div>
+            <Validate v-if="schema" formName="register" :schema="schema" ref="register" :card="false" @onSubmit="register" @onSuccess="onSuccess">
 
-                    <Field :newmasked="true" className="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" mask="\+9 (999) 999-99-99" formName="remember"  />
-                </div>
-                <div class="auth-block__field-container auth-block__field-container--email">
-                    <Field
-                            className="auth-block__field"
-                            type="email"
-                            name="email"
-                            formName="remember"
-                            placeholder="E-Mail"
-                    />
-                </div>
-                <button class="auth-block__submit-btn btn btn-primary" type="submit" @click.prevent="$refs.remember.submit">Восстановить пароль</button>
+                <!-- Второй шаг регистрации -->
+                <div class="auth-block__field-container auth-block__field-container--password" >
+                    <div class="auth-block__field-container auth-block__field-container--pass" >
+                        <Field className="auth-block__field" type="password" name="password" placeholder="Пароль" formName="register" />
+                    </div>
+                    <div class="auth-block__field-container auth-block__field-container--pass" >
+                        <Field className="auth-block__field" type="password" name="rePassword" placeholder="Повторите пароль" formName="register" />
+                    </div>
 
+                    <button class="auth-block__submit-btn btn btn-primary" type="submit" @click.prevent="start">Установить пароль</button>
+
+                </div>
             </Validate>
-            <div class="auth-block__link-container">
-                <span class="auth-block__link-title">Нет аккаунта?</span>&nbsp;
-                <router-link class="auth-block__link" to="/register">Зарегистрируйтесь</router-link>
-            </div>
+
         </div>
     </div>
 </template>
+<style lang="scss">
+    @import "../../../layout/html/assets/scss/main";
 
+    .validation-error {
+        margin: 0;
+    }
+</style>
 <script>
-import gql from 'graphql-tag';
+    import gql from 'graphql-tag';
 
-import Validate from '@/modules/validation/Validate';
-import Field from '@/modules/validation/Field';
+    import { convertServerError } from '@/utils';
 
-import { convertServerError } from '@/utils';
-import {
-    required
-} from '@/utils/validation';
+    import Validate from '@/modules/validation/Validate';
+    import Field from '@/modules/validation/Field';
 
-export default {
-    name: 'Remember',
-    components: {
-        Validate,
-        Field
-    },
-    data: () => ({
-        schema: {
-            phone: [required],
-            email: [required]
+    import { equals, omit, bind } from 'ramda';
+    import {
+        required,
+        email,
+        check
+    } from '@/utils/validation';
+
+    export default {
+        name: 'Registration',
+        components: {
+            Validate,
+            Field
         },
-    }),
-    computed: {
-        isKey: function(){
-            const parts = this.$route.params?.rememberId
-            console.log(parts)
-            return true
-        }
-    },
-    methods: {
-        async remember() {
-            const cache = this.$store.getters['cache/data'];
-            const input = {
-                email: cache.email,
-                phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
-            };
+        data: () => ({
+            schema: null,
+            postData: {
+                tel: ''
+            },
 
-            try {
-                const { errors, data } = await this.$apollo.mutate({
-                    mutation: gql `
-                                mutation remember ($data: RememberInput!) {
-                                    rememberPassword(input: $data)
-                                }
-                            `,
-                    variables: {
-                        data: input
-                    }
-                });
-
-                this.$refs.remember.showMessage('success', "Письмо с дальнейшими указаниями отправлено на почту");
-            } catch (error) {
-                this.$refs.remember.showMessage('error', convertServerError(error.message));
+        }),
+        computed:{
+            token: function(){
+                const url = new URL(document.location.href)
+                const token = url.searchParams.get('token')
+                return token
             }
         },
-        onSuccess({ token }) {
-            this.$store.dispatch('auth/requestUserData', {token, remember: this.remember});
-        }
-    },
-}
+        methods: {
+            async start(){
+
+                this.$refs.register.submit();
+            },
+            async register() {
+                const cache = this.$store.getters['cache/data'];
+
+
+                try {
+                    const { errors, data } = await this.$apollo.mutate({
+                        mutation: gql `
+                            mutation changePasswordRequest ($input: ChangePasswordInput!) {
+                                changePasswordRequest(input: $input)
+                            }
+                        `,
+                        variables: {
+                            input: {
+                                password: cache.rePassword,
+                                token: this.token
+                            }
+                        }
+                    });
+                    this.$refs.remember.showMessage('success', "Параль изменен! Переадрессация на страницу авторизации..");
+                    setTimeout(this.onSuccess, 4500)
+                } catch (error) {
+                    return this.$refs.register.showMessage('error', convertServerError(error.message));
+                }
+            },
+            async onSuccess() {
+
+                this.$router.push('/login');
+            }
+        },
+
+        created() {
+            const rePasswordValidator = bind(function(rePassword) {
+                const cache = this.$store.state.cache.register.data;
+
+                return { error: equals(rePassword, cache.password) ? null : 'Пароли не совпадают.' };
+            }, this);
+
+            this.schema = {
+                password: [required],
+                rePassword: [required, rePasswordValidator]
+            };
+        },
+    }
 </script>
+
+<style scoped lang="scss">
+    .auth-block__field--phone-code, .auth-block__phone-code-btn {
+        width: 50%;
+    }
+
+    .btn.disabled {
+        cursor: not-allowed;
+    }
+</style>

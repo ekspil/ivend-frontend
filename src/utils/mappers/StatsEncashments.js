@@ -11,12 +11,14 @@ export const getTableHeaders = () => [
   {name: 'Кол-во продаж', key: 'salesCount'},
   {name: 'Сумма', key: 'overallAmount'},
   {name: 'Безнал', key: 'cashlessAmount'},
-  {name: 'Наличные', key: 'cashAmount'}
+  {name: 'Наличные', key: 'cashAmount'},
+  {name: 'Адрес установки', key: 'place'}
 ];
 
-export const getTableFields = data => data.map(({id, name, lastEncashment, salesByEncashment}) => ({
+export const getTableFields = data => data.map(({id, name, lastEncashment, salesByEncashment, place}) => ({
   id,
   name,
+  place,
   encashmentTimestamp: lastEncashment ? new Date(lastEncashment.timestamp) : null,
   ...salesByEncashment,
   route: `/machine/${id}/encashments`
