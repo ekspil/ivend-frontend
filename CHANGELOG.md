@@ -115,3 +115,12 @@
 * Fixed mobile version error
 
 
+
+# 1.3.5 - Release
+
+* Added password change
+* Fix some bugs
+* Added pullInterval
+
+
+
