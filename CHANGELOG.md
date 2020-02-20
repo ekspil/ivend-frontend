@@ -122,5 +122,9 @@
 * Fix some bugs
 * Added pullInterval
 
+# 1.3.6 - Release
+
+* Phone remember in login form
+
 
 
