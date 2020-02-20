@@ -130,5 +130,9 @@
 
 * Remember checkbox always true
 
+# 1.3.8 - Release
+
+* TagError
+
 
 
