@@ -90,8 +90,15 @@
 		},
 		created () {
 			const that = this;
+			function checkPhone(){
+                if(that.$route.path == "/login" && that.name=="phone" ){
+                    return that.$store.state.auth.phone
+				}
 
-			this.input = this.value || '';
+			    return ''
+			}
+
+			this.input = this.value || checkPhone();
 
 			if (this.formName && this.name) {
 				bus.$on('submit', function (formName) {

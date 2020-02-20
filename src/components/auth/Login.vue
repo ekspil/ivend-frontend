@@ -65,11 +65,20 @@ export default {
         },
         remember: false
     }),
+    mounted: async function (){
+        this.$store.commit('cache/store', {
+            formName: "login",
+            key: "phone",
+            value: this.$store.state.auth.phone,
+            push: true
+        });
+        this.$store.state.auth.phone
+    },
     methods: {
         async login() {
             const cache = this.$store.getters['cache/data'];
             const userData = {
-                ...cache,
+                password: cache.password,
                 phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
             };
 
@@ -91,7 +100,9 @@ export default {
             }
         },
         onSuccess({ token }) {
-            this.$store.dispatch('auth/requestUserData', {token, remember: this.remember});
+            const cache = this.$store.getters['cache/data'];
+            this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: cache.phone.replace(/[()+\s-]/gi, '')});
+
         }
     },
 }

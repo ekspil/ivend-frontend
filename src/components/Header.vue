@@ -111,7 +111,11 @@
         },
         methods: {
             exit () {
-                this.$store.commit('auth/setToken', {token:null, remember: false});
+                let phone = null
+                if(this.$store.state.auth.remember){
+                    phone = this.$store.state.auth.phone
+                }
+                this.$store.commit('auth/setToken', {token:null, remember: false, phone});
                 this.$store.commit('user/clear');
                 this.$router.push('/login');
             }
