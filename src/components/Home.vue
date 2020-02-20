@@ -346,7 +346,7 @@
                 variables: {
                   period: {
                     from: new Date().setHours(0,0,0,0),
-                    to: Date.now()
+                    to: Date.now() + 30 * 24 * 60 * 60 * 1000
                   }
                 },
                 pollInterval: 60000,

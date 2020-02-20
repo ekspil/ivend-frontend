@@ -81,26 +81,26 @@
 						date.setMonth(date.getMonth() - 1);
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now()
+							to: Date.now() + 30 * 24 * 60 * 60 * 1000
 						};
 					case 'Неделя':
 						date = new Date();
 						date.setDate(date.getDate() - 7);
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now()
+							to: Date.now() + 30 * 24 * 60 * 60 * 1000
 						};
 
 					case 'День':
 						date = new Date();
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now()
+							to: Date.now() + 30 * 24 * 60 * 60 * 1000
 						};
 
 					default: return {
 						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
-						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
+						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now() + 30 * 24 * 60 * 60 * 1000
 					};
 				}
 			}

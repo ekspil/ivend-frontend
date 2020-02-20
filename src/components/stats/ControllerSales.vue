@@ -93,7 +93,7 @@ export default {
 						id: Number(this.$route.params.id),
 						period: {
 							from: this.period,
-							to: Date.now()
+							to: Date.now() + 30 * 24 * 60 * 60 * 1000
 						}
 					};
 				}

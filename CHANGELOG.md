@@ -134,5 +134,9 @@
 
 * TagError
 
+# 1.3.9 - Release
+
+* Correct time update lag
+
 
 
