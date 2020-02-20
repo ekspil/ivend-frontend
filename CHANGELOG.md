@@ -126,5 +126,9 @@
 
 * Phone remember in login form
 
+# 1.3.7 - Release
+
+* Remember checkbox always true
+
 
 

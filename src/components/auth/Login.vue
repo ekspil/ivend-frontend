@@ -63,7 +63,7 @@ export default {
             phone: [required],
             password: [required]
         },
-        remember: false
+        remember: true
     }),
     mounted: async function (){
         this.$store.commit('cache/store', {
