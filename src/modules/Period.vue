@@ -81,32 +81,72 @@
 						date.setMonth(date.getMonth() - 1);
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now() + 30 * 24 * 60 * 60 * 1000
+							to: Date.now()
 						};
 					case 'Неделя':
 						date = new Date();
 						date.setDate(date.getDate() - 7);
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now() + 30 * 24 * 60 * 60 * 1000
+							to: Date.now()
 						};
 
 					case 'День':
 						date = new Date();
 						return {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now() + 30 * 24 * 60 * 60 * 1000
+							to: Date.now()
 						};
 
 					default: return {
 						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
-						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now() + 30 * 24 * 60 * 60 * 1000
+						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
 					};
 				}
 			}
 		},
 		mounted () {
 			this.$emit('onChange', this.getPeriod);
+
+			setInterval(() => {
+			    let date;
+			    let periodNew;
+                switch (this.period) {
+                    case 'Всего': return 0;
+                    case 'Месяц':
+                        date = new Date();
+                        date.setMonth(date.getMonth() - 1);
+                        periodNew = {
+                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                            to: Date.now()
+                        };
+                        break;
+                    case 'Неделя':
+                        date = new Date();
+                        date.setDate(date.getDate() - 7);
+                        periodNew = {
+                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                            to: Date.now()
+                        };
+
+                        break;
+
+                    case 'День':
+                        date = new Date();
+                        periodNew = {
+                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                            to: Date.now()
+                        };
+
+                        break;
+
+                    default: periodNew = {
+                        from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
+                        to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
+                    };
+                }
+                this.$emit('onChange', periodNew);
+            }, 10000)
 		}
 	}
 </script>

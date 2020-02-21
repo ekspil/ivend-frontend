@@ -14,7 +14,7 @@
 		</div>
 
 		<Table
-		v-if="machines.length > 0 || !$apollo.loading"
+		v-if="machines.length > 0"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
 		stats
@@ -22,7 +22,8 @@
 		className="stats-table"
 		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-		<div v-else class="aligned-text">Нет автоматов</div>
+		<div v-else-if="machines.length == 0" class="aligned-text">Нет автоматов</div>
+
 	</div>
 </template>
 
@@ -82,7 +83,6 @@ export default {
 					machineGroupId: this.selectedGroupId
 				};
 			},
-            pollInterval: 60000,
 			update: data => data.getMachines
 		},
 		groups: {

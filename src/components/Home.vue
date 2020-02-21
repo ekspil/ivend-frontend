@@ -17,7 +17,7 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="!$apollo.loading">
+                                <div v-if="data.salesSummary">
                                     <h3 class="mb-1 text-primary counter font-30">{{ data.salesSummary.salesCount }}</h3>
                                     <div class="f-b">Продаж сегодня</div><br/>
                                 </div>
@@ -41,7 +41,7 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="!$apollo.loading">
+                                <div v-if="data.salesSummary">
                                     <h3 class="mb-1  text-primary font-30"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
                                     <div class="f-b">Выручка сегодня</div><br/>
                                 </div>
@@ -66,7 +66,7 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="!$apollo.loading">
+                                <div v-if="data.machines">
                                     <h3 class="mb-1  text-primary counter font-30">{{ data.machines.length }}</h3>
                                     <div class="f-b">{{ getWordEnding(data.machines.length, 'Автомат') }}</div><br/>
                                     <router-link to="/machines/add" class="f-b" v-if="false">Добавить контроллер</router-link>
@@ -314,7 +314,9 @@
     export default {
         name: 'Home',
         data: () => ({
-            data: null
+            data: {},
+            period: "День",
+            queryPeriod: null,
         }),
         apollo: {
             data: {
@@ -343,13 +345,12 @@
 
                     }
                 `,
-                variables: {
-                  period: {
-                    from: new Date().setHours(0,0,0,0),
-                    to: Date.now() + 30 * 24 * 60 * 60 * 1000
-                  }
+                variables (){
+                    return {
+                        period: this.queryPeriod
+                    }
                 },
-                pollInterval: 60000,
+                pollInterval: 50000,
                 update: (data) => {
                     function compare(a, b) {
                         let dateA = a.date.split(/[\s|,\.!\-#]+/)
@@ -370,8 +371,94 @@
                 }
             }
         },
+        beforeMount(){
+            this.queryPeriod = this.newPeriod()
+        },
+    mounted () {
+
+        setInterval(() => {
+            let date;
+            let periodNew;
+            switch (this.period) {
+                case 'Всего': return 0;
+                case 'Месяц':
+                    date = new Date();
+                    date.setMonth(date.getMonth() - 1);
+                    periodNew = {
+                        from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                        to: Date.now()
+                    };
+                    break;
+                case 'Неделя':
+                    date = new Date();
+                    date.setDate(date.getDate() - 7);
+                    periodNew = {
+                        from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                        to: Date.now()
+                    };
+
+                    break;
+
+                case 'День':
+                    date = new Date();
+                    periodNew = {
+                        from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                        to: Date.now()
+                    };
+
+                    break;
+
+                default: periodNew = {
+                    from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
+                    to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
+                };
+            }
+            this.queryPeriod = periodNew;
+        }, 10000)
+    },
         methods: {
             getWordEnding (number, word) { return getWordEnding(number, word); },
+            newPeriod: function(){
+
+                let date;
+                let periodNew;
+                switch (this.period) {
+                    case 'Всего': return 0;
+                    case 'Месяц':
+                        date = new Date();
+                        date.setMonth(date.getMonth() - 1);
+                        periodNew = {
+                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                            to: Date.now()
+                        };
+                        break;
+                    case 'Неделя':
+                        date = new Date();
+                        date.setDate(date.getDate() - 7);
+                        periodNew = {
+                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                            to: Date.now()
+                        };
+
+                        break;
+
+                    case 'День':
+                        date = new Date();
+                        periodNew = {
+                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+                            to: Date.now()
+                        };
+
+                        break;
+
+                    default: periodNew = {
+                        from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
+                        to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
+                    };
+                }
+                return periodNew
+
+            },
             splitP: function(text){
                 return text.split("[P]")
             }

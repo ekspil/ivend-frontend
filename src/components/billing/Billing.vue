@@ -153,7 +153,7 @@ export default {
           return {
             period: {
               from: this.period,
-              to: Date.now() + 30 * 24 * 60 * 60 * 1000
+              to: Date.now()
             }
           };
         }
@@ -162,7 +162,6 @@ export default {
           period: this.period
         };
       },
-        pollInterval: 60000,
       update: (data) => {
           if (data.getProfile){
               return data.getProfile.billing

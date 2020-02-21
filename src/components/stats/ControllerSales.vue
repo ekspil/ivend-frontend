@@ -103,7 +103,6 @@ export default {
 					period: this.period
 				};
 			},
-            pollInterval: 60000,
 			update: data => data.machine
 		}
 	},

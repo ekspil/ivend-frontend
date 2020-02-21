@@ -12,7 +12,7 @@
 		</div>
 
 		<Table
-		v-if="machines.length > 0 && !$apollo.loading"
+		v-if="machines.length > 0"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
 		stats
@@ -73,7 +73,7 @@ export default {
 					return {
 						period: {
               from: this.period,
-              to: Date.now() + 30 * 24 * 60 * 60 * 1000
+              to: Date.now()
             }
 					};
 				}
@@ -83,7 +83,6 @@ export default {
 					period: this.period
 				};
 			},
-            pollInterval: 60000,
 			update: data => data.getItemSales
 		},
 		groups: {
@@ -105,9 +104,9 @@ export default {
 		}
 	},
 	methods: {
-		onPeriodChange (period) {
-			this.period = period;
-		}
+        onPeriodChange (period) {
+            this.period = period;
+        }
 	}
 }
 </script>

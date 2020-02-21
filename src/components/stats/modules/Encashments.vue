@@ -15,7 +15,7 @@
 		</div>
 
 		<Table
-				v-if="machines.length > 0 || !$apollo.loading"
+				v-if="machines.length > 0"
 				:headers="getTableHeaders"
 				:fields="getTableFields"
 				stats
@@ -76,7 +76,6 @@
             machineGroupId: this.selectedGroupId
           };
         },
-		  pollInterval: 60000,
         update: data => data.getMachines
       },
       groups: {

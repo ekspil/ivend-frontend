@@ -139,4 +139,9 @@
 * Correct time update lag
 
 
+# 1.3.10 - Release
+
+* Change update system
+
+
 
