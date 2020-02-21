@@ -143,5 +143,9 @@
 
 * Change update system
 
+# 1.3.11 - Release
+
+* Fix update time
+
 
 

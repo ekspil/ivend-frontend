@@ -146,7 +146,7 @@
                     };
                 }
                 this.$emit('onChange', periodNew);
-            }, 10000)
+            }, 61234)
 		}
 	}
 </script>
