@@ -147,5 +147,9 @@
 
 * Fix update time
 
+# 1.3.12 - Release
+
+* Fix bug
+
 
 

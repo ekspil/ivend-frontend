@@ -350,7 +350,6 @@
                         period: this.queryPeriod
                     }
                 },
-                pollInterval: 50000,
                 update: (data) => {
                     function compare(a, b) {
                         let dateA = a.date.split(/[\s|,\.!\-#]+/)
@@ -414,7 +413,7 @@
                 };
             }
             this.queryPeriod = periodNew;
-        }, 10000)
+        }, 61234)
     },
         methods: {
             getWordEnding (number, word) { return getWordEnding(number, word); },
