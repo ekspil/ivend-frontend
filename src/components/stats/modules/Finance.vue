@@ -55,16 +55,17 @@ export default {
 		machines: {
 			query: gql`
 			query ($machineGroupId: Int, $period: Period) {
-				getMachines {
-					id
-					name
-					salesSummary (machineGroupId: $machineGroupId, period: $period) {
-						salesCount
-						overallAmount
-						cashAmount
-						cashlessAmount
+				getMachineSales (machineGroupId: $machineGroupId, period: $period) {
+						id
+						name
+						salesSummary {
+							salesCount
+							overallAmount
+							cashAmount
+							cashlessAmount
+						}
+						lastSaleTime
 					}
-				}
 			}
 			`,
 			variables () {
