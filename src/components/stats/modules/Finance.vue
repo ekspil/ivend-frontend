@@ -84,7 +84,7 @@ export default {
 					machineGroupId: this.selectedGroupId
 				};
 			},
-			update: data => data.getMachines
+			update: data => data.getMachineSales
 		},
 		groups: {
 			query: gql`
