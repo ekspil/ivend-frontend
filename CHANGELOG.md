@@ -151,5 +151,9 @@
 
 * Fix bug
 
+# 1.3.13 - Release
+
+* Change sales query(machines)
+
 
 
