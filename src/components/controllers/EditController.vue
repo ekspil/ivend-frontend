@@ -44,28 +44,32 @@
                 <div class="form-group">
                   <label class="form-label f-b">Режим работы</label>
                   <select class="form-control custom-select" v-model="data.controller.mode">
-                    <option value="mdb">mdb</option>
-                    <option value="exe">exe</option>
-                    <option value="cashless" selected>cashless</option>
-                    <option value="cashless_free">cashless_free</option>
-                    <option value="exe_ph">exe_ph</option>
-                    <option value="mdb_D">mdb_D</option>
-                    <option value="exe_D">exe_D</option>
-                    <option value="exe_ph_D">exe_ph_D</option>
-                    <option value="cashless_D">cashless_D</option>
-                    <option value="mdb_C">mdb_C</option>
-                    <option value="exe_C">exe_C</option>
-                    <option value="exe_ph_C">exe_ph_C</option>
-                    <option value="cashless_C">cashless_C</option>
-                    <option value="ps_p">ps_p</option>
-                    <option value="ps_m_D">ps_m_D</option>
-                    <option value="ps_M_D">ps_M_D</option>
-                    <option value="ps_m_C">ps_m_C</option>
-                    <option value="ps_M_C">ps_M_C</option>
-                    <option value="mdb2">mdb2</option>
+                    <option value="mdb">MDB</option>
+                    <option value="mdb1">MDB1</option>
+                    <option value="mdb2">MDB2</option>
+                    <option value="exe">EXE</option>
+                    <option value="cashless" selected>CASHLESS</option>
+                    <option value="cashless2" selected>CASHLESS2</option>
+                    <option value="cashless_free">CASHLESS_Free</option>
+                    <option value="cashless_C">CASHLESS_C</option>
+                    <option value="cashless_D">CASHLESS_D</option>
+                    <option value="exe_ph">EXE_ph</option>
+                    <option value="mdb_D">MDB_D</option>
+                    <option value="exe_D">EXE_D</option>
+                    <option value="exe_ph_D">EXE_ph_D</option>
+                    <option value="mdb_C">MDB_C</option>
+                    <option value="exe_C">EXE_C</option>
+                    <option value="exe_ph_C">EXE_ph_C</option>
+                    <option value="ps_m_D">PULSE</option>
+                    <option value="ps_m_2">PULSE2</option>
+                    <option value="ps_m_3">PULSE3</option>
+                    <option value="ps_p">PULSE4</option>
+                    <option value="ps_M_D">PULSE_M_D</option>
+                    <option value="ps_m_C">PULSE_m_C</option>
+                    <option value="rs232">RS232</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div v-if="false" class="form-group">
                   <label class="form-label f-b">Режим считывания статистики</label>
                   <select class="form-control custom-select" v-model="data.controller.readStatMode">
                     <option value="COINBOX">Монетник</option>
@@ -80,6 +84,14 @@
                     <option value="NO_BANK_TERMINAL">Нет</option>
                     <option value="INPAS">ИНПАС</option>
                     <option value="SBERBANK">Сбербанк</option>
+                    <option value="d200i_v">PAX D200 Инпас Vend</option>
+                    <option value="d200i_t">PAX D200 Инпас Trade</option>
+                    <option value="d200s_v">PAX D200 Сбер Vend</option>
+                    <option value="d200s_t">PAX D200 Сбер Trade</option>
+                    <option value="otiu_v">OTI UNO Vend</option>
+                    <option value="otiu_t">OTI UNO Trade</option>
+                    <option value="otit_v">OTI TRIO Vend</option>
+                    <option value="otit_t">OTI TRIO Trade</option>
                   </select>
                 </div>
 
@@ -87,8 +99,8 @@
                   <label class="form-label f-b">Режим фискализации</label>
                   <select class="form-control custom-select" v-model="data.controller.fiscalizationMode">
                     <option value="NO_FISCAL">Нефискальный</option>
-                    <option value="UNAPPROVED">Без подтверждения</option>
-                    <option value="APPROVED">С подтверждением</option>
+                    <option value="UNAPPROVED">Фискальный</option>
+                    <option v-if="false" value="APPROVED">С подтверждением</option>
                   </select>
                 </div>
 

@@ -97,6 +97,11 @@
                   <Field className="form-control" :value="data.controller.remotePrinterId" name="remotePrinterId" formName="editControllerSettings" placeholder="Введите номер удалённого принтера"/>
                 </div>
 
+                <div class="form-group">
+                  <label class="form-label f-b">Номер сим карты</label>
+                  <Field className="form-control" :value="data.controller.simCardNumber" name="simCardNumber" formName="editControllerSettings" placeholder="Номер сим карты"/>
+                </div>
+
               </div>
             </div>
           </template>
@@ -150,6 +155,7 @@ export default {
         controller: getController(id: $id) {
           id
           uid
+          simCardNumber
           mode
           revision {
             id,
@@ -206,7 +212,8 @@ export default {
           fiscalizationMode: controller.fiscalizationMode,
           bankTerminalMode: controller.bankTerminalMode,
           readStatMode: controller.readStatMode,
-          remotePrinterId: inputData.remotePrinterId
+          remotePrinterId: inputData.remotePrinterId,
+          simCardNumber: inputData.simCardNumber
         };
 
         const { errors } = await this.$apollo.mutate({

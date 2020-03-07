@@ -1,3 +1,4 @@
+import { createTooltip } from '@/utils';
 const getStatus = status => {
     switch (status) {
         case 'ENABLED':
@@ -29,6 +30,18 @@ export const getTableHeaders = () => [
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: false },
     { name: 'Автомат', key: 'machine', unsortable: true },
+    {   name: 'Терминал',
+        key: 'simCardNumber',
+        unsortable: true,
+        critery ({simCardNumber}) {
+            if(!simCardNumber || simCardNumber === "0" || simCardNumber === "false"){
+                return createTooltip('info', 'ОТКЛ');
+            }
+            else{
+                return createTooltip('primary', "ВКЛ");
+            }
+        }
+    },
     { name: 'Фискализация', key: 'fiscalizationMode', unsortable: false },
     { name: 'Удалённый принтер', key: 'remotePrinterId', unsortable: true },
 ];
@@ -36,6 +49,7 @@ export const getTableHeaders = () => [
 export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
     uid: controller.uid,
+    simCardNumber: controller.simCardNumber,
     user: controller.user.legalInfo ? controller.user.legalInfo.companyName : "-",
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',

@@ -99,30 +99,52 @@ export const getTableHeaders = () => [
 	{
 		name: 'Терминал',
 		key: 'terminal',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
+		critery ({terminal}) {
+			switch (terminal) {
+				case 'OK':
+					return createTooltip('primary', terminal);
+				case 'ERROR':
+					return createTooltip('alert', terminal);
+				case '24H':
+					return createTooltip('warning', terminal);
+
+				case 'OK (100руб/мес)':
+					return createTooltip('primary', terminal);
+				case 'ERROR (100руб/мес)':
+					return createTooltip('alert', terminal);
+				case '24H (100руб/мес)':
+					return createTooltip('warning', terminal);
+
+
+				default:
+					return createTooltip('info', terminal);
+			}}
 	},
 	{
 		name: 'Касса',
 		key: 'cashbox',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
-	},
-	{
-		name: 'Аудит 1',
-		key: 'audit1',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
-	},
-	{
-		name: 'Аудит 2',
-		key: 'audit2',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
+		critery ({cashbox}) {
+			switch (cashbox) {
+				case 'OK':
+					return createTooltip('primary', cashbox);
+				case 'ERROR':
+					return createTooltip('alert', cashbox);
+				case '24H':
+					return createTooltip('warning', cashbox);
+
+				default:
+					return createTooltip('info', cashbox);
+			}}
 	}
 ];
 
-export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller }) => ({
+export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller, kktStatus, terminalStatus }) => ({
 	id,
 	controllerRegistrationTime: controller?.registrationTime,
 	name,
 	lastSaleTime,
+	cashbox: kktStatus,
+	terminal: terminalStatus,
 
 	registrationTime: controller?.lastState?.registrationTime,
 	coinAmount: controller?.lastState?.coinAmount,

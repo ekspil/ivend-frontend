@@ -45,6 +45,8 @@
 							id
 							name
 							lastSaleTime
+							terminalStatus
+							kktStatus
 							controller {
 								registrationTime
 								lastState {

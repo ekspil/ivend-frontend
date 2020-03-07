@@ -47,6 +47,7 @@
                         id
                         uid
                         mode
+                        simCardNumber
                         user {
                         email
                         legalInfo{

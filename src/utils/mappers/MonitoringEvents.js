@@ -57,23 +57,8 @@ export const getTableHeaders = () => [
 		key: 'lastErrorTime'
 	},
 	{
-		name: 'Аудит 1',
-		key: 'audit1',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
-	},
-	{
-		name: 'Аудит 2',
-		key: 'audit2',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
-	},
-	{
 		name: 'Инкассация',
 		key: 'collection',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
-	},
-	{
-		name: 'Загрузка',
-		key: 'load',
 		critery () { return createTooltip('info', 'ОТКЛ'); }
 	}
 ];
