@@ -54,12 +54,41 @@ export const getTableHeaders = () => [
 	},
 	{
 		name: 'Ошибки',
-		key: 'lastErrorTime'
+		key: 'error',
+		critery ({error}) { switch (error) {
+			case 'OK':
+				return createTooltip('primary', error);
+			case 'NO DATA':
+				return createTooltip('info', error);
+			case 'ОТКЛ':
+				return createTooltip('info', error);
+			case 'NO SALES 24H':
+				return createTooltip('warning', error);
+			case '31D':
+				return createTooltip('warning', error);
+
+			default:
+				return createTooltip('alert', error);
+		} }
 	},
 	{
 		name: 'Инкассация',
-		key: 'collection',
-		critery () { return createTooltip('info', 'ОТКЛ'); }
+		key: 'encashment',
+		critery ({encashment}) { switch (encashment) {
+			case 'OK':
+				return createTooltip('primary', encashment);
+			case 'NO DATA':
+				return createTooltip('info', encashment);
+			case 'ОТКЛ':
+				return createTooltip('info', encashment);
+			case 'NO SALES 24H':
+				return createTooltip('warning', encashment);
+			case '31D':
+				return createTooltip('warning', encashment);
+
+			default:
+				return createTooltip('primary', encashment);
+		} }
 	}
 ];
 
@@ -73,6 +102,8 @@ export const getTableFields = data => data.map(machine => ({
 	load: 'ОТКЛ',
 	audit1: 'ОТКЛ',
 	audit2: 'ОТКЛ',
+	encashment: machine.encashment,
+	error: machine.error,
 
 	route: `/monitoring/${machine.id}`
 }));

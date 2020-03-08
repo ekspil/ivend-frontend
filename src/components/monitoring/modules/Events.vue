@@ -47,6 +47,8 @@
 						id
 						name
 						lastSaleTime
+						error
+						encashment
 						controller {
 							lastErrorTime
 							lastState {
