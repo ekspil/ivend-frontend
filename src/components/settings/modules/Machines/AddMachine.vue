@@ -50,7 +50,7 @@
 							<div class="form-group">
 								<label class="form-label f-b">Модель автомата</label>
 								<select class="form-control custom-select" v-model="input.equipmentId">
-									<option v-for="equipment in machine.equipments"
+									<option v-for="equipment in machine.equipments" v-if="equipment.machineTypeId === input.typeId"
 									:key="equipment.id" :value="equipment.id">
 									{{ equipment.name }}
 								</option>
@@ -149,6 +149,7 @@ export default {
 				getEquipments {
 					id
 					name
+					machineTypeId
 				}
 
 				getControllers {
