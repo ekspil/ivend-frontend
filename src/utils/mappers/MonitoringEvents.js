@@ -65,10 +65,10 @@ export const getTableHeaders = () => [
 			case 'NO SALES 24H':
 				return createTooltip('warning', error);
 			case '31D':
-				return createTooltip('warning', error);
+				return createTooltip('alert', "НЕТ БОЛЕЕ 30 ДНЕЙ");
 
 			default:
-				return createTooltip('alert', error);
+				return createTooltip('warning', error);
 		} }
 	},
 	{
@@ -84,10 +84,17 @@ export const getTableHeaders = () => [
 			case 'NO SALES 24H':
 				return createTooltip('warning', encashment);
 			case '31D':
-				return createTooltip('warning', encashment);
+				return createTooltip('alert', "НЕТ БОЛЕЕ 30 ДНЕЙ");
 
-			default:
-				return createTooltip('primary', encashment);
+			default: {
+				const dt = new Date(Number(encashment)).toLocaleString()
+				const diff = (new Date().getTime()) - Number(encashment)
+				if(diff > 7 * 24 * 60 * 60 * 1000){
+					return createTooltip('warning', dt);
+				}
+				return createTooltip('primary', dt);
+			}
+
 		} }
 	}
 ];
