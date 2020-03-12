@@ -77,6 +77,7 @@
                         equipment {
                           id
                           name
+                          machineTypeId
                         }
                         type {
                           id

@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label class="form-label f-b">Тип автомата</label>
-          <select class="form-control custom-select" v-model="data.machine.type.id">
+          <select class="form-control custom-select" v-model="data.machine.type.id" disabled>
             <option v-for="type in data.types"
             :key="type.id" :value="type.id">
             {{ type.name }}
