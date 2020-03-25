@@ -5,11 +5,20 @@ const state = () => ({
 	phone: null
 });
 
+
 const mutations = {
-	setToken (state,  {token, remember, phone}) {
-		state.token = token;
-		state.remember = remember;
-		state.phone = phone;
+	setToken (state,  info) {
+        if(info){
+            const {token, remember, phone} = info
+            state.token = token;
+            state.remember = remember;
+            state.phone = phone;
+		}else{
+            state.token = null;
+            state.remember = null;
+            state.phone = null;
+		}
+
 	},
 
 	setUser (state, user = {}) {

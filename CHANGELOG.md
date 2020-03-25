@@ -155,5 +155,10 @@
 
 * Change sales query(machines)
 
+# 1.3.14 - Release
+
+* Hotfix
+
+
 
 
