@@ -5,31 +5,39 @@
 
       <div class="balance-info">
         <div :class="['balance-info-block', 'balance-info__block', hasEnoughMoney ? '' : 'balance-info-block--attention']">
-          <div class="balance-info-block__info-container">
-            <div class="balance-info-block__count balance-info-block__count--currency">{{ billing.balance }}</div>
-            <div class="balance-info-block__title">Текущий баланс</div>
-          </div>
-          <div class="balance-info-block__icon">
-            <i class="fas fa-ruble-sign"></i>
+          <div class="balance-info-block__info-container row">
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ billing.balance }}</div>
+            <div class="balance-info-block__title col">Текущий баланс</div>
+
+            <div class="balance-info-block__icon col-1.5">
+              <i class="fas fa-ruble-sign"></i>
+            </div>
+            <div class="w-100"></div>
+            <div class="balance-info-block__count col" >{{ billing.daysLeft }}</div>
+            <div class="balance-info-block__title col">Осталось дней</div>
+
+            <div class="balance-info-block__icon col-1.5">
+              <i class="fas fa-clock"></i>
+            </div>
           </div>
         </div>
         <div class="balance-info-block balance-info__block">
-          <div class="balance-info-block__info-container">
-            <div class="balance-info-block__count balance-info-block__count--currency">{{ billing.dailyBill }}</div>
-            <div class="balance-info-block__title">Ежедневное списание</div>
+          <div class="balance-info-block__info-container row">
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ billing.dailyBill }}</div>
+            <div class="balance-info-block__title col">Ежедневное списание</div>
+            <div class="balance-info-block__icon col-1.5">
+              <i class="far fa-calendar-alt"></i>
+            </div>
+            <div class="w-100"></div>
+
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/10).toFixed(0) * 10 }}</div>
+            <div class="balance-info-block__title col">Ежемесячное списание</div>
+            <div class="balance-info-block__icon col-1.5">
+              <i class="far fa-calendar-alt"></i>
+            </div>
           </div>
-          <div class="balance-info-block__icon">
-            <i class="far fa-calendar-alt"></i>
-          </div>
-        </div>
-        <div :class="['balance-info-block', 'balance-info__block', hasEnoughDays && billing.dailyBill > 0 ? '' : 'balance-info-block--attention']">
-          <div class="balance-info-block__info-container">
-            <div class="balance-info-block__count">{{ billing.daysLeft }}</div>
-            <div class="balance-info-block__title">Осталось дней</div>
-          </div>
-          <div class="balance-info-block__icon">
-            <i class="fas fa-check"></i>
-          </div>
+
+
         </div>
         <div class="balance-info-block balance-info__block ">
           <div class="balance-info-block__info-container">
@@ -114,6 +122,10 @@ import Period from '@/modules/Period';
 
 // Query key for marking redirects from Yandex Kassa e.g. ?from=yandex_kassa
 const YANDEX_REDIRECT_KEY = 'yandex_kassa';
+
+Date.prototype.daysInMonth = function() {
+    return 33 - new Date(this.getFullYear(), this.getMonth(), 33).getDate();
+};
 
 export default {
   name: 'Billing',
@@ -320,7 +332,8 @@ export default {
           this.$refs.depositHint.show('Некорректная сумма');
         }
       } else {
-        this.depositRequested = true;
+          this.depositSum = (this.billing.dailyBill*(new Date().daysInMonth())/10).toFixed(0) * 10
+          this.depositRequested = true;
         this.$refs.depositHint.show('Введите сумму для пополнения');
       }
     },
@@ -333,6 +346,7 @@ export default {
           this.$refs.depositHint2.show2('Некорректная сумма');
         }
       } else {
+          this.depositSum = (this.billing.dailyBill*(new Date().daysInMonth())/10).toFixed(0) * 10
         this.depositRequested = true;
         this.$refs.depositHint2.show2('Введите сумму для пополнения');
       }
