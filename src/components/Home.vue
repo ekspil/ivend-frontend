@@ -17,9 +17,12 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="data.salesSummary">
-                                    <h3 class="mb-1 text-primary counter font-30">{{ data.salesSummary.salesCount }}</h3>
-                                    <div class="f-b">Продаж сегодня</div><br/>
+                                <div v-if="data.salesSummary" class="row">
+                                    <h3 class="mb-1 text-primary counter font-30 col-5">{{ data.salesSummary.salesCount }}</h3>
+                                    <div class="f-b col">Продаж сегодня</div><br/>
+                                    <div class="w-100"></div>
+                                    <h3 class="mb-1 text-primary counter font-30 col-5">{{ data.yesterday.salesCount }}</h3>
+                                    <div class="f-b col">Продаж вчера</div><br/>
                                 </div>
                             </transition>
                         </div>
@@ -41,9 +44,12 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="data.salesSummary">
-                                    <h3 class="mb-1  text-primary font-30"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
-                                    <div class="f-b">Выручка сегодня</div><br/>
+                                <div v-if="data.salesSummary" class="row">
+                                    <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
+                                    <div class="f-b col">Выручка сегодня</div><br/>
+                                    <div class="w-100"></div>
+                                    <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.yesterday.overallAmount }}</span></h3>
+                                    <div class="f-b col">Выручка вчера</div><br/>
                                 </div>
                             </transition>
                         </div>
@@ -66,9 +72,14 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="data.machines">
-                                    <h3 class="mb-1  text-primary counter font-30">{{ data.machines.length }}</h3>
-                                    <div class="f-b">{{ getWordEnding(data.machines.length, 'Автомат') }}</div><br/>
+                                <div v-if="data.machines" class="row">
+                                    <h3 class="mb-1  text-primary counter font-30 col-5">{{ data.machines.length }}</h3>
+                                    <div class="f-b col">{{ getWordEnding(data.machines.length, 'Автомат') }}</div><br/>
+                                    <div class="w-100"></div>
+                                    <h3 class="mb-1  text-warning counter font-30 col-5">{{ data.machines.filter(m => m.error !== "OK").length }}</h3>
+                                    <div class="f-b text-warning col">{{ getWordEnding(data.machines.length, 'Автомат')+' с ошибкой' }}</div><br/>
+
+
                                     <router-link to="/machines/add" class="f-b" v-if="false">Добавить контроллер</router-link>
                                 </div>
                             </transition>
@@ -321,13 +332,21 @@
         apollo: {
             data: {
                 query: gql`
-                    query ($period: Period) {
+                    query ($period: Period, $periodY: Period ) {
                         getMachines {
                             id
+                            error
                         }
 
                         getProfile {
                             salesSummary (period: $period) {
+                                salesCount
+                                overallAmount
+                            }
+                        }
+
+                        yesterday:getProfile {
+                            salesSummary (period: $periodY) {
                                 salesCount
                                 overallAmount
                             }
@@ -347,7 +366,9 @@
                 `,
                 variables (){
                     return {
-                        period: this.queryPeriod
+                        period: this.queryPeriod,
+                        periodY: this.queryPeriodY,
+
                     }
                 },
                 update: (data) => {
@@ -365,6 +386,7 @@
                     return {
                         machines: data.getMachines,
                         salesSummary: data.getProfile.salesSummary,
+                        yesterday: data.yesterday.salesSummary,
                         news: data.getNews.sort(compare)
                     }
                 }
@@ -372,6 +394,9 @@
         },
         beforeMount(){
             this.queryPeriod = this.newPeriod()
+            this.queryPeriodY = {}
+            this.queryPeriodY.to = this.queryPeriod.from
+            this.queryPeriodY.from = this.queryPeriodY.to - 86400000
         },
     mounted () {
 
