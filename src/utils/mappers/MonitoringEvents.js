@@ -59,13 +59,13 @@ export const getTableHeaders = () => [
 			case 'OK':
 				return createTooltip('primary', error);
 			case 'NO DATA':
-				return createTooltip('info', error);
+				return createTooltip('info', "Нет данных");
 			case 'ОТКЛ':
 				return createTooltip('info', error);
 			case 'NO SALES 24H':
-				return createTooltip('warning', error);
+				return createTooltip('warning', "Нет продаж 24 ч.");
 			case '31D':
-				return createTooltip('alert', "НЕТ БОЛЕЕ 30 ДНЕЙ");
+				return createTooltip('alert', "Нет более 30 дней");
 
 			default:
 				return createTooltip('warning', error);
@@ -74,21 +74,22 @@ export const getTableHeaders = () => [
 	{
 		name: 'Инкассация',
 		key: 'encashment',
-		critery ({encashment}) { switch (encashment) {
+		critery ({encashment, lastEncashment}) { switch (encashment) {
 			case 'OK':
 				return createTooltip('primary', encashment);
 			case 'NO DATA':
-				return createTooltip('info', encashment);
+				return createTooltip('info', "Нет данных");
 			case 'ОТКЛ':
 				return createTooltip('info', encashment);
 			case 'NO SALES 24H':
-				return createTooltip('warning', encashment);
+				return createTooltip('warning', "Нет продаж 24 ч.");
 			case '31D':
-				return createTooltip('alert', "НЕТ БОЛЕЕ 30 ДНЕЙ");
+				return createTooltip('alert', "Нет более 30 дней");
 
 			default: {
-				const dt = new Date(Number(encashment)).toLocaleString()
-				const diff = (new Date().getTime()) - Number(encashment)
+
+				const dt = new Date(Number(lastEncashment)).toLocaleString()
+				const diff = (new Date().getTime()) - Number(lastEncashment)
 				if(diff > 7 * 24 * 60 * 60 * 1000){
 					return createTooltip('warning', dt);
 				}
@@ -110,6 +111,7 @@ export const getTableFields = data => data.map(machine => ({
 	audit1: 'ОТКЛ',
 	audit2: 'ОТКЛ',
 	encashment: machine.encashment,
+    lastEncashment: machine.lastEncashment.timestamp,
 	error: machine.error,
 
 	route: `/monitoring/${machine.id}`

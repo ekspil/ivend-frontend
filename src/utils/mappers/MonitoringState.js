@@ -102,18 +102,18 @@ export const getTableHeaders = () => [
 		critery ({terminal}) {
 			switch (terminal) {
 				case 'OK':
-					return createTooltip('primary', terminal);
+					return createTooltip('primary', "Ок");
 				case 'ERROR':
-					return createTooltip('alert', terminal);
+					return createTooltip('alert', "Ошибка");
 				case '24H':
-					return createTooltip('warning', terminal);
+					return createTooltip('warning', "24 часа");
 
 				case 'OK (100руб/мес)':
-					return createTooltip('primary', terminal);
+					return createTooltip('primary', "Ок");
 				case 'ERROR (100руб/мес)':
-					return createTooltip('alert', terminal);
+					return createTooltip('alert', "Ошибка");
 				case '24H (100руб/мес)':
-					return createTooltip('warning', terminal);
+					return createTooltip('warning', "24 часа");
 
 
 				default:
@@ -126,11 +126,11 @@ export const getTableHeaders = () => [
 		critery ({cashbox}) {
 			switch (cashbox) {
 				case 'OK':
-					return createTooltip('primary', cashbox);
+					return createTooltip('primary', "Ок");
 				case 'ERROR':
-					return createTooltip('alert', cashbox);
+					return createTooltip('alert', "Ошибка");
 				case '24H':
-					return createTooltip('warning', cashbox);
+					return createTooltip('warning', "24 часа");
 
 				default:
 					return createTooltip('info', cashbox);

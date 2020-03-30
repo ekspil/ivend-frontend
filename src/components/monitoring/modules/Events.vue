@@ -49,6 +49,9 @@
 						lastSaleTime
 						error
 						encashment
+						lastEncashment{
+							timestamp
+						}
 						controller {
 							lastErrorTime
 							lastState {
