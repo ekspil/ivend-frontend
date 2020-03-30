@@ -70,9 +70,15 @@
                 <div class="form-group">
                   <label class="form-label f-b">Режим работы терминала</label>
                   <select class="form-control custom-select" v-model="data.controller.bankTerminalMode">
-                    <option value="NO_BANK_TERMINAL">Нет</option>
-                    <option value="INPAS">ИНПАС</option>
-                    <option value="SBERBANK">Сбербанк</option>
+                    <option value="NO_BANK_TERMINAL">Без терминала</option>
+                    <option value="d200i_v">PAX D200 Инпас Vend</option>
+                    <option value="d200i_t">PAX D200 Инпас Trade</option>
+                    <option value="d200s_v">PAX D200 Сбер Vend</option>
+                    <option value="d200s_t">PAX D200 Сбер Trade</option>
+                    <option value="otiu_v">OTI UNO Vend</option>
+                    <option value="otiu_t">OTI UNO Trade</option>
+                    <option value="otit_v">OTI TRIO Vend</option>
+                    <option value="otit_t">OTI TRIO Trade</option>
                   </select>
                 </div>
 

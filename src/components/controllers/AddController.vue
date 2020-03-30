@@ -60,9 +60,7 @@
 							<div class="form-group">
 								<label class="form-label f-b">Режим работы терминала</label>
 								<select class="form-control custom-select" v-model="input.bankTerminalMode">
-									<option value="NO_BANK_TERMINAL">Нет</option>
-									<option value="INPAS">ИНПАС</option>
-									<option value="SBERBANK">Сбербанк</option>
+									<option value="NO_BANK_TERMINAL">Без терминала</option>
 									<option value="d200i_v">PAX D200 Инпас Vend</option>
 									<option value="d200i_t">PAX D200 Инпас Trade</option>
 									<option value="d200s_v">PAX D200 Сбер Vend</option>
