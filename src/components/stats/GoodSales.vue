@@ -101,6 +101,9 @@ export default {
 	},
 	methods: {
 		onPeriodChange (period) {
+			if(period.to <= period.from){
+				period.to = period.from
+			}
 			this.period = period;
 		}
 	},
