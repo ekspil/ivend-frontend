@@ -74,10 +74,10 @@
                             <transition name="fade">
                                 <div v-if="data.machines" class="row">
                                     <h3 class="mb-1  text-primary counter font-30 col-5">{{ data.machines.length }}</h3>
-                                    <div class="f-b col">{{ getWordEnding(data.machines.length, 'Автомат') + " подключено" }}</div><br/>
+                                    <div class="f-b col">{{ "Автоматов подключено" }}</div><br/>
                                     <div class="w-100"></div>
                                     <h3 class="mb-1  text-warning counter font-30 col-5">{{ data.machines.filter(m => m.error !== "OK").length }}</h3>
-                                    <div class="f-b text-warning col">{{ getWordEnding(data.machines.length, 'Автомат')+' неисправно' }}</div><br/>
+                                    <div class="f-b text-warning col">{{ 'Автоматов неисправно' }}</div><br/>
 
 
                                     <router-link to="/machines/add" class="f-b" v-if="false">Добавить контроллер</router-link>
