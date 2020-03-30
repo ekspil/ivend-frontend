@@ -86,8 +86,8 @@
                   <label class="form-label f-b">Режим фискализации</label>
                   <select class="form-control custom-select" v-model="data.controller.fiscalizationMode">
                     <option value="NO_FISCAL">Нефискальный</option>
-                    <option value="UNAPPROVED">Без подтверждения</option>
-                    <option value="APPROVED">С подтверждением</option>
+                    <option value="UNAPPROVED">Фискальный</option>
+                    <option v-if="false" value="APPROVED">С подтверждением</option>
                   </select>
                 </div>
 

@@ -17,8 +17,8 @@ const getStatus = status => {
 const mapFiscalizationMode = (mode) => {
     return {
         NO_FISCAL: "Нефискальный",
-        UNAPPROVED: "Без подтверждения",
-        APPROVED: "С подтверждением"
+        UNAPPROVED: "Фискальный",
+        APPROVED: "APPROVED(устарел)"
     }[mode]
 }
 
