@@ -40,6 +40,8 @@
 								<div class="form-group">
 									<label class="form-label f-b">Тип автомата</label>
 									<select class="form-control custom-select" v-model="input.typeId">
+										<option key="" value="0" selected="selected">
+										</option>
 										<option v-for="type in machine.types"
 										:key="type.id" :value="type.id">
 										{{ type.name }}
@@ -171,14 +173,14 @@ export default {
 					this.input = {
 						equipmentId: getEquipments[0].id,
 						groupId: getMachineGroups[0].id,
-						typeId: getMachineTypes[0].id,
+						typeId: 0,
 						controllerId: getControllers[0].id,
 						kktId: 0
 					};
 				}
 
 				return {
-					types: getMachineTypes,
+					types: getMachineTypes.sort(function(a, b) {if (a.name > b.name) return 1; if (a.name == b.name) return 0; if (a.name < b.name) return -1; }),
 					groups: getMachineGroups,
 					equipments: getEquipments,
 					controllers: getControllers,

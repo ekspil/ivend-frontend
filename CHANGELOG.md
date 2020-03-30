@@ -172,6 +172,10 @@
 
 * Fix
 
+# 1.3.18 - Release
+
+* Sort machine groups
+
 
 
 
