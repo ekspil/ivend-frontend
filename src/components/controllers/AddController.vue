@@ -39,22 +39,10 @@
 									<option value="cashless" selected>CASHLESS</option>
 									<option value="cashless2" selected>CASHLESS2</option>
 									<option value="cashless_free">CASHLESS_Free</option>
-									<option value="exe_ph">EXE_ph</option>
-									<option value="mdb_D">MDB_D</option>
-									<option value="exe_D">EXE_D</option>
-									<option value="exe_ph_D">EXE_ph_D</option>
-									<option value="cashless_D">CASHLESS_D</option>
-									<option value="mdb_C">MDB_C</option>
-									<option value="exe_C">EXE_C</option>
-									<option value="exe_ph_C">EXE_ph_C</option>
-									<option value="cashless_C">CASHLESS_C</option>
 									<option value="ps_m_D">PULSE</option>
 									<option value="ps_m_2">PULSE2</option>
 									<option value="ps_m_3">PULSE3</option>
 									<option value="ps_p">PULSE4</option>
-									<option value="ps_M_D">PULSE_M_D</option>
-									<option value="ps_m_C">PULSE_m_C</option>
-									<option value="ps_M_C">PULSE_M_C</option>
 									<option value="rs232">RS232</option>
 
 								</select>

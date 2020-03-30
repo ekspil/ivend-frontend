@@ -44,25 +44,18 @@
                 <div class="form-group">
                   <label class="form-label f-b">Режим работы</label>
                   <select class="form-control custom-select" v-model="data.controller.mode">
-                    <option value="mdb">mdb</option>
-                    <option value="exe">exe</option>
-                    <option value="cashless" selected>cashless</option>
-                    <option value="cashless_free">cashless_free</option>
-                    <option value="exe_ph">exe_ph</option>
-                    <option value="mdb_D">mdb_D</option>
-                    <option value="exe_D">exe_D</option>
-                    <option value="exe_ph_D">exe_ph_D</option>
-                    <option value="cashless_D">cashless_D</option>
-                    <option value="mdb_C">mdb_C</option>
-                    <option value="exe_C">exe_C</option>
-                    <option value="exe_ph_C">exe_ph_C</option>
-                    <option value="cashless_C">cashless_C</option>
-                    <option value="ps_p">ps_p</option>
-                    <option value="ps_m_D">ps_m_D</option>
-                    <option value="ps_M_D">ps_M_D</option>
-                    <option value="ps_m_C">ps_m_C</option>
-                    <option value="ps_M_C">ps_M_C</option>
-                    <option value="mdb2">mdb2</option>
+                    <option value="mdb">MDB</option>
+                    <option value="mdb1">MDB1</option>
+                    <option value="mdb2">MDB2</option>
+                    <option value="exe">EXE</option>
+                    <option value="cashless" selected>CASHLESS</option>
+                    <option value="cashless2" selected>CASHLESS2</option>
+                    <option value="cashless_free">CASHLESS_Free</option>
+                    <option value="ps_m_D">PULSE</option>
+                    <option value="ps_m_2">PULSE2</option>
+                    <option value="ps_m_3">PULSE3</option>
+                    <option value="ps_p">PULSE4</option>
+                    <option value="rs232">RS232</option>
                   </select>
                 </div>
                 <div class="form-group">
