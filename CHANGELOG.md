@@ -159,6 +159,11 @@
 
 * Hotfix
 
+# 1.3.15 - Release
+
+* Added kkt and terminal status
+* Added new billing functions
+
 
 
 
