@@ -85,7 +85,7 @@
     <br/>
 
     <div style="font-weight: bold; font-size: 25pt; padding-left:5px; font-family: Arial;">
-        Счет № 1000 от <span id="date"></span></div>
+        Счет № S<span id="orderNumber"></span> от <span id="date"></span></div>
     <br/>
 
     <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>
@@ -194,6 +194,7 @@
     document.getElementById("summa4").innerHTML=data.searchParams.get("summa");
     document.getElementById("companyName").innerHTML=data.searchParams.get("companyName");
     document.getElementById("inn").innerHTML=data.searchParams.get("inn");
+    document.getElementById("orderNumber").innerHTML=data.searchParams.get("orderNumber");
 </script>
 </body>
 </html>
