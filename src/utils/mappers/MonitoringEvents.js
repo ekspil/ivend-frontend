@@ -111,7 +111,7 @@ export const getTableFields = data => data.map(machine => ({
 	audit1: 'ОТКЛ',
 	audit2: 'ОТКЛ',
 	encashment: machine.encashment,
-    lastEncashment: machine.lastEncashment.timestamp,
+    lastEncashment: machine.lastEncashment?.timestamp,
 	error: machine.error,
 
 	route: `/monitoring/${machine.id}`
