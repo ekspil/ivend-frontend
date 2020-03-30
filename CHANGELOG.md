@@ -164,6 +164,10 @@
 * Added kkt and terminal status
 * Added new billing functions
 
+# 1.3.16 - Release
+
+* Added orderNumber in order
+
 
 
 
