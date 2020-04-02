@@ -74,6 +74,7 @@ export default {
 					sales: getSales(offset: $offset, limit: $limit, machineId: $machineId, itemId: $itemId) {
 						id
 						price
+						type
 						createdAt
 						item {
 							name
