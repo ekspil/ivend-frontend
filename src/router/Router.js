@@ -57,7 +57,7 @@ const routes = [
     { path: '/controllers/add', component: AddController },
 
     { path: '/goods/add/:id', component: AddGoods },
-    { path: '/goods/edit/:matrixId/:id', component: EditGoods },
+    { path: '/goods/edit/:matrixId/:id/:machineId', component: EditGoods },
 
     { path: '/stats', component: Stats },
     { path: '/stats/:id', component: ControllerSales },

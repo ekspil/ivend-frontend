@@ -87,7 +87,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="( { buttonId, item, multiplier } ) in data.buttons" :key="buttonId">
-                                        <td class="input-cel"><a :href="'/goods/edit/'+data.matrixId+'/'+buttonId">{{ buttonId }}</a> </td>
+                                        <td class="input-cel"><a :href="'/goods/edit/'+data.matrixId+'/'+buttonId+'/'+data.machineId">{{ buttonId }}</a> </td>
                                         <td class="input-cel">
                                             {{ item.name }}
                                         </td><td class="input-cel">
@@ -149,16 +149,21 @@ export default {
                 };
             },
 
-            update: data => ({
+            update(data){
+                return {
               buttons: data.getMachineById.itemMatrix?.buttons || [],
-              matrixId: data.getMachineById.itemMatrix?.id || null
-            })
+              matrixId: data.getMachineById.itemMatrix?.id || null,
+              machineId: Number(this.$route.params.id)
+            }
+            }
         }
     },
     data: () => ({
         data: {
           buttons: [],
-          matrixId: null
+          matrixId: null,
+          machineId: null,
+
         }
     }),
     methods: {

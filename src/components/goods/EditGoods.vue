@@ -114,7 +114,7 @@ export default {
       `,
 
       variables () {
-        return { id: Number(this.$route.params.matrixId) };
+        return { id: Number(this.$route.params.machineId) };
       },
 
       update (data) {
@@ -196,7 +196,7 @@ export default {
         const router = this.$router
         const route = this.$route
 
-        setTimeout(function () {router.push(`/machine/edit/${route.params.matrixId}#goods`);}, 1000)
+        setTimeout(function () {router.push(`/machine/edit/${route.params.machineId}#goods`);}, 1000)
     },
 
     onGoodSelect (good) {
