@@ -3,31 +3,20 @@
         <table class="table card-table table-vcenter text-nowrap">
             <thead>
                 <th class="service-name-cel sortable up">Название</th>
+                <th class="service-price-cel sortable">Количество</th>
                 <th class="service-price-cel sortable">Стоимость р/месяц</th>
-                <th></th>
             </thead>
             <tbody>
-                <tr class="payment-table__row-subtable" v-for="(controller, index) in controllers" :key="controller.id" v-if="controller.services.length > 0">
-                    <td class="cel-table" colspan="3">
-                        <table class="controller-service-table">
-                            <thead :class="!controllers[index].hidden && 'active'" @click="toggleController(index)">
-                                <tr>
-                                    <th colspan="3">{{ controller.uid }}</th>
-                                </tr>
-                            </thead>
+
                             <tr
-                                v-for="service in controller.services" :key="service.id"
-                                v-if="(defaultHidden && controllers[index].hidden) || (!defaultHidden && !controllers[index].hidden)"
+                                v-for="service in servs" :key="service.id"
+
                             >
                                 <td class="service-name-cel">{{ service.name }}</td>
+                                <td class="service-price-cel">{{ service.count }}</td>
                                 <td class="service-price-cel">{{ service.price }}</td>
-                                <td class="delete-cel-btn">
-                                    <button class=""><i class="far fa-trash-alt"></i></button>
-                                </td>
+
                             </tr>
-                        </table>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -55,6 +44,7 @@
                                 id
                                 name
                                 price
+                                fixCount
                                 billingType
                             }
                         }
@@ -63,6 +53,35 @@
                 pollInterval: 60000,
 
                 update: data => data.getControllers
+            }
+        },
+        computed:{
+		    servs: function(){
+		        const services = []
+                for(let controller of this.controllers){
+                    for(let service of controller.services){
+                        const [exist] = services.filter(serv => serv.id === service.id)
+                        if(!exist){
+                            service.count = 1
+                            services.push(service)
+                        }else{
+                            services.map(serv => {
+                                if(serv.id !== service.id) return serv
+                                serv.price = serv.price + service.price
+                                serv.count++
+                                if(service.fixCount){
+                                    serv.count = service.fixCount
+                                }
+                                console.log(serv)
+                                return serv
+                            })
+                        }
+
+
+                    }
+                }
+                if(services.length)
+                return services
             }
         },
         methods: {
