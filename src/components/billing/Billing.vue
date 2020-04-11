@@ -88,12 +88,14 @@
               :tabs="tabs"
               :props="{ deposits: billing.deposits }"
             >
-              <template slot="top-menu">
+              <template slot="top-menu" v-if="$route.hash === '#history'">
                 <div class="stats-top-menu">
                   <div class="stats-top-menu__content-container">
+
                     <div class="stats-top-menu__date-buttons">
-                      <Period @onChange="onPeriodChange"/>
+                      <Period   @onChange="onPeriodChange"/>
                     </div>
+                    <div class="card card-title" style="vertical-align: center" v-if="$apollo.loading">Обновление данных...</div>
                   </div>
                 </div>
               </template>
@@ -221,8 +223,8 @@ export default {
     depositStatus: '',
     depositRequested: false,
     period: {
-      from: null,
-      to: null
+      from: Date.now()-24*60*60*1000,
+      to: Date.now()
     }
   }),
   computed: {

@@ -68,13 +68,13 @@ export const getTableHeaders = () => [
 	},
 	{
 		name: 'Монетник',
-		key: 'coinAmount',
-		critery ({ coinAmount, coinAcceptorStatus }) {
-			switch (coinAcceptorStatus) {
+		key: 'coinCollectorStatus',
+		critery ({ coinCollectorStatus }) {
+			switch (coinCollectorStatus) {
 				case 'OK':
-					return createTooltip('primary', coinAmount);
+					return createTooltip('primary', "Ок");
 				case 'ERROR':
-					return createTooltip('alert', coinAmount);
+					return createTooltip('alert', "Ошибка");
 
 				default:
 					return createTooltip('info', 'ОТКЛ');
@@ -83,13 +83,13 @@ export const getTableHeaders = () => [
 	},
 	{
 		name: 'Купюрник',
-		key: 'billAmount',
-		critery ({ billAmount, billAcceptorStatus }) {
-			switch (billAcceptorStatus) {
+		key: 'banknoteCollectorStatus',
+		critery ({banknoteCollectorStatus }) {
+			switch (banknoteCollectorStatus) {
 				case 'OK':
-					return createTooltip('primary', billAmount);
+					return createTooltip('primary', "Ок");
 				case 'ERROR':
-					return createTooltip('alert', billAmount);
+					return createTooltip('alert', "Ошибка");
 
 				default:
 					return createTooltip('info', 'ОТКЛ');
@@ -138,7 +138,7 @@ export const getTableHeaders = () => [
 	}
 ];
 
-export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller, kktStatus, terminalStatus }) => ({
+export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller, kktStatus, terminalStatus, coinCollectorStatus,  banknoteCollectorStatus}) => ({
 	id,
 	controllerRegistrationTime: controller?.registrationTime,
 	name,
@@ -150,8 +150,8 @@ export const getTableFields = data => data.map(({ id, name, lastSaleTime, contro
 	coinAmount: controller?.lastState?.coinAmount,
 	billAmount: controller?.lastState?.billAmount,
 
-	coinAcceptorStatus: controller?.lastState?.coinAcceptorStatus,
-	billAcceptorStatus: controller?.lastState?.billAcceptorStatus,
+	coinCollectorStatus,
+	banknoteCollectorStatus,
 
 	route: `/monitoring/${id}`
 }));

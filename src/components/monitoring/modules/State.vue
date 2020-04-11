@@ -47,6 +47,8 @@
 							lastSaleTime
 							terminalStatus
 							kktStatus
+							banknoteCollectorStatus
+							coinCollectorStatus
 							controller {
 								registrationTime
 								lastState {

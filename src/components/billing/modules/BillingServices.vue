@@ -72,7 +72,6 @@
                                 if(service.fixCount){
                                     serv.count = service.fixCount
                                 }
-                                console.log(serv)
                                 return serv
                             })
                         }
