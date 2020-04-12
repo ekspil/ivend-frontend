@@ -19,6 +19,7 @@
                             </tr>
 
                             <tr
+                                    v-if="servs"
                             >
                                 <td class="service-name-cel" style="color: #00dabf">Итого</td>
                                 <td class="service-price-cel"></td>
