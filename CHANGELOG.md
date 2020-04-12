@@ -176,6 +176,10 @@
 
 * Sort machine groups
 
+# 1.3.19 - Release
+
+* New admin functions
+
 
 
 
