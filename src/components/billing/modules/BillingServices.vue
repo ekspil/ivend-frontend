@@ -17,6 +17,14 @@
                                 <td class="service-price-cel">{{ service.price }}</td>
 
                             </tr>
+
+                            <tr
+                            >
+                                <td class="service-name-cel" style="color: #00dabf">Итого</td>
+                                <td class="service-price-cel"></td>
+                                <td class="service-price-cel" style="color: #00dabf; font-weight: bold">{{servs.reduce((acc, i) => acc + i.price, 0)}}</td>
+
+                            </tr>
             </tbody>
         </table>
     </div>
@@ -71,6 +79,7 @@
                                 serv.count++
                                 if(service.fixCount){
                                     serv.count = service.fixCount
+                                    serv.price = service.price
                                 }
                                 return serv
                             })

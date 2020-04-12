@@ -19,15 +19,22 @@
                         />
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
                         <div v-else class="aligned-text">Нет контроллеров</div>
-                        <div class="card-body row">
+                        <div class="card-body row" style="padding: 4px;">
                             <ul class="pagination col">
                                 <li class="page-item page-prev"> <a class="page-link" v-on:click="prevPage()">Пред</a> </li>
                                 <li class="page-item page-next"> <a class="page-link" v-on:click="nextPage()">След</a> </li>
                             </ul>
                             <div class="form-label f-b col">{{(this.offset/this.limit) + 1}} страница</div>
                             <div class="form-group col" style="width: 20%; padding-left: 10px">
-                                <label class="form-label f-b">Показывать по:</label>
-                                <input v-model="limit" class="form-control custom-select">
+                                <label class="form-label f-b col">Показывать по:</label>
+                            </div>
+                            <div class="form-group kol">
+                                <select v-model="limit" class="form-control custom-select">
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                </select>
                             </div>
                         </div>
 
@@ -87,8 +94,8 @@
                 `,
             variables () {
                 return {
-                    offset: this.offset,
-                    limit: this.limit
+                    offset: Number(this.offset),
+                    limit: Number(this.limit)
                 };
             },
                 update (data) {
