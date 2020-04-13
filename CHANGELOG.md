@@ -180,6 +180,10 @@
 
 * New admin functions
 
+# 1.3.20 - Release
+
+* Search in all controllers
+
 
 
 

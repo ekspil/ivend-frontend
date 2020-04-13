@@ -61,6 +61,7 @@
         data: () => ({
             offset: 0,
             limit:100,
+            savedLimit :100,
             controllers: [],
             search: ""
         }),
@@ -144,7 +145,18 @@
             }
         },
         computed: {
-            controllersSearch(){
+           controllersSearch(){
+                if(this.search.length > 3){
+                    if(this.limit < Number(1001)){
+                        this.savedLimit = this.limit
+                    }
+
+                    this.limit = 9999
+                }else{
+                    if(this.savedLimit < this.limit){
+                        this.limit = this.savedLimit
+                    }
+                }
                 return this.controllers.filter(controller => {
                     if(!this.search) return true
                     const r1 = new RegExp(this.search.toUpperCase())
