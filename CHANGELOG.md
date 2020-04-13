@@ -184,6 +184,10 @@
 
 * Search in all controllers
 
+# 1.3.21 - Release
+
+* Search in all controllers
+
 
 
 
