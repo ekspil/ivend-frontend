@@ -133,7 +133,7 @@
         }),
         methods: {
             isDisabled (link) {
-                if(this.user && this.role === 'VENDOR' && Number(this.user?.billing?.balance) < -500 && this.$store.state.user?.profile?.role !== "ADMIN"){
+                if(Number(this.user?.billing?.balance) < -500 && this.$store.state.user?.profile?.role !== "ADMIN"){
                     this.role = 'VENDOR_NEGATIVE_BALANCE'
                     this.$router.push('/billing')
                 }else{
