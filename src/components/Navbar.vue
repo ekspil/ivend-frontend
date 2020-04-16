@@ -133,17 +133,13 @@
         }),
         methods: {
             isDisabled (link) {
-                console.log("Enter to function")
                 if(Number(this.user?.billing?.balance) < -500 && this.$store.state.user?.profile?.role !== "ADMIN"){
-                    console.log("In function")
                     this.role = 'VENDOR_NEGATIVE_BALANCE'
                     this.$router.push('/billing')
                 }else{
-                    console.log("In else")
                     this.role = this.$store.state.user?.profile?.role;
                 }
                 const role = this.role
-                console.log("next")
 
                 switch (role) {
                     case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing' && 'disabled';

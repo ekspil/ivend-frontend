@@ -188,6 +188,10 @@
 
 * Search in all controllers
 
+# 1.3.22 - Release
+
+* Hotfix
+
 
 
 
