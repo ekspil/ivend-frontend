@@ -152,7 +152,11 @@
                     }
 
                     this.limit = 9999
-                }else{
+                }
+                else if(this.search.length == 0){
+
+                }
+                else{
                     if(this.savedLimit < this.limit){
                         this.limit = this.savedLimit
                     }
