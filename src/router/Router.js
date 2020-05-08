@@ -42,6 +42,8 @@ import Tariffs from '@/components/tariffs/Tariffs';
 import Home from '@/components/Home';
 import Confirm from '@/components/Confirm';
 
+import Tp from '@/components/tp/Tp'
+
 import { includes } from 'ramda';
 
 import store from '@/store';
@@ -76,6 +78,8 @@ const routes = [
     { path: '/billing', component: Billing },
 
     { path: '/tariffs', component: Tariffs },
+
+    { path: '/tp', component: Tp },
 
     { path: '/fiscal', component: Fiscal },
     { path: '/fiscalAll', component: FiscalAll },

@@ -121,7 +121,13 @@
 					case 'CONTROLLER_NO_SALES': return 'Не было продаж за последние сутки';
 					case 'CONTROLLER_ENCASHMENT': return 'Произведена инкассация';
 					case 'USER_LOW_BALANCE': return 'Необходимо пополнить баланс';
-					case 'USER_WILL_BLOCK': return 'Возможность блокировки по балансу';
+					case 'GET_MONTH_SALES': return 'Молучать ежемесячную выручку';
+					case 'GET_WEEK_SALES': return 'Получать еженедельную выручку';
+					case 'GET_DAY_SALES': return 'Получать ежедневную выручку';
+					case 'GET_NEWS': return 'Получать новости сервиса';
+					case 'KKT_ERROR': return 'Неисправность ККТ';
+					case 'PINPAD_ERROR': return 'Неисправность терминала';
+					case 'CASH_ACCEPTOR_ERROR': return 'Неисправность купюроприемника';
 					default: return 'Неизвестный тип уведомления';
 				}
 			},
