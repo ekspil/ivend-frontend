@@ -4,7 +4,7 @@
             <div class="card-header">
                 <h3 class="card-title f-b">{{ title }}</h3>
             </div>
-            <div class="card-header-links">
+            <div class="card-header-links" v-if="back ==='true'">
                 <a href="#" class="card-header-links__item" @click.prevent="goBack">Вернуться назад</a>
             </div>
 
@@ -58,6 +58,10 @@
 				type: Boolean,
 				default: true
 			},
+            back: {
+                type: String,
+                default: "true"
+            },
 
       // Роут при нажатии "Вернуться назад"
       routeBack: {

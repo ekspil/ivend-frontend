@@ -6,8 +6,16 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
+                                <div class="form-group">
+                                    <select v-model="selectType" class="form-control custom-select">
+                                        <option value="all">Все</option>
+                                        <option value="news">Новость</option>
+                                        <option value="info">(ТП) Информация</option>
+                                        <option value="instr">(ТП) Инструкция</option>
+                                    </select>
+                                </div>
                                 <div class="top-buttons__left-container">
-                                    <router-link to="/fiscalAll/addNews" class="btn btn-primary">Добавить Новость</router-link>
+                                    <router-link to="/fiscalAll/addNews" class="btn btn-primary">Добавить запись</router-link>
                                 </div>
 
 
@@ -42,7 +50,8 @@
             Table
         },
         data: () => ({
-            news: []
+            news: [],
+            selectType: "all"
         }),
         apollo: {
             news: {
@@ -56,32 +65,107 @@
                             header
                             active
                             }
+                      getAllInfo {
+                            id
+                            date
+                            text
+                            link
+                            header
+                            active
+                            }
+                      getAllInstr {
+                            id
+                            date
+                            text
+                            link
+                            header
+                            active
+                            }
                     }
                 `,
                 update (data) {
-
-                    return data.getAllNews;
+                    const instr = data.getAllInstr.map(item => {
+                        item.type = "instr"
+                        return item
+                    })
+                    const info = data.getAllInfo.map(item => {
+                        item.type = "info"
+                        return item
+                    })
+                    const news = data.getAllNews.map(item => {
+                        item.type = "news"
+                        return item
+                    })
+                    return [...instr, ...info, ...news];
                 }
             }
         },
         methods: {
-            async removeNews (id) {
-                await this.$apollo.mutate({
-                    mutation: gql`
+            async removeNews (id, type) {
+
+                switch (type) {
+                    case "news":
+
+                        await this.$apollo.mutate({
+                            mutation: gql`
                         mutation ($id: Int!) {
                             deleteNews (id: $id)
                         }
                     `,
-                    variables: { id }
-                });
+                            variables: { id }
+                        });
 
-                this.news = this.news.filter(ne => ne.id !== id);
+                        this.news = this.news.filter(ne => {
+                            return !(ne.id === id && ne.type === type)
+                        });
+                        break
+
+                    case "info":
+
+                        await this.$apollo.mutate({
+                            mutation: gql`
+                        mutation ($id: Int!) {
+                            deleteInfo (id: $id)
+                        }
+                    `,
+                            variables: { id }
+                        });
+
+
+                        this.news = this.news.filter(ne => {
+                            return !(ne.id === id && ne.type === type)
+                        });
+                        break
+
+                    case "instr":
+
+                        await this.$apollo.mutate({
+                            mutation: gql`
+                        mutation ($id: Int!) {
+                            deleteInstr (id: $id)
+                        }
+                    `,
+                            variables: { id }
+                        });
+
+
+                        this.news = this.news.filter(ne => {
+                            return !(ne.id === id && ne.type === type)
+                        });
+                        break
+                }
             }
 
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.news, {
+            newsFiltred (){
+                return this.news.filter(item => {
+                    if(this.selectType === "all") return true
+                    return item.type === this.selectType
+                })
+            },
+            getTableFields () { return getTableFields(this.newsFiltred, {
                 remove: this.removeNews
             }) }
         }

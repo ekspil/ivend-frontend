@@ -87,7 +87,7 @@ const routes = [
     { path: '/fiscalAll/edit/:id', component: EditFiscalAll },
     { path: '/fiscalAll/user/:id', component: EditUserAll },
     { path: '/fiscalAll/controller/:id', component: EditControllerAll },
-    { path: '/fiscalAll/news/:id', component: EditNewsAll },
+    { path: '/fiscalAll/news/:id/:type', component: EditNewsAll },
     { path: '/fiscal/add', component: AddFiscal },
     { path: '/fiscalAll/add', component: AddFiscalAll },
     { path: '/fiscalAll/addNews', component: AddNewsAll },

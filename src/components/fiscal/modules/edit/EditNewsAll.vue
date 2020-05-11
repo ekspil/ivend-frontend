@@ -5,17 +5,27 @@
                 <div class="col-lg-10 offset-lg-1 col-md-12">
                     <Validate
                             formName="addNews"
-                            title="Редактирование новости"
+                            title="Редактирование записи"
                             :schema="schema" ref="form"
                             @onSubmit="save"
                             @onSuccess="onSuccess"
                     >
                         <template slot="form">
                             <div class="row">
-                                <div class="col-md-12 col-lg-12">
+                                <div class="col-md-12 col-lg-12" v-if="data">
+
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Новость активна</label>
+                                        <label class="form-label f-b">Тип записи</label>
+                                        <select v-model="type" class="form-control custom-select" disabled>
+                                            <option value="news">Новость</option>
+                                            <option value="info">(ТП) Информация</option>
+                                            <option value="instr">(ТП) Инструкция</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Запись активна</label>
                                         <select v-model="input.active" class="form-control custom-select">
                                             <option value=1>Да</option>
                                             <option value=0>Нет</option>
@@ -23,7 +33,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Заголовок новости</label>
+                                        <label class="form-label f-b">Заголовок записи</label>
                                         <Field className="form-control" :value="data.news.header"  name="header" formName="addNews" placeholder="Заголовок"/>
                                     </div>
 
@@ -33,7 +43,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Текст (Используй в тексте: [P]  - он создаст новый параграф)</label>
+                                        <label class="form-label f-b">Текст  ([P] - параграф, [li]https://ivend.pro[name]Наш сайт[li] - пример ссылки, не больше одной на параграф)</label>
                                         <Field className="form-control" :value="data.news.text" name="text" formName="addNews" placeholder="Текст (Используй в тексте: [P]  - он создаст новый параграф)"/>
                                     </div>
 
@@ -74,6 +84,8 @@
                 active: 0,
                 id: null
             },
+            type: null,
+            query: null,
 
             schema: {
                 header: [required],
@@ -81,6 +93,9 @@
                 date: [required]
             }
         }),
+        async beforeMount(){
+            this.type = this.$route.params.type
+        },
         apollo: {
             data: {
                 variables() {
@@ -98,14 +113,43 @@
           link
           date
         }
+        info: getInfoById(id: $id) {
+          id
+          active
+          header
+          text
+          link
+          date
+        }
+        instr: getInstrById(id: $id) {
+          id
+          active
+          header
+          text
+          link
+          date
+        }
 
       }
       `,
                 update(data) {
-                    this.input.id = data.news.id
-                    this.input.active = data.news.active
+                    let i
+                    switch(this.type){
+                        case "news":
+                            i = data.news
+                            break
+                        case "info":
+                            i = data.info
+                            break
+                        case "instr":
+                            i = data.instr
+                            break
+                    }
+
+                    this.input.id = i.id
+                    this.input.active = i.active
                     return {
-                        news: data.news
+                        news: i
                     };
                 }
             }
@@ -118,25 +162,72 @@
                     ...this.$store.getters['cache/data']
                 };
 
-
-                try {
-                    const { errors } = await this.$apollo.mutate({
-                        mutation: gql`
+                switch (this.type) {
+                    case "news":
+                        try {
+                            const { errors } = await this.$apollo.mutate({
+                                mutation: gql`
 					mutation saveNews ($data: NewsInput!) {
 						changeNews (input: $data) {
 							id
 						}
 					}
 					`,
-                        variables: {
-                            data: data
-                        }
-                    });
+                                variables: {
+                                    data: data
+                                }
+                            });
 
-                    this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
-                } catch (error) {
-                    this.$refs.form.showMessage('error', convertServerError(error.message));
+                            this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+                        } catch (error) {
+                            this.$refs.form.showMessage('error', convertServerError(error.message));
+                        }
+                        break
+                    case "info":
+                        try {
+                            const { errors } = await this.$apollo.mutate({
+                                mutation: gql`
+					mutation saveInfo ($data: InfoInput!) {
+						changeInfo (input: $data) {
+							id
+						}
+					}
+					`,
+                                variables: {
+                                    data: data
+                                }
+                            });
+
+                            this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+                        } catch (error) {
+                            this.$refs.form.showMessage('error', convertServerError(error.message));
+                        }
+                        break
+                    case "instr":
+                        try {
+                            const { errors } = await this.$apollo.mutate({
+                                mutation: gql`
+					mutation saveInstr ($data: InstrInput!) {
+						changeInstr (input: $data) {
+							id
+						}
+					}
+					`,
+                                variables: {
+                                    data: data
+                                }
+                            });
+
+                            this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+                        } catch (error) {
+                            this.$refs.form.showMessage('error', convertServerError(error.message));
+                        }
+                        break
                 }
+
+
+
+
             },
             onSuccess () {
                 const router = this.$router;

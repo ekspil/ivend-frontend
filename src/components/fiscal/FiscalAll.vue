@@ -33,7 +33,7 @@
                 { name: 'Фискальные аппараты', component: Kkts, route: 'kktsAll' },
                 { name: 'Пользователи', component: Users, route: 'usersAll' },
                 { name: 'Контроллеры', component: Controllers, route: 'controllersAll' },
-                { name: 'Новости', component: News, route: 'newsAll' }
+                { name: 'Текстовые записи', component: News, route: 'newsAll' }
             ]
         })
     }
