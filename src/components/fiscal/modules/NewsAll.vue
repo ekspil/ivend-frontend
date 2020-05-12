@@ -102,9 +102,8 @@
         },
         methods: {
             async removeNews (id, type) {
-
                 switch (type) {
-                    case "news":
+                    case "Новость":
 
                         await this.$apollo.mutate({
                             mutation: gql`
@@ -116,11 +115,11 @@
                         });
 
                         this.news = this.news.filter(ne => {
-                            return !(ne.id === id && ne.type === type)
+                            return !(ne.id === id && ne.type === "news")
                         });
                         break
 
-                    case "info":
+                    case "Информация":
 
                         await this.$apollo.mutate({
                             mutation: gql`
@@ -133,11 +132,11 @@
 
 
                         this.news = this.news.filter(ne => {
-                            return !(ne.id === id && ne.type === type)
+                            return !(ne.id === id && ne.type === "info")
                         });
                         break
 
-                    case "instr":
+                    case "Инструкция":
 
                         await this.$apollo.mutate({
                             mutation: gql`
@@ -150,7 +149,7 @@
 
 
                         this.news = this.news.filter(ne => {
-                            return !(ne.id === id && ne.type === type)
+                            return !(ne.id === id && ne.type === "instr")
                         });
                         break
                 }
