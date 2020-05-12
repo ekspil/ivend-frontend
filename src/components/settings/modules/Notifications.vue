@@ -121,7 +121,7 @@
 					case 'CONTROLLER_NO_SALES': return 'Не было продаж за последние сутки';
 					case 'CONTROLLER_ENCASHMENT': return 'Произведена инкассация';
 					case 'USER_LOW_BALANCE': return 'Необходимо пополнить баланс';
-					case 'GET_MONTH_SALES': return 'Молучать ежемесячную выручку';
+					case 'GET_MONTH_SALES': return 'Получать ежемесячную выручку';
 					case 'GET_WEEK_SALES': return 'Получать еженедельную выручку';
 					case 'GET_DAY_SALES': return 'Получать ежедневную выручку';
 					case 'GET_NEWS': return 'Получать новости сервиса';
