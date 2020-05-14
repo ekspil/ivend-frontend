@@ -24,7 +24,7 @@
 						</div>
 
 						<Table
-						v-if="machine && machine.itemMatrix && machine.itemMatrix.buttons"
+						v-if="machine && machine.machineItemSales"
 						:headers="getTableHeaders"
 						:fields="getTableFields"
 						className="stats-table"
@@ -68,20 +68,16 @@ export default {
 				machine: getMachineById (id: $id) {
 					id
 					name
-					itemMatrix {
-						buttons {
-							item {
+					machineItemSales(period: $period) {
 								id
 								name
 								lastSaleTime
-								salesSummary (machineId: $id, period: $period) {
+								salesSummary {
 									salesCount
 									overallAmount
 									cashAmount
 									cashlessAmount
 								}
-							}
-						}
 					}
 				}
 			}
@@ -117,7 +113,7 @@ export default {
 	},
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.machine.itemMatrix?.buttons || [], this.machine.id); }
+		getTableFields () { return getTableFields(this.machine.machineItemSales || [], this.machine.id); }
 	}
 }
 </script>

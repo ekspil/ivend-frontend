@@ -13,17 +13,17 @@ export const getTableHeaders = () => [
 	{ name: 'Монеты', key: 'coinAmount' }
 ];
 
-export const getTableFields = (data, machineId) => data.map(({ item }) => ({
-	id: item.id,
-	name: item.name,
-	lastSaleTime: getTimestamp(item.lastSaleTime),
-	...item.salesSummary,
+export const getTableFields = (data, machineId) => data.map(({ id, name, lastSaleTime, salesSummary}) => ({
+	id,
+	name,
+	lastSaleTime: getTimestamp(lastSaleTime),
+	...salesSummary,
 
-	invisible: () => item.salesSummary.salesCount <= 0,
+	invisible: () => salesSummary.salesCount <= 0,
 
 	billAmount: 'ОТКЛ',
 	coinAmount: 'ОТКЛ',
 	terminal: 'ОТКЛ',
 	wallet: 'ОТКЛ',
-	route: `/sales/machine/${machineId}/item/${item.id}`
+	route: `/sales/machine/${machineId}/item/${id}`
 }));
