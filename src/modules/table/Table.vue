@@ -13,7 +13,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="field in getFields" :key="''+field.id+field.type">
+			<tr v-for="(field, index) in getFields" :key="'dd'+index">
 				<td v-for="(header, index) in headers" :key="index" :class="field.class" :style="style(field)" v-if="field.invisible ? !field.invisible() : true">
 					<router-link v-if="header.link && field.route" :to="field.route" class="f-b">
 						{{ field[header.key] }}
