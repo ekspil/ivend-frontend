@@ -197,5 +197,13 @@
 * Hotfix
 
 
+# 1.4.1 - Release
+
+* Instructions
+* Info
+* Feedback
+* New mutations in salesSummary
+
+
 
 
