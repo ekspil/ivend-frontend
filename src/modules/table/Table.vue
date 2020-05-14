@@ -13,7 +13,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for="field in getFields" :key="field.id">
+			<tr v-for="field in getFields" :key="''+field.id+field.type">
 				<td v-for="(header, index) in headers" :key="index" :class="field.class" :style="style(field)" v-if="field.invisible ? !field.invisible() : true">
 					<router-link v-if="header.link && field.route" :to="field.route" class="f-b">
 						{{ field[header.key] }}
@@ -31,7 +31,7 @@
 							<i class="fe fe-more-vertical"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="#" class="dropdown-item" @click.prevent="field.props.remove(field.id)">
+							<a href="#" class="dropdown-item" @click.prevent="field.props.remove(field.id, field.type)">
 								<i class="dropdown-icon fe fe-x"></i> Удалить
 							</a>
 						</div>
