@@ -2,10 +2,10 @@ import { all, equals, pickBy, values } from 'ramda';
 
 export const getTableHeaders = () => [
 	{ name: 'Товар', key: 'name', link: true },
-	{ name: 'Количество', key: 'salesCount' },
+	{ name: 'Кол продаж', key: 'salesCount' },
 	{ name: 'Сумма', key: 'overallAmount' },
+	{ name: 'Наличные', key: 'cashAmount' },
 	{ name: 'Безнал', key: 'cashlessAmount' },
-	{ name: 'Наличные', key: 'cashAmount' }
 ];
 
 export const getTableFields = data => data.map(({ id, name, salesSummary }) => ({

@@ -5,10 +5,10 @@ export const getTableHeaders = () => [
 	{ name: 'Продажа', key: 'lastSaleTime' },
 	{ name: 'Кол-во', key: 'salesCount' },
 	{ name: 'Сумма', key: 'overallAmount' },
+	{ name: 'Наличные', key: 'cashAmount' },
 	{ name: 'Безнал', key: 'cashlessAmount' },
 	{ name: 'Терминал', key: 'terminal' },
 	{ name: 'Кошелек', key: 'wallet' },
-	{ name: 'Наличные', key: 'cashAmount' },
 	{ name: 'Купюры', key: 'billAmount' },
 	{ name: 'Монеты', key: 'coinAmount' }
 ];

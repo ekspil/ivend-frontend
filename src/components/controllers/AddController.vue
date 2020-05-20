@@ -21,8 +21,8 @@
 							<div class="form-group">
 								<label class="form-label f-b">Состояние контроллера</label>
 								<select v-model="input.status" class="form-control custom-select">
-									<option value="ENABLED">Активирован</option>
-									<option value="DISABLED">Деактивирован</option>
+									<option value="ENABLED">Работает</option>
+									<option value="DISABLED">Не работает</option>
 									<option value="TRAINING">Обучение</option>
 									<option value="PAUSED">Приостановлен</option>
 									<option value="DEBUG">Отладка</option>
@@ -30,7 +30,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы</label>
+								<label class="form-label f-b">Режим контроллера</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option value="mdb">MDB</option>
 									<option value="mdb1">MDB1</option>
@@ -38,7 +38,7 @@
 									<option value="exe">EXE</option>
 									<option value="cashless" selected>CASHLESS</option>
 									<option value="cashless2" selected>CASHLESS2</option>
-									<option value="cashless_free">CASHLESS_Free</option>
+									<option value="cashless_free">CASHLESS3</option>
 									<option value="ps_m_D">PULSE</option>
 									<option value="ps_m_2">PULSE2</option>
 									<option value="ps_m_3">PULSE3</option>

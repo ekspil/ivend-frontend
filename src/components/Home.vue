@@ -2,10 +2,38 @@
     <div class="container">
         <div class="side-app">
             <div class="page-header">
-                <h4 class="page-title">Рабочий стол</h4>
+<!--                <h4 class="page-title">Рабочий стол</h4>-->
             </div>
 
             <div class="row">
+                <div class="col-sm-12 col-lg-4">
+                    <router-link to="/stats">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-value float-right text-purple">
+                                    <div class="icon icon-shape bg-gradient rounded-circle text-white">
+                                        <i class="fas fa-ruble-sign text-white"></i>
+                                    </div>
+                                </div>
+
+                                <transition name="fade">
+                                    <div v-if="data.salesSummary" class="row">
+                                        <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
+                                        <div class="f-b col">Выручка сегодня</div><br/>
+                                        <div class="w-100"></div>
+                                        <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.yesterday.overallAmount }}</span></h3>
+                                        <div class="f-b col">Выручка вчера</div><br/>
+                                    </div>
+                                </transition>
+                            </div>
+                            <div class="card-chart-bg" v-if="false">
+                                <div id="chart-bg-users-4"></div>
+                            </div>
+                        </div>
+                    </router-link>
+
+                </div>
+
                 <div class="col-sm-12 col-lg-4">
                     <router-link to="/stats#sales">
                     <div class="card">
@@ -33,36 +61,10 @@
                     </router-link>
                 </div>
 
-                <div class="col-sm-12 col-lg-4">
-                    <router-link to="/stats">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-value float-right text-purple">
-                                <div class="icon icon-shape bg-gradient rounded-circle text-white">
-                                    <i class="fas fa-ruble-sign text-white"></i>
-                                </div>
-                            </div>
 
-                            <transition name="fade">
-                                <div v-if="data.salesSummary" class="row">
-                                    <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
-                                    <div class="f-b col">Выручка сегодня</div><br/>
-                                    <div class="w-100"></div>
-                                    <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.yesterday.overallAmount }}</span></h3>
-                                    <div class="f-b col">Выручка вчера</div><br/>
-                                </div>
-                            </transition>
-                        </div>
-                        <div class="card-chart-bg" v-if="false">
-                            <div id="chart-bg-users-4"></div>
-                        </div>
-                    </div>
-                    </router-link>
-
-                </div>
 
                 <div class="col-sm-12 col-lg-4">
-                    <router-link to="/settings#machines">
+                    <router-link to="/monitoring#events">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-value float-right text-purple">

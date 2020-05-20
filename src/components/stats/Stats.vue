@@ -32,7 +32,7 @@ export default {
     tabs: [
       { name: 'По автоматам', component: Finance, route: 'finance' },
       { name: 'По товарам', component: Sales, route: 'sales' },
-      { name: 'Инкассация', component: Encashments, route: 'encashments' }
+      { name: 'По инкассациям', component: Encashments, route: 'encashments' }
     ]
   })
 }

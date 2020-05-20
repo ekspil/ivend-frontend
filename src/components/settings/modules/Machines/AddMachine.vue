@@ -22,7 +22,7 @@
 									<Field name="name" formName="addMachine" className="form-control" placeholder="Введите название автомата"/>
 								</div>
 								<div class="form-group">
-									<label class="form-label f-b">Место установки автомата</label>
+									<label class="form-label f-b">Адрес установки</label>
 									<Field name="place" formName="addMachine" className="form-control" placeholder="Введите место установки автомата"/>
 								</div>
 
@@ -70,7 +70,7 @@
 						</select>
 					</div>
 						<div class="form-group">
-							<label class="form-label f-b">Привязать KKT</label>
+							<label class="form-label f-b">Привязать кассу</label>
 							<select class="form-control custom-select" v-model="input.kktId">
 								<option key="0" value="0">
 									Все ККМ

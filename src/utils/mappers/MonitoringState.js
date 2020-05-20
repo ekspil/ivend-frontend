@@ -55,7 +55,7 @@ export const getTableHeaders = () => [
 		}
 	},
 	{
-		name: 'Контроллер',
+		name: 'Регистрация',
 		key: 'controllerRegistrationTime',
 		critery ({ controllerRegistrationTime }) {
 			const localeTimestamp = getTimestamp(controllerRegistrationTime);

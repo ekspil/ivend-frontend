@@ -32,10 +32,10 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label f-b">Состояние контроллера</label>
+                  <label class="form-label f-b">Режим контроллера</label>
                   <select v-model="data.controller.status" class="form-control custom-select">
-                    <option value="ENABLED">Активирован</option>
-                    <option value="DISABLED">Деактивирован</option>
+                    <option value="ENABLED">Работает</option>
+                    <option value="DISABLED">Не работает</option>
                     <option value="TRAINING">Обучение</option>
                     <option value="PAUSED">Приостановлен</option>
                     <option value="DEBUG">Отладка</option>

@@ -1,7 +1,7 @@
 export const getTableHeaders = () => [
-    { name: 'Автомат', key: 'number', link: true },
-    { name: 'Название', key: 'name' },
-    { name: 'Место установки', key: 'place' },
+    { name: 'Номер', key: 'number', link: true },
+    { name: 'Автомат', key: 'name' },
+    { name: 'Адрес', key: 'place' },
     { name: 'Группа', key: 'groupName' },
     { name: 'Тип', key: 'typeName' },
     { name: 'Модель', key: 'equipmentName' },
