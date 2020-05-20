@@ -58,7 +58,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Режим работы терминала</label>
+								<label class="form-label f-b">Режим терминала</label>
 								<select class="form-control custom-select" v-model="input.bankTerminalMode">
 									<option value="NO_BANK_TERMINAL">Без терминала</option>
 									<option value="d200i_v">PAX D200 Инпас Vend</option>

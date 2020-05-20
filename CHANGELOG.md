@@ -213,6 +213,10 @@
 
 * Fix names and table colums
 
+# 1.4.4 - Release
+
+* Fix names and table colums
+
 
 
 

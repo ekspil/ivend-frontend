@@ -1,6 +1,6 @@
 {
   "name": "ivend-frontend",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "private": true,
   "scripts": {
     "serve": "vue serve",
