@@ -205,5 +205,10 @@
 * New mutations in salesSummary
 
 
+# 1.4.2 - Release
+
+* Fix names and table colums
+
+
 
 
