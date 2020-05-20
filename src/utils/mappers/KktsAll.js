@@ -29,18 +29,18 @@ const getStatus = field => {
 
 
 export const getTableHeaders = () => [
-    { name: 'Статус', key: 'activationDate', unsortable: false },
     { name: 'ID', key: 'id', link: true },
-    { name: 'Контрагент', key: 'companyName', link: false },
-    { name: 'Модель', key: 'model', unsortable: false },
-    { name: 'Заводской №', key: 'factoryNum', unsortable: false },
+    { name: 'Пользователь', key: 'companyName', link: false },
+    { name: 'Тип ФН', key: 'model', unsortable: false },
+    { name: 'Номер кассы', key: 'factoryNum', unsortable: false },
     //{ name: 'Рег. №', key: 'regNum', unsortable: false },
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'КЧ', key: 'countToDie', unsortable: false },
     { name: 'Дата', key: 'timeToDie', unsortable: false },
-    { name: 'ОФД', key: 'ofdKey', unsortable: true, raw: true },
+    { name: 'Рег данные', key: 'ofdKey', unsortable: true, raw: true },
     { name: 'Последний чек', key: 'kktLastBill', unsortable: true, raw: true },
-    { name: 'Сервер', key: 'server', unsortable: true, raw: true }
+    { name: 'Сервер', key: 'server', unsortable: true, raw: true },
+    { name: 'Статус', key: 'activationDate', unsortable: false },
 
 ];
 

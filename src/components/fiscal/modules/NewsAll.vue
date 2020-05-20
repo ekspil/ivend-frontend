@@ -6,6 +6,10 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
+
+                                <div class="top-buttons__left-container">
+                                    <router-link to="/fiscalAll/addNews" class="btn btn-primary">Добавить запись</router-link>
+                                </div>
                                 <div class="form-group">
                                     <select v-model="selectType" class="form-control custom-select">
                                         <option value="all">Все</option>
@@ -13,9 +17,6 @@
                                         <option value="info">(ТП) Информация</option>
                                         <option value="instr">(ТП) Инструкция</option>
                                     </select>
-                                </div>
-                                <div class="top-buttons__left-container">
-                                    <router-link to="/fiscalAll/addNews" class="btn btn-primary">Добавить запись</router-link>
                                 </div>
 
 

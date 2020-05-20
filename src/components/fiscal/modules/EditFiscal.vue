@@ -4,7 +4,7 @@
             <div class="row mt-5">
                 <div class="col-lg-8 offset-2 card">
                     <div class="card-header">
-                        <h3 class="card-title f-b">Редактирование ККТ №{{data.kkt.id}}</h3>
+                        <h3 class="card-title f-b">Редактирование кассы №{{data.kkt.id}}</h3>
                     </div>
 
                     <Validate
@@ -38,7 +38,7 @@
                                         <!--</select>-->
                                     <!--</div>-->
                                     <div class="form-group">
-                                    <label class="form-label f-b">Модель ККТ</label>
+                                    <label class="form-label f-b">Тип фискального накопителя</label>
                                     <Field className="form-control" :value="data.kkt.kktModel" disabled name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
                                     </div>
 

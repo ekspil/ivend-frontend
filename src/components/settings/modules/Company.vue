@@ -52,18 +52,6 @@
 					placeholder="ОГРН" name="ogrn" :value="info.ogrn" />
 				</div>
 
-				<div class="company-settings__field-container">
-					<label for="company-sno" class="company-settings__field-label">Система налогооблажения</label>
-					<select id="company-sno" v-model="info.sno" class="form-control custom-select">
-						<option value="usn_income">УСН доходы</option>
-						<option value="usn_income_outcome">УСН доходы-расходы</option>
-						<option value="envd">ЕНВД</option>
-						<option value="patent">Патент</option>
-						<option value="osn">ОСН</option>
-						<option value="esn">ЕСН</option>
-
-					</select>
-				</div>
 
 				<div class="company-settings__field-container">
 					<label for="company-legal-address" class="company-settings__field-label">Адрес
@@ -113,6 +101,20 @@
 					<label for="company-contact-email" class="company-settings__field-label">Контактная почта</label>
 					<Field id="company-contact-email" className="company-settings__field" formName="company"
 					type="text" placeholder="Контактная почта" :value="info.contactEmail" name="contactEmail" />
+				</div>
+
+
+				<div class="company-settings__field-container">
+					<label for="company-sno" class="company-settings__field-label">Система налогооблажения</label>
+					<select id="company-sno" v-model="info.sno" class="form-control custom-select">
+						<option value="usn_income">УСН доходы</option>
+						<option value="usn_income_outcome">УСН доходы-расходы</option>
+						<option value="envd">ЕНВД</option>
+						<option value="patent">Патент</option>
+						<option value="osn">ОСН</option>
+						<option value="esn">ЕСН</option>
+
+					</select>
 				</div>
 			</Validate>
 

@@ -4,7 +4,7 @@
             <div class="row mt-5">
                 <div class="col-lg-8 offset-2 card">
                     <div class="card-header">
-                        <h3 class="card-title f-b">Редактирование ККТ №{{data.kkt.id}}</h3>
+                        <h3 class="card-title f-b">Редактирование кассы №{{data.kkt.id}}</h3>
                     </div>
 
                     <Validate
@@ -31,7 +31,7 @@
 
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Модель фискального регистратора</label>
+                                        <label class="form-label f-b">Тип фискального накопителя</label>
                                         <select v-model="data.kkt.kktModel" class="form-control custom-select">
                                             <option value="УМКА-01-ФА (ФН15)">УМКА-01-ФА (ФН15)</option>
                                             <option value="УМКА-01-ФА (ФН36)">УМКА-01-ФА (ФН36)</option>

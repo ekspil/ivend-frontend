@@ -30,10 +30,10 @@
         components: { Tabs },
         data: () => ({
             tabs: [
-                { name: 'Фискальные аппараты', component: Kkts, route: 'kktsAll' },
                 { name: 'Пользователи', component: Users, route: 'usersAll' },
                 { name: 'Контроллеры', component: Controllers, route: 'controllersAll' },
-                { name: 'Текстовые записи', component: News, route: 'newsAll' }
+                { name: 'Кассы', component: Kkts, route: 'kktsAll' },
+                { name: 'Информация', component: News, route: 'newsAll' }
             ]
         })
     }

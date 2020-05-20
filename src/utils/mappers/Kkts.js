@@ -22,8 +22,8 @@ export const getTableHeaders = () => [
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'КЧ', key: 'countToDie', unsortable: true },
     { name: 'Дата', key: 'timeToDie', unsortable: true },
-    { name: 'ОФД', key: 'ofdKey', unsortable: true, raw: true },
-    { name: 'Активация', key: 'activationDate', unsortable: false }
+    { name: 'Рег данные', key: 'ofdKey', unsortable: true, raw: true },
+    { name: 'Состояние', key: 'activationDate', unsortable: false }
 ];
 
 export const getTableFields = data => data.map(kkt => ({

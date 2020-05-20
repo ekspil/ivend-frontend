@@ -8,7 +8,7 @@ export const getTableHeaders = () => [
     { name: 'Баланс', key: 'balance', unsortable: false  },
     { name: 'Телефон', key: 'phone', unsortable: false},
     { name: 'Почта', key: 'email', unsortable: false  },
-    { name: 'Роль', key: 'role', link: false },
+    { name: 'Статус', key: 'role', link: false },
 
 
 ];

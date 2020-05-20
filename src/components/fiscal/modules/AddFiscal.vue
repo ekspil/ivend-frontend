@@ -5,7 +5,7 @@
                 <div class="col-lg-10 offset-lg-1 col-md-12">
                     <Validate
                             formName="addFiscal"
-                            title="Добавление фискального аппарата"
+                            title="Добавление кассы"
                             :schema="schema" ref="form"
                             @onSubmit="save"
                             @onSuccess="onSuccess"
@@ -15,7 +15,7 @@
                                 <div class="col-md-12 col-lg-12">
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Модель фискального регистратора</label>
+                                        <label class="form-label f-b">Тип фискального накопителя</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
                                             <option value="УМКА-01-ФА (ФН15)">УМКА-01-ФА (ФН15)</option>
                                             <option value="УМКА-01-ФА (ФН36)">УМКА-01-ФА (ФН36)</option>

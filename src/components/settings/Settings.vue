@@ -32,9 +32,9 @@ export default {
 		tabs: [
 			{ name: 'Контроллеры', component: Equipment, route: 'equipment' },
 			{ name: 'Автоматы', component: Machines, route: 'machines' },
+			{ name: 'Фискализация', component: Fiscal, route: 'fiscal' },
 			{ name: 'Уведомления', component: Notifications, route: 'notifications' },
 			{ name: 'Компания', component: Company, route: 'company' },
-			{ name: 'Фискализация', component: Fiscal, route: 'fiscal' }
 		]
 	})
 }
