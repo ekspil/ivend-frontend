@@ -138,17 +138,19 @@
         }),
         methods: {
             isDisabled (link) {
-                if(Number(this.user?.billing?.balance) < -500 && this.$store.state.user?.profile?.role !== "ADMIN"){
+                if(Number(this.user?.billing?.balance) < -100 && this.$store.state.user?.profile?.role !== "ADMIN"){
                     this.role = 'VENDOR_NEGATIVE_BALANCE'
-                    this.$router.push('/billing')
+                    if(!['/billing', '/settings', '/tp'].includes(link)){
+                        this.$router.push('/billing')
+                    }
                 }else{
                     this.role = this.$store.state.user?.profile?.role;
                 }
                 const role = this.role
 
                 switch (role) {
-                    case 'VENDOR_NEGATIVE_BALANCE': return link !== '/billing' && 'disabled';
-                    case 'VENDOR_NO_LEGAL_INFO': return !['/billing', '/settings'].includes(link) && 'disabled';
+                    case 'VENDOR_NEGATIVE_BALANCE': return !['/billing', '/settings', '/tp'].includes(link)  && 'disabled';
+                    case 'VENDOR_NO_LEGAL_INFO': return !['/billing', '/settings', '/tp'].includes(link) && 'disabled';
 
                     case 'VENDOR_NOT_CONFIRMED': return true && 'disabled';
                     case 'VENDOR':

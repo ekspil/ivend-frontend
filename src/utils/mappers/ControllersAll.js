@@ -14,6 +14,9 @@ const getStatus = status => {
     }
 };
 
+
+import { getTerminal, getMode } from "@/utils/lists/Controller"
+
 const mapFiscalizationMode = (mode) => {
     return {
         NO_FISCAL: "Нефискальный",
@@ -42,6 +45,7 @@ export const getTableHeaders = () => [
             }
         }
     },
+    { name: 'Терминал(название)', key: 'bankTerminalMode', unsortable: true },
     { name: 'Фискализация', key: 'fiscalizationMode', unsortable: false },
     { name: 'Удалённый принтер', key: 'remotePrinterId', unsortable: true },
 ];
@@ -53,10 +57,11 @@ export const getTableFields = (data, props) => data.map(controller => ({
     user: controller.user.legalInfo ? controller.user.legalInfo.companyName : "-",
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',
-    mode: controller.mode || '-',
+    mode: getMode(controller.mode) || '-',
     fiscalizationMode: controller.fiscalizationMode ? mapFiscalizationMode(controller.fiscalizationMode) : '-',
     machine: controller.machine?.name || '-',
     remotePrinterId: controller.remotePrinterId,
+    bankTerminalMode: getTerminal(controller.bankTerminalMode),
     props,
     route: `/fiscalAll/controller/${controller.id}`
 }));

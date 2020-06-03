@@ -34,6 +34,7 @@
                             v-if="controllers && controllers.length > 0"
                             :headers="getTableHeaders"
                             :fields="getTableFields"
+                            order=true
                             className="settings-table"
                         />
 
@@ -71,6 +72,7 @@
                         id
                         uid
                         mode
+                        bankTerminalMode
                         revision {
                             name
                         }

@@ -74,6 +74,7 @@
                         uid
                         mode
                         simCardNumber
+                        bankTerminalMode
                         user {
                         email
                         legalInfo{
