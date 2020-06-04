@@ -1,5 +1,8 @@
 const state = () => ({
 	token: null,
+	admin: {
+		token: null
+	},
 	user: {},
 	remember: null,
 	phone: null
@@ -20,6 +23,15 @@ const mutations = {
 		}
 
 	},
+	setAdminToken (state,  info) {
+        if(info){
+            const {token} = info
+			state.admin.token = token
+        }else{
+				state.admin.token = null;
+
+		}
+    },
 
 	setUser (state, user = {}) {
 		state.user = user;

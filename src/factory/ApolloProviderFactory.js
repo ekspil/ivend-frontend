@@ -19,11 +19,16 @@ const httpLink = new HttpLink({
 const cache = new InMemoryCache()
 
 const authMiddleware = new ApolloLink((operation, forward) => {
+  let token = `Bearer ${store.state.auth.token}`
+  if ((new URL(window.location.href)).pathname.includes('/fiscalAll')){
+    token = `Bearer ${store.state.auth.admin.token}`
+  }
+  console.log(token)
   // add the authorization to the headers
   operation.setContext({
     headers: {
       //Basic test:test
-      authorization: `Bearer ${store.state.auth.token}`
+      authorization: token
       //authorization: `Basic dGVzdDp0ZXN0`
     }
   })

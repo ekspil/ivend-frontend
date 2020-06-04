@@ -6,10 +6,8 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <!--<div class="top-buttons__left-container">-->
-                                    <!--<router-link to="/usersAll" class="btn btn-primary">Добавить фискальный регистратор</router-link>-->
-                                <!--</div>-->
-
+                                <div v-if="!$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminEnter()">Режим администратора</div>
+                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>
 
                                 <Table
                                         v-if="users && users.length > 0"
@@ -35,6 +33,7 @@
     import Table from '@/modules/table/Table';
 
     import { getTableHeaders, getTableFields } from '@/utils/mappers/UsersAll';
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'Users',
@@ -82,6 +81,13 @@
             }
         },
         methods: {
+            ...mapMutations({setAdminToken: 'auth/setAdminToken'}),
+            adminEnter: function(){
+                this.setAdminToken({token: this.$store.state.auth.token})
+            },
+            adminOut: function(){
+                this.setAdminToken(null)
+            },
             async changeBalance (id, sum) {
                 try {
                     const data = {
