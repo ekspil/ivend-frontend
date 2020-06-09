@@ -102,7 +102,6 @@ export default {
         },
         onSuccess({ token }) {
             if(token === "NEED_SMS"){
-                console.log(token)
                 const cache = this.$store.getters['cache/data'];
                 this.$router.push(`/sms/${cache.phone.replace(/[()+\s-]/gi, '')}`)
             }

@@ -84,7 +84,6 @@ export default {
             }
         },
         onSuccess({ token }) {
-            console.log(token)
             this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: this.phone});
 
         }
