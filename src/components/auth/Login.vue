@@ -96,12 +96,21 @@ export default {
 
                 this.$refs.login.process({ errors, data, success: 'Переадресация...' });
             } catch (error) {
+                console.log(error)
                 this.$refs.login.showMessage('error', convertServerError(error.message));
             }
         },
         onSuccess({ token }) {
-            const cache = this.$store.getters['cache/data'];
-            this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: cache.phone.replace(/[()+\s-]/gi, '')});
+            if(token === "NEED_SMS"){
+                console.log(token)
+                const cache = this.$store.getters['cache/data'];
+                this.$router.push(`/sms/${cache.phone.replace(/[()+\s-]/gi, '')}`)
+            }
+            else{
+                const cache = this.$store.getters['cache/data'];
+                this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: cache.phone.replace(/[()+\s-]/gi, '')});
+            }
+
 
         }
     },

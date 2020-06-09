@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from "vue-router";
 
 import Login from '@/components/auth/Login';
+import Sms from '@/components/auth/Sms';
 import Registration from '@/components/auth/Registration';
 import Remember from '@/components/auth/Remember';
 import NewPassword from '@/components/auth/NewPassword';
@@ -93,6 +94,7 @@ const routes = [
     { path: '/fiscalAll/addNews', component: AddNewsAll },
 
     { path: '/login', component: Login },
+    { path: '/sms/:tel', component: Sms },
     { path: '/register', component: Registration },
     { path: '/remember', component: Remember },
     { path: '/NewPassword', component: NewPassword }
@@ -105,7 +107,11 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-     const isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword']);
+
+     let isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword']);
+     if(to.path.includes("/sms")){
+         isSecured = false
+     }
      const isLogin = includes(to.path, ['/login']);
      const token = store.state.auth.token, role = store.state.user?.profile?.role, remember = store.state.auth.remember;
 

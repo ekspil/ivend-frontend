@@ -20,10 +20,9 @@ const cache = new InMemoryCache()
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   let token = `Bearer ${store.state.auth.token}`
-  if ((new URL(window.location.href)).pathname.includes('/fiscalAll')){
+  if (store.state.user?.profile?.role !== "ADMIN" && (new URL(window.location.href)).pathname.includes('/fiscalAll')){
     token = `Bearer ${store.state.auth.admin.token}`
   }
-  console.log(token)
   // add the authorization to the headers
   operation.setContext({
     headers: {
