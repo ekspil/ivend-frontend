@@ -55,7 +55,7 @@ export const getTableFields = (data, props) => data.map(kkt => ({
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
     activationDate: getStatus(kkt),
-    kktLastBill: kkt.kktLastBill || '-',
+    kktLastBill: kkt.kktLastBill ? String(kkt.kktLastBill).substr(0, 19).replace("T", " ") : '-',
     server: kkt.server || 'Стандартный',
     props,
     route: `/fiscalAll/edit/${kkt.id}`

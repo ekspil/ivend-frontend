@@ -75,6 +75,10 @@
                         mode
                         simCardNumber
                         bankTerminalMode
+                        registrationTime
+						lastState {
+								registrationTime
+							}
                         user {
                         email
                         legalInfo{
@@ -87,9 +91,11 @@
                         firmwareId
                         remotePrinterId
 
+
                         machine {
                           id
                           name
+                          lastSaleTime
                         }
                       }
                     }
