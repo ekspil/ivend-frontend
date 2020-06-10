@@ -1,4 +1,26 @@
+export const getStatus = status => {
+    switch (status) {
+        case 'ENABLED':
+            return '<span class="status-icon bg-success"></span> Работает';
+        case 'DISABLED':
+            return '<span class="status-icon bg-danger"></span> Не работает';
+        case 'PAUSED':
+            return '<span class="status-icon bg-secondary"></span> Приостановлен';
+        case 'DEBUG':
+            return '<span class="status-icon bg-yellow"></span> Отладка';
+        case 'TRAINING':
+            return '<span class="status-icon bg-info"></span> Обучение';
+    }
+};
 
+
+export const mapFiscalizationMode = (mode) => {
+    return {
+        NO_FISCAL: "Нефискальный",
+        UNAPPROVED: "Фискальный",
+        APPROVED: "APPROVED(устарел)"
+    }[mode]
+}
 
 export const getTerminal = (status) => {
 

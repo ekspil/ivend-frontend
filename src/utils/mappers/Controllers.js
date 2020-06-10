@@ -1,28 +1,6 @@
-const getStatus = status => {
-    switch (status) {
-        case 'ENABLED':
-            return '<span class="status-icon bg-success"></span> Активирован';
-        case 'DISABLED':
-            return '<span class="status-icon bg-danger"></span> Деактивирован';
-        case 'PAUSED':
-            return '<span class="status-icon bg-secondary"></span> Приостановлен';
-        case 'DEBUG':
-            return '<span class="status-icon bg-yellow"></span> Отладка';
-        case 'TRAINING':
-            return '<span class="status-icon bg-info"></span> Обучение';
-    }
-};
 
-import { getTerminal, getMode } from "@/utils/lists/Controller"
+import { getTerminal, getMode, getStatus, mapFiscalizationMode } from "@/utils/lists/Controller"
 
-
-const mapFiscalizationMode = (mode) => {
-    return {
-        NO_FISCAL: "Нефискальный",
-        UNAPPROVED: "Без подтверждения",
-        APPROVED: "С подтверждением"
-    }[mode]
-}
 
 export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'uid', link: true, ltOrder: true },
