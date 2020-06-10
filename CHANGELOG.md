@@ -217,6 +217,10 @@
 
 * Fix names and table colums
 
+# 1.4.5 - Release
+
+* New admin functions
+
 
 
 
