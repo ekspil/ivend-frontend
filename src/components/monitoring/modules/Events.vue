@@ -53,6 +53,7 @@
 							timestamp
 						}
 						controller {
+							status
 							lastErrorTime
 							lastState {
 								registrationTime
@@ -67,7 +68,7 @@
 		},
 		computed: {
 			getTableHeaders,
-			getTableFields () { return getTableFields(this.machines); }
+			getTableFields () { return getTableFields(this.machines.filter(mach => mach.controller?.status !== "DISABLED")); }
 		}
 	}
 </script>

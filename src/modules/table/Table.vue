@@ -13,15 +13,45 @@
 			</tr>
 		</thead>
 		<tbody>
+
+		<tr v-if="selections.length > 0">
+			<td v-for="(header, index) in headers" :key="'sel'+index" style="padding: 0">
+				<div v-for="selection in selections" v-if="header.key === selection.key" class="form-group" style="margin: 0">
+					<select class="form-control custom-select" @change="filterAction(selection.key, sel[selection.key])" v-model="sel[selection.key]">
+						<option value="ALL">ALL</option>
+						<option v-for="value in selection.values" :value="value">{{value}}</option>
+					</select>
+				</div>
+			</td>
+		</tr>
+
 			<tr v-for="(field, index) in getFields" :key="'dd'+index">
 				<td v-for="(header, index) in headers" :key="index" :class="field.class" :style="style(field)" v-if="field.invisible ? !field.invisible() : true">
-					<router-link v-if="header.link && field.route" :to="field.route" class="f-b">
+					<router-link v-if="field && field.props && field.props.route && field.props.routeKey === header.key" :to="field.props.route + field[header.key]" class="f-b">
+						{{ field[header.key] }}
+					</router-link>
+
+					<router-link v-else-if="header.link && field.route" :to="field.route" class="f-b">
 						{{ field[header.key] }}
 					</router-link>
 
 					<div v-else-if="header.critery" v-html="header.critery(field)"></div>
 
 					<div v-else-if="header.raw" v-html="field[header.key]"></div>
+					<div v-else-if="field && field.props && field.props.changeBalance && field.props.changeBalanceKey === header.key" >
+						<div class="item-action dropdown">
+							<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
+								{{ field[header.key] }}
+							</a>
+							<div class="dropdown-menu dropdown-menu-right text-center">
+								<p> Введите сумму для начисления </p>
+								<input class="form-control" type="text" size="17" v-model="field.props.sum">
+								<a href="#" class="dropdown-item" @click.prevent="field.props.changeBalance(field.id, field.props.sum)">
+									<button class="btn btn-primary ml-auto">Начислить</button>
+								</a>
+							</div>
+						</div>
+					</div>
 					<template v-else>{{ field[header.key] }}</template>
 				</td>
 
@@ -38,20 +68,20 @@
 					</div>
 				</td>
 
-				<td class="text-right" v-if="field && field.props && field.props.changeBalance">
-					<div class="item-action dropdown">
-						<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
-							<i class="fe fe-more-vertical"></i>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right text-center">
-							<p> Введите сумму для начисления </p>
-							<input class="form-control" type="text" size="17" v-model="field.props.sum">
-							<a href="#" class="dropdown-item" @click.prevent="field.props.changeBalance(field.id, field.props.sum)">
-								<button class="btn btn-primary ml-auto">Начислить</button>
-							</a>
-						</div>
-					</div>
-				</td>
+<!--				<td class="text-right" v-if="field && field.props && field.props.changeBalance">-->
+<!--					<div class="item-action dropdown">-->
+<!--						<a href="javascript:void(0)" data-toggle="dropdown" class="icon">-->
+<!--							<i class="fe fe-more-vertical"></i>-->
+<!--						</a>-->
+<!--						<div class="dropdown-menu dropdown-menu-right text-center">-->
+<!--							<p> Введите сумму для начисления </p>-->
+<!--							<input class="form-control" type="text" size="17" v-model="field.props.sum">-->
+<!--							<a href="#" class="dropdown-item" @click.prevent="field.props.changeBalance(field.id, field.props.sum)">-->
+<!--								<button class="btn btn-primary ml-auto">Начислить</button>-->
+<!--							</a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</td>-->
 			</tr>
 		</tbody>
 		<tr v-if="stats">
@@ -80,19 +110,27 @@
 				type: Array,
 				default: () => []
 			},
+			selections: {
+				type: Array,
+				default: () => []
+			},
 
 			sortBy: String,
 			order: {
 				type: Boolean,
 				default: false
 			},
-			className: String
+			className: String,
+			filterAction: Function
 		},
 		data () {
 			const critery = this.sortBy || this.headers[0].key;
 			return {
 				critery,
-				ltOrder: this.order || false
+				ltOrder: this.order || false,
+				sel: {
+					role: "VENDOR"
+				}
 			};
 		},
 		methods: {

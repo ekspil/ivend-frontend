@@ -50,6 +50,7 @@
 							banknoteCollectorStatus
 							coinCollectorStatus
 							controller {
+								status
 								registrationTime
 								lastState {
 									billAmount
@@ -69,7 +70,7 @@
 		},
 		computed: {
 			getTableHeaders,
-			getTableFields () { return getTableFields(this.machines); }
+			getTableFields () { return getTableFields(this.machines.filter(mach => mach.controller?.status !== "DISABLED")); }
 		}
 	}
 </script>

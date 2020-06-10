@@ -3,8 +3,8 @@
         <div class="side-app" v-if="user">
             <div class="row mt-5">
                 <div class="col-lg-8 offset-2 card">
-                    <div class="card-header">
-                        <h3 class="card-title f-b">Изменение баланса пользователя {{user.legalInfo.companyName}}</h3>
+                    <div class="card-header" v-if="user.legalInfo">
+                        <h3 class="card-title f-b">Информация о компании {{user.legalInfo.companyName}}</h3>
                     </div>
 
                     <Validate
@@ -18,63 +18,58 @@
                         <template slot="form">
                             <div class="row">
                                 <div class="col-md-12 col-lg-12">
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Компания</label>
-                                        <Field className="form-control" :value="user.legalInfo.companyName" disabled name="companyName" formName="editUser" placeholder="У компании не указано название"/>
+                                        <input class="form-control" v-model="user.legalInfo.companyName" name="companyName" formName="editUser" placeholder="У компании не указано название"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">ИНН</label>
                                         <Field className="form-control" :value="user.legalInfo.inn"  disabled name="inn" formName="editUser" placeholder="У компании не указан ИНН"/>
                                     </div>
 
 
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">ОГРН</label>
                                         <Field className="form-control" :value="user.legalInfo.ogrn" disabled name="companyName" formName="editUser" placeholder="У компании не указан ОГРН"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">СНО</label>
                                         <Field className="form-control" :value="snoString" disabled name="sno" formName="editUser" placeholder="У компании не указана СНО"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Юридический адрес</label>
                                         <Field className="form-control" :value="user.legalInfo.legalAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан юр.адрес"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Фактический адрес</label>
                                         <Field className="form-control" :value="user.legalInfo.actualAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан фактический адрес"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Директор</label>
                                         <Field className="form-control" :value="user.legalInfo.director" disabled name="companyName" formName="editUser" placeholder="У компании не указан директор"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Телефон директора</label>
                                         <Field className="form-control" :value="user.legalInfo.directorPhone" disabled name="companyName" formName="editUser" placeholder="У компании не указан телефон директора"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Почта директора</label>
                                         <Field className="form-control" :value="user.legalInfo.directorEmail" disabled name="companyName" formName="editUser" placeholder="У компании не указана почта директора"/>
                                     </div>
 
-
-                                    <div class="form-group">
-                                        <label class="form-label f-b">Изменить баланс компании: Начислить( -Списать )</label>
-                                        <Field className="form-control" :value="sum" name="sum" formName="editUser" placeholder="Введите сумму для начисления"/>
-                                    </div>
                                 </div>
                             </div>
                         </template>
-                        <template slot="submit">
-                            <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+                        <template slot="submit" v-if="user.legalInfo">
+                            <button type="submit" class="btn btn-primary ml-auto" >Сохранить</button>
                         </template>
                     </Validate>
 
@@ -94,7 +89,7 @@
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
 
-    import { required } from '@/utils/validation';
+    import { required, email, number } from '@/utils/validation';
 
     export default {
         components: {
@@ -105,37 +100,58 @@
             user: null,
             sum: 0,
             schema: {
-                sum: [required]
-
+                companyName: [required],
+                city: [required],
+                actualAddress: [required],
+                inn: [required, number],
+                ogrn: [required],
+                legalAddress: [required],
+                director: [required],
+                directorPhone: [required],
+                directorEmail: [required, email],
+                contactPerson: [required],
+                contactPhone: [required],
+                contactEmail: [required, email],
+                sno: [required]
             },
 
             userUploading: false
         }),
         apollo: {
             user: {
-                query: gql ` query {
-                      getAllUsers {
+                query: gql ` query($input: AllUsersInput) {
+                      getAllUsers(input: $input) {
                             phone
                             id
                             email
                             role
                             legalInfo{
-                                    inn
-                                    ogrn
-                                    city
-                                    companyName
-                                    sno
-                                    actualAddress
-                                    legalAddress
-                                    director
-                                    directorPhone
-                                    directorEmail
+                                    companyName,
+									city,
+									actualAddress,
+									inn,
+									ogrn,
+									legalAddress,
+									director,
+									directorPhone,
+									directorEmail,
+									contactPerson,
+									contactPhone,
+									contactEmail,
+									sno
                                 }
                              }
                     }
       `,
+                variables () {
+                    return {
+                        input: {
+                            userId: Number(this.$route.params.id)
+                        }
+                    };
+                },
                 update(user) {
-                    const [returnedData] = user.getAllUsers.filter(user => user.id === Number(this.$route.params.id))
+                    const [returnedData] = user.getAllUsers
 
                     return returnedData
 
@@ -143,30 +159,54 @@
             }
         },
         methods: {
-            async save() {
+            async save () {
                 try {
-                    this.userUploading = true;
-                    const data = {
-                        id: this.user.id,
-                        sum: Number(this.$store.getters['cache/data'].sum)
-                    };
 
-                    const { errors } = await this.$apollo.mutate({
-                        mutation: gql `mutation change($data: ChangeUserBalanceInput! ){
-                                         changeUserBalance(input: $data)
-                                                }
-
-          `,
+                    const { errors, data } = await this.$apollo.mutate({
+                        mutation: gql`
+							mutation saveCompanyInfo ($input: LegalInfoToUserInput!) {
+								updateLegalInfoToUser(input: $input) {
+									companyName,
+									city,
+									actualAddress,
+									inn,
+									ogrn,
+									legalAddress,
+									director,
+									directorPhone,
+									directorEmail,
+									contactPerson,
+									contactPhone,
+									contactEmail,
+									sno
+								}
+							}
+						`,
                         variables: {
-                            data: data
+                            input: {
+                                userId: this.user.id,
+                                companyName: this.user.legalInfo.companyName,
+                                city: this.user.legalInfo.city,
+                                actualAddress: this.user.legalInfo.actualAddress,
+                                inn: this.user.legalInfo.inn,
+                                ogrn: this.user.legalInfo.ogrn,
+                                legalAddress: this.user.legalInfo.legalAddress,
+                                director: this.user.legalInfo.director,
+                                directorPhone: this.user.legalInfo.directorPhone,
+                                directorEmail: this.user.legalInfo.directorEmail,
+                                contactPerson: this.user.legalInfo.contactPerson,
+                                contactPhone: this.user.legalInfo.contactPhone,
+                                contactEmail: this.user.legalInfo.contactEmail,
+                                sno: this.user.legalInfo.sno
+                            }
                         }
                     });
 
-                    this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+
+                    this.$refs.form.process({ errors, data, success: 'Успешно сохранено.' });
                 } catch (error) {
+                    console.error(error)
                     this.$refs.form.showMessage('error', 'Ошибка сохранения.');
-                } finally {
-                    this.userUploading = false;
                 }
             },
             onSuccess () {
@@ -184,6 +224,7 @@
         },
         computed: {
             snoString: function (){
+                if(!this.user.legalInfo) return "Не заполнена информация о компании"
                 switch (this.user.legalInfo.sno){
                     case "usn_income":
                         return "УСН доходы"
