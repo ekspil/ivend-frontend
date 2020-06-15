@@ -222,5 +222,10 @@
 * New admin functions
 
 
+# 1.4.6 - Release
+
+* New admin functions
+
+
 
 
