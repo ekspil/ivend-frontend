@@ -227,5 +227,10 @@
 * New admin functions
 
 
+# 1.4.7 - Release
+
+* Hotfix
+
+
 
 

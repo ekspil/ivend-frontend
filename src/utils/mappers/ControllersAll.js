@@ -10,8 +10,10 @@ export const getTableHeaders = () => [
     {
         name: 'Связь',
         key: 'registrationTime',
-        critery ({ registrationTime, lastSaleTime }) {
-            let latestTime = registrationTime > lastSaleTime ? registrationTime : lastSaleTime;
+        critery ({ registrationTime}) {
+
+
+            let latestTime = registrationTime
             const localeTimestamp = getTimestamp(latestTime);
 
             if (localeTimestamp !== '-') {
