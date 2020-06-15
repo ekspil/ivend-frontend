@@ -334,7 +334,7 @@ export default {
           this.$refs.depositHint.show('Некорректная сумма');
         }
       } else {
-          this.depositSum = (this.billing.dailyBill*(new Date().daysInMonth())/10).toFixed(0) * 10
+          this.depositSum = (this.billing.dailyBill*(new Date().daysInMonth())/100).toFixed(0) * 100
           this.depositRequested = true;
         this.$refs.depositHint.show('Введите сумму для пополнения');
       }
@@ -348,7 +348,7 @@ export default {
           this.$refs.depositHint2.show2('Некорректная сумма');
         }
       } else {
-          this.depositSum = (this.billing.dailyBill*(new Date().daysInMonth())/10).toFixed(0) * 10
+          this.depositSum = (this.billing.dailyBill*(new Date().daysInMonth())/100).toFixed(0) * 100
         this.depositRequested = true;
         this.$refs.depositHint2.show2('Введите сумму для пополнения');
       }

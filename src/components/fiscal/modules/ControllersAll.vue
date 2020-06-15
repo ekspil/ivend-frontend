@@ -90,13 +90,6 @@
                         fiscalizationMode
                         firmwareId
                         remotePrinterId
-
-
-                        machine {
-                          id
-                          name
-                          lastSaleTime
-                        }
                       }
                     }
                 `,

@@ -33,28 +33,28 @@ export const getTableHeaders = () => [
             return createTooltip('info', 'НЕТ');
         }
     },
-    {
-        name: 'Продажи',
-        key: 'lastSaleTime',
-        critery ({ lastSaleTime }) {
-            const localeTimestamp = getTimestamp(lastSaleTime);
-            if (localeTimestamp !== '-') {
-                const gradation = getGradation(Date.now() - lastSaleTime);
-
-                if (gradation.seconds < 60) {
-                    return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
-                } else if (gradation.minutes < 60) {
-                    return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
-                } else if (gradation.hours < 24) {
-                    return createTooltip('warning', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`);
-                }
-
-                return createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
-            }
-
-            return createTooltip('info', 'НЕТ');
-        }
-    },
+    // {
+    //     name: 'Продажи',
+    //     key: 'lastSaleTime',
+    //     critery ({ lastSaleTime }) {
+    //         const localeTimestamp = getTimestamp(lastSaleTime);
+    //         if (localeTimestamp !== '-') {
+    //             const gradation = getGradation(Date.now() - lastSaleTime);
+    //
+    //             if (gradation.seconds < 60) {
+    //                 return createTooltip('primary', `${gradation.seconds} ${getWordEnding(gradation.minutes, 'секунда')}`);
+    //             } else if (gradation.minutes < 60) {
+    //                 return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
+    //             } else if (gradation.hours < 24) {
+    //                 return createTooltip('warning', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`);
+    //             }
+    //
+    //             return createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
+    //         }
+    //
+    //         return createTooltip('info', 'НЕТ');
+    //     }
+    // },
     {
         name: 'Регистрация',
         key: 'controllerRegistrationTime',
@@ -70,7 +70,7 @@ export const getTableHeaders = () => [
     { name: 'Состояние', key: 'status', unsortable: false, raw: true },
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: false },
-    { name: 'Автомат', key: 'machine', unsortable: true },
+  //  { name: 'Автомат', key: 'machine', unsortable: true },
     {   name: 'Терминал',
         key: 'simCardNumber',
         unsortable: true,
@@ -91,7 +91,6 @@ export const getTableHeaders = () => [
 export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
     controllerRegistrationTime: controller?.registrationTime,
-    lastSaleTime: controller?.machine?.lastSaleTime,
     registrationTime: controller?.lastState?.registrationTime,
     uid: controller.uid,
     simCardNumber: controller.simCardNumber,
@@ -100,7 +99,6 @@ export const getTableFields = (data, props) => data.map(controller => ({
     firmwareId: controller.firmwareId || '-',
     mode: getMode(controller.mode) || '-',
     fiscalizationMode: controller.fiscalizationMode ? mapFiscalizationMode(controller.fiscalizationMode) : '-',
-    machine: controller.machine?.name || '-',
     remotePrinterId: controller.remotePrinterId,
     bankTerminalMode: getTerminal(controller.bankTerminalMode),
     props,
