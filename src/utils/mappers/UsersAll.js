@@ -17,7 +17,7 @@ export const getTableHeaders = () => [
 export const getTableFields = (data, props) => data.map(user => ({
     id: user.id,
     phone: user.phone,
-    balance: Number(user.billing.balance).toFixed(2),
+    balance: Number(Number(user.billing.balance).toFixed(2)),
     dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())/100).toFixed(0) * 100,
     email: user.email,
     role: user.role,

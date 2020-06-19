@@ -6,7 +6,7 @@
       <div class="balance-info">
         <div :class="['balance-info-block', 'balance-info__block', hasEnoughMoney ? '' : 'balance-info-block--attention']">
           <div class="balance-info-block__info-container row">
-            <div class="balance-info-block__count balance-info-block__count--currency col">{{ billing.balance }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ Number(billing.balance).toFixed(2) }}</div>
             <div class="balance-info-block__title col">Текущий баланс</div>
 
             <div class="balance-info-block__icon col-1.5">
