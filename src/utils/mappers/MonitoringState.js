@@ -144,7 +144,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller, kktStatus, terminalStatus, coinCollectorStatus,  banknoteCollectorStatus}) => ({
 	id,
-	controller: controller.uid,
+	controller: controller?.uid,
 	controllerRegistrationTime: controller?.registrationTime,
 	name,
 	lastSaleTime,

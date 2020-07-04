@@ -77,7 +77,7 @@
 			getTableHeadersC,
 			getTableFieldsC () { return getTableFieldsC(this.machines.reduce((acc, item) => {
 
-				if( item.controller.status !== "DISABLED") {
+				if( item.controller?.status !== "DISABLED") {
 					acc[0].count++
 				}
 				else {
