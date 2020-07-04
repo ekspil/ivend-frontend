@@ -28,6 +28,7 @@
 						:headers="getTableHeaders"
 						:fields="getTableFields"
 						className="stats-table"
+						sortBy="timestamp"
 						/>
 						<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
 						<div v-else class="aligned-text">Нет продаж</div>

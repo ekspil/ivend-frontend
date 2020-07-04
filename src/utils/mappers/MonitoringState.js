@@ -135,11 +135,16 @@ export const getTableHeaders = () => [
 				default:
 					return createTooltip('info', cashbox);
 			}}
+	},
+	{
+		name: 'Контроллер',
+		key: 'controller',
 	}
 ];
 
 export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller, kktStatus, terminalStatus, coinCollectorStatus,  banknoteCollectorStatus}) => ({
 	id,
+	controller: controller.uid,
 	controllerRegistrationTime: controller?.registrationTime,
 	name,
 	lastSaleTime,

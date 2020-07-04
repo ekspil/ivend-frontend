@@ -20,11 +20,11 @@
             <div class="row">
               <div class="col-md-12 col-lg-12">
                 <div class="form-group">
-                  <label class="form-label f-b">Номер контроллера UID</label>
+                  <label class="form-label f-b">{{controllerHeaders.number}}</label>
                   <Field className="form-control" :value="data.controller.uid" disabled name="uid" formName="editControllerSettings" placeholder="Введите UID"/>
                 </div>
                 <div class="form-group" v-if="false">
-                  <label class="form-label f-b">Версия контроллера</label>
+                  <label class="form-label f-b">{{controllerHeaders.version}}</label>
                   <select class="form-control custom-select" v-model="data.controller.revision.id">
                     <option v-for="revision in data.revisions" :key="revision.id" :value="revision.id">
                       {{ revision.name }}
@@ -32,67 +32,43 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label f-b">Состояние контроллера</label>
+                  <label class="form-label f-b">{{controllerHeaders.state}}</label>
                   <select v-model="data.controller.status" class="form-control custom-select">
-                    <option value="ENABLED">Работает</option>
-                    <option value="DISABLED">Не работает</option>
-                    <option value="TRAINING">Обучение</option>
-                    <option value="PAUSED">Приостановлен</option>
-                    <option value="DEBUG">Отладка</option>
+                    <option v-for="item in controllerStates" :value="item.value" :key="item.value">{{item.name}}</option>
+
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label f-b">Режим контроллера</label>
+                  <label class="form-label f-b">{{controllerHeaders.mode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.mode">
-                    <option value="mdb">MDB</option>
-                    <option value="mdb1">MDB1</option>
-                    <option value="mdb2">MDB2</option>
-                    <option value="exe">EXE</option>
-                    <option value="cashless" selected>CASHLESS</option>
-                    <option value="cashless2" selected>CASHLESS2</option>
-                    <option value="cashless_free">CASHLESS3</option>
-                    <option value="ps_m_D">PULSE</option>
-                    <option value="ps_m_2">PULSE2</option>
-                    <option value="ps_m_3">PULSE3</option>
-                    <option value="ps_p">PULSE4</option>
-                    <option value="rs232">RS232</option>
+                    <option v-for="item in controllerType" :value="item.value" :key="item.value">{{item.name}}</option>
+
                   </select>
                 </div>
                 <div v-if="false" class="form-group">
-                  <label class="form-label f-b">Режим считывания статистики</label>
+                  <label class="form-label f-b">{{controllerHeaders.statMode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.readStatMode">
-                    <option value="COINBOX">Монетник</option>
-                    <option value="MACHINE">Автомат</option>
-                    <option value="COINBOX_MACHINE">Монетник+автомат</option>
+                    <option v-for="item in controllerStatType" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label f-b">Режим терминала</label>
+                  <label class="form-label f-b">{{controllerHeaders.terminalMode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.bankTerminalMode">
-                    <option value="NO_BANK_TERMINAL">Без терминала</option>
-                    <option value="d200i_v">PAX D200 Инпас Vend</option>
-                    <option value="d200i_t">PAX D200 Инпас Trade</option>
-                    <option value="d200s_v">PAX D200 Сбер Vend</option>
-                    <option value="d200s_t">PAX D200 Сбер Trade</option>
-                    <option value="otiu_v">OTI UNO Vend</option>
-                    <option value="otiu_t">OTI UNO Trade</option>
-                    <option value="otit_v">OTI TRIO Vend</option>
-                    <option value="otit_t">OTI TRIO Trade</option>
+                    <option v-for="item in controllerTerminal" :value="item.value" :key="item.value">{{item.name}}</option>
+
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label f-b">Режим фискализации</label>
+                  <label class="form-label f-b">{{controllerHeaders.fiscalMode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.fiscalizationMode">
-                    <option value="NO_FISCAL">Нефискальный</option>
-                    <option value="UNAPPROVED">Фискальный</option>
-                    <option v-if="false" value="APPROVED">С подтверждением</option>
+                    <option v-for="item in controllerFiscalType" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label f-b">Номер удалённого принтера</label>
+                  <label class="form-label f-b">{{controllerHeaders.printer}}</label>
                   <Field className="form-control" :value="data.controller.remotePrinterId" name="remotePrinterId" formName="editControllerSettings" placeholder="Введите номер удалённого принтера"/>
                 </div>
 
@@ -120,6 +96,7 @@ import gql from 'graphql-tag';
 
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
+import {controllerHeaders, controllerStates, controllerType, controllerStatType, controllerTerminal, controllerFiscalType } from '@/utils/lists/Controller';
 
 import { required } from '@/utils/validation';
 
@@ -130,7 +107,12 @@ export default {
   },
   data: () => ({
     data: null,
-
+    controllerHeaders,
+    controllerFiscalType,
+    controllerTerminal,
+    controllerStates,
+    controllerType,
+    controllerStatType,
     schema: {
       uid: [required]
     },

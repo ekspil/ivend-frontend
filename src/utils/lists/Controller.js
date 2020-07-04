@@ -1,3 +1,62 @@
+export const controllerHeaders = {
+    number: "Номер контроллера",
+    state: "Состояние контроллера",
+    mode: "Режим контроллера",
+    statMode: "Режим считывания статистики",
+    terminalMode: "Режим терминала",
+    fiscalMode: "Режим фискализации",
+    version: "Версия контроллера",
+    printer: "Номер удалённого принтера",
+    sim: "Номер сим карты"
+}
+
+
+export const controllerStates = [
+    {name: "Работает", value: "ENABLED"},
+    {name: "Не работает", value: "DISABLED"},
+    {name: "Отладка", value: "DEBUG"},
+]
+
+export const controllerFiscalType = [
+    {name: "Нефискальный", value: "NO_FISCAL"},
+    {name: "Фискальный", value: "UNAPPROVED"}
+]
+export const controllerStatType = [
+    {name: "Монетник", value: "COINBOX"},
+    {name: "Автомат", value: "MACHINE"},
+    {name: "Монетник+автомат", value: "COINBOX_MACHINE"},
+]
+export const controllerType = [
+    {name: "MDB", value: "mdb"},
+    {name: "MDB1", value: "mdb1"},
+    {name: "MDB2", value: "mdb2"},
+    {name: "EXE", value: "exe"},
+    {name: "CASHLESS", value: "cashless"},
+    {name: "CASHLESS2", value: "cashless2"},
+    {name: "CASHLESS3", value: "cashless_free"},
+    {name: "PULSE", value: "ps_m_D"},
+    {name: "PULSE2", value: "ps_m_2"},
+    {name: "PULSE3", value: "ps_m_3"},
+    {name: "PULSE4", value: "ps_p"},
+    {name: "RS232", value: "rs232"},
+]
+export const controllerTerminal = [
+    {name: "Без терминала", value: "NO_BANK_TERMINAL"},
+    {name: "PAX D200 Инпас Vend", value: "d200i_v"},
+    {name: "PAX D200 Инпас Trade", value: "d200i_t"},
+    {name: "PAX D200 Сбер Vend", value: "d200s_v"},
+    {name: "PAX D200 Сбер Trade", value: "d200s_t"},
+    {name: "OTI UNO Vend", value: "otiu_v"},
+    {name: "OTI UNO Trade", value: "otiu_t"},
+    {name: "OTI TRIO Vend", value: "otit_v"},
+    {name: "OTI TRIO Trade", value: "otit_t"},
+]
+
+
+
+
+
+
 export const getStatus = status => {
     switch (status) {
         case 'ENABLED':
@@ -15,63 +74,33 @@ export const getStatus = status => {
 
 
 export const mapFiscalizationMode = (mode) => {
-    return {
-        NO_FISCAL: "Нефискальный",
-        UNAPPROVED: "Фискальный",
-        APPROVED: "APPROVED(устарел)"
-    }[mode]
+
+    const data = controllerFiscalType.find((item) => item.value === mode)
+    if(data){
+        return data.name
+    }
+    else {
+        return "Неверный тип"
+    }
 }
 
 export const getTerminal = (status) => {
-
-    switch (status) {
-        case 'NO_BANK_TERMINAL':
-            return 'Без терминала';
-        case 'd200i_v':
-            return 'PAX D200 Инпас Vend';
-        case 'd200s_v':
-            return 'PAX D200 Сбер Vend';
-        case 'd200i_t':
-            return 'PAX D200 Инпас Trade';
-        case 'd200s_t':
-            return 'PAX D200 Сбер Trade';
-        case 'otiu_v':
-            return 'OTI UNO Vend';
-        case 'otiu_t':
-            return 'OTI UNO Trade';
-        case 'otit_v':
-            return 'OTI TRIO Vend';
-        case 'otit_t':
-            return 'OTI TRIO Trade';
+    const data = controllerTerminal.find((item) => item.value === status)
+    if(data){
+        return data.name
     }
+    else {
+        return "Неверный тип"
+    }
+
 }
 export const getMode = (mode) => {
 
-    switch (mode) {
-        case 'mdb':
-            return 'MDB';
-        case 'mdb1':
-            return 'MDB1';
-        case 'mdb2':
-            return 'MDB2';
-        case 'exe':
-            return 'EXE';
-        case 'cashless':
-            return 'CASHLESS';
-        case 'cashless2':
-            return 'CASHLESS2';
-        case 'cashless_free':
-            return 'CASHLESS3';
-        case 'ps_m_D':
-            return 'PULSE';
-        case 'ps_m_2':
-            return 'PULSE2';
-        case 'ps_m_3':
-            return 'PULSE3';
-        case 'ps_p':
-            return 'PULSE4';
-        case 'rs232':
-            return 'RS232';
+    const data = controllerType.find((item) => item.value === mode)
+    if(data){
+        return data.name
+    }
+    else {
+        return "Неверный тип"
     }
 }
-

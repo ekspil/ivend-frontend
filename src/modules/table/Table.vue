@@ -27,7 +27,11 @@
 
 			<tr v-for="(field, index) in getFields" :key="'dd'+index">
 				<td v-for="(header, index) in headers" :key="index" :class="field.class" :style="style(field)" v-if="field.invisible ? !field.invisible() : true">
-					<router-link v-if="field && field.props && field.props.route && field.props.routeKey === header.key" :to="field.props.route + field[header.key]" class="f-b">
+					<router-link v-if="field && field.props && field.props.route && field.props.routeId && field.props.routeKey === header.key" :to="field.props.route + field[field.props.routeId]" class="f-b">
+						{{ field[header.key] }}
+					</router-link>
+
+					<router-link  v-else-if="field && field.props && field.props.route && field.props.routeKey === header.key" :to="field.props.route + field[header.key]" class="f-b">
 						{{ field[header.key] }}
 					</router-link>
 

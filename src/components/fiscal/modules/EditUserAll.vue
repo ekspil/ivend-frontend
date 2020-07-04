@@ -42,17 +42,17 @@
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Юридический адрес</label>
-                                        <Field className="form-control" :value="user.legalInfo.legalAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан юр.адрес"/>
+                                        <input class="form-control" v-model="user.legalInfo.legalAddress"  name="companyName" formName="editUser" placeholder="У компании не указан юр.адрес"/>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Фактический адрес</label>
-                                        <Field className="form-control" :value="user.legalInfo.actualAddress" disabled name="companyName" formName="editUser" placeholder="У компании не указан фактический адрес"/>
+                                        <input class="form-control" v-model="user.legalInfo.actualAddress"  name="companyName" formName="editUser" placeholder="У компании не указан фактический адрес"/>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Директор</label>
-                                        <Field className="form-control" :value="user.legalInfo.director" disabled name="companyName" formName="editUser" placeholder="У компании не указан директор"/>
+                                        <input class="form-control" v-model="user.legalInfo.director"  name="companyName" formName="editUser" placeholder="У компании не указан директор"/>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">
@@ -205,7 +205,6 @@
 
                     this.$refs.form.process({ errors, data, success: 'Успешно сохранено.' });
                 } catch (error) {
-                    console.error(error)
                     this.$refs.form.showMessage('error', 'Ошибка сохранения.');
                 }
             },

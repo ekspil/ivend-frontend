@@ -85,9 +85,9 @@ export const getTableHeaders = () => [
             }
         }
     },
-    { name: 'Терминал(название)', key: 'bankTerminalMode', unsortable: true },
+    { name: 'Режим Терминала', key: 'bankTerminalMode', unsortable: true },
     { name: 'Фискализация', key: 'fiscalizationMode', unsortable: false },
-    { name: 'Удалённый принтер', key: 'remotePrinterId', unsortable: true },
+    { name: 'Принтер', key: 'remotePrinterId', unsortable: true },
 ];
 
 export const getTableFields = (data, props) => data.map(controller => ({

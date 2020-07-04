@@ -7,10 +7,10 @@ export const getTableHeaders = () => [
     { name: 'Состояние', key: 'status', unsortable: true, raw: true },
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: true },
+    { name: 'Терминал', key: 'bankTerminalMode', unsortable: true },
     { name: 'Фискализация', key: 'fiscalizationMode', unsortable: true },
     { name: 'Принтер', key: 'remotePrinterId', unsortable: true },
     { name: 'Автомат', key: 'machine', unsortable: true },
-    { name: 'Терминал', key: 'bankTerminalMode', unsortable: true },
 ];
 
 export const getTableFields = (data, props) => data.map(controller => ({
@@ -21,6 +21,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     mode: getMode(controller.mode) || '-',
     fiscalizationMode: controller.fiscalizationMode ? mapFiscalizationMode(controller.fiscalizationMode) : '-',
     machine: controller.machine?.name || '-',
+    machineId: controller.machine?.id || '-',
     remotePrinterId: controller.remotePrinterId,
     bankTerminalMode: getTerminal(controller.bankTerminalMode),
     props,

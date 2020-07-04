@@ -14,20 +14,20 @@
 						<div class="row" v-if="!$apollo.loading">
 							<div class="col-md-12 col-lg-12">
 								<div class="form-group">
-									<label class="form-label f-b">Номер автомата</label>
+									<label class="form-label f-b">{{machineHeaders.number}}</label>
 									<Field name="number" formName="addMachine" className="form-control" placeholder="Введите номер автомата"/>
 								</div>
 								<div class="form-group">
-									<label class="form-label f-b">Название автомата</label>
+									<label class="form-label f-b">{{machineHeaders.name}}</label>
 									<Field name="name" formName="addMachine" className="form-control" placeholder="Введите название автомата"/>
 								</div>
 								<div class="form-group">
-									<label class="form-label f-b">Адрес установки</label>
+									<label class="form-label f-b">{{machineHeaders.address}}</label>
 									<Field name="place" formName="addMachine" className="form-control" placeholder="Введите место установки автомата"/>
 								</div>
 
 								<div class="form-group">
-									<label class="form-label f-b">Группа автомата</label>
+									<label class="form-label f-b">{{machineHeaders.group}}</label>
 									<CustomSelect
 									className="form-control"
 									:initialValue="input.groupId"
@@ -38,7 +38,7 @@
 								</div>
 
 								<div class="form-group">
-									<label class="form-label f-b">Тип автомата</label>
+									<label class="form-label f-b">{{machineHeaders.type}}</label>
 									<select class="form-control custom-select" v-model="input.typeId">
 										<option key="" value="0" selected="selected">
 										</option>
@@ -50,7 +50,7 @@
 							</div>
 
 							<div class="form-group">
-								<label class="form-label f-b">Модель автомата</label>
+								<label class="form-label f-b">{{machineHeaders.model}}</label>
 								<select class="form-control custom-select" v-model="input.equipmentId">
 									<option v-for="equipment in machine.equipments" v-if="equipment.machineTypeId === input.typeId"
 									:key="equipment.id" :value="equipment.id">
@@ -60,7 +60,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="form-label f-b">Привязать контроллер</label>
+							<label class="form-label f-b">{{machineHeaders.controller}}</label>
 							<select class="form-control custom-select" v-model="input.controllerId">
                                 <option v-bind:value="null">Без контроллера</option>
                                 <option v-for="controller in getAvailableControllers(machine.controllers)"
@@ -70,7 +70,7 @@
 						</select>
 					</div>
 						<div class="form-group">
-							<label class="form-label f-b">Привязать кассу</label>
+							<label class="form-label f-b">{{machineHeaders.kkt}}</label>
 							<select class="form-control custom-select" v-model="input.kktId">
 								<option key="0" value="0">
 									Все ККМ
@@ -104,6 +104,7 @@ import gql from 'graphql-tag';
 import CustomSelect from '@/modules/CustomSelect';
 
 import { required } from '@/utils/validation';
+import { machineHeaders } from '@/utils/lists/Machine';
 
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
@@ -121,6 +122,7 @@ export default {
 			groups: [],
 			types: []
 		},
+		machineHeaders,
 		input: {
 			equipmentId: 1,
 			groupId: 1,

@@ -34,6 +34,8 @@
                             :headers="getTableHeaders"
                             :fields="getTableFields"
                             className="settings-table"
+                            sortBy="controllerName"
+                            :order="true"
                         />
 
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -86,6 +88,7 @@
 
                         controller {
                           uid
+                          id
                         }
                       }
                     }
@@ -115,7 +118,10 @@
             getTableHeaders,
             getTableFields () {
                 return getTableFields(this.machines, {
-                    remove: this.removeMachine
+                    remove: this.removeMachine,
+                    routeKey: "controllerName",
+                    routeId: "controllerId",
+                    route: "/controllers/edit/"
                 });
             }
         }

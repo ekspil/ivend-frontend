@@ -12,9 +12,11 @@
                             <input v-model="search" class="form-control custom-select">
                         </div>
                         <Table
-                            v-if="controllers && controllers.length > 0"
+                            v-if="controllers"
                             :headers="getTableHeaders"
                             :fields="getTableFields"
+                            :selections="selections"
+                            :filterAction="filterBy"
                             className="settings-table"
                         />
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -52,6 +54,7 @@
 
     import Table from '@/modules/table/Table';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/ControllersAll';
+    import {controllerTerminal, controllerFiscalType, controllerStates } from '@/utils/lists/Controller';
 
     export default {
         name: 'Controllers',
@@ -63,13 +66,56 @@
             limit:100,
             savedLimit :100,
             controllers: [],
-            search: ""
+            search: "",
+            selected_registrationTime: "ALL",
+            selected_status: "ALL",
+            selected_simCardNumber: "ALL",
+            selected_bankTerminalMode: "ALL",
+            selected_fiscalizationMode: "ALL",
+            selections: [
+                {
+                    key: "registrationTime",
+                    values: [
+                        "OK",
+                        "WARNING",
+                        "ALERT",
+                        "NO"
+                    ]
+                },
+                {
+                    key: "status",
+                    values: [
+                        ...controllerStates.map(item => item.value)
+                    ]
+                },
+                {
+                    key: "simCardNumber",
+                    values: [
+                        "ENABLED",
+                        "DISABLED",
+                    ]
+                },
+                {
+                    key: "bankTerminalMode",
+                    values: [
+                        ...controllerTerminal.map(item => item.value)
+                    ]
+                },
+                {
+                    key: "fiscalizationMode",
+                    values: [
+
+                        ...controllerFiscalType.map(item => item.value)
+                    ]
+                },
+
+            ]
         }),
         apollo: {
             controllers: {
                 query: gql`
-                    query($offset: Int, $limit: Int) {
-                      getAllControllers(offset: $offset, limit: $limit) {
+                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String ) {
+                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode ) {
                         id
                         uid
                         mode
@@ -94,9 +140,20 @@
                     }
                 `,
             variables () {
+                    // selected_registrationTime: "ALL",
+                    // selected_status: "ALL",
+                    // selected_simCardNumber: "ALL",
+                    // selected_bankTerminalMode: "ALL",
+                    // selected_fiscalizationMode: "ALL",
+
                 return {
                     offset: Number(this.offset),
-                    limit: Number(this.limit)
+                    limit: Number(this.limit),
+                    connection: this.selected_registrationTime,
+                    status: this.selected_status,
+                    terminal: this.selected_simCardNumber,
+                    bankTerminalMode: this.selected_bankTerminalMode,
+                    fiscalizationMode: this.selected_fiscalizationMode,
                 };
             },
                 update (data) {
@@ -142,6 +199,23 @@
                 });
 
                 this.controllers = this.controllers.filter(controller => controller.id !== id);
+            },
+            async filterBy (key, value) {
+                if(key === "registrationTime"){
+                    this.selected_registrationTime = value
+                }
+                if(key === "status"){
+                    this.selected_status = value
+                }
+                if(key === "simCardNumber"){
+                    this.selected_simCardNumber = value
+                }
+                if(key === "bankTerminalMode"){
+                    this.selected_bankTerminalMode = value
+                }
+                if(key === "fiscalizationMode"){
+                    this.selected_fiscalizationMode = value
+                }
             }
         },
         computed: {

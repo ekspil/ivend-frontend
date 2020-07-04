@@ -34,7 +34,7 @@
                             v-if="controllers && controllers.length > 0"
                             :headers="getTableHeaders"
                             :fields="getTableFields"
-                            order=true
+                            :order="true"
                             className="settings-table"
                         />
 
@@ -123,7 +123,10 @@
             getTableHeaders,
             getTableFields () {
                 return getTableFields(this.controllers, {
-                    remove: this.removeController
+                    remove: this.removeController,
+                    routeKey: "machine",
+                    routeId: "machineId",
+                    route: "/machine/edit/"
                 });
             }
         }

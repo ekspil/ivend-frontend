@@ -1,6 +1,6 @@
 export const getTableHeaders = () => [
-    { name: 'Номер', key: 'number', link: true },
-    { name: 'Автомат', key: 'name' },
+    { name: 'Номер', key: 'number', link: false },
+    { name: 'Автомат', key: 'name', link: true  },
     { name: 'Адрес', key: 'place' },
     { name: 'Группа', key: 'groupName' },
     { name: 'Тип', key: 'typeName' },
@@ -17,6 +17,7 @@ export const getTableFields = (data, props) => data.map(({ id, name, place, numb
     typeName: type.name,
     equipmentName: equipment.name,
     controllerName: controller?.uid || '-',
+    controllerId: controller?.id || '-',
 
     props,
     route: `/machine/edit/${id}`
