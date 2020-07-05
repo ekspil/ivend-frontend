@@ -6,7 +6,7 @@
 			@click="setPeriod(periodName)"
 		>{{ periodName }}</button>
 
-		<div class="stats-top-menu__date-period">
+		<div class="stats-top-menu__date-period" v-if="false">
 			<datepicker
 				placeholder="от"
 				v-model="calendar.from"
@@ -25,12 +25,24 @@
 				@selected="setPeriodTo"
 			/>
 		</div>
+
+		<el-date-picker
+				v-model="calendar1"
+				type="datetimerange"
+				range-separator=""
+				start-placeholder="Произвольная дата"
+				end-placeholder=""
+				@change="setPeriodRange"
+				:default-time="['00:00:00', '23:59:59']"
+		>
+		</el-date-picker>
 	</div>
 </template>
 
 <script>
 	import datepicker from 'vuejs-datepicker';
 	import { ru } from 'vuejs-datepicker/dist/locale';
+	import {mapGetters} from 'vuex'
 
 	export default {
 		name: 'Period',
@@ -38,20 +50,18 @@
 			datepicker
 		},
 		data: () => ({
-			periods: ['Всего', 'День', 'Неделя', 'Месяц'],
-			period: 'День',
-			calendar: {
-				from: undefined,
-				to: undefined
-			},
+			periods: ['Всего', 'День', 'Вчера', 'Неделя', 'Месяц'],
+			period: 'cache',
+			// calendar: {
+			// 	from: undefined,
+			// 	to: undefined
+			// },
+			calendar1: null,
 			pickerLanguage: ru
 		}),
 		methods: {
 			setPeriod (period = 'Неделя') {
-				this.calendar = {
-					from: undefined,
-					to: undefined
-				};
+				this.calendar1 = null
 				this.period = period;
 
 				this.$emit('onChange', this.getPeriod);
@@ -69,34 +79,88 @@
 				this.period = null;
 
 				this.$emit('onChange', this.getPeriod);
+			},
+			setPeriodRange () {
+				this.period = null;
+
+				this.$emit('onChange', this.getPeriod);
 			}
 		},
 		computed: {
+			...mapGetters({
+				periodStat: "cache/periodStat"
+			}),
+			calendar(){
+				if(this.calendar1){
+					return {
+						from: this.calendar1[0],
+						to:this.calendar1[1],
+					}
+				}
+				else {
+					return {
+						from: undefined,
+						to: undefined,
+					}
+				}
+
+			},
 			getPeriod () {
 				let date;
+				let period
 				switch (this.period) {
-					case 'Всего': return 0;
+					case 'Всего':
+						date = new Date();
+						period = {
+							from: 0,
+							to: Date.now()
+						};
+						this.$store.commit("cache/setPeriodStat", {period})
+						return period
 					case 'Месяц':
 						date = new Date();
 						date.setMonth(date.getMonth() - 1);
-						return {
+						period = {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
 						};
+						this.$store.commit("cache/setPeriodStat", {period})
+						return period
 					case 'Неделя':
 						date = new Date();
 						date.setDate(date.getDate() - 7);
-						return {
+						period = {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
 						};
+						this.$store.commit("cache/setPeriodStat", {period})
+						return period
 
 					case 'День':
 						date = new Date();
-						return {
+						period = {
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
 						};
+						this.$store.commit("cache/setPeriodStat", {period})
+						return period
+
+					case 'Вчера':
+						date = new Date();
+						period = {
+							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - (1000*60*60*24),
+							to: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+						};
+						this.$store.commit("cache/setPeriodStat", {period})
+						return period
+
+					case 'cache':
+						period = this.periodStat
+						if(!period) {
+							this.period = "День"
+							return this.getPeriod
+						}
+						return period
 
 					default: return {
 						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
@@ -110,9 +174,17 @@
 
 			setInterval(() => {
 			    let date;
+			    let period;
 			    let periodNew;
                 switch (this.period) {
-                    case 'Всего': return 0;
+                    case 'Всего':
+						date = new Date();
+						periodNew = {
+							from: 0,
+							to: Date.now()
+						};
+						this.$store.commit("cache/setPeriodStat", {period: periodNew})
+						break;
                     case 'Месяц':
                         date = new Date();
                         date.setMonth(date.getMonth() - 1);
@@ -131,14 +203,34 @@
 
                         break;
 
+					case 'Вчера':
+						date = new Date();
+						periodNew = {
+							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - (1000*60*60*24),
+							to: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+						};
+						break;
+
                     case 'День':
                         date = new Date();
                         periodNew = {
                             from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
                             to: Date.now()
                         };
+						this.$store.commit("cache/setPeriodStat", {period: periodNew})
+						break;
 
-                        break;
+
+					case 'cache':
+						periodNew = this.periodStat
+						if(!periodNew) {
+							date = new Date();
+							periodNew = {
+								from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+								to: Date.now()
+							};
+						}
+						break;
 
                     default: periodNew = {
                         from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
@@ -146,7 +238,7 @@
                     };
                 }
                 this.$emit('onChange', periodNew);
-            }, 61234)
+            }, 6234)
 		}
 	}
 </script>

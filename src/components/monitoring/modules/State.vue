@@ -14,7 +14,7 @@
 				</div>
 			</div>
 
-			<Table :headers="getTableHeadersC" :fields="getTableFieldsC" className="monitoring-table" />
+			<Table v-if="false" :headers="getTableHeadersC" :fields="getTableFieldsC" className="monitoring-table" />
 			<Table :headers="getTableHeaders" :fields="getTableFields" className="monitoring-table" />
 		</template>
 

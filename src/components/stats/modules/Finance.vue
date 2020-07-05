@@ -44,8 +44,13 @@ export default {
 		ExportExcel
 	},
 	data: () => ({
+		pickerOptions: {
+		},
+		value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+		value2: '',
 		selectedGroupId: null,
 		machines: [],
+		controllers: [],
 		period: {
 			from: null,
 			to: null
@@ -84,7 +89,10 @@ export default {
 					machineGroupId: this.selectedGroupId
 				};
 			},
-			update: data => data.getMachineSales
+			update(data) {
+				this.setSales(data.getMachineSales)
+				return data.getMachineSales
+			}
 		},
 		groups: {
 			query: gql`
@@ -96,11 +104,33 @@ export default {
 			}
 			`,
 			update: data => data.getMachineGroups
+		},
+		controllers: {
+			query: gql`
+					query {
+                      getControllers {
+                        id
+                        uid
+                        status
+                        machine {
+                          id
+                          name
+                        }
+                      }
+                    }
+			`,
+			update: data => data.getControllers
 		}
 	},
 	computed: {
+
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.machines); }
+		getTableFields () { return getTableFields(this.machines.map(item => {
+
+			const controller = this.controllers.find(it => it.machine?.id === item.id)
+			item.controller = controller
+			return item
+		})); }
 	},
 	methods: {
 		onPeriodChange (period) {
@@ -108,7 +138,15 @@ export default {
 				period.to = period.from
 			}
 			this.period = period;
-		}
+		},
+		setSales(d){
+			const sal = d.reduce((acc, item) => {
+				acc.count = acc.count + item.salesSummary.salesCount
+				acc.amount = acc.amount + item.salesSummary.overallAmount
+				return acc
+			}, {count: 0, amount: 0})
+			this.$store.commit("cache/setSales", {sales: sal})
+		},
 	}
 }
 </script>

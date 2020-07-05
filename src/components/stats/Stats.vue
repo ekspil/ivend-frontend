@@ -7,6 +7,8 @@
             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
             <div class="card-header">
               <div class="card-title f-b">Статистика</div>
+              <div class="card-title-right f-b" v-if="sales"><span style="color: #3ddabd">{{sales.count}}</span> продаж на суммму <span style="color: #3ddabd">{{sales.amount}}</span> руб.</div>
+
             </div>
 
             <Tabs :tabs="tabs" />
@@ -18,10 +20,12 @@
 </template>
 
 <script>
+
 import Tabs from '@/modules/Tabs';
 import Finance from './modules/Finance';
 import Sales from './modules/Sales';
 import Encashments from './modules/Encashments';
+import {mapGetters} from 'vuex';
 
 export default {
   name: 'Stats',
@@ -34,6 +38,11 @@ export default {
       { name: 'По товарам', component: Sales, route: 'sales' },
       { name: 'По инкассациям', component: Encashments, route: 'encashments' }
     ]
-  })
+  }),
+  computed: {
+    ...mapGetters({
+      sales: "cache/sales"
+    })
+  }
 }
 </script>

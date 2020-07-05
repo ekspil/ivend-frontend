@@ -11,6 +11,14 @@
                         <img alt="iVend" class="header-brand-img" src="/assets/images/brand/logo.png">
                     </router-link>
                     <div class="d-flex order-lg-2 ml-auto">
+                        <div class="dropdown d-none d-md-flex" v-if="true">
+                            <span class="ml-2 d-none d-lg-block"  style=" padding:15px"  v-if="user && user.legalInfo">
+                                <span class="text-black f-b">Телефон: {{ user.legalInfo.contactPhone | prettify }}</span>
+                            </span>
+                        </div></div>
+
+
+                    <div class="d-flex order-lg-2 ml-auto">
                         <div class="dropdown d-none d-md-flex" v-if="false">
                             <a class="nav-link icon" data-toggle="dropdown">
                                 <i class="fas fa-bell"></i>
@@ -102,6 +110,9 @@
                     query {
                         user: getProfile {
                             phone
+                            legalInfo {
+                                contactPhone
+                            }
                         }
                     }
                 `,

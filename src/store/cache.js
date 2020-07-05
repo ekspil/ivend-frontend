@@ -3,15 +3,32 @@ import { not } from 'ramda';
 import { validate, mapValidationObject } from '@/utils/validation';
 
 const state = () => ({
-	_observable: ''
+	_observable: '',
+	sharedData: {
+		sales: {
+			count: 0,
+			amount: 0
+		},
+	},
+	periodStat: null
 });
 
 const getters = {
 	validation: state => state[state._observable] ? state[state._observable].validation : {},
-	data: state => state[state._observable] ? state[state._observable].data : {}
+	data: state => state[state._observable] ? state[state._observable].data : {},
+	sales: state => state.sharedData.sales,
+	periodStat: state => state.periodStat
 };
 
 const mutations = {
+	setPeriodStat(state, {period}){
+		if(!period) return
+		state.periodStat = period
+	},
+	setSales(state, {sales}){
+		if(!sales) return
+		state.sharedData.sales = sales
+	},
 	store (state, { formName, key, value, push }) {
 		if (formName && key && not(undefined, value)) {
 			if (push) {

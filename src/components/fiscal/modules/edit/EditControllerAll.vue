@@ -74,6 +74,11 @@
                   <Field className="form-control" :value="data.controller.simCardNumber" name="simCardNumber" formName="editControllerSettings" placeholder="Номер сим карты"/>
                 </div>
 
+                <div class="form-group">
+                  <label class="form-label f-b">{{controllerHeaders.imsi}}</label>
+                  <Field className="form-control" :value="data.controller.imsi" name="simCardNumber" formName="editControllerSettings" placeholder="Номер сим контроллера" disabled/>
+                </div>
+
               </div>
             </div>
           </template>
@@ -135,6 +140,7 @@ export default {
           uid
           simCardNumber
           mode
+          imsi
           revision {
             id,
             name

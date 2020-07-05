@@ -7,7 +7,8 @@ export const controllerHeaders = {
     fiscalMode: "Режим фискализации",
     version: "Версия контроллера",
     printer: "Номер удалённого принтера",
-    sim: "Номер сим карты"
+    sim: "Номер сим карты",
+    imsi: "Номер сим контроллера"
 }
 
 
