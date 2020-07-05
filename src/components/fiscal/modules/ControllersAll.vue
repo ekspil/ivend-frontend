@@ -98,14 +98,18 @@
                 {
                     key: "bankTerminalMode",
                     values: [
-                        ...controllerTerminal.map(item => item.value)
+
+                        "ENABLED",
+                        "DISABLED",
                     ]
                 },
                 {
                     key: "fiscalizationMode",
                     values: [
 
-                        ...controllerFiscalType.map(item => item.value)
+
+                        "ENABLED",
+                        "DISABLED",
                     ]
                 },
 
