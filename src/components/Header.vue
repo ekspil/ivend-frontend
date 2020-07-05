@@ -12,8 +12,8 @@
                     </router-link>
                     <div class="d-flex order-lg-2 ml-auto">
                         <div class="dropdown d-none d-md-flex" v-if="true">
-                            <span class="ml-2 d-none d-lg-block"  style=" padding:15px"  v-if="user && user.legalInfo">
-                                <span class="text-black f-b">Телефон: {{ user.legalInfo.contactPhone | prettify }}</span>
+                            <span class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
+                                <span class="text-black f-b">Телефон: {{ '9313288159' | prettify }}</span>
                             </span>
                         </div></div>
 
