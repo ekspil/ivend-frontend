@@ -49,6 +49,7 @@
 				format="DD.MM.YY"
 				range-separator="-"
 				@close="setPeriodRange"
+				:editable="false"
 				input-class="stats-top-menu__item stats-top-menu__item--date"
 		>
 			<template v-slot:icon-calendar="{ emit }">
