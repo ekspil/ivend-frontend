@@ -6,8 +6,8 @@ export const controllerHeaders = {
     terminalMode: "Режим терминала",
     fiscalMode: "Режим фискализации",
     version: "Версия контроллера",
-    printer: "Номер удалённого принтера",
-    sim: "Номер сим карты",
+    printer: "Номер принтера",
+    sim: "Номер сим терминала",
     imsi: "Номер сим контроллера"
 }
 
