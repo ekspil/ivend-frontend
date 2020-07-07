@@ -113,6 +113,10 @@ router.beforeEach((to, from, next) => {
      let isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword']);
      if(to.path.includes("/sms")){
          isSecured = false
+     };
+     if(!to.path.includes("/stats")){
+         store.state.cache.periodStat = null
+         store.state.cache.periodStatType = "День"
      }
      const isLogin = includes(to.path, ['/login']);
      const token = store.state.auth.token, role = store.state.user?.profile?.role, remember = store.state.auth.remember;

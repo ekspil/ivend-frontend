@@ -83,7 +83,10 @@ export default {
 					period: this.period
 				};
 			},
-			update: data => data.getItemSales
+			update(data) {
+				this.setSales(data.getItemSales)
+				return data.getItemSales
+			}
 		},
 		groups: {
 			query: gql`
@@ -109,7 +112,15 @@ export default {
         		period.to = period.from
 			}
             this.period = period;
-        }
+        },
+		setSales(d){
+			const sal = d.reduce((acc, item) => {
+				acc.count = acc.count + item.salesSummary.salesCount
+				acc.amount = acc.amount + item.salesSummary.overallAmount
+				return acc
+			}, {count: 0, amount: 0})
+			this.$store.commit("cache/setSales", {sales: sal})
+		},
 	}
 }
 </script>

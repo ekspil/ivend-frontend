@@ -6,27 +6,29 @@
 			@click="setPeriod(periodName)"
 		>{{ periodName }}</button>
 
-		<div class="stats-top-menu__date-period" v-if="false">
+		<div class="stats-top-menu__date-period"  v-if="false">
 			<datepicker
 				placeholder="от"
-				v-model="calendar.from"
+				v-model="calendar1[0]"
 				:language="pickerLanguage"
 				input-class="stats-top-menu__item stats-top-menu__item--date"
 				@selected="setPeriodFrom"
+				format="dd.MM.yy"
 			/>
 
 			<div class="stats-top-menu__date-separator"></div>
 
 			<datepicker
 				placeholder="до"
-				v-model="calendar.to"
+				v-model="calendar1[1]"
 				:language="pickerLanguage"
 				input-class="stats-top-menu__item stats-top-menu__item--date"
 				@selected="setPeriodTo"
+				format="dd.MM.yy"
 			/>
 		</div>
 
-		<el-date-picker
+		<el-date-picker  v-if="false"
 				v-model="calendar1"
 				type="datetimerange"
 				range-separator=""
@@ -34,8 +36,32 @@
 				end-placeholder=""
 				@change="setPeriodRange"
 				:default-time="['00:00:00', '23:59:59']"
+				:unlink-panels="true"
 		>
 		</el-date-picker>
+
+
+		<date-picker
+				v-model="calendar1"
+				type="date"
+				placeholder="Дата"
+				range
+				format="DD.MM.YY"
+				range-separator="-"
+				@close="setPeriodRange"
+				input-class="stats-top-menu__item stats-top-menu__item--date"
+		>
+			<template v-slot:icon-calendar="{ emit }">
+				<div >
+				</div>
+			</template>
+			<template v-slot:icon-clear="{ emit }">
+				<div >
+				</div>
+			</template>
+		</date-picker>
+
+
 	</div>
 </template>
 
@@ -44,10 +70,16 @@
 	import { ru } from 'vuejs-datepicker/dist/locale';
 	import {mapGetters} from 'vuex'
 
+	import DatePicker from 'vue2-datepicker';
+	import 'vue2-datepicker/index.css';
+
+	import 'vue2-datepicker/locale/ru';
+
 	export default {
 		name: 'Period',
 		components: {
-			datepicker
+			datepicker,
+			DatePicker
 		},
 		data: () => ({
 			periods: ['Всего', 'День', 'Вчера', 'Неделя', 'Месяц'],
@@ -56,8 +88,12 @@
 			// 	from: undefined,
 			// 	to: undefined
 			// },
-			calendar1: null,
-			pickerLanguage: ru
+			calendar1: [],
+			pickerLanguage: ru,
+			value1: null,
+			value2: [],
+			showTimePanel: false,
+			showTimeRangePanel: false,
 		}),
 		methods: {
 			setPeriod (period = 'Неделя') {
@@ -115,7 +151,8 @@
 							from: 0,
 							to: Date.now()
 						};
-						this.$store.commit("cache/setPeriodStat", {period})
+						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
+
 						return period
 					case 'Месяц':
 						date = new Date();
@@ -124,7 +161,7 @@
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
 						};
-						this.$store.commit("cache/setPeriodStat", {period})
+						this.$store.commit("cache/setPeriodStat",   {period, type: this.period})
 						return period
 					case 'Неделя':
 						date = new Date();
@@ -133,7 +170,7 @@
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
 						};
-						this.$store.commit("cache/setPeriodStat", {period})
+						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 						return period
 
 					case 'День':
@@ -142,7 +179,7 @@
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 							to: Date.now()
 						};
-						this.$store.commit("cache/setPeriodStat", {period})
+						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 						return period
 
 					case 'Вчера':
@@ -151,21 +188,30 @@
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - (1000*60*60*24),
 							to: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 						};
-						this.$store.commit("cache/setPeriodStat", {period})
+						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 						return period
 
 					case 'cache':
-						period = this.periodStat
+						period = this.periodStat.period
+
 						if(!period) {
 							this.period = "День"
 							return this.getPeriod
 						}
+						this.period = this.periodStat.type
+						if(this.period === "calendar"){
+							this.calendar1[0] = new Date(period.from)
+							this.calendar1[1] = new Date(period.to)
+						}
 						return period
 
-					default: return {
+					default: period = {
 						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
-						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
+						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() + (24*60*60*1000 - 999) : Date.now()
 					};
+						this.$store.commit("cache/setPeriodStat",  {period, type: "calendar"})
+						return period
+
 				}
 			}
 		},
@@ -238,7 +284,7 @@
                     };
                 }
                 this.$emit('onChange', periodNew);
-            }, 6234)
+            }, 61234)
 		}
 	}
 </script>
@@ -248,4 +294,11 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
+	.mx-icon-calendar {
+		visibility: hidden;
+	}
+	.mx-icon-clear {
+		visibility: hidden;
+	}
+
 </style>
