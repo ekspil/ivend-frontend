@@ -230,7 +230,8 @@
 							from: 0,
 							to: Date.now()
 						};
-						this.$store.commit("cache/setPeriodStat", {period: periodNew})
+
+						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "Всего"})
 						break;
                     case 'Месяц':
                         date = new Date();
@@ -239,6 +240,7 @@
                             from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
                             to: Date.now()
                         };
+						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "Месяц"})
                         break;
                     case 'Неделя':
                         date = new Date();
@@ -246,7 +248,8 @@
                         periodNew = {
                             from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
                             to: Date.now()
-                        };
+                        }
+						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "Неделя"})
 
                         break;
 
@@ -256,6 +259,7 @@
 							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - (1000*60*60*24),
 							to: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 						};
+						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "День"})
 						break;
 
                     case 'День':
@@ -264,18 +268,23 @@
                             from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
                             to: Date.now()
                         };
-						this.$store.commit("cache/setPeriodStat", {period: periodNew})
+						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "День"})
 						break;
 
 
 					case 'cache':
-						periodNew = this.periodStat
+						periodNew = this.periodStat.period
 						if(!periodNew) {
 							date = new Date();
 							periodNew = {
 								from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
 								to: Date.now()
 							};
+						}
+						this.period = this.periodStat.type
+						if(this.period === "calendar"){
+							this.calendar1[0] = new Date(period.from)
+							this.calendar1[1] = new Date(period.to)
 						}
 						break;
 
