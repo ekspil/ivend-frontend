@@ -76,7 +76,7 @@
 
                 <div class="form-group">
                   <label class="form-label f-b">{{controllerHeaders.imsi}}</label>
-                  <Field className="form-control" :value="data.controller.imsi" name="simCardNumber" formName="editControllerSettings" placeholder="Номер сим контроллера" disabled/>
+                  <Field className="form-control" :value="data.controller.imsi" name="imsi" formName="editControllerSettings" placeholder="Номер сим контроллера" disabled/>
                 </div>
 
               </div>

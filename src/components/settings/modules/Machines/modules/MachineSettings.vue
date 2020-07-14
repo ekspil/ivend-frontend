@@ -40,21 +40,23 @@
 
         <div class="form-group">
           <label class="form-label f-b">{{machineHeaders.type}}</label>
-          <select class="form-control custom-select" v-model="data.machine.type.id">
+          <select class="form-control custom-select" v-model="input.typeId">
+            <option key="" value="0" selected="selected">
+            </option>
             <option v-for="type in data.types"
-            :key="type.id" :value="type.id">
-            {{ type.name }}
-          </option>
+                    :key="type.id" :value="type.id">
+              {{ type.name }}
+            </option>
         </select>
       </div>
 
       <div class="form-group">
         <label class="form-label f-b">{{machineHeaders.model}}</label>
-        <select class="form-control custom-select" v-model="data.machine.equipment.id">
-          <option v-for="equipment in data.equipments"
-          :key="equipment.id" :value="equipment.id">
-          {{ equipment.name }}
-        </option>
+        <select class="form-control custom-select" v-model="input.equipmentId">
+          <option v-for="equipment in data.equipments" v-if="equipment.machineTypeId === input.typeId"
+                  :key="equipment.id" :value="equipment.id">
+            {{ equipment.name }}
+          </option>
       </select>
     </div>
     <div class="form-group">
@@ -119,7 +121,10 @@ export default {
     machineHeaders,
     input: {
       controllerId: 1,
-      kktId: 0
+      equipmentId: 1,
+      kktId: 0,
+      groupId: 1,
+      typeId: 1,
     },
 
     schema: {
@@ -150,6 +155,7 @@ export default {
           equipment {
             id
             name
+            machineTypeId
           }
           type {
             id
@@ -170,6 +176,7 @@ export default {
         getEquipments {
           id
           name
+          machineTypeId
         }
 
         getMachineTypes {
@@ -209,12 +216,17 @@ export default {
         if (!this.machineUpdating && data.getMachineById.controller) {
           this.input.controllerId = data.getMachineById.controller.id;
         }
+        if (!this.machineUpdating && data.getMachineById.equipment) {
+          this.input.equipmentId = data.getMachineById.equipment.machineTypeId;
+        }
+
+
 
         return {
           machine: data.getMachineById,
           groups: data.getMachineGroups,
           equipments: data.getEquipments,
-          types: data.getMachineTypes,
+          types: data.getMachineTypes.sort(function(a, b) {if (a.name > b.name) return 1; if (a.name == b.name) return 0; if (a.name < b.name) return -1; }),
           controllers: data.getControllers,
           kkts: data.getUserKkts
         };
@@ -253,8 +265,8 @@ export default {
                 data: {
                   machineId: this.data.machine.id,
                   groupId: this.data.machine.group.id,
-                  equipmentId: this.data.machine.equipment.id,
-                  typeId: this.data.machine.type.id,
+                  equipmentId: this.input.equipmentId,
+                  typeId: this.input.typeId,
                   controllerId: this.input.controllerId,
                   kktId: Number(this.input.kktId),
 
