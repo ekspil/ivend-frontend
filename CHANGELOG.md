@@ -244,6 +244,10 @@
 
 * General optimization
 
+# 1.5.1 - Hotfix
+
+* General optimization
+
 
 
 
