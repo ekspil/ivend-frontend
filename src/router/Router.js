@@ -128,7 +128,7 @@ router.beforeEach((to, from, next) => {
 
      }
      else if (!isSecured && token || token && role !== 'VENDOR') {
-        if (role === 'VENDOR_NEGATIVE_BALANCE' && to.path !== '/billing') {
+        if (role === 'VENDOR_NEGATIVE_BALANCE' && !['/billing', '/settings', '/tp'].includes(to.path)) {
             return next('/billing');
         } else if (role === 'VENDOR_NO_LEGAL_INFO' && !['/billing', '/settings'].includes(to.path)) {
             return next('/settings#company');
