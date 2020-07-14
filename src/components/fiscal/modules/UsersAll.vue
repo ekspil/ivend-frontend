@@ -143,6 +143,19 @@
             adminOut: function(){
                 this.setAdminToken(null)
             },
+            nextPage() {
+                if(!this.users || !this.users.length) {
+                    return
+                }
+                this.offset += this.limit
+            },
+            prevPage() {
+                if(this.offset - this.limit < 0) {
+                    return
+                }
+
+                this.offset -= this.limit
+            },
             async changeBalance (id, sum) {
                 try {
                     const data = {
