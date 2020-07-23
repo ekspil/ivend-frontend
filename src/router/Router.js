@@ -58,6 +58,7 @@ const routes = [
     { path: '/confirm', component: Confirm },
 
     { path: '/controllers/edit/:id', component: EditController },
+    { path: '/controllers/edit/:id/:from', component: EditController },
     { path: '/controllers/add', component: AddController },
 
     { path: '/goods/add/:id', component: AddGoods },

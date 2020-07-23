@@ -8,7 +8,7 @@
           </div>
 
           <Validate
-          routeBack="/settings"
+          :routeBack="routeBack"
           formName="editControllerSettings"
           ref="form"
           :schema="schema"
@@ -106,6 +106,7 @@ export default {
     Field
   },
   data: () => ({
+    routeBack: "/settings",
     data: null,
     controllerHeaders,
     controllerFiscalType,
@@ -168,6 +169,12 @@ export default {
         };
       }
     }
+  },
+  mounted() {
+    if(this.$route.params.from){
+      this.routeBack = `${this.routeBack}#${this.$route.params.from}`
+    }
+
   },
   methods: {
     async save() {

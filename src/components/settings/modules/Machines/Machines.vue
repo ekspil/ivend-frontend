@@ -121,6 +121,7 @@
                     remove: this.removeMachine,
                     routeKey: "controllerName",
                     routeId: "controllerId",
+                    routeParams: "/machines",
                     route: "/controllers/edit/"
                 });
             }
