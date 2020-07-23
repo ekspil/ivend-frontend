@@ -16,8 +16,8 @@ export const getTableFields = (data, props) => data.map(({ id, name, place, numb
     groupName: group.name,
     typeName: type.name,
     equipmentName: equipment.name,
-    controllerName: controller?.uid || '-',
-    controllerId: controller?.id || '-',
+    controllerName: controller?.uid || '',
+    controllerId: controller?.id || '',
 
     props,
     route: `/machine/edit/${id}`

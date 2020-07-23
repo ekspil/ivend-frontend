@@ -53,6 +53,7 @@
 							timestamp
 						}
 						controller {
+							uid
 							status
 							lastErrorTime
 							lastState {

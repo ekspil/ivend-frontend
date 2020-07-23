@@ -7,6 +7,10 @@ export const getTableHeaders = () => [
 		link: true,
 	},
 	{
+		name: 'Контроллер',
+		key: 'controller',
+	},
+	{
 		name: 'Связь',
 		key: 'registrationTime',
 		critery ({ registrationTime, lastSaleTime }) {
@@ -105,7 +109,7 @@ export const getTableFields = data => data.map(machine => ({
 	lastSaleTime: machine.lastSaleTime,
 	lastErrorTime: getTimestamp(machine.controller?.lastErrorTime),
 	registrationTime: machine.controller?.lastState?.registrationTime,
-
+	controller: machine.controller?.uid,
 	collection: 'ОТКЛ',
 	load: 'ОТКЛ',
 	audit1: 'ОТКЛ',
