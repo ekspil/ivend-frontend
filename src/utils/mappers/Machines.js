@@ -1,6 +1,6 @@
 export const getTableHeaders = () => [
-    { name: 'Номер', key: 'number', link: false },
     { name: 'Автомат', key: 'name', link: true  },
+    { name: 'Номер', key: 'number', link: false },
     { name: 'Адрес', key: 'place' },
     { name: 'Группа', key: 'groupName' },
     { name: 'Тип', key: 'typeName' },

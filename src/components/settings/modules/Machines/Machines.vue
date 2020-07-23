@@ -13,7 +13,7 @@
                                     <div class="row gutters-xs">
                                         <span class="col-auto">
                                             <button class="btn btn-primary" type="button"><i
-                                                class="fe fe-upload"></i>
+                                                class="fe fe-upload"> Импорт</i>
                                             </button>
                                         </span>
 
