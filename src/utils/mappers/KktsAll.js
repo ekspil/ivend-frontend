@@ -9,18 +9,46 @@ const getStatus = field => {
     let yearF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[2];
     let monthF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1];
 
-    if(year - yearF >= 1 && month - monthF >=2){
-        return "5:Ошибка" ;
+    if(field.model === "УМКА-01-ФА (ФН36)"){
+
+        if(year - yearF >= 3 && month - monthF >=0){
+            return "5:Ошибка" ;
+        }
+        if(Number(field.kktBillsCount) > 230000){
+            return "5:Ошибка" ;
+        }
+        if(year - yearF >= 2 && month - monthF >=11){
+            return "3:Внимание" ;
+        }
+        if(Number(field.kktBillsCount) > 220000){
+            return "3:Внимание" ;
+        }
     }
-    if(Number(field.kktBillsCount) > 230000){
-        return "5:Ошибка" ;
+    if(field.model === "УМКА-01-ФА (ФН15)"){
+
+        if(year - yearF >= 1 && month - monthF >=3){
+            return "5:Ошибка" ;
+        }
+        if(Number(field.kktBillsCount) > 230000){
+            return "5:Ошибка" ;
+        }
+        if(year - yearF >= 1 && month - monthF >=2){
+            return "3:Внимание" ;
+        }
+        if(Number(field.kktBillsCount) > 220000){
+            return "3:Внимание" ;
+        }
     }
-    if(year - yearF >= 1 && month - monthF >=0){
-        return "3:Внимание" ;
+    if(field.kktLastBill){
+        let da = new Date(field.kktLastBill).getTime()
+        let dn = new Date()
+        if (da < (dn - (1000 * 60 * 60 * 24 * 10))) {
+           return "3:Внимание" ;
+        }
     }
-    if(Number(field.kktBillsCount) > 220000){
-        return "3:Внимание" ;
-    }
+
+
+
 
     return "0: НОРМА" ;
     };

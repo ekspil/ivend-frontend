@@ -1,4 +1,4 @@
-import { createTooltip, getTimestamp, getGradation, getWordEnding } from '@/utils';
+import { createTooltip, getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
   {name: 'Товар', key: 'itemName'},
@@ -33,7 +33,7 @@ const getPaymentTypeStr = (paymentType) => {
   }[paymentType]
 }
 
-export const getTableFields = ({sales}) => sales.map(({id, price, type, createdAt, item, receipt}) => ({
+export const getTableFields = ({sales}) => sales.map(({price, type, createdAt, item, receipt}) => ({
   itemName: item.name,
   timestamp: receipt ? new Date(receipt.timestamp) : new Date(createdAt),
   itemPrice: price,

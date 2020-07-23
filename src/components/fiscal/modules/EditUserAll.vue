@@ -37,7 +37,15 @@
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">СНО</label>
-                                        <Field className="form-control" :value="snoString" disabled name="sno" formName="editUser" placeholder="У компании не указана СНО"/>
+                                        <select id="company-sno" v-model="user.legalInfo.sno" class="form-control custom-select">
+                                            <option value="usn_income">УСН доходы</option>
+                                            <option value="usn_income_outcome">УСН доходы-расходы</option>
+                                            <option value="envd">ЕНВД</option>
+                                            <option value="patent">Патент</option>
+                                            <option value="osn">ОСН</option>
+                                            <option value="esn">ЕСН</option>
+
+                                        </select>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">

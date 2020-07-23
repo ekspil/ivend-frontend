@@ -1,4 +1,4 @@
-import { createTooltip, getTimestamp, getGradation, getWordEnding } from '@/utils';
+import {  getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'name', link: true},

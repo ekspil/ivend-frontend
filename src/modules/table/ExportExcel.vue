@@ -1,6 +1,6 @@
 <template>
   <button class="btn btn-primary" type="button" @click.prevent="requestExcel"><i
-    class="fe fe-download"></i>
+    class="fe fe-download"> Экспорт</i>
   </button>
 </template>
 

@@ -113,7 +113,7 @@ router.beforeEach((to, from, next) => {
      let isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword']);
      if(to.path.includes("/sms")){
          isSecured = false
-     };
+     }
      if(!to.path.includes("/stats") && !to.path.includes("/sales")){
          store.state.cache.periodStat = null
          store.state.cache.periodStatType = "День"
