@@ -119,6 +119,7 @@ import Hint from '@/modules/Hint';
 import Tabs from '@/modules/Tabs';
 import BillingHistory from './modules/BillingHistory';
 import BillingServices from './modules/BillingServices';
+import {mapGetters} from 'vuex'
 
 import Period from '@/modules/Period';
 
@@ -228,6 +229,9 @@ export default {
     }
   }),
   computed: {
+    ...mapGetters({
+      services: "cache/services"
+    }),
     isDepositPending () {
         if(this.sendQuery){
             return true
@@ -307,6 +311,7 @@ export default {
                 amount: parseFloat(this.depositSum),
                 inn: this.legalInfo.inn,
                 companyName: this.legalInfo.companyName,
+                services: this.services
             }
           }
         });

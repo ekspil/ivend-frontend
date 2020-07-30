@@ -125,7 +125,7 @@
             <th style="width:27mm;  ">Сумма</th>
         </tr>
         </thead>
-        <tbody >
+        <tbody id="table">
         <tr>
             <td style="width:13mm; ">№</td>
 
@@ -195,6 +195,24 @@
     document.getElementById("companyName").innerHTML=data.searchParams.get("companyName");
     document.getElementById("inn").innerHTML=data.searchParams.get("inn");
     document.getElementById("orderNumber").innerHTML=data.searchParams.get("orderNumber");
+
+    let string = ``
+    let services = JSON.parse(data.searchParams.get("services"))
+    console.log(services)
+    for(let i of services){
+        string +=`
+                      <tr>
+            <td style="width:13mm; ">№</td>
+
+            <td>${i.name}</td>
+            <td style="width:20mm; ">${i.count}</td>
+            <td style="width:17mm; ">Шт.</td>
+            <td style="width:27mm; text-align: center; " >${(i.price/i.count).toFixed(0)}</td>
+            <td style="width:27mm; text-align: center; " >${i.price}</td>
+        </tr>
+        `
+    }
+    document.getElementById("table").innerHTML=string
 </script>
 </body>
 </html>

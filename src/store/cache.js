@@ -11,13 +11,15 @@ const state = () => ({
 		},
 	},
 	periodStat: null,
-	periodStatType: null
+	periodStatType: null,
+	services: null
 });
 
 const getters = {
 	validation: state => state[state._observable] ? state[state._observable].validation : {},
 	data: state => state[state._observable] ? state[state._observable].data : {},
 	sales: state => state.sharedData.sales,
+	services: state => state.services,
 	periodStat: state => {
 		return {
 			period: state.periodStat,
@@ -31,6 +33,9 @@ const mutations = {
 		if(!period) return
 		state.periodStat = period
 		state.periodStatType = type
+	},
+	setServices(state, services){
+		state.services = services
 	},
 	setSales(state, {sales}){
 		if(!sales) return

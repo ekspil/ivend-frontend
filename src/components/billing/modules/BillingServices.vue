@@ -89,8 +89,12 @@
 
                     }
                 }
-                if(services.length)
-                return services
+                if(services.length){
+                    const json = JSON.stringify(services)
+                    this.$store.commit("cache/setServices", json)
+                    return services
+                }
+
             }
         },
         methods: {
