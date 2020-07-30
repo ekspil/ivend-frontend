@@ -69,7 +69,11 @@
 		},
 		computed: {
 			getTableHeaders,
-			getTableFields () { return getTableFields(this.machines.filter(mach => mach.controller?.status !== "DISABLED" && mach.error !== "OK")); }
+			getTableFields () { return getTableFields(this.machines.filter(mach => {
+				if(mach.controller?.status === "DISABLED") return false
+				if(mach.error === "OK") return false
+				 return true
+			})); }
 		}
 	}
 </script>
