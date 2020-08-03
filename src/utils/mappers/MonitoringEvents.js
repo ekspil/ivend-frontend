@@ -59,7 +59,29 @@ export const getTableHeaders = () => [
 	{
 		name: 'Ошибки',
 		key: 'error',
-		critery ({error}) { switch (error) {
+		critery ({error, terminalStatus, kktStatus, banknoteCollectorStatus, coinCollectorStatus}) {
+
+			if(kktStatus && kktStatus !== "OK" && kktStatus !== "ОТКЛ" && kktStatus !== "ОК"){
+				console.log("kktStatus"+kktStatus)
+				return createTooltip('alert', "Ошибка кассы");
+			}
+
+			if(terminalStatus && terminalStatus !== "OK" && terminalStatus !== "ОТКЛ" && terminalStatus !== "ОК"){
+
+				return createTooltip('alert', "Ошибка терминала");
+			}
+
+			if(banknoteCollectorStatus && banknoteCollectorStatus !== "OK"  && banknoteCollectorStatus !== "ОТКЛ" && banknoteCollectorStatus !== "ОК"){
+				console.log("banknoteCollectorStatus"+banknoteCollectorStatus)
+				return createTooltip('alert', "Ошибка купюроприемника");
+			}
+			if(coinCollectorStatus && coinCollectorStatus !== "OK"  && coinCollectorStatus !== "ОТКЛ" && coinCollectorStatus !== "ОК"){
+				console.log("coinCollectorStatus"+coinCollectorStatus)
+				return createTooltip('alert', "Ошибка монетника");
+			}
+
+
+			switch (error) {
 			case 'OK':
 				return createTooltip('primary', error);
 			case 'NO DATA':
@@ -110,6 +132,10 @@ export const getTableFields = data => data.map(machine => ({
 	lastErrorTime: getTimestamp(machine.controller?.lastErrorTime),
 	registrationTime: machine.controller?.lastState?.registrationTime,
 	controller: machine.controller?.uid,
+	terminalStatus: machine.terminalStatus ,
+	kktStatus: machine.kktStatus ,
+	banknoteCollectorStatus: machine.banknoteCollectorStatus ,
+	coinCollectorStatus: machine.coinCollectorStatus ,
 	collection: 'ОТКЛ',
 	load: 'ОТКЛ',
 	audit1: 'ОТКЛ',

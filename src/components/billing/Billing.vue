@@ -8,14 +8,12 @@
           <div class="balance-info-block__info-container row">
             <div class="balance-info-block__count balance-info-block__count--currency col">{{ Number(billing.balance).toFixed(2) }}</div>
             <div class="balance-info-block__title col">Текущий баланс</div>
-
             <div class="balance-info-block__icon col-1.5">
               <i class="fas fa-ruble-sign"></i>
             </div>
             <div class="w-100"></div>
             <div class="balance-info-block__count col" >{{ billing.daysLeft }}</div>
             <div class="balance-info-block__title col">Осталось дней</div>
-
             <div class="balance-info-block__icon col-1.5">
               <i class="fas fa-clock"></i>
             </div>

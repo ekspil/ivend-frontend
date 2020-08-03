@@ -48,6 +48,10 @@
 						name
 						lastSaleTime
 						error
+						terminalStatus
+						kktStatus
+						banknoteCollectorStatus
+						coinCollectorStatus
 						encashment
 						lastEncashment{
 							timestamp

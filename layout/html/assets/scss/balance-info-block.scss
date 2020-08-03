@@ -35,6 +35,9 @@
     font-size: 14px;
     font-weight: 600;
   }
+  &__info-container {
+    width: 100%;
+  }
 
   &__icon {
     background: $background-gradient;
@@ -49,6 +52,7 @@
   }
 
   &__btn {
+    width: 200px;
     position: absolute;
     z-index: 2;
     top: 30%;
@@ -63,6 +67,7 @@
     }
   }
   &__btn2 {
+    width: 200px;
     position: absolute;
     z-index: 2;
     top: 75%;
@@ -251,10 +256,12 @@
   @media screen and (max-width: 768px) {
 
     &__btn {
+      width: 200px;
       position: absolute;
       z-index: 2;
       top: 12%;
-      transform: translate(0%, 0%);
+      right: 50%;
+      transform: translate(50%, 0%);
       transition: right .15s, transform .15s;
 
       .active & {
@@ -263,11 +270,15 @@
       }
     }
     &__btn2 {
+      width: 200px;
       position: absolute;
       z-index: 2;
       top: 56%;
-      transform: translate(0%, 0%);
+      right: 50%;
+      transform: translate(50%, 0%);
       transition: right .15s, transform .15s;
+
+
 
       .active & {
         right: 24px;
