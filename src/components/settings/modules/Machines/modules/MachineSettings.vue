@@ -210,6 +210,9 @@ export default {
         if (!this.machineUpdating && data.getMachineById.controller) {
           this.input.controllerId = data.getMachineById.controller.id;
         }
+        if (!this.machineUpdating && data.getMachineById.type) {
+          this.input.typeId = data.getMachineById.type.id;
+        }
         if (!this.machineUpdating && data.getMachineById.kkt) {
           this.input.kktId = data.getMachineById.kkt.id;
         }
@@ -217,7 +220,7 @@ export default {
           this.input.controllerId = data.getMachineById.controller.id;
         }
         if (!this.machineUpdating && data.getMachineById.equipment) {
-          this.input.equipmentId = data.getMachineById.equipment.machineTypeId;
+          this.input.equipmentId = data.getMachineById.equipment.id;
         }
 
 
