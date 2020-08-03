@@ -126,6 +126,11 @@
                         simCardNumber
                         bankTerminalMode
                         registrationTime
+                        machine {
+                            id
+                            name
+                            terminalStatus
+                        }
 						lastState {
 								registrationTime
 							}

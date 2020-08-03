@@ -73,19 +73,43 @@ export const getTableHeaders = () => [
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: false },
   //  { name: 'Автомат', key: 'machine', unsortable: true },
-    {   name: 'Терминал',
+    {   name: 'Режим терминала',
         key: 'simCardNumber',
         unsortable: true,
-        critery ({simCardNumber}) {
+        critery ({simCardNumber, bankTerminalMode}) {
             if(!simCardNumber || simCardNumber === "0" || simCardNumber === "false"){
-                return createTooltip('info', 'ОТКЛ');
+                return createTooltip('info', bankTerminalMode);
             }
             else{
-                return createTooltip('primary', "ВКЛ");
+                return createTooltip('primary', bankTerminalMode);
             }
         }
     },
-    { name: 'Режим Терминала', key: 'bankTerminalMode', unsortable: true },
+    {
+        name: 'Терминал',
+        key: 'terminal',
+        critery ({terminal, bankTerminalMode}) {
+            if(bankTerminalMode ==="Без терминала") return createTooltip('info', "ОТКЛ");
+            switch (terminal) {
+                case 'OK':
+                    return createTooltip('primary', "Ок");
+                case 'ERROR':
+                    return createTooltip('alert', "Ошибка");
+                case '24H':
+                    return createTooltip('warning', "24 часа");
+
+                case 'OK (100руб/мес)':
+                    return createTooltip('primary', "Ок");
+                case 'ERROR (100руб/мес)':
+                    return createTooltip('alert', "Ошибка");
+                case '24H (100руб/мес)':
+                    return createTooltip('warning', "24 часа");
+
+
+                default:
+                    return createTooltip('info', "ОТКЛ");
+            }}
+    },
     { name: 'Фискализация', key: 'fiscalizationMode', unsortable: false },
     { name: 'Принтер', key: 'remotePrinterId', unsortable: true },
 ];
@@ -100,6 +124,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',
     mode: getMode(controller.mode) || '-',
+    terminal: controller.machine?.terminalStatus,
     fiscalizationMode: controller.fiscalizationMode ? mapFiscalizationMode(controller.fiscalizationMode) : '-',
     remotePrinterId: controller.remotePrinterId,
     bankTerminalMode: getTerminal(controller.bankTerminalMode),
