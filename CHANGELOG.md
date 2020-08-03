@@ -253,5 +253,10 @@
 * General optimization
 
 
+# 1.5.3 - Release
+
+* New admin functions
+
+
 
 
