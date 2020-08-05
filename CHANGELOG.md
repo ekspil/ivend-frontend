@@ -262,5 +262,11 @@
 * New admin functions
 
 
+# 1.5.4 - Hotfix
+
+* fix
+
+
+
 
 
