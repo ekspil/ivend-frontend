@@ -81,7 +81,7 @@
                                     <tr>
                                         <th class="sortable up">ID</th>
                                         <th class="sortable">Название товара</th>
-                                        <th class="sortable">Множетель</th>
+                                        <th class="sortable">Множитель</th>
                                         <th></th>
                                     </tr>
                                 </thead>

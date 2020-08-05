@@ -252,6 +252,10 @@
 
 * General optimization
 
+# 1.5.3 - Hotfix
+
+* fix
+
 
 
 
