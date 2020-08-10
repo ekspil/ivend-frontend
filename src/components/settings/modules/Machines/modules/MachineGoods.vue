@@ -81,16 +81,22 @@
                                     <tr>
                                         <th class="sortable up">ID</th>
                                         <th class="sortable">Название товара</th>
+                                        <th class="sortable">Вид товара</th>
                                         <th class="sortable">Множитель</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="( { buttonId, item, multiplier } ) in data.buttons" :key="buttonId">
+                                    <tr v-for="( { buttonId, item, multiplier, type } ) in data.buttons" :key="buttonId">
                                         <td class="input-cel"><a :href="'/goods/edit/'+data.matrixId+'/'+buttonId+'/'+data.machineId">{{ buttonId }}</a> </td>
                                         <td class="input-cel">
                                             {{ item.name }}
-                                        </td><td class="input-cel">
+                                        </td>
+                                        <td class="input-cel">
+                                            {{itemType(type) }}
+
+                                        </td>
+                                        <td class="input-cel">
                                             {{ multiplier }}
 
                                         </td>
@@ -132,6 +138,7 @@ export default {
                             id
                             buttons {
                               multiplier
+                              type
                               buttonId
                               item {
                                 id
@@ -166,7 +173,15 @@ export default {
 
         }
     }),
+    computed: {
+
+    },
     methods: {
+        itemType: function(type){
+            if(type === "commodity") return "Товар"
+            if(type === "service") return "Услуга"
+            else return "Товар"
+        },
         getRandomKey() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         },

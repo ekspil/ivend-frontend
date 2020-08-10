@@ -20,6 +20,7 @@
                   <tr>
                     <th class="">ID</th>
                     <th class="">Название товара</th>
+                    <th class="">Вид товара</th>
                     <th class="">Множитель</th>
                   </tr>
                 </thead>
@@ -39,7 +40,18 @@
                       ref="goodSelect"
                       />
                     </td>
+                    <td class="input-cel">
+                      <CustomSelect
+                              :initialValue="type"
+                              :options="types"
+                              @onSelect="onTypeSelect"
 
+                              @onInputToggle="disableSubmit"
+                              @onSelectToggle="enableSubmit"
+                              ref="typeSelect"
+                              :disabledAdd="dis"
+                      />
+                    </td>
                     <td class="input-cel">
                       <Field type="text" formName="addGoods" name="multiplier" :value="data.button.multiplier || 1" placeholder="Множитель" />
                     </td>
@@ -95,6 +107,7 @@ export default {
             id
             buttons {
               buttonId,
+              type,
               multiplier,
               item {
                 id
@@ -121,6 +134,9 @@ export default {
         if (data.getProfile.items.length > 0) {
           this.item.id = data.getProfile.items[0].id;
         }
+        if(data.getMachineById.itemMatrix.buttons.filter(but => but.buttonId == this.$route.params.id )[0]){
+          this.type = data.getMachineById.itemMatrix.buttons.filter(but => but.buttonId == this.$route.params.id )[0].type
+        }
 
         return {
           matrixId: data.getMachineById.itemMatrix.id,
@@ -135,6 +151,12 @@ export default {
     item: {
       id: 1
     },
+    dis: true,
+    types: [
+      {id: "commodity", name: "Товар"},
+      {id: "service", name: "Услуга"},
+    ],
+    type: "commodity",
 
     schema: {
       buttonId: [required],
@@ -165,6 +187,7 @@ export default {
                 buttons {
                   buttonId,
                   multiplier,
+                  type
                   item {
                     id,
                     name
@@ -179,6 +202,7 @@ export default {
                 itemMatrixId: this.data.matrixId,
                 buttonId: Number(cache.buttonId),
                 multiplier: Number(cache.multiplier),
+                type: this.type,
                 itemId: this.item.id
               }
             },
@@ -201,6 +225,9 @@ export default {
 
     onGoodSelect (good) {
       this.item.id = good.id;
+    },
+    onTypeSelect (good) {
+      this.type = good.id;
     },
     async onGoodAppend (name) {
       this.disableSubmit();

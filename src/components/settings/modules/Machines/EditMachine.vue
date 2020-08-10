@@ -25,7 +25,7 @@ export default {
   data: () => ({
     tabs: [
       { name: 'Автомат', component: MachineSettings, route: 'machine' },
-      { name: 'Товары', component: MachineGoods, route: 'goods' }
+      { name: 'Товары/Услуги', component: MachineGoods, route: 'goods' }
     ]
   })
 }

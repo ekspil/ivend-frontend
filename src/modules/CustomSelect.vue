@@ -18,7 +18,7 @@
       >
         {{ option.name }}
       </option>
-      <option value="ADD_ANOTHER_GROUP">Добавить ещё...</option>
+      <option v-if="!disabledAdd" value="ADD_ANOTHER_GROUP">Добавить ещё...</option>
     </select>
   </div>
 </template>
@@ -33,6 +33,10 @@ export default {
       type: Array,
       default: () => []
     },
+    disabledAdd: {
+      type: Boolean,
+      default: () => false
+    },
     className: String,
     initialValue: {
       default: ''
@@ -46,7 +50,7 @@ export default {
     value (newVal) {
       if (newVal === 'ADD_ANOTHER_GROUP') {
         this.showInput();
-      } else if (newVal !== '' && typeof(newVal) === 'number') {
+      } else if (newVal !== '') {
         this.$emit('onSelect', find(propEq('id', newVal))(this.options));
       }
     }

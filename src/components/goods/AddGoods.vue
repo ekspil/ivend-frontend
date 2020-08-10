@@ -20,6 +20,7 @@
                   <tr>
                     <th class="">ID</th>
                     <th class="">Название товара</th>
+                    <th class="">Вид товара</th>
                     <th class="">Множитель</th>
                   </tr>
                 </thead>
@@ -37,6 +38,18 @@
                       @onInputToggle="disableSubmit"
                       @onSelectToggle="enableSubmit"
                       ref="goodSelect"
+                      />
+                    </td>
+                    <td class="input-cel">
+                      <CustomSelect
+                              :initialValue="type"
+                              :options="types"
+                              @onSelect="onTypeSelect"
+
+                              @onInputToggle="disableSubmit"
+                              @onSelectToggle="enableSubmit"
+                              ref="typeSelect"
+                              :disabledAdd="dis"
                       />
                     </td>
 
@@ -95,6 +108,7 @@ export default {
             id
             buttons {
               multiplier,
+              type,
               item {
                 name
               }
@@ -133,7 +147,12 @@ export default {
     item: {
       id: 1
     },
-
+    dis: true,
+    types: [
+      {id: "commodity", name: "Товар"},
+      {id: "service", name: "Услуга"},
+    ],
+    type: "commodity",
     schema: {
       buttonId: [required]
     },
@@ -162,6 +181,7 @@ export default {
                 buttons {
                   buttonId,
                   multiplier,
+                  type,
                   item {
                     id,
                     name
@@ -176,7 +196,8 @@ export default {
                 itemMatrixId: this.data.matrixId,
                 buttonId: Number(cache.buttonId),
                 multiplier: Number(cache.multiplier) || 1,
-                itemId: this.item.id
+                itemId: this.item.id,
+                type: this.type
               }
             },
 
@@ -195,6 +216,10 @@ export default {
 
     onGoodSelect (good) {
       this.item.id = good.id;
+    },
+
+    onTypeSelect (good) {
+      this.type = good.id;
     },
     async onGoodAppend (name) {
       this.disableSubmit();
