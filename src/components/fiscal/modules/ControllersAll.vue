@@ -130,6 +130,7 @@
                             id
                             name
                             terminalStatus
+                            lastSaleTime
                         }
 						lastState {
 								registrationTime

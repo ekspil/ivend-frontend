@@ -271,6 +271,11 @@
 
 * Service\commodity
 
+# 1.5.6 - Hotfix
+
+* kkts status error fixed
+* connection time fixed
+
 
 
 

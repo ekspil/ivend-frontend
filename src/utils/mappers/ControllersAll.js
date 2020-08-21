@@ -10,10 +10,10 @@ export const getTableHeaders = () => [
     {
         name: 'Связь',
         key: 'registrationTime',
-        critery ({ registrationTime}) {
+        critery ({ registrationTime, lastSaleTime}) {
 
 
-            let latestTime = registrationTime
+            let latestTime = registrationTime > lastSaleTime ? registrationTime : lastSaleTime;
             const localeTimestamp = getTimestamp(latestTime);
 
             if (localeTimestamp !== '-') {
@@ -118,6 +118,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
     controllerRegistrationTime: controller?.registrationTime,
     registrationTime: controller?.lastState?.registrationTime,
+    lastSaleTime: controller?.machine?.lastSaleTime,
     uid: controller.uid,
     simCardNumber: controller.simCardNumber,
     user: controller.user.legalInfo ? controller.user.legalInfo.companyName : "-",

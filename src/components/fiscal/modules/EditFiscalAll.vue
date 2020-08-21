@@ -8,7 +8,7 @@
                     </div>
 
                     <Validate
-                            routeBack="/fiscalAll"
+                            routeBack="/fiscalAll#kktsAll"
                             formName="editFiscal"
                             ref="form"
                             :schema="schema"
@@ -190,7 +190,7 @@
             },
             onSuccess () {
                 const router = this.$router;
-                setTimeout(function () { router.push('/fiscalAll'); }, 1000);
+                setTimeout(function () { router.push('/fiscalAll#kktsAll'); }, 1000);
             },
 
             getBillingAbbr (date) {

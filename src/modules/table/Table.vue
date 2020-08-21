@@ -159,25 +159,14 @@
 				}
                 else if(this.$route.path === "/fiscalAll"){
 
-                    if(field.timeToDie === "-"){
+                    if(field.activationDate === "4:Регистрация"){
                         return "background:#c6df5f" ;
                     }
-                    let date =new Date();
-                    let year = date.getFullYear();
-                    let month = date.getMonth() + 1;
-                    let yearF = field.timeToDie.replace(/[,-/ ]/g, ".").split('.')[2];
-                    let monthF = field.timeToDie.replace(/[,-/ ]/g, ".").split('.')[1];
 
-                    if(year - yearF >= 1 && month - monthF >=2){
+                    if(field.activationDate === "5:Ошибка"){
                         return "background:#f05457" ;
                     }
-                    if(Number(field.countToDie) > 230000){
-                        return "background:#f05457" ;
-                    }
-                    if(year - yearF >= 1 && month - monthF >=0){
-                        return "background:#ffd000" ;
-                    }
-                    if(Number(field.countToDie) > 220000){
+                    if(field.activationDate === "3:Внимание"){
                         return "background:#ffd000" ;
                     }
 

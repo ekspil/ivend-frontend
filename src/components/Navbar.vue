@@ -140,7 +140,7 @@
             isDisabled (link) {
                 if(Number(this.user?.billing?.balance) < -100 && this.$store.state.user?.profile?.role !== "ADMIN"){
                     this.role = 'VENDOR_NEGATIVE_BALANCE'
-                    if(!['/billing', '/settings', '/tp'].includes(link)){
+                    if(!['/billing', '/settings', '/tp', '/confirm'].includes(link)){
                         this.$router.push('/billing')
                     }
                 }else{
