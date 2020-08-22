@@ -10,7 +10,7 @@ export const getTableHeaders = () => [
     {
         name: 'Связь',
         key: 'registrationTime',
-        critery ({ registrationTime, lastSaleTime}) {
+        critery ({ registrationTime}) {
 
 
             let latestTime = registrationTime > lastSaleTime ? registrationTime : lastSaleTime;
