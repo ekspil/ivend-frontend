@@ -13,7 +13,7 @@ export const getTableHeaders = () => [
         critery ({ registrationTime}) {
 
 
-            let latestTime = registrationTime > lastSaleTime ? registrationTime : lastSaleTime;
+            let latestTime = registrationTime // > lastSaleTime ? registrationTime : lastSaleTime;
             const localeTimestamp = getTimestamp(latestTime);
 
             if (localeTimestamp !== '-') {
