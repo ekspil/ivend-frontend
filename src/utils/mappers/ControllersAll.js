@@ -118,7 +118,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
     controllerRegistrationTime: controller?.registrationTime,
     registrationTime: controller?.lastState?.registrationTime,
-    lastSaleTime: controller?.machine?.lastSaleTime,
+    //lastSaleTime: controller?.machine?.lastSaleTime,
     uid: controller.uid,
     simCardNumber: controller.simCardNumber,
     user: controller.user.legalInfo ? controller.user.legalInfo.companyName : "-",
