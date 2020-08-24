@@ -54,11 +54,14 @@
     apollo: {
       machines: {
         query: gql`
-			query($machineGroupId: Int)  {
+			query($machineGroupId: Int, $interval: Period)  {
 				getMachines {
 					id
 					name
 					place
+					controller {
+						uid
+					}
 					lastEncashment {
 						timestamp
 					}
@@ -68,12 +71,24 @@
 						cashAmount
 						cashlessAmount
 					}
+					encashmentsSummaries(interval: $interval){
+						encashment {
+							timestamp
+						}
+						salesSummary {
+							salesCount
+							overallAmount
+							cashAmount
+							cashlessAmount
+						}
+					}
 				}
 			}
 			`,
         variables () {
           return {
-            machineGroupId: this.selectedGroupId
+            	machineGroupId: this.selectedGroupId,
+			  	interval: this.period
           };
         },
         update: data => data.getMachines
