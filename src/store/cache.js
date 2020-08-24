@@ -9,6 +9,10 @@ const state = () => ({
 			count: 0,
 			amount: 0
 		},
+		encashments: {
+			count: 0,
+			amount: 0
+		},
 	},
 	periodStat: null,
 	periodStatType: null,
@@ -19,6 +23,7 @@ const getters = {
 	validation: state => state[state._observable] ? state[state._observable].validation : {},
 	data: state => state[state._observable] ? state[state._observable].data : {},
 	sales: state => state.sharedData.sales,
+	encashments: state => state.sharedData.encashments,
 	services: state => state.services,
 	periodStat: state => {
 		return {
@@ -40,6 +45,10 @@ const mutations = {
 	setSales(state, {sales}){
 		if(!sales) return
 		state.sharedData.sales = sales
+	},
+	setEncashments(state, {encashments}){
+		if(!encashments) return
+		state.sharedData.encashments = encashments
 	},
 	store (state, { formName, key, value, push }) {
 		if (formName && key && not(undefined, value)) {

@@ -19,8 +19,9 @@
 				:headers="getTableHeaders"
 				:fields="getTableFields"
 				stats
-				sortBy="machineId"
+				sortBy="overallAmount"
 				className="stats-table"
+				:order="true"
 		/>
 		<div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
 		<div v-else class="aligned-text">Нет автоматов</div>
@@ -91,7 +92,11 @@
 			  	interval: this.period
           };
         },
-        update: data => data.getMachines
+        update(data) {
+			this.setEncashments(data.getMachines)
+			return data.getMachines
+		}
+
       },
       groups: {
         query: gql`
@@ -103,6 +108,7 @@
 			}
 			`,
         update: data => data.getMachineGroups
+
       }
     },
     computed: {
@@ -110,6 +116,16 @@
       getTableFields () { return getTableFields(this.machines); }
     },
     methods: {
+    	setEncashments(d){
+			const sal = d.reduce((acc, item) => {
+				acc.count = acc.count + item.encashmentsSummaries.length
+				acc.amount = acc.amount + item.encashmentsSummaries.reduce((accc, itemm) => {
+							return Number(itemm.salesSummary?.cashAmount) + accc
+						}, 0)
+				return acc
+			}, {count: 0, amount: 0})
+			this.$store.commit("cache/setEncashments", {encashments: sal})
+		},
       onPeriodChange (period) {
 
 		  if(period.to <= period.from){
