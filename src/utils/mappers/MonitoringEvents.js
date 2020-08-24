@@ -62,7 +62,6 @@ export const getTableHeaders = () => [
 		critery ({error, terminalStatus, kktStatus, banknoteCollectorStatus, coinCollectorStatus}) {
 
 			if(kktStatus && kktStatus !== "OK" && kktStatus !== "ОТКЛ" && kktStatus !== "ОК"){
-				console.log("kktStatus"+kktStatus)
 				return createTooltip('alert', "Ошибка кассы");
 			}
 
@@ -72,11 +71,11 @@ export const getTableHeaders = () => [
 			}
 
 			if(banknoteCollectorStatus && banknoteCollectorStatus !== "OK"  && banknoteCollectorStatus !== "ОТКЛ" && banknoteCollectorStatus !== "ОК"){
-				console.log("banknoteCollectorStatus"+banknoteCollectorStatus)
+
 				return createTooltip('alert', "Ошибка купюроприемника");
 			}
 			if(coinCollectorStatus && coinCollectorStatus !== "OK"  && coinCollectorStatus !== "ОТКЛ" && coinCollectorStatus !== "ОК"){
-				console.log("coinCollectorStatus"+coinCollectorStatus)
+
 				return createTooltip('alert', "Ошибка монетника");
 			}
 

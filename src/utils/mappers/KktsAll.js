@@ -1,3 +1,5 @@
+import { createTooltip} from '@/utils';
+
 const getStatus = field => {
     //Проверку оставшихся дней после того как установлю формат
     if(!field.kktActivationDate){
@@ -66,7 +68,22 @@ export const getTableHeaders = () => [
     { name: 'КЧ', key: 'countToDie', unsortable: false },
     { name: 'Дата', key: 'timeToDie', unsortable: false },
     { name: 'Рег данные', key: 'ofdKey', unsortable: true, raw: true },
-    { name: 'Последний чек', key: 'kktLastBill', unsortable: true, raw: true },
+    { name: 'Последний чек', key: 'kktLastBill',
+        critery ({kktLastBill, kktStatus}) {
+                if(kktStatus == "ERROR"){
+                    return createTooltip('alert', kktLastBill);
+                }
+                if(kktStatus == "OK"){
+                    return createTooltip('primary', kktLastBill);
+                }
+                else {
+                    return createTooltip('warning', kktLastBill);
+                }
+
+
+
+            }
+            },
     { name: 'Сервер', key: 'server', unsortable: true, raw: true },
     { name: 'Статус', key: 'activationDate', unsortable: false },
 
@@ -78,6 +95,7 @@ export const getTableFields = (data, props) => data.map(kkt => ({
     model: kkt.kktModel || '-',
     factoryNum: kkt.kktFactoryNumber || '-',
     regNum: kkt.kktRegNumber || '-',
+    kktStatus: kkt.kktStatus || '-',
     fiscalNum: kkt.kktFNNumber || '-',
     countToDie: kkt.kktBillsCount || '-',
     timeToDie: kkt.kktActivationDate || '-',

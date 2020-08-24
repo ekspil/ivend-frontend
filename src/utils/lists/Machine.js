@@ -7,5 +7,6 @@ export const machineHeaders = {
     type: "Тип автомата",
     model: "Модель автомата",
     controller: "Привязать контроллер",
-    kkt: "Привязать кассу"
+    kkt: "Привязать кассу",
+    printer: "Привязать принтер"
 }

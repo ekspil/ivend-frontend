@@ -32,6 +32,8 @@
                             </div>
                             <div class="form-group kol">
                                 <select v-model="limit" class="form-control custom-select">
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
                                     <option value="100">100</option>
                                     <option value="200">200</option>
                                     <option value="500">500</option>
@@ -63,7 +65,7 @@
         },
         data: () => ({
             offset: 0,
-            limit:100,
+            limit:10,
             savedLimit :100,
             controllers: [],
             search: "",
@@ -71,6 +73,9 @@
             selected_status: "ALL",
             selected_simCardNumber: "ALL",
             selected_bankTerminalMode: "ALL",
+            selected_controllerRegistrationTime: "ALL",
+            selected_remotePrinterId: "ALL",
+            selected_terminal: "ALL",
             selected_fiscalizationMode: "ALL",
             selections: [
                 {
@@ -104,6 +109,31 @@
                     ]
                 },
                 {
+                    key: "remotePrinterId",
+                    values: [
+
+                        "ENABLED",
+                        "DISABLED",
+                    ]
+                },
+                {
+                    key: "controllerRegistrationTime",
+                    values: [
+
+                        "ENABLED",
+                        "DISABLED",
+                    ]
+                },
+                {
+                    key: "terminal",
+                    values: [
+
+                        "OK",
+                        "24H",
+                        "ERROR",
+                    ]
+                },
+                {
                     key: "fiscalizationMode",
                     values: [
 
@@ -118,8 +148,8 @@
         apollo: {
             controllers: {
                 query: gql`
-                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String ) {
-                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode ) {
+                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String ) {
+                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer ) {
                         id
                         uid
                         mode
@@ -162,6 +192,9 @@
                     status: this.selected_status,
                     terminal: this.selected_simCardNumber,
                     bankTerminalMode: this.selected_bankTerminalMode,
+                    terminalStatus: this.selected_terminal,
+                    printer: this.selected_remotePrinterId,
+                    registrationTime: this.selected_controllerRegistrationTime,
                     fiscalizationMode: this.selected_fiscalizationMode,
                 };
             },
@@ -224,6 +257,15 @@
                 }
                 if(key === "fiscalizationMode"){
                     this.selected_fiscalizationMode = value
+                }
+                if(key === "terminal"){
+                    this.selected_terminal = value
+                }
+                if(key === "controllerRegistrationTime"){
+                    this.selected_controllerRegistrationTime = value
+                }
+                if(key === "remotePrinterId"){
+                    this.selected_remotePrinterId = value
                 }
             }
         },

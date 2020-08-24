@@ -77,6 +77,7 @@
                       getAllKkts(offset: $offset, limit: $limit) {
                             id
                             kktModel
+                            kktStatus
                             kktFactoryNumber
                             kktRegNumber
                             kktFNNumber

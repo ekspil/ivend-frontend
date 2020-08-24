@@ -25,12 +25,17 @@
 								</select>
 							</div>
 
-							<div class="form-group">
+								<div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+									<div class="col">
 								<label class="form-label f-b">{{controllerHeaders.mode}}</label>
 								<select class="form-control custom-select" v-model="input.mode">
 									<option v-for="item in controllerType" :value="item.value" :key="item.value">{{item.name}}</option>
 
 								</select>
+									</div>
+									<div class="col-auto">
+										<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+									</div>
 							</div>
 
 							<div v-if="false" class="form-group">
@@ -41,21 +46,32 @@
 								</select>
 							</div>
 
-							<div class="form-group">
+								<div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+									<div class="col">
 								<label class="form-label f-b">{{controllerHeaders.terminalMode}}</label>
 								<select class="form-control custom-select" v-model="input.bankTerminalMode">
 									<option v-for="item in controllerTerminal" :value="item.value" :key="item.value">{{item.name}}</option>
 
 								</select>
 							</div>
-
-							<div class="form-group">
-								<label class="form-label f-b">{{controllerHeaders.fiscalMode}}</label>
-								<select class="form-control custom-select" v-model="input.fiscalizationMode">
-									<option v-for="item in controllerFiscalType" :value="item.value" :key="item.value">{{item.name}}</option>
-
-								</select>
+								<div class="col-auto">
+									<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+								</div>
 							</div>
+
+								<div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+									<div class="col">
+										<label class="form-label f-b">{{controllerHeaders.fiscalMode}}</label>
+										<select class="form-control custom-select" v-model="input.fiscalizationMode">
+											<option v-for="item in controllerFiscalType" :value="item.value" :key="item.value">{{item.name}}</option>
+
+										</select>
+									</div>
+									<div class="col-auto">
+										<button class="btn btn-primary ml-auto" @click.prevent="fiscalEditPage()">Настройки</button>
+									</div>
+
+								</div>
 
 							<div class="form-group" v-if="false">
 								<label class="form-label f-b">{{controllerHeaders.version}}</label>
@@ -68,6 +84,33 @@
 						</div>
 				</div>
 			</div>
+
+
+
+
+
+						<div class="modal fade" id="ModalSettings" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Настройки</h5>
+
+									</div>
+									<div class="modal-body">
+										Тут должны быть настройки
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+										<button type="button" class="btn btn-primary" @click.prevent="">Сохранить</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
 		</template>
 		<template slot="submit">
 			<button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
@@ -151,6 +194,9 @@ export default {
 		}
 	},
 	methods: {
+		fiscalEditPage(){
+			window.open("/settings#fiscal", '_blank').focus();
+		},
 		async save () {
 			const data = {
 				...this.input,

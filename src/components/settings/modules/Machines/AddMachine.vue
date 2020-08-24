@@ -59,28 +59,72 @@
 							</select>
 						</div>
 
-						<div class="form-group">
-							<label class="form-label f-b">{{machineHeaders.controller}}</label>
-							<select class="form-control custom-select" v-model="input.controllerId">
-                                <option v-bind:value="null">Без контроллера</option>
-                                <option v-for="controller in getAvailableControllers(machine.controllers)"
-								:key="controller.id" :value="controller.id">
-								{{ controller.uid }}
-							</option>
-						</select>
+						<div class="row align-items-end justify-content-between">
+							<div class="col">
+								<label class="form-label f-b">{{machineHeaders.controller}}</label>
+								<select class="form-control custom-select" v-model="input.controllerId">
+									<option v-bind:value="null">Без контроллера</option>
+									<option v-for="controller in getAvailableControllers(machine.controllers)"
+											:key="controller.id" :value="controller.id">
+										{{ controller.uid }}
+									</option>
+								</select>
+
+							</div>
+
+							<div class="col-auto">
+								<button class="btn btn-primary ml-auto" @click.prevent="controllerEditPage()">Настройки</button>
+							</div>
 					</div>
-						<div class="form-group">
-							<label class="form-label f-b">{{machineHeaders.kkt}}</label>
-							<select class="form-control custom-select" v-model="input.kktId">
-								<option key="0" value="0">
-									Все ККМ
-								</option>
-								<option v-for="kkt in machine.kkts"
-								:key="kkt.id" :value="kkt.id">
-								{{ kkt.kktFactoryNumber}}
-							</option>
-						</select>
+						<div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+							<div class="col">
+								<label class="form-label f-b">{{machineHeaders.kkt}}</label>
+								<select class="form-control custom-select" v-model="input.kktId">
+									<option key="0" value="0">
+										Все ККМ
+									</option>
+									<option v-for="kkt in machine.kkts"
+											:key="kkt.id" :value="kkt.id">
+										{{ kkt.kktFactoryNumber}}
+									</option>
+								</select>
+							</div>
+							<div class="col-auto">
+								<button class="btn btn-primary ml-auto" @click.prevent="kktEditPage()">Настройки</button>
+							</div>
+
 					</div>
+						<div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+							<div class="col">
+								<label class="form-label f-b">{{machineHeaders.printer}}</label>
+								<input name="number" v-model="printer" class="form-control" placeholder="Привяжите номер принтера" disabled="true"/>
+							</div>
+							<div class="col-auto">
+								<button  type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#exampleModal">Настройки</button>
+							</div>
+
+					</div>
+
+
+								<div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Привяжите принтер</h5>
+
+											</div>
+											<div class="modal-body">
+												<input name="number" v-model="printerNew" class="form-control" placeholder="Привяжите принтер" />
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+												<button type="button" class="btn btn-primary" @click.prevent="printerEditPage()">Сохранить</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
 
 					</div>
 				</div>
@@ -124,12 +168,14 @@ export default {
 		},
 		machineHeaders,
 		input: {
+			controllerId: null,
 			equipmentId: 1,
 			groupId: 1,
 			typeId: 1,
 			kktId: 0
 		},
-
+		printer: null,
+		printerNew: null,
 		schema: {
 			name: [required],
 			number: [required],
@@ -192,7 +238,21 @@ export default {
 		}
 	},
 	methods: {
+		controllerEditPage(){
+			if(!this.input.controllerId) return
+			window.open("/controllers/edit/"+this.input.controllerId, '_blank').focus();
+		},
+		kktEditPage(){
+			if(!this.input.kktId) return
+			window.open("/fiscal/edit/"+this.input.kktId, '_blank').focus();
+		},
+		printerEditPage(){
+			this.printer = this.printerNew
+			$('#exampleModal').modal('hide')
+
+		},
 		getAvailableControllers(controllers) {
+			if(!controllers) return []
 			return controllers.filter(controller => !controller.machine)
 		},
 		async save () {
@@ -200,6 +260,10 @@ export default {
 			const data = {
 				...this.input,
 				...this.$store.getters['cache/data']
+			};
+            const dataP = {
+				printerId: this.printer,
+				controllerId: this.input.controllerId
 			};
 
 			try {
@@ -218,7 +282,26 @@ export default {
 					}
 				});
 
-				this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+				if(this.printer && this.input.controllerId){
+					const {err} = await this.$apollo.mutate({
+						mutation: gql`
+					mutation updatePrinterOnController ($dataP: UpdatePrinter!) {
+						updatePrinterOnController (input: $dataP)
+					}
+					`,
+						variables: {
+							dataP
+						}
+					});
+					this.$refs.form.process({ err, success: 'Успешно сохранено.' });
+				}
+
+				if(this.printer && !this.input.controllerId){
+					this.$refs.form.process({ errors, success: 'Сохранено без принтера, т.к. не выбран контроллер.' });
+				}
+				else{
+					this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+				}
 			} catch (error) {
 				this.$refs.form.showMessage('error', 'Ошибка сервера.');
 			}
