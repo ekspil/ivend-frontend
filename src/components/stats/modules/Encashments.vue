@@ -67,20 +67,11 @@
 						timestamp
 					}
 					salesByEncashment(machineGroupId: $machineGroupId) {
-						salesCount
-						overallAmount
 						cashAmount
-						cashlessAmount
 					}
 					encashmentsSummaries(interval: $interval){
-						encashment {
-							timestamp
-						}
 						salesSummary {
-							salesCount
-							overallAmount
 							cashAmount
-							cashlessAmount
 						}
 					}
 				}

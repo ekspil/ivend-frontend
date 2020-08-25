@@ -3,19 +3,20 @@ import {  getTimestamp } from '@/utils';
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'name', link: true},
   {name: 'Контроллер', key: 'controller'},
+  {name: 'Наличные', key: 'cashAmount'},
   {
-    name: 'Последняя инкассация', key: 'encashmentTimestamp',
+    name: 'Посл инкасс', key: 'encashmentTimestamp',
     critery({encashmentTimestamp}) {
       return getTimestamp(encashmentTimestamp);
     }
   },
-  {name: 'Сумма', key: 'overallAmount'},
-  {name: 'Кол-во инкассаций', key: 'encashmentsCount'},
-  {name: 'Сумма инкассаций', key: 'encashmentsAmount'},
-  {name: 'Кол-во продаж', key: 'salesCount'},
+  {name: 'Сумма', key: 'cashAmount'},
+  {name: 'Кол инкасс', key: 'encashmentsCount'},
+  {name: 'Сумма инкасс', key: 'encashmentsAmount'},
+  //{name: 'Кол-во продаж', key: 'salesCount'},
 
-  {name: 'Наличные', key: 'cashAmount'},
-  {name: 'Безнал', key: 'cashlessAmount'},
+
+  //{name: 'Безнал', key: 'cashlessAmount'},
   {name: 'Адрес установки', key: 'place'}
 ];
 
