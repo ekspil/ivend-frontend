@@ -1,6 +1,6 @@
 <template>
   <Validate
-  goBack="/settings#machines"
+  routeBack="/settings#machines"
   formName="editMachine"
   title="Редактирование автомата"
   :schema="schema" ref="form"
@@ -84,7 +84,7 @@
               <option key="0" value="0">
                 Все ККМ
               </option>
-              <option v-for="kkt in data.machine.kkts"
+              <option v-for="kkt in data.kkts"
                       :key="kkt.id" :value="kkt.id">
                 {{ kkt.kktFactoryNumber}}
               </option>

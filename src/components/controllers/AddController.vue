@@ -34,7 +34,7 @@
 								</select>
 									</div>
 									<div class="col-auto">
-										<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+										<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings!!!" @click.prevent="">Настройки</button>
 									</div>
 							</div>
 
@@ -55,7 +55,7 @@
 								</select>
 							</div>
 								<div class="col-auto">
-									<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+									<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings!!!" @click.prevent="">Настройки</button>
 								</div>
 							</div>
 
