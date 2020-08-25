@@ -26,10 +26,13 @@
                       </div>
 
                       <Table
-                        v-if="machine.logs.length > 0 && !$apollo.loading"
+                        v-if="machine.logs"
                         :headers="getTableHeaders"
                         :fields="getTableFields"
+                        sortBy="timestamp"
                         className="monitoring-table"
+                        :selections="selections"
+                        :filterAction="filterBy"
                       />
                       <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
                       <div v-else class="aligned-text">На данный момент логи отсутствуют</div>
@@ -59,7 +62,7 @@ export default {
   apollo: {
     machine: {
       query: gql`
-        query ($id: Int!) {
+        query ($id: Int!, $type: MachineLogType) {
           getMachineById (id: $id) {
             id
             number
@@ -77,7 +80,7 @@ export default {
               id
               name
             }
-            logs {
+            logs(type: $type) {
               type
               message
               timestamp
@@ -99,6 +102,7 @@ export default {
 
         return {
           period: this.period,
+            type: this.selected_type,
           id: Number(this.$route.params.id)
         };
       },
@@ -112,6 +116,22 @@ export default {
     machine: {
       logs: []
     },
+      selected_type: "ALL",
+      selections: [
+          {
+              key: "type",
+              values: [
+                  "Связь",
+                  "Монетник",
+                  "Купюроприемник",
+                  "Ошибка шины",
+                  "Регистрация",
+                  "Касса",
+                  "Терминал",
+                  "Инкассация"
+              ]
+          },
+      ],
     period: {
       from: null,
       to: null
@@ -122,6 +142,25 @@ export default {
     getTableFields () { return getTableFields(this.machine.logs); }
   },
   methods: {
+      async filterBy (key, value) {
+          if(key === "type"){
+              const mapType = (value) => {
+                  switch (value) {
+                      case 'Связь': return 'CONNECTION';
+                      case 'Монетник': return 'COINACCEPTOR';
+                      case 'Купюроприемник': return 'BILLACCEPTOR';
+                      case 'Ошибка шины': return 'BUS_ERROR';
+                      case 'Регистрация': return 'REGISTRATION';
+                      case 'Касса': return 'KKT';
+                      case 'Терминал': return 'TERMINAL';
+                      case 'Инкассация': return 'ENCASHMENT';
+                      default: return 'ALL';
+                  }
+              }
+
+              this.selected_type = mapType(value)
+          }
+      },
     onPeriodChange (period) {
       this.period = period;
     }
