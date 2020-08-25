@@ -110,9 +110,7 @@
                     query {
                         user: getProfile {
                             phone
-                            legalInfo {
-                                contactPhone
-                            }
+
                         }
                     }
                 `,

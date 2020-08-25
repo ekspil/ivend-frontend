@@ -35,7 +35,7 @@
     mounted: async function () {
       const actionType = this.$route.query.action_type
       const token = this.$route.query.token
-
+        if(!actionType) return
 
       try {
         const input = {
