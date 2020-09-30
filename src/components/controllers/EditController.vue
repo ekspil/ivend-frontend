@@ -84,7 +84,7 @@
                   </div>
                 </div>
 
-                <div class="form-group" style="margin-top: 1rem">
+                <div class="form-group" style="margin-top: 1rem" v-if="false">
                   <label class="form-label f-b">{{controllerHeaders.printer}}</label>
                   <Field className="form-control" :value="data.controller.remotePrinterId" name="remotePrinterId" formName="editControllerSettings" placeholder="Введите номер удалённого принтера" :disabled="true"/>
                 </div>

@@ -37,6 +37,10 @@ export default {
       type: Boolean,
       default: () => false
     },
+    notNumber: {
+      type: Boolean,
+      default: () => false
+    },
     className: String,
     initialValue: {
       default: ''
@@ -48,11 +52,21 @@ export default {
   }),
   watch: {
     value (newVal) {
-      if (newVal === 'ADD_ANOTHER_GROUP') {
-        this.showInput();
-      } else if (newVal !== '') {
-        this.$emit('onSelect', find(propEq('id', newVal))(this.options));
+
+      if(this.notNumber === true){
+        if (newVal === 'ADD_ANOTHER_GROUP') {
+          this.showInput();
+        } else if (newVal !== '' && typeof(newVal) === 'number') {
+          this.$emit('onSelect', find(propEq('id', newVal))(this.options));
+        }
+      } else {
+        if (newVal === 'ADD_ANOTHER_GROUP') {
+          this.showInput();
+        } else if (newVal !== '') {
+          this.$emit('onSelect', find(propEq('id', newVal))(this.options));
+        }
       }
+
     }
   },
   methods: {

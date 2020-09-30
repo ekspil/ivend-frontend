@@ -30,6 +30,7 @@
           className="form-control"
           :initialValue="data.machine.group.id"
           :options="data.groups"
+          :notNumber="true"
           @onSelect="onGroupSelect"
           @onBlur="onGroupAppend"
           @onInputToggle="disableSubmit"

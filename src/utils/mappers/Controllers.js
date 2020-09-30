@@ -9,7 +9,7 @@ export const getTableHeaders = () => [
     { name: 'Режим', key: 'mode', unsortable: true },
     { name: 'Терминал', key: 'bankTerminalMode', unsortable: true },
     { name: 'Фискализация', key: 'fiscalizationMode', unsortable: true },
-    { name: 'Принтер', key: 'remotePrinterId', unsortable: true },
+   // { name: 'Принтер', key: 'remotePrinterId', unsortable: true },
     { name: 'Автомат', key: 'machine', unsortable: true },
 ];
 
