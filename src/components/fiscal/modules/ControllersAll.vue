@@ -156,25 +156,26 @@
                         simCardNumber
                         bankTerminalMode
                         registrationTime
-                        machine {
-                            id
-                            name
-                            terminalStatus
-                        }
-						lastState {
-								registrationTime
-							}
-                        user {
-                        email
-                        legalInfo{
-                        companyName
-                        inn
-                        }
-                        }
                         status
                         fiscalizationMode
                         firmwareId
                         remotePrinterId
+                        machine {
+                            id
+                            name
+                            terminalStatus
+                            lastSaleTime
+                        }
+						lastState {
+							registrationTime
+						}
+                        user {
+                            email
+                            companyName
+                            inn
+
+                        }
+
                       }
                     }
                 `,
