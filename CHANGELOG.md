@@ -290,6 +290,10 @@
 
 * fix
 
+# 1.5.10 - Hotfix
+
+* controllers list speed
+
 
 
 
