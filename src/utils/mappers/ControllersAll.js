@@ -131,4 +131,5 @@ export const getTableFields = (data, props) => data.map(controller => ({
     bankTerminalMode: getTerminal(controller.bankTerminalMode),
     props,
     route: `/fiscalAll/controller/${controller.id}`
+
 }));
