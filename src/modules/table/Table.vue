@@ -125,7 +125,8 @@
 				default: false
 			},
 			className: String,
-			filterAction: Function
+			filterAction: Function,
+			orderAll: Function
 		},
 		data () {
 			const critery = this.sortBy || this.headers[0].key;
@@ -185,9 +186,11 @@
 
 					if (equals(currentCritery, newCritery)) {
 						this.ltOrder = !this.ltOrder;
+						this.orderAll(newCritery, this.ltOrder)
 					} else {
 						this.critery = or(newCritery, defaultCritery);
 						this.ltOrder = false;
+						this.orderAll(newCritery, this.ltOrder)
 					}
 				}
 			}

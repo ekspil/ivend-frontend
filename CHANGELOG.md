@@ -294,6 +294,10 @@
 
 * controllers list speed
 
+# 1.5.11 - Hotfix
+
+* controllers list order
+
 
 
 

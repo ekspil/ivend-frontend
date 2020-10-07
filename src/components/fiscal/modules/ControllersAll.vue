@@ -17,6 +17,7 @@
                             :fields="getTableFields"
                             :selections="selections"
                             :filterAction="filterBy"
+                            :orderAll="desc"
                             className="settings-table"
                         />
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -69,6 +70,8 @@
             savedLimit :100,
             controllers: [],
             search: "",
+            orderKey: null,
+            orderDesc: null,
             selected_registrationTime: "ALL",
             selected_status: "ALL",
             selected_simCardNumber: "ALL",
@@ -148,8 +151,8 @@
         apollo: {
             controllers: {
                 query: gql`
-                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String ) {
-                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer ) {
+                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String  , $orderDesc: Boolean  , $orderKey: String ) {
+                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer,  orderDesc: $orderDesc,   orderKey: $orderKey,  ) {
                         id
                         uid
                         mode
@@ -197,6 +200,8 @@
                     printer: this.selected_remotePrinterId,
                     registrationTime: this.selected_controllerRegistrationTime,
                     fiscalizationMode: this.selected_fiscalizationMode,
+                    orderKey: this.orderKey,
+                    orderDesc: this.orderDesc
                 };
             },
                 update (data) {
@@ -242,6 +247,10 @@
                 });
 
                 this.controllers = this.controllers.filter(controller => controller.id !== id);
+            },
+            async desc(key, desc){
+                this.orderKey = key
+                this.orderDesc = desc
             },
             async filterBy (key, value) {
                 if(key === "registrationTime"){
@@ -293,10 +302,10 @@
                     const res1 = r1.test(controller.uid.toUpperCase())
                     if(res1) return res1
                     const r2 = new RegExp(this.search.toUpperCase())
-                    const res2 = r2.test(controller.user?.legalInfo?.companyName.toUpperCase())
+                    const res2 = r2.test(controller.user?.companyName.toUpperCase())
                     if(res2) return res2
                     const r3 = new RegExp(this.search.toUpperCase())
-                    const res3 = r3.test(controller.user?.legalInfo?.inn.toUpperCase())
+                    const res3 = r3.test(controller.user?.inn.toUpperCase())
                     if(res3) return res3
 
                     let statusRus = ""
