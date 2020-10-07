@@ -69,10 +69,9 @@
 					salesByEncashment(machineGroupId: $machineGroupId) {
 						cashAmount
 					}
-					encashmentsSummaries(interval: $interval){
-						salesSummary {
-							cashAmount
-						}
+					encashmentsSummariesFast(interval: $interval){
+						encashmentsAmount
+
 					}
 				}
 			}
@@ -109,9 +108,9 @@
     methods: {
     	setEncashments(d){
 			const sal = d.reduce((acc, item) => {
-				acc.count = acc.count + item.encashmentsSummaries.length
-				acc.amount = acc.amount + item.encashmentsSummaries.reduce((accc, itemm) => {
-							return Number(itemm.salesSummary?.cashAmount) + accc
+				acc.count = acc.count + item.encashmentsSummariesFast.length
+				acc.amount = acc.amount + item.encashmentsSummariesFast.reduce((accc, itemm) => {
+							return Number(itemm.encashmentsAmount) + accc
 						}, 0)
 				return acc
 			}, {count: 0, amount: 0})

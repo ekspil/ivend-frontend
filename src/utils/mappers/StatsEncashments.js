@@ -20,12 +20,12 @@ export const getTableHeaders = () => [
   {name: 'Адрес установки', key: 'place'}
 ];
 
-export const getTableFields = data => data.map(({id, name, lastEncashment, salesByEncashment, place, controller, encashmentsSummaries}) => ({
+export const getTableFields = data => data.map(({id, name, lastEncashment, salesByEncashment, place, controller, encashmentsSummariesFast}) => ({
   id,
   name,
-  encashmentsCount: encashmentsSummaries.length,
-  encashmentsAmount: encashmentsSummaries.reduce((acc, item) => {
-    return Number(item.salesSummary?.cashAmount) + acc
+  encashmentsCount: encashmentsSummariesFast.length,
+  encashmentsAmount: encashmentsSummariesFast.reduce((acc, item) => {
+    return Number(item.encashmentsAmount) + acc
   }, 0),
   controller: controller?.uid,
   place,
