@@ -298,6 +298,10 @@
 
 * controllers list order
 
+# 1.5.12 - Hotfix
+
+* encashment speed
+
 
 
 
