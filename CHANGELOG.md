@@ -302,6 +302,10 @@
 
 * encashment speed
 
+# 1.5.13 - Hotfix
+
+* encashment speed
+
 
 
 
