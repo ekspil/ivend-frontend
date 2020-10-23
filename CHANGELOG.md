@@ -292,7 +292,19 @@
 
 # 1.5.10 - Hotfix
 
-* fix
+* controllers list speed
+
+# 1.5.11 - Hotfix
+
+* controllers list order
+
+# 1.5.12 - Hotfix
+
+* encashment speed
+
+# 1.5.13 - Hotfix
+
+* encashment speed
 
 
 

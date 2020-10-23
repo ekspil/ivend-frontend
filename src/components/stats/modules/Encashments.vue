@@ -55,8 +55,8 @@
     apollo: {
       machines: {
         query: gql`
-			query($machineGroupId: Int, $interval: Period)  {
-				getMachines {
+			query($machineGroupId: Int, $period: Period)  {
+				getMachines(machineGroupId: $machineGroupId) {
 					id
 					name
 					place
@@ -65,14 +65,12 @@
 					}
 					lastEncashment {
 						timestamp
+						sum
 					}
-					salesByEncashment(machineGroupId: $machineGroupId) {
-						cashAmount
-					}
-					encashmentsSummaries(interval: $interval){
-						salesSummary {
-							cashAmount
-						}
+					cashInMachine
+					encashments(period: $period){
+						sum
+
 					}
 				}
 			}
@@ -80,7 +78,7 @@
         variables () {
           return {
             	machineGroupId: this.selectedGroupId,
-			  	interval: this.period
+			  	period: this.period
           };
         },
         update(data) {
@@ -109,9 +107,9 @@
     methods: {
     	setEncashments(d){
 			const sal = d.reduce((acc, item) => {
-				acc.count = acc.count + item.encashmentsSummaries.length
-				acc.amount = acc.amount + item.encashmentsSummaries.reduce((accc, itemm) => {
-							return Number(itemm.salesSummary?.cashAmount) + accc
+				acc.count = acc.count + item.encashments.length
+				acc.amount = acc.amount + item.encashments.reduce((accc, itemm) => {
+							return Number(itemm.sum) + accc
 						}, 0)
 				return acc
 			}, {count: 0, amount: 0})

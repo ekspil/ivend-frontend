@@ -10,10 +10,10 @@ export const getTableHeaders = () => [
     {
         name: 'Связь',
         key: 'registrationTime',
-        critery ({ registrationTime}) {
+        critery ({ registrationTime, lastSaleTime}) {
 
 
-            let latestTime = registrationTime // > lastSaleTime ? registrationTime : lastSaleTime;
+            let latestTime = registrationTime > lastSaleTime ? registrationTime : lastSaleTime;
             const localeTimestamp = getTimestamp(latestTime);
 
             if (localeTimestamp !== '-') {
@@ -118,10 +118,10 @@ export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
     controllerRegistrationTime: controller?.registrationTime,
     registrationTime: controller?.lastState?.registrationTime,
-    //lastSaleTime: controller?.machine?.lastSaleTime,
+    lastSaleTime: controller?.machine?.lastSaleTime,
     uid: controller.uid,
     simCardNumber: controller.simCardNumber,
-    user: controller.user.legalInfo ? controller.user.legalInfo.companyName : "-",
+    user: controller.user ? controller.user.companyName : "-",
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',
     mode: getMode(controller.mode) || '-',
@@ -131,4 +131,5 @@ export const getTableFields = (data, props) => data.map(controller => ({
     bankTerminalMode: getTerminal(controller.bankTerminalMode),
     props,
     route: `/fiscalAll/controller/${controller.id}`
+
 }));

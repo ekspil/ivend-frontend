@@ -3,14 +3,14 @@ import {  getTimestamp } from '@/utils';
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'name', link: true},
   {name: 'Контроллер', key: 'controller'},
-  {name: 'Наличные', key: 'cashAmount'},
+  {name: 'Наличные', key: 'cashInMachine'},
   {
     name: 'Посл инкасс', key: 'encashmentTimestamp',
     critery({encashmentTimestamp}) {
       return getTimestamp(encashmentTimestamp);
     }
   },
-  {name: 'Сумма', key: 'cashAmount'},
+  {name: 'Сумма', key: 'lastEncashSum'},
   {name: 'Кол инкасс', key: 'encashmentsCount'},
   {name: 'Сумма инкасс', key: 'encashmentsAmount'},
   //{name: 'Кол-во продаж', key: 'salesCount'},
@@ -20,16 +20,17 @@ export const getTableHeaders = () => [
   {name: 'Адрес установки', key: 'place'}
 ];
 
-export const getTableFields = data => data.map(({id, name, lastEncashment, salesByEncashment, place, controller, encashmentsSummaries}) => ({
+export const getTableFields = data => data.map(({id, name, lastEncashment, cashInMachine, place, controller, encashments}) => ({
   id,
   name,
-  encashmentsCount: encashmentsSummaries.length,
-  encashmentsAmount: encashmentsSummaries.reduce((acc, item) => {
-    return Number(item.salesSummary?.cashAmount) + acc
+  encashmentsCount: encashments.length,
+  encashmentsAmount: encashments.reduce((acc, item) => {
+    return Number(item.sum) + acc
   }, 0),
   controller: controller?.uid,
   place,
   encashmentTimestamp: lastEncashment ? new Date(lastEncashment.timestamp) : null,
-  ...salesByEncashment,
+  cashInMachine,
+  lastEncashSum: lastEncashment ? lastEncashment.sum : null,
   route: `/machine/${id}/encashments`
 }));
