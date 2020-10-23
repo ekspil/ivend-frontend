@@ -290,11 +290,11 @@
 
                     default: periodNew = {
                         from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
-                        to: this.calendar.to instanceof Date ? this.calendar.to.getTime() : Date.now()
+                        to: this.calendar.to instanceof Date ? this.calendar.to.getTime() + (24*60*60*1000 - 999) : Date.now()
                     };
                 }
                 this.$emit('onChange', periodNew);
-            }, 61234)
+            }, 120000)
 		}
 	}
 </script>
