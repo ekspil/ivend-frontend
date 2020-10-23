@@ -306,6 +306,10 @@
 
 * encashment speed
 
+# 1.5.14 - Hotfix
+
+* fix time bug
+
 
 
 
