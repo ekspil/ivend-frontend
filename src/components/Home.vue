@@ -17,11 +17,11 @@
                                 </div>
 
                                 <transition name="fade">
-                                    <div v-if="data.salesSummary" class="row">
-                                        <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.salesSummary.overallAmount }}</span></h3>
+                                    <div v-if="data.fastSummary" class="row">
+                                        <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.fastSummary.amountToday }}</span></h3>
                                         <div class="f-b col">Выручка сегодня</div><br/>
                                         <div class="w-100"></div>
-                                        <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.yesterday.overallAmount }}</span></h3>
+                                        <h3 class="mb-1  text-primary font-30 col-5"><span class="counter">{{ data.fastSummary.amountYesterday }}</span></h3>
                                         <div class="f-b col">Выручка вчера</div><br/>
                                     </div>
                                 </transition>
@@ -45,11 +45,11 @@
                             </div>
 
                             <transition name="fade">
-                                <div v-if="data.salesSummary" class="row">
-                                    <h3 class="mb-1 text-primary counter font-30 col-5">{{ data.salesSummary.salesCount }}</h3>
+                                <div v-if="data.fastSummary" class="row">
+                                    <h3 class="mb-1 text-primary counter font-30 col-5">{{ data.fastSummary.countToday }}</h3>
                                     <div class="f-b col">Продаж сегодня</div><br/>
                                     <div class="w-100"></div>
-                                    <h3 class="mb-1 text-primary counter font-30 col-5">{{ data.yesterday.salesCount }}</h3>
+                                    <h3 class="mb-1 text-primary counter font-30 col-5">{{ data.fastSummary.countYesterday }}</h3>
                                     <div class="f-b col">Продаж вчера</div><br/>
                                 </div>
                             </transition>
@@ -301,23 +301,18 @@
         apollo: {
             data: {
                 query: gql`
-                    query ($period: Period, $periodY: Period ) {
+                    query () {
                         getMachines {
                             id
                             error
                         }
 
                         getProfile {
-                            salesSummary (period: $period) {
-                                salesCount
-                                overallAmount
-                            }
-                        }
-
-                        yesterday:getProfile {
-                            salesSummary (period: $periodY) {
-                                salesCount
-                                overallAmount
+                            fastSummary () {
+                                amountToday
+                                amountYesterday
+                                countToday
+                                countYesterday
                             }
                         }
 
@@ -333,13 +328,6 @@
 
                     }
                 `,
-                variables (){
-                    return {
-                        period: this.queryPeriod,
-                        periodY: this.queryPeriodY,
-
-                    }
-                },
                 update: (data) => {
                     function compare(a, b) {
                         let dateA = a.date.split(/[\s|,\.!\-#]+/)
@@ -354,8 +342,7 @@
                     }
                     return {
                         machines: data.getMachines,
-                        salesSummary: data.getProfile.salesSummary,
-                        yesterday: data.yesterday.salesSummary,
+                        fastSummary: data.getProfile.fastSummary,
                         news: data.getNews.sort(compare)
                     }
                 }
