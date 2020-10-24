@@ -301,14 +301,14 @@
         apollo: {
             data: {
                 query: gql`
-                    query () {
+                    query {
                         getMachines {
                             id
                             error
                         }
 
                         getProfile {
-                            fastSummary () {
+                            fastSummary {
                                 amountToday
                                 amountYesterday
                                 countToday
