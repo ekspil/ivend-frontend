@@ -21,6 +21,7 @@
                                         className="settings-table"
                                         :selections="selections"
                                         :filterAction="filterBy"
+                                        :orderAll="descFunc"
                                 />
 
                                 <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -66,6 +67,9 @@
             Table
         },
         data: () => ({
+
+            orderKey: null,
+            orderDesc: null,
             users: [],
             offset: 0,
             limit:100,
@@ -91,8 +95,8 @@
         apollo: {
             users: {
                 query: gql`
-                    query($input: AllUsersInput) {
-                      getAllUsers(input: $input) {
+                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String ) {
+                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey) {
                             phone
                             id
                             email
@@ -113,8 +117,11 @@
                         input: {
                             role: this.selectedRole,
                             offset: Number(this.offset),
-                            limit: Number(this.limit)
-                        }
+                            limit: Number(this.limit),
+                        },
+
+                      orderKey: this.orderKey,
+                      orderDesc: this.orderDesc
                     };
                 },
                 update (data) {
@@ -148,6 +155,12 @@
                     return
                 }
                 this.offset += this.limit
+            },
+
+            descFunc(key, desc){
+                console.log(key)
+                this.orderKey = key
+                this.orderDesc = desc
             },
             prevPage() {
                 if(this.offset - this.limit < 0) {

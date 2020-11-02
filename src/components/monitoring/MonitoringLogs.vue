@@ -62,7 +62,7 @@ export default {
   apollo: {
     machine: {
       query: gql`
-        query ($id: Int!, $type: MachineLogType) {
+        query ($id: Int!, $period: Period, $type: MachineLogType) {
           getMachineById (id: $id) {
             id
             number
@@ -80,7 +80,7 @@ export default {
               id
               name
             }
-            logs(type: $type) {
+            logs(type: $type, period: $period) {
               type
               message
               timestamp
@@ -106,7 +106,6 @@ export default {
           id: Number(this.$route.params.id)
         };
       },
-        pollInterval: 60000,
       update: ({ getMachineById }) => ({
         ...getMachineById
       })
