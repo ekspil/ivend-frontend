@@ -280,12 +280,8 @@ export default {
 
       await this.$apollo.mutate({
         mutation: gql`
-          mutation RequestDeposit ($amount: Float!) {
-            requestDeposit(amount: $amount) {
-              id,
-              status,
-              redirectUrl
-            }
+          mutation userAutoSend ($value: Boolean!) {
+            userAutoSend(value: $value)
           }
           `,
         variables: {
