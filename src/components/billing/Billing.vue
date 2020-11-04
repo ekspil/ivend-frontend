@@ -84,7 +84,7 @@
                 <div  class="col-md-4 col-lg-4">
                   <label class="default-checkbox" for="check1">
                   <input class="auth-block__checkbox" type="checkbox" v-model="autoSend"
-                        id="check1" @change="userAutoSend"/>
+                        id="check1" @change.prevent="userAutoSend"/>
 
                   <span class="auth-block__checkbox-label">Автоматически отправлять счет</span>
                   </label>
@@ -277,7 +277,7 @@ export default {
   },
   methods: {
     async userAutoSend(){
-
+      this.autoSend = !this.autoSend
       await this.$apollo.mutate({
         mutation: gql`
           mutation userAutoSend ($value: Boolean!) {
