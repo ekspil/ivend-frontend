@@ -78,8 +78,18 @@
         <div class="col-md-12 col-lg-12">
           <div class="card">
             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
-            <div class="card-header">
-              <div class="card-title f-b">Оплата</div>
+            <div class="card-header row">
+                <div class="col-md-8 col-lg-8 card-title f-b">Оплата</div>
+                <div  class=""></div>
+                <div  class="col-md-4 col-lg-4">
+                  <label class="default-checkbox" for="check1">
+                  <input class="auth-block__checkbox" type="checkbox" v-model="autoSend"
+                        id="check1" @change="userAutoSend"/>
+
+                  <span class="auth-block__checkbox-label">Автоматически отправлять счет</span>
+                  </label>
+                </div>
+
             </div>
 
             <Tabs
@@ -186,6 +196,8 @@ export default {
           query: gql`
 			query {
 				getProfile {
+				    step,
+				    autoSend,
                     legalInfo{
                         inn
                         companyName
@@ -193,7 +205,8 @@ export default {
           }
 			}
 			`,
-          update:(data) => {
+          update: function(data){
+              this.autoSend = data.getProfile.autoSend
               if(data.getProfile.legalInfo){
                   return data.getProfile.legalInfo
               }
@@ -208,6 +221,7 @@ export default {
       }
   },
   data: () => ({
+    autoSend: false,
     tabs: [
       { name: 'Услуги', component: BillingServices, route: 'services' },
       { name: 'Платежи', component: BillingHistory, route: 'history' }
@@ -262,6 +276,24 @@ export default {
     }
   },
   methods: {
+    async userAutoSend(){
+
+      await this.$apollo.mutate({
+        mutation: gql`
+          mutation RequestDeposit ($amount: Float!) {
+            requestDeposit(amount: $amount) {
+              id,
+              status,
+              redirectUrl
+            }
+          }
+          `,
+        variables: {
+          value: this.autoSend
+        }
+      });
+
+    },
     async requestDeposit () {
       try {
         const { errors, data } = await this.$apollo.mutate({
