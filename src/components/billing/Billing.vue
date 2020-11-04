@@ -83,8 +83,8 @@
                 <div  class=""></div>
                 <div  class="col-md-4 col-lg-4">
                   <label class="default-checkbox" for="check1">
-                  <input class="auth-block__checkbox" type="checkbox" v-model="autoSend"
-                        id="check1" @change.prevent="userAutoSend"/>
+                  <input class="auth-block__checkbox" type="checkbox" :value="autoSend"
+                        id="check1" @change="userAutoSend"/>
 
                   <span class="auth-block__checkbox-label">Автоматически отправлять счет</span>
                   </label>
