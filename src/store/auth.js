@@ -17,11 +17,12 @@ const mutations = {
             state.token = token;
             state.remember = remember;
             state.phone = phone;
+						state.closeHelp = false;
 		}else{
             state.token = null;
             state.remember = null;
             state.phone = null;
-						state.closeHelp = false
+						state.closeHelp = false;
 		}
 
 	},
