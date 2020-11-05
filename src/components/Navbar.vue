@@ -117,9 +117,10 @@
                             :content="s.text">
                         <div slot class="rap">
                             {{s.text}}</div>
-                        <div slot="reference" class="grid-content" @click="$router.push({ path: s.link})" :class="{
+                        <div slot="reference" class="grid-content" @click="link(s)" :class="{
                           'el-steps': (user.step >= s.step),
                           'el-steps-not': (user.step < s.step),
+                          'link': (s.step === (user.step+1))
 
                         }"
 
@@ -231,6 +232,11 @@
             role: null
         }),
         methods: {
+            link(data){
+              if(data.step === (this.user.step +1)){
+                this.$router.push({ path: data.link})
+              }
+            },
             closeHelp(){
               this.$store.state.auth.closeHelp = true
             },
@@ -313,6 +319,8 @@
     .grid-content {
         border-radius: 4px;
         min-height: 60px;
+    }
+    .link {
         cursor: pointer;
     }
     .row-bg {
