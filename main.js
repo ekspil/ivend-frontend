@@ -10,7 +10,6 @@ import store from './src/store'
 import App from './src/App.vue'
 import apolloProvider from "./src/factory/ApolloProviderFactory"
 Vue.use(ElementUI, {locale});
-Vue.use(ElementUI, {locale});
 new Vue({
   el: '.page',
   router,

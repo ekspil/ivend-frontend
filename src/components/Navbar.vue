@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="ren-navbar" id="headerMenuCollapse">
         <div class="container">
             <ul class="nav">
@@ -103,6 +104,42 @@
             </ul>
         </div>
     </div>
+
+        <div v-if="!$store.state.auth.closeHelp">
+            <el-row class="" style="margin-top: 30px; margin-left: 30px; margin-right: 30px; margin-bottom: 2px;" :gutter="10">
+
+                <el-col v-for="s of steps" :span="3" :key="s.step">
+                    <el-popover
+                            placement="bottom-start"
+                            :title="s.name"
+                            width="200"
+                            trigger="hover"
+                            :content="s.text">
+                        <div slot="reference" class="grid-content" :class="{
+                          'el-steps': (user.step >= s.step),
+                          'el-steps-not': (user.step < s.step),
+
+                        }">
+
+                            <el-container>
+                                <el-main :class="{
+                                  'not': (user.step < s.step)
+                                }">
+                                    <p style="margin: 0">Шаг {{s.step}}</p>
+                                    <p style="margin: 0">{{s.name}}</p>
+                                </el-main>
+                            </el-container>
+                        </div>
+                    </el-popover>
+
+
+
+                </el-col>
+
+            </el-row>
+            <div style="text-align: center"><a href="#" @click.prevent="closeHelp">Скрыть подсказки</a></div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -116,7 +153,8 @@
                 query: gql`
                     query {
                         user: getProfile {
-                              billing {
+                                step
+                                billing {
                                        balance,
 
                                        }
@@ -129,7 +167,50 @@
         },
 
         data: () => ({
+            steps: [
+              {
+                step: 0,
+                name: "Регистрация",
+                text: "Регистрация в системе iVend пройдена успешно. Для начала работы выполните пожалуйста все шаги быстрого старта"
+              },
+              {
+                step: 1,
+                name: "Реквизиты",
+                text: "Заполните все реквизиты вашей компании, данный пункт обязателен для полноценной работы сервиса"
+              },
+              {
+                step: 2,
+                name: "Контроллеры",
+                text: "Зарегистрируйте ваши контроллеры в системе по их номеру на обратной стороне"
+              },
+              {
+                step: 3,
+                name: "Автоматы",
+                text: "Создайте ваши торговые автоматы и привяжите к ним подключенное оборудование"
+              },
+              {
+                step: 4,
+                name: "Товары",
+                text: "Добавьте для ваших автоматов товары или услуги, без них не будет работать статистика и фискализация"
+              },
+              {
+                step: 5,
+                name: "Уведомления",
+                text: "Настройте уведомления, которые вы будете получать при различных событиях"
+              },
+              {
+                step: 6,
+                name: "Оплата",
+                text: "Пополните баланс вашего личного кабинета и держите баланс всегда положительным"
+              },
+              {
+                step: 7,
+                name: "Кассы",
+                text: "При необходимости фискализации продаж, добавьте онлайн кассу и включите фискальный режим"
+              },
+            ],
             user: {
+                step: 7,
                 billing: {
                     balance: 1
                 }
@@ -137,6 +218,9 @@
             role: null
         }),
         methods: {
+            closeHelp(){
+              this.$store.state.auth.closeHelp = true
+            },
             isDisabled (link) {
                 if(Number(this.user?.billing?.balance) < -100 && this.$store.state.user?.profile?.role !== "ADMIN"){
                     this.role = 'VENDOR_NEGATIVE_BALANCE'
@@ -177,5 +261,66 @@
             background: transparent;
             color: #666666;
         }
+    }
+    .el-row {
+        margin-bottom: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .el-col {
+        border-radius: 4px;
+
+    }
+    .el-steps {
+        border: #06dabf 1px solid;
+        color: #333;
+        text-align: center;
+
+    }
+    .el-steps-not {
+        border: #da0d06 1px solid;
+        color: #333;
+        text-align: center;
+
+    }
+    p.step {
+        margin-left: auto;
+        margin-right: auto
+    }
+    .bg-purple-dark {
+        background: #99a9bf;
+    }
+    .bg-purple {
+        background: #d3dce6;
+    }
+    .bg-purple-light {
+        background: #e5e9f2;
+    }
+    .grid-content {
+        border-radius: 4px;
+        min-height: 60px;
+    }
+    .row-bg {
+        padding: 10px 0;
+        background-color: #f9fafc;
+    }
+    .el-main {
+
+        border-radius: 4px;
+        background-color: #e6f1e1;
+        color: #2b2b2b;
+        text-align: center;
+        line-height: 30px;
+        padding: 0;
+    }
+    .el-main.not {
+
+        border-radius: 4px;
+        background-color: #f1e7e7;
+        color: #950000;
+        text-align: center;
+        line-height: 30px;
+        padding: 0;
     }
 </style>

@@ -5,7 +5,8 @@ const state = () => ({
 	},
 	user: {},
 	remember: null,
-	phone: null
+	phone: null,
+	closeHelp: false
 });
 
 
@@ -20,6 +21,7 @@ const mutations = {
             state.token = null;
             state.remember = null;
             state.phone = null;
+						state.closeHelp = false
 		}
 
 	},
