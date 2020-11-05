@@ -105,21 +105,25 @@
         </div>
     </div>
 
-        <div v-if="!$store.state.auth.closeHelp && user.step < 7">
+        <div v-if="!$store.state.auth.closeHelp && user.step < 7" class="centered">
             <el-row class="" style="margin-top: 30px; margin-left: 30px; margin-right: 30px; margin-bottom: 2px;" :gutter="10">
 
                 <el-col v-for="s of steps" :span="3" :key="s.step">
                     <el-popover
                             placement="bottom-start"
                             :title="s.name"
-                            width="200"
+                            width="250"
                             trigger="hover"
                             :content="s.text">
-                        <div slot="reference" class="grid-content" :class="{
+                        <div slot class="rap">
+                            {{s.text}}</div>
+                        <div slot="reference" class="grid-content" @click="$router.push({ path: s.link})" :class="{
                           'el-steps': (user.step >= s.step),
                           'el-steps-not': (user.step < s.step),
 
-                        }">
+                        }"
+
+                        >
 
                             <el-container>
                                 <el-main :class="{
@@ -172,42 +176,50 @@
               {
                 step: 0,
                 name: "Регистрация",
-                text: "Регистрация в системе iVend пройдена успешно. Для начала работы выполните пожалуйста все шаги быстрого старта"
+                text: "Регистрация в системе iVend пройдена успешно. Для начала работы выполните пожалуйста все шаги быстрого старта",
+                link: ""
               },
               {
                 step: 1,
                 name: "Реквизиты",
-                text: "Заполните все реквизиты вашей компании, данный пункт обязателен для полноценной работы сервиса"
+                text: "Заполните все реквизиты вашей компании, данный пункт обязателен для полноценной работы сервиса",
+                link: "/settings#company"
               },
               {
                 step: 2,
                 name: "Контроллеры",
-                text: "Зарегистрируйте ваши контроллеры в системе по их номеру на обратной стороне"
+                text: "Зарегистрируйте ваши контроллеры в системе по их номеру на обратной стороне",
+                link: "/settings"
               },
               {
                 step: 3,
                 name: "Автоматы",
-                text: "Создайте ваши торговые автоматы и привяжите к ним подключенное оборудование"
+                text: "Создайте ваши торговые автоматы и привяжите к ним подключенное оборудование",
+                link: "/settings#machines"
               },
               {
                 step: 4,
                 name: "Товары",
-                text: "Добавьте для ваших автоматов товары или услуги, без них не будет работать статистика и фискализация"
+                text: "Добавьте для ваших автоматов товары или услуги, без них не будет работать статистика и фискализация",
+                link: "/settings#machines"
               },
               {
                 step: 5,
                 name: "Уведомления",
-                text: "Настройте уведомления, которые вы будете получать при различных событиях"
+                text: "Настройте уведомления, которые вы будете получать при различных событиях",
+                link: "/settings#notifications"
               },
               {
                 step: 6,
                 name: "Оплата",
-                text: "Пополните баланс вашего личного кабинета и держите баланс всегда положительным"
+                text: "Пополните баланс вашего личного кабинета и держите баланс всегда положительным",
+                link: "/billing#services"
               },
               {
                 step: 7,
                 name: "Кассы",
-                text: "При необходимости фискализации продаж, добавьте онлайн кассу и включите фискальный режим"
+                text: "При необходимости фискализации продаж, добавьте онлайн кассу и включите фискальный режим",
+                link: "/settings#fiscal"
               },
             ],
             user: {
@@ -301,6 +313,7 @@
     .grid-content {
         border-radius: 4px;
         min-height: 60px;
+        cursor: pointer;
     }
     .row-bg {
         padding: 10px 0;
@@ -323,5 +336,37 @@
         text-align: center;
         line-height: 30px;
         padding: 0;
+    }
+    .rap {
+
+            overflow-wrap: normal;  /* не поддерживает IE, Firefox; является копией word-wrap */
+            word-wrap: normal;
+            word-break: normal;  /* не поддерживает Opera12.14, значение keep-all не поддерживается IE, Chrome */
+            line-break: auto;  /* нет поддержки для русского языка */
+            hyphens: manual;  /* значение auto не поддерживается Chrome */
+
+    }
+    .centered {
+        width: 1265px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+    }
+    @media (max-width: 1280px) {
+        .centered {
+            width: 1030px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+    }
+    @media (max-width: 1000px) {
+        .centered {
+            display: none;
+        }
     }
 </style>
