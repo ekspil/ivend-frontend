@@ -162,7 +162,8 @@
                     }
                 `,
 
-                update: data => data.user
+                update: data => data.user,
+                pollInterval: 60000
             }
         },
 
