@@ -277,7 +277,7 @@ export default {
   },
   methods: {
     async userAutoSend(){
-      this.$nextTick()
+      await this.$nextTick()
       await this.$apollo.mutate({
         mutation: gql`
           mutation userAutoSend ($value: Boolean!) {
