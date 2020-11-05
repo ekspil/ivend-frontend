@@ -168,7 +168,7 @@
                 `,
 
                 update: data => data.user,
-                pollInterval: 60000
+                pollInterval: 10000
             }
         },
 
