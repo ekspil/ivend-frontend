@@ -105,7 +105,7 @@
         </div>
     </div>
 
-        <div v-if="!$store.state.auth.closeHelp">
+        <div v-if="!$store.state.auth.closeHelp || user.step < 7">
             <el-row class="" style="margin-top: 30px; margin-left: 30px; margin-right: 30px; margin-bottom: 2px;" :gutter="10">
 
                 <el-col v-for="s of steps" :span="3" :key="s.step">
