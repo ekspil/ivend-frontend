@@ -88,8 +88,7 @@ export const getTableHeaders = () => [
     {
         name: 'Терминал',
         key: 'terminal',
-        critery ({terminal, bankTerminalMode}) {
-            if(bankTerminalMode ==="Без терминала") return createTooltip('info', "ОТКЛ");
+        critery ({terminal}) {
             switch (terminal) {
                 case 'OK':
                     return createTooltip('primary', "Ок");

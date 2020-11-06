@@ -34,11 +34,9 @@
                             <div class="form-group kol">
                                 <select v-model="limit" class="form-control custom-select">
                                     <option value="10">10</option>
-                                    <option value="11">11</option>
                                     <option value="100">100</option>
-                                    <option value="200">200</option>
-                                    <option value="500">500</option>
                                     <option value="1000">1000</option>
+                                    <option value="9999">ВСЕ</option>
                                 </select>
                             </div>
                         </div>
@@ -67,7 +65,7 @@
         data: () => ({
             offset: 0,
             limit:10,
-            savedLimit :100,
+            savedLimit :10,
             controllers: [],
             search: "",
             orderKey: null,
