@@ -310,6 +310,10 @@
 
 * fix time bug
 
+# 1.5.15 - Hotfix
+
+* 7 steps, speed
+
 
 
 
