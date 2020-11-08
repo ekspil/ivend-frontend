@@ -216,6 +216,11 @@
 
                     this.users = this.users.map(user => {
                         if(user.id !== id) return user
+                        if(user.role === "CLOSED"){
+                            user.role = "DELETED"
+                            return user
+                        }
+
                         user.role = "CLOSED"
                         return user
                     })
