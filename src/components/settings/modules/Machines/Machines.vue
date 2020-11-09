@@ -94,6 +94,7 @@
                     }
                 `,
                 update (data) {
+                    this.checkParams(data.getMachines)
                     return data.getMachines;
                 }
             }
@@ -112,7 +113,15 @@
                 });
 
                 this.machines = this.machines.filter(machine => machine.id !== id);
+            },
+          async checkParams(machines){
+            if(this.$route.query.to === 'items'){
+              if(machines[0]){
+                this.$router.push(`/machine/edit/${machines[0].id}#goods`)
+              }
+
             }
+          }
         },
         computed: {
             getTableHeaders,

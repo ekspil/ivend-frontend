@@ -202,13 +202,15 @@
                 step: 4,
                 name: "Товары",
                 text: "Добавьте для ваших автоматов товары или услуги, без них не будет работать статистика и фискализация",
-                link: "/settings#machines"
+                link: "/settings#machines",
+                query: { to: 'items' }
               },
               {
                 step: 5,
                 name: "Уведомления",
                 text: "Настройте уведомления, которые вы будете получать при различных событиях",
-                link: "/settings#notifications"
+                link: "/settings#notifications",
+
               },
               {
                 step: 6,
@@ -234,7 +236,10 @@
         methods: {
             link(data){
               if(data.step === (this.user.step +1)){
-                this.$router.push({ path: data.link})
+                this.$router.push({ path: data.link, query: data.query})
+                if(this.$route.path === '/settings'){
+                  window.location.reload()
+                }
               }
             },
             closeHelp(){
