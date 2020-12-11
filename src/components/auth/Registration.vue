@@ -152,7 +152,14 @@ export default {
         },
         async register() {
             const cache = this.$store.getters['cache/data'];
+            const regData = {
+                ...(omit(['agreement', 'rePassword'], cache)),
+                phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
+            }
 
+            if(this.$store.state.user.partner){
+              regData.partnerId = this.$store.state.user.partner
+            }
             try {
                 const { errors, data } = await this.$apollo.mutate({
                     mutation: gql `
@@ -161,10 +168,7 @@ export default {
                             }
                         `,
                     variables: {
-                        regData: {
-                            ...(omit(['agreement', 'rePassword'], cache)),
-                            phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
-                        }
+                        regData
                     }
                 });
 
@@ -211,6 +215,12 @@ export default {
     },
     beforeDestroy () {
         clearInterval(smsInterval);
+    },
+    mounted() {
+      const ref = Number(this.$route.query.ref)
+      if ( ref > 1){
+        this.$store.commit("user/setPartner", ref)
+      }
     }
 }
 </script>

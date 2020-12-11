@@ -34,6 +34,7 @@
                                             <label class="form-label f-b">Роль</label>
                                             <select class="form-control custom-select" v-model="user.role">
                                                 <option value="VENDOR">VENDOR</option>
+                                                <option value="PARTNER">PARTNER</option>
                                                 <option value="ADMIN">ADMIN</option>
                                                 <option value="VENDOR_NEGATIVE_BALANCE">VENDOR_NEGATIVE_BALANCE</option>
                                                 <option value="VENDOR_NOT_CONFIRMED">VENDOR_NOT_CONFIRMED</option>
@@ -47,6 +48,28 @@
                                         <label class="form-label f-b">Новый пароль</label>
                                         <input class="form-control" v-model="newPassword" name="companyName" formName="editUserData" placeholder="Не заполнять без особой надобности"/>
                                     </div>
+
+
+                                    <div class="form-group" v-if="user.role !== 'PARTNER'">
+                                        <label class="form-label f-b">Партнер</label>
+                                        <input class="form-control" v-model="partnerId" name="partnerId" formName="editUserData" placeholder="Без партнера"/>
+                                    </div>
+
+                                    <div class="form-group" v-if="user.role === 'PARTNER'">
+                                        <label class="form-label f-b">Комиссия контроллеров</label>
+                                        <input class="form-control" v-model="partner.controllerFee" type="number" formName="editUserData" placeholder="Процент"/>
+                                    </div>
+                                    <div class="form-group" v-if="user.role === 'PARTNER'">
+                                        <label class="form-label f-b">Комиссия ККМ</label>
+                                        <input class="form-control" v-model="partner.kkmFee" type="number" formName="editUserData" placeholder="Процент"/>
+                                    </div>
+                                    <div class="form-group" v-if="user.role === 'PARTNER'">
+                                        <label class="form-label f-b">Комиссия терминалов</label>
+                                        <input class="form-control" v-model="partner.terminalFee" type="number" formName="editUserData" placeholder="Процент"/>
+                                    </div>
+
+
+
 
 
                                 </div>
@@ -81,8 +104,14 @@
             Field
         },
         data: () => ({
+            partner: {
+              controllerFee: null,
+              terminalFee: null,
+              kkmFee: null
+            },
             newPassword: null,
             user: null,
+            partnerId: null,
             schema: {
                 email: [required],
                 phone: [required]
@@ -97,6 +126,7 @@
                             id
                             email
                             role
+                            partnerId
                              }
                     }
       `,
@@ -109,11 +139,32 @@
                 },
                 update(user) {
                     const [returnedData] = user.getAllUsers
-
+                    this.partnerId = returnedData.partnerId
                     return returnedData
 
                 }
-            }
+            },
+            partner: {
+                query: gql ` query($userId: Int!) {
+                      getPartnerFee(userId: $userId) {
+                            controllerFee
+                            terminalFee
+                            kkmFee
+                             }
+                        }
+                        `,
+                variables () {
+                    return {
+                      userId: Number(this.$route.params.id)
+                    };
+                },
+                update(partner) {
+                    if(!partner.getPartnerFee){
+                      return this.partner
+                    }
+                    return partner.getPartnerFee
+                }
+            },
         },
         methods: {
             async save () {
@@ -126,8 +177,10 @@
                     if(this.newPassword){
                         input.password = this.newPassword
                     }
-                    console.log(input)
-                    const { errors, data } = await this.$apollo.mutate({
+                    if(this.partnerId){
+                        input.partnerId = Number(this.partnerId)
+                    }
+                    let { errors, data } = await this.$apollo.mutate({
                         mutation: gql`
 							mutation saveUserInfo ($input: UpdateUserInput!) {
 								updateUser(input: $input) {
@@ -139,6 +192,27 @@
                             input
                         }
                     });
+                    if(this.user.role === "PARTNER" && (this.partner.controllerFee || this.partner.controllerFee || this.partner.kkmFee)){
+
+                      await this.$apollo.mutate({
+                        mutation: gql`
+							mutation changePartnerFee ($input: ChangePartnerFeeInput!) {
+								changePartnerFee(input: $input) {
+									userId
+								}
+							}
+						`,
+                        variables: {
+                          input: {
+                            userId: this.user.id,
+                            controllerFee: Number(this.partner.controllerFee),
+                            terminalFee: Number(this.partner.terminalFee),
+                            kkmFee: Number(this.partner.kkmFee),
+                          }
+                        }
+                      });
+
+                    }
 
 
                     this.$refs.form.process({ errors, data, success: 'Успешно сохранено.' });
