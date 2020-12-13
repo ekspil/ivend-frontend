@@ -38,6 +38,9 @@ import AddFiscal from '@/components/fiscal/modules/AddFiscal';
 import AddFiscalAll from '@/components/fiscal/modules/AddFiscalAll';
 import AddNewsAll from '@/components/fiscal/modules/add/AddNewsAll';
 
+
+import Partner from '@/components/partner/Index';
+
 import Billing from '@/components/billing/Billing';
 import Tariffs from '@/components/tariffs/Tariffs';
 
@@ -95,6 +98,9 @@ const routes = [
     { path: '/fiscal/add', component: AddFiscal },
     { path: '/fiscalAll/add', component: AddFiscalAll },
     { path: '/fiscalAll/addNews', component: AddNewsAll },
+
+
+    { path: '/partner', component: Partner },
 
     { path: '/login', component: Login },
     { path: '/sms/:tel', component: Sms },

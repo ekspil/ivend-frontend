@@ -101,6 +101,9 @@
                 <li class="nav-item" v-if="isAdmin() || $store.state.auth.admin.token">
                     <router-link to="/fiscalAll" :class="['nav-link', isDisabled('/fiscalAll')]" activeClass="active" :event="isDisabled('/fiscalAll') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Администратор</span></router-link>
                 </li>
+                <li class="nav-item" v-if="isPartner()">
+                    <router-link to="/partner" :class="['nav-link', isDisabled('/partner')]" activeClass="active" :event="isDisabled('/partner') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Партнерский раздел</span></router-link>
+                </li>
             </ul>
         </div>
     </div>
@@ -268,6 +271,12 @@
             },
             isAdmin () {
                 if (this.$store.state.user?.profile?.role == 'ADMIN'){
+                    return true;
+                }
+                return false;
+            },
+            isPartner () {
+                if (this.$store.state.user?.profile?.role == 'PARTNER'){
                     return true;
                 }
                 return false;

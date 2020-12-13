@@ -6,8 +6,6 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <div class="form-label f-b card-header my-auto">Партнерская ссылка: https://cabinet.ivend.pro/register?ref={{this.user.id}}</div>
-
                                 <div class="stats-top-menu__date-buttons">
                                     <Period @onChange="onPeriodChange"/>
                                 </div>
@@ -54,7 +52,7 @@
     import gql from 'graphql-tag';
     import Table from '@/modules/table/Table';
     import Period from '@/modules/Period';
-    import { getTableHeaders, getTableFields } from '@/utils/mappers/PartnerUsers';
+    import { getTableHeaders, getTableFields } from '@/utils/mappers/Partners';
 
     export default {
         name: 'Users',
@@ -66,9 +64,6 @@
             period: {
               from: null,
               to: null
-            },
-            user: {
-              id:null
             },
             orderKey: null,
             orderDesc: null,
@@ -89,21 +84,28 @@
                             phone
                             id
                             email
-                            role
-                            partnerId
-                            monthPay(period: $period)
-                            partnerFee(period: $period)
-                            controllers{
+                            vendors{
                                 id
-                                simCardNumber
-                            }
-                            kkts{
-                                id
+                                monthPay(period: $period)
+                                partnerFee(period: $period)
+                                controllers{
+                                    id
+                                    simCardNumber
+                                }
+
+                                kkts{
+                                    id
+                                }
+
+                                billing{
+                                    balance
+                                    dailyBill
+                                }
                             }
                             billing{
-                                balance
-                                dailyBill
-                                }
+                                 balance
+                                 dailyBill
+                            }
                             legalInfo{
                                 inn
                                 companyName
@@ -116,6 +118,7 @@
                         input: {
                             offset: Number(this.offset),
                             limit: Number(this.limit),
+                            role: "PARTNER"
                         },
 
                       orderKey: this.orderKey,
@@ -136,20 +139,8 @@
                             return user
                         }
                     )
+                  console.log(returnedData)
                     return returnedData;
-                }
-            },
-            user: {
-                query: gql`
-                    query {
-                      getProfile {
-                            id
-                      }
-                    }
-                `,
-                update (data) {
-
-                    return data.getProfile
                 }
             }
         },
@@ -168,6 +159,7 @@
             },
 
             descFunc(key, desc){
+                console.log(key)
                 this.orderKey = key
                 this.orderDesc = desc
             },
