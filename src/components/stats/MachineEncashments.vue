@@ -5,6 +5,8 @@
 				<div class="col-md-12 col-lg-12">
 					<div class="card">
 						<div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
+
+
 						<div class="card-header">
 							<div class="card-title f-b" v-if="machine">Инкассации автомата {{ machine.name }}</div>
 						</div>
@@ -12,9 +14,12 @@
 						<div class="card-header-links">
 							<router-link :to="`/stats#encashments`" class="card-header-links__item">Вернуться назад</router-link>
 						</div>
+						<div class="card-header">
+							<Period @onChange="onPeriodChange"/>
+						</div>
 
 						<Table
-						v-if="machine && machine.encashmentsSummaries && machine.encashmentsSummaries.length"
+						v-if="machine && machine.encashments && machine.encashments.length"
 						:headers="getTableHeaders"
 						:fields="getTableFields"
 						className="stats-table"
@@ -49,25 +54,22 @@ export default {
 		period: {
 			from: null,
 			to: null
-		}
+		},
+		machine: null
 	}),
 	apollo: {
 		machine: {
 			query: gql`
-			query ($id: Int!) {
+			query ($id: Int!, $period: Period!) {
 				machine: getMachineById (id: $id) {
 					id
 					name
-					encashmentsSummaries {
-						encashment {
-						    timestamp
-						}
-						salesSummary {
-                            salesCount
-                            overallAmount
-                            cashAmount
-                            cashlessAmount
-						}
+
+					encashments(period: $period){
+						sum
+						createdAt
+						timestamp
+
 					}
 				}
 			}
@@ -75,6 +77,7 @@ export default {
 			variables () {
 				return {
 					id: Number(this.$route.params.id),
+					period: this.period
 				};
 			},
             pollInterval: 60000,
@@ -91,7 +94,8 @@ export default {
 	},
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.machine || {}) }
+		getTableFields () {
+			return getTableFields(this.machine || {}) }
 	}
 }
 </script>

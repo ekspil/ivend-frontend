@@ -8,22 +8,20 @@ export const getTableHeaders = () => [
       return getTimestamp(encashmentTimestamp);
     }
   },
-  {name: 'Кол-во', key: 'salesCount'},
+  // {name: 'Кол-во', key: 'salesCount'},
   {name: 'Сумма', key: 'overallAmount'},
-  {name: 'Нал', key: 'cashAmount'},
-  {name: 'Безнал', key: 'cashlessAmount'},
+  // {name: 'Нал', key: 'cashAmount'},
+  // {name: 'Безнал', key: 'cashlessAmount'},
 ];
 
 export const getTableFields = (machine) => {
-    return machine.encashmentsSummaries.map(encashmentSummary => {
-      const {salesSummary, encashment} = encashmentSummary
-      const {timestamp} = encashment
-
+    return machine.encashments.map(encashment => {
+      const {timestamp, sum} = encashment
       return {
         machineId: machine.id,
         machineName: machine.name,
         encashmentTimestamp: new Date(timestamp),
-        ...salesSummary
+        overallAmount: sum,
       }
     })
 
