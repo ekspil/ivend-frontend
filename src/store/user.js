@@ -5,7 +5,8 @@ import gql from 'graphql-tag';
 
 const state = () => ({
 	profile: null,
-	partner: null
+	partner: null,
+	partnerFee: null,
 });
 
 const mutations = {

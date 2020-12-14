@@ -7,6 +7,8 @@
                         <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
                         <div class="card-header">
                             <div class="card-title f-b">Панель партнера</div>
+                            <div class="card-title-right f-b" v-if="$store.state.user.partnerFee">Сумма комиссии за период {{($store.state.user.partnerFee).toFixed(2)}} руб.</div>
+
                         </div>
 
                         <Tabs :tabs="tabs" />

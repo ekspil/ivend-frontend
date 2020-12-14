@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <div class="form-label f-b card-header my-auto">Партнерская ссылка: https://cabinet.ivend.pro/register?ref={{this.user.id}}</div>
+                                <div class="form-label f-b card-header my-auto">Партнерская ссылка: <a :href="'https://cabinet.ivend.pro/register?ref='+user.id">https://cabinet.ivend.pro/register?ref={{this.user.id}}</a></div>
 
                                 <div class="stats-top-menu__date-buttons">
                                     <Period @onChange="onPeriodChange"/>
@@ -124,7 +124,7 @@
                     };
                 },
                 update (data) {
-
+                  let feeSum = 0
                     const returnedData = data.getAllUsers.map(
                         (user) => {
                             if(!user.legalInfo){
@@ -133,9 +133,15 @@
                                 user.legalInfo.companyName = "Не указан"
 
                             }
+
+                            if(user.partnerFee){
+                              feeSum += Number(user.partnerFee)
+                            }
+
                             return user
                         }
                     )
+                    this.$store.state.user.partnerFee = feeSum
                     return returnedData;
                 }
             },
