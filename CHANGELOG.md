@@ -329,6 +329,11 @@
 * bugs
 
 
+# 1.6.1 - Release
+
+* Partner service
+
+
 
 
 
