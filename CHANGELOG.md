@@ -333,6 +333,10 @@
 
 * Partner service
 
+# 1.6.2 - Release
+
+* New terminal models
+
 
 
 
