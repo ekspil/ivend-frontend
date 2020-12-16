@@ -337,6 +337,10 @@
 
 * New terminal models
 
+# 1.6.3 - Hotfix
+
+* Rename terminal models
+
 
 
 
