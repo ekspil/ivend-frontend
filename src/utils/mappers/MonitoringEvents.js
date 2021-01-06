@@ -7,10 +7,6 @@ export const getTableHeaders = () => [
 		link: true,
 	},
 	{
-		name: 'Контроллер',
-		key: 'controller',
-	},
-	{
 		name: 'Связь',
 		key: 'registrationTime',
 		critery ({ registrationTime, lastSaleTime }) {
@@ -122,7 +118,12 @@ export const getTableHeaders = () => [
 			}
 
 		} }
-	}
+	},
+
+	{
+		name: 'Контроллер',
+		key: 'controller',
+	},
 ];
 
 export const getTableFields = data => data.map(machine => ({

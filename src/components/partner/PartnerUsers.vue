@@ -53,7 +53,7 @@
 <script>
     import gql from 'graphql-tag';
     import Table from '@/modules/table/Table';
-    import Period from '@/modules/Period';
+    import Period from '@/modules/PeriodLarge';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/PartnerUsers';
 
     export default {

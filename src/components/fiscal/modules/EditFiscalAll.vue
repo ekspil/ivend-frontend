@@ -64,7 +64,7 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Количество чеков</label>
-                                        <Field className="form-control" :value="data.kkt.kktBillsCount" disabled name="kktBillsCount" formName="editFiscal" placeholder=""/>
+                                        <Field className="form-control" :value="data.kkt.kktBillsCount" name="kktBillsCount" formName="editFiscal" placeholder=""/>
                                     </div>
 
                                     <div class="form-group">

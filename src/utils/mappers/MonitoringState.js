@@ -7,10 +7,6 @@ export const getTableHeaders = () => [
 		link: true,
 	},
 	{
-		name: 'Контроллер',
-		key: 'controller',
-	},
-	{
 		name: 'Связь',
 		key: 'registrationTime',
 		critery ({ registrationTime, lastSaleTime }) {
@@ -139,6 +135,10 @@ export const getTableHeaders = () => [
 				default:
 					return createTooltip('info', cashbox);
 			}}
+	},
+	{
+		name: 'Контроллер',
+		key: 'controller',
 	},
 
 ];

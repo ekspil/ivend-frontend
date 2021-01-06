@@ -2,7 +2,6 @@ import {  getTimestamp } from '@/utils';
 
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'name', link: true},
-  {name: 'Контроллер', key: 'controller'},
   {name: 'Наличные', key: 'cashInMachine'},
   {
     name: 'Посл инкасс', key: 'encashmentTimestamp',
@@ -17,7 +16,8 @@ export const getTableHeaders = () => [
 
 
   //{name: 'Безнал', key: 'cashlessAmount'},
-  {name: 'Адрес установки', key: 'place'}
+  {name: 'Адрес установки', key: 'place'},
+  {name: 'Контроллер', key: 'controller'},
 ];
 
 export const getTableFields = data => data.map(({id, name, lastEncashment, cashInMachine, place, controller, encashments}) => ({
