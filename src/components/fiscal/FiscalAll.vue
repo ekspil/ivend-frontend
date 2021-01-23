@@ -67,6 +67,7 @@
                              }
                     }
                 `,
+          pollInterval: 120000,
           update (data) {
             return data.getAdminStatistic;
           }
