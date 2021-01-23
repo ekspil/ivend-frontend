@@ -41,9 +41,7 @@
                 { name: 'Кассы', component: Kkts, route: 'kktsAll' },
                 { name: 'Информация', component: News, route: 'newsAll' },
                 { name: 'Партнеры', component: Partners, route: 'partners' },
-            ]
-        })
-                { name: 'Информация', component: News, route: 'newsAll' }
+
             ],
           statistic: null
         }),
