@@ -1,10 +1,10 @@
 export const getTableHeaders = () => [
 	{ name: 'Автомат', key: 'name', link: true },
-	{ name: 'Контроллер', key: 'controller'},
 	{ name: 'Кол-во продаж', key: 'salesCount' },
 	{ name: 'Сумма', key: 'overallAmount' },
 	{ name: 'Наличные', key: 'cashAmount' },
 	{ name: 'Безнал', key: 'cashlessAmount' },
+	{ name: 'Контроллер', key: 'controller'},
 
 ];
 

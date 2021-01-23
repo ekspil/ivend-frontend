@@ -129,7 +129,7 @@ import BillingHistory from './modules/BillingHistory';
 import BillingServices from './modules/BillingServices';
 import {mapGetters} from 'vuex'
 
-import Period from '@/modules/Period';
+import Period from '@/modules/PeriodLarge';
 
 // Query key for marking redirects from Yandex Kassa e.g. ?from=yandex_kassa
 const YANDEX_REDIRECT_KEY = 'yandex_kassa';

@@ -20,19 +20,19 @@
                                 <div class="col-md-12 col-lg-12">
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Компания</label>
-                                        <input class="form-control" v-model="user.legalInfo.companyName" name="companyName" formName="editUser" placeholder="У компании не указано название"/>
+                                        <Field className="form-control" :value="user.legalInfo.companyName" name="companyName" formName="editUser" placeholder="У компании не указано название"/>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">ИНН</label>
-                                        <Field className="form-control" :value="user.legalInfo.inn"  disabled name="inn" formName="editUser" placeholder="У компании не указан ИНН"/>
+                                        <input class="form-control" v-model="user.legalInfo.inn"  name="inn" formName="editUser" placeholder="У компании не указан ИНН"/>
                                     </div>
 
 
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">ОГРН</label>
-                                        <Field className="form-control" :value="user.legalInfo.ogrn" disabled name="companyName" formName="editUser" placeholder="У компании не указан ОГРН"/>
+                                        <input class="form-control" v-model="user.legalInfo.ogrn"  name="companyName" formName="editUser" placeholder="У компании не указан ОГРН"/>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">
@@ -65,12 +65,12 @@
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Телефон директора</label>
-                                        <Field className="form-control" :value="user.legalInfo.directorPhone" disabled name="companyName" formName="editUser" placeholder="У компании не указан телефон директора"/>
+                                        <input class="form-control" v-model="user.legalInfo.directorPhone" name="companyName" formName="editUser" placeholder="У компании не указан телефон директора"/>
                                     </div>
 
                                     <div class="form-group" v-if="user.legalInfo">
                                         <label class="form-label f-b">Почта директора</label>
-                                        <Field className="form-control" :value="user.legalInfo.directorEmail" disabled name="companyName" formName="editUser" placeholder="У компании не указана почта директора"/>
+                                        <input class="form-control" v-model="user.legalInfo.directorEmail" name="companyName" formName="editUser" placeholder="У компании не указана почта директора"/>
                                     </div>
 
                                 </div>
@@ -193,7 +193,7 @@
                         variables: {
                             input: {
                                 userId: this.user.id,
-                                companyName: this.user.legalInfo.companyName,
+                                ...this.$store.getters['cache/data'],
                                 city: this.user.legalInfo.city,
                                 actualAddress: this.user.legalInfo.actualAddress,
                                 inn: this.user.legalInfo.inn,

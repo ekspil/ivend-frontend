@@ -82,6 +82,7 @@
                 key: "role",
                 values: [
                     "VENDOR",
+                    "PARTNER",
                     "CLOSED",
                     "AGGREGATE",
                     "VENDOR_NO_LEGAL_INFO",
@@ -101,6 +102,7 @@
                             id
                             email
                             role
+                            partnerId
                             billing{
                                 balance
                                 dailyBill

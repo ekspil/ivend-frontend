@@ -27,6 +27,7 @@
     import Users from './modules/UsersAll';
     import Controllers from './modules/ControllersAll';
     import News from './modules/NewsAll';
+    import Partners from './modules/Partners';
     import gql from "graphql-tag";
 
 
@@ -38,6 +39,10 @@
                 { name: 'Пользователи', component: Users, route: 'usersAll' },
                 { name: 'Контроллеры', component: Controllers, route: 'controllersAll' },
                 { name: 'Кассы', component: Kkts, route: 'kktsAll' },
+                { name: 'Информация', component: News, route: 'newsAll' },
+                { name: 'Партнеры', component: Partners, route: 'partners' },
+            ]
+        })
                 { name: 'Информация', component: News, route: 'newsAll' }
             ],
           statistic: null

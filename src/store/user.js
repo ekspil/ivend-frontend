@@ -4,12 +4,17 @@ import router from '@/router/Router';
 import gql from 'graphql-tag';
 
 const state = () => ({
-	profile: null
+	profile: null,
+	partner: null,
+	partnerFee: null,
 });
 
 const mutations = {
 	set (state, payload = null) {
 		state.profile = payload;
+	},
+	setPartner (state, partner = null) {
+		state.partner = partner;
 	},
 
 	clear (state) {

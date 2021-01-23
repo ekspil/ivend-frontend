@@ -329,6 +329,19 @@
 * bugs
 
 
+# 1.6.1 - Release
+
+* Partner service
+
+# 1.6.2 - Release
+
+* New terminal models
+
+# 1.6.3 - Hotfix
+
+* Rename terminal models
+
+
 
 
 

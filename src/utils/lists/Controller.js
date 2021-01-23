@@ -51,6 +51,9 @@ export const controllerTerminal = [
     {name: "OTI UNO Trade", value: "otiu_t"},
     {name: "OTI TRIO Vend", value: "otit_v"},
     {name: "OTI TRIO Trade", value: "otit_t"},
+    {name: "Vendotek V3 Vend", value: "vdk3_v"},
+    {name: "Vendotek V3 Trade", value: "vdk3_t"},
+    {name: "Vendotek V3 Pulse", value: "vdk3_p"},
 ]
 
 
