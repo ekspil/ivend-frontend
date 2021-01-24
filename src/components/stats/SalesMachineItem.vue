@@ -13,11 +13,15 @@
 							<router-link :to="`/stats/${$route.params.machineId}`" class="card-header-links__item">Вернуться назад</router-link>
 						</div>
 
-						<div class="stats-top-menu" v-if="false">
-							<div class="stats-top-menu__content-container">
-								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data"/>
-							</div>
-						</div>
+            <div class="stats-top-menu">
+              <div class="stats-top-menu__content-container">
+                <div class="stats-top-menu__date-buttons">
+                  <Period @onChange="onPeriodChange"/>
+                </div>
+
+                <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data.machine"/>
+              </div>
+            </div>
 
 
                         <div v-if="data">
@@ -53,12 +57,14 @@ import gql from 'graphql-tag';
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
 import { getTableHeaders, getTableFields } from '@/utils/mappers/MachineItemSales';
+import Period from '@/modules/Period';
 
 export default {
 	name: 'salesMachineItem',
 	components: {
 		Table,
 		ExportExcel,
+    Period
 	},
 	data: () => ({
         offset: 0,
@@ -66,12 +72,16 @@ export default {
         sales: null,
         data: null,
 		machine: null,
+    period: {
+      from: null,
+      to: null
+    }
 	}),
 	apollo: {
 		data: {
 			query: gql`
-				query ($offset: Int!, $limit: Int!, $machineId: Int, $itemId: Int, $machineIdRequired: Int!) {
-					sales: getSales(offset: $offset, limit: $limit, machineId: $machineId, itemId: $itemId) {
+				query ($offset: Int!, $limit: Int!, $machineId: Int, $itemId: Int, $machineIdRequired: Int!, $period: Period) {
+					sales: getSales(offset: $offset, limit: $limit, machineId: $machineId, itemId: $itemId, period: $period) {
 						id
 						price
 						type
@@ -97,10 +107,11 @@ export default {
 					machineIdRequired: Number(this.$route.params.machineId),
 					itemId: Number(this.$route.params.itemId),
 					offset: this.offset,
-					limit: this.limit
+					limit: this.limit,
+          period: this.period
 				};
 			},
-            pollInterval: 60000,
+
 			update ({ sales, machine}) {
 				return {
 					sales,
@@ -110,6 +121,13 @@ export default {
 		}
 	},
 	methods: {
+    onPeriodChange (period) {
+
+      if(period.to <= period.from){
+        period.to = period.from
+      }
+      this.period = period;
+    },
 	  nextPage() {
 	    if(!this.data || !this.data.sales || !this.data.sales.length) {
 	      return
