@@ -19,7 +19,7 @@
                   <Period @onChange="onPeriodChange"/>
                 </div>
 
-                <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data.machine"/>
+                <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data"/>
               </div>
             </div>
 
@@ -73,8 +73,8 @@ export default {
         data: null,
 		machine: null,
     period: {
-      from: null,
-      to: null
+      from: new Date().getTime() - 24 * 60 * 60 * 100,
+      to: new Date().getTime()
     }
 	}),
 	apollo: {

@@ -341,6 +341,10 @@
 
 * Rename terminal models
 
+# 1.6.4 - Hotfix
+
+* Rename terminal models
+
 
 
 
