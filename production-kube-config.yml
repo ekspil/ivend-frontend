@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: registry.gitlab.com/pshenmic/ivend/frontend:1.6.4
+        image: registry.gitlab.com/pshenmic/ivend/frontend:1.6.5
         imagePullPolicy: Always
         ports:
           - containerPort: 80

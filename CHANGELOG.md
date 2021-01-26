@@ -346,6 +346,11 @@
 * Rename terminal models
 
 
+# 1.6.5 - Hotfix
+
+* fix
+
+
 
 
 
