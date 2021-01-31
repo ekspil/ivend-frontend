@@ -60,7 +60,7 @@
 									billAmount
 									registrationTime
 									coinAmount
-
+                  attentionRequired
 									coinAcceptorStatus
 									billAcceptorStatus
 								}

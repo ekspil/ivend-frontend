@@ -169,6 +169,7 @@
                         }
 						lastState {
 							registrationTime
+							attentionRequired
 						}
                         user {
                             email
