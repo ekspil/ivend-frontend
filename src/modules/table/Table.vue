@@ -155,7 +155,7 @@
 				if(field.phone && field.email){
 					//did nothing
 				}
-				console.log(field)
+
 				if(field.attentionRequired){
             return "background:#f05457"
         }

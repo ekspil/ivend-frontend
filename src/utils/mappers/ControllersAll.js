@@ -115,6 +115,8 @@ export const getTableHeaders = () => [
 
 export const getTableFields = (data, props) => data.map(controller => ({
     id: controller.id,
+
+    attentionRequired: controller?.lastState?.attentionRequired,
     controllerRegistrationTime: controller?.registrationTime,
     registrationTime: controller?.lastState?.registrationTime,
     lastSaleTime: controller?.machine?.lastSaleTime,
