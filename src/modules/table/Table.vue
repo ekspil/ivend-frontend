@@ -155,7 +155,8 @@
 				if(field.phone && field.email){
 					//did nothing
 				}
-				if(field.controller && field.controller.lastState && field.controller.lastState.attentionRequired){
+				console.log(field)
+				if(field.attentionRequired){
             return "background:#f05457"
         }
 				else if(!field.timeToDie){
