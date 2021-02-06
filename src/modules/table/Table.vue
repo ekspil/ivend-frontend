@@ -35,6 +35,10 @@
 						{{ field[header.key] }}
 					</router-link>
 
+					<router-link v-else-if="header.link && field.route && header.critery" v-html="header.critery(field)" :to="field.route" class="f-b">
+
+					</router-link>
+
 					<router-link v-else-if="header.link && field.route" :to="field.route" class="f-b">
 						{{ field[header.key] }}
 					</router-link>
@@ -156,9 +160,9 @@
 					//did nothing
 				}
 
-				if(field.attentionRequired){
-            return "background:#f05457"
-        }
+				// if(field.attentionRequired){
+        //     return "background:#f05457"
+        // }
 				else if(!field.timeToDie){
                     //did nothing
 				}

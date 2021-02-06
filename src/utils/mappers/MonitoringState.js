@@ -4,6 +4,16 @@ export const getTableHeaders = () => [
 	{
 		name: 'Автомат',
 		key: 'name',
+		critery ({ name, attentionRequired }) {
+
+
+				if (attentionRequired) {
+					return createTooltip('alert', name);
+				} else {
+					return name
+				}
+
+		},
 		link: true,
 	},
 	{
