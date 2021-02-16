@@ -129,6 +129,7 @@
 					case 'PINPAD_ERROR': return 'Неисправность терминала';
 					case 'CASH_ACCEPTOR_ERROR': return 'Неисправность купюроприемника';
 					case 'USER_WILL_BLOCK': return 'Блокирока личного кабинета';
+					case 'MACHINE_ATTENTION_REQUIRED': return 'Неисправность автомата';
 					default: return 'Неизвестный тип уведомления';
 				}
 			},

@@ -363,6 +363,11 @@
 * fix
 
 
+# 1.6.8 - Hotfix
+
+* new notification
+
+
 
 
 
