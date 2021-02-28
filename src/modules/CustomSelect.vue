@@ -13,7 +13,7 @@
     <select :class="['custom-select', className]" v-if="!inputShown" v-model="value">
       <option
         v-for="option in options"
-        :key="option.id"
+        :key="prefix + '-' + option.id"
         :value="option.id"
       >
         {{ option.name }}
@@ -42,6 +42,7 @@ export default {
       default: () => false
     },
     className: String,
+    prefix: String,
     initialValue: {
       default: ''
     }

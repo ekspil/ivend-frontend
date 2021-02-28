@@ -40,6 +40,7 @@
 		name: 'BillingServices',
         data: () => ({
             controllers: [],
+            svs: [],
             defaultHidden: process.env.VUE_APP_SERVICES_DEFAULT_HIDDEN
         }),
         apollo: {
@@ -59,20 +60,22 @@
                         }
                     }
                 `,
-                pollInterval: 60000,
 
-                update: data => data.getControllers
+                update: data => {
+                  return data.getControllers
+                }
             }
         },
         computed:{
-		    servs: function(){
-		        const services = []
+            servs: function(){
+                let services = []
                 for(let controller of this.controllers){
                     for(let service of controller.services){
                         const [exist] = services.filter(serv => serv.id === service.id)
                         if(!exist){
-                            service.count = 1
-                            services.push(service)
+                          let s = JSON.parse(JSON.stringify(service))
+                          s.count = 1
+                            services.push(s)
                         }else{
                             services.map(serv => {
                                 if(serv.id !== service.id) return serv
@@ -89,10 +92,12 @@
 
                     }
                 }
+
                 if(services.length){
                     const json = JSON.stringify(services)
+                    services = null
                     this.$store.commit("cache/setServices", json)
-                    return services
+                    return JSON.parse(json)
                 }
 
             }

@@ -11,7 +11,20 @@
                                 </div>
                                 <div class="">
                                     <div class="row gutters-xs">
-                                        <span class="col-auto">
+                                      <select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
+                                        <option label="Все группы" :value="null"></option>
+                                        <option v-for="group in groups" v-bind:value="group.id" :key="group.id">{{group.name}}</option>
+                                      </select>
+
+
+
+                                      <span class="col-auto">
+                                            <button class="btn btn-primary" type="button" @click.prevent="$router.push('/machine/editGroup')"><i
+                                                class="fe fe-settings"> Общие настройки</i>
+                                            </button>
+                                        </span>
+
+                                      <span class="col-auto">
                                             <button class="btn btn-primary" type="button"><i
                                                 class="fe fe-upload"> Импорт</i>
                                             </button>
@@ -21,9 +34,9 @@
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                                         </span>
 
-                                        <span class="col-auto">
-                                            <button class="btn btn-primary" type="button">Сохранить</button>
-                                        </span>
+<!--                                        <span class="col-auto">-->
+<!--                                            <button class="btn btn-primary" type="button">Сохранить</button>-->
+<!--                                        </span>-->
                                     </div>
                                 </div>
                             </div>
@@ -61,13 +74,15 @@
             ExportExcel
         },
         data: () => ({
-            machines: []
+            machines: [],
+            groups: null,
+            selectedGroupId: null
         }),
         apollo: {
             machines: {
                 query: gql`
-                    query {
-                      getMachines {
+                    query($machineGroupId: Int) {
+                      getMachines(machineGroupId: $machineGroupId) {
                         id
                         name
                         number
@@ -93,11 +108,28 @@
                       }
                     }
                 `,
+              variables () {
+                return {
+                  machineGroupId: this.selectedGroupId
+                };
+              },
                 update (data) {
                     this.checkParams(data.getMachines)
                     return data.getMachines;
                 }
-            }
+            },
+
+          groups: {
+            query: gql`
+			query {
+				getMachineGroups {
+					id
+					name
+				}
+			}
+			`,
+            update: data => data.getMachineGroups
+          },
         },
         methods: {
             async removeMachine (id) {

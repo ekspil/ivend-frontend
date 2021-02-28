@@ -26,17 +26,48 @@
 
         <div class="form-group">
           <label class="form-label f-b">{{machineHeaders.group}}</label>
-          <CustomSelect
-          className="form-control"
-          :initialValue="data.machine.group.id"
-          :options="data.groups"
-          :notNumber="true"
-          @onSelect="onGroupSelect"
-          @onBlur="onGroupAppend"
-          @onInputToggle="disableSubmit"
-          @onSelectToggle="enableSubmit"
-          ref="goodSelect"
-          />
+          <div class="row">
+            <div class="col-md-4">
+              <CustomSelect
+                  className="form-control"
+                  :initialValue="data.machine.group.id"
+                  :options="data.groups"
+                  :notNumber="true"
+                  @onSelect="onGroupSelect"
+                  @onBlur="onGroupAppend"
+                  @onInputToggle="disableSubmit"
+                  @onSelectToggle="enableSubmit"
+                  ref="goodSelect"
+                  prefix="1"
+              /></div>
+            <div class="col-md-4">
+              <CustomSelect
+                  className="form-control"
+                  :initialValue="data.machine.group2.id"
+                  :options="data.groups"
+                  :notNumber="true"
+                  @onSelect="onGroupSelect"
+                  @onBlur="onGroupAppend"
+                  @onInputToggle="disableSubmit"
+                  @onSelectToggle="enableSubmit"
+                  ref="goodSelect2"
+                  prefix="2"
+              /></div>
+            <div class="col-md-4">
+              <CustomSelect
+                  className="form-control"
+                  :initialValue="data.machine.group3.id"
+                  :options="data.groups"
+                  :notNumber="true"
+                  @onSelect="onGroupSelect"
+                  @onBlur="onGroupAppend"
+                  @onInputToggle="disableSubmit"
+                  @onSelectToggle="enableSubmit"
+                  ref="goodSelect3"
+                  prefix="3"
+              /></div>
+
+          </div>
         </div>
 
         <div class="form-group">
@@ -197,6 +228,14 @@ export default {
             id
             name
           }
+          group2 {
+            id
+            name
+          }
+          group3 {
+            id
+            name
+          }
           equipment {
             id
             name
@@ -313,13 +352,16 @@ export default {
         this.machineUpdating = true;
 
 
-        /* Забираем значение из CustomSelect */
-        const newGoodLabel = this.$refs.goodSelect.value;
-        if (typeof(newGoodLabel) === 'string') {
-          this.data.machine.group.id = find(propEq('name', newGoodLabel))(this.data.groups).id;
-        } else {
-          this.data.machine.group.id = find(propEq('id', newGoodLabel))(this.data.groups).id;
-        }
+        // /* Забираем значение из CustomSelect */
+        // const newGoodLabel = this.$refs.goodSelect.value;
+        // if (typeof(newGoodLabel) === 'string') {
+        //   this.data.machine.group.id = find(propEq('name', newGoodLabel))(this.data.groups).id;
+        // } else {
+        //   this.data.machine.group.id = find(propEq('id', newGoodLabel))(this.data.groups).id;
+        // }
+        const newGroupId = Number(this.$refs.goodSelect.value)
+        const newGroupId2 = Number(this.$refs.goodSelect2.value)
+        const newGroupId3 = Number(this.$refs.goodSelect3.value)
         try {
           const { errors } = await this.$apollo.mutate({
             mutation: gql`
@@ -335,7 +377,9 @@ export default {
             variables: {
                 data: {
                   machineId: this.data.machine.id,
-                  groupId: this.data.machine.group.id,
+                  groupId: newGroupId,
+                  group2Id: newGroupId2,
+                  group3Id: newGroupId3,
                   equipmentId: this.input.equipmentId,
                   typeId: this.input.typeId,
                   controllerId: this.input.controllerId,

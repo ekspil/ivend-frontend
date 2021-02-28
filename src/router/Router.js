@@ -8,6 +8,7 @@ import Remember from '@/components/auth/Remember';
 import NewPassword from '@/components/auth/NewPassword';
 
 import EditController from '@/components/controllers/EditController';
+import EditControllerGroup from '@/components/controllers/EditControllerGroup';
 import AddController from '@/components/controllers/AddController';
 
 import AddGoods from '@/components/goods/AddGoods';
@@ -25,6 +26,7 @@ import MonitoringLogs from '@/components/monitoring/MonitoringLogs';
 import Settings from '@/components/settings/Settings';
 import AddMachine from '@/components/settings/modules/Machines/AddMachine';
 import EditMachine from '@/components/settings/modules/Machines/EditMachine';
+import EditMachineGroup from '@/components/settings/modules/Machines/EditMachineGroup';
 
 import Fiscal from '@/components/fiscal/Fiscal';
 import FiscalAll from '@/components/fiscal/FiscalAll';
@@ -61,6 +63,7 @@ const routes = [
     { path: '/confirm', component: Confirm },
 
     { path: '/controllers/edit/:id', component: EditController },
+    { path: '/controllers/editGroup', component: EditControllerGroup },
     { path: '/controllers/edit/:id/:from', component: EditController },
     { path: '/controllers/add', component: AddController },
 
@@ -77,6 +80,7 @@ const routes = [
     { path: '/settings', component: Settings },
     { path: '/machine/add', component: AddMachine },
     { path: '/machine/edit/:id', component: EditMachine },
+    { path: '/machine/editGroup', component: EditMachineGroup },
     { path: '/machine/:id/encashments', component: MachineEncashments },
 
     { path: '/sales/machine/:machineId/item/:itemId', component: SalesMachineItem },

@@ -4,13 +4,13 @@ import { getTerminal, getMode, getStatus, mapFiscalizationMode } from "@/utils/l
 
 export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'uid', link: true, ltOrder: true },
-    { name: 'Состояние', key: 'status', unsortable: true, raw: true },
-    { name: 'Прошивка', key: 'firmwareId', unsortable: true },
-    { name: 'Режим', key: 'mode', unsortable: true },
-    { name: 'Терминал', key: 'bankTerminalMode', unsortable: true },
-    { name: 'Фискализация', key: 'fiscalizationMode', unsortable: true },
+    { name: 'Состояние', key: 'status', raw: true },
+    { name: 'Прошивка', key: 'firmwareId'},
+    { name: 'Режим', key: 'mode'},
+    { name: 'Терминал', key: 'bankTerminalMode'},
+    { name: 'Фискализация', key: 'fiscalizationMode'},
    // { name: 'Принтер', key: 'remotePrinterId', unsortable: true },
-    { name: 'Автомат', key: 'machine', unsortable: true },
+    { name: 'Автомат', key: 'machine' },
 ];
 
 export const getTableFields = (data, props) => data.map(controller => ({

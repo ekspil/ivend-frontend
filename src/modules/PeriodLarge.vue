@@ -210,7 +210,7 @@
 		mounted () {
 			this.$emit('onChange', this.getPeriod);
 
-			setInterval(() => {
+			setInterval(function() {
 				let periodNew = this.getPeriod()
                 this.$emit('onChange', periodNew);
             }, 120000)

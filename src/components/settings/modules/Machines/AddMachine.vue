@@ -26,16 +26,48 @@
 									<Field name="place" formName="addMachine" className="form-control" placeholder="Введите место установки автомата"/>
 								</div>
 
-								<div class="form-group">
-									<label class="form-label f-b">{{machineHeaders.group}}</label>
-									<CustomSelect
-									className="form-control"
-									:initialValue="input.groupId"
-									:options="machine.groups"
-									@onSelect="onGroupSelect"
-									@onBlur="onGroupAppend"
-									/>
-								</div>
+
+
+
+                <div class="form-group">
+                  <label class="form-label f-b">{{machineHeaders.group}}</label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <CustomSelect
+                          className="form-control"
+                          :initialValue="input.groupId"
+                          :options="machine.groups"
+                          :notNumber="true"
+                          @onSelect="onGroupSelect"
+                          @onBlur="onGroupAppend"
+                          ref="goodSelect"
+                          prefix="1"
+                      /></div>
+                    <div class="col-md-4">
+                      <CustomSelect
+                          className="form-control"
+                          :initialValue="input.group2Id"
+                          :options="machine.groups"
+                          :notNumber="true"
+                          @onSelect="onGroupSelect"
+                          @onBlur="onGroupAppend"
+                          ref="goodSelect2"
+                          prefix="2"
+                      /></div>
+                    <div class="col-md-4">
+                      <CustomSelect
+                          className="form-control"
+                          :initialValue="input.group3Id"
+                          :options="machine.groups"
+                          :notNumber="true"
+                          @onSelect="onGroupSelect"
+                          @onBlur="onGroupAppend"
+                          ref="goodSelect3"
+                          prefix="3"
+                      /></div>
+
+                  </div>
+                </div>
 
 								<div class="form-group">
 									<label class="form-label f-b">{{machineHeaders.type}}</label>
@@ -170,7 +202,9 @@ export default {
 		input: {
 			controllerId: null,
 			equipmentId: 1,
-			groupId: 1,
+			groupId: null,
+			group2Id: null,
+			group3Id: null,
 			typeId: 1,
 			kktId: 0
 		},
@@ -257,6 +291,9 @@ export default {
 		},
 		async save () {
             this.input.kktId = Number(this.input.kktId)
+      this.input.groupId = Number(this.$refs.goodSelect.value)
+      this.input.group2Id = Number(this.$refs.goodSelect2.value)
+      this.input.group3Id = Number(this.$refs.goodSelect3.value)
 			const data = {
 				...this.input,
 				...this.$store.getters['cache/data']

@@ -10,8 +10,22 @@
                                     <router-link to="/controllers/add" class="btn btn-primary">Добавить контроллер</router-link>
                                 </div>
                                 <div class="">
+
+
                                     <div class="row gutters-xs">
-                                        <span class="col-auto">
+                                      <select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
+                                        <option label="Все группы" :value="null"></option>
+                                        <option v-for="group in groups" v-bind:value="group.id" :key="group.id">{{group.name}}</option>
+                                      </select>
+
+
+                                      <span class="col-auto">
+                                            <button class="btn btn-primary" type="button" @click.prevent="$router.push('/controllers/editGroup')"><i
+                                                class="fe fe-settings"> Общие настройки</i>
+                                            </button>
+                                        </span>
+
+                                      <span class="col-auto">
                                             <button class="btn btn-primary" type="button"><i
                                                 class="fe fe-upload"> Импорт</i>
                                             </button>
@@ -21,10 +35,10 @@
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                                         </span>
 
-                                        <span class="col-auto">
-                                            <button class="btn btn-primary" type="button">Сохранить
-                                            </button>
-                                        </span>
+<!--                                        <span class="col-auto">-->
+<!--                                            <button class="btn btn-primary" type="button">Сохранить-->
+<!--                                            </button>-->
+<!--                                        </span>-->
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +76,9 @@
             ExportExcel
         },
         data: () => ({
-            controllers: []
+            controllers: [],
+            groups: null,
+            selectedGroupId: null
         }),
         apollo: {
             controllers: {
@@ -84,6 +100,15 @@
                         machine {
                           id
                           name
+                          group {
+                            id
+                          }
+                          group2 {
+                            id
+                          }
+                          group3 {
+                            id
+                          }
                         }
                       }
                     }
@@ -91,7 +116,19 @@
                 update (data) {
                     return data.getControllers;
                 }
-            }
+            },
+
+          groups: {
+            query: gql`
+			query {
+				getMachineGroups {
+					id
+					name
+				}
+			}
+			`,
+            update: data => data.getMachineGroups
+          },
         },
         methods: {
             getStatus (status) {
@@ -122,7 +159,15 @@
         computed: {
             getTableHeaders,
             getTableFields () {
-                return getTableFields(this.controllers, {
+                return getTableFields(this.controllers.filter(c=> {
+                  if (!this.selectedGroupId) return true
+                  if (!c.machine) return false
+                  if (!c.machine.group) return false
+                  if (c.machine.group.id == this.selectedGroupId) return true
+                  if (c.machine.group2.id == this.selectedGroupId) return true
+                  if (c.machine.group3.id == this.selectedGroupId) return true
+                  return false
+                }), {
                     remove: this.removeController,
                     routeKey: "machine",
                     routeId: "machineId",

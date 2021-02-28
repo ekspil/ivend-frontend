@@ -8,7 +8,8 @@ export const controllerHeaders = {
     version: "Версия контроллера",
     printer: "Номер принтера",
     sim: "Номер сим терминала",
-    imsi: "Номер сим контроллера"
+    controllerSim: "Номер сим контроллера",
+    imsi: "IMSI сим контроллера"
 }
 
 
