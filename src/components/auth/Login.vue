@@ -96,7 +96,6 @@ export default {
 
                 this.$refs.login.process({ errors, data, success: 'Переадресация...' });
             } catch (error) {
-                console.log(error)
                 this.$refs.login.showMessage('error', convertServerError(error.message));
             }
         },

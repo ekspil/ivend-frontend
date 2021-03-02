@@ -146,6 +146,7 @@ export const convertServerError = error => {
 		'Such buttonId already bound to this ItemMatrix': 'Введённый ID товара уже привязан к этой матрице.',
 		'SMS code does not match': 'Введённый код не совпадает с отправленным.',
 		'Controller with such UID exist': 'Контроллер с таким UID уже существует.',
+		'CLOSED_USER': 'Ваш кабинет заблокирован, для разблокировки напишите на почту support@ivend.pro',
 		default: 'Неизвестная ошибка сервера.'
 	}
 
