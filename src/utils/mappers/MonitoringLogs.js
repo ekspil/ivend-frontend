@@ -7,6 +7,10 @@ const mapType = type => {
 		case 'BILLACCEPTOR': return 'Купюроприемник';
 		case 'BUS_ERROR': return 'Ошибка шины';
 		case 'REGISTRATION': return 'Регистрация';
+		case 'NO_RECEIPT_24H': return 'Касса';
+		case 'NO_CASHLESS_24H': return 'Банковский терминал';
+		case 'NO_CASH_24H': return 'Купюроприемник';
+		case 'NO_COINS_24H': return 'Монетник';
 		default: return '?';
 	}
 }

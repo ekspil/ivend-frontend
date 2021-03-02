@@ -32,8 +32,9 @@
 					<td class="checkbox-cel">
 						<div>
 
-							<input  name="telegram" class="company-settings__field" type="text"
-									placeholder="login в телеграм"  v-model="telegram" @change="saveAll()"/>
+							<input  name="telegram" class="company-settings__field" type="text" id="popover111"
+                      title="Для подключения уведомлений вам необходимо вписать свой ник(посмотреть и изменить можно в настройках телеграм) и после этого написать '/start' боту @ivend_bot"
+									  placeholder="login в телеграм"  v-model="telegram" @change="saveAll()" />
 						</div>
 					</td>
 
@@ -45,7 +46,7 @@
 						<td class="checkbox-cel">
 							<label class="default-checkbox" :for="'checkbox-11'+index">
 								<input class="auth-block__checkbox" type="checkbox"
-								:id="'checkbox-11'+index" v-model="profile.notificationSettings[index].email" @change="save(index)"/>
+								:id="'checkbox-11'+index" v-model="profile.notificationSettings[index].email" @change.prevent="save(index)" :disabled="baseNotif(profile.notificationSettings[index])"/>
 
 								<span class="auth-block__checkbox-label"></span>
 							</label>
@@ -60,10 +61,10 @@
 						<!--</td>-->
 						<td class="checkbox-cel">
 							<label class="default-checkbox" :for="'checkbox-13'+index">
-								<input class="auth-block__checkbox" type="checkbox"
-								:id="'checkbox-13'+index" v-model="profile.notificationSettings[index].tlgrm" @change="save(index)"/>
+								<input class="" type="checkbox"
+								:id="'checkbox-13'+index" v-model="profile.notificationSettings[index].tlgrm" @change.prevent="save(index)" :disabled="baseNotif(profile.notificationSettings[index])"/>
 
-								<span class="auth-block__checkbox-label"></span>
+								<span class=""></span>
 							</label>
 						</td>
 
@@ -83,7 +84,7 @@
 		name: 'Notifications',
 		apollo: {
 			profile: {
-				query: gql`
+        query: gql`
 					query {
 						getProfile {
 							email,
@@ -100,11 +101,21 @@
 						}
 					}
 				`,
-				update: data => data.getProfile
+        update: (data) => {
+          data.getProfile.notificationSettings.map(item => {
+          if (item.type === "ALARM_SMS") {
+            item.tlgrm = true
+            item.email = true
+          }
+          return item
+        })
+          return data.getProfile
+      }
 			}
 		},
 		data: () => ({
 			profile: null,
+      myPopover: {},
 			values: {
 				telegram: "",
 				extraEmail: ""
@@ -114,7 +125,13 @@
 				success: null
 			}
 		}),
-		methods: {
+    mounted() {
+    },
+    methods: {
+		  baseNotif(data){
+		    if(data.type === "ALARM_SMS") return true
+        return false
+      },
 			getType (type) {
 				switch (type) {
 					case 'CONTROLLER_NO_CONNECTION': return 'Нет связи с автоматом';
@@ -125,11 +142,12 @@
 					case 'GET_WEEK_SALES': return 'Получать еженедельную выручку';
 					case 'GET_DAY_SALES': return 'Получать ежедневную выручку';
 					case 'GET_NEWS': return 'Получать новости сервиса';
-					case 'KKT_ERROR': return 'Неисправность ККТ';
-					case 'PINPAD_ERROR': return 'Неисправность терминала';
-					case 'CASH_ACCEPTOR_ERROR': return 'Неисправность купюроприемника';
-					case 'USER_WILL_BLOCK': return 'Блокирока личного кабинета';
+					case 'NO_RECEIPT_24H': return 'Нет чеков за 24 часа';
+					case 'NO_CASHLESS_24H': return 'Нет безнала за 24 часа';
+					case 'NO_COINS_24H': return 'Нет монет за 24 часа';
+					case 'NO_CASH_24H': return 'Нет купюр за 24 часа';
 					case 'MACHINE_ATTENTION_REQUIRED': return 'Неисправность автомата';
+					case 'ALARM_SMS': return 'Экстренные уведомления по СМС';
 					default: return 'Неизвестный тип уведомления';
 				}
 			},
