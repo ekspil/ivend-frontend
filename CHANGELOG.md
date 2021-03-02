@@ -368,6 +368,11 @@
 * new notification
 
 
+# 1.6.9 - Hotfix
+
+* new fiches
+
+
 
 
 
