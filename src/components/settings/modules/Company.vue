@@ -47,6 +47,12 @@
 				</div>
 
 				<div class="company-settings__field-container">
+					<label for="company-kpp" class="company-settings__field-label">КПП</label>
+					<Field id="company-kpp" className="company-settings__field" formName="company" type="text"
+					placeholder="КПП" name="kpp" :value="info.kpp"/>
+				</div>
+
+				<div class="company-settings__field-container">
 					<label for="company-ogrn" class="company-settings__field-label">ОГРН</label>
 					<Field id="company-ogrn" className="company-settings__field" formName="company" type="text"
 					placeholder="ОГРН" name="ogrn" :value="info.ogrn" />
@@ -116,6 +122,26 @@
 
 					</select>
 				</div>
+
+				<div class="company-settings__field-container">
+					<label for="company-time" class="company-settings__field-label">Часовой пояс</label>
+					<select id="company-time" v-model="info.timeZone" class="form-control custom-select">
+						<option value="0">МСК -3</option>
+						<option value="1">МСК -2</option>
+						<option value="2">МСК -1</option>
+						<option value="3">МСК</option>
+						<option value="4">МСК +1</option>
+						<option value="5">МСК +2</option>
+						<option value="6">МСК +3</option>
+						<option value="7">МСК +4</option>
+						<option value="8">МСК +5</option>
+						<option value="9">МСК +6</option>
+						<option value="10">МСК +7</option>
+						<option value="11">МСК +8</option>
+						<option value="12">МСК +9</option>
+
+					</select>
+				</div>
 			</Validate>
 
 			<div class="row gutters-xs company__save-button">
@@ -152,6 +178,8 @@
 								actualAddress,
 								inn,
 								ogrn,
+								kpp,
+								timeZone,
 								legalAddress,
 								director,
 								directorPhone,
@@ -196,7 +224,7 @@
 				contactPerson: [required],
 				contactPhone: [required],
 				contactEmail: [required, email],
-				sno: [required]
+				sno: [required],
 			}
 		}),
 		methods: {
@@ -220,7 +248,9 @@
 									contactPerson,
 									contactPhone,
 									contactEmail,
-									sno
+									sno,
+									timeZone,
+									kpp
 								}
 							}
 						`,
@@ -229,7 +259,8 @@
 								...cache,
 								directorPhone: cache.directorPhone.replace(/[()+\s-]/gi, '').slice(1),
 								contactPhone: cache.contactPhone.replace(/[()+\s-]/gi, '').slice(1),
-								sno: this.info.sno
+								sno: this.info.sno,
+                timeZone: this.info.timeZone
 							}
 						}
 					});
