@@ -113,7 +113,19 @@
         methods: {
           async deleteKkt(){
             if(!this.selectedKkt.agree) return
-            console.log("delete")
+            $('#exampleModal').modal('hide')
+            await this.$apollo.mutate({
+              mutation: gql`
+                        mutation ($id: Int!) {
+                            userDeleteKkt (id: $id)
+                        }
+                    `,
+              variables: { id: this.selectedKkt.id }
+            });
+            this.kkts = this.kkts.filter(controller => controller.id !== this.selectedKkt.id);
+
+            this.selectedKkt.agree = false
+            this.selectedKkt.id = null
           }
 
         },
