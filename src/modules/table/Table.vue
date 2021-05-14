@@ -175,6 +175,10 @@
                     if(field.activationDate === "5:Ошибка"){
                         return "background:#f05457" ;
                     }
+
+                    if(field.activationDate === "6:Удаление"){
+                        return "background:#f05457" ;
+                    }
                     if(field.activationDate === "3:Внимание"){
                         return "background:#ffd000" ;
                     }

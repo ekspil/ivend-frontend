@@ -2,6 +2,9 @@ import { createTooltip} from '@/utils';
 
 const getStatus = field => {
     //Проверку оставшихся дней после того как установлю формат
+    if(field.action === "DELETE"){
+        return "6:Удаление" ;
+    }
     if(!field.kktActivationDate){
         return "4:Регистрация" ;
     }
@@ -12,6 +15,7 @@ const getStatus = field => {
     let monthF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1];
 
     if(field.kktModel === "УМКА-01-ФА (ФН36)"){
+
 
 
         if(year - yearF >= 3 && month - monthF <=0){

@@ -6,13 +6,17 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <div class="top-buttons__left-container">
-                                    <router-link to="/fiscalAll/add" class="btn btn-primary">Добавить кассу</router-link>
-                                </div>
+<!--                                <div class="top-buttons__left-container">-->
+<!--                                    <router-link to="/fiscalAll/add" class="btn btn-primary">Добавить кассу</router-link>-->
+<!--                                </div>-->
 
                                 <div class="form-group" style="width: 50%; padding-left: 10px">
                                     <input v-model="search" class="form-control custom-select" placeholder="Поиск">
                                 </div>
+
+                              <span class="col-auto">
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                            </span>
 
 
                                 <Table
@@ -56,12 +60,14 @@
     import gql from 'graphql-tag';
     import Table from '@/modules/table/Table';
 
+    import ExportExcel from '@/modules/table/ExportExcel';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/KktsAll';
 
     export default {
         name: 'Kkts',
         components: {
-            Table
+            Table,
+          ExportExcel
         },
         data: () => ({
             kkts: [],
@@ -87,6 +93,7 @@
                             companyName
                             kktLastBill
                             server
+                            action
 
                              }
                     }
@@ -155,20 +162,20 @@
                     // kktFNNumber
                     if(!this.search) return true
                     const r1 = new RegExp(this.search.toUpperCase())
-                    const res1 = r1.test(kkt.kktModel.toUpperCase())
+                    const res1 = r1.test(String(kkt.kktModel).toUpperCase())
                     if(res1) return res1
                     const r2 = new RegExp(this.search.toUpperCase())
-                    const res2 = r2.test(kkt.companyName.toUpperCase())
+                    const res2 = r2.test(String(kkt.companyName).toUpperCase())
                     if(res2) return res2
                     const r3 = new RegExp(this.search.toUpperCase())
-                    const res3 = r3.test(kkt.kktFactoryNumber.toUpperCase())
+                    const res3 = r3.test(String(kkt.kktFactoryNumber).toUpperCase())
                     if(res3) return res3
 
                     const r4 = new RegExp('^'+this.search.toUpperCase())
-                    const res4 = r4.test(kkt.kktRegNumber.toUpperCase())
+                    const res4 = r4.test(String(kkt.kktRegNumber).toUpperCase())
                     if(res4) return res4
                     const r5 = new RegExp('^'+this.search.toUpperCase())
-                    const res5 = r5.test(kkt.kktFNNumber.toUpperCase())
+                    const res5 = r5.test(String(kkt.kktFNNumber).toUpperCase())
                     if(res5) return res5
                     return false
 

@@ -6,8 +6,8 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <div v-if="!$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminEnter()">Режим администратора</div>
-                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>
+<!--                                <div v-if="!$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminEnter()">Режим администратора</div>-->
+<!--                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>-->
 
                                 <div class="form-group" style="width: 50%; padding-left: 10px">
                                     <input v-model="search" class="form-control custom-select" placeholder="Поиск">

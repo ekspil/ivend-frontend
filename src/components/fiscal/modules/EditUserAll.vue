@@ -6,80 +6,120 @@
                     <div class="card-header" v-if="user.legalInfo">
                         <h3 class="card-title f-b">Информация о компании {{user.legalInfo.companyName}}</h3>
                     </div>
-
+                  <div class="company-settings">
                     <Validate
+                            className="company-settings__form"
                             routeBack="/fiscalAll#usersAll"
-                            formName="editUser"
+                            formName="company"
                             ref="form"
                             :schema="schema"
                             @onSubmit="save"
                             @onSuccess="onSuccess"
                     >
                         <template slot="form">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-12">
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">Компания</label>
-                                        <Field className="form-control" :value="user.legalInfo.companyName" name="companyName" formName="editUser" placeholder="У компании не указано название"/>
-                                    </div>
+                          <div class="company-settings">
+                            <label for="company-name" class="company-settings__field-label">Название
+                              компании</label>
+                            <Field id="company-name" name="companyName" className="company-settings__field" type="text"
+                                   placeholder="Название компании" formName="company" :value="user.legalInfo.companyName" />
+                          </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">ИНН</label>
-                                        <input class="form-control" v-model="user.legalInfo.inn"  name="inn" formName="editUser" placeholder="У компании не указан ИНН"/>
-                                    </div>
+                          <div class="company-settings">
+                            <label for="company-city"
+                                   class="company-settings__field-label">Город</label>
+                            <Field id="company-city" className="company-settings__field" formName="company" type="text" name="city"
+                                   placeholder="Город" :value="user.legalInfo.city"/>
+                          </div>
+
+                          <div class="company-settings">
+                            <label for="company-fact-address" class="company-settings__field-label">Адрес
+                              фактический</label>
+                            <Field id="company-fact-address" className="company-settings__field" formName="company" type="text"
+                                   placeholder="Адрес фактический" :value="user.legalInfo.actualAddress" name="actualAddress"/>
+                          </div>
+
+                          <div class="company-settings">
+                            <label for="company-inn" class="company-settings__field-label">ИНН</label>
+                            <Field id="company-inn" className="company-settings__field" formName="company" type="text"
+                                   placeholder="ИНН" name="inn" :value="user.legalInfo.inn"/>
+                          </div>
+
+                          <div class="company-settings">
+                            <label for="company-ogrn" class="company-settings__field-label">ОГРН</label>
+                            <Field id="company-ogrn" className="company-settings__field" formName="company" type="text"
+                                   placeholder="ОГРН" name="ogrn" :value="user.legalInfo.ogrn" />
+                          </div>
+
+
+                          <div class="company-settings">
+                            <label for="company-legal-address" class="company-settings__field-label">Адрес
+                              юридический</label>
+                            <Field id="company-legal-address" className="company-settings__field" formName="company"
+                                   type="text" placeholder="Адрес юридический" :value="user.legalInfo.legalAddress" name="legalAddress"/>
+                          </div>
 
 
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">ОГРН</label>
-                                        <input class="form-control" v-model="user.legalInfo.ogrn"  name="companyName" formName="editUser" placeholder="У компании не указан ОГРН"/>
-                                    </div>
+                          <div class="company-settings">
+                            <label for="company-director" class="company-settings__field-label">Директор</label>
+                            <Field id="company-director" className="company-settings__field" formName="company" type="text"
+                                   placeholder="Директор" :value="user.legalInfo.director" name="director" />
+                          </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">СНО</label>
-                                        <select id="company-sno" v-model="user.legalInfo.sno" class="form-control custom-select">
-                                            <option value="usn_income">УСН доходы</option>
-                                            <option value="usn_income_outcome">УСН доходы-расходы</option>
-                                            <option value="envd">ЕНВД</option>
-                                            <option value="patent">Патент</option>
-                                            <option value="osn">ОСН</option>
-                                            <option value="esn">ЕСН</option>
+                          <div class="company-settings">
+                            <label for="company-director-phone" class="company-settings__field-label">Телефон директора</label>
+                            <Field :masked="true" mask="\+\7 (111) 111 11-11"
+                                   id="company-director-phone" className="company-settings__field" formName="company" type="tel"
+                                   placeholder="Телефон директора" :value="user.legalInfo.directorPhone" name="directorPhone" />
+                          </div>
 
-                                        </select>
-                                    </div>
+                          <div class="company-settings">
+                            <label for="company-director-email" class="company-settings__field-label">Почта директора</label>
+                            <Field id="company-director-email" className="company-settings__field" formName="company"
+                                   type="text" placeholder="Почта директора" :value="user.legalInfo.directorEmail" name="directorEmail" />
+                          </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">Юридический адрес</label>
-                                        <input class="form-control" v-model="user.legalInfo.legalAddress"  name="companyName" formName="editUser" placeholder="У компании не указан юр.адрес"/>
-                                    </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">Фактический адрес</label>
-                                        <input class="form-control" v-model="user.legalInfo.actualAddress"  name="companyName" formName="editUser" placeholder="У компании не указан фактический адрес"/>
-                                    </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">Директор</label>
-                                        <input class="form-control" v-model="user.legalInfo.director"  name="companyName" formName="editUser" placeholder="У компании не указан директор"/>
-                                    </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">Телефон директора</label>
-                                        <input class="form-control" v-model="user.legalInfo.directorPhone" name="companyName" formName="editUser" placeholder="У компании не указан телефон директора"/>
-                                    </div>
+                          <div class="company-settings">
+                            <label for="company-contact-name" class="company-settings__field-label">Контактное лицо</label>
+                            <Field id="company-contact-name" className="company-settings__field" formName="company" type="text"
+                                   placeholder="Контактное лицо" :value="user.legalInfo.contactPerson" name="contactPerson" />
+                          </div>
 
-                                    <div class="form-group" v-if="user.legalInfo">
-                                        <label class="form-label f-b">Почта директора</label>
-                                        <input class="form-control" v-model="user.legalInfo.directorEmail" name="companyName" formName="editUser" placeholder="У компании не указана почта директора"/>
-                                    </div>
+                          <div class="company-settings">
+                            <label for="company-contact-phone" class="company-settings__field-label">Контактный телефон</label>
+                            <Field :masked="true" mask="\+\7 (111) 111 11-11" id="company-contact-phone"
+                                   className="company-settings__field" formName="company" type="tel"
+                                   placeholder="Контактный телефон" :value="user.legalInfo.contactPhone" name="contactPhone" />
+                          </div>
 
-                                </div>
-                            </div>
+                          <div class="company-settings">
+                            <label for="company-contact-email" class="company-settings__field-label">Контактная почта</label>
+                            <Field id="company-contact-email" className="company-settings__field" formName="company"
+                                   type="text" placeholder="Контактная почта" :value="user.legalInfo.contactEmail" name="contactEmail" />
+                          </div>
+
+
+                          <div class="company-settings">
+                            <label for="company-sno" class="company-settings__field-label">Система налогооблажения</label>
+                            <select id="company-sno" v-model="user.legalInfo.sno" class="form-control custom-select">
+                              <option value="usn_income">УСН доходы</option>
+                              <option value="usn_income_outcome">УСН доходы-расходы</option>
+                              <option value="envd">ЕНВД</option>
+                              <option value="patent">Патент</option>
+                              <option value="osn">ОСН</option>
+                              <option value="esn">ЕСН</option>
+
+                            </select>
+                          </div>
                         </template>
                         <template slot="submit" v-if="user.legalInfo">
                             <button type="submit" class="btn btn-primary ml-auto" >Сохранить</button>
                         </template>
                     </Validate>
+                  </div>
 
                     <div class="aligned-text" v-if="$apollo.loading">Загрузка...</div>
 
@@ -194,17 +234,6 @@
                             input: {
                                 userId: this.user.id,
                                 ...this.$store.getters['cache/data'],
-                                city: this.user.legalInfo.city,
-                                actualAddress: this.user.legalInfo.actualAddress,
-                                inn: this.user.legalInfo.inn,
-                                ogrn: this.user.legalInfo.ogrn,
-                                legalAddress: this.user.legalInfo.legalAddress,
-                                director: this.user.legalInfo.director,
-                                directorPhone: this.user.legalInfo.directorPhone,
-                                directorEmail: this.user.legalInfo.directorEmail,
-                                contactPerson: this.user.legalInfo.contactPerson,
-                                contactPhone: this.user.legalInfo.contactPhone,
-                                contactEmail: this.user.legalInfo.contactEmail,
                                 sno: this.user.legalInfo.sno
                             }
                         }

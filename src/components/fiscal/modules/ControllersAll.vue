@@ -5,12 +5,17 @@
                 <div class="col-md-12 col-lg-12">
                     <div class="card">
                         <div class="text-wrap">
+                          <div class="example top-buttons-container top-buttons">
+                            <div class="form-group" style="width: 50%; padding-left: 10px">
+                              <input v-model="search" class="form-control custom-select" placeholder="Поиск">
 
+                            </div>
+                            <span class="col-auto">
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                            </span>
+                          </div>
                         </div>
-                        <div class="form-group" style="width: 50%; padding-left: 10px">
-                            <label class="form-label f-b">Поиск:</label>
-                            <input v-model="search" class="form-control custom-select">
-                        </div>
+
                         <Table
                             v-if="controllers"
                             :headers="getTableHeaders"
@@ -54,13 +59,16 @@
     import gql from 'graphql-tag';
 
     import Table from '@/modules/table/Table';
+
+    import ExportExcel from '@/modules/table/ExportExcel';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/ControllersAll';
     import {controllerTerminal, controllerFiscalType, controllerStates } from '@/utils/lists/Controller';
 
     export default {
         name: 'Controllers',
         components: {
-            Table
+            Table,
+          ExportExcel
         },
         data: () => ({
             offset: 0,
