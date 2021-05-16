@@ -373,6 +373,11 @@
 * new fiches
 
 
+# 1.6.10 - Hotfix
+
+* new fiches
+
+
 
 
 
