@@ -154,6 +154,35 @@
                         });
                         break
                 }
+            },
+            async sendSMS (id) {
+
+                        await this.$apollo.mutate({
+                          mutation: gql`
+                        mutation ($id: Int!) {
+                            sendNewsSMS (id: $id)
+                        }
+                    `,
+                            variables: { id }
+                        });
+
+                        alert("СМС рассылка выполнена!")
+
+            },
+            async sendEmail (id) {
+
+                        await this.$apollo.mutate({
+                            mutation: gql`
+                        mutation ($id: Int!) {
+                            sendNewsEmail (id: $id)
+                        }
+                    `,
+                            variables: { id }
+                        });
+
+
+              alert("Почтовая рассылка выполнена!")
+
             }
 
         },
@@ -166,7 +195,9 @@
                 })
             },
             getTableFields () { return getTableFields(this.newsFiltred, {
-                remove: this.removeNews
+                remove: this.removeNews,
+                sendSMS: this.sendSMS,
+                sendEmail: this.sendEmail,
             }) }
         }
     }

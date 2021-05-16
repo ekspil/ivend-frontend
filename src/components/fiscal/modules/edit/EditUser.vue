@@ -8,7 +8,7 @@
                     </div>
 
                     <Validate
-                            routeBack="/fiscalAll#usersAll"
+                            :routeBack=from
                             formName="editUserData"
                             ref="form"
                             :schema="schema"
@@ -103,7 +103,13 @@
             Validate,
             Field
         },
-        data: () => ({
+      mounted() {
+          if(this.$route.query.from === "partner"){
+            this.from = "/fiscalAll#partners"
+          }
+      },
+      data: () => ({
+            from: "/fiscalAll#usersAll",
             partner: {
               controllerFee: null,
               terminalFee: null,
@@ -223,7 +229,7 @@
             },
             onSuccess () {
                 const router = this.$router;
-                setTimeout(function () { router.push('/fiscalAll#usersAll'); }, 1000);
+                setTimeout(function () { router.push(this.from); }, 1000);
             },
 
             getBillingAbbr (date) {

@@ -1,6 +1,6 @@
 <template>
   <button class="btn btn-primary" type="button" @click.prevent="requestExcel"><i
-    class="fe fe-download"> Экспорт</i>
+    class="fe fe-download"> {{ text }}</i>
   </button>
 </template>
 
@@ -18,6 +18,12 @@ export default {
         headers: [],
         fields: []
       })
+    },
+    text: {
+      type: String,
+      default: () => {
+        return "Экспорт"
+      }
     }
   },
   methods: {
@@ -34,7 +40,7 @@ export default {
       });
       fields.forEach(field => {
         rows.push({
-          cells: headers.map(header => JSON.stringify(field[header.key]))
+          cells: headers.map(header => String(JSON.stringify(field[header.key])))
         });
       });
 

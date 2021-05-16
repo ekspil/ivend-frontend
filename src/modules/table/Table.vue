@@ -72,9 +72,16 @@
 							<a href="#" class="dropdown-item" @click.prevent="field.props.remove(field.id, field.type)">
 								<i class="dropdown-icon fe fe-x"></i> Удалить
 							</a>
+							<a v-if="field.props.sendSMS && field.type === 'Новость'" href="#" class="dropdown-item" @click.prevent="field.props.sendSMS(field.id, field.type)">
+								<i class="dropdown-icon fe fe-send"></i> Рассылка по СМС
+							</a>
+							<a  v-if="field.props.sendEmail && field.type === 'Новость'"  href="#" class="dropdown-item" @click.prevent="field.props.sendEmail(field.id, field.type)">
+								<i class="dropdown-icon fe fe-send"></i> Рассылка на почту
+							</a>
 						</div>
 					</div>
 				</td>
+
 
 <!--				<td class="text-right" v-if="field && field.props && field.props.changeBalance">-->
 <!--					<div class="item-action dropdown">-->

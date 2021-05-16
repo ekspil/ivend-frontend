@@ -139,7 +139,6 @@
                             return user
                         }
                     )
-                  console.log(returnedData)
                     return returnedData;
                 }
             }
@@ -159,7 +158,6 @@
             },
 
             descFunc(key, desc){
-                console.log(key)
                 this.orderKey = key
                 this.orderDesc = desc
             },

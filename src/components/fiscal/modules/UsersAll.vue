@@ -12,7 +12,43 @@
                                 <div class="form-group" style="width: 50%; padding-left: 10px">
                                     <input v-model="search" class="form-control custom-select" placeholder="Поиск">
                                 </div>
+                              <span class="col-auto">
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                            </span>
+                              <span class="col-auto">
+                                            <ExportExcel :table="{ headers: [...getTableHeaders,
 
+                                            { name: 'КПП', key: 'kpp'},
+                                            { name: 'Город', key: 'city'},
+                                            { name: 'Адрес фактический', key: 'actualAddress'},
+                                            { name: 'ОГРН', key: 'ogrn'},
+                                            { name: 'Адрес юридический', key: 'legalAddress'},
+                                            { name: 'Директо', key: 'director'},
+                                            { name: 'Телефон директора', key: 'directorPhone'},
+                                            { name: 'Почта директора', key: 'directorEmail'},
+                                            { name: 'Контактное лицо', key: 'contactPerson'},
+                                            { name: 'Контактный номер', key: 'contactPhone'},
+                                            { name: 'Контактная почта', key: 'contactEmail'},
+                                            { name: 'СНО', key: 'sno'},
+                                            { name: 'Часовой пояс', key: 'timeZone'},
+                                            ], fields: getTableFields }" text="Экспорт с данными компаний"/>
+                            </span>
+
+<!--                              companyName,-->
+<!--                              city,-->
+<!--                              actualAddress,-->
+<!--                              inn,-->
+<!--                              ogrn,-->
+<!--                              legalAddress,-->
+<!--                              director,-->
+<!--                              directorPhone,-->
+<!--                              directorEmail,-->
+<!--                              contactPerson,-->
+<!--                              contactPhone,-->
+<!--                              contactEmail,-->
+<!--                              sno,-->
+<!--                              timeZone,-->
+<!--                              kpp-->
 
                                 <Table
                                         v-if="users"
@@ -58,13 +94,15 @@
     import gql from 'graphql-tag';
     import Table from '@/modules/table/Table';
 
+    import ExportExcel from '@/modules/table/ExportExcel';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/UsersAll';
     import { mapMutations } from 'vuex';
 
     export default {
         name: 'Users',
         components: {
-            Table
+            Table,
+          ExportExcel
         },
         data: () => ({
 
@@ -108,8 +146,21 @@
                                 dailyBill
                                 }
                             legalInfo{
-                                inn
-                                companyName
+                                companyName,
+                                city,
+                                actualAddress,
+                                inn,
+                                ogrn,
+                                legalAddress,
+                                director,
+                                directorPhone,
+                                directorEmail,
+                                contactPerson,
+                                contactPhone,
+                                contactEmail,
+                                sno,
+                                timeZone,
+                                kpp
                                 }
                              }
                     }

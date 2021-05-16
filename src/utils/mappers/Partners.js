@@ -26,7 +26,7 @@ function terminals(vendors){
 
 
 export const getTableHeaders = () => [
-    { name: 'ID', key: 'id', unsortable: false},
+    { name: 'ID', key: 'id', unsortable: false, link: true},
     { name: 'Компания', key: 'companyName', unsortable: false },
     { name: 'ИНН', key: 'inn', unsortable: false  },
     { name: 'Вендоры', key: 'vendors', unsortable: false  },
@@ -56,5 +56,5 @@ export const getTableFields = (data, props) => data.map(user => ({
     inn: user.legalInfo ? user.legalInfo.inn : "Не указано",
     companyName:  user.legalInfo ? user.legalInfo.companyName : "Не указано",
     props,
-    route: `/fiscalAll/user/${user.id}`
+    route: `/fiscalAll/userEdit/${user.id}?from=partner`
 }));
