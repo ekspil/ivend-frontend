@@ -378,6 +378,11 @@
 * new fiches
 
 
+# 1.6.11 - Hotfix
+
+* new fiches
+
+
 
 
 
