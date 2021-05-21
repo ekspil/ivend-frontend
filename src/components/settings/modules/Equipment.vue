@@ -5,10 +5,16 @@
                 <div class="col-md-12 col-lg-12">
                     <div class="card">
                         <div class="text-wrap">
+
                             <div class="example top-buttons-container top-buttons">
                                 <div class="top-buttons__left-container">
                                     <router-link to="/controllers/add" class="btn btn-primary">Добавить контроллер</router-link>
                                 </div>
+                              <div class="" >
+                                <input v-model="search" class="stats-top-menu__item" placeholder="Поиск">
+
+                              </div>
+
                                 <div class="">
 
 
@@ -50,6 +56,7 @@
                             :fields="getTableFields"
                             :order="true"
                             className="settings-table"
+                            :short="true"
                         />
 
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -76,6 +83,7 @@
             ExportExcel
         },
         data: () => ({
+            search: "",
             controllers: [],
             groups: null,
             selectedGroupId: null
@@ -157,9 +165,62 @@
             }
         },
         computed: {
+          controllersSearch(){
+            if(this.search.length > 3){
+              if(this.limit < Number(1001)){
+                this.savedLimit = this.limit
+              }
+
+              this.limit = 9999
+            }
+            else if(this.search.length == 0){
+
+            }
+            else{
+              if(this.savedLimit < this.limit){
+                this.limit = this.savedLimit
+              }
+            }
+            return this.controllers.filter(controller => {
+              if(!this.search) return true
+              const r1 = new RegExp(this.search.toUpperCase())
+              const res1 = r1.test(controller.uid.toUpperCase())
+              if(res1) return res1
+              const r3 = new RegExp(this.search.toUpperCase())
+              const res3 = r3.test(controller.machine?.name.toUpperCase())
+              if(res3) return res3
+
+              let statusRus = ""
+              switch (controller.status) {
+                case 'ENABLED':
+                  statusRus =  'Работает';
+                  break;
+                case 'DISABLED':
+                  statusRus = 'Не работает';
+                  break;
+                case 'PAUSED':
+                  statusRus = 'Приостановлен';
+                  break;
+                case 'DEBUG':
+                  statusRus = 'Отладка';
+                  break;
+                case 'TRAINING':
+                  statusRus = 'Обучение';
+                  break;
+                default: statusRus = '';
+                  break;
+              }
+              const r4 = new RegExp(this.search.toUpperCase())
+              console.log(statusRus)
+              const res4 = r4.test(statusRus.toUpperCase())
+              if(res4) return res4
+              return false
+
+            })
+          },
             getTableHeaders,
             getTableFields () {
-                return getTableFields(this.controllers.filter(c=> {
+                return getTableFields(this.controllersSearch.filter(c=> {
                   if (!this.selectedGroupId) return true
                   if (!c.machine) return false
                   if (!c.machine.group) return false
@@ -177,3 +238,5 @@
         }
     }
 </script>
+<style>
+</style>

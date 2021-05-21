@@ -23,6 +23,7 @@
                   <div class="col">
                     <select v-if="groups" v-model="selectedGroupId" class="form-control custom-select" placeholder="Выберите группу">
                       <option label="Выберите группу" :value="null"></option>
+                      <option label="Все группы" :value="0"></option>
                       <option v-for="group in groups" v-bind:value="group.id" :key="group.id">{{group.name}}</option>
                     </select>
                   </div>
@@ -245,7 +246,7 @@ export default {
       try {
         this.controllerUploading = true;
 
-        if (!this.selectedGroupId){
+        if (this.selectedGroupId === null){
           this.$refs.form.showMessage('error', 'Сперва выберите группу!');
           return
         }

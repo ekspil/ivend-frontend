@@ -1,5 +1,5 @@
 <template>
-	<div :class="['table-responsive', className]">
+	<div :class="['table-responsive', className, short ?'no-overflow': '']">
 		<table class="table card-table table-vcenter text-nowrap">
 			<thead>
 				<tr>
@@ -118,6 +118,10 @@
 				default: () => []
 			},
 			stats: {
+				type: Boolean,
+				default: () => false
+			},
+      short: {
 				type: Boolean,
 				default: () => false
 			},
@@ -259,5 +263,9 @@
 <style scoepd lang="scss">
 .settings-table td:first-child {
 	font-weight: normal;
+}
+.no-overflow {
+  max-height: 45vh;
+  overflow: auto;
 }
 </style>
