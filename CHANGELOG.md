@@ -382,6 +382,10 @@
 
 * new fiches
 
+# 1.6.12 - Release
+
+* Move to yandex
+
 
 
 
