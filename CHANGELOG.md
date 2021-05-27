@@ -399,6 +399,10 @@
 
 * mobile opt
 
+# 1.6.16 - Hotfix
+
+* mobile opt fix
+
 
 
 

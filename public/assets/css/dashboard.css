@@ -12538,7 +12538,7 @@ a.icon {
     color: #000;
     transition: .3s border-color;
     font-weight: 600;
-    padding: 0.25rem 0.25rem;
+    padding: 1.3rem 1.40rem;
     font-size: 14px;
     text-align: center;
 	display: flex;
@@ -12602,6 +12602,7 @@ a.icon {
 		text-align:left !important;
 		align-items: left !important;
 		justify-content: left !important;
+		padding: 0.25rem 0.25rem;
 	}
 	.container {
 		padding-right: 0.75rem;

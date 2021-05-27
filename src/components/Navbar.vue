@@ -3,14 +3,14 @@
     <div class="ren-navbar" id="headerMenuCollapse">
         <div class="container">
             <ul class="nav">
-                <li class="nav-item"  data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" @click="headerMenuCollapse" >
                     <router-link :class="['nav-link', isDisabled('/home')]" to="/home" activeClass="active" :event="isDisabled('/home') ? '' : 'click'">
                         <i class="fas fa-home"></i>
                         Главная
                     </router-link>
                 </li>
 
-                <li class="nav-item" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" @click="headerMenuCollapse">
                     <router-link to="/monitoring" :class="['nav-link', isDisabled('/monitoring')]" activeClass="active" :event="isDisabled('/monitoring') ? '' : 'click'">
                         <i class="fas fa-desktop"></i> <span>Мониторинг</span>
                     </router-link>
@@ -29,14 +29,14 @@
                     <!-- ------- -->
                 </li>
 
-                <li class="nav-item"  data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item"  @click="headerMenuCollapse">
                     <router-link to="/stats" :class="['nav-link', isDisabled('/stats')]" activeClass="active" :event="isDisabled('/stats') ? '' : 'click'">
                         <i class="fas fa-chart-bar"></i> <span>Статистика</span>
                     </router-link>
                 </li>
 
                 <!-- Removed -->
-                <li class="nav-item with-sub" v-if="false" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item with-sub" v-if="false" @click="headerMenuCollapse">
                     <a class="nav-link" href="#"><i class="fas fa-cog"></i> <span>Обслуживание</span></a>
 
                     <div class="sub-item" v-if="false">
@@ -56,7 +56,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item with-sub" v-if="false" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item with-sub" v-if="false" @click="headerMenuCollapse">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="fas fa-hdd"></i> <span>Оборудование</span>
                     </a>
@@ -80,17 +80,17 @@
                 </li>
                 <!-- ------ -->
 
-                <li class="nav-item" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" @click="headerMenuCollapse">
                     <router-link :class="['nav-link', isDisabled('/settings')]" to="/settings" activeClass="active" :event="isDisabled('/settings') ? '' : 'click'">
                         <i class="fas fa-sliders-h"></i> <span>Настройки</span>
                     </router-link>
                 </li>
-                <li class="nav-item" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" @click="headerMenuCollapse">
                     <router-link :class="['nav-link', isDisabled('/billing')]" to="/billing" activeClass="active" :event="isDisabled('/billing') ? '' : 'click'">
                         <i class="fas fa-money-check"></i> <span>Оплата</span>
                     </router-link>
                 </li>
-                <li class="nav-item" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" @click="headerMenuCollapse">
                     <router-link :class="['nav-link', isDisabled('/tp')]" to="/tp" activeClass="active" :event="isDisabled('/tp') ? '' : 'click'">
                         <i class="fas fa-money-check"></i> <span>Техподдержка</span>
                     </router-link>
@@ -98,10 +98,10 @@
                 <li class="nav-item" v-if="false">
                     <router-link to="/fiscal" :class="['nav-link', isDisabled('/fiscal')]" activeClass="active" :event="isDisabled('/fiscal') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Фискализация</span></router-link>
                 </li>
-                <li class="nav-item" v-if="isAdmin() || $store.state.auth.admin.token" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" v-if="isAdmin() || $store.state.auth.admin.token" @click="headerMenuCollapse">
                     <router-link to="/fiscalAll" :class="['nav-link', isDisabled('/fiscalAll')]" activeClass="active" :event="isDisabled('/fiscalAll') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Администратор</span></router-link>
                 </li>
-                <li class="nav-item" v-if="isPartner()" data-toggle="collapse"  data-target="#headerMenuCollapse">
+                <li class="nav-item" v-if="isPartner()" @click="headerMenuCollapse">
                     <router-link to="/partner" :class="['nav-link', isDisabled('/partner')]" activeClass="active" :event="isDisabled('/partner') ? '' : 'click'"><i class="fas fa-hdd"></i> <span>Партнерка</span></router-link>
                 </li>
             </ul>
@@ -236,7 +236,36 @@
             },
             role: null
         }),
+      mounted(){
+        let myCollapse = document.getElementById('headerMenuCollapse')
+        this.bsCollapse = new bootstrap.Collapse(myCollapse, {
+          toggle: false
+        })
+        this.interval = setInterval(()=>{
+          if(document.documentElement.clientWidth > 992 && this.bsCollapse._element.clientHeight === 0){
+
+            this.bsCollapse.show()
+          }
+        }, 3000)
+      },
+      beforeDestroy() {
+          if(this.interval){
+            clearInterval(this.interval)
+          }
+      },
+      computed: {
+
+
+      },
         methods: {
+          headerMenuCollapse(){
+
+
+
+            if(document.documentElement.clientWidth <= 992) {
+              this.bsCollapse.toggle()
+            }
+          },
             link(data){
               if(data.step === (this.user.step +1)){
                 this.$router.push({ path: data.link, query: data.query})
