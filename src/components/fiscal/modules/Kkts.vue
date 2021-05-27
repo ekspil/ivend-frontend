@@ -92,6 +92,7 @@
                       getUserKkts {
                             id
                             kktModel
+                            action
                             kktFactoryNumber
                             kktRegNumber
                             kktFNNumber

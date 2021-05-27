@@ -1,5 +1,9 @@
-const getStatus = status => {
+const getStatus = (status, action) => {
     //Проверку оставшихся дней после того как установлю формат
+
+    if(action === "DELETE"){
+        return "Удаление..." ;
+    }
 
     if(!status){
         return 'Ожидание';
@@ -23,7 +27,8 @@ export const getTableHeaders = () => [
     { name: 'КЧ', key: 'countToDie', unsortable: true },
     { name: 'Дата', key: 'timeToDie', unsortable: true },
     { name: 'Рег данные', key: 'ofdKey', unsortable: true, raw: true },
-    { name: 'Состояние', key: 'activationDate', unsortable: false }
+    { name: 'Состояние', key: 'activationDate',
+    }
 ];
 
 export const getTableFields = data => data.map(kkt => ({
@@ -35,6 +40,6 @@ export const getTableFields = data => data.map(kkt => ({
     countToDie: kkt.kktBillsCount || '-',
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
-    activationDate: getStatus(kkt.kktActivationDate),
+    activationDate: getStatus(kkt.kktActivationDate, kkt.action),
     route: `/fiscal/edit/${kkt.id}`
 }));
