@@ -81,7 +81,7 @@
                 <table class="table card-table table-vcenter text-nowrap notification-table" style>
                   <tr >
                     <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <i class="dropdown-icon fe fe-toggle-right"></i>Новости компании
+                      <i class="dropdown-icon fe fe-chevron-down"></i>Новости компании
                     </a></td>
 
                     <td class="checkbox-cel">
@@ -142,7 +142,7 @@
               <table class="table card-table table-vcenter text-nowrap notification-table" style>
                 <tr >
                   <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
-                    <i class="dropdown-icon fe fe-toggle-right"></i>Финансовые отчеты
+                    <i class="dropdown-icon fe fe-chevron-down"></i>Финансовые отчеты
                   </a></td>
 
                   <td class="checkbox-cel">
@@ -203,7 +203,7 @@
               <table class="table card-table table-vcenter text-nowrap notification-table" style>
                 <tr >
                   <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
-                    <i class="dropdown-icon fe fe-toggle-right"></i>Неисправности автомата
+                    <i class="dropdown-icon fe fe-chevron-down"></i>Неисправности автомата
                   </a></td>
 
                   <td class="checkbox-cel">
@@ -264,7 +264,7 @@
               <table class="table card-table table-vcenter text-nowrap notification-table" style>
                 <tr >
                   <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
-                    <i class="dropdown-icon fe fe-toggle-right"></i>Баланс личного кабинета
+                    <i class="dropdown-icon fe fe-chevron-down"></i>Баланс личного кабинета
                   </a></td>
 
                   <td class="checkbox-cel">

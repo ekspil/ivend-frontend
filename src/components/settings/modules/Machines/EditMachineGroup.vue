@@ -24,6 +24,7 @@
                     <label class="form-label f-b">Группа автоматов</label>
                     <select class="form-control custom-select" v-model="selectedGroupId">
                       <option label="Выберите группу" :value="null"></option>
+                      <option label="Все группы" :value="0"></option>
                       <option v-for="group in data.groups"
                               :key="group.id" :value="group.id">
                         {{ group.name }}
@@ -240,7 +241,7 @@ export default {
       try {
         this.machineUpdating = true;
 
-        if (!this.selectedGroupId){
+        if (this.selectedGroupId === null){
           this.$refs.form.showMessage('error', 'Сперва выберите группу!');
           return
         }

@@ -30,7 +30,12 @@
 
 
                 <div class="form-group">
-                  <label class="form-label f-b">{{machineHeaders.group}}</label>
+                  <label class="form-label f-b">{{machineHeaders.group}}
+
+                    <a href="#" data-toggle="modal" data-target="#exampleModal2">
+                      <i class="dropdown-icon fe fe-trash" style="margin-left: 5px;"></i>
+                    </a>
+                    </label>
                   <div class="row">
                     <div class="col-md-4">
                       <CustomSelect
@@ -171,6 +176,35 @@
 	</div>
 </div>
 </div>
+
+
+
+    <div v-if="machine.groups && machine.groups.length > 0" class="modal fade" id="exampleModal2" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel2">Удаление группы</h5>
+
+          </div>
+          <div class="modal-body">
+            <select class="form-control custom-select" v-model="selectedGroup.id">
+              <option v-for="group in machine.groups"
+                      :key="group.id" :value="group.id">
+                {{'id: '+group.id+', Группа: '+group.name}}
+              </option>
+            </select>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Закрыть</button>
+            <button type="button" class="btn btn-primary" @click.prevent="deleteGroup">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 </div>
 </template>
 
@@ -193,6 +227,10 @@ export default {
 		CustomSelect
 	},
 	data: () => ({
+
+    selectedGroup: {
+      id: null
+    },
 		machine: {
 			equipments: [],
 			groups: [],
@@ -272,6 +310,36 @@ export default {
 		}
 	},
 	methods: {
+    async deleteGroup() {
+      if(!this.selectedGroup.id){
+        alert("Выберете группу сперва")
+        return
+      }
+
+      $('#exampleModal2').modal('hide')
+
+      try {
+
+        const { errors } = await this.$apollo.mutate({
+          mutation: gql`
+					mutation deleteMachineGroup ($id: Int!) {
+						deleteMachineGroup (id: $id)
+					}
+					`,
+          variables: {
+            id: this.selectedGroup.id
+          }
+        });
+
+        this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+
+        alert("Успешное удаление")
+
+      } catch (error) {
+
+        alert("Ошибка удалени, вероятно вгруппе остались автоматы!")
+      }
+    },
 		controllerEditPage(){
 			if(!this.input.controllerId) return
 			window.open("/controllers/edit/"+this.input.controllerId, '_blank').focus();

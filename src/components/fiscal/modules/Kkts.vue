@@ -36,9 +36,6 @@
                                     </div>
                                     <div class="modal-body">
                                       <select class="form-control custom-select" v-model="selectedKkt.id">
-                                        <option key="0" value="0">
-                                          Все ККМ
-                                        </option>
                                         <option v-for="kkt in kkts"
                                                 :key="kkt.id" :value="kkt.id">
                                           {{'id: '+kkt.id+', модель: '+kkt.kktModel+ ', ЗН: ' + (kkt.kktFactoryNumber || '-')}}

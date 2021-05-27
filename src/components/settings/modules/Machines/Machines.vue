@@ -9,6 +9,11 @@
                                 <div class="top-buttons__left-container">
                                     <router-link to="/machine/add" class="btn btn-primary">Добавить автомат</router-link>
                                 </div>
+
+                              <div class="" >
+                                <input v-model="search" class="stats-top-menu__item" placeholder="Поиск">
+
+                              </div>
                                 <div class="">
                                     <div class="row gutters-xs">
                                       <select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
@@ -49,6 +54,7 @@
                             className="settings-table"
                             sortBy="controllerName"
                             :order="true"
+                            :short="true"
                         />
 
                         <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -74,6 +80,8 @@
             ExportExcel
         },
         data: () => ({
+
+            search: "",
             machines: [],
             groups: null,
             selectedGroupId: null
@@ -87,6 +95,9 @@
                         name
                         number
                         place
+                        kkt{
+                          id
+                        }
                         group {
                           id
                           name
@@ -104,6 +115,7 @@
                         controller {
                           uid
                           id
+                          fiscalizationMode
                         }
                       }
                     }
@@ -156,9 +168,50 @@
           }
         },
         computed: {
+
+          machinesSearch(){
+            if(this.search.length > 3){
+              if(this.limit < Number(1001)){
+                this.savedLimit = this.limit
+              }
+
+              this.limit = 9999
+            }
+            else if(this.search.length == 0){
+
+            }
+            else{
+              if(this.savedLimit < this.limit){
+                this.limit = this.savedLimit
+              }
+            }
+            return this.machines.filter(machine => {
+              if(!this.search) return true
+              const r1 = new RegExp(this.search.toUpperCase())
+              const res1 = r1.test(machine.name.toUpperCase())
+              if(res1) return res1
+              const r2 = new RegExp(this.search.toUpperCase())
+              const res2 = r2.test(machine.number.toUpperCase())
+              if(res2) return res2
+              const r3 = new RegExp(this.search.toUpperCase())
+              const res3 = r3.test(machine.place.toUpperCase())
+              if(res3) return res3
+              const r4 = new RegExp(this.search.toUpperCase())
+              const res4 = r4.test(machine.controller?.uid.toUpperCase())
+              if(res4) return res4
+              const r5 = new RegExp(this.search.toUpperCase())
+              const res5 = r5.test(machine.equipment?.name.toUpperCase())
+              if(res5) return res5
+              const r6 = new RegExp(this.search.toUpperCase())
+              const res6 = r6.test(machine.group?.name.toUpperCase())
+              if(res6) return res6
+              return false
+
+            })
+          },
             getTableHeaders,
             getTableFields () {
-                return getTableFields(this.machines, {
+                return getTableFields(this.machinesSearch, {
                     remove: this.removeMachine,
                     routeKey: "controllerName",
                     routeId: "controllerId",

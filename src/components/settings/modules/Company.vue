@@ -47,24 +47,27 @@
 				</div>
 
 				<div class="company-settings__field-container">
-					<label for="company-kpp" class="company-settings__field-label">КПП</label>
-					<Field id="company-kpp" className="company-settings__field" formName="company" type="text"
-					placeholder="КПП" name="kpp" :value="info.kpp"/>
-				</div>
-
-				<div class="company-settings__field-container">
 					<label for="company-ogrn" class="company-settings__field-label">ОГРН</label>
 					<Field id="company-ogrn" className="company-settings__field" formName="company" type="text"
 					placeholder="ОГРН" name="ogrn" :value="info.ogrn" />
 				</div>
 
 
-				<div class="company-settings__field-container">
-					<label for="company-legal-address" class="company-settings__field-label">Адрес
-					юридический</label>
-					<Field id="company-legal-address" className="company-settings__field" formName="company"
-					type="text" placeholder="Адрес юридический" :value="info.legalAddress" name="legalAddress"/>
-				</div>
+
+        <div class="company-settings__field-container">
+          <label for="company-legal-address" class="company-settings__field-label">Адрес
+            юридический</label>
+          <Field id="company-legal-address" className="company-settings__field" formName="company"
+                 type="text" placeholder="Адрес юридический" :value="info.legalAddress" name="legalAddress"/>
+        </div>
+
+
+        <div class="company-settings__field-container">
+          <label for="company-kpp" class="company-settings__field-label">КПП</label>
+          <Field id="company-kpp" className="company-settings__field" formName="company" type="text"
+                 placeholder="КПП" name="kpp" :value="info.kpp"/>
+        </div>
+
 
 
 
@@ -229,6 +232,9 @@
 		}),
 		methods: {
 			async save () {
+			  if(!this.info.timeZone){
+          this.info.timeZone = "3"
+        }
 				try {
 					const cache = this.$store.getters['cache/data'];
 
