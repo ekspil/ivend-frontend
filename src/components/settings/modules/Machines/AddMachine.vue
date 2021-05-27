@@ -100,7 +100,7 @@
 							<div class="col">
 								<label class="form-label f-b">{{machineHeaders.controller}}</label>
 								<select class="form-control custom-select" v-model="input.controllerId">
-									<option v-bind:value="null">Без контроллера</option>
+									<option v-bind:value="null" selected>Без контроллера</option>
 									<option v-for="controller in getAvailableControllers(machine.controllers)"
 											:key="controller.id" :value="controller.id">
 										{{ controller.uid }}
@@ -294,7 +294,7 @@ export default {
 						equipmentId: getEquipments[0].id,
 						groupId: getMachineGroups[0].id,
 						typeId: 0,
-						controllerId: getControllers[0].id,
+						controllerId: this.getAvailableControllers(getControllers)[0]?this.getAvailableControllers(getControllers)[0].id: null,
 						kktId: 0
 					};
 				}
