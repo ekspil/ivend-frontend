@@ -6,11 +6,12 @@ export const getTableHeaders = () => [
     { name: 'Компания', key: 'companyName', unsortable: false , link: true },
     { name: 'ИНН', key: 'inn', unsortable: false  },
 
-    { name: 'Статус', key: 'role', link: false },
     { name: 'Баланс', key: 'balance', unsortable: false  },
     { name: 'Списание', key: 'dailyBill', unsortable: false  },
     { name: 'Телефон', key: 'phone', unsortable: false},
     { name: 'Почта', key: 'email', unsortable: false  },
+
+    { name: 'Статус', key: 'role', link: false },
     { name: 'Партнер', key: 'partnerId', link: false },
 
 

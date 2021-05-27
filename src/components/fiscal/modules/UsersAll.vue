@@ -9,9 +9,20 @@
 <!--                                <div v-if="!$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminEnter()">Режим администратора</div>-->
 <!--                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>-->
 
-                                <div class="form-group" style="width: 50%; padding-left: 10px">
+                                <div class="form-group" style="width: 25%; padding-left: 10px">
                                     <input v-model="search" class="form-control custom-select" placeholder="Поиск">
                                 </div>
+                              <div class="form-group " style="width: 25%; padding-left: 10px">
+                              <select class="form-control custom-select" v-model="selectedRole">
+                                <option key="" value="0" selected="selected">
+                                </option>
+                                <option v-for="type in selections[0].values"
+                                        :key="type" :value="type">
+                                  {{ type }}
+                                </option>
+                              </select>
+                              </div>
+
                               <span class="col-auto">
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                             </span>
@@ -55,9 +66,8 @@
                                         :headers="getTableHeaders"
                                         :fields="getTableFields"
                                         className="settings-table"
-                                        :selections="selections"
-                                        :filterAction="filterBy"
                                         :orderAll="descFunc"
+
                                 />
 
                                 <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
