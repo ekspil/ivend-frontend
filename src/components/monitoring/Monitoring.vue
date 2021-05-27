@@ -7,7 +7,7 @@
             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
             <div class="card-header">
               <div class="card-title f-b">Мониторинг</div>
-              <div class="card-title-right f-b" v-if="machines"><span style="margin-right: 10px; color: #3ddabd">Работает {{getTableFieldsC[0].count}} авт. </span><span style="color: #e34d6a"> Не работает {{getTableFieldsC[1].count}} авт.</span></div>
+              <div class="card-title-right f-b" v-if="machines"><span style="margin-right: 10px; color: #3ddabd"><span class="disabled-small">Работает</span> {{getTableFieldsC[0].count}} авт. </span><span style="color: #e34d6a"> <span class="disabled-small">Не работает</span> {{getTableFieldsC[1].count}} авт.</span></div>
             </div>
 
             <Tabs :tabs="tabs" :props="{ 'v-if': !$apollo.loading }" />

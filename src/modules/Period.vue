@@ -2,7 +2,7 @@
 	<div class="period-wrapper">
 		<button
 			v-for="(periodName, i) in periods" :key="i"
-			:class="['stats-top-menu__item', period === periodName ? 'stats-top-menu__item--active' : '']"
+			:class="['stats-top-menu__item', period === periodName ? 'stats-top-menu__item--active' : '', 'disabled-small']"
 			@click="setPeriod(periodName)"
 		>{{ periodName }}</button>
 

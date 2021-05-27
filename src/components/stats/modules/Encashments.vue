@@ -10,7 +10,7 @@
 					</select>
 				</div>
 
-				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+				<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
 		</div>
 

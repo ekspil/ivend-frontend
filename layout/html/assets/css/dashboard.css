@@ -4602,6 +4602,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 		padding-right: 0;
 		padding-left: 0;
 	}
+
 }
 @media (min-width: 768px) {
 	.navbar-expand-md {
@@ -12785,7 +12786,7 @@ a.icon {
 		height: 50px !important;
 	}
 	.tabs-menu1 ul li  {
-		width:100%;
+		width: 50%;
 		margin: 15px;
 	}
 	.tabs-menu1 ul li a{
@@ -12947,6 +12948,11 @@ a.icon {
 	}
 }
 @media (max-width: 990px) {
+	.small-menu {
+		width: 19%;
+		overflow: hidden;
+		white-space: nowrap;
+	}
 	.header-toggler {
 		margin: 6px;
 	}

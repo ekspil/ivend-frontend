@@ -6,7 +6,7 @@
 
 
 					<tr>
-						<th width="45%">Событие</th>
+						<th class="width-notif">Событие</th>
 						<th width="24%">Email</th>
 						<!--
 						<th>Viber</th>
@@ -78,9 +78,9 @@
           <div class="" role="tab" id="headingOne">
             <h4 class="panel-title" style="font-weight: bold">
 
-                <table class="table card-table table-vcenter text-nowrap notification-table" style>
+                <table class="table card-table table-vcenter  notification-table" style>
                   <tr >
-                    <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <td class="width-notif"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       <i class="dropdown-icon fe fe-chevron-down"></i>Новости компании
                     </a></td>
 
@@ -107,7 +107,7 @@
           <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
 
-            <table class="table card-table table-vcenter text-nowrap notification-table">
+            <table class="table card-table table-vcenter  notification-table">
               <tr v-for="({ type, email, sms, tlgrm, telegram, telegramChat }, index) in profile.notificationSettings" :key="index"  v-if="type === 'GET_NEWS' || type === 'ALARM_SMS'">
                 <td width="50%">{{ getType(type) }}</td>
 
@@ -139,9 +139,9 @@
           <div class="" role="tab" id="heading2">
             <h4 class="panel-title" style="font-weight: bold">
 
-              <table class="table card-table table-vcenter text-nowrap notification-table" style>
+              <table class="table card-table table-vcenter  notification-table" style>
                 <tr >
-                  <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                  <td class="width-notif"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
                     <i class="dropdown-icon fe fe-chevron-down"></i>Финансовые отчеты
                   </a></td>
 
@@ -168,7 +168,7 @@
           <div id="collapse2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
 
-              <table class="table card-table table-vcenter text-nowrap notification-table">
+              <table class="table card-table table-vcenter  notification-table">
                 <tr v-for="({ type, email, sms, tlgrm, telegram, telegramChat }, index) in profile.notificationSettings" :key="index"  v-if="type === 'GET_DAY_SALES' || type === 'GET_WEEK_SALES' || type === 'GET_MONTH_SALES' || type === 'CONTROLLER_ENCASHMENT'">
                   <td width="50%">{{ getType(type) }}</td>
 
@@ -200,10 +200,10 @@
           <div class="" role="tab" id="heading3">
             <h4 class="panel-title" style="font-weight: bold">
 
-              <table class="table card-table table-vcenter text-nowrap notification-table" style>
+              <table class="table card-table table-vcenter  notification-table" style>
                 <tr >
-                  <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
-                    <i class="dropdown-icon fe fe-chevron-down"></i>Неисправности автомата
+                  <td class="width-notif"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                    <i class="dropdown-icon fe fe-chevron-down"></i>Ошибки автомата
                   </a></td>
 
                   <td class="checkbox-cel">
@@ -229,7 +229,7 @@
           <div id="collapse3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
 
-              <table class="table card-table table-vcenter text-nowrap notification-table">
+              <table class="table card-table table-vcenter  notification-table">
                 <tr v-for="({ type, email, sms, tlgrm, telegram, telegramChat }, index) in profile.notificationSettings" :key="index"  v-if="type === 'MACHINE_ATTENTION_REQUIRED' || type === 'CONTROLLER_NO_CONNECTION' || type === 'CONTROLLER_NO_SALES' || type === 'NO_COINS_24H' || type === 'NO_CASH_24H' || type === 'NO_CASHLESS_24H' || type === 'NO_RECEIPT_24H'">
                   <td width="50%">{{ getType(type) }}</td>
 
@@ -261,9 +261,9 @@
           <div class="" role="tab" id="heading4">
             <h4 class="panel-title" style="font-weight: bold">
 
-              <table class="table card-table table-vcenter text-nowrap notification-table" style>
+              <table class="table card-table table-vcenter  notification-table" style>
                 <tr >
-                  <td width="45%"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                  <td class="width-notif"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
                     <i class="dropdown-icon fe fe-chevron-down"></i>Баланс личного кабинета
                   </a></td>
 
@@ -290,7 +290,7 @@
           <div id="collapse4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
 
-              <table class="table card-table table-vcenter text-nowrap notification-table">
+              <table class="table card-table table-vcenter  notification-table">
                 <tr v-for="({ type, email, sms, tlgrm, telegram, telegramChat }, index) in profile.notificationSettings" :key="index"  v-if="type === 'USER_LOW_BALANCE'">
                   <td width="50%">{{ getType(type) }}</td>
 
@@ -573,4 +573,11 @@
 	.top-buttons {
 		justify-content: flex-end;
 	}
+  .width-notif {
+    width: 45%;
+    overflow: hidden;
+  }
+  //table {
+  //  max-width: 100%
+  //}
 </style>

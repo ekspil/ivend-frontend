@@ -19,7 +19,7 @@
 									<Period @onChange="onPeriodChange"/>
 								</div>
 
-								<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="machine"/>
+								<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="machine"/>
 							</div>
 						</div>
 

@@ -12538,7 +12538,7 @@ a.icon {
     color: #000;
     transition: .3s border-color;
     font-weight: 600;
-    padding: 1.3rem 1.40rem;
+    padding: 0.25rem 0.25rem;
     font-size: 14px;
     text-align: center;
 	display: flex;
@@ -12775,22 +12775,33 @@ a.icon {
 	.header-brand-img {
 		height:auto;
 	}
-	.tabs-menu ul li  {
-		width:100%;
-		margin: 15px;
-	}
+	/*.tabs-menu ul li  {*/
+	/*	width:50%;*/
+	/*	margin: 15px;*/
+	/*}*/
 	.tabs-menu ul li a{
 		width:100%;
 	}
 	.cal1 .clndr .clndr-table tr {
 		height: 50px !important;
 	}
-	.tabs-menu1 ul li  {
-		width:100%;
-		margin: 15px;
+	/*.tabs-menu1 ul li  {*/
+	/*	width:40%;*/
+	/*	margin: 15px;*/
+	/*}*/
+	/*.tabs-menu1 ul li a{*/
+	/*	width:100%;*/
+	/*}*/
+	.small-button-1 {
+		width: 40%;
 	}
-	.tabs-menu1 ul li a{
-		width:100%;
+
+	select.select2.stats-top-menu__item {
+		margin-top: 0.25rem;
+		margin-left: 0.25rem;
+	}
+	.disabled-small {
+		display: none !important;
 	}
 	.wizard-card .nav-pills>li {
 		text-align: center;

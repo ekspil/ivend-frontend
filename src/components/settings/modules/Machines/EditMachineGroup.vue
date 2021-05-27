@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <div class="side-app" v-if="data">
+    <div class="side-app">
       <div class="row mt-5">
-        <div class="col-lg-8 offset-2 card">
-          <div class="card-header">
-          </div>
+        <div class="col-lg-10 offset-lg-1 col-md-12">
 
           <Validate
               routeBack="/settings#machines"

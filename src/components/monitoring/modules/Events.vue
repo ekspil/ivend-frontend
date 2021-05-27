@@ -6,7 +6,7 @@
 
 				<div class="">
 					<div class="row gutters-xs">
-						<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+						<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 					</div>
 				</div>
 			</div>

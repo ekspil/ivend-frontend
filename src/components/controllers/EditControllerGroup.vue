@@ -1,15 +1,13 @@
 <template>
   <div class="container">
-    <div class="side-app" v-if="data">
+    <div class="side-app">
       <div class="row mt-5">
-        <div class="col-lg-8 offset-2 card">
-          <div class="card-header">
-            <h3 class="card-title f-b">Групповое редактирование контроллеров</h3>
-          </div>
+        <div class="col-lg-10 offset-lg-1 col-md-12">
 
           <Validate
           :routeBack="routeBack"
           formName="editControllerSettings"
+          title="Групповое редактирование контроллеров"
           ref="form"
           :schema="schema"
           @onSubmit="save"

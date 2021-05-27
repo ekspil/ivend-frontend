@@ -3,10 +3,10 @@
     <div class="tab-menu-heading">
       <div class="tabs-menu1">
         <ul class="nav panel-tabs f-b">
-          <li v-for="(tab, index) in tabs" :key="index">
+          <li v-for="(tab, index) in tabs" :key="index" class="small-menu">
             <a
               href="#"
-              :class="activeTab === tab.name ? 'active' : ''"
+              :class="[activeTab === tab.name ? 'active' : '', '']"
               data-toggle="tab"
               @click="setActiveTab(tab.name)"
             >{{ tab.name }}</a>
@@ -81,3 +81,13 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@media (max-width: 992px) {
+.small-menu {
+    width: 50%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+}
+
+</style>

@@ -7,7 +7,7 @@
 
         <router-view/>
 
-        <Footer/>
+        <Footer class="disabled-small"/>
     </div>
 </template>
 <script>

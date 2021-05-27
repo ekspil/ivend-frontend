@@ -7,8 +7,8 @@
             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
             <div class="card-header">
               <div class="card-title f-b">Статистика</div>
-              <div class="card-title-right f-b" v-if="sales && !$route.fullPath.includes('encashments')"><span style="color: #3ddabd">{{sales.count}}</span> продаж на суммму <span style="color: #3ddabd">{{sales.amount}}</span> руб.</div>
-              <div class="card-title-right f-b" v-if="sales && $route.fullPath.includes('encashments')">Кол инкассаций: <span style="color: #3ddabd">{{encashments.count}}</span> Сумма: <span style="color: #3ddabd"> {{encashments.amount}}</span> руб.</div>
+              <div class="card-title-right f-b" v-if="sales && !$route.fullPath.includes('encashments')"><span class="disabled-small" style="color: #3ddabd">{{sales.count}}</span> <span class="disabled-small"> продаж на суммму </span><span style="color: #3ddabd">{{sales.amount}}</span> руб.</div>
+              <div class="card-title-right f-b" v-if="sales && $route.fullPath.includes('encashments')"><span class="disabled-small">Кол инкассаций: </span><span class="disabled-small" style="color: #3ddabd">{{encashments.count}}</span> <span class="disabled-small">Сумма:</span> <span style="color: #3ddabd"> {{encashments.amount}}</span> руб.</div>
 
             </div>
 

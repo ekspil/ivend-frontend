@@ -7,7 +7,7 @@
 					<option label="Выберите группу" :value="null"></option>
 					<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
 				</select>
-				<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+				<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
 		</div>
 

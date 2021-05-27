@@ -11,20 +11,20 @@
             <div class="balance-info-block__icon col-1.5">
               <i class="fas fa-ruble-sign"></i>
             </div>
-            <div class="w-100"></div>
-            <div class="balance-info-block__count col" >{{ billing.daysLeft }}</div>
-            <div class="balance-info-block__title col">Осталось дней</div>
-            <div class="balance-info-block__icon col-1.5">
-              <i class="fas fa-clock"></i>
+            <div class="w-100 disabled-small"></div>
+            <div class="balance-info-block__count col disabled-small" >{{ billing.daysLeft }}</div>
+            <div class="balance-info-block__title col disabled-small">Осталось дней</div>
+            <div class="balance-info-block__icon col-1.5 disabled-small">
+              <i class="fas fa-clock disabled-small"></i>
             </div>
           </div>
         </div>
         <div class="balance-info-block balance-info__block">
           <div class="balance-info-block__info-container row">
-            <div class="balance-info-block__count balance-info-block__count--currency col">{{ billing.dailyBill }}</div>
-            <div class="balance-info-block__title col">Ежедневное списание</div>
-            <div class="balance-info-block__icon col-1.5">
-              <i class="far fa-calendar-alt"></i>
+            <div class="balance-info-block__count balance-info-block__count--currency col  disabled-small">{{ billing.dailyBill }}</div>
+            <div class="balance-info-block__title col  disabled-small">Ежедневное списание</div>
+            <div class="balance-info-block__icon col-1.5  disabled-small">
+              <i class="far fa-calendar-alt  disabled-small"></i>
             </div>
             <div class="w-100"></div>
 
@@ -48,7 +48,7 @@
             placeholder="Сумма"
             v-model="depositSum"
             />
-            <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="submitDeposit">Пополнить баланс</button>
+                <button id="recharge-submit-btn" class="btn btn-primary balance-info-block__btn" :disabled="isDepositPending" @click.prevent="submitDeposit">Пополнить <span class="disabled-small">баланс</span></button>
           </form>
 
           <Hint ref="depositHint" className="billing-hint" />
@@ -81,12 +81,12 @@
             <div class="card-header row">
                 <div class="col-md-8 col-lg-8 card-title f-b">Оплата</div>
                 <div  class=""></div>
-                <div  class="col-md-4 col-lg-4">
+                <div  class="col-md-4 col-lg-4 disabled-small">
                   <label class="default-checkbox" for="check1">
                   <input class="auth-block__checkbox" type="checkbox" v-model="autoSend"
                         id="check1" @change="userAutoSend"/>
 
-                  <span class="auth-block__checkbox-label">Автоматически отправлять счет</span>
+                  <span class="auth-block__checkbox-labell">Автоматически отправлять счет</span>
                   </label>
                 </div>
 
@@ -404,6 +404,15 @@ export default {
   margin-top: 30px;
 }
 
+
+@media (max-width: 992px) {
+  .stats-top-menu {
+    margin: 10px 0 0 0;
+  }
+  .payment-table {
+    margin-top: 10px;
+  }
+}
 .balance-alert, .balance-info {
   margin-top: 1em;
 }

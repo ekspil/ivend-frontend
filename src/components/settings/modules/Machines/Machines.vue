@@ -7,7 +7,7 @@
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
                                 <div class="top-buttons__left-container">
-                                    <router-link to="/machine/add" class="btn btn-primary">Добавить автомат</router-link>
+                                    <router-link to="/machine/add" class="btn btn-primary">Добавить <span class="disabled-small">автомат</span></router-link>
                                 </div>
 
                               <div class="" >
@@ -29,13 +29,13 @@
                                             </button>
                                         </span>
 
-                                      <span class="col-auto">
+                                      <span class="col-auto disabled-small">
                                             <button class="btn btn-primary" type="button"><i
                                                 class="fe fe-upload"> Импорт</i>
                                             </button>
                                         </span>
 
-                                        <span class="col-auto">
+                                        <span class="col-auto disabled-small">
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                                         </span>
 

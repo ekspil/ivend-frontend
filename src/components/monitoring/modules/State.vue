@@ -6,9 +6,9 @@
 				<div class="example top-buttons-container top-buttons">
 					<div class="top-buttons__left-container"></div>
 
-					<div class="">
+					<div >
 						<div class="row gutters-xs">
-							<ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+							<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 						</div>
 					</div>
 				</div>

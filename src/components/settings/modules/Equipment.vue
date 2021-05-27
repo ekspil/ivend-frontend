@@ -8,7 +8,7 @@
 
                             <div class="example top-buttons-container top-buttons">
                                 <div class="top-buttons__left-container">
-                                    <router-link to="/controllers/add" class="btn btn-primary">Добавить контроллер</router-link>
+                                    <router-link to="/controllers/add" class="btn btn-primary">Добавить <span class="disabled-small">контроллер</span></router-link>
                                 </div>
                               <div class="" >
                                 <input v-model="search" class="stats-top-menu__item" placeholder="Поиск">
@@ -25,19 +25,19 @@
                                       </select>
 
 
-                                      <span class="col-auto">
+                                      <span class="col-auto ">
                                             <button class="btn btn-primary" type="button" @click.prevent="$router.push('/controllers/editGroup')"><i
                                                 class="fe fe-settings"> Общие настройки</i>
                                             </button>
                                         </span>
 
-                                      <span class="col-auto">
+                                      <span class="col-auto disabled-small">
                                             <button class="btn btn-primary" type="button"><i
                                                 class="fe fe-upload"> Импорт</i>
                                             </button>
                                         </span>
 
-                                        <span class="col-auto">
+                                        <span class="col-auto disabled-small">
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                                         </span>
 
