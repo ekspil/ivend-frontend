@@ -403,6 +403,10 @@
 
 * mobile opt fix
 
+# 1.6.17 - Hotfix
+
+* mobile opt fix
+
 
 
 

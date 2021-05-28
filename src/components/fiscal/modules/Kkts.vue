@@ -11,7 +11,7 @@
 
                                 </div>
                               <div v-if="kkts && kkts.length > 0" class="top-buttons__left-container">
-                                <button  type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#exampleModal">Удалить кассу</button>
+                                <button  type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#exampleModal">Отключить кассу</button>
                               </div>
 
 
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="selectedKkt.agree = false">Закрыть</button>
-                                      <button type="button" class="btn btn-primary" @click.prevent="deleteKkt()" :disabled="!(selectedKkt.agree && selectedKkt.id)">Удалить</button>
+                                      <button type="button" class="btn btn-primary" @click.prevent="deleteKkt()" :disabled="!(selectedKkt.agree && selectedKkt.id)">Отключить</button>
                                     </div>
                                   </div>
                                 </div>
@@ -120,7 +120,11 @@
                     `,
               variables: { id: this.selectedKkt.id }
             });
-            this.kkts = this.kkts.filter(controller => controller.id !== this.selectedKkt.id);
+            this.kkts = this.kkts.map(controller => {
+              if (controller.id !== this.selectedKkt.id) return controller
+              controller.action = "DELETE"
+              return controller
+            });
 
             this.selectedKkt.agree = false
             this.selectedKkt.id = null
