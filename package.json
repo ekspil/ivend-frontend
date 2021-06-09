@@ -1,6 +1,6 @@
 {
   "name": "ivend-frontend",
-  "version": "1.6.17",
+  "version": "1.6.18",
   "private": true,
   "scripts": {
     "serve": "vue serve",
@@ -18,6 +18,7 @@
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "particles.js": "^2.0.0",
+    "qrcode.vue": "^1.7.0",
     "ramda": "^0.26.1",
     "vue": "^2.5.21",
     "vue-apollo": "^3.0.0-beta.26",
