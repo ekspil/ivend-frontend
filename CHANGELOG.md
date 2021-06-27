@@ -407,6 +407,10 @@
 
 * mobile opt fix
 
+# 1.6.18 - Hotfix
+
+* fix phone save
+
 
 
 

@@ -1,13 +1,13 @@
 <template>
     <div class="page-main">
-        <div v-if="!['login', 'register', 'remember', 'NewPassword', 'sms'].includes($route.path.split('/')[1])">
+        <div v-if="!['login', 'register', 'remember', 'NewPassword', 'sms', 'bill'].includes($route.path.split('/')[1])">
             <Header/>
             <Navbar/>
         </div>
 
         <router-view/>
 
-        <Footer class="disabled-small"/>
+        <Footer class="disabled-small" v-if="!['bill'].includes($route.path.split('/')[1])"/>
     </div>
 </template>
 <script>

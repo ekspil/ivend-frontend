@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from "vue-router";
 
 import Login from '@/components/auth/Login';
+import Bill from '@/components/bill/Bill';
 import Sms from '@/components/auth/Sms';
 import Registration from '@/components/auth/Registration';
 import Remember from '@/components/auth/Remember';
@@ -107,6 +108,7 @@ const routes = [
     { path: '/partner', component: Partner },
 
     { path: '/login', component: Login },
+    { path: '/bill/:receiptId', component: Bill },
     { path: '/sms/:tel', component: Sms },
     { path: '/register', component: Registration },
     { path: '/remember', component: Remember },
@@ -121,7 +123,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-     let isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword']);
+     let isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword', '/bill']);
      if(to.path.includes("/sms")){
          isSecured = false
      }
