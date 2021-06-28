@@ -22,7 +22,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     id: user.id,
     phone: user.phone,
     monthPay: user.monthPay,
-    fee: user.partnerFee,
+    fee: user.partnerFee.toFixed(2),
     kkms: user.kkts?.length || 0,
     controllers: user.controllers?.length || 0,
     terminals: user.controllers?.filter(c=> (c.simCardNumber && c.simCardNumber !== "0"&& c.simCardNumber !== "false")).length || 0,
