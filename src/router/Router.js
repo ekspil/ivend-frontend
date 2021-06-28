@@ -123,7 +123,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-     let isSecured = !includes(to.path, ['/login', '/register', '/remember', '/NewPassword', '/bill']);
+     let isSecured = !includes(("/"+(to.path).split("/")[1]), ['/login', '/register', '/remember', '/NewPassword', '/bill']);
      if(to.path.includes("/sms")){
          isSecured = false
      }
