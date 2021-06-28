@@ -129,6 +129,7 @@
                 {
                 key: "role",
                 values: [
+                    "ALL",
                     "VENDOR",
                     "PARTNER",
                     "CLOSED",
