@@ -7,6 +7,8 @@ const state = () => ({
 	profile: null,
 	partner: null,
 	partnerFee: null,
+	selectedGroupIdSe: null,
+	selectedGroupIdSt: null,
 });
 
 const mutations = {

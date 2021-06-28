@@ -132,6 +132,15 @@ export default {
 			return item
 		})); }
 	},
+  watch:{
+    selectedGroupId(newVal, oldVal){
+      if(this.$store.state.user.selectedGroupIdSt === newVal) return
+      this.$store.state.user.selectedGroupIdSt = newVal
+    }
+  },
+  mounted(){
+    this.selectedGroupId = this.$store.state.user.selectedGroupIdSt
+  },
 	methods: {
 		onPeriodChange (period) {
 			if(period.to <= period.from){

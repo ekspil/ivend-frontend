@@ -164,6 +164,15 @@
                 this.controllers = this.controllers.filter(controller => controller.id !== id);
             }
         },
+        watch:{
+          selectedGroupId(newVal, oldVal){
+            if(this.$store.state.user.selectedGroupIdSe === newVal) return
+            this.$store.state.user.selectedGroupIdSe = newVal
+          }
+        },
+        mounted(){
+          this.selectedGroupId = this.$store.state.user.selectedGroupIdSe
+        },
         computed: {
           controllersSearch(){
             if(this.search.length > 3){

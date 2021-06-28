@@ -104,6 +104,15 @@
       getTableHeaders,
       getTableFields () { return getTableFields(this.machines); }
     },
+    watch:{
+      selectedGroupId(newVal, oldVal){
+        if(this.$store.state.user.selectedGroupIdSt === newVal) return
+        this.$store.state.user.selectedGroupIdSt = newVal
+      }
+    },
+    mounted(){
+      this.selectedGroupId = this.$store.state.user.selectedGroupIdSt
+    },
     methods: {
     	setEncashments(d){
 			const sal = d.reduce((acc, item) => {

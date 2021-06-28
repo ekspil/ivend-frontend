@@ -143,6 +143,15 @@
             update: data => data.getMachineGroups
           },
         },
+      watch:{
+        selectedGroupId(newVal, oldVal){
+          if(this.$store.state.user.selectedGroupIdSe === newVal) return
+          this.$store.state.user.selectedGroupIdSe = newVal
+        }
+      },
+      mounted(){
+        this.selectedGroupId = this.$store.state.user.selectedGroupIdSe
+      },
         methods: {
             async removeMachine (id) {
                 await this.$apollo.mutate({
