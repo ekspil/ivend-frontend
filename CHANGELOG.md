@@ -411,6 +411,10 @@
 
 * fix phone save
 
+# 1.6.19 - Hotfix
+
+* fix check loading
+
 
 
 

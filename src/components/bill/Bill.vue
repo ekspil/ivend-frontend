@@ -2,6 +2,9 @@
     <div class="auth-page">
         <img src="/assets/images/brand/logo.png" class="auth-page__logo" />
         <!-- Товарный чек -->
+        <div class="auth-block" v-if="!bill">
+          <div class="auth-block__link-title col-12">Вашего чека еще нет в системе ОФД, попробуйте перезагрузить страницу через несколько секунд...</div>
+        </div>
         <div class="auth-block" v-if="bill">
             <div class="auth-block__link-title col-12">{{ bill.companyName }} ИНН: {{ bill.inn }} / КПП: {{ bill.kpp }} Юр.адрес
               {{ bill.legalAddress }}</div>
