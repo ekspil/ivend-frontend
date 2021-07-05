@@ -419,6 +419,10 @@
 
 * add link to bill
 
+# 1.6.21 - Hotfix
+
+* fix time in receipt
+
 
 
 
