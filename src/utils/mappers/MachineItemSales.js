@@ -10,7 +10,7 @@ export const getTableHeaders = () => [
   },
   {name: 'Сумма', key: 'itemPrice'},
   {name: 'Тип платежа', key: 'receiptPaymentType'},
-  {name: 'Чек', key: 'receiptStatus',
+  {name: 'Чек', key: 'receiptStatus', link: true,
     critery ({receiptStatus}) {
       switch (receiptStatus) {
         case "PENDING":
@@ -38,5 +38,6 @@ export const getTableFields = ({sales}) => sales.map(({price, type, createdAt, i
   timestamp: receipt ? new Date(receipt.timestamp) : new Date(createdAt),
   itemPrice: price,
   receiptStatus: receipt ? receipt.status : null,
-  receiptPaymentType: receipt ? getPaymentTypeStr(receipt.paymentType) : getPaymentTypeStr(type)
+  receiptPaymentType: receipt ? getPaymentTypeStr(receipt.paymentType) : getPaymentTypeStr(type),
+  route: `/bill/${receipt ? receipt.id : null}`
 }));

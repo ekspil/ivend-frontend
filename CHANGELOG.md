@@ -415,6 +415,10 @@
 
 * fix check loading
 
+# 1.6.20 - Hotfix
+
+* add link to bill
+
 
 
 

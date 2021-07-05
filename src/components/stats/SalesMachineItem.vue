@@ -90,6 +90,7 @@ export default {
 							name
 						}
 						receipt {
+						  id
 							timestamp
 							paymentType
 							status
