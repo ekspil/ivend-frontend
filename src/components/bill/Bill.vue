@@ -100,7 +100,7 @@ export default {
             return (monthOrDate < 10) ? "0" + monthOrDate : "" + monthOrDate
           }
 
-          const receiptDateUtcDate = new  Date(new Date(data.getFiscalReceipt.receiptDatetime).getTime() + 3600000*3)
+          const receiptDateUtcDate = new  Date(new Date(data.getFiscalReceipt.receiptDatetime).getTime() - 3600000*3)
           let mappedReceiptDate = ""
           mappedReceiptDate += receiptDateUtcDate.getFullYear() + ""
           mappedReceiptDate += getTwoDigitDateFormat((receiptDateUtcDate.getMonth() + 1)) + ""

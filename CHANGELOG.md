@@ -427,6 +427,10 @@
 
 * fix time in receipt
 
+# 1.6.23 - Hotfix
+
+* fix time in receipt
+
 
 
 
