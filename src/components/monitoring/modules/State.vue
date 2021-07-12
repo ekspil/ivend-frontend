@@ -85,7 +85,7 @@
 				}
 				return acc
 			}, [{status: "Автоматов работает", count: 0}, {status: "Автоматов не работает", count: 0}])) },
-			getTableFields () { return getTableFields(this.machines.filter(mach => mach.controller?.status !== "DISABLED")); }
+			getTableFields () { return getTableFields(this.machines.filter(mach => mach.controller?.status === "ENABLED")); }
 		}
 	}
 </script>
