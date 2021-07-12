@@ -440,6 +440,10 @@
 
 * fix receipt
 
+# 1.6.26 - Hotfix
+
+* fix receipt
+
 
 
 

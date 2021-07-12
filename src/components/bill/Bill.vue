@@ -28,6 +28,7 @@
                 <div class="auth-block__link-title col-6 left">НДС:</div><div class="auth-block__link-title col-6 right">Без НДС</div>
               <div><hr/></div>
                 <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
+                <div class="auth-block__link-title col-6 left">Автомат</div><div class="auth-block__link-title col-6 right">{{ bill.machineNumber}}</div>
                 <div class="auth-block__link-title col-6 left">Место расчетов</div><div class="auth-block__link-title col-6 right">{{ bill.place}}</div>
               <div><hr/></div>
                 <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
@@ -87,6 +88,7 @@ export default {
               kpp
               sno
               place
+              machineNumber
               companyName
               legalAddress
               fnsSite
