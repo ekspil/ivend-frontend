@@ -9,7 +9,12 @@
             <div class="auth-block__link-title col-12">{{ bill.companyName }} ИНН: {{ bill.inn }} / КПП: {{ bill.kpp }} Юр.адрес
               {{ bill.legalAddress }}</div>
           <div><hr/></div>
+          <div class="auth-block__link-container row">
+            <div class="auth-block__link-title col-6 left">{{ datetime[0] }}</div><div class="auth-block__link-title col-6 right">{{ datetime[1]}}</div>
+
+          </div>
             <div class="auth-block__title">Товарный чек № {{bill.fiscalReceiptNumber}}</div>
+
 
 
             <div class="auth-block__link-container row">
@@ -23,7 +28,12 @@
                 <div class="auth-block__link-title col-6 left">НДС:</div><div class="auth-block__link-title col-6 right">Без НДС</div>
               <div><hr/></div>
                 <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
+                <div class="auth-block__link-title col-6 left">Место расчетов</div><div class="auth-block__link-title col-6 right">{{ bill.place}}</div>
+              <div><hr/></div>
+                <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
                 <div class="auth-block__link-title col-6 left">Кассовый чек</div><div class="auth-block__link-title col-6 right">Приход</div>
+                <div class="auth-block__link-title col-6 left">СНО</div><div class="auth-block__link-title col-6 right">
+              {{ snoString(bill.sno) }}</div>
                 <div class="auth-block__link-title col-6 left">ИНН: </div><div class="auth-block__link-title col-6 right">
               {{ bill.inn }}</div>
                 <div class="auth-block__link-title col-6 left">Смена:</div><div class="auth-block__link-title col-6 right">
@@ -75,6 +85,8 @@ export default {
                 }
               inn
               kpp
+              sno
+              place
               companyName
               legalAddress
               fnsSite
@@ -110,7 +122,7 @@ export default {
           mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getMinutes())
           //Фэйковые данные
           this.value = `t=${mappedReceiptDate}&s=${(data.getFiscalReceipt.sale.price).toFixed(2)}&fn=${data.getFiscalReceipt.fnNumber}&i=${data.getFiscalReceipt.fiscalDocumentNumber}&fp=${data.getFiscalReceipt.fiscalDocumentAttribute}&n=1`
-
+          this.datetime = data.getFiscalReceipt.receiptDatetime.substr(0, 19).split("T")
 
           return data.getFiscalReceipt;
         }
@@ -120,13 +132,32 @@ export default {
       value: 'https://example.com?dkjdkjf=3&kdkfjkdfjkdsjfksf=8977897',
       size: 100,
       bill: null,
+      datetime: []
     }),
     mounted: async function (){
     },
     beforeCreate() {
 
     },
+
     methods: {
+
+      snoString(sno){
+        switch(sno){
+          case "usn_income":
+            return "УСН доходы"
+          case "usn_income_outcome":
+            return "УСН доходы-расходы"
+          case "envd":
+            return "ЕНВД"
+          case "osn":
+            return "ОСН"
+          case "esn":
+            return "ЕСН"
+          default:
+            return "Не передано"
+        }
+      },
         async login() {
             const cache = this.$store.getters['cache/data'];
             const userData = {
