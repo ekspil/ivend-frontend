@@ -55,6 +55,11 @@ export const controllerTerminal = [
     {name: "Vendotek V3 Vend", value: "vdk3_v"},
     {name: "Vendotek V3 Trade", value: "vdk3_t"},
     {name: "Vendotek V3 Pulse", value: "vdk3_p"},
+    {name: "PAX D200 Инпас", value: "d200i"},
+    {name: "PAX D200 Сбер", value: "d200s"},
+    {name: "Vendista V1", value: "vda1"},
+    {name: "Vendotek VL", value: "vdkl"},
+    {name: "Vendotek VX", value: "vdkx"},
 ]
 
 
