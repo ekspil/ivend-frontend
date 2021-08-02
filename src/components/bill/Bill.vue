@@ -25,7 +25,7 @@
                 <div class="auth-block__link-title col-6 left">Наличными:</div><div class="auth-block__link-title col-6 right">
               {{ bill.sale.type === "CASH" ? (bill.sale.price).toFixed(2)  : 0.00 }}</div>
                 <div class="auth-block__link-title col-6 left">Электронными:</div><div class="auth-block__link-title col-6 right">{{ bill.sale.type === "CASHLESS" ? (bill.sale.price).toFixed(2)  : 0.00 }}</div>
-                <div class="auth-block__link-title col-6 left">НДС:</div><div class="auth-block__link-title col-6 right">{{bill.sno === "osn" ? (bill.sale.price * 0.2).toFixed(2) : "Без НДС"}}</div>
+                <div class="auth-block__link-title col-6 left">{{bill.sno === "osn" ? "НДС 20%:" : "НДС:"}}</div><div class="auth-block__link-title col-6 right">{{bill.sno === "osn" ? (bill.sale.price - (bill.sale.price/1.2)).toFixed(2) : "Без НДС"}}</div>
               <div><hr/></div>
                 <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
                 <div class="auth-block__link-title col-6 left">Автомат</div><div class="auth-block__link-title col-6 right">{{ bill.machineNumber}}</div>
