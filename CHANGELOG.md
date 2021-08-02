@@ -449,6 +449,11 @@
 * fix receipt
 
 
+# 1.6.28 - Hotfix
+
+* vat 20
+
+
 
 
 
