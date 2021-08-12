@@ -3,7 +3,7 @@
         <img src="/assets/images/brand/logo.png" class="auth-page__logo" />
         <!-- Товарный чек -->
         <div class="auth-block" v-if="!bill">
-          <div class="auth-block__link-title col-12">Вашего чека еще нет в системе ОФД, попробуйте перезагрузить страницу через несколько секунд...</div>
+          <div class="auth-block__link-title col-12">{{text}}</div>
         </div>
         <div class="auth-block" v-if="bill">
             <div class="auth-block__link-title col-12">{{ bill.companyName }} ИНН: {{ bill.inn }} / КПП: {{ bill.kpp }} Юр.адрес
@@ -110,6 +110,11 @@ export default {
 
         update (data) {
 
+          if(!data){
+            this.text = "Вашего чека еще нет в системе ОФД, попробуйте перезагрузить страницу через пару минут..."
+            return null
+          }
+
           const getTwoDigitDateFormat = (monthOrDate) => {
             return (monthOrDate < 10) ? "0" + monthOrDate : "" + monthOrDate
           }
@@ -125,7 +130,11 @@ export default {
           //Фэйковые данные
           this.value = `t=${mappedReceiptDate}&s=${(data.getFiscalReceipt.sale.price).toFixed(2)}&fn=${data.getFiscalReceipt.fnNumber}&i=${data.getFiscalReceipt.fiscalDocumentNumber}&fp=${data.getFiscalReceipt.fiscalDocumentAttribute}&n=1`
           this.datetime = data.getFiscalReceipt.receiptDatetime.substr(0, 19).split("T")
-
+          if(data.getFiscalReceipt.ecrRegistrationNumber.includes("http")){
+            this.$router.replace(data.getFiscalReceipt.ecrRegistrationNumber)
+            window.location.href = data.getFiscalReceipt.ecrRegistrationNumber
+            data.getFiscalReceipt.ecrRegistrationNumber = "----"
+          }
           return data.getFiscalReceipt;
         }
       }
@@ -134,7 +143,8 @@ export default {
       value: 'https://example.com?dkjdkjf=3&kdkfjkdfjkdsjfksf=8977897',
       size: 100,
       bill: null,
-      datetime: []
+      datetime: [],
+      text: "Ожидание загрузки чека..."
     }),
     mounted: async function (){
     },

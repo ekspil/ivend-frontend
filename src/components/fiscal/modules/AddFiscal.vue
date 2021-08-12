@@ -15,6 +15,14 @@
                                 <div class="col-md-12 col-lg-12">
 
                                     <div class="form-group">
+                                        <label class="form-label f-b">Касса</label>
+                                        <select v-model="input.type" class="form-control custom-select">
+                                            <option value="umka">Умка (Россия)</option>
+                                            <option value="rekassa">Рекасса (Казахстан)</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group" v-if="input.type === 'umka'">
                                         <label class="form-label f-b">Тип фискального накопителя</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
                                             <option value="УМКА-01-ФА (ФН15)">УМКА-01-ФА (ФН15)</option>
@@ -23,10 +31,24 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group" v-if="kkt.profile">
-                                        <label class="form-label f-b">ИНН</label>
-                                        <Field className="form-control" :value="kkt.profile.legalInfo.inn"  disabled name="inn" formName="addFiscal" placeholder="Введите ИНН"/>
+
+
+
+                                  <div class="form-group" v-if="input.type === 'rekassa'">
+                                    <label class="form-label f-b">Номер кассы</label>
+                                    <Field className="form-control" value=""   name="rekassaNumber" formName="addFiscal" placeholder="Введите номер кассы"/>
+                                  </div>
+
+                                    <div class="form-group" v-if="input.type === 'rekassa'">
+                                        <label class="form-label f-b">Пароль кассы</label>
+                                        <Field className="form-control" value=""   name="rekassaPassword" formName="addFiscal" placeholder="Введите пароль кассы"/>
                                     </div>
+
+
+                                  <div class="form-group" v-if="kkt.profile">
+                                    <label class="form-label f-b">ИНН</label>
+                                    <Field className="form-control" :value="kkt.profile.legalInfo.inn"  disabled name="inn" formName="addFiscal" placeholder="Введите ИНН"/>
+                                  </div>
 
                                     <div class="form-group" v-if="kkt.profile">
                                         <label class="form-label f-b">Компания</label>
@@ -65,7 +87,8 @@
                 profile: null
             },
             input: {
-                kktModel: "UMKA"
+                kktModel: "REKASSA",
+                type: "umka"
 
             },
 
@@ -98,6 +121,7 @@
             async save () {
                 const data = {
                     kktModel: this.input.kktModel,
+                    type: this.input.type,
                     ...this.$store.getters['cache/data']
                 };
 

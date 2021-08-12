@@ -13,6 +13,72 @@
                 @onSubmit="login"
                 @onSuccess="onSuccess"
             >
+
+
+
+
+
+<!--              <div class="auth-block__field-container auth-block__field-container">-->
+<!--                <select id="company-sno" v-model="country" class="form-control custom-select">-->
+<!--                  <option value="rus">Россия</option>-->
+<!--                  <option value="kaz">Казахстан</option>-->
+<!--                  <option value="arm">Армения</option>-->
+<!--                  <option value="aze">Азербайджан</option>-->
+<!--                  <option value="bel">Беларусь</option>-->
+<!--                  <option value="geo">Грузия</option>-->
+<!--                  <option value="kg">Кыргыстан</option>-->
+<!--                  <option value="lva">Латвия</option>-->
+<!--                  <option value="ltu">Литва</option>-->
+<!--                  <option value="mda">Молдова</option>-->
+<!--                  <option value="tjk">Таджикистан</option>-->
+<!--                  <option value="tkm">Туркменистан</option>-->
+<!--                  <option value="ukr">Украина</option>-->
+<!--                  <option value="uzb">Узбекистан</option>-->
+<!--                  <option value="est">Эстония</option>-->
+
+<!--                </select>-->
+<!--              </div>-->
+
+<!--              <div  class="auth-block__field-container auth-block__field-container&#45;&#45;phone">-->
+
+
+
+<!--                <Field v-if="country==='rus' || country==='kaz'"-->
+<!--                       :masked="true"-->
+<!--                       className="auth-block__field"-->
+<!--                       type="tel"-->
+<!--                       name="phone"-->
+<!--                       placeholder="Телефон"-->
+<!--                       mask="\+\7 (111) 111 11-11"-->
+<!--                       formName="login"-->
+<!--                       ref="tel"-->
+<!--                />-->
+<!--                <Field v-if="country==='arm' || country==='bel' || country==='lva' || country==='ltu' || country==='mda' || country==='ukr' || country==='est'"-->
+<!--                       :masked="true"-->
+<!--                       className="auth-block__field"-->
+<!--                       type="tel"-->
+<!--                       name="phone"-->
+<!--                       placeholder="Телефон"-->
+<!--                       mask="\+\311 (111) 111 11-11"-->
+<!--                       formName="login"-->
+<!--                       ref="tel"-->
+<!--                />-->
+<!--                <Field v-if="country==='aze' || country==='geo' || country==='kg' || country==='tjk' || country==='tkm' || country==='uzb'"-->
+<!--                       :masked="true"-->
+<!--                       className="auth-block__field"-->
+<!--                       type="tel"-->
+<!--                       name="phone"-->
+<!--                       placeholder="Телефон"-->
+<!--                       mask="\+\911 (111) 111 11-11"-->
+<!--                       formName="login"-->
+<!--                       ref="tel"-->
+<!--                />-->
+
+<!--              </div>-->
+
+
+
+
                 <div class="auth-block__field-container auth-block__field-container--phone">
 
                     <Field :newmasked="true" className="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" mask="\+9 (999) 999-99-99" formName="login"  />
