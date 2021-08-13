@@ -460,6 +460,12 @@
 
 
 
+# 1.6.30 - Release
+
+* rekassa support
+
+
+
 
 
 
