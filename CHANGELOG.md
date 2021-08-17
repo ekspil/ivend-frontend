@@ -472,6 +472,12 @@
 
 
 
+# 1.6.32 - Release
+
+* rekassa support
+
+
+
 
 
 

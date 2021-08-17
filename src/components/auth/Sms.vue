@@ -62,7 +62,7 @@ export default {
         async login() {
             const cache = this.$store.getters['cache/data'];
             const userData = {
-                phone: this.phone.slice(1),
+                phone: this.phone,
                 sms: cache.sms
             };
 
