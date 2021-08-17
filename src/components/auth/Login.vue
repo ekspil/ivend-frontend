@@ -18,26 +18,26 @@
 
 
 
-<!--              <div class="auth-block__field-container auth-block__field-container">-->
-<!--                <select id="company-sno" v-model="country" class="form-control custom-select">-->
-<!--                  <option value="rus">Россия</option>-->
-<!--                  <option value="kaz">Казахстан</option>-->
-<!--                  <option value="arm">Армения</option>-->
-<!--                  <option value="aze">Азербайджан</option>-->
-<!--                  <option value="bel">Беларусь</option>-->
-<!--                  <option value="geo">Грузия</option>-->
-<!--                  <option value="kg">Кыргыстан</option>-->
-<!--                  <option value="lva">Латвия</option>-->
-<!--                  <option value="ltu">Литва</option>-->
-<!--                  <option value="mda">Молдова</option>-->
-<!--                  <option value="tjk">Таджикистан</option>-->
-<!--                  <option value="tkm">Туркменистан</option>-->
-<!--                  <option value="ukr">Украина</option>-->
-<!--                  <option value="uzb">Узбекистан</option>-->
-<!--                  <option value="est">Эстония</option>-->
+              <div class="auth-block__field-container auth-block__field-container">
+                <select id="company-sno" v-model="country" class="form-control custom-select">
+                  <option value="rus">Россия</option>
+                  <option value="kaz">Казахстан</option>
+                  <option value="arm">Армения</option>
+                  <option value="aze">Азербайджан</option>
+                  <option value="bel">Беларусь</option>
+                  <option value="geo">Грузия</option>
+                  <option value="kg">Кыргыстан</option>
+                  <option value="lva">Латвия</option>
+                  <option value="ltu">Литва</option>
+                  <option value="mda">Молдова</option>
+                  <option value="tjk">Таджикистан</option>
+                  <option value="tkm">Туркменистан</option>
+                  <option value="ukr">Украина</option>
+                  <option value="uzb">Узбекистан</option>
+                  <option value="est">Эстония</option>
 
-<!--                </select>-->
-<!--              </div>-->
+                </select>
+              </div>
 
 <!--              <div  class="auth-block__field-container auth-block__field-container&#45;&#45;phone">-->
 
@@ -78,11 +78,15 @@
 
 
 
+                <div class="row">
+                  <div class="auth-block__field-container  col-3"><div class="auth-block__field" :disabled="true">
+                    {{countryCode[country] }}</div></div>
+                  <div class="auth-block__field-container auth-block__field-container col-9">
 
-                <div class="auth-block__field-container auth-block__field-container--phone">
-
-                    <Field :newmasked="true" className="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" mask="\+9 (999) 999-99-99" formName="login"  />
+                    <Field :newmasked="true" className="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" mask="\(999) 999-99-99" formName="login"  />
+                  </div>
                 </div>
+
                 <div class="auth-block__field-container auth-block__field-container--pass">
                     <Field className="auth-block__field" type="password" name="password" placeholder="Пароль" formName="login" />
                 </div>
@@ -129,7 +133,25 @@ export default {
             phone: [required],
             password: [required]
         },
-        remember: true
+        country: "rus",
+        remember: true,
+      countryCode: {
+        rus: "+7",
+        kaz: "+7",
+        arm: "+374",
+        aze: "+994",
+        bel: "+375",
+        geo: "+995",
+        kg: "+996",
+        lva: "+371",
+        ltu: "+370",
+        mda: "+373",
+        tjk: "+992",
+        tkm: "+993",
+        ukr: "+380",
+        uzb: "+998",
+        est: "+372",
+      }
     }),
     mounted: async function (){
         this.$store.commit('cache/store', {
@@ -145,7 +167,7 @@ export default {
             const cache = this.$store.getters['cache/data'];
             const userData = {
                 password: cache.password,
-                phone: cache.phone.replace(/[()+\s-]/gi, '').slice(1)
+                phone: cache.phone.replace(/[()+\s-]/gi, '')
             };
 
             try {
