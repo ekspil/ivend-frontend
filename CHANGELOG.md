@@ -477,6 +477,11 @@
 * rekassa support
 
 
+# 1.6.33 - Release
+
+* terminal list fix
+
+
 
 
 
