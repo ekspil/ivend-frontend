@@ -487,6 +487,11 @@
 * terminal list fix
 
 
+# 1.6.35 - Hotfix
+
+* fix text
+
+
 
 
 

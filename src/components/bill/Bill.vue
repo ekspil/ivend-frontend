@@ -13,7 +13,7 @@
             <div class="auth-block__link-title col-6 left">{{ datetime[0] }}</div><div class="auth-block__link-title col-6 right">{{ datetime[1]}}</div>
 
           </div>
-            <div class="auth-block__title">Товарный чек № {{bill.fiscalReceiptNumber}}</div>
+            <div class="auth-block__title">Кассовый чек № {{bill.fiscalReceiptNumber}}</div>
 
 
 
