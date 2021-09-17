@@ -6,8 +6,7 @@
           <div class="auth-block__link-title col-12">{{text}}</div>
         </div>
         <div class="auth-block" v-if="bill">
-            <div class="auth-block__link-title col-12">{{ bill.companyName }} ИНН: {{ bill.inn }} / КПП: {{ bill.kpp }} Юр.адрес
-              {{ bill.legalAddress }}</div>
+            <div class="auth-block__link-title col-12 center">{{ bill.companyName }} <br>  ИНН: {{ bill.inn }}</div>
           <div><hr/></div>
           <div class="auth-block__link-container row">
             <div class="auth-block__link-title col-6 left">{{ datetime[0] }}</div><div class="auth-block__link-title col-6 right">{{ datetime[1]}}</div>
@@ -212,6 +211,9 @@ export default {
 <style>
 .left {
   text-align: left !important;
+}
+.center {
+  text-align: center !important;
 }
 .right {
   text-align: right !important;
