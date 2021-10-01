@@ -498,6 +498,11 @@
 * fix text
 
 
+# 1.6.37 - Hotfix
+
+* fix stamp
+
+
 
 
 
