@@ -97,6 +97,10 @@
 			showTimeRangePanel: false,
 		}),
 		methods: {
+		  timerFunction(){
+        let periodNew = this.getPeriod
+        this.$emit('onChange', periodNew);
+      },
 			setPeriod (period = 'Месяц') {
 				this.calendar1 = null
 				this.period = period;
@@ -123,6 +127,7 @@
 				this.$emit('onChange', this.getPeriod);
 			}
 		},
+
 		computed: {
 			...mapGetters({
 				periodStat: "cache/periodStat"
@@ -210,10 +215,7 @@
 		mounted () {
 			this.$emit('onChange', this.getPeriod);
 
-			setInterval(function() {
-				let periodNew = this.getPeriod()
-                this.$emit('onChange', periodNew);
-            }, 120000)
+			setInterval(this.timerFunction() , 120000)
 		}
 	}
 </script>

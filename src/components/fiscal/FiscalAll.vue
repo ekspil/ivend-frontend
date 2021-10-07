@@ -28,6 +28,7 @@
     import Controllers from './modules/ControllersAll';
     import News from './modules/NewsAll';
     import Partners from './modules/Partners';
+    import Tariffs from './modules/Tariffs';
     import gql from "graphql-tag";
 
 
@@ -41,6 +42,7 @@
                 { name: 'Кассы', component: Kkts, route: 'kktsAll' },
                 { name: 'Информация', component: News, route: 'newsAll' },
                 { name: 'Партнеры', component: Partners, route: 'partners' },
+                { name: 'Тарифы', component: Tariffs, route: 'tariffs' },
 
             ],
           statistic: null

@@ -40,6 +40,7 @@ import EditUserInfo from '@/components/fiscal/modules/edit/EditUser';
 import AddFiscal from '@/components/fiscal/modules/AddFiscal';
 import AddFiscalAll from '@/components/fiscal/modules/AddFiscalAll';
 import AddNewsAll from '@/components/fiscal/modules/add/AddNewsAll';
+import AddTariff from '@/components/fiscal/modules/add/AddTariff';
 
 
 import Partner from '@/components/partner/Index';
@@ -103,6 +104,7 @@ const routes = [
     { path: '/fiscal/add', component: AddFiscal },
     { path: '/fiscalAll/add', component: AddFiscalAll },
     { path: '/fiscalAll/addNews', component: AddNewsAll },
+    { path: '/fiscalAll/addTariff', component: AddTariff },
 
 
     { path: '/partner', component: Partner },
