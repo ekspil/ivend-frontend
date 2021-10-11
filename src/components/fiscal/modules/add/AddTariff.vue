@@ -2,7 +2,7 @@
     <div class="container">
         <div class="side-app">
             <div class="row mt-5">
-                <div class="col-lg-10 offset-lg-1 col-md-12">
+                <div class="col-lg-10 offset-lg-1 col-md-12" v-if="partners">
                   <Validate
                       formName="addTariff"
                       title="Изменение тарификации"
@@ -19,6 +19,7 @@
                                         <label class="form-label f-b">Целевая группа</label>
                                         <select v-model="partnerId" class="form-control custom-select">
                                             <option value="null">Для всех</option>
+                                            <option v-for="partner of partners" :value="partner.id">{{ partner.companyName }}</option>
                                         </select>
                                     </div>
 
@@ -80,6 +81,7 @@
             Field
         },
         data: () => ({
+            partners: null,
             input: {
                 active: 0
             },
@@ -92,6 +94,33 @@
             acquiring: 0,
             startedAt: null,
         }),
+
+      apollo: {
+        partners: {
+          query: gql`
+                    query($input: AllUsersInput) {
+                      getAllUsers(input: $input) {
+                            phone
+                            id
+                            email
+                            inn
+                            companyName
+                    }
+                    }
+                `,
+          variables () {
+            return {
+              input: {
+                role: "PARTNER"
+              },
+            };
+          },
+          update (data) {
+
+            return data.getAllUsers
+          }
+        }
+      },
         methods: {
             async save () {
                 const data = {

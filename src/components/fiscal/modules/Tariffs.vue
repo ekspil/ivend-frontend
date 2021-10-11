@@ -15,7 +15,7 @@
 <!--                                </div>-->
 
                                 <Table
-                                        v-if="tariffs"
+                                        v-if="tariffs && partners"
                                         :headers="getTableHeaders"
                                         :fields="getTableFields"
                                         className="settings-table"
@@ -62,11 +62,36 @@
             Table
         },
         data: () => ({
+            partners: null,
             orderKey: null,
             orderDesc: null,
             tariffs: null,
         }),
         apollo: {
+          partners: {
+            query: gql`
+                    query($input: AllUsersInput) {
+                      getAllUsers(input: $input) {
+                            phone
+                            id
+                            email
+                            inn
+                            companyName
+                    }
+                    }
+                `,
+            variables () {
+              return {
+                input: {
+                  role: "PARTNER"
+                },
+              };
+            },
+            update (data) {
+
+              return data.getAllUsers
+            }
+          },
             tariffs: {
                 query: gql`
                     query {
@@ -91,7 +116,7 @@
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.tariffs) }
+            getTableFields () { return getTableFields(this.tariffs, this.partners) }
         }
     }
 </script>

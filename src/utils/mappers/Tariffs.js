@@ -1,6 +1,8 @@
-function showPartner(id){
+function showPartner(id, props){
     if(!id) return "Для всех"
-    return "Партнер №"+id
+
+    const value = props.find(prop => prop.id === id)
+    return value.companyName
 }
 
 export const getTableHeaders = () => [
@@ -16,7 +18,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = (data, props) => data.map(tariff => ({
     id: tariff.id,
-    partnerId: showPartner(tariff.partnerId),
+    partnerId: showPartner(tariff.partnerId, props),
     telemetry: tariff.telemetry,
     acquiring: tariff.acquiring,
     fiscal: tariff.fiscal,
