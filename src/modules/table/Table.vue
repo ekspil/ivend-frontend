@@ -158,17 +158,9 @@
 				const {fields} = this
 				const {key} = header
 
-				let value = fields.reduce((acc, row) => {
-				  console.log(row[key])
-          if(Number.isInteger(row[key])) {
-            return acc + Number(row[key])
-          } else {
-            return 0
-          }
-        }, 0)
-        console.log(value)
-        if(value === 0) return ""
-        return value
+				const value = fields.reduce((acc, row) => Number.isInteger(row[key]) ? acc + Number(row[key]) + 0 : "", 0)
+        if(Number.isInteger(value)) return value
+        return ""
 			},
 			getHeaderClass (header) {
 				return {
