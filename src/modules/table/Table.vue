@@ -158,7 +158,7 @@
 				const {fields} = this
 				const {key} = header
 
-				const value = fields.reduce((acc, row) => Number.isInteger(row[key]) ? acc + Number(row[key]) + 0 : "", 0)
+				const value = fields.reduce((acc, row) => Number.isInteger(row[key]) ? acc + row[key] + 0 : "", 0)
         if(Number.isInteger(value)) return value
         return ""
 			},
