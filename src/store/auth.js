@@ -42,10 +42,10 @@ const mutations = {
 };
 
 const actions = {
-	requestUserData ({ commit, dispatch }, {token, remember, phone}) {
+	async requestUserData ({ commit, dispatch }, {token, remember, phone}) {
 		commit('setToken',  {token, remember, phone});
 
-		dispatch('user/fetch', null, {
+		await dispatch('user/fetch', null, {
 			root: true
 		});
 	}

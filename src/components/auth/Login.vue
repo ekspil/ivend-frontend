@@ -195,7 +195,9 @@ export default {
             else{
                 const cache = this.$store.getters['cache/data'];
                 this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: cache.phone.replace(/[()+\s-]/gi, '')});
+
             }
+
 
 
         }

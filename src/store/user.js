@@ -9,11 +9,15 @@ const state = () => ({
 	partnerFee: null,
 	selectedGroupIdSe: null,
 	selectedGroupIdSt: null,
+	partnerInfo: null,
 });
 
 const mutations = {
 	set (state, payload = null) {
 		state.profile = payload;
+	},
+	setPartnerInfo (state, payload = null) {
+		state.partnerInfo = payload;
 	},
 	setPartner (state, partner = null) {
 		state.partner = partner;
@@ -30,12 +34,57 @@ const actions = {
 			query: gql`
 				query {
 					getProfile {
+						id
 						role
+						partnerId
 					}
 				}
 			`
 		});
+		let info = null
+		if(data.getProfile && (data.getProfile.role === "PARTNER" || data.getProfile.partnerId)){
+			let partnerId
+			if(data.getProfile.role === "PARTNER"){
+				partnerId = data.getProfile.id
+			}
+			if(data.getProfile.partnerId){
+				partnerId = data.getProfile.partnerId
+			}
 
+
+			const result = await Bus.$apollo.query({
+				query: gql `
+                                query ($partnerId: Int!) {
+                                    getPartnerInfo(partnerId: $partnerId){
+                                    	partnerId
+										fileOferta
+										fileLogo
+										infoRequisites
+										infoMailTech
+										infoPhoneTech
+										infoPhoneCom
+                                    
+                                    }
+                                }
+                            `,
+				variables: {
+					partnerId
+				}
+			});
+
+			if(result.data){
+				info = result.data.getPartnerInfo
+			}
+
+
+
+		}
+
+
+
+		if(info){
+			commit('setPartnerInfo', info);
+		}
 		commit('set', data.getProfile);
 		router.push('/home');
 	}

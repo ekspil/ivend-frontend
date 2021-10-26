@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="d-flex">
                     <router-link class="header-brand" to="/home">
-                        <img alt="iVend" class="header-brand-img" src="/assets/images/brand/logo.png">
+                        <img alt="iVend" class="header-brand-img" :src="logo">
                     </router-link>
                     <div class="d-flex order-lg-2 ml-auto">
                         <div class="dropdown d-none d-md-flex" v-if="true">
@@ -104,6 +104,14 @@
         components: {
             particles
         },
+      beforeMount() {
+          if(this.$store.state.user.partnerInfo){
+            this.logo = `/api/v1/files/file/${this.$store.state.user.partnerInfo.partnerId}/${this.$store.state.user.partnerInfo.fileLogo}`
+          }
+      },
+      data: ()=>({
+          logo: "/assets/images/brand/logo.png",
+        }),
         apollo: {
             user: {
                 query: gql`
