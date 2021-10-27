@@ -270,7 +270,7 @@
               let formData = new FormData();
               formData.append('file', this.file);
               try {
-                await axios.post( `http://localhost:3210/api/v1/files/upload/${this.user.id}/${this.file.name}`,
+                await axios.post( `/api/v1/files/upload/${this.user.id}/${this.file.name}`,
                     formData,
                     {
                       headers: {
