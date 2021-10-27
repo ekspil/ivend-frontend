@@ -82,9 +82,9 @@ const actions = {
 
 
 
-		if(info){
-			commit('setPartnerInfo', info);
-		}
+
+		commit('setPartnerInfo', info);
+
 		commit('set', data.getProfile);
 		router.push('/home');
 	}
