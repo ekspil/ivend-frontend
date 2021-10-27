@@ -5,7 +5,7 @@
 
             <div class="row mt-5">
                 <div class="col-lg-10 offset-lg-1 col-md-12">
-                    <div class="form-label f-b card-header my-auto">Позвонить в техническую поддержку: +7 (952) 381-31-41</div>
+                    <div class="form-label f-b card-header my-auto">Позвонить в техническую поддержку: {{infoPhoneTech}}</div>
 
                     <Validate
                             formName="addQuestion"
@@ -68,6 +68,7 @@
             Field
         },
         data: ()=> ({
+            infoPhoneTech: "+7 (952) 381-31-41",
             input: {
                 category: "general"
             },
@@ -76,6 +77,12 @@
             },
 
         }),
+
+      beforeMount() {
+        if(this.$store.state.user.partnerInfo){
+          this.infoPhoneTech = this.$store.state.user.partnerInfo.infoPhoneTech
+        }
+      },
         methods: {
             async send () {
                 const cache = this.$store.getters["cache/data"]

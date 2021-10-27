@@ -13,7 +13,7 @@
                     <div class="d-flex order-lg-2 ml-auto">
                         <div class="dropdown d-none d-md-flex" v-if="true">
                             <span class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
-                                <span class="text-black f-b">Телефон: {{ '9313288159' | prettify }}</span>
+                                <span class="text-black f-b">Телефон: {{ infoPhoneCom | prettify }}</span>
                             </span>
                         </div></div>
 
@@ -107,10 +107,12 @@
       beforeMount() {
           if(this.$store.state.user.partnerInfo){
             this.logo = `/api/v1/files/file/${this.$store.state.user.partnerInfo.partnerId}/${this.$store.state.user.partnerInfo.fileLogo}`
+            this.infoPhoneCom = this.$store.state.user.partnerInfo.infoPhoneCom
           }
       },
       data: ()=>({
           logo: "/assets/images/brand/logo.png",
+          infoPhoneCom: "9313288159"
         }),
         apollo: {
             user: {
