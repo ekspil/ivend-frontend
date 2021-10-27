@@ -4,7 +4,7 @@
             <div class="row align-items-center text-center">
                 <div class="col-lg-6 col-sm-12 text-left privacy">
                     <router-link to="/tariffs">Тарифы и реквизиты</router-link>
-                    <a :href="oferta" class="ml-5">Договор оферты</a>
+                    <a v-if="oferta" :href="oferta" class="ml-5">Договор оферты</a>
                 </div>
                 <div class="col-lg-6 col-sm-12 mt-3 mt-lg-0 text-right privacy">
                     © {{ (new Date()).getFullYear() }} <a href="https://cabinet.ivend.pro">ivend</a>. Все права защищены.
@@ -21,10 +21,12 @@
     beforeMount() {
       if(this.$store.state.user.partnerInfo){
         this.oferta = `/api/v1/files/download/${this.$store.state.user.partnerInfo.partnerId}/${this.$store.state.user.partnerInfo.fileOferta}`
+      } else{
+        this.oferta = "/assets/uploads/oferta.pdf"
       }
     },
     data: () =>({
-    oferta: "/assets/uploads/oferta.pdf",
+    oferta: null,
   })
 	}
 </script>
