@@ -45,10 +45,10 @@ const actions = {
 		if(data.getProfile && (data.getProfile.role === "PARTNER" || data.getProfile.partnerId)){
 			let partnerId
 			if(data.getProfile.role === "PARTNER"){
-				partnerId = data.getProfile.id
+				partnerId = Number(data.getProfile.id)
 			}
 			if(data.getProfile.partnerId){
-				partnerId = data.getProfile.partnerId
+				partnerId = Number(data.getProfile.partnerId)
 			}
 
 
