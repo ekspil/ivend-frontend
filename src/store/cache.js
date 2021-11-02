@@ -14,6 +14,7 @@ const state = () => ({
 			amount: 0
 		},
 	},
+	editedUser: null,
 	periodStat: null,
 	periodStatType: null,
 	services: null
