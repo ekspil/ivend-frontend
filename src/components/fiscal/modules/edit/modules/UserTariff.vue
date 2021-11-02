@@ -73,7 +73,7 @@
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
 
-    import { required, email, number } from '@/utils/validation';
+    import { required} from '@/utils/validation';
 
     export default {
         components: {
@@ -209,7 +209,6 @@
                     }
 
                 } catch (error) {
-                    console.error(error)
                     this.$refs.form2.showMessage('error', 'Ошибка сохранения.');
                 }
             },

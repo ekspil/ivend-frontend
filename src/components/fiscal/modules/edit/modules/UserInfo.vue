@@ -82,12 +82,11 @@
 
 <script>
     import gql from 'graphql-tag';
-    import axios from 'axios';
 
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
 
-    import { required, email, number } from '@/utils/validation';
+    import { required} from '@/utils/validation';
 
     export default {
         components: {
@@ -152,58 +151,6 @@
             },
         },
         methods: {
-           async handleFileUpload(fileName){
-              this.file = this.$refs[fileName].files[0];
-              let formData = new FormData();
-              formData.append('file', this.file);
-              try {
-                await axios.post( `/api/v1/files/upload/${this.user.id}/${this.file.name}`,
-                    formData,
-                    {
-                      headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'authorization': 'Bearer ' + this.$store.state.auth.token
-                      }
-                    }
-                )
-                this[fileName] = `${this.file.name}`
-                this.$refs.form.showMessage('success', 'Файл загружен на сервер');
-
-
-              }
-              catch(e) {
-                this.$refs.form.showMessage('error', 'Ошибка загрузки.');
-              }
-            },
-          async updatePartnerInfo(){
-
-
-              try{
-                let {error, data } = await this.$apollo.mutate({
-                  mutation: gql`
-                    mutation updatePartnerInfo ($input: PartnerInfoInput!) {
-                      updatePartnerInfo(input: $input) {
-                        partnerId
-                      }
-                    }
-                  `,
-                  variables: {
-                    input: {
-                      partnerId: this.user.id,
-                      fileOferta: this.fileOferta,
-                      fileLogo: this.fileLogo,
-                      infoRequisites: this.infoRequisites,
-                      infoMailTech: this.infoMailTech,
-                      infoPhoneTech: this.infoPhoneTech,
-                      infoPhoneCom: this.infoPhoneCom,
-                    }
-                  }
-                })
-              }
-              catch (e) {
-
-              }
-          },
             async save () {
                 try {
                     const input = {
@@ -234,7 +181,6 @@
 
                     this.$refs.form.process({ errors, data, success: 'Успешно сохранено.' });
                 } catch (error) {
-                    console.error(error)
                     this.$refs.form.showMessage('error', 'Ошибка сохранения.');
                 }
             },
