@@ -8,7 +8,7 @@
                             <div class="example top-buttons-container top-buttons">
 
                               <div class="top-buttons__left-container">
-                                <router-link to="/fiscalAll/addTariff" class="btn btn-primary">Изменить тариф</router-link>
+                                <router-link :to="'/fiscalAll/addTariff/'+ $route.params.id" class="btn btn-primary">Изменить тариф</router-link>
                               </div>
 <!--                                <div class="stats-top-menu__date-buttons">-->
 <!--                                    <Period @onChange="onPeriodChange"/>-->
@@ -94,8 +94,8 @@
           },
             tariffs: {
                 query: gql`
-                    query {
-                      getTariffs {
+                    query($partnerId: Int) {
+                      getTariffs(partnerId: $partnerId) {
                           id
                           telemetry
                           acquiring
@@ -106,6 +106,10 @@
                     }
                 `,
                 variables () {
+                  return {
+                    partnerId: Number(this.$route.params.id)
+                  }
+
                 },
                 update (data) {
                     return data.getTariffs

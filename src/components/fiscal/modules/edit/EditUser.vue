@@ -21,6 +21,7 @@
 import Tabs from '@/modules/Tabs';
 import UserInfo from './modules/UserInfo';
 import UserTariff from './modules/UserTariff';
+import PartnerTariff from './modules/PartnerTariff';
 import UserVisio from './modules/UserVisio';
 
 
@@ -32,8 +33,9 @@ export default {
       if(this.$store.state.cache.editedUser && this.$store.state.cache.editedUser.role === "PARTNER"){
         this.tabs = [
           { name: 'Информация', component: UserInfo, route: 'UserInfo' },
-          { name: 'Тарифы', component: UserTariff, route: 'UserTariff' },
-          { name: 'Визуализация', component: UserVisio, route: 'UserVisio' },
+          { name: 'Комиссия', component: UserTariff, route: 'UserTariff' },
+          { name: 'Тарифы', component: PartnerTariff, route: 'PartnerTariff' },
+          { name: 'Персонализация', component: UserVisio, route: 'UserVisio' },
         ]
       }
       else {

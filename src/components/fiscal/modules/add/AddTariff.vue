@@ -17,7 +17,7 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Целевая группа</label>
-                                        <select v-model="partnerId" class="form-control custom-select">
+                                        <select v-model="partnerId" disabled class="form-control custom-select">
                                             <option value="null">Для всех</option>
                                             <option v-for="partner of partners" :value="partner.id">{{ partner.companyName }}</option>
                                         </select>
@@ -80,7 +80,10 @@
           Validate,
             Field
         },
-        data: () => ({
+      beforeMount() {
+          this.partnerId = Number(this.$route.params.id)
+      },
+      data: () => ({
             partners: null,
             input: {
                 active: 0
@@ -156,7 +159,7 @@
             },
             onSuccess () {
                 const router = this.$router;
-                setTimeout(function () { router.push('/fiscalAll#tariffs'); }, 1000);
+                setTimeout(function () { router.push('/fiscalAll/userEdit/'+ this.partnerId +'?from=partner'); }, 1000);
             },
 
             getBillingAbbr (date) {

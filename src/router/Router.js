@@ -104,7 +104,7 @@ const routes = [
     { path: '/fiscal/add', component: AddFiscal },
     { path: '/fiscalAll/add', component: AddFiscalAll },
     { path: '/fiscalAll/addNews', component: AddNewsAll },
-    { path: '/fiscalAll/addTariff', component: AddTariff },
+    { path: '/fiscalAll/addTariff/:id', component: AddTariff },
 
 
     { path: '/partner', component: Partner },
