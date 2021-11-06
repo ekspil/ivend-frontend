@@ -503,6 +503,11 @@
 * fix stamp
 
 
+# 1.7.0 - Hotfix
+
+* partner functions
+
+
 
 
 
