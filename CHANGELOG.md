@@ -503,9 +503,13 @@
 * fix stamp
 
 
-# 1.7.0 - Hotfix
+# 1.7.0 - Release
 
 * partner functions
+
+# 1.7.1 - Hotfix
+
+* partner functions fix
 
 
 

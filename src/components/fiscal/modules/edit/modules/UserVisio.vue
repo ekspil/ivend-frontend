@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <div class="side-app" v-if="partnerInfo">
+        <div class="side-app">
             <div class="row mt-5">
                 <div class="col-lg-12  ">
-                    <div class="card-header" v-if="partnerInfo">
+                    <div class="card-header" >
                         <h3 class="card-title f-b">Персонализация партнера {{user.id}}</h3>
                     </div>
 
