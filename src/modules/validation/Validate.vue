@@ -1,7 +1,7 @@
 <template>
     <div class="validation-wrapper">
         <form method="POST" class="card" v-if="card">
-            <div class="card-header">
+            <div class="card-header" v-if="!noHeader">
                 <h3 class="card-title f-b">{{ title }}</h3>
             </div>
             <div class="card-header-links" v-if="back ==='true'">
@@ -44,6 +44,7 @@
 		name: 'Validate',
 		props: {
 			className: String,
+      noHeader: Boolean,
 			title: String,
 			formName: String,
 

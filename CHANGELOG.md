@@ -517,6 +517,11 @@
 * partner functions fix
 
 
+# 1.7.3 - Hotfix
+
+* partner functions fix
+
+
 
 
 

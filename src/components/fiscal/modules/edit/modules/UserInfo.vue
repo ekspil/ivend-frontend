@@ -1,11 +1,6 @@
 <template>
     <div class="container">
         <div class="side-app" v-if="user">
-            <div class="row mt-5">
-                <div class="col-lg-12 ">
-                    <div class="card-header" v-if="user">
-                        <h3 class="card-title f-b">Информация о пользователе {{user.id}}</h3>
-                    </div>
 
                     <Validate
                             :routeBack=from
@@ -14,6 +9,7 @@
                             :schema="schema"
                             @onSubmit="save"
                             @onSuccess="onSuccess"
+                            :noHeader="true"
                     >
                         <template slot="form">
                             <div class="row">
@@ -74,8 +70,6 @@
 
                 </div>
             </div>
-        </div>
-    </div>
 
 </template>
 
