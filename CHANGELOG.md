@@ -522,6 +522,11 @@
 * partner functions fix
 
 
+# 1.7.4 - Hotfix
+
+* bill fix
+
+
 
 
 
