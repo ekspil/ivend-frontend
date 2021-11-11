@@ -56,7 +56,7 @@
 
 
             <div class="auth-block__link-container row">
-                <div class="auth-block__link col-6 left">1 x {{ bill.sale.item.name }}</div><div class="auth-block__link col-6 right">
+                <div class="auth-block__link col-6 left bold">1 x {{ bill.sale.item.name }}</div><div class="auth-block__link col-6 right bold">
               {{ (bill.sale.price).toFixed(2) }}</div>
 
               <div class="auth-block__link-title col-4 left" v-if="bill.sno !== 'osn'"></div><div class="auth-block__link-title col-8 right" v-if="bill.sno !== 'osn'">в т.ч. НДС НЕ ОБЛАГАЕТСЯ</div>
@@ -226,6 +226,9 @@ export default {
 }
 .center {
   text-align: center !important;
+}
+.bold {
+  font-weight: bold;
 }
 .right {
   text-align: right !important;
