@@ -14,6 +14,17 @@
                                     <input v-model="search" class="form-control custom-select" placeholder="Поиск">
                                 </div>
 
+                              <div class="form-group " style="width: 25%; padding-left: 10px">
+                                <select class="form-control custom-select" v-model="selectedStatus">
+                                  <option key="" :value="null" selected="selected"></option>
+                                  <option key="" value="6" selected="selected">6:Удаление</option>
+                                  <option key="" value="5" selected="selected">5:Ошибка</option>
+                                  <option key="" value="4" selected="selected">4:Регистрация</option>
+                                  <option key="" value="3" selected="selected">3:Внимание</option>
+                                  <option key="" value="0" selected="selected">0: НОРМА</option>
+                                </select>
+                              </div>
+
                               <span class="col-auto">
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                             </span>
@@ -24,6 +35,7 @@
                                         :headers="getTableHeaders"
                                         :fields="getTableFields"
                                         className="settings-table"
+                                        sortBy="activationDate"
                                 />
 
                                 <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -39,10 +51,10 @@
                                     </div>
                                     <div class="form-group kol">
                                         <select v-model="limit" class="form-control custom-select">
+                                            <option value="50">50</option>
                                             <option value="100">100</option>
                                             <option value="200">200</option>
-                                            <option value="500">500</option>
-                                            <option value="1000">1000</option>
+                                            <option value="99999">ВСЕ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -70,17 +82,18 @@
           ExportExcel
         },
         data: () => ({
+            selectedStatus: null,
             kkts: [],
             offset: 0,
-            limit:100,
-            savedLimit :100,
+            limit:50,
+            savedLimit :50,
             search: ""
         }),
         apollo: {
             kkts: {
                 query: gql`
-                    query($offset: Int, $limit: Int) {
-                      getAllKkts(offset: $offset, limit: $limit) {
+                    query($offset: Int, $limit: Int, $status: Int) {
+                      getAllKkts(offset: $offset, limit: $limit, status: $status) {
                             id
                             kktModel
                             kktStatus
@@ -99,10 +112,14 @@
                     }
                 `,
                 variables () {
-                    return {
+                    const vars = {
                         offset: Number(this.offset),
                         limit: Number(this.limit)
                     };
+                    if(this.selectedStatus!==null){
+                      vars.status = Number(this.selectedStatus)
+                    }
+                    return vars
                 },
                 update (data) {
                     return data.getAllKkts;
