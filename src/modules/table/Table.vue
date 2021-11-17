@@ -60,7 +60,7 @@
 							</div>
 						</div>
 					</div>
-					<template v-else>{{ field[header.key] }}</template>
+          <template v-else><div class="bold-int">{{ field[header.key] }}</div></template>
 				</td>
 
 				<td class="text-right" v-if="field && field.props && field.props.remove">
@@ -100,7 +100,7 @@
 			</tr>
 		</tbody>
 		<tr v-if="stats">
-			<th v-for="(header, index) in headers" :key="index">{{index === 0 ? "Итого": getTotal(header)}}</th>
+			<th v-for="(header, index) in headers" :key="index" class="bold-int">{{index === 0 ? "Итого": getTotal(header)}}</th>
 		</tr>
 	</table>
 </div>
@@ -269,5 +269,9 @@
 .no-overflow {
   max-height: 45vh;
   overflow: auto;
+}
+.bold-int {
+  font-weight: bold;
+  color: #128b7e
 }
 </style>

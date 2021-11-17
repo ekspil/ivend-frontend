@@ -44,7 +44,7 @@
 		<date-picker
 				v-model="calendar1"
 				type="date"
-				placeholder="Дата"
+				:placeholder="(calendar1 && calendar1.length > 1)?calendar1[0].toLocaleDateString().substr(0, 6) +calendar1[0].toLocaleDateString().substr(8, 2) + '-' + calendar1[1].toLocaleDateString().substr(0, 6) +calendar1[1].toLocaleDateString().substr(8, 2):'Дата'"
 				range
 				format="DD.MM.YY"
 				range-separator="-"
@@ -95,6 +95,7 @@
 			value2: [],
 			showTimePanel: false,
 			showTimeRangePanel: false,
+      interval: null
 		}),
 		methods: {
 			setPeriod (period = 'Неделя') {
@@ -216,10 +217,13 @@
 				}
 			}
 		},
-		mounted () {
+    beforeDestroy() {
+		  clearInterval(this.interval)
+    },
+    mounted () {
 			this.$emit('onChange', this.getPeriod);
 
-			setInterval(() => {
+			this.interval = setInterval(() => {
 			    let date;
 			    let period;
 			    let periodNew;
@@ -283,8 +287,7 @@
 						}
 						this.period = this.periodStat.type
 						if(this.period === "calendar"){
-							this.calendar1[0] = new Date(period.from)
-							this.calendar1[1] = new Date(period.to)
+							this.calendar1 = [new Date(period.from), new Date(period.to)]
 						}
 						break;
 

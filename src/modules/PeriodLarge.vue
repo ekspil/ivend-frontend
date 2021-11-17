@@ -44,7 +44,7 @@
 		<date-picker
 				v-model="calendar1"
 				type="date"
-				placeholder="Дата"
+        :placeholder="(calendar1 && calendar1.length > 1)?calendar1[0].toLocaleDateString().substr(0, 6) +calendar1[0].toLocaleDateString().substr(8, 2) + '-' + calendar1[1].toLocaleDateString().substr(0, 6) +calendar1[1].toLocaleDateString().substr(8, 2):'Дата'"
 				range
 				format="DD.MM.YY"
 				range-separator="-"
@@ -95,6 +95,7 @@
 			value2: [],
 			showTimePanel: false,
 			showTimeRangePanel: false,
+      interval: null,
 		}),
 		methods: {
 		  timerFunction(){
@@ -212,10 +213,14 @@
 				}
 			}
 		},
+
+    beforeDestroy() {
+      clearInterval(this.interval)
+    },
 		mounted () {
 			this.$emit('onChange', this.getPeriod);
 
-			setInterval(this.timerFunction() , 120000)
+      this.interval = (this.timerFunction() , 120000)
 		}
 	}
 </script>
