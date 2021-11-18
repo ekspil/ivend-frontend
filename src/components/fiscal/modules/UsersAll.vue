@@ -24,7 +24,7 @@
                               </div>
 
                               <span class="col-auto">
-                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                                            <ExportExcel  v-if="false" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                             </span>
                               <span class="col-auto">
                                             <ExportExcel :table="{ headers: [...getTableHeaders,
@@ -34,7 +34,7 @@
                                             { name: 'Адрес фактический', key: 'actualAddress'},
                                             { name: 'ОГРН', key: 'ogrn'},
                                             { name: 'Адрес юридический', key: 'legalAddress'},
-                                            { name: 'Директо', key: 'director'},
+                                            { name: 'Директор', key: 'director'},
                                             { name: 'Телефон директора', key: 'directorPhone'},
                                             { name: 'Почта директора', key: 'directorEmail'},
                                             { name: 'Контактное лицо', key: 'contactPerson'},
@@ -42,7 +42,7 @@
                                             { name: 'Контактная почта', key: 'contactEmail'},
                                             { name: 'СНО', key: 'sno'},
                                             { name: 'Часовой пояс', key: 'timeZone'},
-                                            ], fields: getTableFields }" text="Экспорт с данными компаний"/>
+                                            ], fields: getTableFields }" text="Экспорт"/>
                             </span>
 
 <!--                              companyName,-->
