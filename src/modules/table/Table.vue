@@ -46,9 +46,9 @@
 					<div v-else-if="header.critery" v-html="header.critery(field)" class="bold-int"></div>
 
 					<div v-else-if="header.raw" v-html="field[header.key]" class="bold-int"></div>
-					<div v-else-if="field && field.props && field.props.changeBalance && field.props.changeBalanceKey === header.key" class="bold-int">
+					<div v-else-if="field && field.props && field.props.changeBalance && field.props.changeBalanceKey === header.key" class="">
 						<div class="item-action dropdown">
-							<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
+							<a href="javascript:void(0)" data-toggle="dropdown" class="bold-link bold-int">
 								{{ field[header.key] }}
 							</a>
 							<div class="dropdown-menu dropdown-menu-right text-center">
@@ -278,5 +278,11 @@
 }
 .bold-link:hover {
   color: #00dabf !important;
+}
+.bold-int-color {
+
+  font-weight: bold;
+  color: #20088d !important;
+
 }
 </style>

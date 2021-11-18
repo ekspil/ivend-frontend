@@ -526,6 +526,10 @@
 
 * bill fix
 
+# 1.7.5 - Hotfix
+
+* bill fix
+
 
 
 
