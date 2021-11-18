@@ -27,19 +27,19 @@
 
 			<tr v-for="(field, index) in getFields" :key="'dd'+index">
 				<td v-for="(header, index) in headers" :key="index" :class="field.class" :style="style(field)" v-if="field.invisible ? !field.invisible() : true">
-					<router-link v-if="field && field.props && field.props.route && field.props.routeId && field.props.routeKey === header.key" :to="field.props.route + field[field.props.routeId] + (field.props.routeParams || '')" class="f-b">
+					<router-link v-if="field && field.props && field.props.route && field.props.routeId && field.props.routeKey === header.key" :to="field.props.route + field[field.props.routeId] + (field.props.routeParams || '')" class="f-b bold-link">
 						{{ field[header.key] }}
 					</router-link>
 
-					<router-link  v-else-if="field && field.props && field.props.route && field.props.routeKey === header.key" :to="field.props.route + field[header.key]" class="f-b">
+					<router-link  v-else-if="field && field.props && field.props.route && field.props.routeKey === header.key" :to="field.props.route + field[header.key]" class="f-b bold-link">
 						{{ field[header.key] }}
 					</router-link>
 
-					<router-link v-else-if="header.link && field.route && header.critery" v-html="header.critery(field)" :to="field.route" class="f-b">
+					<router-link v-else-if="header.link && field.route && header.critery" v-html="header.critery(field)" :to="field.route" class="f-b bold-link">
 
 					</router-link>
 
-					<router-link v-else-if="header.link && field.route" :to="field.route" class="f-b">
+					<router-link v-else-if="header.link && field.route" :to="field.route" class="f-b bold-link">
 						{{ field[header.key] }}
 					</router-link>
 
@@ -272,6 +272,11 @@
 }
 .bold-int {
   font-weight: bold;
-  color: #128b7e
+}
+.bold-link {
+  color: #20088d !important;
+}
+.bold-link:hover {
+  color: #00dabf !important;
 }
 </style>

@@ -50,7 +50,7 @@
 				range-separator="-"
 				@close="setPeriodRange"
 				:editable="false"
-				input-class="stats-top-menu__item stats-top-menu__item--date"
+				:input-class="(calendar1 && calendar1.length > 1)?'stats-top-menu__item stats-top-menu__item--date green-selected':'stats-top-menu__item stats-top-menu__item--date green-selected-no'"
 		>
 			<template v-slot:icon-calendar="{ emit }">
 				<div >
@@ -95,7 +95,9 @@
 			value2: [],
 			showTimePanel: false,
 			showTimeRangePanel: false,
-      interval: null
+      interval: null,
+      interval2: null,
+      greenEl: null
 		}),
 		methods: {
 			setPeriod (period = 'Неделя') {
@@ -219,9 +221,27 @@
 		},
     beforeDestroy() {
 		  clearInterval(this.interval)
+		  clearInterval(this.interval2)
     },
     mounted () {
+
 			this.$emit('onChange', this.getPeriod);
+
+			this.interval2 = setInterval(()=>{
+			  const el = document.getElementsByClassName('green-selected')
+
+        if(el[0]){
+          el[0].setAttribute('style', 'background-color: #00dabf')
+        }
+        const elno = document.getElementsByClassName('green-selected-no')
+
+        if(elno[0]){
+          elno[0].setAttribute('style', 'background-color: #fff;')
+        }
+
+
+
+      }, 500)
 
 			this.interval = setInterval(() => {
 			    let date;
@@ -313,5 +333,8 @@
 	.mx-icon-clear {
 		visibility: hidden;
 	}
+  .green-selected {
+
+  }
 
 </style>
