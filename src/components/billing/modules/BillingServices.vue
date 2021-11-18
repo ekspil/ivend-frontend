@@ -109,3 +109,8 @@
         }
 	}
 </script>
+<style>
+.service-price-cel {
+  font-weight: bold;
+}
+</style>

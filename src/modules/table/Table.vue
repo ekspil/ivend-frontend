@@ -43,10 +43,10 @@
 						{{ field[header.key] }}
 					</router-link>
 
-					<div v-else-if="header.critery" v-html="header.critery(field)"></div>
+					<div v-else-if="header.critery" v-html="header.critery(field)" class="bold-int"></div>
 
-					<div v-else-if="header.raw" v-html="field[header.key]"></div>
-					<div v-else-if="field && field.props && field.props.changeBalance && field.props.changeBalanceKey === header.key" >
+					<div v-else-if="header.raw" v-html="field[header.key]" class="bold-int"></div>
+					<div v-else-if="field && field.props && field.props.changeBalance && field.props.changeBalanceKey === header.key" class="bold-int">
 						<div class="item-action dropdown">
 							<a href="javascript:void(0)" data-toggle="dropdown" class="icon">
 								{{ field[header.key] }}
