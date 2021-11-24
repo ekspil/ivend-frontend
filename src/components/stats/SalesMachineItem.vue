@@ -19,7 +19,7 @@
                   <Period @onChange="onPeriodChange"/>
                 </div>
 
-                <ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }" v-if="data"/>
+                <ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFieldsNoLimit }" v-if="data"/>
               </div>
             </div>
 
@@ -56,7 +56,7 @@ import gql from 'graphql-tag';
 
 import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
-import { getTableHeaders, getTableFields } from '@/utils/mappers/MachineItemSales';
+import { getTableHeaders, getTableFields, getTableFieldsNoLimit, getTableHeadersNoLimit } from '@/utils/mappers/MachineItemSales';
 import Period from '@/modules/Period';
 
 export default {
@@ -96,6 +96,16 @@ export default {
 							status
 						}
 					},
+					salesNoLimit: getSalesNoLimit(machineId: $machineId, itemId: $itemId, period: $period) {
+						id
+						price
+						type
+						createdAt
+						item {
+							name
+						}
+						status
+					},
 					machine: getMachineById (id: $machineIdRequired) {
 						id
 						name
@@ -113,10 +123,11 @@ export default {
 				};
 			},
 
-			update ({ sales, machine}) {
+			update ({ sales, machine, salesNoLimit}) {
 				return {
 					sales,
-					machine
+					machine,
+          salesNoLimit
 				};
 			}
 		}
@@ -145,7 +156,9 @@ export default {
     },
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.data); }
+		getTableFields () { return getTableFields(this.data); },
+		getTableFieldsNoLimit () { return getTableFieldsNoLimit(this.data); },
+    getTableHeadersNoLimit
 	}
 }
 </script>

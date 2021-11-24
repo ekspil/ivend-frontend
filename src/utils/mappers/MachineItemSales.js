@@ -25,6 +25,31 @@ export const getTableHeaders = () => [
     }
   },
 ];
+export const getTableHeadersNoLimit = () => [
+  {name: 'Товар', key: 'itemName'},
+  {
+    name: 'Дата', key: 'timestamp',
+    critery({timestamp}) {
+      return getTimestamp(timestamp)
+    },
+  },
+  {name: 'Сумма', key: 'itemPrice'},
+  {name: 'Тип платежа', key: 'receiptPaymentType'},
+  {name: 'Чек', key: 'receiptStatus', link: true,
+    critery ({receiptStatus}) {
+      switch (receiptStatus) {
+        case "PENDING":
+          return createTooltip('warning', 'В очереди');
+        case "ERROR":
+          return createTooltip('alert', 'Ошибка');
+        case "SUCCESS":
+          return createTooltip('primary', 'OK');
+        default:
+          return createTooltip(null, 'Нет');
+      }
+    }
+  },
+];
 
 const getPaymentTypeStr = (paymentType) => {
   return {
@@ -40,4 +65,13 @@ export const getTableFields = ({sales}) => sales.map(({price, type, createdAt, i
   receiptStatus: receipt ? receipt.status : null,
   receiptPaymentType: receipt ? getPaymentTypeStr(receipt.paymentType) : getPaymentTypeStr(type),
   route: `/bill/${receipt ? receipt.id : null}`
+}));
+
+export const getTableFieldsNoLimit = ({salesNoLimit}) => salesNoLimit.map(({price, type, createdAt, item, status}) => ({
+  itemName: item.name,
+  timestamp: new Date(createdAt),
+  itemPrice: price,
+  receiptStatus: status,
+  receiptPaymentType: getPaymentTypeStr(type),
+  route: `/bill/`
 }));
