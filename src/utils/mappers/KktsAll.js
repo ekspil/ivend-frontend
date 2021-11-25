@@ -95,7 +95,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = (data, props) => data.map(kkt => ({
     id: kkt.id,
-    companyName: kkt.companyName,
+    companyName: kkt.companyName ? kkt.companyName.split(" ")[0] : '-',
     model: kkt.kktModel || '-',
     factoryNum: kkt.kktFactoryNumber || '-',
     regNum: kkt.kktRegNumber || '-',

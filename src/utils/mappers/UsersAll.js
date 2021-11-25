@@ -26,7 +26,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     role: user.role,
     partnerId: user.partnerId,
     inn: user.legalInfo ? user.legalInfo.inn : "Не указано",
-    companyName:  user.legalInfo ? user.legalInfo.companyName : "Не указано",
+    companyName:  user.legalInfo && user.legalInfo.companyName ? user.legalInfo.companyName.split(" ")[0] : "Не указано",
     city:  user.legalInfo ? user.legalInfo.city : "Не указано",
     actualAddress:  user.legalInfo ? user.legalInfo.actualAddress : "Не указано",
     ogrn:  user.legalInfo ? user.legalInfo.ogrn : "Не указано",

@@ -122,7 +122,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     lastSaleTime: controller?.machine?.lastSaleTime,
     uid: controller.uid,
     simCardNumber: controller.simCardNumber,
-    user: controller.user ? controller.user.companyName : "-",
+    user: controller.user &&  controller.user.companyName ? controller.user.companyName.split(" ")[0] : "-",
     status: getStatus(controller.status),
     firmwareId: controller.firmwareId || '-',
     mode: getMode(controller.mode) || '-',
