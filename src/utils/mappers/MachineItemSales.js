@@ -58,12 +58,14 @@ const getPaymentTypeStr = (paymentType) => {
   }[paymentType]
 }
 
-export const getTableFields = ({sales}) => sales.map(({price, type, createdAt, item, receipt}) => ({
+export const getTableFields = ({sales}, props) => sales.map(({price, type, createdAt, item, receipt, id}) => ({
+  id,
   itemName: item.name,
   timestamp: receipt ? new Date(receipt.timestamp) : new Date(createdAt),
   itemPrice: price,
   receiptStatus: receipt ? receipt.status : null,
   receiptPaymentType: receipt ? getPaymentTypeStr(receipt.paymentType) : getPaymentTypeStr(type),
+  props,
   route: `/bill/${receipt ? receipt.id : null}`
 }));
 

@@ -30,6 +30,7 @@
                                     :fields="getTableFields"
                                     sortBy="timestamp"
                                     className="stats-table"
+                                    :checkReSend="true"
                             />
                             <div class="card-body">
                                 <ul class="pagination ">
@@ -133,6 +134,23 @@ export default {
 		}
 	},
 	methods: {
+	  async resend(id){
+	    try {
+        const { errors, data } = await this.$apollo.mutate({
+          mutation: gql`
+          mutation ($id: Int!) {
+            reSendCheck (id: $id)
+
+          }
+        `,
+          variables: {
+            id
+          }
+        });
+      }catch (e) {
+        alert("Ошибка повторной отправки, попробуйте позже!")
+      }
+    },
     onPeriodChange (period) {
 
       if(period.to <= period.from){
@@ -156,7 +174,7 @@ export default {
     },
 	computed: {
 		getTableHeaders,
-		getTableFields () { return getTableFields(this.data); },
+		getTableFields () { return getTableFields(this.data, {resend: this.resend}); },
 		getTableFieldsNoLimit () { return getTableFieldsNoLimit(this.data); },
     getTableHeadersNoLimit
 	}
