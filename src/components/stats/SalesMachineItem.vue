@@ -152,7 +152,6 @@ export default {
       }
     },
     onPeriodChange (period) {
-
       if(period.to <= period.from){
         period.to = period.from
       }
