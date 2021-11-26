@@ -147,7 +147,54 @@ export default {
             id
           }
         });
+
+        const newResult = await this.$apollo.query({
+          query: gql`
+				query ($offset: Int!, $limit: Int!, $machineId: Int, $itemId: Int, $period: Period) {
+					sales: getSales(offset: $offset, limit: $limit, machineId: $machineId, itemId: $itemId, period: $period) {
+						id
+						price
+						type
+						createdAt
+						item {
+							name
+						}
+						receipt {
+						  id
+							timestamp
+							paymentType
+							status
+						}
+					},
+					salesNoLimit: getSalesNoLimit(machineId: $machineId, itemId: $itemId, period: $period) {
+						id
+						price
+						type
+						createdAt
+						item {
+							name
+						}
+						status
+					}
+				}
+			`,
+          variables: {
+              machineId: Number(this.$route.params.machineId),
+              machineIdRequired: Number(this.$route.params.machineId),
+              itemId: Number(this.$route.params.itemId),
+              offset: this.offset,
+              limit: this.limit,
+              period: this.period
+
+          },
+        });
+
+        this.data.sales = newResult.data.sales
+        this.data.salesNoLimit = newResult.data.salesNoLimit
+
+
       }catch (e) {
+	      console.log(e.message)
         alert("Ошибка повторной отправки, попробуйте позже!")
       }
     },
