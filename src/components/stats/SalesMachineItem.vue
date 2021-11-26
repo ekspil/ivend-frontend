@@ -194,7 +194,6 @@ export default {
 
 
       }catch (e) {
-	      console.log(e.message)
         alert("Ошибка повторной отправки, попробуйте позже!")
       }
     },
