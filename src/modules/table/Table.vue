@@ -79,7 +79,7 @@
 								<i class="dropdown-icon fe fe-send"></i> Рассылка на почту
 							</a>
 						</div>
-					</div>x
+					</div>
 				</td>
 				<td class="text-right" v-if="checkReSend">
 					<div class="item-action dropdown" >
