@@ -68,6 +68,7 @@ export default {
     Period
 	},
 	data: () => ({
+        interval: null,
         offset: 0,
         limit:25,
         sales: null,
@@ -192,8 +193,10 @@ export default {
         this.data.sales = newResult.data.sales
         this.data.salesNoLimit = newResult.data.salesNoLimit
 
-
-        setInterval(async ()=>{
+        if(this.interval){
+          clearInterval(this.interval)
+        }
+        this.interval = setInterval(async ()=>{
           const newResult = await this.$apollo.query({
             query: gql`
 				query ($offset: Int!, $limit: Int!, $machineId: Int, $itemId: Int, $period: Period) {
