@@ -38,9 +38,15 @@ export default {
         // rows[0] - table headers
         rows[0].cells.push(header.name);
       });
+
+      // fields.forEach(field => {
+      //   rows.push({
+      //     cells: headers.map(header => String(JSON.stringify(field[header.key])))
+      //   });
+      // });
       fields.forEach(field => {
         rows.push({
-          cells: headers.map(header => String(JSON.stringify(field[header.key])))
+          cells: headers.map(header => field[header.key])
         });
       });
 
