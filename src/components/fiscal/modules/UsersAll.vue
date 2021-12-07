@@ -222,7 +222,6 @@
             },
 
             descFunc(key, desc){
-                console.log(key)
                 this.orderKey = key
                 this.orderDesc = desc
             },

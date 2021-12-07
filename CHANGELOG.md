@@ -557,6 +557,10 @@
 
 * hotfix
 
+# 1.7.12 - Hotfix
+
+* sim reset
+
 
 
 

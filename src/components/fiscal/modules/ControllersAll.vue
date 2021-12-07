@@ -10,6 +10,15 @@
                               <input v-model="search" class="form-control custom-select" placeholder="Поиск">
 
                             </div>
+
+                            <div class="form-group " style="width: 25%; padding-left: 10px">
+                              <select class="form-control custom-select" v-model="selectedRole">
+                                <option v-for="type in selectionRoles[0].values"
+                                        :key="type" :value="type">
+                                  {{ type }}
+                                </option>
+                              </select>
+                            </div>
                             <span class="col-auto">
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                             </span>
@@ -78,6 +87,24 @@
             search: "",
             orderKey: null,
             orderDesc: null,
+            selectedRole: "VENDOR",
+            savedSelectedRole: "VENDOR",
+            selectionRoles: [
+              {
+              key: "role",
+              values: [
+                "ALL",
+                "VENDOR",
+                "PARTNER",
+                "CLOSED",
+                "AGGREGATE",
+                "VENDOR_NO_LEGAL_INFO",
+                "VENDOR_NOT_CONFIRMED",
+                "VENDOR_NEGATIVE_BALANCE",
+                "ADMIN"
+                ]
+             }
+            ],
             selected_registrationTime: "ALL",
             selected_status: "ALL",
             selected_simCardNumber: "ALL",
@@ -157,12 +184,13 @@
         apollo: {
             controllers: {
                 query: gql`
-                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String  , $orderDesc: Boolean  , $orderKey: String ) {
-                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer,  orderDesc: $orderDesc,   orderKey: $orderKey,  ) {
+                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String  , $orderDesc: Boolean  , $orderKey: String, $userRole: String ) {
+                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer,  orderDesc: $orderDesc,   orderKey: $orderKey,   userRole: $userRole,  ) {
                         id
                         uid
                         mode
                         simCardNumber
+                        sim
                         bankTerminalMode
                         registrationTime
                         status
@@ -255,6 +283,25 @@
 
                 this.controllers = this.controllers.filter(controller => controller.id !== id);
             },
+            async simReset (sim) {
+              try{
+                await this.$apollo.mutate({
+                  mutation: gql`
+                        mutation ($sim: String!) {
+                            simReset (sim: $sim)
+                        }
+                    `,
+                  variables: { sim }
+                });
+                console.log("Успех")
+              }catch (e) {
+
+                console.log("Неудача")
+                console.log(e.message)
+              }
+
+
+            },
             async desc(key, desc){
                 this.orderKey = key
                 this.orderDesc = desc
@@ -345,7 +392,8 @@
             getTableHeaders,
             getTableFields () {
                 return getTableFields(this.controllersSearch, {
-                    remove: this.removeController
+                    remove: this.removeController,
+                    simReset: this.simReset
                 });
             }
         }

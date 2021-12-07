@@ -121,6 +121,7 @@ export const getTableFields = (data, props) => data.map(controller => ({
     registrationTime: controller?.lastState?.registrationTime,
     lastSaleTime: controller?.machine?.lastSaleTime,
     uid: controller.uid,
+    sim: controller.sim,
     simCardNumber: controller.simCardNumber,
     user: (controller.user &&  controller.user.companyName ? controller.user.companyName.split(" ")[0] : "-")  +  " " +   (controller.user &&  controller.user.companyName  &&  controller.user.companyName.split(" ")[1]? controller.user.companyName.split(" ")[1] : ''),
     status: getStatus(controller.status),

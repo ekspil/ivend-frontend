@@ -203,8 +203,10 @@ export default {
           bankTerminalMode: controller.bankTerminalMode,
           readStatMode: controller.readStatMode,
           remotePrinterId: inputData.remotePrinterId,
-          simCardNumber: inputData.simCardNumber
+          simCardNumber: inputData.simCardNumber,
+          sim: inputData.sim,
         };
+
 
         const { errors } = await this.$apollo.mutate({
           mutation: gql `
