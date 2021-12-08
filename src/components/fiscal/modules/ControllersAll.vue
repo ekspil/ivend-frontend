@@ -95,13 +95,7 @@
               values: [
                 "ALL",
                 "VENDOR",
-                "PARTNER",
-                "CLOSED",
-                "AGGREGATE",
-                "VENDOR_NO_LEGAL_INFO",
-                "VENDOR_NOT_CONFIRMED",
-                "VENDOR_NEGATIVE_BALANCE",
-                "ADMIN"
+                "CLOSED"
                 ]
              }
             ],
@@ -236,7 +230,8 @@
                     registrationTime: this.selected_controllerRegistrationTime,
                     fiscalizationMode: this.selected_fiscalizationMode,
                     orderKey: this.orderKey,
-                    orderDesc: this.orderDesc
+                    orderDesc: this.orderDesc,
+                    userRole: this.selectedRole
                 };
             },
                 update (data) {
