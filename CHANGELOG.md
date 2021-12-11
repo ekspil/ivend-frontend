@@ -565,6 +565,10 @@
 
 * sim reset
 
+# 1.7.14 - Hotfix
+
+* resend fix
+
 
 
 

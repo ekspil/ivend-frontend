@@ -86,11 +86,11 @@
 				</td>
 				<td class="text-right" v-if="checkReSend">
 					<div class="item-action dropdown" >
-						<a href="javascript:void(0)" data-toggle="dropdown" class="icon" v-if="field.receiptStatus === 'ERROR'">
+						<a href="javascript:void(0)" data-toggle="dropdown" class="icon" v-if="field.receiptStatus === 'ERROR' || field.receiptStatus === null ">
 							<i class="fe fe-more-vertical"></i>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a href="#" class="dropdown-item" @click.prevent="field.props.resend(field.id)" v-if="field.receiptStatus === 'ERROR'">
+							<a href="#" class="dropdown-item" @click.prevent="field.props.resend(field.id)" v-if="field.receiptStatus === 'ERROR' || field.receiptStatus === null ">
 								<i class="dropdown-icon fe fe-send"></i> Переотправить (текущей датой)
 							</a>
 						</div>
