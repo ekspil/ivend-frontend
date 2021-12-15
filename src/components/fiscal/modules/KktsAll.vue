@@ -16,12 +16,12 @@
 
                               <div class="form-group " style="width: 25%; padding-left: 10px">
                                 <select class="form-control custom-select" v-model="selectedStatus">
-                                  <option key="" :value="null" selected="selected"></option>
-                                  <option key="" value="6" selected="selected">6:Удаление</option>
-                                  <option key="" value="5" selected="selected">5:Ошибка</option>
-                                  <option key="" value="4" selected="selected">4:Регистрация</option>
-                                  <option key="" value="3" selected="selected">3:Внимание</option>
-                                  <option key="" value="0" selected="selected">0: НОРМА</option>
+                                  <option key="null" :value="null" selected="selected"></option>
+                                  <option key="6" value="6" selected="selected">6:Удаление</option>
+                                  <option key="5" value="5" selected="selected">5:Ошибка</option>
+                                  <option key="4" value="4" selected="selected">4:Регистрация</option>
+                                  <option key="3" value="3" selected="selected">3:Внимание</option>
+                                  <option key="0" value="0" selected="selected">0: НОРМА</option>
                                 </select>
                               </div>
 
@@ -36,6 +36,7 @@
                                         :fields="getTableFields"
                                         className="settings-table"
                                         sortBy="activationDate"
+                                        :order="false"
                                 />
 
                                 <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
