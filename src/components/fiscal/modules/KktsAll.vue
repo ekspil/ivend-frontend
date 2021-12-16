@@ -16,7 +16,7 @@
 
                               <div class="form-group " style="width: 25%; padding-left: 10px">
                                 <select class="form-control custom-select" v-model="selectedStatus">
-                                  <option key="null" :value="null" selected="selected"></option>
+                                  <option key="null" :value="null" selected="selected">Все</option>
                                   <option key="6" value="6" selected="selected">6:Удаление</option>
                                   <option key="5" value="5" selected="selected">5:Ошибка</option>
                                   <option key="4" value="4" selected="selected">4:Регистрация</option>
