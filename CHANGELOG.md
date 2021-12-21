@@ -570,6 +570,11 @@
 * resend fix
 
 
+# 1.7.15 - Hotfix
+
+* fix big pdf
+
+
 
 
 
