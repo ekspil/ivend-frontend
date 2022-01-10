@@ -574,6 +574,10 @@
 
 * fix big pdf
 
+# 1.7.16 - Hotfix
+
+* fix ktt status
+
 
 
 

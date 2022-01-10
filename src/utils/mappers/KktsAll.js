@@ -11,14 +11,15 @@ const getStatus = field => {
     let date =new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
-    let yearF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[2];
-    let monthF = field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1];
+    let yearF = Number(field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[2])
+    let monthF = Number(field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1])
+
+
+
 
     if(field.kktModel === "УМКА-01-ФА (ФН36)"){
 
-
-
-        if(year - yearF >= 3 && month - monthF <=0){
+        if((year - yearF >= 3 && month - monthF >=0) || (year - yearF >= 4)){
             return "5:Ошибка" ;
         }
         if(Number(field.kktBillsCount) > 230000){
@@ -32,7 +33,7 @@ const getStatus = field => {
         }
     }
     if(field.kktModel === "УМКА-01-ФА (ФН15)"){
-        if(year - yearF >= 1 && month - monthF >=3){
+        if((year - yearF >= 1 && month - monthF >=3) || (year - yearF >= 2)){
             return "5:Ошибка" ;
         }
         if(Number(field.kktBillsCount) > 230000){
