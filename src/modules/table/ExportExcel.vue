@@ -43,10 +43,10 @@ export default {
       //   rows.push({
       //     cells: headers.map(header => String(JSON.stringify(field[header.key])))
       //   });
-      // });
+      // }); let text = news.text.replace( /(<([^>]+)>)/ig, `` )
       fields.forEach(field => {
         rows.push({
-          cells: headers.map(header => field[header.key])
+          cells: headers.map(header => field[header.key].replace( /(<([^>]+)>)/ig, `` ))
         });
       });
 
