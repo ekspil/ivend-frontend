@@ -10,7 +10,7 @@
                                     <router-link to="/fiscal/add" class="btn btn-primary">Добавить кассу</router-link>
 
                                 </div>
-                              <div v-if="kkts && kkts.length > 0" class="top-buttons__left-container">
+                              <div  class="top-buttons__left-container">
                                 <button  type="button" class="btn btn-primary ml-auto" :disabled="sendQuery" @click="requestOrder">Получить счет на ФН</button>
                               </div>
                               <div v-if="kkts && kkts.length > 0" class="top-buttons__left-container">
