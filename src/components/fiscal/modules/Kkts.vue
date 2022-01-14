@@ -11,6 +11,9 @@
 
                                 </div>
                               <div v-if="kkts && kkts.length > 0" class="top-buttons__left-container">
+                                <button  type="button" class="btn btn-primary ml-auto" :disabled="sendQuery" @click="requestOrder">Получить счет на ФН</button>
+                              </div>
+                              <div v-if="kkts && kkts.length > 0" class="top-buttons__left-container">
                                 <button  type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#exampleModal">Отключить кассу</button>
                               </div>
 
@@ -69,8 +72,10 @@
 <script>
     import gql from 'graphql-tag';
 
+    import { convertServerError } from '@/utils';
     import Table from '@/modules/table/Table';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/Kkts';
+    import {head, isEmpty} from "ramda";
 
     export default {
         name: 'Kkts',
@@ -79,6 +84,14 @@
         },
         data: () => ({
             kkts: [],
+            sendQuery: false,
+            legalInfo: null,
+            depositSum: 12000,
+            services: [{
+              name: "Фискальный накопитель ФН36",
+              count: 1,
+              price: 12000
+            }],
             selectedKkt: {
               id: null,
               kktFactoryNumber: null,
@@ -106,9 +119,69 @@
                 update (data) {
                     return data.getUserKkts;
                 }
+            },
+          legalInfo: {
+            query: gql`
+			query {
+				getProfile {
+                    legalInfo{
+                        inn
+                        companyName
             }
+          }
+			}
+			`,
+            update: function(data){
+              if(data.getProfile.legalInfo){
+                return data.getProfile.legalInfo
+              }
+              else {
+                return {
+                  inn: "012345678",
+                  companyName: "ООО Не указано"
+                }
+              }
+
+            }
+          }
         },
         methods: {
+
+          async requestOrder () {
+            this.sendQuery = true
+            try {
+              const { errors, data } = await this.$apollo.mutate({
+                mutation: gql`
+          mutation RequestOrder ($input: pdfInput!) {
+            generatePdf(input: $input) {
+              url
+            }
+          }
+          `,
+                variables: {
+                  input: {
+                    amount: parseFloat(this.depositSum),
+                    inn: this.legalInfo.inn,
+                    companyName: this.legalInfo.companyName,
+                    services: JSON.stringify(this.services),
+                    prefix: "FN"
+                  }
+                }
+              });
+
+              if (errors && !isEmpty(errors)) {
+                alert("Ошибка на сервере, попробуйте позже")
+              } else {
+
+                if (data.generatePdf.url) {
+                  window.location.href = data.generatePdf.url;
+                  this.sendQuery = false
+                }
+              }
+            } catch (error) {
+              alert(convertServerError(error.message));
+            }
+          },
           async deleteKkt(){
             if(!this.selectedKkt.agree) return
             $('#exampleModal').modal('hide')

@@ -85,7 +85,7 @@
     <br/>
 
     <div style="font-weight: bold; font-size: 25pt; padding-left:5px; font-family: Arial;">
-        Счет № VFT<span id="orderNumber"></span> от <span id="date"></span></div>
+        Счет № <span id="orderPrefix"></span><span id="orderNumber"></span> от <span id="date"></span></div>
     <br/>
 
     <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>
@@ -158,9 +158,12 @@
 
     <br />
     <div style="font-family: Arial;">
-        Всего наименований 1 на сумму <span id="summa"></span> рублей.<br />
+        Всего наименований <span id="servicesCount">1</span> на сумму <span id="summa"></span> рублей.<br />
         </div>
     <br /><br />
+    <div style="font-family: Arial; color: #ff0000">
+        Для зачисления оплаты в личный кабинет, обязательно указывайте номер счета в комментарии к платежу <br />
+    </div>
     <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>
     <br/>
     <div style="font-family: Arial; font-size: 10pt;">
@@ -195,11 +198,33 @@
     document.getElementById("companyName").innerHTML=data.searchParams.get("companyName");
     document.getElementById("inn").innerHTML=data.searchParams.get("inn");
     document.getElementById("orderNumber").innerHTML=data.searchParams.get("orderNumber");
+    const prefix = data.searchParams.get("prefix");
+    if(prefix){
+        document.getElementById("orderPrefix").innerHTML= prefix
+    }
+    else {
+        document.getElementById("orderPrefix").innerHTML= "VFT"
+    }
 
     let string = ``
     let services = JSON.parse(data.searchParams.get("services"))
-    console.log(services)
+    document.getElementById("servicesCount").innerHTML=services.length
+
+    const serviceSum = services.reduce((acc, item) => {
+        return acc + Number(item.price)
+    }, 0)
+    const sum = data.searchParams.get("summa")
+    const k = Number(sum) / serviceSum
+
+    let itemNum = 0
+    let tempSum = 0
+    let diff = 0
     for(let i of services){
+        itemNum++
+        tempSum += Number((k * i.price).toFixed(0))
+        if(itemNum === services.length){
+            diff = sum - tempSum
+        }
         string +=`
                       <tr>
             <td style="width:13mm; ">№</td>
@@ -207,10 +232,12 @@
             <td>${i.name}</td>
             <td style="width:20mm; ">${i.count}</td>
             <td style="width:17mm; ">Шт.</td>
-            <td style="width:27mm; text-align: center; " >${(i.price/i.count).toFixed(0)}</td>
-            <td style="width:27mm; text-align: center; " >${i.price}</td>
+            <td style="width:27mm; text-align: center; " >${(k * i.price/i.count).toFixed(0)}</td>
+            <td style="width:27mm; text-align: center; " >${Number((k * i.price).toFixed(0)) + diff}</td>
         </tr>
         `
+
+
     }
     document.getElementById("table").innerHTML=string
 </script>

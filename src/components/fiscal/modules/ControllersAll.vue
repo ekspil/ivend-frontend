@@ -288,11 +288,9 @@
                     `,
                   variables: { sim }
                 });
-                console.log("Успех")
               }catch (e) {
 
-                console.log("Неудача")
-                console.log(e.message)
+                alert("Неудача")
               }
 
 

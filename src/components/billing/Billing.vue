@@ -337,7 +337,8 @@ export default {
                 amount: parseFloat(this.depositSum),
                 inn: this.legalInfo.inn,
                 companyName: this.legalInfo.companyName,
-                services: this.services
+                services: this.services,
+                prefix: "VFT"
             }
           }
         });
