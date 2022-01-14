@@ -45,8 +45,17 @@ export default {
       //   });
       // }); let text = news.text.replace( /(<([^>]+)>)/ig, `` )
       fields.forEach(field => {
+
         rows.push({
-          cells: headers.map(header => field[header.key].replace( /(<([^>]+)>)/ig, `` ))
+          cells: headers.map(header => {
+            if(typeof (field[header.key]) === "string"){
+              return field[header.key].replace( /(<([^>]+)>)/ig, `` )
+            }
+            if(typeof (field[header.key]) === "number" && field[header.key] > 1536202081000){
+              return new Date(field[header.key]).toLocaleString()
+            }
+            return field[header.key]
+          })
         });
       });
 

@@ -598,6 +598,10 @@
 
 * fix order number
 
+# 1.7.22 - Hotfix
+
+* fix excel
+
 
 
 
