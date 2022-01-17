@@ -107,6 +107,7 @@
                             companyName
                             kktLastBill
                             server
+                            status
                             action
 
                              }

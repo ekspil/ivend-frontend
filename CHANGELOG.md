@@ -602,6 +602,10 @@
 
 * fix excel
 
+# 1.7.23 - Hotfix
+
+* fix kkt statuses
+
 
 
 

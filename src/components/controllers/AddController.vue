@@ -152,7 +152,7 @@ export default {
 		controllerStatType,
 		input: {
 			status: "ENABLED",
-			mode: "cashless",
+			mode: "ps_m_D",
 			revisionId: 1,
 			readStatMode: "COINBOX",
 			bankTerminalMode: "NO_BANK_TERMINAL",

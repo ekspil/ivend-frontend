@@ -1,5 +1,28 @@
 import { createTooltip} from '@/utils';
 
+const statusToText = field => {
+    switch(field){
+        case null:
+            return "7: Ожидание"
+        case 7:
+            return "7: Ожидание"
+        case 6:
+            return "6: Удаление"
+        case 5:
+            return "5: Ошибка"
+        case 4:
+            return "4: Внимание"
+        case 3:
+            return "3: Регистрация"
+        case 2:
+            return "2: Активация"
+        case 1:
+            return "1: Зарегистрирована"
+        case 0:
+            return "0: Работает"
+    }
+
+}
 const getStatus = field => {
     //Проверку оставшихся дней после того как установлю формат
     if(field.action === "DELETE"){
@@ -105,7 +128,8 @@ export const getTableFields = (data, props) => data.map(kkt => ({
     countToDie: kkt.kktBillsCount || '-',
     timeToDie: kkt.kktActivationDate || '-',
     ofdKey: kkt.kktOFDRegKey || 'ОТКЛ',
-    activationDate: getStatus(kkt),
+    //activationDate: getStatus(kkt),
+    activationDate: statusToText(kkt.status),
     kktLastBill: kkt.kktLastBill ? String(kkt.kktLastBill).substr(0, 19).replace("T", " ") : '-',
     server: kkt.server || 'Стандартный',
     props,

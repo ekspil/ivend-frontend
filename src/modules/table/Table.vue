@@ -200,21 +200,27 @@
 				}
                 else if(this.$route.path === "/fiscalAll"){
 
-                    if(field.activationDate === "4:Регистрация"){
-                        return "background:#c6df5f" ;
+                    if(field.activationDate === "7: Ожидание"){
+                        return "background:#00ffff" ;
                     }
-
-                    if(field.activationDate === "5:Ошибка"){
-                        return "background:#f05457" ;
+                    if(field.activationDate === "6: Удаление"){
+                        return "background:#ff9900" ;
                     }
-
-                    if(field.activationDate === "6:Удаление"){
-                        return "background:#f05457" ;
+                    if(field.activationDate === "5: Ошибка"){
+                        return "background:#ff0000" ;
                     }
-                    if(field.activationDate === "3:Внимание"){
-                        return "background:#ffd000" ;
+                    if(field.activationDate === "4: Внимание"){
+                        return "background:#ffff00" ;
                     }
-
+                    if(field.activationDate === "3: Регистрация"){
+                        return "background:#00ff00" ;
+                    }
+                    if(field.activationDate === "2: Активация"){
+                        return "background:#9fc5e8" ;
+                    }
+                    if(field.activationDate === "1: Зарегистрирована"){
+                        return "background:#ffe599" ;
+                    }
                     return "" ;
                 }else{
                     return "" ;
