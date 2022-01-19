@@ -17,11 +17,14 @@
                               <div class="form-group " style="width: 25%; padding-left: 10px">
                                 <select class="form-control custom-select" v-model="selectedStatus">
                                   <option key="null" :value="null" selected="selected">Все</option>
-                                  <option key="6" value="6" selected="selected">6:Удаление</option>
-                                  <option key="5" value="5" selected="selected">5:Ошибка</option>
-                                  <option key="4" value="4" selected="selected">4:Регистрация</option>
-                                  <option key="3" value="3" selected="selected">3:Внимание</option>
-                                  <option key="0" value="0" selected="selected">0: НОРМА</option>
+                                  <option key="7" :value="0" selected="selected">0: Ожидание</option>
+                                  <option key="6" :value="1" selected="selected">1: Удаление</option>
+                                  <option key="5" :value="2" selected="selected">2: Ошибка</option>
+                                  <option key="4" :value="3" selected="selected">3: Внимание</option>
+                                  <option key="3" :value="4" selected="selected">4: Регистрация</option>
+                                  <option key="3" :value="5" selected="selected">5: Активация</option>
+                                  <option key="3" :value="6" selected="selected">6: Зарегистрирована</option>
+                                  <option key="0" :value="7" selected="selected">7: Работает</option>
                                 </select>
                               </div>
 
@@ -36,7 +39,7 @@
                                         :fields="getTableFields"
                                         className="settings-table"
                                         sortBy="activationDate"
-                                        :order="false"
+                                        :order="true"
                                 />
 
                                 <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
@@ -119,7 +122,7 @@
                         limit: Number(this.limit)
                     };
                     if(this.selectedStatus!==null){
-                      vars.status = Number(this.selectedStatus)
+                      vars.status = this.selectedStatus
                     }
                     return vars
                 },

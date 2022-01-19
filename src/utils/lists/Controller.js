@@ -29,18 +29,20 @@ export const controllerStatType = [
     {name: "Монетник+автомат", value: "COINBOX_MACHINE"},
 ]
 export const controllerType = [
+    {name: "PULSE", value: "ps_m_D"},
     {name: "MDB", value: "mdb"},
+    {name: "CASHLESS", value: "cashless"},
+    {name: "EXE", value: "exe"},
+    {name: "RS232", value: "rs232"},
     {name: "MDB1", value: "mdb1"},
     {name: "MDB2", value: "mdb2"},
-    {name: "EXE", value: "exe"},
-    {name: "CASHLESS", value: "cashless"},
     {name: "CASHLESS2", value: "cashless2"},
     {name: "CASHLESS3", value: "cashless_free"},
-    {name: "PULSE", value: "ps_m_D"},
     {name: "PULSE2", value: "ps_m_2"},
     {name: "PULSE3", value: "ps_m_3"},
     {name: "PULSE4", value: "ps_p"},
-    {name: "RS232", value: "rs232"},
+    {name: "CCTALK", value: "cctlk"},
+    {name: "CCNET", value: "ccnet"},
 ]
 export const controllerTerminal = [
     {name: "Без терминала", value: "NO_BANK_TERMINAL"},
@@ -49,6 +51,15 @@ export const controllerTerminal = [
     {name: "Vendista V1", value: "vda1"},
     {name: "Vendotek VL", value: "vdkl"},
     {name: "Vendotek VX", value: "vdkx"},
+    {name: "Worldwide Valina", value: "wvln"},
+    {name: "CASTLES MP200 Vend", value: "mp200_v"},
+    {name: "CASTLES MP200 Trade", value: "mp200_t"},
+    {name: "OTI UNO Vend", value: "otiu_v"},
+    {name: "OTI UNO Trade", value: "otiu_t"},
+    {name: "OTI TRIO Vend", value: "otit_v"},
+    {name: "OTI TRIO Trade", value: "otit_t"},
+    {name: "2CAN V20 Vend", value: "2c20_v"},
+    {name: "2CAN V20 Trade", value: "2c20_t"},
 ]
 
 

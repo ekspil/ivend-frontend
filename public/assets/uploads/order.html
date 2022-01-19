@@ -161,8 +161,8 @@
         Всего наименований <span id="servicesCount">1</span> на сумму <span id="summa"></span> рублей.<br />
         </div>
     <br /><br />
-    <div style="font-family: Arial; color: #ff0000">
-        Для зачисления оплаты в личный кабинет, обязательно указывайте номер счета в комментарии к платежу <br />
+    <div style="font-family: Arial; color: #ff0000" id="alertMessage">
+
     </div>
     <div style="background-color:#000000; width:100%; font-size:1px; height:2px;">&nbsp;</div>
     <br/>
@@ -204,6 +204,9 @@
     }
     else {
         document.getElementById("orderPrefix").innerHTML= "VFT"
+    }
+    if(prefix === "VFT"){
+        document.getElementById("alertMessage").innerHTML= " Для зачисления оплаты в личный кабинет, обязательно указывайте номер счета в комментарии к платежу <br />"
     }
 
     let string = ``

@@ -3,23 +3,23 @@ import { createTooltip} from '@/utils';
 const statusToText = field => {
     switch(field){
         case null:
-            return "7: Ожидание"
-        case 7:
-            return "7: Ожидание"
-        case 6:
-            return "6: Удаление"
-        case 5:
-            return "5: Ошибка"
-        case 4:
-            return "4: Внимание"
-        case 3:
-            return "3: Регистрация"
-        case 2:
-            return "2: Активация"
-        case 1:
-            return "1: Зарегистрирована"
+            return "0: Ожидание"
         case 0:
-            return "0: Работает"
+            return "0: Ожидание"
+        case 1:
+            return "1: Удаление"
+        case 2:
+            return "2: Ошибка"
+        case 3:
+            return "3: Внимание"
+        case 4:
+            return "4: Регистрация"
+        case 5:
+            return "5: Активация"
+        case 6:
+            return "6: Зарегистрирована"
+        case 7:
+            return "7: Работает"
     }
 
 }
