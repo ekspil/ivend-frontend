@@ -610,6 +610,10 @@
 
 * fix kkt statuses
 
+# 1.7.25 - Hotfix
+
+* fix kkt statuses
+
 
 
 
