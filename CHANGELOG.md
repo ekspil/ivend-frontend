@@ -614,6 +614,10 @@
 
 * fix kkt statuses
 
+# 1.7.26 - Hotfix
+
+* fix company name 
+
 
 
 
