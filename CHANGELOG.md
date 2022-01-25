@@ -618,6 +618,10 @@
 
 * fix company name 
 
+# 1.7.27 - Hotfix
+
+* fix company name 
+
 
 
 

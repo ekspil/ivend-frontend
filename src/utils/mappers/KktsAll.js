@@ -94,24 +94,24 @@ export const getTableHeaders = () => [
     //{ name: 'Рег. №', key: 'regNum', unsortable: false },
     { name: 'Номер ФН', key: 'fiscalNum', unsortable: true },
     { name: 'КЧ', key: 'countToDie', unsortable: false },
-    { name: 'Дата', key: 'timeToDie', unsortable: false },
-    { name: 'Рег данные', key: 'ofdKey', unsortable: true, raw: true },
     { name: 'Последний чек', key: 'kktLastBill',
         critery ({kktLastBill, kktStatus}) {
-                if(kktStatus == "ERROR"){
-                    return createTooltip('alert', kktLastBill);
-                }
-                if(kktStatus == "OK"){
-                    return createTooltip('primary', kktLastBill);
-                }
-                else {
-                    return createTooltip('warning', kktLastBill);
-                }
-
-
-
+            if(kktStatus == "ERROR"){
+                return createTooltip('alert', kktLastBill);
             }
-            },
+            if(kktStatus == "OK"){
+                return createTooltip('primary', kktLastBill);
+            }
+            else {
+                return createTooltip('warning', kktLastBill);
+            }
+
+
+
+        }
+    },
+    { name: 'Дата', key: 'timeToDie', unsortable: false },
+    { name: 'Рег данные', key: 'ofdKey', unsortable: true, raw: true },
     { name: 'Сервер', key: 'server', unsortable: true, raw: true },
     { name: 'Статус', key: 'activationDate', unsortable: false },
 
