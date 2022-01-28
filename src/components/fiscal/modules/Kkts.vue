@@ -86,7 +86,7 @@
             kkts: [],
             sendQuery: false,
             legalInfo: null,
-            depositSum: 12000,
+            depositSum: 14000,
             services: [{
               name: "Фискальный накопитель ФН36",
               count: 1,
