@@ -28,6 +28,7 @@
     import Controllers from './modules/ControllersAll';
     import News from './modules/NewsAll';
     import Partners from './modules/Partners';
+    import Sims from './modules/Sims';
     import gql from "graphql-tag";
 
 
@@ -41,6 +42,7 @@
                 { name: 'Кассы', component: Kkts, route: 'kktsAll' },
                 { name: 'Информация', component: News, route: 'newsAll' },
                 { name: 'Партнеры', component: Partners, route: 'partners' },
+                { name: 'Сим карты', component: Sims, route: 'sims' },
 
             ],
           statistic: null
