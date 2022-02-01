@@ -33,10 +33,10 @@
                                     </div>
                                     <div class="form-group kol">
                                         <select v-model="limit" class="form-control custom-select">
-                                            <option value="100">100</option>
-                                            <option value="200">200</option>
-                                            <option value="500">500</option>
-                                            <option value="1000">1000</option>
+                                            <option :value="100">100</option>
+                                            <option :value="200">200</option>
+                                            <option :value="500">500</option>
+                                            <option :value="1000">1000</option>
                                         </select>
                                     </div>
                                 </div>
@@ -122,46 +122,6 @@
 
         },
         computed: {
-            userSearch(){
-                if(this.search.length > 3){
-                    if(this.limit < Number(1001)){
-                        this.savedLimit = this.limit
-                    }
-
-                    this.limit = 9999
-                }
-                else if(this.search.length == 0){
-
-                }
-                else{
-                    if(this.savedLimit < this.limit){
-                        this.limit = this.savedLimit
-                    }
-                }
-                return this.sims.filter(user => {
-                    // id
-                    // kktModel
-                    // kktFactoryNumber
-                    // kktRegNumber
-                    // kktFNNumber
-                    if(!this.search) return true
-                    const r1 = new RegExp(this.search.toUpperCase())
-                    const res1 = r1.test(user.legalInfo.inn.toUpperCase())
-                    if(res1) return res1
-                    const r2 = new RegExp(this.search.toUpperCase())
-                    const res2 = r2.test(user.legalInfo.companyName.toUpperCase())
-                    if(res2) return res2
-                    const r3 = new RegExp(this.search.toUpperCase())
-                    const res3 = r3.test(user.phone.toUpperCase())
-                    if(res3) return res3
-
-                    const r4 = new RegExp('^'+this.search.toUpperCase())
-                    const res4 = r4.test(user.email.toUpperCase())
-                    if(res4) return res4
-                    return false
-
-                })
-            },
             getTableHeaders,
             getTableFields () { return getTableFields(this.sims) }
         }
