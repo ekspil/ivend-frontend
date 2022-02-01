@@ -15,6 +15,8 @@
                                         :headers="getTableHeaders"
                                         :fields="getTableFields"
                                         className="settings-table"
+                                        sortBy="traffic"
+                                        :order="false"
 
                                 />
 
@@ -78,6 +80,11 @@
                       getAllSims(input: $input) {
                             imsi
                             number
+                            traffic
+                            expense
+                            terminal
+                            controllerId
+                            terminalId
 
                         }
                     }
@@ -99,7 +106,7 @@
         },
         methods: {
             nextPage() {
-                if(!this.users || !this.users.length) {
+                if(!this.sims || !this.sims.length) {
                     return
                 }
                 this.offset += this.limit
@@ -131,7 +138,7 @@
                         this.limit = this.savedLimit
                     }
                 }
-                return this.users.filter(user => {
+                return this.sims.filter(user => {
                     // id
                     // kktModel
                     // kktFactoryNumber

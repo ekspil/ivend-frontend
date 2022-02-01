@@ -23,65 +23,65 @@ const statusToText = field => {
     }
 
 }
-const getStatus = field => {
-    //Проверку оставшихся дней после того как установлю формат
-    if(field.action === "DELETE"){
-        return "6:Удаление" ;
-    }
-    if(!field.kktActivationDate){
-        return "4:Регистрация" ;
-    }
-    let date =new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let yearF = Number(field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[2])
-    let monthF = Number(field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1])
-
-
-
-
-    if(field.kktModel === "УМКА-01-ФА (ФН36)"){
-
-        if((year - yearF >= 3 && month - monthF >=0) || (year - yearF >= 4)){
-            return "5:Ошибка" ;
-        }
-        if(Number(field.kktBillsCount) > 230000){
-            return "5:Ошибка" ;
-        }
-        if(year - yearF >= 3 && month - monthF == 1){
-            return "3:Внимание" ;
-        }
-        if(Number(field.kktBillsCount) > 220000){
-            return "3:Внимание" ;
-        }
-    }
-    if(field.kktModel === "УМКА-01-ФА (ФН15)"){
-        if((year - yearF >= 1 && month - monthF >=3) || (year - yearF >= 2)){
-            return "5:Ошибка" ;
-        }
-        if(Number(field.kktBillsCount) > 230000){
-            return "5:Ошибка" ;
-        }
-        if(year - yearF >= 1 && month - monthF >=2){
-            return "3:Внимание" ;
-        }
-        if(Number(field.kktBillsCount) > 220000){
-            return "3:Внимание" ;
-        }
-    }
-    if(field.kktLastBill){
-        let da = new Date(field.kktLastBill).getTime()
-        let dn = new Date()
-        if (da < (dn - (1000 * 60 * 60 * 24 * 10))) {
-           return "3:Внимание" ;
-        }
-    }
-
-
-
-
-    return "0: НОРМА" ;
-    };
+// const getStatus = field => {
+//     //Проверку оставшихся дней после того как установлю формат
+//     if(field.action === "DELETE"){
+//         return "6:Удаление" ;
+//     }
+//     if(!field.kktActivationDate){
+//         return "4:Регистрация" ;
+//     }
+//     let date =new Date();
+//     let year = date.getFullYear();
+//     let month = date.getMonth() + 1;
+//     let yearF = Number(field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[2])
+//     let monthF = Number(field.kktActivationDate.replace(/[,-/ ]/g, ".").split('.')[1])
+//
+//
+//
+//
+//     if(field.kktModel === "УМКА-01-ФА (ФН36)"){
+//
+//         if((year - yearF >= 3 && month - monthF >=0) || (year - yearF >= 4)){
+//             return "5:Ошибка" ;
+//         }
+//         if(Number(field.kktBillsCount) > 230000){
+//             return "5:Ошибка" ;
+//         }
+//         if(year - yearF >= 3 && month - monthF == 1){
+//             return "3:Внимание" ;
+//         }
+//         if(Number(field.kktBillsCount) > 220000){
+//             return "3:Внимание" ;
+//         }
+//     }
+//     if(field.kktModel === "УМКА-01-ФА (ФН15)"){
+//         if((year - yearF >= 1 && month - monthF >=3) || (year - yearF >= 2)){
+//             return "5:Ошибка" ;
+//         }
+//         if(Number(field.kktBillsCount) > 230000){
+//             return "5:Ошибка" ;
+//         }
+//         if(year - yearF >= 1 && month - monthF >=2){
+//             return "3:Внимание" ;
+//         }
+//         if(Number(field.kktBillsCount) > 220000){
+//             return "3:Внимание" ;
+//         }
+//     }
+//     if(field.kktLastBill){
+//         let da = new Date(field.kktLastBill).getTime()
+//         let dn = new Date()
+//         if (da < (dn - (1000 * 60 * 60 * 24 * 10))) {
+//            return "3:Внимание" ;
+//         }
+//     }
+//
+//
+//
+//
+//     return "0: НОРМА" ;
+//     };
 
 
 
