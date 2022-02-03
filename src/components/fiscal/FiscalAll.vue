@@ -10,6 +10,7 @@
                           <div class="card-title-right f-b" v-if="statistic && $route.fullPath.includes('usersAll')">Сумма списаний <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.billingAmount.toFixed(0) }}</span> руб. &nbsp &nbsp Баланс <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.billingBalance.toFixed(0) }}</span> руб. &nbsp &nbsp Долг <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.billingCredit.toFixed(0) }}</span> руб.</div>
                           <div class="card-title-right f-b" v-if="statistic && $route.fullPath.includes('controllersAll')">Контроллеров всего <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.controllersCount }}</span> шт. &nbsp &nbsp Не работают <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.controllersDisabled }}</span> шт. &nbsp &nbsp Нет связи <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.controllersDisconnected }}</span> шт.</div>
                           <div class="card-title-right f-b" v-if="statistic && $route.fullPath.includes('kktsAll')">Касс всего <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.kktsCount }}</span> шт. &nbsp &nbsp Работает <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.kktsNormal }}</span> шт. &nbsp &nbsp Не работает <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.kktsError }}</span> шт.</div>
+                          <div class="card-title-right f-b" v-if="statistic && $route.fullPath.includes('sims')">Сим (активных) <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.simCount }}</span> шт. &nbsp &nbsp Траффик <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.simTraffic.toFixed(2) }}</span> МБ &nbsp &nbsp Расход <span :class="{'style-green': statistic.informationStatus, 'style-red': !statistic.informationStatus}">{{ statistic.simExpense.toFixed(2) }}</span> $</div>
 
                         </div>
 
@@ -64,7 +65,13 @@
                             kktsNormal
                             kktsError
 
+                            simCount
+                            simTraffic
+                            simExpense
+
                             informationStatus
+
+
 
                              }
                     }

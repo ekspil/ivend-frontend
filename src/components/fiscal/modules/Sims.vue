@@ -84,6 +84,7 @@
                             expense
                             terminal
                             controllerId
+                            controllerUid
                             terminalId
 
                         }

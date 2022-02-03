@@ -1,10 +1,10 @@
 import { createTooltip} from '@/utils';
 function getEquipment(sim){
     if(sim.controllerId){
-        return `Контроллер ( ${sim.controllerId} )`
+        return `Контроллер ( ${sim.controllerUid} )`
     }
     if(sim.terminalId){
-        return `${sim.terminal} ( ${sim.terminalId} )`
+        return `${sim.terminal} ( ${sim.controllerUid} )`
     }
 }
 
