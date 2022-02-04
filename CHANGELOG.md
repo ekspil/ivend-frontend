@@ -626,6 +626,10 @@
 
 * fix company name 
 
+# 1.7.29 - Hotfix
+
+* fix company name 
+
 
 
 
