@@ -630,6 +630,10 @@
 
 * fix company name 
 
+# 1.7.30 - Hotfix
+
+* mdb2 added 
+
 
 
 
