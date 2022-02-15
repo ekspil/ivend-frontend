@@ -16,17 +16,20 @@
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Касса</label>
-                                        <select v-model="input.type" class="form-control custom-select">
+                                        <select v-model="input.type" class="form-control custom-select" @change="selectDefaultFN()">
                                             <option value="umka">Умка (Россия)</option>
                                             <option value="rekassa">Рекасса (Казахстан)</option>
+                                            <option value="telemedia">Телемедиа (Киргизия)</option>
 
                                         </select>
                                     </div>
-                                    <div class="form-group" v-if="input.type === 'umka'">
+                                    <div class="form-group" >
                                         <label class="form-label f-b">Тип фискального накопителя</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
-                                            <option value="УМКА-01-ФА (ФН15)">УМКА-01-ФА (ФН15)</option>
-                                            <option value="УМКА-01-ФА (ФН36)">УМКА-01-ФА (ФН36)</option>
+                                            <option value="УМКА-01-ФА (ФН15)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН15)</option>
+                                            <option value="УМКА-01-ФА (ФН36)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН36)</option>
+                                            <option value="REKASSA" v-if="input.type === 'rekassa'">Рекасса Online KKM</option>
+                                            <option value="TELEMEDIA" v-if="input.type === 'telemedia'">Телемедиа Online KKM</option>
 
                                         </select>
                                     </div>
@@ -87,7 +90,7 @@
                 profile: null
             },
             input: {
-                kktModel: "REKASSA",
+                kktModel: "УМКА-01-ФА (ФН36)",
                 type: "umka"
 
             },
@@ -118,6 +121,21 @@
             }
         },
         methods: {
+            selectDefaultFN(){
+              switch (this.input.type){
+                case "umka":
+                  this.input.kktModel = "УМКА-01-ФА (ФН36)"
+                  break;
+                case "rekassa":
+                  this.input.kktModel = "REKASSA"
+                  break;
+                case "telemedia":
+                  this.input.kktModel = "TELEMEDIA"
+                  break;
+
+              }
+
+            },
             async save () {
                 const data = {
                     kktModel: this.input.kktModel,

@@ -76,6 +76,16 @@
                                         <label class="form-label f-b">Сервер</label>
                                         <Field className="form-control" :value="data.kkt.server" name="server" formName="editFiscal" placeholder="Сервер"/>
                                     </div>
+
+                                  <div class="form-group" v-if="data.kkt.type === 'telemedia'">
+                                    <label class="form-label f-b">Номер кассы</label>
+                                    <Field className="form-control" :value="data.kkt.rekassaKktId"   name="rekassaKktId" formName="editFiscal" placeholder="Введите номер кассы"/>
+                                  </div>
+
+                                  <div class="form-group" v-if="data.kkt.type === 'telemedia'">
+                                    <label class="form-label f-b">Номер отдела</label>
+                                    <Field className="form-control" :value="data.kkt.rekassaNumber"   name="rekassaNumber" formName="editFiscal" placeholder="Введите номер отдела"/>
+                                  </div>
                                 </div>
                             </div>
                         </template>
@@ -141,6 +151,9 @@
                 kktBillsCount
                 kktOFDRegKey
                 server
+                type
+                rekassaNumber
+                rekassaKktId
             }
 
       }
