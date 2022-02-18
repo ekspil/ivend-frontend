@@ -1,4 +1,5 @@
 import { createTooltip} from '@/utils';
+let num = 0
 function getEquipment(sim){
     if(sim.controllerId){
         return `Контроллер ( ${sim.controllerUid} )`
@@ -8,9 +9,15 @@ function getEquipment(sim){
     }
 }
 
+function getNum(){
+    num++
+    return num
+}
+
 
 
 export const getTableHeaders = () => [
+    //{ name: '№', key: 'num', link: false },
     { name: 'Оператор', key: 'provider', link: false },
     { name: 'Номер в системе', key: 'number', unsortable: false },
     { name: 'IMSI', key: 'imsi', link: false },
@@ -29,12 +36,15 @@ export const getTableHeaders = () => [
         }},
     { name: 'Траффик', key: 'traffic', link: false },
     { name: 'Расход', key: 'expense', link: false },
-    { name: 'Оборудование', key: 'equipment', link: true }
+    { name: 'Оборудование', key: 'equipment', link: true },
+    { name: 'Пользователь', key: 'userName', link: true },
 
 ];
 
 export const getTableFields = (data, props) => data.map(sim => ({
     provider: "Гудлайн",
+    userId: sim.userId,
+    userName: sim.userName,
     imsi: sim.imsi,
     number: sim.number,
     equipment: getEquipment(sim),

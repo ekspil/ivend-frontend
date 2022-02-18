@@ -10,6 +10,18 @@
                                 <div class="form-group" style="width: 25%; padding-left: 10px">
                                     <input v-model="search" class="form-control custom-select" placeholder="Поиск">
                                 </div>
+
+                              <div class="form-group " style="width: 25%; padding-left: 10px">
+                                <select class="form-control custom-select" v-model="selectedStatus">
+                                  <option key="null" :value="null" selected="selected">Все</option>
+                                  <option key="7" value="active" >Активные</option>
+                                  <option key="6" value="not_active" >Не активные</option>
+                                </select>
+                              </div>
+                                <span class="col-auto">
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                                </span>
+
                                 <Table
                                         v-if="sims"
                                         :headers="getTableHeaders"
@@ -34,9 +46,10 @@
                                     <div class="form-group kol">
                                         <select v-model="limit" class="form-control custom-select">
                                             <option :value="100">100</option>
-                                            <option :value="200">200</option>
                                             <option :value="500">500</option>
                                             <option :value="1000">1000</option>
+                                            <option :value="5000">5000</option>
+                                            <option :value="99999">ВСЕ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -66,6 +79,7 @@
         data: () => ({
 
             orderKey: null,
+            selectedStatus: null,
             orderDesc: null,
             sims: [],
             offset: 0,
@@ -86,6 +100,8 @@
                             controllerId
                             controllerUid
                             terminalId
+                            userName
+                            userId
 
                         }
                     }
@@ -95,6 +111,7 @@
                         input: {
                             offset: Number(this.offset),
                             limit: Number(this.limit),
+                            status: this.selectedStatus
                         }
                     };
                 },
@@ -124,7 +141,11 @@
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.sims) }
+            getTableFields () { return getTableFields(this.sims, {
+              routeKey: "userName",
+              routeId: "userId",
+              route: "/fiscalAll/userEdit/"
+            }) }
         }
     }
 </script>
