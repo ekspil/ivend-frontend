@@ -86,11 +86,11 @@
             kkts: [],
             sendQuery: false,
             legalInfo: null,
-            depositSum: 14000,
+            depositSum: 15000,
             services: [{
               name: "Фискальный накопитель ФН36",
               count: 1,
-              price: 12000
+              price: 15000
             }],
             selectedKkt: {
               id: null,
