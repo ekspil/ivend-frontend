@@ -82,6 +82,12 @@
 			datepicker,
 			DatePicker
 		},
+    props: {
+		  allTime: {
+        type: Boolean,
+        default: () => false
+      }
+    },
 		data: () => ({
 			periods: ['Всего', 'Месяц', 'Квартал', 'Год'],
 			period: 'cache',
@@ -192,9 +198,14 @@
 
 					case 'cache':
 						period = this.periodStat.period
-
-						if(!period) {
+            console.log(period)
+            console.log(this.allTime)
+						if(!period && !this.allTime) {
 							this.period = "Месяц"
+							return this.getPeriod
+						}
+						if(!period && this.allTime) {
+							this.period = "Всего"
 							return this.getPeriod
 						}
 						this.period = this.periodStat.type

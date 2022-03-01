@@ -7,7 +7,7 @@
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
                                 <div class="stats-top-menu__date-buttons">
-                                    <Period @onChange="onPeriodChange"/>
+                                    <Period @onChange="onPeriodChange" :allTime="true"/>
                                 </div>
 
                                 <Table
