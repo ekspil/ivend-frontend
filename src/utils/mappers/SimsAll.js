@@ -23,7 +23,6 @@ export const getTableHeaders = () => [
     { name: 'IMSI', key: 'imsi', link: false },
     { name: 'Статус', key: 'status',
         critery ({status}) {
-        console.log(status)
             if(status && status !== "0"){
                 return createTooltip('primary', "Активна");
             }

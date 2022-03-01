@@ -198,8 +198,6 @@
 
 					case 'cache':
 						period = this.periodStat.period
-            console.log(period)
-            console.log(this.allTime)
 						if(!period && !this.allTime) {
 							this.period = "Месяц"
 							return this.getPeriod
