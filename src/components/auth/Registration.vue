@@ -235,7 +235,8 @@ export default {
                         `,
                         variables: {
                             input: {
-                                phone: this.postData.tel.replace(/[()+\s-]/gi, '')
+                                phone: (this.postData.tel).replace(/\D/gi, ''),
+                                countryCode: (this.countryCode[this.country]).replace(/\D/gi, '')
                             }
                         }
                     });
@@ -260,7 +261,8 @@ export default {
             const cache = this.$store.getters['cache/data'];
             const regData = {
                 ...(omit(['agreement', 'rePassword'], cache)),
-                phone: cache.phone.replace(/[()+\s-]/gi, '')
+                phone: (this.postData.tel).replace(/\D/gi, ''),
+                countryCode: (this.countryCode[this.country]).replace(/\D/gi, '')
             }
 
             if(this.$store.state.user.partner){
@@ -295,7 +297,7 @@ export default {
                 variables: {
                     logData: {
                         ...(omit(['agreement', 'rePassword', 'code', 'email'], cache)),
-                        phone: cache.phone.replace(/[()+\s-]/gi, '')
+                        phone: (this.postData.tel).replace(/\D/gi, '')
                     }
                 }
             });
