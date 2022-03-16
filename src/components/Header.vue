@@ -128,7 +128,7 @@
                     }
                 `,
 
-                update: data => {
+                update(date){
 
                   let timeZone = 3
 
