@@ -187,7 +187,7 @@
             fromDay.setUTCFullYear(year)
             fromDay.setUTCMonth(month)
             fromDay.setUTCDate(day)
-            fromDay.setUTCHours(0 + timeZone)
+            fromDay.setUTCHours(0 - timeZone)
             fromDay.setUTCMinutes(0)
             fromDay.setUTCSeconds(0)
 
@@ -195,7 +195,7 @@
             toDay.setUTCFullYear(year)
             toDay.setUTCMonth(month)
             toDay.setUTCDate(day)
-            toDay.setUTCHours(23 + timeZone)
+            toDay.setUTCHours(23 - timeZone)
             toDay.setUTCMinutes(59)
             toDay.setUTCSeconds(59)
 
@@ -213,7 +213,7 @@
             from.setUTCFullYear(year)
             from.setUTCMonth(month)
             from.setUTCDate(day -1)
-            from.setUTCHours(0 + timeZone)
+            from.setUTCHours(0 - timeZone)
             from.setUTCMinutes(0)
             from.setUTCSeconds(0)
 
@@ -221,7 +221,7 @@
             to.setUTCFullYear(year)
             to.setUTCMonth(month)
             to.setUTCDate(day -1)
-            to.setUTCHours(23 + timeZone)
+            to.setUTCHours(23 - timeZone)
             to.setUTCMinutes(59)
             to.setUTCSeconds(59)
 
@@ -325,7 +325,7 @@
             from.setUTCFullYear(year)
             from.setUTCMonth(month)
             from.setUTCDate(day -1)
-            from.setUTCHours(0 + timeZone)
+            from.setUTCHours(0 - timeZone)
             from.setUTCMinutes(0)
             from.setUTCSeconds(0)
 
@@ -333,7 +333,7 @@
             to.setUTCFullYear(year)
             to.setUTCMonth(month)
             to.setUTCDate(day -1)
-            to.setUTCHours(23 + timeZone)
+            to.setUTCHours(23 - timeZone)
             to.setUTCMinutes(59)
             to.setUTCSeconds(59)
 
@@ -350,7 +350,7 @@
                       fromDay.setUTCFullYear(year)
                       fromDay.setUTCMonth(month)
                       fromDay.setUTCDate(day)
-                      fromDay.setUTCHours(0 + timeZone)
+                      fromDay.setUTCHours(0 - timeZone)
                       fromDay.setUTCMinutes(0)
                       fromDay.setUTCSeconds(0)
 
@@ -358,7 +358,7 @@
                       toDay.setUTCFullYear(year)
                       toDay.setUTCMonth(month)
                       toDay.setUTCDate(day)
-                      toDay.setUTCHours(23 + timeZone)
+                      toDay.setUTCHours(23 - timeZone)
                       toDay.setUTCMinutes(59)
                       toDay.setUTCSeconds(59)
 
