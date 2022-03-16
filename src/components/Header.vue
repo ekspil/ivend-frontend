@@ -120,12 +120,26 @@
                     query {
                         user: getProfile {
                             phone
+                            legalInfo {
+                               timeZone
+                            }
 
                         }
                     }
                 `,
 
-                update: data => data.user
+                update: data => {
+
+                  let timeZone = 3
+
+                  if(data.user.legalInfo && data.user.legalInfo.timeZone ){
+                    timeZone = Number(data.user.legalInfo.timeZone)
+                  }
+                  this.$store.commit('user/setTimeZone', timeZone);
+
+
+                  return data.user
+                }
             }
         },
         methods: {

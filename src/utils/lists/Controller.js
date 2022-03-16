@@ -52,7 +52,7 @@ export const controllerTerminal = [
     // {name: "Vendista V2", value: "vda2"},
     {name: "Vendotek VL", value: "vdkl"},
     {name: "Vendotek VX", value: "vdkx"},
-    {name: "Worldwide Valina", value: "wvln"},
+    {name: "Worldline VALINA", value: "wvln"},
     // {name: "CASTLES MP200 Vend", value: "mp200_v"},
     // {name: "CASTLES MP200 Trade", value: "mp200_t"},
     // {name: "OTI UNO Vend", value: "otiu_v"},

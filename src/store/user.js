@@ -10,6 +10,7 @@ const state = () => ({
 	selectedGroupIdSe: null,
 	selectedGroupIdSt: null,
 	partnerInfo: null,
+	timeZone: 3
 });
 
 const mutations = {
@@ -21,6 +22,9 @@ const mutations = {
 	},
 	setPartner (state, partner = null) {
 		state.partner = partner;
+	},
+	setTimeZone (state, timeZone = 3) {
+		state.timeZone = timeZone;
 	},
 
 	clear (state) {

@@ -146,6 +146,10 @@
 
 			},
 			getPeriod () {
+			  let timeZone = this.$store.state.user.timeZone
+        const day = new Date().getUTCDate()
+        const month = new Date().getUTCMonth()
+        const year = new Date().getUTCFullYear()
 				let date;
 				let period
 				switch (this.period) {
@@ -162,36 +166,70 @@
 						date = new Date();
 						date.setMonth(date.getMonth() - 1);
 						period = {
-							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+							from: new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), ).getTime(),
 							to: Date.now()
 						};
 						this.$store.commit("cache/setPeriodStat",   {period, type: this.period})
 						return period
 					case 'Неделя':
 						date = new Date();
-						date.setDate(date.getDate() - 7);
+						date.setUTCDate(date.getUTCDate() - 7);
 						period = {
-							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
+							from: new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), ).getTime(),
 							to: Date.now()
 						};
 						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 						return period
 
 					case 'День':
-						date = new Date();
+
+            const fromDay = new Date()
+            fromDay.setUTCFullYear(year)
+            fromDay.setUTCMonth(month)
+            fromDay.setUTCDate(day)
+            fromDay.setUTCHours(0 + timeZone)
+            fromDay.setUTCMinutes(0)
+            fromDay.setUTCSeconds(0)
+
+            const toDay = new Date()
+            toDay.setUTCFullYear(year)
+            toDay.setUTCMonth(month)
+            toDay.setUTCDate(day)
+            toDay.setUTCHours(23 + timeZone)
+            toDay.setUTCMinutes(59)
+            toDay.setUTCSeconds(59)
+
+
 						period = {
-							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-							to: Date.now()
+							from: fromDay.getTime(),
+							to: toDay.getTime(),
 						};
 						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 						return period
 
 					case 'Вчера':
-						date = new Date();
-						period = {
-							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - (1000*60*60*24),
-							to: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-						};
+
+            const from = new Date()
+            from.setUTCFullYear(year)
+            from.setUTCMonth(month)
+            from.setUTCDate(day -1)
+            from.setUTCHours(0 + timeZone)
+            from.setUTCMinutes(0)
+            from.setUTCSeconds(0)
+
+            const to = new Date()
+            to.setUTCFullYear(year)
+            to.setUTCMonth(month)
+            to.setUTCDate(day -1)
+            to.setUTCHours(23 + timeZone)
+            to.setUTCMinutes(59)
+            to.setUTCSeconds(59)
+
+
+            period = {
+              from: from.getTime(),
+              to: to.getTime(),
+            };
 						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 						return period
 
@@ -244,6 +282,11 @@
       }, 500)
 
 			this.interval = setInterval(() => {
+
+        let timeZone = this.$store.state.user.timeZone
+        const day = new Date().getUTCDate()
+        const month = new Date().getUTCMonth()
+        const year = new Date().getUTCFullYear()
 			    let date;
 			    let period;
 			    let periodNew;
@@ -278,20 +321,52 @@
                         break;
 
 					case 'Вчера':
-						date = new Date();
-						periodNew = {
-							from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime() - (1000*60*60*24),
-							to: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-						};
+            const from = new Date()
+            from.setUTCFullYear(year)
+            from.setUTCMonth(month)
+            from.setUTCDate(day -1)
+            from.setUTCHours(0 + timeZone)
+            from.setUTCMinutes(0)
+            from.setUTCSeconds(0)
+
+            const to = new Date()
+            to.setUTCFullYear(year)
+            to.setUTCMonth(month)
+            to.setUTCDate(day -1)
+            to.setUTCHours(23 + timeZone)
+            to.setUTCMinutes(59)
+            to.setUTCSeconds(59)
+
+
+            period = {
+              from: from.getTime(),
+              to: to.getTime(),
+            };
 						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "День"})
 						break;
 
                     case 'День':
-                        date = new Date();
-                        periodNew = {
-                            from: new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(),
-                            to: Date.now()
-                        };
+                      const fromDay = new Date()
+                      fromDay.setUTCFullYear(year)
+                      fromDay.setUTCMonth(month)
+                      fromDay.setUTCDate(day)
+                      fromDay.setUTCHours(0 + timeZone)
+                      fromDay.setUTCMinutes(0)
+                      fromDay.setUTCSeconds(0)
+
+                      const toDay = new Date()
+                      toDay.setUTCFullYear(year)
+                      toDay.setUTCMonth(month)
+                      toDay.setUTCDate(day)
+                      toDay.setUTCHours(23 + timeZone)
+                      toDay.setUTCMinutes(59)
+                      toDay.setUTCSeconds(59)
+
+
+                      period = {
+                        from: fromDay.getTime(),
+                        to: toDay.getTime(),
+                      };
 						this.$store.commit("cache/setPeriodStat", {period: periodNew, type: "День"})
 						break;
 

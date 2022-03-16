@@ -167,7 +167,7 @@ export default {
             const cache = this.$store.getters['cache/data'];
             const userData = {
                 password: cache.password,
-                phone: cache.phone.replace(/[()+\s-]/gi, '')
+                phone: cache.phone.replace(/\D/gi, '')
             };
 
             try {
@@ -190,11 +190,11 @@ export default {
         onSuccess({ token }) {
             if(token === "NEED_SMS"){
                 const cache = this.$store.getters['cache/data'];
-                this.$router.push(`/sms/${cache.phone.replace(/[()+\s-]/gi, '')}`)
+                this.$router.push(`/sms/${cache.phone.replace(/\D/gi, '')}`)
             }
             else{
                 const cache = this.$store.getters['cache/data'];
-                this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: cache.phone.replace(/[()+\s-]/gi, '')});
+                this.$store.dispatch('auth/requestUserData', {token, remember: this.remember, phone: cache.phone.replace(/\D/gi, '')});
 
             }
 
