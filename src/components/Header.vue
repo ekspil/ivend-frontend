@@ -128,7 +128,7 @@
                     }
                 `,
 
-                update(date){
+                update(data){
 
                   let timeZone = 3
 
