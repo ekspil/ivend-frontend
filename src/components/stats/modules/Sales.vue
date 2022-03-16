@@ -7,12 +7,12 @@
 					<option label="Выберите группу" :value="null"></option>
 					<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
 				</select>
-				<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+				<ExportExcel v-if="machines && machines.length > 0" class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
 		</div>
 
 		<Table
-		v-if="machines.length > 0"
+		v-if="machines && machines.length > 0"
 		:headers="getTableHeaders"
 		:fields="getTableFields"
 		stats
@@ -123,6 +123,7 @@ export default {
             this.period = period;
         },
 		setSales(d){
+      if(!d) return
 			const sal = d.reduce((acc, item) => {
 				acc.count = acc.count + item.salesSummary.salesCount
 				acc.amount = acc.amount + item.salesSummary.overallAmount

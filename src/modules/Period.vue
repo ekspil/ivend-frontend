@@ -147,9 +147,12 @@
 			},
 			getPeriod () {
 			  let timeZone = this.$store.state.user.timeZone
-        const day = new Date().getUTCDate()
+        let day = new Date().getUTCDate()
         const month = new Date().getUTCMonth()
         const year = new Date().getUTCFullYear()
+
+        if((new Date().getUTCHours() + timeZone) > 23) day++
+
 				let date;
 				let period
 				switch (this.period) {
@@ -182,6 +185,7 @@
 						return period
 
 					case 'День':
+
 
             const fromDay = new Date()
             fromDay.setUTCFullYear(year)
@@ -284,9 +288,11 @@
 			this.interval = setInterval(() => {
 
         let timeZone = this.$store.state.user.timeZone
-        const day = new Date().getUTCDate()
+        let day = new Date().getUTCDate()
         const month = new Date().getUTCMonth()
         const year = new Date().getUTCFullYear()
+        if((new Date().getUTCHours() + timeZone) > 23) day++
+
 			    let date;
 			    let period;
 			    let periodNew;
