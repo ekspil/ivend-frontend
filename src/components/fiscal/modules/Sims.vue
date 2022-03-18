@@ -137,6 +137,23 @@
 
                 this.offset -= this.limit
             },
+          async simReset (sim) {
+            try{
+              await this.$apollo.mutate({
+                mutation: gql`
+                        mutation ($sim: String!) {
+                            simReset (sim: $sim)
+                        }
+                    `,
+                variables: { sim }
+              });
+            }catch (e) {
+
+              alert("Неудача")
+            }
+
+
+          },
 
         },
         computed: {
@@ -144,7 +161,8 @@
             getTableFields () { return getTableFields(this.sims, {
               routeKey: "userName",
               routeId: "userId",
-              route: "/fiscalAll/userEdit/"
+              route: "/fiscalAll/userEdit/",
+              simResetNumber: this.simReset
             }) }
         }
     }
