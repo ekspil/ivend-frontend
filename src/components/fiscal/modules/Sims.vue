@@ -8,7 +8,7 @@
                             <div class="example top-buttons-container top-buttons">
 
                                 <div class="form-group" style="width: 25%; padding-left: 10px">
-                                    <input v-model="search" class="form-control custom-select" placeholder="Поиск">
+                                    <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="search = searchTemp">
                                 </div>
 
                               <div class="form-group " style="width: 25%; padding-left: 10px">
@@ -85,6 +85,7 @@
             offset: 0,
             limit:100,
             savedLimit :100,
+            searchTemp: null,
             search: "",
         }),
         apollo: {
@@ -111,7 +112,8 @@
                         input: {
                             offset: Number(this.offset),
                             limit: Number(this.limit),
-                            status: this.selectedStatus
+                            status: this.selectedStatus,
+                            search: this.search
                         }
                     };
                 },
