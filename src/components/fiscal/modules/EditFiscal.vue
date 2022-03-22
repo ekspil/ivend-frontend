@@ -38,7 +38,7 @@
                                         <!--</select>-->
                                     <!--</div>-->
                                     <div class="form-group">
-                                    <label class="form-label f-b">Тип фискального накопителя</label>
+                                    <label class="form-label f-b">Модель онлайн кассы</label>
                                     <Field className="form-control" :value="data.kkt.kktModel" disabled name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
                                     </div>
 
@@ -52,10 +52,34 @@
                                         <Field className="form-control" :value="data.kkt.kktRegNumber" name="kktRegNumber" formName="editFiscal" placeholder="Регистрационный номер"/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="data.kkt.kktModel !== 'TELEMEDIA'">
                                         <label class="form-label f-b">Номер ФН</label>
                                         <Field className="form-control" :value="data.kkt.kktFNNumber" disabled name="kktFNNumber" formName="editFiscal" placeholder="Номер ФН"/>
                                     </div>
+
+
+                                  <div class="form-group">
+                                    <label class="form-label f-b">Компания ОФД</label>
+                                    <select v-model="data.kkt.ofdName" class="form-control custom-select">
+                                      <option value="Первый ОФД" >Первый ОФД</option>
+                                      <option value="Такском" >Такском</option>
+                                      <option value="Эвотор ОФД" >Эвотор ОФД</option>
+                                      <option value="Ярус" >Ярус</option>
+                                      <option value="Петер-Сервис" >Петер-Сервис</option>
+                                      <option value="Яндекс ОФД" >Яндекс ОФД</option>
+                                      <option value="Электронный экспресс" >Электронный экспресс</option>
+                                      <option value="Калуга Астрал" >Калуга Астрал</option>
+                                      <option value="Тензор" >Тензор</option>
+                                      <option value="Корус Конслатинг СНГ" >Корус Конслатинг СНГ</option>
+                                      <option value="СКБ Контур" >СКБ Контур</option>
+                                      <option value="Тандер" >Тандер</option>
+                                      <option value="Контур НТТ" >Контур НТТ</option>
+                                      <option value="Группа Элемент" >Группа Элемент</option>
+                                      <option value="Мультикарта" >Мультикарта</option>
+                                      <option value="Инитпро ОФД" >Инитпро ОФД</option>
+
+                                    </select>
+                                  </div>
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Дата активации</label>
@@ -67,7 +91,7 @@
                                         <Field className="form-control" :value="data.kkt.kktBillsCount" disabled name="kktBillsCount" formName="editFiscal" placeholder=""/>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" v-if="data.kkt.kktModel !== 'TELEMEDIA'">
                                         <label class="form-label f-b">Регистрационный номер ОФД</label>
                                         <Field className="form-control" :value="data.kkt.kktOFDRegKey" disabled name="kktOFDRegKey" formName="editFiscal" placeholder="Регистрационный номер ОФД"/>
                                     </div>
@@ -134,6 +158,7 @@
                 kktActivationDate
                 kktBillsCount
                 kktOFDRegKey
+                ofdName
             }
 
       }
@@ -156,9 +181,11 @@
                         this.$store.getters['cache/data'].kktBillsCount = Number(this.$store.getters['cache/data'].kktBillsCount);
                     }
                     const data = {
+
+                        ...this.$store.getters['cache/data'],
                         id: Number(this.data.kkt.id),
                         kktModel: this.data.kkt.kktModel,
-                        ...this.$store.getters['cache/data']
+                        ofdName: this.data.kkt.ofdName,
                     };
 
                     const { errors } = await this.$apollo.mutate({

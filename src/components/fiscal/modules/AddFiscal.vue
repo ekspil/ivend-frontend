@@ -24,7 +24,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" >
-                                        <label class="form-label f-b">Тип фискального накопителя</label>
+                                        <label class="form-label f-b">Модель онлайн кассы</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
                                             <option value="УМКА-01-ФА (ФН15)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН15)</option>
                                             <option value="УМКА-01-ФА (ФН36)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН36)</option>
