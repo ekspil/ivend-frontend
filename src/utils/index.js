@@ -188,11 +188,15 @@ export const checkForRepeat = (propName, array) => {
 	Преобразовать в удобочитаемый вид телефонный номер вида 999 999 99-99
 	@author Samir Amirseidov
 */
-export const prettifyPhone = phone => {
+export const prettifyPhone = (phone, countryCode) => {
 	let str = split('', phone);
+	let code = "+7"
+	if(countryCode){
+		code = "+" + countryCode
+	}
 
 	str = join('', flatten(
-		prepend('+7',
+		prepend(code,
 			prepend([' ', '('],
 				insertAll(3, [')', ' '],
 					insertAll(6, [' '], split('', phone))

@@ -674,6 +674,10 @@
 
 * new oferta
 
+# 1.7.42 - Hotfix
+
+* new oferta
+
 
 
 

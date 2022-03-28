@@ -67,7 +67,7 @@
                                     <span class="avatar avatar-md brround"
                                           style="background-image: url(/assets/images/faces/female/25.jpg)"></span>
                                 <span class="ml-2 d-none d-lg-block" v-if="user && user.phone">
-												<span class="text-black f-b">{{ user.phone | prettify }}</span>
+												<span class="text-black f-b">{{ {phone: user.phone, countryCode: user.countryCode} | prettifyObj }}</span>
 											</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -122,6 +122,7 @@
                     query {
                         user: getProfile {
                             phone
+                            countryCode
                             legalInfo {
                                timeZone
                             }
@@ -158,6 +159,9 @@
         filters: {
             prettify (phone) {
                 return prettifyPhone(phone);
+            },
+            prettifyObj ({phone, countryCode}) {
+                return prettifyPhone(phone, countryCode);
             }
         }
     }
