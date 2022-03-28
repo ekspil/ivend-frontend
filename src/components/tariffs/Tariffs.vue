@@ -26,19 +26,19 @@
                     <th scope="row">Услуга телеметрии за один ТА</th>
 
 
-                    <td>{{ (this.tariff ? this.tariff.telemetry : 100).toFixed(2) }} руб./мес.</td>
+                    <td>{{ ((this.tariff && this.tariff.telemetry ) ? this.tariff.telemetry : 100).toFixed(2) }} руб./мес.</td>
                   </tr>
                   <tr>
                     <th scope="row">Услуга фискализации за один ТА (от 20 ТА)</th>
 
 
-                    <td>{{ (this.tariff ? this.tariff.fiscal/20 : 100).toFixed(2) }} руб./мес.</td>
+                    <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal/20 : 100).toFixed(2) }} руб./мес.</td>
                   </tr>
                   <tr>
                     <th scope="row">Услуга фискализации до 20 ТА за всю сеть</th>
 
 
-                    <td>{{ (this.tariff ? this.tariff.fiscal : 2000).toFixed(2)}}  руб./мес.</td>
+                    <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal : 2000).toFixed(2)}}  руб./мес.</td>
                   </tr>
                   <tr>
                     <th scope="row">Услуга СМС информирования</th>
@@ -83,7 +83,7 @@
   export default {
     name: 'Tariffs',
     async beforeMount() {
-      if(this.$store.state.user.partnerInfo){
+      if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.infoRequisites){
         this.infoRequisites = this.$store.state.user.partnerInfo.infoRequisites
         const { data } = await this.$apollo.query({
           query: gql`

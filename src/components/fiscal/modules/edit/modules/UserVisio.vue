@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="side-app" v-if="user">
+        <div class="side-app" v-if="showData">
 
                     <Validate
                             :routeBack=from
@@ -31,7 +31,7 @@
                                         </div>
 
                                       </div>
-                                      <div class="form-group" >
+                                      <div class="form-group">
                                         <label class="form-label f-b">Телефон заголовок</label>
                                         <Field className="form-control" :value="infoPhoneCom" name="infoPhoneCom" formName="editUserData" placeholder="Телефон в заголовке"/>
                                       </div>
@@ -92,6 +92,7 @@
           }
       },
       data: () => ({
+            showData: false,
             from: "/fiscalAll#usersAll",
             partner: {
               controllerFee: null,
@@ -160,6 +161,7 @@
                 },
                 update(partnerInfo) {
                     if(!partnerInfo.getPartnerInfo){
+                      this.showData = true
                       return partnerInfo.getPartnerInfo
                     }
 
@@ -169,7 +171,7 @@
                       this.infoMailTech = partnerInfo.getPartnerInfo.infoMailTech
                       this.infoPhoneTech = partnerInfo.getPartnerInfo.infoPhoneTech
                       this.infoPhoneCom = partnerInfo.getPartnerInfo.infoPhoneCom
-
+                    this.showData = true
                     return partnerInfo.getPartnerInfo
                 }
             },
