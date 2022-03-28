@@ -105,8 +105,10 @@
             particles
         },
       beforeMount() {
-          if(this.$store.state.user.partnerInfo){
+          if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.fileLogo){
             this.logo = `/api/v1/files/file/${this.$store.state.user.partnerInfo.partnerId}/${this.$store.state.user.partnerInfo.fileLogo}`
+          }
+          if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.infoPhoneCom){
             this.infoPhoneCom = this.$store.state.user.partnerInfo.infoPhoneCom
           }
       },
