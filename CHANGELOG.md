@@ -670,6 +670,10 @@
 
 * sim search
 
+# 1.7.41 - Hotfix
+
+* new oferta
+
 
 
 
