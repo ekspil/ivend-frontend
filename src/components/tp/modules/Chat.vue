@@ -79,7 +79,7 @@
         }),
 
       beforeMount() {
-        if(this.$store.state.user.partnerInfo){
+        if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.infoPhoneTech){
           this.infoPhoneTech = this.$store.state.user.partnerInfo.infoPhoneTech
         }
       },
