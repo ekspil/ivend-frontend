@@ -679,6 +679,11 @@
 * new oferta
 
 
+# 1.7.43 - Hotfix
+
+* fix bill download
+
+
 
 
 

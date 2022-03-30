@@ -349,7 +349,8 @@ export default {
         } else {
 
           if (data.generatePdf.url) {
-            window.location.href = data.generatePdf.url;
+           //window.location.href = data.generatePdf.url;
+            window.open(data.generatePdf.url, '_blank');
             this.sendQuery = false
           }
         }
