@@ -86,7 +86,6 @@
         methods: {
             async send () {
                 const cache = this.$store.getters["cache/data"]
-                console.log(cache)
                 try {
                     const { errors } = await this.$apollo.mutate({
                         mutation: gql`
@@ -104,7 +103,6 @@
                     });
                     this.$refs.form.process({ errors, success: 'Сообщение успешно отправлено' });
                 } catch (error) {
-                    console.log(error)
                     this.$refs.form.showMessage('error', convertServerError(error.message));
                 }
             },

@@ -15,7 +15,7 @@
             >
                 <div class="auth-block__field-container auth-block__field-container--phone">
 
-                    <input :value="phone"class="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" formName="sms" disabled/>
+                    <input :value="phone" class="auth-block__field" type="tel" name="phone" placeholder="Номер телефона" formName="sms" disabled/>
                 </div>
                 <div class="auth-block__field-container auth-block__field-container--pass">
                     <Field className="auth-block__field" type="text" name="sms" placeholder="Код из СМС" formName="sms" />

@@ -74,7 +74,8 @@ export default {
 
       const excelUrl = data.generateExcel.url;
       if (and(errors, not(isEmpty(errors)) || not(excelUrl))) {
-        return console.error('Произошла серверная ошибка.');
+        alert("Произошла серверная ошибка")
+        return;
       }
 
       window.open(excelUrl, '_blank');

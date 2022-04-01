@@ -52,6 +52,15 @@
                                         <Field className="form-control" :value="data.kkt.kktRegNumber" name="kktRegNumber" formName="editFiscal" placeholder="Регистрационный номер"/>
                                     </div>
 
+
+                                  <div class="form-group">
+                                    <label class="form-label f-b">Компания ОФД</label>
+                                    <select v-model="data.kkt.ofdName" class="form-control custom-select">
+                                      <option v-for="item of ofdNames" :value="item.name" >{{item.text}}</option>
+
+                                    </select>
+                                  </div>
+
                                     <div class="form-group">
                                         <label class="form-label f-b">Номер ФН</label>
                                         <Field className="form-control" :value="data.kkt.kktFNNumber" name="kktFNNumber" formName="editFiscal" placeholder="Номер ФН"/>
@@ -109,7 +118,7 @@
 
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
-
+    import {ofdNames} from '@/utils/lists/Kkt';
     import { required } from '@/utils/validation';
 
     export default {
@@ -118,6 +127,7 @@
             Field
         },
         data: () => ({
+            ofdNames,
             data: null,
 
             schema: {
@@ -154,6 +164,7 @@
                 type
                 rekassaNumber
                 rekassaKktId
+                ofdName
             }
 
       }
@@ -178,7 +189,8 @@
                     const data = {
                         id: Number(this.data.kkt.id),
                         kktModel: this.data.kkt.kktModel,
-                        ...this.$store.getters['cache/data']
+                        ...this.$store.getters['cache/data'],
+                        ofdName: this.data.kkt.ofdName,
                     };
 
                     const { errors } = await this.$apollo.mutate({

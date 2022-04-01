@@ -683,6 +683,10 @@
 
 * fix bill download
 
+# 1.7.4 - Hotfix
+
+* fix bill download
+
 
 
 

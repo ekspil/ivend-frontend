@@ -330,9 +330,9 @@
                 `,
                 update: (data) => {
                     function compare(a, b) {
-                        let dateA = a.date.split(/[\s|,\.!\-#]+/)
+                        let dateA = a.date.split(/[\s|,.!\-#]+/)
                         dateA.reverse()
-                        let dateB = b.date.split(/[\s|,\.!\-#]+/)
+                        let dateB = b.date.split(/[\s|,.!\-#]+/)
                         dateB.reverse()
                         dateA.join('.')
                         dateB.join('.')

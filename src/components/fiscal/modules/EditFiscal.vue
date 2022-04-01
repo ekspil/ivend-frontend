@@ -61,22 +61,7 @@
                                   <div class="form-group">
                                     <label class="form-label f-b">Компания ОФД</label>
                                     <select v-model="data.kkt.ofdName" class="form-control custom-select">
-                                      <option value="Первый ОФД" >Первый ОФД</option>
-                                      <option value="Такском" >Такском</option>
-                                      <option value="Эвотор ОФД" >Эвотор ОФД</option>
-                                      <option value="Ярус" >Ярус</option>
-                                      <option value="Петер-Сервис" >Петер-Сервис</option>
-                                      <option value="Яндекс ОФД" >Яндекс ОФД</option>
-                                      <option value="Электронный экспресс" >Электронный экспресс</option>
-                                      <option value="Калуга Астрал" >Калуга Астрал</option>
-                                      <option value="Тензор" >Тензор</option>
-                                      <option value="Корус Конслатинг СНГ" >Корус Конслатинг СНГ</option>
-                                      <option value="СКБ Контур" >СКБ Контур</option>
-                                      <option value="Тандер" >Тандер</option>
-                                      <option value="Контур НТТ" >Контур НТТ</option>
-                                      <option value="Группа Элемент" >Группа Элемент</option>
-                                      <option value="Мультикарта" >Мультикарта</option>
-                                      <option value="Инитпро ОФД" >Инитпро ОФД</option>
+                                      <option v-for="item of ofdNames" :value="item.name" >{{item.text}}</option>
 
                                     </select>
                                   </div>
@@ -119,6 +104,7 @@
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
 
+    import {ofdNames} from '@/utils/lists/Kkt';
     import { required } from '@/utils/validation';
 
     export default {
@@ -127,6 +113,7 @@
             Field
         },
         data: () => ({
+            ofdNames,
             data: null,
 
             schema: {

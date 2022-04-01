@@ -168,13 +168,10 @@
 
                     this.limit = 9999
                 }
-                else if(this.search.length == 0){
-
-                }
-                else{
-                    if(this.savedLimit < this.limit){
-                        this.limit = this.savedLimit
-                    }
+                else if(this.search.length > 0 && this.search.length <= 3){
+                  if(this.savedLimit < this.limit){
+                    this.limit = this.savedLimit
+                  }
                 }
                 return this.kkts.filter(kkt => {
                     // id
