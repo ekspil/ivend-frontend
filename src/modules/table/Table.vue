@@ -60,6 +60,7 @@
 							</div>
 						</div>
 					</div>
+
           <template v-else><div class="bold-int">{{ field[header.key] }}</div></template>
 				</td>
 
@@ -83,6 +84,23 @@
 							</a>
 						</div>
 					</div>
+				</td>
+
+				<td class="text-right" v-if="field && field.props && field.props.controllerIntegrationUidUpdate">
+          <div class="">
+            <div class="item-action dropdown">
+              <a href="javascript:void(0)" data-toggle="dropdown" class="bold-link bold-int">
+                <i class="fe fe-more-vertical"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right text-center">
+                <p> Введите UID контроллера</p>
+                <input class="form-control" type="text" size="17" v-model="field.controllerUid">
+                <a href="#" class="dropdown-item" @click.prevent="field.props.controllerIntegrationUidUpdate(field.id, field.controllerUid)">
+                  <button class="btn btn-primary ml-auto">Присвоить</button>
+                </a>
+              </div>
+            </div>
+          </div>
 				</td>
 
 				<td class="text-right" v-if="field && field.props && field.props.simResetNumber">

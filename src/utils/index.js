@@ -274,3 +274,16 @@ export const createTooltip = (type, string) => {
 			return `<span class="badge badge-gray">${string}</span>`;
 	}
 };
+export const createInput = (type, string) => {
+	switch (type) {
+		case 'input':
+			return `
+				<span >
+                    <input class="form-control" value="${string}" name="companyName"  placeholder="uid" @keydown.enter="func"/>
+                                    
+				</span>
+			`;
+		default:
+			return `<span class="badge badge-gray">${string}</span>`;
+	}
+};

@@ -30,6 +30,7 @@
     import News from './modules/NewsAll';
     import Partners from './modules/Partners';
     import Sims from './modules/Sims';
+    import Integrations from './modules/Integrations';
     import gql from "graphql-tag";
 
 
@@ -44,6 +45,7 @@
                 { name: 'Информация', component: News, route: 'newsAll' },
                 { name: 'Партнеры', component: Partners, route: 'partners' },
                 { name: 'Сим карты', component: Sims, route: 'sims' },
+                { name: 'Интеграции', component: Integrations, route: 'integrations' },
 
             ],
           statistic: null
