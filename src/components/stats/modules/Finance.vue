@@ -149,6 +149,7 @@ export default {
 			this.period = period;
 		},
 		setSales(d){
+		  if(!d) return
 			const sal = d.reduce((acc, item) => {
 				acc.count = acc.count + item.salesSummary.salesCount
 				acc.amount = acc.amount + item.salesSummary.overallAmount
