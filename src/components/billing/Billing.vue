@@ -63,7 +63,7 @@
             placeholder="Сумма"
             v-model="depositSum"
             />
-            <button id="recharge-submit-btn2" class="btn btn-primary balance-info-block__btn2" :disabled="isDepositPending" @click.prevent="submitOrder"> Получить счет </button>
+            <button id="recharge-submit-btn2" class="btn btn-primary balance-info-block__btn2" :disabled="false" @click.prevent="submitOrder"> Получить счет </button>
           </form>
 
           <Hint ref="depositHint2" className="billing-hint" />
