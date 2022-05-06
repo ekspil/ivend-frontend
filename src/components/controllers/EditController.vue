@@ -47,7 +47,7 @@
                   </select>
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="data.controller.mode !== 'ps_m_D'">Настройки</button>
                 </div>
                 </div>
 
@@ -68,7 +68,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="data.controller.mode !== 'ps_m_D'">Настройки</button>
                   </div>
                 </div>
 
@@ -96,7 +96,7 @@
 
 
 
-            <div class="modal fade" id="ModalSettings!!!" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ModalSettingsController" tabindex="-1" data-backdrop="static"   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -104,11 +104,55 @@
 
                   </div>
                   <div class="modal-body">
-                    Тут должны быть настройки
+
+                    <div class="form-group">
+                      <label class="form-label f-b">Цена импульса линии 1 (А)</label>
+                      <input class="form-control" value="" type="number" v-model="pulse.a" placeholder="A"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label f-b">Цена импульса линии 2 (B)</label>
+                      <input class="form-control" value="" type="number" v-model="pulse.b" placeholder="B"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label f-b">Цена импульса линии 3 (C)</label>
+                      <input class="form-control" value="" type="number" v-model="pulse.c" placeholder="C"/>
+                    </div>
+
+
+
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary" @click.prevent="">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"  @click.prevent="pulseBack(true, true, true, false, false)">Закрыть</button>
+                    <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal">Сохранить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="modal fade" id="ModalSettingsTerminal" tabindex="-1" data-backdrop="static"   role="dialog" aria-labelledby="exampleModalLabelModalSettingsTerminal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelModalSettingsTerminal">Настройки</h5>
+
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label class="form-label f-b">Цена выходного импульса (О)</label>
+                      <input class="form-control" value="" type="number" v-model="pulse.o" placeholder="O"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label f-b">Сумма на терминале (Т)</label>
+                      <input class="form-control" value="" type="number" v-model="pulse.t" placeholder="T"/>
+                    </div>
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"   @click.prevent="pulseBack(false, false, false, true, true)">Закрыть</button>
+                    <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal">Сохранить</button>
                   </div>
                 </div>
               </div>
@@ -130,6 +174,12 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+
 </div>
 
 </template>
@@ -161,6 +211,13 @@ export default {
     schema: {
       uid: [required]
     },
+    pulse: {
+      a: 1,
+      b: 1,
+      c: 1,
+      o: 1,
+      t: 1,
+    },
 
     controllerUploading: false
   }),
@@ -186,6 +243,13 @@ export default {
           readStatMode
           fiscalizationMode
           remotePrinterId
+          pulse {
+            a
+            b
+            c
+            o
+            t
+          }
         }
 
         equipments: getEquipments {
@@ -205,6 +269,9 @@ export default {
       }
       `,
       update(data) {
+        if(data.controller.pulse){
+          this.pulse = data.controller.pulse
+        }
         return {
           controller: data.controller,
           equipments: data.equipments,
@@ -221,6 +288,28 @@ export default {
 
   },
   methods: {
+    pulseBack(a,b,c,o,t){
+      if(a){
+        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.a = this.data.controller.pulse.a
+        else this.pulse.a = 1
+      }
+      if(b){
+        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.b = this.data.controller.pulse.b
+        else this.pulse.b = 1
+      }
+      if(c){
+        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.c = this.data.controller.pulse.c
+        else this.pulse.c = 1
+      }
+      if(o){
+        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.o = this.data.controller.pulse.o
+        else this.pulse.o = 1
+      }
+      if(t){
+        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.t = this.data.controller.pulse.t
+        else this.pulse.t = 1
+      }
+    },
 
     fiscalEditPage(){
       window.open("/settings#fiscal", '_blank').focus();
@@ -256,6 +345,26 @@ export default {
           variables: {
             id: controller.id,
             data: controllerData
+          }
+        });
+
+        const pulse = await this.$apollo.mutate({
+          mutation: gql `
+          mutation setControllerPulse ($input: ControllerPulseInput!) {
+            setControllerPulse (input: $input) {
+              controllerId
+            }
+          }
+          `,
+          variables: {
+            input: {
+              controllerId: Number(controller.id),
+              a: Number(this.pulse.a),
+              b: Number(this.pulse.b),
+              c: Number(this.pulse.c),
+              o: Number(this.pulse.o),
+              t: Number(this.pulse.t),
+            }
           }
         });
 
