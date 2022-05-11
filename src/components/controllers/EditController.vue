@@ -140,7 +140,7 @@
                   <div class="modal-body">
 
                     <div class="form-group">
-                      <label class="form-label f-b">Цена выходного импульса (О)</label>
+                      <label class="form-label f-b">Цена выходного импульса (О)  <span class="text-red" v-if="!(Number(pulse.t) % Number(pulse.o) === 0)">Проверьте кратность чисел!</span></label>
                       <input class="form-control" value="" type="number" v-model="pulse.o" placeholder="O"/>
                     </div>
                     <div class="form-group">
@@ -152,7 +152,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"   @click.prevent="pulseBack(false, false, false, true, true)">Закрыть</button>
-                    <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal">Сохранить</button>
+                    <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal" :disabled="!(Number(pulse.t) % Number(pulse.o) === 0)">Сохранить</button>
                   </div>
                 </div>
               </div>
@@ -269,8 +269,8 @@ export default {
       }
       `,
       update(data) {
-        if(data.controller.pulse){
-          this.pulse = data.controller.pulse
+        if(data.controller.pulse && !this.data){
+          this.pulse = JSON.parse(JSON.stringify(data.controller.pulse))
         }
         return {
           controller: data.controller,
@@ -286,6 +286,24 @@ export default {
       this.routeBack = `${this.routeBack}#${this.$route.params.from}`
     }
 
+  },
+  watch: {
+    pulse: {
+      handler(newValue, oldValue) {
+        if(Number(newValue.a) > 1000) this.pulse.a = 1000
+        if(Number(newValue.b) > 1000) this.pulse.b = 1000
+        if(Number(newValue.c) > 1000) this.pulse.c = 1000
+        if(Number(newValue.o) > 1000) this.pulse.o = 1000
+        if(Number(newValue.t) > 10000) this.pulse.t = 10000
+        if(Number(newValue.a) < 0) this.pulse.a = 0
+        if(Number(newValue.b) < 0) this.pulse.b = 0
+        if(Number(newValue.c) < 0) this.pulse.c = 0
+        if(Number(newValue.o) < 0) this.pulse.o = 0
+        if(Number(newValue.t) < 0) this.pulse.t = 0
+      },
+      deep: true
+
+    }
   },
   methods: {
     pulseBack(a,b,c,o,t){
