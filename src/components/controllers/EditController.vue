@@ -100,7 +100,7 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Настройки</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Настройки режима контроллера PUlSE</h5>
 
                   </div>
                   <div class="modal-body">
@@ -134,7 +134,7 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelModalSettingsTerminal">Настройки</h5>
+                    <h5 class="modal-title" id="exampleModalLabelModalSettingsTerminal">Настройки режима терминала</h5>
 
                   </div>
                   <div class="modal-body">
