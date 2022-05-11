@@ -100,7 +100,7 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Настройки режима контроллера PUlSE</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Настройки режима контроллера PULSE</h5>
 
                   </div>
                   <div class="modal-body">
