@@ -212,11 +212,11 @@ export default {
       uid: [required]
     },
     pulse: {
-      a: 1,
-      b: 1,
-      c: 1,
-      o: 1,
-      t: 1,
+      a: 0,
+      b: 0,
+      c: 0,
+      o: 0,
+      t: 0,
     },
 
     controllerUploading: false
@@ -291,23 +291,39 @@ export default {
     pulseBack(a,b,c,o,t){
       if(a){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.a = this.data.controller.pulse.a
-        else this.pulse.a = 1
+        else this.pulse.a = 0
       }
       if(b){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.b = this.data.controller.pulse.b
-        else this.pulse.b = 1
+        else this.pulse.b = 0
       }
       if(c){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.c = this.data.controller.pulse.c
-        else this.pulse.c = 1
+        else this.pulse.c = 0
       }
       if(o){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.o = this.data.controller.pulse.o
-        else this.pulse.o = 1
+        else this.pulse.o = 0
       }
       if(t){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.t = this.data.controller.pulse.t
-        else this.pulse.t = 1
+        else this.pulse.t = 0
+      }
+    },
+    pulseCheck(){
+      if(!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.o) || Number(this.pulse.t))){
+        if(!Number(this.pulse.a)) this.pulse.a = 1
+        if(!Number(this.pulse.b)) this.pulse.b = 1
+        if(!Number(this.pulse.c)) this.pulse.c = 1
+        if(!Number(this.pulse.o)) this.pulse.o = 1
+        if(!Number(this.pulse.t)) this.pulse.t = 1
+      }
+      if(this.data.controller.pulse && (!Number(this.pulse.a) || !Number(this.pulse.b) || !Number(this.pulse.c) || !Number(this.pulse.o) || !Number(this.pulse.t))){
+        if(Number(this.pulse.a)) this.pulse.a = 0
+        if(Number(this.pulse.b)) this.pulse.b = 0
+        if(Number(this.pulse.c)) this.pulse.c = 0
+        if(Number(this.pulse.o)) this.pulse.o = 0
+        if(Number(this.pulse.t)) this.pulse.t = 0
       }
     },
 
@@ -347,7 +363,7 @@ export default {
             data: controllerData
           }
         });
-
+        this.pulseCheck()
         const pulse = await this.$apollo.mutate({
           mutation: gql `
           mutation setControllerPulse ($input: ControllerPulseInput!) {

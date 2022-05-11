@@ -29,8 +29,8 @@
         components: { Tabs },
         data: () => ({
             tabs: [
-                { name: 'Инструкции', component: Instructions, route: 'Instructions' },
                 { name: 'Информация', component: Information, route: 'Information' },
+                { name: 'Инструкции', component: Instructions, route: 'Instructions' },
                 { name: 'Связь со специалистом', component: Chat, route: 'Chat' },
         ]
         })
