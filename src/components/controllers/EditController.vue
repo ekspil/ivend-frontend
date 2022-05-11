@@ -106,15 +106,15 @@
                   <div class="modal-body">
 
                     <div class="form-group">
-                      <label class="form-label f-b">Цена импульса линии 1 (А)</label>
+                      <label class="form-label f-b">Цена импульса линии 1 (монетник, синий провод)</label>
                       <input class="form-control" value="" type="number" v-model="pulse.a" placeholder="A"/>
                     </div>
                     <div class="form-group">
-                      <label class="form-label f-b">Цена импульса линии 2 (B)</label>
+                      <label class="form-label f-b">Цена импульса линии 2 (купюрник, зеленый провод)</label>
                       <input class="form-control" value="" type="number" v-model="pulse.b" placeholder="B"/>
                     </div>
                     <div class="form-group">
-                      <label class="form-label f-b">Цена импульса линии 3 (C)</label>
+                      <label class="form-label f-b">Цена импульса линии 3 (безнал, коричневый провод)</label>
                       <input class="form-control" value="" type="number" v-model="pulse.c" placeholder="C"/>
                     </div>
 
@@ -140,12 +140,12 @@
                   <div class="modal-body">
 
                     <div class="form-group">
-                      <label class="form-label f-b">Цена выходного импульса (О)  <span class="text-red" v-if="!(Number(pulse.t) % Number(pulse.o) === 0)">Проверьте кратность чисел!</span></label>
-                      <input class="form-control" value="" type="number" v-model="pulse.o" placeholder="O"/>
+                      <label class="form-label f-b">Сумма на терминале по умолчанию  <span class="text-red" v-if="!(Number(pulse.t) % Number(pulse.o) === 0)">Проверьте кратность чисел!</span></label>
+                      <input class="form-control" value="" type="number" v-model="pulse.t" placeholder="O"/>
                     </div>
                     <div class="form-group">
-                      <label class="form-label f-b">Сумма на терминале (Т)</label>
-                      <input class="form-control" value="" type="number" v-model="pulse.t" placeholder="T"/>
+                      <label class="form-label f-b">Цена выходного импульса (безнал, желтый провод)</label>
+                      <input class="form-control" value="" type="number" v-model="pulse.o" placeholder="T"/>
                     </div>
 
 
