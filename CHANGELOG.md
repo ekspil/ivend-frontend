@@ -696,6 +696,11 @@
 * fix bill download
 
 
+# 1.7.47 - Hotfix
+
+* fix bill download
+
+
 
 
 
