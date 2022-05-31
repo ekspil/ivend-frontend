@@ -36,6 +36,7 @@ export const controllerType = [
     {name: "RS232", value: "rs232"},
     // {name: "MDB1", value: "mdb1"},
     {name: "MDB2", value: "mdb2"},
+    {name: "MECHANIC", value: "mech"},
     // {name: "CASHLESS2", value: "cashless2"},
     // {name: "CASHLESS3", value: "cashless_free"},
     // {name: "PULSE2", value: "ps_m_2"},

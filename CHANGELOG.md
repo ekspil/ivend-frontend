@@ -695,10 +695,15 @@
 
 * fix bill download
 
-
 # 1.7.47 - Hotfix
 
 * fix bill download
+
+# 1.7.48 - Hotfix
+
+* fix max date range
+* mech mode
+* remove controller -1000
 
 
 

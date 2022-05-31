@@ -47,7 +47,7 @@
                   </select>
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="data.controller.mode !== 'ps_m_D'">Настройки</button>
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech')">Настройки</button>
                 </div>
                 </div>
 
@@ -68,7 +68,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="data.controller.mode !== 'ps_m_D'">Настройки</button>
+                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech')">Настройки</button>
                   </div>
                 </div>
 
@@ -96,68 +96,6 @@
 
 
 
-            <div class="modal fade" id="ModalSettingsController" tabindex="-1" data-backdrop="static"   role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Настройки режима контроллера PULSE</h5>
-
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="form-group">
-                      <label class="form-label f-b">Цена импульса линии 1 (монетник, синий провод)</label>
-                      <input class="form-control" value="" type="number" v-model="pulse.a" placeholder="A"/>
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label f-b">Цена импульса линии 2 (купюрник, зеленый провод)</label>
-                      <input class="form-control" value="" type="number" v-model="pulse.b" placeholder="B"/>
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label f-b">Цена импульса линии 3 (безнал, коричневый провод)</label>
-                      <input class="form-control" value="" type="number" v-model="pulse.c" placeholder="C"/>
-                    </div>
-
-
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"  @click.prevent="pulseBack(true, true, true, false, false)">Закрыть</button>
-                    <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal">Сохранить</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="modal fade" id="ModalSettingsTerminal" tabindex="-1" data-backdrop="static"   role="dialog" aria-labelledby="exampleModalLabelModalSettingsTerminal" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelModalSettingsTerminal">Настройки режима терминала</h5>
-
-                  </div>
-                  <div class="modal-body">
-
-                    <div class="form-group">
-                      <label class="form-label f-b">Сумма на терминале по умолчанию  <span class="text-red" v-if="!(Number(pulse.t) % Number(pulse.o) === 0)">Проверьте кратность чисел!</span></label>
-                      <input class="form-control" value="" type="number" v-model="pulse.t" placeholder="O"/>
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label f-b">Цена выходного импульса (безнал, желтый провод)</label>
-                      <input class="form-control" value="" type="number" v-model="pulse.o" placeholder="T"/>
-                    </div>
-
-
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"   @click.prevent="pulseBack(false, false, false, true, true)">Закрыть</button>
-                    <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal" :disabled="!(Number(pulse.t) % Number(pulse.o) === 0)">Сохранить</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
 
 
 
@@ -176,7 +114,7 @@
   </div>
 
 
-
+<Pulse :data="data" :pulse="pulse"></Pulse>
 
 
 
@@ -191,13 +129,14 @@ import gql from 'graphql-tag';
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 import {controllerHeaders, controllerStates, controllerType, controllerStatType, controllerTerminal, controllerFiscalType } from '@/utils/lists/Controller';
-
+import Pulse from '@/components/controllers/dialogs/pulse'
 import { required } from '@/utils/validation';
 
 export default {
   components: {
     Validate,
-    Field
+    Field,
+    Pulse
   },
   data: () => ({
     routeBack: "/settings",
@@ -250,6 +189,16 @@ export default {
             o
             t
           }
+          mech {
+            a
+            b
+            c
+            o
+            t
+            d
+            e
+            f
+          }
         }
 
         equipments: getEquipments {
@@ -272,6 +221,9 @@ export default {
         if(data.controller.pulse && !this.data){
           this.pulse = JSON.parse(JSON.stringify(data.controller.pulse))
         }
+        if(data.controller.mech && !this.data){
+          this.pulse = JSON.parse(JSON.stringify(data.controller.mech))
+        }
         return {
           controller: data.controller,
           equipments: data.equipments,
@@ -287,61 +239,24 @@ export default {
     }
 
   },
-  watch: {
-    pulse: {
-      handler(newValue, oldValue) {
-        if(Number(newValue.a) > 1000) this.pulse.a = 1000
-        if(Number(newValue.b) > 1000) this.pulse.b = 1000
-        if(Number(newValue.c) > 1000) this.pulse.c = 1000
-        if(Number(newValue.o) > 1000) this.pulse.o = 1000
-        if(Number(newValue.t) > 10000) this.pulse.t = 10000
-        if(Number(newValue.a) < 0) this.pulse.a = 0
-        if(Number(newValue.b) < 0) this.pulse.b = 0
-        if(Number(newValue.c) < 0) this.pulse.c = 0
-        if(Number(newValue.o) < 0) this.pulse.o = 0
-        if(Number(newValue.t) < 0) this.pulse.t = 0
-      },
-      deep: true
-
-    }
-  },
   methods: {
-    pulseBack(a,b,c,o,t){
-      if(a){
-        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.a = this.data.controller.pulse.a
-        else this.pulse.a = 0
-      }
-      if(b){
-        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.b = this.data.controller.pulse.b
-        else this.pulse.b = 0
-      }
-      if(c){
-        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.c = this.data.controller.pulse.c
-        else this.pulse.c = 0
-      }
-      if(o){
-        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.o = this.data.controller.pulse.o
-        else this.pulse.o = 0
-      }
-      if(t){
-        if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.t = this.data.controller.pulse.t
-        else this.pulse.t = 0
-      }
-    },
+
     pulseCheck(){
-      if(!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.o) || Number(this.pulse.t))){
-        if(!Number(this.pulse.a)) this.pulse.a = 1
-        if(!Number(this.pulse.b)) this.pulse.b = 1
-        if(!Number(this.pulse.c)) this.pulse.c = 1
-        if(!Number(this.pulse.o)) this.pulse.o = 1
-        if(!Number(this.pulse.t)) this.pulse.t = 1
-      }
-      if(this.data.controller.pulse && (!Number(this.pulse.a) || !Number(this.pulse.b) || !Number(this.pulse.c) || !Number(this.pulse.o) || !Number(this.pulse.t))){
-        if(Number(this.pulse.a)) this.pulse.a = 0
-        if(Number(this.pulse.b)) this.pulse.b = 0
-        if(Number(this.pulse.c)) this.pulse.c = 0
-        if(Number(this.pulse.o)) this.pulse.o = 0
-        if(Number(this.pulse.t)) this.pulse.t = 0
+      if (this.data.controller.mode === 'ps_m_D'){
+        if (!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.o) || Number(this.pulse.t))) {
+          if (!Number(this.pulse.a)) this.pulse.a = 1
+          if (!Number(this.pulse.b)) this.pulse.b = 1
+          if (!Number(this.pulse.c)) this.pulse.c = 1
+          if (!Number(this.pulse.o)) this.pulse.o = 1
+          if (!Number(this.pulse.t)) this.pulse.t = 1
+        }
+        if (this.data.controller.pulse && (!Number(this.pulse.a) || !Number(this.pulse.b) || !Number(this.pulse.c) || !Number(this.pulse.o) || !Number(this.pulse.t))) {
+          if (Number(this.pulse.a)) this.pulse.a = 0
+          if (Number(this.pulse.b)) this.pulse.b = 0
+          if (Number(this.pulse.c)) this.pulse.c = 0
+          if (Number(this.pulse.o)) this.pulse.o = 0
+          if (Number(this.pulse.t)) this.pulse.t = 0
+        }
       }
     },
 
@@ -382,6 +297,31 @@ export default {
           }
         });
         this.pulseCheck()
+        let input = {}
+        if (this.data.controller.mode === 'ps_m_D'){
+          input = {
+                controllerId: Number(controller.id),
+                a: Number(this.pulse.a),
+                b: Number(this.pulse.b),
+                c: Number(this.pulse.c),
+                o: Number(this.pulse.o),
+                t: Number(this.pulse.t),
+          }
+        }
+        if (this.data.controller.mode === 'mech'){
+          input = {
+                controllerId: Number(controller.id),
+                a: Number(this.pulse.a),
+                b: Number(this.pulse.b),
+                c: Number(this.pulse.c),
+                d: Number(this.pulse.d),
+                e: Number(this.pulse.e),
+                f: Number(this.pulse.f),
+                o: Number(this.pulse.o),
+                t: Number(this.pulse.t),
+          }
+        }
+
         const pulse = await this.$apollo.mutate({
           mutation: gql `
           mutation setControllerPulse ($input: ControllerPulseInput!) {
@@ -391,14 +331,7 @@ export default {
           }
           `,
           variables: {
-            input: {
-              controllerId: Number(controller.id),
-              a: Number(this.pulse.a),
-              b: Number(this.pulse.b),
-              c: Number(this.pulse.c),
-              o: Number(this.pulse.o),
-              t: Number(this.pulse.t),
-            }
+            input
           }
         });
 

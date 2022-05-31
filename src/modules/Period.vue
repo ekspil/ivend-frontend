@@ -83,7 +83,7 @@
 			DatePicker
 		},
 		data: () => ({
-			periods: ['Всего', 'День', 'Вчера', 'Неделя', 'Месяц'],
+			periods: ['День', 'Вчера', 'Неделя', 'Месяц', 'Год'],
 			period: 'cache',
 			// calendar: {
 			// 	from: undefined,
@@ -100,7 +100,7 @@
       greenEl: null
 		}),
 		methods: {
-			setPeriod (period = 'Неделя') {
+			setPeriod (period = 'День') {
 				this.calendar1 = null
 				this.period = period;
 
@@ -131,7 +131,13 @@
 				periodStat: "cache/periodStat"
 			}),
 			calendar(){
+
 				if(this.calendar1){
+          const diff = this.calendar1[1].getTime() - this.calendar1[0].getTime()
+
+          if(diff > 366*24*60*60*1000){
+            this.calendar1[0] = new Date(this.calendar1[1].getTime() - 365*24*60*60*1000)
+          }
 					return {
 						from: this.calendar1[0],
 						to:this.calendar1[1],
@@ -156,12 +162,12 @@
 				let date;
 				let period
 				switch (this.period) {
-					case 'Всего':
-						date = new Date();
-						period = {
-							from: 0,
-							to: Date.now()
-						};
+					case 'Год':
+            date = new Date();
+            period = {
+              from: new Date(date.getFullYear(), 0, 1).getTime(),
+              to: new Date(date.getFullYear(), 12, 1).getTime()
+            };
 						this.$store.commit("cache/setPeriodStat",  {period, type: this.period})
 
 						return period
@@ -252,7 +258,7 @@
 						return period
 
 					default: period = {
-						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
+						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : (Date.now() - (1000 * 60 * 60 * 3600)),
 						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() + (24*60*60*1000 - 999) : Date.now()
 					};
 						this.$store.commit("cache/setPeriodStat",  {period, type: "calendar"})

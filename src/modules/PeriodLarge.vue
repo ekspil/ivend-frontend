@@ -89,7 +89,7 @@
       }
     },
 		data: () => ({
-			periods: ['Всего', 'Месяц', 'Квартал', 'Год'],
+			periods: ['Месяц', 'Квартал', 'Год'],
 			period: 'cache',
 			// calendar: {
 			// 	from: undefined,
@@ -142,6 +142,11 @@
 			}),
 			calendar(){
 				if(this.calendar1){
+          const diff = this.calendar1[1].getTime() - this.calendar1[0].getTime()
+
+          if(diff > 366*24*60*60*1000){
+            this.calendar1[0] = new Date(this.calendar1[1].getTime() - 365*24*60*60*1000)
+          }
 					return {
 						from: this.calendar1[0],
 						to:this.calendar1[1],
@@ -214,7 +219,7 @@
 						return period
 
 					default: period = {
-						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : 0,
+						from: this.calendar.from instanceof Date ? this.calendar.from.getTime() : (Date.now() - (1000 * 60 * 60 * 3600)),
 						to: this.calendar.to instanceof Date ? this.calendar.to.getTime() + (24*60*60*1000 - 999) : Date.now()
 					};
 						this.$store.commit("cache/setPeriodStat",  {period, type: "calendar"})
