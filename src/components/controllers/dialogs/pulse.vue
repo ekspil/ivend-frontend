@@ -7,7 +7,11 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Настройки режима контроллера PULSE</h5>
+          <h5 class="modal-title" id="exampleModalLabel">
+            <span v-if="data.controller.mode === 'ps_m_D'">Настройки режима контроллера PULSE</span>
+            <span v-if="data.controller.mode === 'mech'">Настройки режима контроллера MECHANIC</span>
+          </h5>
+
 
         </div>
           <div class="modal-body">
