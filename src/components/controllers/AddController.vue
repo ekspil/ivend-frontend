@@ -101,7 +101,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-										<button type="button" class="btn btn-primary" @click.prevent="">Сохранить</button>
+										<button type="button" class="btn btn-primary" @click.prevent="" :disabled="busy">Сохранить</button>
 									</div>
 								</div>
 							</div>
@@ -139,10 +139,11 @@ export default {
 		Field
 	},
 	data: () => ({
+    busy: false,
 		controller: {
 			revisions: [],
 			equipments: [],
-			machines: []
+			machines: [],
 		},
 		controllerHeaders,
 		controllerFiscalType,
@@ -198,6 +199,7 @@ export default {
 			window.open("/settings#fiscal", '_blank').focus();
 		},
 		async save () {
+		  this.busy = true
 			const data = {
 				...this.input,
 				...this.$store.getters['cache/data']
@@ -218,8 +220,11 @@ export default {
 				});
 
 				this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+
+        this.busy = false
 			} catch (error) {
 				this.$refs.form.showMessage('error', convertServerError(error.message));
+        this.busy = true
 			}
 		},
 		onSuccess () {
