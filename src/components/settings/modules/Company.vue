@@ -74,7 +74,7 @@
 
 
         <div class="company-settings__field-container">
-          <label for="company-sno" class="company-settings__field-label">Система налогооблажения</label>
+          <label for="company-sno" class="company-settings__field-label">Система налогообложения</label>
           <select id="company-sno" v-model="info.sno" class="form-control custom-select">
             <option value="usn_income">УСН доходы</option>
             <option value="usn_income_outcome">УСН доходы-расходы</option>
