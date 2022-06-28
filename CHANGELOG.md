@@ -722,6 +722,10 @@
 
 * fix 
 
+# 1.7.53 - Hotfix
+
+* oferta fix 
+
 
 
 
