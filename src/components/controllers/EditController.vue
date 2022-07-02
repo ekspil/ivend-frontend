@@ -154,6 +154,9 @@ export default {
       a: 0,
       b: 0,
       c: 0,
+      d: 0,
+      e: 0,
+      f: 0,
       o: 0,
       t: 0,
     },
@@ -308,7 +311,7 @@ export default {
                 t: Number(this.pulse.t),
           }
         }
-        if (this.data.controller.mode === 'mech'){
+        else{
           input = {
                 controllerId: Number(controller.id),
                 a: Number(this.pulse.a),

@@ -726,6 +726,10 @@
 
 * oferta fix 
 
+# 1.7.54 - Hotfix
+
+* oferta fix 
+
 
 
 
