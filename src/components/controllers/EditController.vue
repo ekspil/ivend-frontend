@@ -102,7 +102,7 @@
 
           </template>
           <template slot="submit">
-            <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+            <button type="submit" class="btn btn-primary ml-auto" :disabled="disSave">Сохранить</button>
           </template>
         </Validate>
 
@@ -141,6 +141,7 @@ export default {
   data: () => ({
     routeBack: "/settings",
     data: null,
+    disSave: false,
     controllerHeaders,
     controllerFiscalType,
     controllerTerminal,
@@ -267,6 +268,7 @@ export default {
       window.open("/settings#fiscal", '_blank').focus();
     },
     async save() {
+      this.disSave = true
       try {
         this.controllerUploading = true;
 
@@ -343,6 +345,7 @@ export default {
         this.$refs.form.showMessage('error', 'Ошибка сохранения.');
       } finally {
         this.controllerUploading = false;
+        this.disSave = false
       }
     },
     onSuccess () {

@@ -730,6 +730,10 @@
 
 * oferta fix 
 
+# 1.7.55 - Hotfix
+
+* edit button disable during process 
+
 
 
 
