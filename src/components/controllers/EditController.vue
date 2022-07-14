@@ -68,7 +68,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech')">Настройки</button>
+                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech' || isVendistaIntegrated)">Настройки</button>
                   </div>
                 </div>
 
@@ -114,7 +114,7 @@
   </div>
 
 
-<Pulse :data="data" :pulse="pulse"></Pulse>
+<Pulse :data="data" :pulse="pulse" :isVendistaIntegrated="isVendistaIntegrated"></Pulse>
 
 
 
@@ -183,6 +183,7 @@ export default {
           }
           status
           bankTerminalMode
+          bankTerminalUid
           readStatMode
           fiscalizationMode
           remotePrinterId
@@ -243,6 +244,14 @@ export default {
     }
 
   },
+  computed:{
+    isVendistaIntegrated(){
+      if(this.data.controller.uid.slice(0, 3) === "300"){
+        return true
+      }
+      return false
+    }
+  },
   methods: {
 
     pulseCheck(){
@@ -284,6 +293,7 @@ export default {
           mode: controller.mode,
           fiscalizationMode: controller.fiscalizationMode,
           bankTerminalMode: controller.bankTerminalMode,
+          bankTerminalUid: controller.bankTerminalUid,
           readStatMode: controller.readStatMode,
           remotePrinterId: inputData.remotePrinterId
         };

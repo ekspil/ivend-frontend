@@ -34,7 +34,7 @@
 								</select>
 									</div>
 									<div class="col-auto">
-										<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings!!!" @click.prevent="">Настройки</button>
+                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="!(input.mode === 'ps_m_D' || input.mode === 'mech')">Настройки</button>
 									</div>
 							</div>
 
@@ -55,7 +55,7 @@
 								</select>
 							</div>
 								<div class="col-auto">
-									<button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings!!!" @click.prevent="">Настройки</button>
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(input.mode === 'ps_m_D' || input.mode === 'mech' || isVendistaIntegrated)">Настройки</button>
 								</div>
 							</div>
 
@@ -119,6 +119,9 @@
 </div>
 </div>
 </div>
+
+
+    <Pulse :data="{controller: input}" :pulse="pulse" :isVendistaIntegrated="isVendistaIntegrated"></Pulse>
 </div>
 </template>
 
@@ -128,6 +131,7 @@ import gql from 'graphql-tag';
 import { convertServerError } from '@/utils';
 import { required } from '@/utils/validation';
 import {controllerHeaders, controllerStates, controllerType, controllerStatType, controllerTerminal, controllerFiscalType } from '@/utils/lists/Controller';
+import Pulse from '@/components/controllers/dialogs/pulse'
 
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
@@ -136,10 +140,24 @@ export default {
 	name: 'AddController',
 	components: {
 		Validate,
-		Field
+		Field,
+    Pulse
 	},
 	data: () => ({
     busy: false,
+    disSave: false,
+    data: null,
+    pulse: {
+      a: 0,
+      b: 0,
+      c: 0,
+      d: 0,
+      e: 0,
+      f: 0,
+      o: 0,
+      t: 0,
+    },
+
 		controller: {
 			revisions: [],
 			equipments: [],
@@ -152,6 +170,7 @@ export default {
 		controllerType,
 		controllerStatType,
 		input: {
+      uid: "",
 			status: "ENABLED",
 			mode: "ps_m_D",
 			revisionId: 1,
@@ -161,7 +180,6 @@ export default {
 		},
 
 		schema: {
-			name: [required],
 			uid: [required]
 		}
 	}),
@@ -194,8 +212,30 @@ export default {
 			}
 		}
 	},
+  computed:{
+    isVendistaIntegrated(){
+      const d = this.$store.getters['cache/data']
+      if(d && d.uid && d.uid.slice(0, 3) === "300"){
+        return true
+      }
+      return false
+    }
+  },
 	methods: {
-		fiscalEditPage(){
+
+    pulseCheck(){
+      if (this.input.mode === 'ps_m_D'){
+        if ((Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.o) || Number(this.pulse.t))) {
+          if (!Number(this.pulse.a)) this.pulse.a = 1
+          if (!Number(this.pulse.b)) this.pulse.b = 1
+          if (!Number(this.pulse.c)) this.pulse.c = 1
+          if (!Number(this.pulse.o)) this.pulse.o = 1
+          if (!Number(this.pulse.t)) this.pulse.t = 1
+        }
+      }
+    },
+
+    fiscalEditPage(){
 			window.open("/settings#fiscal", '_blank').focus();
 		},
 		async save () {
@@ -206,11 +246,12 @@ export default {
 			};
 
 			try {
-				const { errors } = await this.$apollo.mutate({
+				const result = await this.$apollo.mutate({
 					mutation: gql`
 					mutation saveController ($data: CreateControllerInput!) {
 						createController (input: $data) {
 							uid
+							id
 						}
 					}
 					`,
@@ -219,12 +260,54 @@ export default {
 					}
 				});
 
+				const {errors}  = result
+
+        this.pulseCheck()
+        let input = {}
+        if (this.input.mode === 'ps_m_D'){
+          input = {
+            controllerId: Number(result.data.createController.id),
+            a: Number(this.pulse.a),
+            b: Number(this.pulse.b),
+            c: Number(this.pulse.c),
+            o: Number(this.pulse.o),
+            t: Number(this.pulse.t),
+          }
+        }
+        else{
+          input = {
+            controllerId: Number(result.data.createController.id),
+            a: Number(this.pulse.a),
+            b: Number(this.pulse.b),
+            c: Number(this.pulse.c),
+            d: Number(this.pulse.d),
+            e: Number(this.pulse.e),
+            f: Number(this.pulse.f),
+            o: Number(this.pulse.o),
+            t: Number(this.pulse.t),
+          }
+        }
+
+        const pulse = await this.$apollo.mutate({
+          mutation: gql `
+          mutation setControllerPulse ($input: ControllerPulseInput!) {
+            setControllerPulse (input: $input) {
+              controllerId
+            }
+          }
+          `,
+          variables: {
+            input
+          }
+        });
+
 				this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
 
         this.busy = false
 			} catch (error) {
+			  console.log(error)
 				this.$refs.form.showMessage('error', convertServerError(error.message));
-        this.busy = true
+        this.busy = false
 			}
 		},
 		onSuccess () {

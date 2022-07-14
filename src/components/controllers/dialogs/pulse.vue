@@ -78,7 +78,12 @@
           <h5 class="modal-title" id="exampleModalLabelModalSettingsTerminal">Настройки режима терминала</h5>
 
         </div>
-        <div class="modal-body">
+        <div class="modal-body" >
+
+          <div class="form-group" v-if="isVendistaIntegrated">
+            <label class="form-label f-b">Номер терминала</label>
+            <input class="form-control" value="" type="text" v-model="data.controller.bankTerminalUid" placeholder=""/>
+          </div>
 
           <div class="form-group">
             <label class="form-label f-b">Сумма на терминале по умолчанию  <span class="text-red" v-if="!(Number(pulse.t) % Number(pulse.o) === 0)">Проверьте кратность чисел!</span></label>
@@ -91,7 +96,7 @@
 
 
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" >
           <button type="button" class="btn btn-secondary" data-dismiss="modal"   @click.prevent="pulseBack(false, false, false, true, true)">Закрыть</button>
           <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal" :disabled="!(Number(pulse.t) % Number(pulse.o) === 0)">Сохранить</button>
         </div>
@@ -106,7 +111,10 @@
 <script>
 export default {
   name: "pulse",
-  props: ["pulse", "data"],
+  props: ["pulse", "data", "isVendistaIntegrated"],
+  computed: {
+
+  },
   methods: {
     pulseBack(a,b,c,o,t){
       if(a){
