@@ -246,7 +246,7 @@ export default {
   },
   computed:{
     isVendistaIntegrated(){
-      if(this.data.controller.uid.slice(0, 3) === "300"){
+      if(this.data && this.data.controller && this.data.controller.uid.slice(0, 3) === "300"){
         return true
       }
       return false
