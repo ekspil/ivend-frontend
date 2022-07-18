@@ -255,18 +255,24 @@ export default {
   methods: {
 
     pulseCheck(){
-      if (this.data.controller.mode === 'ps_m_D'){
-        if (!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.o) || Number(this.pulse.t))) {
+      if (this.data.controller.mode === 'ps_m_D' || this.data.controller.mode === 'mech'){
+        if (!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.d) || Number(this.pulse.e) || Number(this.pulse.f) || Number(this.pulse.o) || Number(this.pulse.t))) {
           if (!Number(this.pulse.a)) this.pulse.a = 1
           if (!Number(this.pulse.b)) this.pulse.b = 1
           if (!Number(this.pulse.c)) this.pulse.c = 1
+          if (!Number(this.pulse.d)) this.pulse.d = 1
+          if (!Number(this.pulse.e)) this.pulse.e = 1
+          if (!Number(this.pulse.f)) this.pulse.f = 1
           if (!Number(this.pulse.o)) this.pulse.o = 1
           if (!Number(this.pulse.t)) this.pulse.t = 1
         }
-        if (this.data.controller.pulse && (!Number(this.pulse.a) || !Number(this.pulse.b) || !Number(this.pulse.c) || !Number(this.pulse.o) || !Number(this.pulse.t))) {
+        if (this.data.controller.pulse && (!Number(this.pulse.a) || !Number(this.pulse.b) || !Number(this.pulse.c) || !Number(this.pulse.d) || !Number(this.pulse.e) || !Number(this.pulse.f)  || !Number(this.pulse.o) || !Number(this.pulse.t))) {
           if (Number(this.pulse.a)) this.pulse.a = 0
           if (Number(this.pulse.b)) this.pulse.b = 0
           if (Number(this.pulse.c)) this.pulse.c = 0
+          if (Number(this.pulse.d)) this.pulse.d = 0
+          if (Number(this.pulse.e)) this.pulse.e = 0
+          if (Number(this.pulse.f)) this.pulse.f = 0
           if (Number(this.pulse.o)) this.pulse.o = 0
           if (Number(this.pulse.t)) this.pulse.t = 0
         }
