@@ -84,6 +84,14 @@
                   <Field className="form-control" :value="data.controller.imsi" name="imsi" formName="editControllerSettings" placeholder="IMSI сим контроллера" disabled/>
                 </div>
 
+                <div class="form-group">
+                  <label class="form-label f-b">{{controllerHeaders.terminalBilling}}</label>
+                  <select class="form-control custom-select" v-model="data.controller.cashless">
+                    <option :value="null" :key="null">ОТКЛ</option>
+                    <option :value="'ON'" :key="'ON'">ВКЛ</option>
+                  </select>
+                </div>
+
               </div>
             </div>
           </template>
@@ -156,6 +164,7 @@ export default {
           readStatMode
           fiscalizationMode
           remotePrinterId
+          cashless
         }
 
         equipments: getEquipments {
@@ -205,6 +214,7 @@ export default {
           remotePrinterId: inputData.remotePrinterId,
           simCardNumber: inputData.simCardNumber,
           sim: inputData.sim,
+          cashless: controller.cashless
         };
 
 

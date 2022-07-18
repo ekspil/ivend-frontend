@@ -9,7 +9,8 @@ export const controllerHeaders = {
     printer: "Номер принтера",
     sim: "Номер сим терминала",
     controllerSim: "Номер сим контроллера",
-    imsi: "IMSI сим контроллера"
+    imsi: "IMSI сим контроллера",
+    terminalBilling: "Тарификация терминала"
 }
 
 
