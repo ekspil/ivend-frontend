@@ -63,7 +63,7 @@
             placeholder="Сумма"
             v-model="depositSum"
             />
-            <button id="recharge-submit-btn2" class="btn btn-primary balance-info-block__btn2" :disabled="false" @click.prevent="submitOrder"> Получить счет </button>
+            <button id="recharge-submit-btn2" class="btn btn-primary balance-info-block__btn2" :disabled="orderBusy" @click.prevent="submitOrder"> Получить счет </button>
           </form>
 
           <Hint ref="depositHint2" className="billing-hint" />
@@ -221,6 +221,7 @@ export default {
       }
   },
   data: () => ({
+    orderBusy: false,
     autoSend: false,
     tabs: [
       { name: 'Услуги', component: BillingServices, route: 'services' },
@@ -322,6 +323,7 @@ export default {
     },
 
        async requestOrder () {
+        this.orderBusy = true
         this.sendQuery = true
       try {
         const { errors, data } = await this.$apollo.mutate({
@@ -356,6 +358,10 @@ export default {
         }
       } catch (error) {
         this.$refs.depositHint2.show2(convertServerError(error.message));
+      }
+      finally {
+
+        this.orderBusy = false
       }
     },
 
