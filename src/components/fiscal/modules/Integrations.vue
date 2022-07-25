@@ -98,6 +98,11 @@
                             type
                             controllerId
                             controllerUid
+                            userId
+                            serial
+                            user{
+                              companyName
+                            }
 
                         }
                     }
