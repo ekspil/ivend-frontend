@@ -740,6 +740,11 @@
 * create controller fix
 
 
+# 1.7.57 - Hotfix
+
+* add controller cashless manage
+
+
 
 
 
