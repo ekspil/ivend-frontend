@@ -52,12 +52,6 @@
 
                     <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal : 2000).toFixed(2)}}  руб./мес.</td>
                   </tr>
-                  <tr>
-                    <th scope="row">Услуга СМС информирования</th>
-
-
-                    <td>2 руб./смс</td>
-                  </tr>
 
 
                   </tbody>
