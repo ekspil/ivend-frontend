@@ -23,19 +23,31 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <th scope="row">Услуга телеметрии за один ТА</th>
+                    <th scope="row">Абонентская плата за Услугу телеметрии Контроллера</th>
 
 
                     <td>{{ ((this.tariff && this.tariff.telemetry ) ? this.tariff.telemetry : 100).toFixed(2) }} руб./мес.</td>
                   </tr>
                   <tr>
-                    <th scope="row">Услуга фискализации за один ТА (от 20 ТА)</th>
+                    <th scope="row">Абонентская плата за Услугу телеметрии Терминала</th>
+
+
+                    <td>{{100}} руб./мес.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Абонентская плата за Услугу телеметрии Смарт-терминала</th>
+
+
+                    <td>{{150}} руб./мес.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Абонентская плата за Услугу фискализации одного Автомата (от 20 шт)</th>
 
 
                     <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal/20 : 100).toFixed(2) }} руб./мес.</td>
                   </tr>
                   <tr>
-                    <th scope="row">Услуга фискализации до 20 ТА за всю сеть</th>
+                    <th scope="row">Абонентская плата за Услугу фискализации сети Автоматов (до 20 шт)</th>
 
 
                     <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal : 2000).toFixed(2)}}  руб./мес.</td>

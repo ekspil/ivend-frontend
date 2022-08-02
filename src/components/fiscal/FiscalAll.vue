@@ -46,7 +46,7 @@
                 { name: 'Информация', component: News, route: 'newsAll' },
                 { name: 'Партнеры', component: Partners, route: 'partners' },
                 { name: 'Сим карты', component: Sims, route: 'sims' },
-                { name: 'Интеграции', component: Integrations, route: 'integrations' },
+                { name: 'Терминалы', component: Integrations, route: 'integrations' },
                 { name: 'Платежи', component: Bills, route: 'bills' },
 
             ],
