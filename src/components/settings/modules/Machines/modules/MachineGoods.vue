@@ -5,7 +5,7 @@
                 <div class="col-lg-10 offset-lg-1 col-md-12">
                     <form method="post" class="card">
                         <div class="card-header">
-                            <h3 class="card-title f-b">Настройки товарной матрицы</h3>
+                            <h3 class="card-title f-b">Параметры товарной матрицы</h3>
                         </div>
                         <div class="card-header-links">
                             <router-link to="/settings" class="card-header-links__item">Вернуться назад</router-link>

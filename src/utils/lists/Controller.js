@@ -15,9 +15,8 @@ export const controllerHeaders = {
 
 
 export const controllerStates = [
-    {name: "Работает", value: "ENABLED"},
-    {name: "Не работает", value: "DISABLED"},
-    {name: "Отладка", value: "DEBUG"},
+    {name: "Разрешено", value: "ENABLED"},
+    {name: "Запрещено", value: "DISABLED"}
 ]
 
 export const controllerFiscalType = [

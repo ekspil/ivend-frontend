@@ -91,8 +91,8 @@
         apollo: {
             integrations: {
                 query: gql`
-                    query {
-                      getControllerIntegrations {
+                    query($input: AllIntegrationsInput) {
+                      getControllerIntegrations(input: $input) {
                             id
                             imei
                             type
@@ -107,6 +107,15 @@
                         }
                     }
                 `,
+              variables () {
+                return {
+                  input: {
+                    offset: Number(this.offset),
+                    limit: Number(this.limit),
+                    search: this.search
+                  }
+                };
+              },
                 update (data) {
 
                   return data.getControllerIntegrations

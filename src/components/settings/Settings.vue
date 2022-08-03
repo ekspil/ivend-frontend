@@ -6,7 +6,7 @@
 					<div class="card">
 						<div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
 						<div class="card-header">
-							<div class="card-title f-b">Настройки</div>
+							<div class="card-title f-b">Параметры</div>
 						</div>
 
 						<Tabs :tabs="tabs" />

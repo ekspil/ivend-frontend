@@ -74,7 +74,7 @@
                       </select>
                     </div>
                     <div class="col-auto">
-                      <button class="btn btn-primary ml-auto" @click.prevent="kktEditPage()">Настройки</button>
+                      <button class="btn btn-primary ml-auto" @click.prevent="kktEditPage()">Параметры</button>
                     </div>
 
                   </div>
@@ -84,7 +84,7 @@
                       <input name="number" v-model="printer" class="form-control" placeholder="Привяжите номер принтера" disabled="true"/>
                     </div>
                     <div class="col-auto">
-                      <button  type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#exampleModal">Настройки</button>
+                      <button  type="button" class="btn btn-primary ml-auto" data-toggle="modal" data-target="#exampleModal">Параметры</button>
                     </div>
 
                   </div>

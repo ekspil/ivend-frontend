@@ -60,7 +60,7 @@
                   </select>
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Параметры</button>
                 </div>
                 </div>
 
@@ -81,7 +81,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Настройки</button>
+                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettings" @click.prevent="">Параметры</button>
                   </div>
                 </div>
 
@@ -93,7 +93,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" @click.prevent="fiscalEditPage()">Настройки</button>
+                    <button class="btn btn-primary ml-auto" @click.prevent="fiscalEditPage()">Параметры</button>
                   </div>
                 </div>
 
@@ -113,11 +113,11 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Настройки</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Параметры</h5>
 
                   </div>
                   <div class="modal-body">
-                    Тут должны быть настройки
+                    Тут должны быть Параметры
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

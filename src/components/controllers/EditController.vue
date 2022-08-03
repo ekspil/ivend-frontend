@@ -47,7 +47,7 @@
                   </select>
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech')">Настройки</button>
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech')">Параметры</button>
                 </div>
                 </div>
 
@@ -68,7 +68,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech' || isVendistaIntegrated)">Настройки</button>
+                    <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech' || isVendistaIntegrated)">Параметры</button>
                   </div>
                 </div>
 
@@ -80,7 +80,7 @@
                   </select>
                   </div>
                   <div class="col-auto">
-                    <button class="btn btn-primary ml-auto" @click.prevent="fiscalEditPage()">Настройки</button>
+                    <button class="btn btn-primary ml-auto" @click.prevent="fiscalEditPage()">Параметры</button>
                   </div>
                 </div>
 

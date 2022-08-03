@@ -748,6 +748,10 @@
 
 * add controller cashless manage
 
+# 1.7.60 - Hotfix
+
+* small fix
+
 
 
 
