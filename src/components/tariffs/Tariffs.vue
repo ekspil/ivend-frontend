@@ -23,34 +23,34 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <th scope="row">Абонентская плата за Услугу телеметрии Контроллера</th>
+                    <th scope="row" class="black-bold">Абонентская плата за Услугу телеметрии Контроллера</th>
 
 
-                    <td>{{ ((this.tariff && this.tariff.telemetry ) ? this.tariff.telemetry : 100).toFixed(2) }} руб./мес.</td>
+                    <td class="black-bold">{{ (this.tariff && this.tariff.telemetry ) ? this.tariff.telemetry : 100 }} руб./мес.</td>
                   </tr>
                   <tr>
-                    <th scope="row">Абонентская плата за Услугу телеметрии Терминала</th>
+                    <th scope="row" class="black-bold">Абонентская плата за Услугу телеметрии Терминала</th>
 
 
-                    <td>{{100}} руб./мес.</td>
+                    <td class="black-bold">{{100}} руб./мес.</td>
                   </tr>
                   <tr>
-                    <th scope="row">Абонентская плата за Услугу телеметрии Смарт-терминала</th>
+                    <th scope="row" class="black-bold">Абонентская плата за Услугу телеметрии Смарт-терминала</th>
 
 
-                    <td>{{150}} руб./мес.</td>
+                    <td class="black-bold">{{150}} руб./мес.</td>
                   </tr>
                   <tr>
-                    <th scope="row">Абонентская плата за Услугу фискализации одного Автомата (от 20 шт)</th>
+                    <th scope="row" class="black-bold">Абонентская плата за Услугу фискализации одного Автомата (от 20 шт)</th>
 
 
-                    <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal/20 : 100).toFixed(2) }} руб./мес.</td>
+                    <td class="black-bold">{{ (this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal/20 : 100}} руб./мес.</td>
                   </tr>
                   <tr>
-                    <th scope="row">Абонентская плата за Услугу фискализации сети Автоматов (до 20 шт)</th>
+                    <th scope="row" class="black-bold">Абонентская плата за Услугу фискализации сети Автоматов (до 20 шт)</th>
 
 
-                    <td>{{ ((this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal : 2000).toFixed(2)}}  руб./мес.</td>
+                    <td class="black-bold">{{ (this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal : 2000}}  руб./мес.</td>
                   </tr>
 
 
@@ -129,3 +129,10 @@
     })
   }
 </script>
+<style scoped>
+
+.black-bold {
+  color: black !important;
+  font-weight: bold !important;
+}
+</style>
