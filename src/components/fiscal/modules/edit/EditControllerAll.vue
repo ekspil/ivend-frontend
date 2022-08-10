@@ -37,31 +37,44 @@
                     <option v-for="item in controllerStates" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+                  <div class="col">
                   <label class="form-label f-b">{{controllerHeaders.mode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.mode">
                     <option v-for="item in controllerType" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
+
                 </div>
-                <div class="form-group">
+                <div  class="col-auto">
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsController" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech')">Параметры</button>
+                </div>
+                </div>
+                <div style="margin-top: 1rem"  class="form-group">
                   <label class="form-label f-b">{{controllerHeaders.statMode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.readStatMode">
                     <option v-for="item in controllerStatType" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
                 </div>
 
-                <div class="form-group">
+                <div style="margin-top: 1rem" class="row align-items-end justify-content-between">
+                  <div class="col">
                   <label class="form-label f-b">{{controllerHeaders.terminalMode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.bankTerminalMode">
                     <option v-for="item in controllerTerminal" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
+
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary ml-auto" data-toggle="modal" data-target="#ModalSettingsTerminal" @click.prevent="" :disabled="!(data.controller.mode === 'ps_m_D' || data.controller.mode === 'mech' || isVendistaIntegrated)">Параметры</button>
+                </div>
                 </div>
 
-                <div class="form-group">
+                <div style="margin-top: 1rem"  class="form-group">
                   <label class="form-label f-b">{{controllerHeaders.fiscalMode}}</label>
                   <select class="form-control custom-select" v-model="data.controller.fiscalizationMode">
                     <option v-for="item in controllerFiscalType" :value="item.value" :key="item.value">{{item.name}}</option>
                   </select>
+
                 </div>
 
                 <div class="form-group">
@@ -106,6 +119,7 @@
       </div>
     </div>
   </div>
+    <Pulse :data="data" :pulse="pulse" :isVendistaIntegrated="isVendistaIntegrated"></Pulse>
 </div>
 
 </template>
@@ -117,13 +131,14 @@ import gql from 'graphql-tag';
 import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 import {controllerHeaders, controllerStates, controllerType, controllerStatType, controllerTerminal, controllerFiscalType } from '@/utils/lists/Controller';
-
+import Pulse from '@/components/controllers/dialogs/pulse'
 import { required } from '@/utils/validation';
 
 export default {
   components: {
     Validate,
-    Field
+    Field,
+    Pulse
   },
   data: () => ({
     data: null,
@@ -135,6 +150,16 @@ export default {
     controllerStatType,
     schema: {
       uid: [required]
+    },
+    pulse: {
+      a: 0,
+      b: 0,
+      c: 0,
+      d: 0,
+      e: 0,
+      f: 0,
+      o: 0,
+      t: 0,
     },
 
     controllerUploading: false
@@ -165,6 +190,23 @@ export default {
           fiscalizationMode
           remotePrinterId
           cashless
+          pulse {
+            a
+            b
+            c
+            o
+            t
+          }
+          mech {
+            a
+            b
+            c
+            o
+            t
+            d
+            e
+            f
+          }
         }
 
         equipments: getEquipments {
@@ -184,6 +226,12 @@ export default {
       }
       `,
       update(data) {
+        if(data.controller.pulse && !this.data){
+          this.pulse = JSON.parse(JSON.stringify(data.controller.pulse))
+        }
+        if(data.controller.mech && !this.data){
+          this.pulse = JSON.parse(JSON.stringify(data.controller.mech))
+        }
         return {
           controller: data.controller,
           equipments: data.equipments,
@@ -193,7 +241,41 @@ export default {
       }
     }
   },
+  computed:{
+    isVendistaIntegrated(){
+      if(this.data && this.data.controller && this.data.controller.uid.slice(0, 3) === "300"){
+        return true
+      }
+      return false
+    }
+  },
   methods: {
+
+    pulseCheck(){
+      if (this.data.controller.mode === 'ps_m_D' || this.data.controller.mode === 'mech'){
+        if (!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.d) || Number(this.pulse.e) || Number(this.pulse.f) || Number(this.pulse.o) || Number(this.pulse.t))) {
+          if (!Number(this.pulse.a)) this.pulse.a = 1
+          if (!Number(this.pulse.b)) this.pulse.b = 1
+          if (!Number(this.pulse.c)) this.pulse.c = 1
+          if (!Number(this.pulse.d)) this.pulse.d = 1
+          if (!Number(this.pulse.e)) this.pulse.e = 1
+          if (!Number(this.pulse.f)) this.pulse.f = 1
+          if (!Number(this.pulse.o)) this.pulse.o = 1
+          if (!Number(this.pulse.t)) this.pulse.t = 1
+        }
+        if (this.data.controller.pulse && (!Number(this.pulse.a) || !Number(this.pulse.b) || !Number(this.pulse.c) || !Number(this.pulse.d) || !Number(this.pulse.e) || !Number(this.pulse.f)  || !Number(this.pulse.o) || !Number(this.pulse.t))) {
+          if (Number(this.pulse.a)) this.pulse.a = 0
+          if (Number(this.pulse.b)) this.pulse.b = 0
+          if (Number(this.pulse.c)) this.pulse.c = 0
+          if (Number(this.pulse.d)) this.pulse.d = 0
+          if (Number(this.pulse.e)) this.pulse.e = 0
+          if (Number(this.pulse.f)) this.pulse.f = 0
+          if (Number(this.pulse.o)) this.pulse.o = 0
+          if (Number(this.pulse.t)) this.pulse.t = 0
+        }
+      }
+    },
+
     async save() {
       try {
         this.controllerUploading = true;
@@ -229,6 +311,44 @@ export default {
           variables: {
             id: controller.id,
             data: controllerData
+          }
+        });
+        this.pulseCheck()
+        let input = {}
+        if (this.data.controller.mode === 'ps_m_D'){
+          input = {
+            controllerId: Number(controller.id),
+            a: Number(this.pulse.a),
+            b: Number(this.pulse.b),
+            c: Number(this.pulse.c),
+            o: Number(this.pulse.o),
+            t: Number(this.pulse.t),
+          }
+        }
+        else{
+          input = {
+            controllerId: Number(controller.id),
+            a: Number(this.pulse.a),
+            b: Number(this.pulse.b),
+            c: Number(this.pulse.c),
+            d: Number(this.pulse.d),
+            e: Number(this.pulse.e),
+            f: Number(this.pulse.f),
+            o: Number(this.pulse.o),
+            t: Number(this.pulse.t),
+          }
+        }
+
+        const pulse = await this.$apollo.mutate({
+          mutation: gql `
+          mutation setControllerPulse ($input: ControllerPulseInput!) {
+            setControllerPulse (input: $input) {
+              controllerId
+            }
+          }
+          `,
+          variables: {
+            input
           }
         });
 
