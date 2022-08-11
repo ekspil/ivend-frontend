@@ -69,7 +69,7 @@ export const getTableHeaders = () => [
             return createTooltip('info', 'ОТКЛ');
         }
     },
-    { name: 'Состояние', key: 'status', unsortable: false, raw: true },
+    { name: 'Работа', key: 'status', unsortable: false, raw: true },
     { name: 'Прошивка', key: 'firmwareId', unsortable: true },
     { name: 'Режим', key: 'mode', unsortable: false },
   //  { name: 'Автомат', key: 'machine', unsortable: true },

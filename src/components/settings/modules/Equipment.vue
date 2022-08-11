@@ -202,10 +202,10 @@
               let statusRus = ""
               switch (controller.status) {
                 case 'ENABLED':
-                  statusRus =  'Работает';
+                  statusRus =  'Разрешено';
                   break;
                 case 'DISABLED':
-                  statusRus = 'Не работает';
+                  statusRus = 'Запрещено';
                   break;
                 case 'PAUSED':
                   statusRus = 'Приостановлен';

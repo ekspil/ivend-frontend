@@ -4,7 +4,7 @@ import { getTerminal, getMode, getStatus, mapFiscalizationMode } from "@/utils/l
 
 export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'uid', link: true, ltOrder: true },
-    { name: 'Состояние', key: 'status', raw: true },
+    { name: 'Работа', key: 'status', raw: true },
     { name: 'Прошивка', key: 'firmwareId'},
     { name: 'Режим', key: 'mode'},
     { name: 'Терминал', key: 'bankTerminalMode'},

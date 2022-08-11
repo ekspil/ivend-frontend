@@ -72,9 +72,9 @@ export const controllerTerminal = [
 export const getStatus = status => {
     switch (status) {
         case 'ENABLED':
-            return '<span class="status-icon bg-success"></span> Работает';
+            return '<span class="status-icon bg-success"></span> Разрешено';
         case 'DISABLED':
-            return '<span class="status-icon bg-danger"></span> Не работает';
+            return '<span class="status-icon bg-danger"></span> Запрещено';
         case 'PAUSED':
             return '<span class="status-icon bg-secondary"></span> Приостановлен';
         case 'DEBUG':

@@ -40,6 +40,11 @@
                                         <input class="form-control" value="" type="number" v-model="fiscal" placeholder="Фискализация"/>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Смарт терминал</label>
+                                        <input class="form-control" value="" type="number" v-model="smart" placeholder="Фискализация"/>
+                                    </div>
+
 
                                     <div class="form-group">
                                         <label class="form-label f-b">Действует с</label>
@@ -94,6 +99,7 @@
             fiscal: 0,
             partnerId: null,
             telemetry: 0,
+            smart: 0,
             acquiring: 0,
             startedAt: null,
         }),
@@ -130,6 +136,7 @@
                   fiscal: Number(this.fiscal),
                   partnerId: Number(this.partnerId),
                   telemetry: Number(this.telemetry),
+                  smart: Number(this.smart),
                   startedAt: new Date(this.startedAt).getTime(),
                   acquiring: Number(this.acquiring),
                   ...this.$store.getters['cache/data']
