@@ -28,7 +28,7 @@
             </div>
             <div class="w-100"></div>
 
-            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/100).toFixed(0) * 100 }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/50).toFixed(0) * 50 }}</div>
             <div class="balance-info-block__title col">Ежемесячное списание</div>
             <div class="balance-info-block__icon col-1.5">
               <i class="far fa-calendar-alt"></i>
