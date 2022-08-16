@@ -762,6 +762,10 @@
 
 * small fix
 
+# 1.7.63 - Hotfix
+
+* smart terminal
+
 
 
 

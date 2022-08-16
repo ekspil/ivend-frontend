@@ -67,7 +67,7 @@
               <div class="auth-block__link-title col-4 left" v-if="bill.sno === 'osn'"></div><div class="auth-block__link-title col-8 right" v-if="bill.sno === 'osn'">{{ '= ' +  (bill.sale.price - (bill.sale.price/1.2)).toFixed(2) }}</div>
 
               <div><hr/></div>
-              <div class="auth-block__link-title col-6 left">Еединица измерения</div><div class="auth-block__link-title col-6 right">шт</div>
+              <div class="auth-block__link-title col-6 left">Единица измерения</div><div class="auth-block__link-title col-6 right">шт</div>
               <div class="auth-block__link-title col-7 left no-right">Признак способа расчета</div><div class="auth-block__link-title col-5 right no-left">Полный расчет</div>
               <div class="auth-block__link-title col-8 left no-right">Признак предмета расчета</div><div class="auth-block__link-title col-4 right no-left">{{bill.itemType ==='commodity'?'Товар':'Услуга'}}</div>
 
