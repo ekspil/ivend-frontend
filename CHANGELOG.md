@@ -768,6 +768,12 @@
 
 
 
+# 1.7.64 - Hotfix
+
+* payments integration
+
+
+
 
 
 

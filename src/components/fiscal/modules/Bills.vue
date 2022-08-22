@@ -8,7 +8,7 @@
                             <div class="example top-buttons-container top-buttons">
 
                                 <div class="form-group" style="width: 25%; padding-left: 10px">
-                                    <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="search = searchTemp">
+                                    <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="searchTemp.length > 2 ? search = searchTemp : search = '' ">
                                 </div>
 
                               <div class="form-group " style="width: 25%; padding-left: 10px">
@@ -29,7 +29,7 @@
                                         :headers="getTableHeaders"
                                         :fields="getTableFields"
                                         className="settings-table"
-                                        sortBy="traffic"
+                                        sortBy="createdAt"
                                         :order="false"
 
                                 />
@@ -105,6 +105,8 @@
                             applied
                             meta
                             userId
+                            amount
+                            type
                             startedAt
                             createdAt
                             userName
@@ -160,6 +162,10 @@
 
                 this.offset -= this.limit
             },
+          descFunc(key, desc){
+            this.orderKey = key
+            this.orderDesc = desc
+          },
 
         },
         computed: {
