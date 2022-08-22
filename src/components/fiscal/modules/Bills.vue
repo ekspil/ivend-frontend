@@ -7,11 +7,11 @@
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
 
-                                <div class="form-group" style="width: 25%; padding-left: 10px">
+                                <div class="form-group " style="width: 70%; padding-left: 0px">
                                     <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="searchTemp.length > 2 ? search = searchTemp : search = '' ">
                                 </div>
 
-                              <div class="form-group " style="width: 25%; padding-left: 10px">
+                              <div class="form-group " style="width: 30%; padding-left: 5px">
                                 <select class="form-control custom-select" v-model="selectedStatus">
                                   <option key="null" :value="null" selected="selected">Все</option>
                                   <option key="9997" value="payed" >Оплаченные</option>
