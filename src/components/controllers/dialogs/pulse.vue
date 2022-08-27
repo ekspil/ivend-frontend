@@ -63,7 +63,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"  @click.prevent="pulseBack(true, true, true, false, false)">Закрыть</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"  @click.prevent="pulseBack(true, true, true, false, false, true, true, true)">Закрыть</button>
           <button type="button" class="btn btn-primary" @click.prevent="" data-dismiss="modal">Сохранить</button>
         </div>
       </div>
@@ -116,26 +116,33 @@ export default {
 
   },
   methods: {
-    pulseBack(a,b,c,o,t){
+    pulseBack(a,b,c,o,t,d,e,f){
       if(a){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.a = this.data.controller.pulse.a
-        else this.pulse.a = 0
+        if(this.data && this.data.controller && this.data.controller.mech) this.pulse.a = this.data.controller.mech.a
       }
       if(b){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.b = this.data.controller.pulse.b
-        else this.pulse.b = 0
+        if(this.data && this.data.controller && this.data.controller.mech) this.pulse.b = this.data.controller.mech.b
       }
       if(c){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.c = this.data.controller.pulse.c
-        else this.pulse.c = 0
+        if(this.data && this.data.controller && this.data.controller.mech) this.pulse.c = this.data.controller.mech.c
+      }
+      if(d){
+        if(this.data && this.data.controller && this.data.controller.mech) this.pulse.d = this.data.controller.mech.d
+      }
+      if(e){
+        if(this.data && this.data.controller && this.data.controller.mech) this.pulse.e = this.data.controller.mech.e
+      }
+      if(f){
+        if(this.data && this.data.controller && this.data.controller.mech) this.pulse.f = this.data.controller.mech.f
       }
       if(o){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.o = this.data.controller.pulse.o
-        else this.pulse.o = 0
       }
       if(t){
         if(this.data && this.data.controller && this.data.controller.pulse) this.pulse.t = this.data.controller.pulse.t
-        else this.pulse.t = 0
       }
     },
   },

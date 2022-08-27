@@ -767,8 +767,11 @@
 * smart terminal
 
 
-
 # 1.7.64 - Hotfix
+
+* payments integration
+
+# 1.7.65 - Hotfix
 
 * payments integration
 
