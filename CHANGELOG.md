@@ -775,6 +775,10 @@
 
 * payments integration
 
+# 1.7.67 - Hotfix
+
+* fix integration
+
 
 
 

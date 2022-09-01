@@ -156,8 +156,12 @@
 
               this.integrations = this.integrations.map(item => {
                 if (item.id === id){
-                  item.controllerUid = uid
-                  return user
+                  item.controllerUid = null
+                  item.controllerId = null
+                  item.userId = null
+                  item.serial = null
+                  item.user = {}
+                  return item
                 }
                 return item
               })
