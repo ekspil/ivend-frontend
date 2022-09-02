@@ -262,7 +262,6 @@ export default {
 
 				const {errors}  = result
 
-        this.pulseCheck()
         let input = {}
         if (this.input.mode === 'ps_m_D'){
           input = {

@@ -779,6 +779,10 @@
 
 * fix integration
 
+# 1.7.68 - Hotfix
+
+* fix pulse
+
 
 
 

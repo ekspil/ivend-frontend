@@ -317,7 +317,6 @@ export default {
             data: controllerData
           }
         });
-        this.pulseCheck()
         let input = {}
         if (this.data.controller.mode === 'ps_m_D'){
           input = {
