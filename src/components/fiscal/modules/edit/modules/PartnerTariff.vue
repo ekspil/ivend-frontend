@@ -97,6 +97,7 @@
                     query($partnerId: Int) {
                       getTariffs(partnerId: $partnerId) {
                           id
+                          smart
                           telemetry
                           acquiring
                           fiscal

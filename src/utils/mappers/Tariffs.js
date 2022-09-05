@@ -8,6 +8,7 @@ function showPartner(id, props){
 export const getTableHeaders = () => [
     { name: 'ID', key: 'id', unsortable: false},
     { name: 'Партнер', key: 'partnerId', unsortable: false },
+    { name: 'Смарт', key: 'smart', unsortable: true  },
     { name: 'Телеметрия', key: 'telemetry', unsortable: true  },
     { name: 'Эквайринг', key: 'acquiring', unsortable: true  },
     { name: 'Фискализация', key: 'fiscal', unsortable: true  },
@@ -21,6 +22,7 @@ export const getTableFields = (data, props) => data.map(tariff => ({
     partnerId: showPartner(tariff.partnerId, props),
     telemetry: tariff.telemetry,
     acquiring: tariff.acquiring,
+    smart: tariff.smart,
     fiscal: tariff.fiscal,
     startedAt: new Date(tariff.startedAt).toLocaleDateString(),
     props,

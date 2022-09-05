@@ -21,7 +21,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     id: user.id,
     phone: user.phone,
     balance: Number(Number(user.billing.balance).toFixed(2)),
-    dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())/100).toFixed(0) * 100,
+    dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())/50).toFixed(0) * 50,
     email: user.email,
     role: user.role,
     partnerId: user.partnerId,

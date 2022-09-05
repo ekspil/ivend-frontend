@@ -783,6 +783,10 @@
 
 * fix pulse
 
+# 1.7.69 - Hotfix
+
+* fix pulse
+
 
 
 
