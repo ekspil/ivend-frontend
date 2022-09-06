@@ -19,7 +19,7 @@ export const getTableHeaders = () => [
 	{
 		name: 'Связь',
 		key: 'registrationTime',
-		critery ({ registrationTime, lastSaleTime }) {
+		critery ({ registrationTime, lastSaleTime, controllerSim }) {
 			let latestTime = registrationTime > lastSaleTime ? registrationTime : lastSaleTime;
 			const localeTimestamp = getTimestamp(latestTime);
 
@@ -31,15 +31,15 @@ export const getTableHeaders = () => [
 				} else if (gradation.minutes < 15) {
 					return createTooltip('primary', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
 				} else if (gradation.minutes >= 15 && gradation.minutes <= 30) {
-					return createTooltip('warning', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`);
+					return createTooltip('warning', `${gradation.minutes} ${getWordEnding(gradation.minutes, 'минута')}`, controllerSim);
 				} else if (gradation.minutes > 30 && gradation.hours < 24) {
-					return createTooltip('alert', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`);
+					return createTooltip('alert', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`, controllerSim);
 				} else if (gradation.days > 0) {
-					createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`);
+					createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`, controllerSim);
 				}
 			}
 
-			return createTooltip('info', 'НЕТ');
+			return createTooltip('info', 'НЕТ', controllerSim );
 		}
 	},
 	{
@@ -67,10 +67,16 @@ export const getTableHeaders = () => [
 	{
 		name: 'Регистрация',
 		key: 'controllerRegistrationTime',
-		critery ({ controllerRegistrationTime }) {
+		critery ({ controllerRegistrationTime, controllerCmd }) {
 			const localeTimestamp = getTimestamp(controllerRegistrationTime);
 			if (localeTimestamp !== '-') {
-				return createTooltip('primary', localeTimestamp);
+				if(!controllerCmd){
+					return createTooltip('primary', localeTimestamp);
+				}
+				else {
+
+					return createTooltip('warning', localeTimestamp);
+				}
 			}
 
 			return createTooltip('info', 'ОТКЛ');
@@ -156,8 +162,10 @@ export const getTableHeaders = () => [
 export const getTableFields = data => data.map(({ id, name, lastSaleTime, controller, kktStatus, terminalStatus, coinCollectorStatus,  banknoteCollectorStatus}) => ({
 	id,
 	controller: controller?.uid,
+	controllerSim: controller?.sim,
 	attentionRequired: controller?.lastState?.attentionRequired,
 	controllerRegistrationTime: controller?.registrationTime,
+	controllerCmd: controller?.cmdInfo,
 	name,
 	lastSaleTime,
 	cashbox: kktStatus,

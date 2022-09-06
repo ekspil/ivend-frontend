@@ -1,8 +1,19 @@
-import {  getTimestamp } from '@/utils';
+import {  getTimestamp, createTooltip } from '@/utils';
 
 export const getTableHeaders = () => [
   {name: 'Автомат', key: 'name', link: true},
-  {name: 'Наличные', key: 'cashInMachine'},
+  {name: 'Наличные', key: 'cashInMachine',
+    critery({cashInMachine, controller}) {
+      if(Number(cashInMachine) === 0){
+
+        return createTooltip("primary", cashInMachine, false, false);
+      }
+      else {
+
+        return createTooltip("primary", cashInMachine, false, controller);
+      }
+    }},
+
   {
     name: 'Посл инкасс', key: 'encashmentTimestamp',
     critery({encashmentTimestamp}) {

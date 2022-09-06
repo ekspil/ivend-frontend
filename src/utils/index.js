@@ -247,31 +247,61 @@ export const getGradation = ms => ({
  * @return {[string]} Tooltip
  * @author Samir Amirseidov
  */
-export const createTooltip = (type, string) => {
-	switch (type) {
-		case 'alert':
-			return `
+export const createTooltip = (type, string, link, id) => {
+
+	if(!link && !id){
+
+		switch (type) {
+			case 'alert':
+				return `
 				<span class="badge badge-danger">
 					<i class="fas fa-times text-white mr-1"></i>
 					${string}
 				</span>
 			`;
-		case 'warning':
-			return `
+			case 'warning':
+				return `
 				<span class="badge badge-warning">
 					<i class="fas fa-exclamation text-white mr-1"></i>
 					${string}
 				</span>
 			`;
-		case 'primary':
-			return `
+			case 'primary':
+				return `
 				<span class="badge badge-primary">
 					<i class="fas fa-check text-white mr-1"></i>
 					${string}
 				</span>
 			`;
-		default:
-			return `<span class="badge badge-gray">${string}</span>`;
+			default:
+				return `<span class="badge badge-gray">${string}</span>`;
+		}
+	}
+	else if(id) {
+
+		switch (type) {
+			case 'alert':
+				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+			case 'warning':
+				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+			case 'primary':
+				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+			default:
+				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+		}
+	}
+	else {
+
+		switch (type) {
+			case 'alert':
+				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >${string}</button>`;
+			case 'warning':
+				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >${string}</button>`;
+			case 'primary':
+				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >${string}</button>`;
+			default:
+				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >НЕТ</button>`;
+		}
 	}
 };
 export const createInput = (type, string) => {
