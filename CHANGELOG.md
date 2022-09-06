@@ -791,6 +791,10 @@
 
 * fix pulse
 
+# 1.7.71 - Hotfix
+
+* add update
+
 
 
 

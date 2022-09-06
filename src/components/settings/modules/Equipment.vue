@@ -66,6 +66,24 @@
                 </div>
             </div>
         </div>
+
+
+
+      <div class="modal fade"  id="modalEncashment" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="modalEncashment" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="width: 450px">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="width: 100%; text-align: center">Обновление прошивки</h5>
+
+            </div>
+            <div class="modal-footer ">
+              <button type="button" class="btn btn-secondary " style="width: 50%" data-dismiss="modal">Отмена</button>
+              <button type="button" class="btn btn-primary" style="width: 50%" data-dismiss="modal" @click.prevent="update()">Выполнить обновление</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 </template>
 
@@ -148,6 +166,31 @@
                     case 'TRAINING': return '<span class="status-icon bg-info"></span> Обучение';
                 }
             },
+
+          async update(){
+            const uid = String(document.tempId)
+            try{
+              await this.$apollo.mutate({
+                mutation: gql`
+                        mutation($input: RegisterEventInput!) {
+          registerEvent(input: $input) {
+            id
+          }
+        }
+                    `,
+                variables: {
+                  input: {
+                    controllerUid: uid,
+                    eventType: "UPDATE",
+                    timestamp: new Date().getTime()
+                  }
+                }
+              });
+            }catch (e) {
+
+              alert("Инкассация не удалась")
+            }
+          },
 
             async removeController (id) {
                 await this.$apollo.mutate({

@@ -1,11 +1,22 @@
 
-import { getTerminal, getMode, getStatus, mapFiscalizationMode } from "@/utils/lists/Controller"
-
+import { getTerminal, getMode, getStatus, mapFiscalizationMode} from "@/utils/lists/Controller"
+import { createTooltip } from '@/utils';
 
 export const getTableHeaders = () => [
     { name: 'Контроллер', key: 'uid', link: true, ltOrder: true },
     { name: 'Работа', key: 'status', raw: true },
-    { name: 'Прошивка', key: 'firmwareId'},
+    { name: 'Прошивка', key: 'firmwareId',
+        critery({firmwareId, uid}) {
+            if(firmwareId === '-'){
+
+                return createTooltip("warning", firmwareId, false, false);
+            }
+            else {
+
+                return createTooltip("primary", firmwareId, false, uid);
+            }
+        }
+    },
     { name: 'Режим', key: 'mode'},
     { name: 'Терминал', key: 'bankTerminalMode'},
     { name: 'Фискализация', key: 'fiscalizationMode'},
