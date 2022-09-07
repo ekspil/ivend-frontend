@@ -281,26 +281,26 @@ export const createTooltip = (type, string, link, id) => {
 
 		switch (type) {
 			case 'alert':
-				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#modalEncashment" onclick="window.tempId = ${id}" >${string}</button>`;
 			case 'warning':
-				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#modalEncashment" onclick="window.tempId = ${id}" >${string}</button>`;
 			case 'primary':
-				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#modalEncashment" onclick="window.tempId = ${id}" >${string}</button>`;
 			default:
-				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#modalEncashment" onclick="document.tempId = ${id}" >${string}</button>`;
+				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#modalEncashment" onclick="window.tempId = ${id}" >${string}</button>`;
 		}
 	}
 	else {
 
 		switch (type) {
 			case 'alert':
-				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >${string}</button>`;
+				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.tempSim = ${link}" >${string}</button>`;
 			case 'warning':
-				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >${string}</button>`;
+				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.tempSim = ${link}" >${string}</button>`;
 			case 'primary':
-				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >${string}</button>`;
+				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.tempSim = ${link}" >${string}</button>`;
 			default:
-				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#resetSimMonitoring" onclick="document.tempSim = ${link}" >НЕТ</button>`;
+				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.tempSim = ${link}" >НЕТ</button>`;
 		}
 	}
 };

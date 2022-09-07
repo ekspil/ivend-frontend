@@ -108,7 +108,7 @@
 		},
     methods: {
       async simReset () {
-        const sim = String(document.tempSim)
+        const sim = String(window.tempSim)
         try{
           await this.$apollo.mutate({
             mutation: gql`

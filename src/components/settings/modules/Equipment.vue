@@ -168,7 +168,7 @@
             },
 
           async update(){
-            const uid = String(document.tempId)
+            const uid = String(window.tempId)
             try{
               await this.$apollo.mutate({
                 mutation: gql`
