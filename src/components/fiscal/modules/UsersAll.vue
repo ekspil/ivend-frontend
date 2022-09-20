@@ -152,6 +152,8 @@
                             id
                             email
                             role
+                            inn
+                            companyName
                             partnerId
                             billing{
                                 balance

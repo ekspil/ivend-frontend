@@ -817,6 +817,11 @@
 * search users
 
 
+# 1.7.79 - Hotfix
+
+* search users
+
+
 
 
 
