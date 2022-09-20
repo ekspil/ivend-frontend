@@ -93,10 +93,14 @@ export default {
         window.location.hash = `#${route}`;
         this.$router.push(`/fiscalAll?userId=${userId}#controllersAll`)
 
-      }else {
+      }else if(!userId && this.$route.path === "/fiscalAll"){
 
         window.location.hash = `#${route}`;
         this.$router.push(`/fiscalAll?#${route}`)
+      }
+      else {
+
+        window.location.hash = `#${route}`;
       }
     }
   },
