@@ -10,7 +10,7 @@
 <!--                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>-->
 
                                 <div class="form-group" style="width: 25%; padding-left: 10px">
-                                    <input v-model="search" class="form-control custom-select" placeholder="Поиск">
+                                  <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="search = searchTemp">
                                 </div>
                               <div class="form-group " style="width: 25%; padding-left: 10px">
                               <select class="form-control custom-select" v-model="selectedRole">
@@ -123,6 +123,7 @@
             limit:100,
             savedLimit :100,
             search: "",
+            searchTemp: "",
             selectedRole: "VENDOR",
             savedSelectedRole: "VENDOR",
             selections: [
@@ -145,8 +146,8 @@
         apollo: {
             users: {
                 query: gql`
-                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String ) {
-                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey) {
+                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String, $search: String ) {
+                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey, search: $search) {
                             phone
                             id
                             email
@@ -185,7 +186,8 @@
                         },
 
                       orderKey: this.orderKey,
-                      orderDesc: this.orderDesc
+                      orderDesc: this.orderDesc,
+                      search: this.search,
                     };
                 },
                 update (data) {
@@ -262,7 +264,8 @@
                 }
             },
             async remove (id) {
-                console.log(id)
+                const confi = confirm("Действительно хотите удалить пользователя?");
+                if(!confi) return
                 try {
                     const { errors } = await this.$apollo.mutate({
                         mutation: gql `mutation remove($id: Int!) {
@@ -291,6 +294,9 @@
 
                 }
             },
+            async showControllers (id) {
+                this.$emit("goToUserControllers", id)
+            },
             async filterBy (key, value) {
                 if(key === "role"){
                     this.selectedRole = value
@@ -299,52 +305,53 @@
 
         },
         computed: {
-            userSearch(){
-                if(this.search.length > 3){
-                    if(this.limit < Number(1001)){
-                        this.savedLimit = this.limit
-                    }
-
-                    this.limit = 9999
-                }
-                else if(this.search.length == 0){
-
-                }
-                else{
-                    if(this.savedLimit < this.limit){
-                        this.limit = this.savedLimit
-                    }
-                }
-                return this.users.filter(user => {
-                    // id
-                    // kktModel
-                    // kktFactoryNumber
-                    // kktRegNumber
-                    // kktFNNumber
-                    if(!this.search) return true
-                    const r1 = new RegExp(this.search.toUpperCase())
-                    const res1 = r1.test(user.legalInfo.inn.toUpperCase())
-                    if(res1) return res1
-                    const r2 = new RegExp(this.search.toUpperCase())
-                    const res2 = r2.test(user.legalInfo.companyName.toUpperCase())
-                    if(res2) return res2
-                    const r3 = new RegExp(this.search.toUpperCase())
-                    const res3 = r3.test(user.phone.toUpperCase())
-                    if(res3) return res3
-
-                    const r4 = new RegExp('^'+this.search.toUpperCase())
-                    const res4 = r4.test(user.email.toUpperCase())
-                    if(res4) return res4
-                    return false
-
-                })
-            },
+            // userSearch(){
+            //     if(this.search.length > 3){
+            //         if(this.limit < Number(1001)){
+            //             this.savedLimit = this.limit
+            //         }
+            //
+            //         this.limit = 9999
+            //     }
+            //     else if(this.search.length == 0){
+            //
+            //     }
+            //     else{
+            //         if(this.savedLimit < this.limit){
+            //             this.limit = this.savedLimit
+            //         }
+            //     }
+            //     return this.users.filter(user => {
+            //         // id
+            //         // kktModel
+            //         // kktFactoryNumber
+            //         // kktRegNumber
+            //         // kktFNNumber
+            //         if(!this.search) return true
+            //         const r1 = new RegExp(this.search.toUpperCase())
+            //         const res1 = r1.test(user.legalInfo.inn.toUpperCase())
+            //         if(res1) return res1
+            //         const r2 = new RegExp(this.search.toUpperCase())
+            //         const res2 = r2.test(user.legalInfo.companyName.toUpperCase())
+            //         if(res2) return res2
+            //         const r3 = new RegExp(this.search.toUpperCase())
+            //         const res3 = r3.test(user.phone.toUpperCase())
+            //         if(res3) return res3
+            //
+            //         const r4 = new RegExp('^'+this.search.toUpperCase())
+            //         const res4 = r4.test(user.email.toUpperCase())
+            //         if(res4) return res4
+            //         return false
+            //
+            //     })
+            // },
             getTableHeaders,
-            getTableFields () { return getTableFields(this.userSearch, {
+            getTableFields () { return getTableFields(this.users, {
                 changeBalance: this.changeBalance,
                 sum: 0,
                 changeBalanceKey: "balance",
                 remove: this.remove,
+                showControllers: this.showControllers,
                 routeKey: "id",
                 route: "/fiscalAll/userEdit/"
             }) }

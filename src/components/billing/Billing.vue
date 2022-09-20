@@ -336,7 +336,7 @@ export default {
           `,
           variables: {
             input: {
-                amount: parseFloat(this.depositSum),
+                amount: parseFloat(Number(this.depositSum).toFixed(0)),
                 inn: this.legalInfo.inn,
                 companyName: this.legalInfo.companyName,
                 services: this.services,

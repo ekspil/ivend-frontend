@@ -803,6 +803,10 @@
 
 * add update
 
+# 1.7.74 - Hotfix
+
+* search rebuild
+
 
 
 

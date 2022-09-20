@@ -73,6 +73,9 @@
 							<a href="#" class="dropdown-item" @click.prevent="field.props.remove(field.id, field.type)">
 								<i class="dropdown-icon fe fe-x"></i> Удалить
 							</a>
+							<a v-if="field.props.showControllers && field.id" href="#" class="dropdown-item" @click.prevent="field.props.showControllers(field.id)">
+								<i class="dropdown-icon fe fe-refresh-cw"></i> Показать контроллеры
+							</a>
 							<a v-if="field.props.simReset && field.sim" href="#" class="dropdown-item" @click.prevent="field.props.simReset(field.sim)">
 								<i class="dropdown-icon fe fe-refresh-cw"></i> Перезагрузка sim
 							</a>

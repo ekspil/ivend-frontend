@@ -11,7 +11,7 @@
 <!--                                </div>-->
 
                                 <div class="form-group" style="width: 50%; padding-left: 10px">
-                                    <input v-model="search" class="form-control custom-select" placeholder="Поиск">
+                                  <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="search = searchTemp">
                                 </div>
 
                               <div class="form-group " style="width: 25%; padding-left: 10px">
@@ -91,13 +91,14 @@
             offset: 0,
             limit:50,
             savedLimit :50,
-            search: ""
+            search: "",
+            searchTemp: "",
         }),
         apollo: {
             kkts: {
                 query: gql`
-                    query($offset: Int, $limit: Int, $status: Int) {
-                      getAllKkts(offset: $offset, limit: $limit, status: $status) {
+                    query($offset: Int, $limit: Int, $status: Int, $search: String) {
+                      getAllKkts(offset: $offset, limit: $limit, status: $status, search: $search) {
                             id
                             kktModel
                             kktStatus
@@ -119,7 +120,8 @@
                 variables () {
                     const vars = {
                         offset: Number(this.offset),
-                        limit: Number(this.limit)
+                        limit: Number(this.limit),
+                        search: this.search
                     };
                     if(this.selectedStatus!==null){
                       vars.status = this.selectedStatus
@@ -160,48 +162,8 @@
 
         },
         computed: {
-            kktsSearch(){
-                if(this.search.length > 3){
-                    if(this.limit < Number(1001)){
-                        this.savedLimit = this.limit
-                    }
-
-                    this.limit = 9999
-                }
-                else if(this.search.length > 0 && this.search.length <= 3){
-                  if(this.savedLimit < this.limit){
-                    this.limit = this.savedLimit
-                  }
-                }
-                return this.kkts.filter(kkt => {
-                    // id
-                    // kktModel
-                    // kktFactoryNumber
-                    // kktRegNumber
-                    // kktFNNumber
-                    if(!this.search) return true
-                    const r1 = new RegExp(this.search.toUpperCase())
-                    const res1 = r1.test(String(kkt.kktModel).toUpperCase())
-                    if(res1) return res1
-                    const r2 = new RegExp(this.search.toUpperCase())
-                    const res2 = r2.test(String(kkt.companyName).toUpperCase())
-                    if(res2) return res2
-                    const r3 = new RegExp(this.search.toUpperCase())
-                    const res3 = r3.test(String(kkt.kktFactoryNumber).toUpperCase())
-                    if(res3) return res3
-
-                    const r4 = new RegExp('^'+this.search.toUpperCase())
-                    const res4 = r4.test(String(kkt.kktRegNumber).toUpperCase())
-                    if(res4) return res4
-                    const r5 = new RegExp('^'+this.search.toUpperCase())
-                    const res5 = r5.test(String(kkt.kktFNNumber).toUpperCase())
-                    if(res5) return res5
-                    return false
-
-                })
-            },
             getTableHeaders,
-            getTableFields () { return getTableFields(this.kktsSearch, {
+            getTableFields () { return getTableFields(this.kkts, {
                 remove: this.removeKkt
             }); }
         }

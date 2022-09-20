@@ -27,7 +27,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     controllers: user.controllers?.length || 0,
     terminals: user.controllers?.filter(c=> (c.simCardNumber && c.simCardNumber !== "0"&& c.simCardNumber !== "false")).length || 0,
     balance: Number(Number(user.billing.balance).toFixed(2)),
-    dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())/100).toFixed(0) * 100,
+    dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())/50).toFixed(0) * 50,
     email: user.email,
     role: user.role,
     partnerId: user.partnerId,

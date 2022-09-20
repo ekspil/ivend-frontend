@@ -7,18 +7,18 @@
                         <div class="text-wrap">
                           <div class="example top-buttons-container top-buttons">
                             <div class="form-group" style="width: 50%; padding-left: 10px">
-                              <input v-model="search" class="form-control custom-select" placeholder="Поиск">
+                              <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter="search = searchTemp">
 
                             </div>
 
-                            <div class="form-group " style="width: 25%; padding-left: 10px">
-                              <select class="form-control custom-select" v-model="selectedRole">
-                                <option v-for="type in selectionRoles[0].values"
-                                        :key="type" :value="type">
-                                  {{ type }}
-                                </option>
-                              </select>
-                            </div>
+<!--                            <div class="form-group " style="width: 25%; padding-left: 10px">-->
+<!--                              <select class="form-control custom-select" v-model="selectedRole">-->
+<!--                                <option v-for="type in selectionRoles[0].values"-->
+<!--                                        :key="type" :value="type">-->
+<!--                                  {{ type }}-->
+<!--                                </option>-->
+<!--                              </select>-->
+<!--                            </div>-->
                             <span class="col-auto">
                                             <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
                             </span>
@@ -85,6 +85,7 @@
             savedLimit :10,
             controllers: [],
             search: "",
+            searchTemp: "",
             orderKey: null,
             orderDesc: null,
             selectedRole: "VENDOR",
@@ -178,8 +179,8 @@
         apollo: {
             controllers: {
                 query: gql`
-                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String  , $orderDesc: Boolean  , $orderKey: String, $userRole: String ) {
-                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer,  orderDesc: $orderDesc,   orderKey: $orderKey,   userRole: $userRole,  ) {
+                    query($offset: Int, $limit: Int, $status: String, $connection: String, $terminal: String, $fiscalizationMode: String, $bankTerminalMode: String , $printer: String , $registrationTime: String , $terminalStatus: String  , $orderDesc: Boolean  , $orderKey: String, $userRole: String , $search: String , $userId: String ) {
+                      getAllControllers(offset: $offset, limit: $limit, status: $status, connection: $connection, terminal: $terminal, fiscalizationMode: $fiscalizationMode, bankTerminalMode: $bankTerminalMode , terminalStatus: $terminalStatus , registrationTime: $registrationTime , printer: $printer,  orderDesc: $orderDesc,   orderKey: $orderKey,   userRole: $userRole,  search: $search, userId: $userId,  ) {
                         id
                         uid
                         mode
@@ -197,10 +198,10 @@
                             terminalStatus
                             lastSaleTime
                         }
-						lastState {
-							registrationTime
-							attentionRequired
-						}
+                        lastState {
+                          registrationTime
+                          attentionRequired
+                        }
                         user {
                             email
                             companyName
@@ -217,6 +218,13 @@
                     // selected_simCardNumber: "ALL",
                     // selected_bankTerminalMode: "ALL",
                     // selected_fiscalizationMode: "ALL",
+              let userId
+                if(this.$route.query.userId){
+                  userId = this.$route.query.userId
+                }
+                else {
+                  userId = null
+                }
 
                 return {
                     offset: Number(this.offset),
@@ -231,7 +239,10 @@
                     fiscalizationMode: this.selected_fiscalizationMode,
                     orderKey: this.orderKey,
                     orderDesc: this.orderDesc,
-                    userRole: this.selectedRole
+                    userRole: this.selectedRole,
+                    search: this.search,
+                    userId
+
                 };
             },
                 update (data) {
@@ -328,63 +339,63 @@
         },
         computed: {
            controllersSearch(){
-                if(this.search.length > 3){
-                    if(this.limit < Number(1001)){
-                        this.savedLimit = this.limit
-                    }
-
-                    this.limit = 9999
-                }
-                else if(this.search.length == 0){
-
-                }
-                else{
-                    if(this.savedLimit < this.limit){
-                        this.limit = this.savedLimit
-                    }
-                }
-                return this.controllers.filter(controller => {
-                    if(!this.search) return true
-                    const r1 = new RegExp(this.search.toUpperCase())
-                    const res1 = r1.test(controller.uid.toUpperCase())
-                    if(res1) return res1
-                    const r2 = new RegExp(this.search.toUpperCase())
-                    const res2 = r2.test(controller.user?.companyName.toUpperCase())
-                    if(res2) return res2
-                    const r3 = new RegExp(this.search.toUpperCase())
-                    const res3 = r3.test(controller.user?.inn.toUpperCase())
-                    if(res3) return res3
-
-                    let statusRus = ""
-                    switch (controller.status) {
-                        case 'ENABLED':
-                            statusRus =  'Работает';
-                            break;
-                        case 'DISABLED':
-                            statusRus = 'Не работает';
-                            break;
-                        case 'PAUSED':
-                            statusRus = 'Приостановлен';
-                            break;
-                        case 'DEBUG':
-                            statusRus = 'Отладка';
-                            break;
-                        case 'TRAINING':
-                            statusRus = 'Обучение';
-                            break;
-                        default: statusRus = '';
-                            break;
-                    }
-                    const r4 = new RegExp('^'+this.search.toUpperCase())
-                    const res4 = r4.test(statusRus.toUpperCase())
-                    if(res4) return res4
-                    return false
-
-                })
+                // if(this.search.length > 3){
+                //     if(this.limit < Number(1001)){
+                //         this.savedLimit = this.limit
+                //     }
+                //
+                //     this.limit = 9999
+                // }
+                // else if(this.search.length == 0){
+                //
+                // }
+                // else{
+                //     if(this.savedLimit < this.limit){
+                //         this.limit = this.savedLimit
+                //     }
+                // }
+                // return this.controllers.filter(controller => {
+                //     if(!this.search) return true
+                //     const r1 = new RegExp(this.search.toUpperCase())
+                //     const res1 = r1.test(controller.uid.toUpperCase())
+                //     if(res1) return res1
+                //     const r2 = new RegExp(this.search.toUpperCase())
+                //     const res2 = r2.test(controller.user?.companyName.toUpperCase())
+                //     if(res2) return res2
+                //     const r3 = new RegExp(this.search.toUpperCase())
+                //     const res3 = r3.test(controller.user?.inn.toUpperCase())
+                //     if(res3) return res3
+                //
+                //     let statusRus = ""
+                //     switch (controller.status) {
+                //         case 'ENABLED':
+                //             statusRus =  'Работает';
+                //             break;
+                //         case 'DISABLED':
+                //             statusRus = 'Не работает';
+                //             break;
+                //         case 'PAUSED':
+                //             statusRus = 'Приостановлен';
+                //             break;
+                //         case 'DEBUG':
+                //             statusRus = 'Отладка';
+                //             break;
+                //         case 'TRAINING':
+                //             statusRus = 'Обучение';
+                //             break;
+                //         default: statusRus = '';
+                //             break;
+                //     }
+                //     const r4 = new RegExp('^'+this.search.toUpperCase())
+                //     const res4 = r4.test(statusRus.toUpperCase())
+                //     if(res4) return res4
+                //     return false
+                //
+                // })
             },
             getTableHeaders,
             getTableFields () {
-                return getTableFields(this.controllersSearch, {
+                return getTableFields(this.controllers, {
                     remove: this.removeController,
                     simReset: this.simReset
                 });

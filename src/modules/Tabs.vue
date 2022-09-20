@@ -17,7 +17,7 @@
 
     <slot name="top-menu"></slot>
 
-    <component :is="getActiveTab" class="tab-content" v-bind="props"/>
+    <component :is="getActiveTab" class="tab-content" v-bind="props" @goToUserControllers="goToUserControllers"/>
   </div>
 </template>
 
@@ -43,7 +43,8 @@ export default {
     }
   },
   data: () => ({
-    activeTab: ''
+    activeTab: '',
+    userId: null,
   }),
   computed: {
     getActiveTab () {
@@ -54,12 +55,24 @@ export default {
       if (not(activeTab)) {
         activeTab = this.initial;
       }
+      if(this.userId){
 
-      this.setRouteHash(activeTab.route);
+        this.setRouteHash(activeTab.route, this.userId);
+        this.userId = null
+      }
+      else {
+
+        this.setRouteHash(activeTab.route);
+      }
       return activeTab.component;
     }
   },
   methods: {
+
+    goToUserControllers(id){
+      this.setActiveTab("Контроллеры")
+      this.userId = id
+    },
     setActiveTab (tabName) {
       this.activeTab = tabName || this.initial.name;
     },
@@ -72,7 +85,13 @@ export default {
 
       return this.initial;
     },
-    setRouteHash (route) {
+    setRouteHash (route, userId) {
+      if(userId){
+
+        window.location.hash = `#${route}`;
+        this.$router.push(`/fiscalAll?userId=${userId}#controllersAll`)
+
+      }
       window.location.hash = `#${route}`;
     }
   },
