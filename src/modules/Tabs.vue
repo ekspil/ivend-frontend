@@ -86,13 +86,18 @@ export default {
       return this.initial;
     },
     setRouteHash (route, userId) {
+      console.log(userId)
+      console.log(route)
       if(userId){
 
         window.location.hash = `#${route}`;
         this.$router.push(`/fiscalAll?userId=${userId}#controllersAll`)
 
+      }else {
+
+        window.location.hash = `#${route}`;
+        this.$router.push(`/fiscalAll?#${route}`)
       }
-      window.location.hash = `#${route}`;
     }
   },
   created () {
