@@ -808,6 +808,11 @@
 * search rebuild
 
 
+# 1.7.75 - Hotfix
+
+* search users
+
+
 
 
 

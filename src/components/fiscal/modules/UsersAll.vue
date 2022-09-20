@@ -157,23 +157,7 @@
                                 balance
                                 dailyBill
                                 }
-                            legalInfo{
-                                companyName,
-                                city,
-                                actualAddress,
-                                inn,
-                                ogrn,
-                                legalAddress,
-                                director,
-                                directorPhone,
-                                directorEmail,
-                                contactPerson,
-                                contactPhone,
-                                contactEmail,
-                                sno,
-                                timeZone,
-                                kpp
-                                }
+
                              }
                     }
                 `,
@@ -192,19 +176,19 @@
                 },
                 update (data) {
 
-                    const returnedData = data.getAllUsers.map(
-                        (user) => {
-                            if(!user.legalInfo){
-                                user.legalInfo = {}
-                                user.legalInfo.inn = "Не указан"
-                                user.legalInfo.companyName = "Не указан"
+                    // const returnedData = data.getAllUsers.map(
+                    //     (user) => {
+                    //         if(!user.legalInfo){
+                    //             user.legalInfo = {}
+                    //             user.legalInfo.inn = "Не указан"
+                    //             user.legalInfo.companyName = "Не указан"
+                    //
+                    //         }
+                    //         return user
+                    //     }
+                    // )
 
-                            }
-                            return user
-                        }
-                    )
-
-                    return returnedData;
+                    return data.getAllUsers
                 }
             }
         },
