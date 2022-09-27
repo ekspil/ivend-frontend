@@ -822,6 +822,11 @@
 * search users
 
 
+# 1.7.80 - Hotfix
+
+* search users
+
+
 
 
 

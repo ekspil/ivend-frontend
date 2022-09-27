@@ -152,7 +152,6 @@
                   data
                 }
               });
-              console.log(result)
 
               this.integrations = this.integrations.map(item => {
                 if (item.id === id){
@@ -166,6 +165,45 @@
                 return item
               })
             } catch (error) {
+
+            }
+          },
+          async setUid (id) {
+
+            let userId = prompt("Введите ID пользователя", '');
+            if(!userId) return
+            let uid = prompt("Введите UID контроллера", '');
+            if(!uid) return
+
+
+
+
+            try {
+              const data = {
+                id: Number(id),
+                controllerUid: uid,
+                userId: Number(userId)
+              };
+
+              const result = await this.$apollo.mutate({
+                mutation: gql `mutation change($data: ControllerIntegrationInput! ){
+                                         updateControllerIntegration(input: $data){
+                                         id
+                                         controllerUid
+                                         type
+                                         }
+                                                }
+
+          `,
+                variables: {
+                  data
+                }
+              });
+
+              alert("Данные записаны, обновите страницу!")
+            } catch (error) {
+
+              alert(error.message)
 
             }
           },
@@ -183,7 +221,8 @@
         computed: {
             getTableHeaders,
             getTableFields () { return getTableFields(this.integrations, {
-              controllerIntegrationUidUpdate: this.updateUid
+              controllerIntegrationUidUpdate: this.updateUid,
+              controllerIntegrationSet: this.setUid
             }) }
         }
     }

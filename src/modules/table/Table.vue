@@ -98,6 +98,9 @@
               <div class="dropdown-menu dropdown-menu-right text-center">
 <!--                <p> Введите UID контроллера</p>-->
 <!--                <input class="form-control" type="text" size="17" v-model="field.controllerUid">-->
+                <a href="#" class="dropdown-item" @click.prevent="field.props.controllerIntegrationSet(field.id)">
+                  <button class="btn btn-primary ml-auto">Привязать вручную</button>
+                </a>
                 <a href="#" class="dropdown-item" @click.prevent="field.props.controllerIntegrationUidUpdate(field.id,  'DELETE')">
                   <button class="btn btn-primary ml-auto">Обновить привязку</button>
                 </a>
