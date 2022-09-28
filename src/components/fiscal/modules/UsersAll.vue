@@ -336,6 +336,7 @@
                 changeBalance: this.changeBalance,
                 sum: 0,
                 changeBalanceKey: "balance",
+                showControllersKey: "inn",
                 remove: this.remove,
                 showControllers: this.showControllers,
                 routeKey: "id",

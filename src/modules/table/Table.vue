@@ -60,6 +60,13 @@
 							</div>
 						</div>
 					</div>
+					<div v-else-if="field && field.props && field.props.changeBalance && field.props.showControllersKey === header.key" class="">
+						<div >
+							<a href="#"  class="bold-link bold-int" @click.prevent="field.props.showControllers(field.id)">
+								{{ field[header.key] }}
+							</a>
+						</div>
+					</div>
 
           <template v-else><div class="bold-int">{{ field[header.key] }}</div></template>
 				</td>

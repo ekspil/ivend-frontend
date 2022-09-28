@@ -826,6 +826,10 @@
 
 * search users
 
+# 1.7.81 - Hotfix
+
+* search user controllers over inn
+
 
 
 
