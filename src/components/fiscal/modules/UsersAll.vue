@@ -281,7 +281,16 @@
                 }
             },
             async showControllers (id) {
-                this.$emit("goToUserControllers", id)
+              let routeData = this.$router.resolve({path: `fiscalAll#controllers__${id}`, query: {userId: id}});
+                window.open(routeData.href, '_blank');
+               // this.$emit("goToUserControllers", id)
+
+            },
+            async showBilling (id) {
+              let routeData = this.$router.resolve({path: `billing`, query: {userId: id}});
+                window.open(routeData.href, '_blank');
+               // this.$emit("goToUserControllers", id)
+
             },
             async filterBy (key, value) {
                 if(key === "role"){
@@ -337,8 +346,10 @@
                 sum: 0,
                 changeBalanceKey: "balance",
                 showControllersKey: "inn",
+                showBillingKey: "dailyBill",
                 remove: this.remove,
                 showControllers: this.showControllers,
+                showBilling: this.showBilling,
                 routeKey: "id",
                 route: "/fiscalAll/userEdit/"
             }) }

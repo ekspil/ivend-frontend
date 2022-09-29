@@ -103,7 +103,14 @@ export default {
     }
   },
   created () {
-    this.activeTab = this.getTabByHash().name;
+    if(window.location.hash.includes("controllers__")){
+      const hashArr = window.location.hash.split("__")
+      this.userId = hashArr[1]
+      this.activeTab = "Контроллеры"
+    }else {
+
+      this.activeTab = this.getTabByHash().name;
+    }
   }
 }
 </script>

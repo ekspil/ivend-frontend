@@ -46,11 +46,11 @@
         apollo: {
             controllers: {
                 query: gql`
-                    query getServices {
-                        getControllers {
+                    query getServices($userId: Int)  {
+                        getControllers(userId: $userId) {
                             id
                             uid
-                            services {
+                            services(userId: $userId) {
                                 id
                                 name
                                 price
@@ -60,6 +60,16 @@
                         }
                     }
                 `,
+                variables(){
+                  let userId = null
+                  if(this.$route.query.userId){
+                    userId = Number(this.$route.query.userId)
+                    return {
+                      userId
+                    }
+                  }
+                  return {}
+                } ,
 
                 update: data => {
                   return data.getControllers

@@ -830,6 +830,10 @@
 
 * search user controllers over inn
 
+# 1.7.82 - Hotfix
+
+* added user billing info in admin panel
+
 
 
 

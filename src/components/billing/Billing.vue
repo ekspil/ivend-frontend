@@ -149,17 +149,17 @@ export default {
   apollo: {
     billing: {
       query: gql`
-      query ($period: Period!) {
-        getProfile {
+      query ($period: Period!, $userId: Int) {
+        getProfile(userId: $userId) {
           legalInfo{
           inn
           companyName
           }
-          billing {
-            balance,
-            dailyBill,
-            daysLeft,
-            deposits (period: $period) {
+          billing (userId: $userId){
+            balance (userId: $userId),
+            dailyBill (userId: $userId),
+            daysLeft (userId: $userId),
+            deposits (period: $period, userId: $userId, ) {
               id,
               amount,
               status,
@@ -171,18 +171,24 @@ export default {
       }
       `,
       variables () {
+        let userId = null
+        if(this.$route.query.userId){
+          userId = Number(this.$route.query.userId)
+        }
         const notCustomDate = !this.period.from && !this.period.to;
         if (notCustomDate) {
           return {
             period: {
               from: this.period,
               to: Date.now()
-            }
+            },
+            userId
           };
         }
 
         return {
-          period: this.period
+          period: this.period,
+          userId
         };
       },
       update: (data) => {
