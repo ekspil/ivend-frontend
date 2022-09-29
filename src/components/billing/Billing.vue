@@ -161,10 +161,10 @@ export default {
             daysLeft (userId: $userId),
             deposits (period: $period, userId: $userId, ) {
               id,
-              amount,
-              status,
-              timestamp,
-              redirectUrl
+              amount(userId: $userId),
+              status(userId: $userId),
+              timestamp(userId: $userId),
+              redirectUrl(userId: $userId)
             }
           }
         }

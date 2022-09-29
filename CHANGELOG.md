@@ -834,6 +834,10 @@
 
 * added user billing info in admin panel
 
+# 1.7.83 - Hotfix
+
+* added user billing info in admin panel
+
 
 
 

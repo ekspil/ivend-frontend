@@ -81,8 +81,8 @@
         },
         data: () => ({
             offset: 0,
-            limit:10,
-            savedLimit :10,
+            limit:100,
+            savedLimit :100,
             controllers: [],
             search: "",
             searchTemp: "",
