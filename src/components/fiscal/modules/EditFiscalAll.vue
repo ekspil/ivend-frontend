@@ -37,6 +37,15 @@
                                             <option value="УМКА-01-ФА (ФН36)">УМКА-01-ФА (ФН36)</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-label f-b">Фискальный провайдер</label>
+                                        <select v-model="data.kkt.type" class="form-control custom-select">
+                                            <option value="umka">УМКА</option>
+                                            <option value="umka_new">УМКА НОВОЕ API</option>
+                                            <option value="rekassa">РЕКАССА</option>
+                                            <option value="telemedia">ТЕЛЕМЕДИА</option>
+                                        </select>
+                                    </div>
                                     <!--<div class="form-group">-->
                                         <!--<label class="form-label f-b">Модель ККТ</label>-->
                                         <!--<Field className="form-control" :value="data.kkt.kktModel"  name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>-->
@@ -191,6 +200,7 @@
                         kktModel: this.data.kkt.kktModel,
                         ...this.$store.getters['cache/data'],
                         ofdName: this.data.kkt.ofdName,
+                        type: this.data.kkt.type,
                     };
 
                     const { errors } = await this.$apollo.mutate({

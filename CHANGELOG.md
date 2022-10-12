@@ -839,6 +839,11 @@
 * added user billing info in admin panel
 
 
+# 1.7.84 - Hotfix
+
+* edit kkt type
+
+
 
 
 

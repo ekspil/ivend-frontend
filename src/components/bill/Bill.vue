@@ -200,6 +200,8 @@ export default {
             return "УСН доходы-расходы"
           case "envd":
             return "ЕНВД"
+          case "patent":
+            return "Патент"
           case "osn":
             return "ОСН"
           case "esn":
