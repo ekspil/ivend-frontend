@@ -7,7 +7,7 @@
                         <div class="text-wrap">
                           <div class="example top-buttons-container top-buttons">
                             <div class="form-group" style="width: 50%; padding-left: 10px">
-                              <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @keydown.enter.tab="search = searchTemp">
+                              <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
 
                             </div>
 
