@@ -23,7 +23,7 @@
 
             <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
             <div class="auth-block__link-title col-6 left">Автомат</div><div class="auth-block__link-title col-6 right">{{ bill.machineNumber}}</div>
-            <div class="auth-block__link-title col-5 left no-right">Адрес расчетов</div><div class="auth-block__link-title col-7 right no-left">{{ bill.place}}</div>
+            <div class="auth-block__link-title col-5 left no-right">Адрес расчетов</div><div class="auth-block__link-title col-7 right no-left">{{ "Курск" }}</div>
             <div class="auth-block__link-title col-5 left no-right">Место расчетов</div><div class="auth-block__link-title col-7 right no-left">{{ bill.place}}</div>
             <div class="auth-block__link-title col-4 left">Кассир</div><div class="auth-block__link-title col-8 right">Администратор Kassir</div>
 
