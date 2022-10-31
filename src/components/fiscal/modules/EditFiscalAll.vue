@@ -44,6 +44,7 @@
                                             <option value="umka_new">УМКА НОВОЕ API</option>
                                             <option value="rekassa">РЕКАССА</option>
                                             <option value="telemedia">ТЕЛЕМЕДИА</option>
+                                            <option value="orange">OrangeData</option>
                                         </select>
                                     </div>
                                     <!--<div class="form-group">-->
