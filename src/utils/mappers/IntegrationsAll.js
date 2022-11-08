@@ -17,7 +17,7 @@ function getNum(){
 
 
 export const getTableHeaders = () => [
-    //{ name: '№', key: 'num', link: false },
+    { name: '№', key: 'id', link: false },
     { name: 'Тип', key: 'type', link: false },
     { name: 'IMEI', key: 'imei', link: false },
     { name: 'UUID', key: 'controllerUid', link: false },

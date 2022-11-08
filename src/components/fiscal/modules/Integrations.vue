@@ -28,7 +28,7 @@
                                         :fields="getTableFields"
                                         className="settings-table"
                                         sortBy="traffic"
-                                        :order="false"
+                                        order="id"
 
                                 />
 
