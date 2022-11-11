@@ -7,13 +7,13 @@
         <div :class="['balance-info-block', 'balance-info__block', hasEnoughMoney ? '' : 'balance-info-block--attention']">
           <div class="balance-info-block__info-container row">
             <div class="balance-info-block__count balance-info-block__count--currency col">{{ Number(billing.balance).toFixed(2) }}</div>
-            <div class="balance-info-block__title col">Текущий баланс</div>
+            <div class="balance-info-block__title col-3">Текущий баланс</div>
             <div class="balance-info-block__icon col-1.5">
               <i class="fas fa-ruble-sign"></i>
             </div>
             <div class="w-100 disabled-small"></div>
             <div class="balance-info-block__count col disabled-small" >{{ billing.daysLeft }}</div>
-            <div class="balance-info-block__title col disabled-small">Осталось дней</div>
+            <div class="balance-info-block__title col-3 disabled-small">Осталось дней</div>
             <div class="balance-info-block__icon col-1.5 disabled-small">
               <i class="fas fa-clock disabled-small"></i>
             </div>
@@ -22,14 +22,14 @@
         <div class="balance-info-block balance-info__block">
           <div class="balance-info-block__info-container row">
             <div class="balance-info-block__count balance-info-block__count--currency col  disabled-small">{{ billing.dailyBill }}</div>
-            <div class="balance-info-block__title col  disabled-small">Ежедневное списание</div>
+            <div class="balance-info-block__title col-4  disabled-small">Ежедневное списание</div>
             <div class="balance-info-block__icon col-1.5  disabled-small">
               <i class="far fa-calendar-alt  disabled-small"></i>
             </div>
             <div class="w-100"></div>
 
             <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/50).toFixed(0) * 50 }}</div>
-            <div class="balance-info-block__title col">Ежемесячное списание</div>
+            <div class="balance-info-block__title col-4">Ежемесячное списание</div>
             <div class="balance-info-block__icon col-1.5">
               <i class="far fa-calendar-alt"></i>
             </div>

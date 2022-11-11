@@ -860,6 +860,10 @@
 
 * small fixes
 
+# 1.7.90 - Hotfix
+
+* billing visual fix
+
 
 
 
