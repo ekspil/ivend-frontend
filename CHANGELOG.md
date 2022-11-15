@@ -865,6 +865,11 @@
 * billing visual fix
 
 
+# 1.7.91 - Hotfix
+
+* add pay type in billing history
+
+
 
 
 

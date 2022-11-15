@@ -163,6 +163,7 @@ export default {
               id,
               amount(userId: $userId),
               status(userId: $userId),
+              meta,
               timestamp(userId: $userId),
               redirectUrl(userId: $userId)
             }

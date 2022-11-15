@@ -3,12 +3,14 @@
         <table class="table card-table table-vcenter text-nowrap" v-if="dps && dps.length > 0">
             <thead>
             <th class="service-date-cel sortable up">Дата</th>
+            <th class="service-price-cel sortable">Тип</th>
             <th class="service-price-cel sortable">Сумма</th>
             <th class="service-status-cel sortable">Статус</th>
             </thead>
             <tbody>
             <tr v-for="deposit in dps" :key="deposit.id" :class="(getStatusClass(deposit.status)).class">
                 <td class="service-date-cel">{{ getTime(deposit.timestamp) }}</td>
+                <td class="service-date-cel">{{ getTypeOfPayment(deposit.meta) }}</td>
                 <td class="service-price-cel">{{ deposit.amount }}</td>
                 <td class="service-status-cel">{{ (getStatusClass(deposit.status)).text }} <a v-if="deposit.status === 'PENDING'" :href="deposit.redirectUrl" target="_blank" class="btn btn-white btn-block ml-2" style="min-width: max-content;">Оплатить</a> <a v-if="deposit.status === 'PENDING'" @click.prevent="deleteDeposit(deposit.id)" target="_blank" class="btn btn-white btn-block ml-2" style="min-width: max-content; margin-top: 0;">Отмена</a></td>
             </tr>
@@ -43,6 +45,17 @@
             getTime (timestamp){
                 const date = new Date(timestamp);
                 return `${date.toLocaleDateString('ru-RU')} ${date.toLocaleTimeString('ru-RU')}`;
+            },
+          getTypeOfPayment(meta){
+                if(meta.includes("ADMIN_EDIT")){
+                  return "Ручное начисление"
+                }
+                else if(meta.includes("BANK_AUTO")){
+                  return "Банк"
+                }
+                else {
+                  return "Робокасса"
+                }
             },
           async deleteDeposit(id){
 
