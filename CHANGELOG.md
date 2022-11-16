@@ -864,10 +864,13 @@
 
 * billing visual fix
 
-
 # 1.7.91 - Hotfix
 
 * add pay type in billing history
+
+# 1.7.92 - Hotfix
+
+* fix country phones in company settings
 
 
 

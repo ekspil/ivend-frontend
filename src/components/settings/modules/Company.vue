@@ -116,9 +116,12 @@
 
 				<div class="company-settings__field-container">
 					<label for="company-director-phone" class="company-settings__field-label">Телефон директора</label>
-					<Field :masked="true" mask="\+\7 (111) 111 11-11"
-					id="company-director-phone" className="company-settings__field" formName="company" type="tel"
-					placeholder="Телефон директора" :value="info.directorPhone" name="directorPhone" />
+          <div class="row"><div class="auth-block__field-container  col-3"><div class="auth-block__field" :disabled="true">
+            {{ '+'+info.countryCode }}</div></div>
+            <div class="auth-block__field-container auth-block__field-container col-9">
+
+              <Field id="company-director-phone" :newmasked="true" className="company-settings__field" type="tel" :value="info.directorPhone" name="directorPhone" placeholder="Телефон директора" mask="\(999) 999-99-99" formName="company"  />
+            </div></div>
 				</div>
 
 				<div class="company-settings__field-container">
@@ -130,17 +133,21 @@
 
 
 
-				<div class="company-settings__field-container">
+				<div class="company-settings__field-container ">
 					<label for="company-contact-name" class="company-settings__field-label">Контактное лицо</label>
 					<Field id="company-contact-name" className="company-settings__field" formName="company" type="text"
 					placeholder="Контактное лицо" :value="info.contactPerson" name="contactPerson" />
 				</div>
 
 				<div class="company-settings__field-container">
+
 					<label for="company-contact-phone" class="company-settings__field-label">Контактный телефон</label>
-					<Field :masked="true" mask="\+\7 (111) 111 11-11" id="company-contact-phone"
-					className="company-settings__field" formName="company" type="tel"
-					placeholder="Контактный телефон" :value="info.contactPhone" name="contactPhone" />
+          <div class="row"><div class="auth-block__field-container  col-3"><div class="auth-block__field" :disabled="true">
+            {{ '+'+info.countryCode }}</div></div>
+            <div class="auth-block__field-container auth-block__field-container col-9">
+
+              <Field  id="company-contact-phone" :newmasked="true" className="company-settings__field" type="tel" :value="info.contactPhone" name="contactPhone" placeholder="Контактный телефон" mask="\(999) 999-99-99" formName="company"  />
+            </div></div>
 				</div>
 
 				<div class="company-settings__field-container">
@@ -179,6 +186,7 @@
 				query: gql`
 					query {
 						getProfile {
+						  countryCode
 							legalInfo {
 								companyName,
 								city,
@@ -199,21 +207,30 @@
 						}
 					}
 				`,
-				update: data => data.getProfile.legalInfo || {
-					companyName: '',
-					city: '',
-					actualAddress: '',
-					inn: '',
-					ogrn: '',
-					legalAddress: '',
-					director: '',
-					directorPhone: '',
-					directorEmail: '',
-					contactPerson: '',
-					contactPhone: '',
-					contactEmail: '',
-					sno: ''
-				}
+				update: data => {
+          if (data.getProfile.legalInfo){
+            data.getProfile.legalInfo.countryCode = data.getProfile.countryCode
+            return data.getProfile.legalInfo
+          } else {
+
+            return {
+              companyName: '',
+              city: '',
+              actualAddress: '',
+              inn: '',
+              ogrn: '',
+              legalAddress: '',
+              director: '',
+              directorPhone: '',
+              directorEmail: '',
+              contactPerson: '',
+              contactPhone: '',
+              contactEmail: '',
+              sno: '',
+              countryCode: "7"
+            }
+          }
+        }
 			}
 		},
 		data: () => ({
@@ -267,22 +284,30 @@
 						variables: {
 							input: {
 								...cache,
-								directorPhone: cache.directorPhone.replace(/[()+\s-]/gi, '').slice(1),
-								contactPhone: cache.contactPhone.replace(/[()+\s-]/gi, '').slice(1),
+								directorPhone: cache.directorPhone.replace(/[()+\s-]/gi, ''),
+								contactPhone: cache.contactPhone.replace(/[()+\s-]/gi, ''),
 								sno: this.info.sno,
                 timeZone: this.info.timeZone
 							}
 						}
 					});
 
-                  this.$store.dispatch('user/fetch')
-                  this.$refs.company.process({ errors, data, success: 'Успешно сохранено.' });
+					setTimeout(async ()=>{
+
+            await this.$store.dispatch('user/fetch')
+
+          }, 3000)
+
+          this.$refs.company.process({ errors, data, success: 'Успешно сохранено.' });
+
+
 				} catch (error) {
 					this.$refs.company.showMessage('error', 'Ошибка сохранения.');
 				}
 			},
 
 			onSuccess ({ updateLegalInfo }) {
+        updateLegalInfo.countryCode = this.info.countryCode
 				this.info = updateLegalInfo;
 			}
 		}
