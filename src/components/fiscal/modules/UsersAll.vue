@@ -146,8 +146,8 @@
         apollo: {
             users: {
                 query: gql`
-                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String, $search: String ) {
-                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey, search: $search) {
+                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String, $search: String, $partnerId: String ) {
+                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey, search: $search, partnerId: $partnerId) {
                             phone
                             id
                             email
@@ -164,16 +164,26 @@
                     }
                 `,
                 variables () {
+
+                  let partnerId
+                  if(this.$route.query.userId){
+                    partnerId = this.$route.query.userId
+                  }
+                  else {
+                    partnerId = null
+                  }
+
                     return {
                         input: {
                             role: this.selectedRole,
                             offset: Number(this.offset),
-                            limit: Number(this.limit),
+                            limit: Number(this.limit)
                         },
 
                       orderKey: this.orderKey,
                       orderDesc: this.orderDesc,
                       search: this.search,
+                      partnerId
                     };
                 },
                 update (data) {

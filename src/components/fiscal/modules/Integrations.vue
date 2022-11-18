@@ -28,7 +28,7 @@
                                         :fields="getTableFields"
                                         className="settings-table"
                                         sortBy="traffic"
-                                        order="id"
+                                        :order="true"
 
                                 />
 
@@ -73,7 +73,7 @@
     export default {
         name: 'Users',
         components: {
-            Table,
+          Table,
           ExportExcel
         },
         data: () => ({
@@ -164,6 +164,9 @@
                 }
                 return item
               })
+              if(uid === "DELETE_FORCE"){
+                this.integrations = this.integrations.filter(item => Number(item.id) !== Number(id))
+              }
             } catch (error) {
 
             }

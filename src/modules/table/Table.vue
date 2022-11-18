@@ -74,6 +74,13 @@
 							</a>
 						</div>
 					</div>
+					<div v-else-if="field && field.props && field.props.showUsersKey === header.key" class="">
+						<div >
+							<a href="#"  class="bold-link bold-int" @click.prevent="field.props.showUsers(field.id)">
+								{{ field[header.key] }}
+							</a>
+						</div>
+					</div>
 
           <template v-else><div class="bold-int">{{ field[header.key] }}</div></template>
 				</td>
@@ -117,6 +124,9 @@
                 </a>
                 <a href="#" class="dropdown-item" @click.prevent="field.props.controllerIntegrationUidUpdate(field.id,  'DELETE')">
                   <button class="btn btn-primary ml-auto">Обновить привязку</button>
+                </a>
+                <a href="#" class="dropdown-item" @click.prevent="field.props.controllerIntegrationUidUpdate(field.id,  'DELETE_FORCE')">
+                  <button class="btn btn-primary ml-auto">Удалить</button>
                 </a>
               </div>
             </div>

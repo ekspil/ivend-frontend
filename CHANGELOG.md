@@ -872,6 +872,10 @@
 
 * fix country phones in company settings
 
+# 1.7.93 - Hotfix
+
+* show partner users by click on count
+
 
 
 

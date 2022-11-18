@@ -150,6 +150,12 @@
                 }
                 this.period = period;
             },
+            async showUsers (partnerId) {
+            let routeData = this.$router.resolve({path: `fiscalAll#usersAll__${partnerId}`, query: {partnerId}});
+            window.open(routeData.href, '_blank');
+            // this.$emit("goToUserControllers", id)
+
+            },
             nextPage() {
                 if(!this.users || !this.users.length) {
                     return
@@ -178,7 +184,11 @@
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.users) }
+            getTableFields () { return getTableFields(this.users, {
+
+              showUsersKey: "vendors",
+              showUsers: this.showUsers,
+            }) }
         }
     }
 </script>

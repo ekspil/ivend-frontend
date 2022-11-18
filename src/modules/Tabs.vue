@@ -107,6 +107,10 @@ export default {
       const hashArr = window.location.hash.split("__")
       this.userId = hashArr[1]
       this.activeTab = "Контроллеры"
+    }else if(window.location.hash.includes("usersAll__")){
+      const hashArr = window.location.hash.split("__")
+      this.userId = hashArr[1]
+      this.activeTab = "Пользователи"
     }else {
 
       this.activeTab = this.getTabByHash().name;
