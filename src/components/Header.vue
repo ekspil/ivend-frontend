@@ -13,7 +13,7 @@
                     <div class="d-flex order-lg-2 ml-auto">
                         <div class="dropdown d-none d-md-flex" v-if="true">
                             <span class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
-                                <span class="text-black f-b">Телефон: {{ infoPhoneCom | prettify }}</span>
+                                <span v-if="user" class="text-black f-b">Телефон: {{{phone: infoPhoneCom, countryCode: user.countryCode} | prettifyObj }}</span>
                             </span>
                         </div></div>
 

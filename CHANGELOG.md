@@ -880,6 +880,10 @@
 
 * fix country code
 
+# 1.7.95 - Hotfix
+
+* add orange billing information
+
 
 
 

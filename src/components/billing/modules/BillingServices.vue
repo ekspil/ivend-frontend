@@ -38,10 +38,16 @@
 
 	export default {
 		name: 'BillingServices',
+    props: {
+      orangeBilling: {
+        type: Object,
+        default: () => null
+      }
+    },
         data: () => ({
             controllers: [],
             svs: [],
-            defaultHidden: process.env.VUE_APP_SERVICES_DEFAULT_HIDDEN
+            defaultHidden: process.env.VUE_APP_SERVICES_DEFAULT_HIDDEN,
         }),
         apollo: {
             controllers: {
@@ -71,7 +77,7 @@
                   return {}
                 } ,
 
-                update: data => {
+                update(data){
                   return data.getControllers
                 }
             }
@@ -88,6 +94,7 @@
                             services.push(s)
                         }else{
                             services.map(serv => {
+                                if(serv.id === 60 && this.orangeBilling) serv.price = -this.orangeBilling.orangeFixSum
                                 if(serv.id !== service.id) return serv
                                 serv.price = serv.price + service.price
                                 serv.count++

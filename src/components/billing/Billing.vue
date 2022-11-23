@@ -6,7 +6,7 @@
       <div class="balance-info">
         <div :class="['balance-info-block', 'balance-info__block', hasEnoughMoney ? '' : 'balance-info-block--attention']">
           <div class="balance-info-block__info-container row">
-            <div class="balance-info-block__count balance-info-block__count--currency col">{{ Number(billing.balance).toFixed(2) }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ Number(billing.balance).toFixed(0) }}</div>
             <div class="balance-info-block__title col-3">Текущий баланс</div>
             <div class="balance-info-block__icon col-1.5">
               <i class="fas fa-ruble-sign"></i>
@@ -21,14 +21,14 @@
         </div>
         <div class="balance-info-block balance-info__block">
           <div class="balance-info-block__info-container row">
-            <div class="balance-info-block__count balance-info-block__count--currency col  disabled-small">{{ billing.dailyBill }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col  disabled-small">{{ (billing.dailyBill + orangeDay).toFixed(0) }}</div>
             <div class="balance-info-block__title col-4  disabled-small">Ежедневное списание</div>
             <div class="balance-info-block__icon col-1.5  disabled-small">
               <i class="far fa-calendar-alt  disabled-small"></i>
             </div>
             <div class="w-100"></div>
 
-            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/50).toFixed(0) * 50 }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/1 + orangeMonth).toFixed(0) * 1 }}</div>
             <div class="balance-info-block__title col-4">Ежемесячное списание</div>
             <div class="balance-info-block__icon col-1.5">
               <i class="far fa-calendar-alt"></i>
@@ -94,7 +94,7 @@
 
             <Tabs
               :tabs="tabs"
-              :props="{ deposits: billing.deposits }"
+              :props="{ deposits: billing.deposits, orangeBilling }"
             >
               <template slot="top-menu" v-if="$route.hash === '#history'">
                 <div class="stats-top-menu">
@@ -169,6 +169,10 @@ export default {
             }
           }
         }
+
+        getOrangeStatistic(userId: $userId) {
+            orangeFixSum
+        }
       }
       `,
       variables () {
@@ -192,7 +196,12 @@ export default {
           userId
         };
       },
-      update: (data) => {
+      update(data){
+
+          if(data.getOrangeStatistic){
+            data.getOrangeStatistic.orangeFixSum = Number(Number(data.getOrangeStatistic.orangeFixSum).toFixed(0))
+                this.orangeBilling = data.getOrangeStatistic
+          }
           if (data.getProfile){
               return data.getProfile.billing
           } else {
@@ -229,7 +238,7 @@ export default {
   },
   data: () => ({
     orderBusy: false,
-    autoSend: false,
+    orangeBilling: null,
     tabs: [
       { name: 'Услуги', component: BillingServices, route: 'services' },
       { name: 'Платежи', component: BillingHistory, route: 'history' }
@@ -260,7 +269,14 @@ export default {
         return this.billing.deposits.some(deposit => deposit.status === 'PENDING') || this.depositStatus === 'PENDING';
       }
     },
-
+    orangeDay(){
+      if(!this.orangeBilling || !this.orangeBilling.orangeFixSum) return 0
+      return -Number((this.orangeBilling.orangeFixSum/30).toFixed(0))
+    },
+    orangeMonth(){
+      if(!this.orangeBilling || !this.orangeBilling.orangeFixSum) return 0
+      return -Number((this.orangeBilling.orangeFixSum).toFixed(0))
+    },
     hasEnoughMoney () {
       const billing = this.billing;
       if (billing) {
