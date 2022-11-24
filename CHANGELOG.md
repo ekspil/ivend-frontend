@@ -884,6 +884,10 @@
 
 * add orange billing information
 
+# 1.7.96 - Hotfix
+
+* add managar functions
+
 
 
 

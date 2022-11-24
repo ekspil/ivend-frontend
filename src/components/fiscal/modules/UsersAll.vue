@@ -22,6 +22,16 @@
                                 </option>
                               </select>
                               </div>
+                              <div class="form-group " style="width: 25%; padding-left: 10px" v-if="managers">
+                              <select class="form-control custom-select" v-model="selectedManagerId">
+                                <option key="0" :value="null" selected="selected">Все менеджеры
+                                </option>
+                                <option v-for="manager in managers"
+                                        :key="manager.id" :value="manager.id">
+                                  {{ manager.name }}
+                                </option>
+                              </select>
+                              </div>
 
                               <span class="col-auto">
                                             <ExportExcel  v-if="false" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
@@ -115,9 +125,10 @@
           ExportExcel
         },
         data: () => ({
-
+            selectedManagerId: null,
             orderKey: null,
             orderDesc: null,
+            managers: null,
             users: [],
             offset: 0,
             limit:100,
@@ -146,8 +157,8 @@
         apollo: {
             users: {
                 query: gql`
-                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String, $search: String, $partnerId: String ) {
-                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey, search: $search, partnerId: $partnerId) {
+                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String, $search: String, $partnerId: String, $managerId: Int ) {
+                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey, search: $search, partnerId: $partnerId, managerId: $managerId) {
                             phone
                             id
                             email
@@ -155,12 +166,17 @@
                             inn
                             companyName
                             partnerId
+                            managerId
                             billing{
                                 balance
                                 dailyBill
                                 }
 
                              }
+                      getManagers{
+                        id
+                        name
+                      }
                     }
                 `,
                 variables () {
@@ -183,7 +199,8 @@
                       orderKey: this.orderKey,
                       orderDesc: this.orderDesc,
                       search: this.search,
-                      partnerId
+                      partnerId,
+                      managerId: Number(this.selectedManagerId)
                     };
                 },
                 update (data) {
@@ -199,6 +216,9 @@
                     //         return user
                     //     }
                     // )
+                    if(data.getManagers && data.getManagers.length){
+                      this.managers = data.getManagers
+                  }
 
                     return data.getAllUsers
                 }
@@ -354,6 +374,7 @@
             getTableFields () { return getTableFields(this.users, {
                 changeBalance: this.changeBalance,
                 sum: 0,
+                managers: this.managers,
                 changeBalanceKey: "balance",
                 showControllersKey: "inn",
                 showBillingKey: "dailyBill",

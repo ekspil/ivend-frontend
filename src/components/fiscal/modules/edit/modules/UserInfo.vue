@@ -52,6 +52,17 @@
                                     </div>
 
 
+                                    <div class="form-group" >
+                                        <label class="form-label f-b">Менеджер</label>
+                                      <select class="form-control custom-select" v-model="managerId">
+                                        <option :value="null">Без менеджера</option>
+
+                                        <option v-for="manager of managers" :key="manager.id" :value="manager.id">
+                                          {{ manager.name }}</option>
+                                      </select>
+                                    </div>
+
+
 
 
 
@@ -102,6 +113,8 @@
             newPassword: null,
             user: null,
             partnerId: null,
+            managerId: null,
+            managers: null,
             schema: {
                 email: [required],
                 phone: [required]
@@ -125,7 +138,12 @@
                             email
                             role
                             partnerId
+                            managerId
                              }
+                      getManagers{
+                        id
+                        name
+                        }
                     }
       `,
                 variables () {
@@ -138,6 +156,10 @@
                 update(user) {
                     const [returnedData] = user.getAllUsers
                     this.partnerId = returnedData.partnerId
+                  if (!this.managerId){
+                    this.managerId = returnedData.managerId
+                  }
+                    this.managers = user.getManagers
                     this.$store.state.cache.editedUser = returnedData
                     return returnedData
 
@@ -159,6 +181,7 @@
                     if(this.partnerId){
                         input.partnerId = Number(this.partnerId)
                     }
+                    input.managerId = this.managerId
                     let { errors, data } = await this.$apollo.mutate({
                         mutation: gql`
 							mutation saveUserInfo ($input: UpdateUserInput!) {

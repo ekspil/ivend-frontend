@@ -13,6 +13,12 @@ export const getTableHeaders = () => [
 
     { name: 'Статус', key: 'role', link: false },
     { name: 'Партнер', key: 'partnerId', link: false },
+    { name: 'Менеджер', key: 'managerId', critery ({managerId, props}) {
+          const manager = props.managers.find(item => item.id === managerId)
+            if(!manager) return ""
+            return manager.name
+
+        }, link: false },
 
 
 ];
@@ -25,6 +31,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     email: user.email,
     role: user.role,
     partnerId: user.partnerId,
+    managerId: user.managerId,
     inn: user.inn || "Не указано",
     companyName:  (user && user.companyName ? user.companyName.split(" ")[0] : "Не указано") + " " +  (user && user.companyName && user.companyName.split(" ")[1] ? user.companyName.split(" ")[1] : ""),
     props,
