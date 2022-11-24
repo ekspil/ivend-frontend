@@ -886,7 +886,11 @@
 
 # 1.7.96 - Hotfix
 
-* add managar functions
+* add manager functions
+
+# 1.7.97 - Hotfix
+
+* fix kkt fn types
 
 
 
