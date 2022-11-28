@@ -89,7 +89,9 @@
                     for(let service of controller.services){
                         const [exist] = services.filter(serv => serv.id === service.id)
                         if(!exist){
+
                           let s = JSON.parse(JSON.stringify(service))
+                          if(s.id === 60 && this.orangeBilling) s.price = -this.orangeBilling.orangeFixSum
                           s.count = 1
                             services.push(s)
                         }else{

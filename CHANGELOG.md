@@ -892,6 +892,10 @@
 
 * fix kkt fn types
 
+# 1.7.98 - Hotfix
+
+* fix kkt fn types
+
 
 
 
