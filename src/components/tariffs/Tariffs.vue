@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-status bg-gradient br-tr-3 br-tl-3"></div>
             <div class="card-header">
-              <div class="card-title f-b">Тарифы</div>
+              <div class="card-title f-b">Тарифы и услуги</div>
             </div>
 
             <div class="card-body">
@@ -15,7 +15,7 @@
                 <table class="table card-table table-vcenter text-nowrap">
                   <thead class="bg-primary text-white">
                   <tr>
-                    <th class="text-white">Название услуги</th>
+                    <th class="text-white">Тарифы</th>
                     <th class="text-white">Стоимость</th>
 
 
@@ -51,6 +51,113 @@
 
 
                     <td class="black-bold">{{ (this.tariff && this.tariff.fiscal ) ? this.tariff.fiscal : 2000}}  руб./мес.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Аренда онлайн-кассы OrangeData (за 1 год)</th>
+
+
+                    <td class="black-bold">{{ (this.tariff && this.tariff.fiscalOrangeRent ) ? this.tariff.fiscalOrangeRent : 1500}}  руб./год</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Услуга почековой фискализации Автомата (только OrangeData, за 1 чек)</th>
+
+
+                    <td class="black-bold">{{ (this.tariff && this.tariff.fiscalOrangeBill ) ? this.tariff.fiscalOrangeBill : 0.25}}  руб./чек</td>
+                  </tr>
+
+
+                  </tbody>
+                </table>
+                <table class="table card-table table-vcenter text-nowrap">
+                  <thead class="bg-primary text-white">
+                  <tr>
+                    <th class="text-white">Услуги</th>
+                    <th class="text-white">Стоимость</th>
+
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row" class="black-bold">Услуга регистрации онлайн-кассы в ФНС </th>
+
+
+                    <td class="black-bold">2500 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Услуга регистрации замены ФН в ФНС</th>
+
+
+                    <td class="black-bold">2500 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Услуга снятия с учета онлайн-кассы в ФНС</th>
+
+
+                    <td class="black-bold">2500 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Услуга настройки ЛК OrangeData</th>
+
+
+                    <td class="black-bold">2500 руб.</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="black-bold">Услуга настройки ЛК iVend</th>
+
+
+                    <td class="black-bold">2500 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Заключение договора с банком эквайером</th>
+
+
+                    <td class="black-bold">2000 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Установка и запуск банковского терминала  на автомате</th>
+
+
+                    <td class="black-bold">7000 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Прошивка банковского терминала  D200</th>
+
+
+                    <td class="black-bold">2000 руб.</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="black-bold">Прошивка контроллера  iVend</th>
+
+
+                    <td class="black-bold">500 руб.</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="black-bold">Установка и запуск контроллера  iVend на автомате</th>
+
+
+                    <td class="black-bold">2000 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Замена процессорной платы контроллера  iVend</th>
+
+
+                    <td class="black-bold">3000 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Замена платы модема контроллера  iVend</th>
+
+
+                    <td class="black-bold">2000 руб.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="black-bold">Замена интерфейсной платы контроллера  iVend</th>
+
+
+                    <td class="black-bold">1000 руб.</td>
                   </tr>
 
 

@@ -4,7 +4,7 @@
             <div class="row align-items-center text-center">
                 <div class="col-lg-6 col-sm-12 text-left privacy">
                     <router-link to="/tariffs">Тарифы и реквизиты</router-link>
-                    <a v-if="oferta" :href="oferta" target="_blank" class="ml-5">Договор оферты</a>
+                    <a v-if="oferta" :href="oferta" target="_blank" class="ml-5">Договор присоединения</a>
                 </div>
                 <div class="col-lg-6 col-sm-12 mt-3 mt-lg-0 text-right privacy">
                     © {{ (new Date()).getFullYear() }} <a href="https://cabinet.ivend.pro">ivend</a>. Все права защищены.

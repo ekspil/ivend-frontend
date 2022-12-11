@@ -60,6 +60,20 @@
 							</div>
 						</div>
 					</div>
+					<div v-else-if="field && field.props && field.props.payFee && field.props.payFeeKey === header.key" class="">
+						<div class="item-action dropdown">
+							<a href="javascript:void(0)" data-toggle="dropdown" class="bold-link bold-int">
+								{{ field[header.key] }}
+							</a>
+							<div class="dropdown-menu dropdown-menu-right text-center">
+								<p> Введите сумму выплаты </p>
+								<input class="form-control" type="text" size="17" v-model="field.props.sum">
+								<a href="#" class="dropdown-item" @click.prevent="field.props.payFee(field.id, Number(field.props.sum))">
+									<button class="btn btn-primary ml-auto">Выплачено</button>
+								</a>
+							</div>
+						</div>
+					</div>
 					<div v-else-if="field && field.props && field.props.changeBalance && field.props.showControllersKey === header.key" class="">
 						<div >
 							<a href="#"  class="bold-link bold-int" @click.prevent="field.props.showControllers(field.id)">

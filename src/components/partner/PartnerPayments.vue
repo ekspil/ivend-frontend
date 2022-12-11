@@ -6,14 +6,14 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <div class="form-label f-b card-header my-auto">Партнерская ссылка: <a :href="'https://cabinet.ivend.pro/register?ref='+user.id">https://cabinet.ivend.pro/register?ref={{this.user.id}}</a></div>
+<!--                                <div class="form-label f-b card-header my-auto">Партнерская ссылка: <a :href="'https://cabinet.ivend.pro/register?ref='+user.id">https://cabinet.ivend.pro/register?ref={{this.user.id}}</a></div>-->
 
-                                <div class="stats-top-menu__date-buttons">
+                                <div class="stats-top-menu__date-buttons" v-if="false">
                                     <Period @onChange="onPeriodChange"/>
                                 </div>
 
                                 <Table
-                                        v-if="users"
+                                        v-if="payments"
                                         :headers="getTableHeaders"
                                         :fields="getTableFields"
                                         className="settings-table"
@@ -21,7 +21,7 @@
                                 />
 
                                 <div v-else-if="$apollo.loading" class="aligned-text">Загрузка...</div>
-                                <div v-else class="aligned-text">Нет вендоров</div>
+                                <div v-else class="aligned-text">Нет выплат</div>
                                 <div class="card-body row" style="padding: 4px;">
                                     <ul class="pagination col">
                                         <li class="page-item page-prev"> <a class="page-link" v-on:click="prevPage()">Пред</a> </li>
@@ -54,10 +54,10 @@
     import gql from 'graphql-tag';
     import Table from '@/modules/table/Table';
     import Period from '@/modules/PeriodLarge';
-    import { getTableHeaders, getTableFields } from '@/utils/mappers/PartnerUsers';
+    import { getTableHeaders, getTableFields } from '@/utils/mappers/PartnerPayments';
 
     export default {
-        name: 'Users',
+        name: 'payments',
         components: {
             Table,
             Period
@@ -72,7 +72,7 @@
             },
             orderKey: null,
             orderDesc: null,
-            users: null,
+            payments: null,
             offset: 0,
             limit:100,
             savedLimit :100,
@@ -82,68 +82,24 @@
             ]
         }),
         apollo: {
-            users: {
+            payments: {
                 query: gql`
-                    query($input: AllUsersInput, $orderDesc: Boolean, $orderKey: String, $period: Period, $role: String) {
-                      getAllUsers(input: $input, orderDesc: $orderDesc, orderKey: $orderKey) {
-                            phone
+                    query($period: Period) {
+                      getPartnerPayments(period: $period) {
                             id
-                            email
-                            role
-                            partnerId
-                            monthPay(period: $period)
-                            partnerFee(period: $period, role: $role)
-                            controllers{
-                                id
-                                simCardNumber
-                            }
-                            kkts{
-                                id
-                            }
-                            billing{
-                                balance
-                                dailyBill
-                                }
-                            legalInfo{
-                                inn
-                                companyName
-                                }
-                             }
+                            controllerFee
+                            kkmFee
+                            terminalFee
+                            createdAt
+                    }
                     }
                 `,
                 variables () {
                     return {
-                        input: {
-                            offset: Number(this.offset),
-                            limit: Number(this.limit),
-                        },
-
-                      orderKey: this.orderKey,
-                      orderDesc: this.orderDesc,
-                      period: this.period,
-                      role: "PARTNER"
                     };
                 },
                 update (data) {
-                  let feeSum = 0
-                    const returnedData = data.getAllUsers.map(
-                        (user) => {
-                            if(!user.legalInfo){
-                                user.legalInfo = {}
-                                user.legalInfo.inn = "Не указан"
-                                user.legalInfo.companyName = "Не указан"
-
-                            }
-
-                            if(user.partnerFee){
-                              feeSum += Number(user.partnerFee)
-                            }
-
-                            return user
-                        }
-                    )
-                    this.$store.state.user.partnerFee = feeSum
-                    return returnedData;
+                    return data.getPartnerPayments
                 }
             },
             user: {
@@ -168,7 +124,7 @@
                 this.period = period;
             },
             nextPage() {
-                if(!this.users || !this.users.length) {
+                if(!this.payments || !this.payments.length) {
                     return
                 }
                 this.offset += this.limit
@@ -195,7 +151,7 @@
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.users) }
+            getTableFields () { return getTableFields(this.payments) }
         }
     }
 </script>

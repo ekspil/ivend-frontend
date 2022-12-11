@@ -81,7 +81,7 @@
             <div class="card-header row">
                 <div class="col-md-8 col-lg-8 card-title f-b">Оплата</div>
                 <div  class=""></div>
-                <div  class="col-md-4 col-lg-4 disabled-small">
+                <div  class="col-md-4 col-lg-4 disabled-small" v-if="autoSend !== null">
                   <label class="default-checkbox" for="check1">
                   <input class="auth-block__checkbox" type="checkbox" v-model="autoSend"
                         id="check1" @change="userAutoSend"/>
@@ -127,6 +127,7 @@ import Hint from '@/modules/Hint';
 import Tabs from '@/modules/Tabs';
 import BillingHistory from './modules/BillingHistory';
 import BillingServices from './modules/BillingServices';
+import BillingActs from './modules/BillingActs';
 import {mapGetters} from 'vuex'
 
 import Period from '@/modules/PeriodLarge';
@@ -239,9 +240,11 @@ export default {
   data: () => ({
     orderBusy: false,
     orangeBilling: null,
+    autoSend: null,
     tabs: [
       { name: 'Услуги', component: BillingServices, route: 'services' },
-      { name: 'Платежи', component: BillingHistory, route: 'history' }
+      { name: 'Платежи', component: BillingHistory, route: 'history' },
+      { name: 'Акты(бета)', component: BillingActs, route: 'acts' },
     ],
     billing: null,
     legalInfo: {
@@ -301,7 +304,7 @@ export default {
   },
   methods: {
     async userAutoSend(){
-      await this.$nextTick()
+      //await this.$nextTick()
       await this.$apollo.mutate({
         mutation: gql`
           mutation userAutoSend ($value: Boolean!) {

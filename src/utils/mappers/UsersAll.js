@@ -14,6 +14,7 @@ export const getTableHeaders = () => [
     { name: 'Статус', key: 'role', link: false },
     { name: 'Партнер', key: 'partnerId', link: false },
     { name: 'Менеджер', key: 'managerId', critery ({managerId, props}) {
+        if(!props.managers) return ""
           const manager = props.managers.find(item => item.id === managerId)
             if(!manager) return ""
             return manager.name

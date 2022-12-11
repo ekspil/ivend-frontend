@@ -897,6 +897,11 @@
 * fix kkt fn types
 
 
+# 1.7.100 - Hotfix
+
+* add partner payments
+
+
 
 
 

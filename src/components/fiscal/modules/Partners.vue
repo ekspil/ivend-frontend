@@ -84,10 +84,10 @@
                             phone
                             id
                             email
+                            partnerFee(period: $period)
                             vendors{
                                 id
                                 monthPay(period: $period)
-                                partnerFee(period: $period)
                                 controllers{
                                     id
                                     simCardNumber
@@ -167,6 +167,37 @@
                 this.orderKey = key
                 this.orderDesc = desc
             },
+
+            async payFee(userId, sum){
+              try {
+
+
+                  const {errors, data} = await this.$apollo.mutate({
+                    mutation: gql`
+							mutation createFeeTransaction ($input: CreateFeeTransactionInput!) {
+								createFeeTransaction(input: $input) {
+									controllerFee
+								}
+							}
+						`,
+                    variables: {
+                      input: {
+                        userId: userId,
+                        partnerId: userId,
+                        controllerFee: -sum,
+                        terminalFee: 0,
+                        kkmFee: 0,
+                      }
+                    }
+                  });
+
+
+                  alert("Успешно списана коммисия")
+
+              } catch (error) {
+                  alert("Ошибка сохранения коммисии")
+              }
+            },
             prevPage() {
                 if(this.offset - this.limit < 0) {
                     return
@@ -185,7 +216,9 @@
         computed: {
             getTableHeaders,
             getTableFields () { return getTableFields(this.users, {
-
+              payFee: this.payFee,
+              sum: 0,
+              payFeeKey: "fee",
               showUsersKey: "vendors",
               showUsers: this.showUsers,
             }) }

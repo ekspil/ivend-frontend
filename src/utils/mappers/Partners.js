@@ -46,7 +46,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     id: user.id,
     phone: user.phone,
     monthPay: (user.vendors?.reduce((acc, item)=>acc+item.monthPay, 0)).toFixed(2),
-    fee: (user.vendors?.reduce((acc, item)=>acc+item.partnerFee, 0)).toFixed(2),
+    fee: (user.partnerFee).toFixed(2),
     kkms: (user.vendors?.reduce((acc, item)=>acc+item.kkts?.length, 0)).toFixed(0) || 0,
     controllers: (user.vendors?.reduce((acc, item)=>acc+item.controllers?.length, 0)).toFixed(0) || 0,
     terminals: terminals(user.vendors),
@@ -55,6 +55,9 @@ export const getTableFields = (data, props) => data.map(user => ({
     vendors: user.vendors?.length,
     inn: user.legalInfo ? user.legalInfo.inn : "Не указано",
     companyName:  user.legalInfo ? user.legalInfo.companyName : "Не указано",
-    props,
+    props: {
+        ...props,
+        sum: user.partnerFee
+    },
     route: `/fiscalAll/userEdit/${user.id}?from=partner`
 }));

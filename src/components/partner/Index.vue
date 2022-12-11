@@ -22,6 +22,7 @@
 <script>
     import Tabs from '@/modules/Tabs';
     import Vendors from '@/components/partner/PartnerUsers';
+    import PartnerPayments from '@/components/partner/PartnerPayments';
 
 
     export default {
@@ -29,7 +30,8 @@
         components: { Tabs },
         data: () => ({
             tabs: [
-                { name: 'ВЕНДОРЫ', component: Vendors, route: 'vendors' },
+                { name: 'Вендоры', component: Vendors, route: 'vendors' },
+                { name: 'Выплаты', component: PartnerPayments, route: 'partnerPayments' },
             ]
         })
     }
