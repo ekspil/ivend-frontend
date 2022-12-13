@@ -71,7 +71,7 @@ export const getTableFields = ({sales}, props) => sales.map(({price, type, creat
 
 export const getTableFieldsNoLimit = ({salesNoLimit}) => salesNoLimit.map(({price, type, createdAt, item, status}) => ({
   itemName: item.name,
-  timestamp: new Date(createdAt),
+  timestamp: new Date(createdAt).toLocaleString(),
   itemPrice: price,
   receiptStatus: status,
   receiptPaymentType: getPaymentTypeStr(type),

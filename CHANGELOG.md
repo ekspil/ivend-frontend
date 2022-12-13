@@ -906,6 +906,10 @@
 
 * add random commands
 
+# 1.7.102 - Hotfix
+
+* items sales exports in locale time
+
 
 
 
