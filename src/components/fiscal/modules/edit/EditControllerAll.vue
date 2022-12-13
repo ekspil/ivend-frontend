@@ -105,6 +105,27 @@
                   </select>
                 </div>
 
+                <div class="form-group">
+                  <label class="form-label f-b">Дополнительные команды</label>
+                  <div>
+                    <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#ModalCommandAdd"  @click.prevent="">
+                      <i class="dropdown-icon fe fe-plus"></i> Добавить
+                    </a>
+                  </div>
+                    <div class="d-flex" v-for="command of commands" >
+
+                      <div class="dropdown-item">
+                        {{ "Команда: " + command.id + commandValues(command) }}
+                      </div>
+                      <div>
+
+                      <a href="#" class="dropdown-item" @click.prevent="deleteCommand(command.id)">
+                        <i class="dropdown-icon fe fe-x"></i> Удалить
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </template>
@@ -120,6 +141,7 @@
     </div>
   </div>
     <Pulse :data="data" :pulse="pulse" :isVendistaIntegrated="isVendistaIntegrated"></Pulse>
+    <Commands :commands="commands"></Commands>
 </div>
 
 </template>
@@ -132,13 +154,15 @@ import Validate from '@/modules/validation/Validate';
 import Field from '@/modules/validation/Field';
 import {controllerHeaders, controllerStates, controllerType, controllerStatType, controllerTerminal, controllerFiscalType } from '@/utils/lists/Controller';
 import Pulse from '@/components/controllers/dialogs/pulse'
+import Commands from '@/components/controllers/dialogs/commands'
 import { required } from '@/utils/validation';
 
 export default {
   components: {
     Validate,
     Field,
-    Pulse
+    Pulse,
+    Commands
   },
   data: () => ({
     data: null,
@@ -151,6 +175,7 @@ export default {
     schema: {
       uid: [required]
     },
+    commands: null,
     pulse: {
       a: 0,
       b: 0,
@@ -160,6 +185,7 @@ export default {
       f: 0,
       o: 0,
       t: 0,
+      randomCommands: null
     },
 
     controllerUploading: false
@@ -196,6 +222,7 @@ export default {
             c
             o
             t
+            randomCommands
           }
           mech {
             a
@@ -206,6 +233,7 @@ export default {
             d
             e
             f
+            randomCommands
           }
         }
 
@@ -228,10 +256,17 @@ export default {
       update(data) {
         if(data.controller.pulse && !this.data){
           this.pulse = JSON.parse(JSON.stringify(data.controller.pulse))
+          if(!this.commands) this.commands = JSON.parse(data.controller.pulse.randomCommands) || []
         }
         if(data.controller.mech && !this.data){
           this.pulse = JSON.parse(JSON.stringify(data.controller.mech))
+          if(!this.commands) this.commands = JSON.parse(data.controller.mech.randomCommands) || []
+
         }
+        if(!this.commands) this.commands = []
+
+
+
         return {
           controller: data.controller,
           equipments: data.equipments,
@@ -250,7 +285,21 @@ export default {
     }
   },
   methods: {
-
+    commandValues({p1, p2, p3, p4, p5, p6, p7}){
+      let result = ", Значения:  ["
+      if(p1 !== undefined) result+=  " " +p1
+      if(p2 !== undefined) result+=  ", " +p2
+      if(p3 !== undefined) result+=  ", " +p3
+      if(p4 !== undefined) result+=  ", " +p4
+      if(p5 !== undefined) result+=  ", " +p5
+      if(p6 !== undefined) result+=  ", " +p6
+      if(p7 !== undefined) result+=  ", " +p7
+      result += " ]"
+      return result
+    },
+    deleteCommand(id){
+      this.commands = this.commands.filter(i => i.id !== id)
+    },
     pulseCheck(){
       if (this.data.controller.mode === 'ps_m_D' || this.data.controller.mode === 'mech'){
         if (!this.data.controller.pulse && (Number(this.pulse.a) || Number(this.pulse.b) || Number(this.pulse.c) || Number(this.pulse.d) || Number(this.pulse.e) || Number(this.pulse.f) || Number(this.pulse.o) || Number(this.pulse.t))) {
@@ -322,6 +371,7 @@ export default {
             c: Number(this.pulse.c),
             o: Number(this.pulse.o),
             t: Number(this.pulse.t),
+            commands: JSON.stringify(this.commands)
           }
         }
         else{
@@ -335,6 +385,7 @@ export default {
             f: Number(this.pulse.f),
             o: Number(this.pulse.o),
             t: Number(this.pulse.t),
+            commands: JSON.stringify(this.commands)
           }
         }
 

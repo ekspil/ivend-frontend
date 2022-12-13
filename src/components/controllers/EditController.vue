@@ -193,6 +193,7 @@ export default {
             c
             o
             t
+            randomCommands
           }
           mech {
             a
@@ -203,6 +204,7 @@ export default {
             d
             e
             f
+            randomCommands
           }
         }
 
@@ -326,6 +328,7 @@ export default {
                 c: Number(this.pulse.c),
                 o: Number(this.pulse.o),
                 t: Number(this.pulse.t),
+                commands: this.pulse.randomCommands
           }
         }
         else{
@@ -339,6 +342,7 @@ export default {
                 f: Number(this.pulse.f),
                 o: Number(this.pulse.o),
                 t: Number(this.pulse.t),
+                commands: this.pulse.randomCommands
           }
         }
 
