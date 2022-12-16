@@ -910,6 +910,10 @@
 
 * items sales exports in locale time
 
+# 1.7.103 - Hotfix
+
+* items sales exports in locale time
+
 
 
 

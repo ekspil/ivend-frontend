@@ -21,31 +21,31 @@
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 1</label>
-              <input class="form-control" value="" type="number" v-model="com.p1" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter1" placeholder="0"/>
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 2</label>
-              <input class="form-control" value="" type="number" v-model="com.p2" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter2" placeholder="0"/>
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 3</label>
-              <input class="form-control" value="" type="number" v-model="com.p3" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter3" placeholder="0"/>
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 4</label>
-              <input class="form-control" value="" type="number" v-model="com.p4" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter4" placeholder="0"/>
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 5</label>
-              <input class="form-control" value="" type="number" v-model="com.p5" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter5" placeholder="0"/>
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 6</label>
-              <input class="form-control" value="" type="number" v-model="com.p6" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter6" placeholder="0"/>
             </div>
             <div class="form-group">
               <label class="form-label f-b">Значение 7</label>
-              <input class="form-control" value="" type="number" v-model="com.p7" placeholder="0"/>
+              <input class="form-control" value="" type="number" v-model="com.parameter7" placeholder="0"/>
             </div>
           </div>
 
@@ -72,13 +72,13 @@ export default {
   data: ()=>({
     com: {
       id: 0,
-      p1: undefined,
-      p2: undefined,
-      p3: undefined,
-      p4: undefined,
-      p5: undefined,
-      p6: undefined,
-      p7: undefined,
+      parameter1: undefined,
+      parameter2: undefined,
+      parameter3: undefined,
+      parameter4: undefined,
+      parameter5: undefined,
+      parameter6: undefined,
+      parameter7: undefined,
     }
   }),
   computed: {
@@ -90,13 +90,13 @@ export default {
       this.commands.push(comResult)
       this.com = {
         id: 0,
-        p1: undefined,
-        p2: undefined,
-        p3: undefined,
-        p4: undefined,
-        p5: undefined,
-        p6: undefined,
-        p7: undefined,
+        parameter1: undefined,
+        parameter2: undefined,
+        parameter3: undefined,
+        parameter4: undefined,
+        parameter5: undefined,
+        parameter6: undefined,
+        parameter7: undefined,
       }
     }
   },

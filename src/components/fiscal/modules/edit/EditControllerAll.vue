@@ -105,7 +105,7 @@
                   </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" v-if="data.controller.bankTerminalMode === 'vda1'">
                   <label class="form-label f-b">Дополнительные команды</label>
                   <div>
                     <a href="#" class="dropdown-item"  data-toggle="modal" data-target="#ModalCommandAdd"  @click.prevent="">
@@ -130,7 +130,7 @@
             </div>
           </template>
           <template slot="submit">
-            <button type="submit" class="btn btn-primary ml-auto">Сохранить</button>
+            <button type="submit" class="btn btn-primary ml-auto" :disabled="controllerUploading">{{controllerUploading ? "Отправка данных, ожидайте..." : "Сохранить"}}</button>
           </template>
         </Validate>
 
@@ -285,15 +285,15 @@ export default {
     }
   },
   methods: {
-    commandValues({p1, p2, p3, p4, p5, p6, p7}){
+    commandValues({parameter1, parameter2, parameter3, parameter4, parameter5, parameter6, parameter7}){
       let result = ", Значения:  ["
-      if(p1 !== undefined) result+=  " " +p1
-      if(p2 !== undefined) result+=  ", " +p2
-      if(p3 !== undefined) result+=  ", " +p3
-      if(p4 !== undefined) result+=  ", " +p4
-      if(p5 !== undefined) result+=  ", " +p5
-      if(p6 !== undefined) result+=  ", " +p6
-      if(p7 !== undefined) result+=  ", " +p7
+      if(parameter1 !== undefined) result+=  " " +parameter1
+      if(parameter2 !== undefined) result+=  ", " +parameter2
+      if(parameter3 !== undefined) result+=  ", " +parameter3
+      if(parameter4 !== undefined) result+=  ", " +parameter4
+      if(parameter5 !== undefined) result+=  ", " +parameter5
+      if(parameter6 !== undefined) result+=  ", " +parameter6
+      if(parameter7 !== undefined) result+=  ", " +parameter7
       result += " ]"
       return result
     },
@@ -326,6 +326,7 @@ export default {
     },
 
     async save() {
+
       try {
         this.controllerUploading = true;
 
@@ -411,7 +412,7 @@ export default {
     },
     onSuccess () {
       const router = this.$router;
-      setTimeout(function () { router.push('/fiscalAll#controllersAll'); }, 1000);
+      setTimeout(function () { router.push('/fiscalAll#controllersAll'); }, 3000);
     },
 
     getBillingAbbr (date) {
