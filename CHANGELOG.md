@@ -914,6 +914,10 @@
 
 * items sales exports in locale time
 
+# 1.7.104 - Hotfix
+
+* swift bill
+
 
 
 
