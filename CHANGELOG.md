@@ -918,6 +918,10 @@
 
 * swift bill
 
+# 1.7.105 - Hotfix
+
+* add news info
+
 
 
 

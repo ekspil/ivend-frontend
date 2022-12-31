@@ -1,5 +1,10 @@
 <template>
     <div>
+
+
+      <div >
+        <News :data="data"></News>
+      </div>
     <div class="ren-navbar" id="headerMenuCollapse">
         <div class="container">
             <ul class="nav">
@@ -153,8 +158,13 @@
 <script>
 
     import gql from 'graphql-tag';
+
+    import News from '@/components/News';
     export default {
         name: 'Navbar',
+      components: {
+        News
+      },
 
         apollo: {
             user: {
@@ -162,6 +172,7 @@
                     query {
                         user: getProfile {
                                 step
+                                newInfoId
                                 billing {
                                        balance,
 
@@ -176,6 +187,7 @@
         },
 
         data: () => ({
+          data: null,
             steps: [
               {
                 step: 0,
@@ -247,6 +259,20 @@
             this.bsCollapse.show()
           }
         }, 3000)
+
+
+        this.interval2 = setInterval(()=>{
+
+          if(this.user && this.user.newInfoId){
+
+            this.data = this.user.newInfoId
+            $('#ModalNewsPopup').modal("show")
+            clearInterval(this.interval2)
+          }
+
+        }, 3000)
+
+
       },
       beforeDestroy() {
           if(this.interval){
