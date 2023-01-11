@@ -922,6 +922,10 @@
 
 * add news info
 
+# 1.7.106 - Hotfix
+
+* fix billing auto sum
+
 
 
 
