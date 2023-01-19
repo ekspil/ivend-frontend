@@ -1,4 +1,4 @@
-
+import { createTooltip } from '@/utils';
 function dailyBill(vendors){
     return (vendors?.reduce((acc, item)=> {
         let dayBill = item.billing?.dailyBill
@@ -37,6 +37,31 @@ export const getTableHeaders = () => [
     { name: 'Списание', key: 'dailyBill', unsortable: false  },
     { name: 'Оплата', key: 'monthPay', unsortable: false  },
     { name: 'Комиссия', key: 'fee', unsortable: false  },
+    { name: 'Посл.выплата', key: 'lastPayment', unsortable: false,
+        critery({lastPayment, lastPaymentStatus, lastPaymentId}) {
+            if(lastPaymentStatus === 'WAITING'){
+
+                return createTooltip("warning", lastPayment, false, false, lastPaymentId);
+            }
+            else {
+
+                return createTooltip("primary", lastPayment, false, false, lastPaymentId);
+            }
+        }
+    },
+    { name: 'Сумма посл.выплаты', key: 'lastPaymentAmount', unsortable: false,
+        critery({lastPaymentAmount, lastPaymentStatus, lastPaymentId}) {
+            if(lastPaymentStatus === 'WAITING'){
+
+                return createTooltip("warning", lastPaymentAmount, false, false, lastPaymentId);
+            }
+            else {
+
+                return createTooltip("primary", lastPaymentAmount, false, false, lastPaymentId);
+            }
+        }  },
+    { name: 'Выплат', key: 'payments', unsortable: false  },
+    { name: 'Сумма выплат', key: 'paymentsAmount', unsortable: false  },
     //{ name: 'Партнер', key: 'partnerId', link: false },
 
 
@@ -55,6 +80,12 @@ export const getTableFields = (data, props) => data.map(user => ({
     vendors: user.vendors?.length,
     inn: user.legalInfo ? user.legalInfo.inn : "Не указано",
     companyName:  user.legalInfo ? user.legalInfo.companyName : "Не указано",
+    lastPayment: user.partnerInfo?.lastPayment ? new Date(user.partnerInfo?.lastPayment).toLocaleDateString() : "",
+    lastPaymentAmount: user.partnerInfo?.lastPaymentAmount,
+    lastPaymentStatus: user.partnerInfo?.lastPaymentStatus || "SUCCESS",
+    lastPaymentId: user.partnerInfo?.lastPaymentId,
+    payments: user.partnerInfo?.payments,
+    paymentsAmount: user.partnerInfo?.paymentsAmount,
     props: {
         ...props,
         sum: user.partnerFee

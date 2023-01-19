@@ -11,6 +11,8 @@
                                 <div class="stats-top-menu__date-buttons" v-if="false">
                                     <Period @onChange="onPeriodChange"/>
                                 </div>
+                                <Toast :message="message" :error="true" />
+
 
                                 <Table
                                         v-if="payments"
@@ -55,14 +57,20 @@
     import Table from '@/modules/table/Table';
     import Period from '@/modules/PeriodLarge';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/PartnerPayments';
+    import {head, isEmpty} from "ramda";
+    import Toast from '@/modules/Toast';
+    import { convertServerError } from '@/utils';
 
     export default {
         name: 'payments',
         components: {
             Table,
-            Period
+            Period,
+            Toast
         },
         data: () => ({
+            orderBusy: false,
+            message: "",
             period: {
               from: null,
               to: null
@@ -89,6 +97,7 @@
                             id
                             controllerFee
                             kkmFee
+                            status
                             terminalFee
                             createdAt
                     }
@@ -141,17 +150,61 @@
 
                 this.offset -= this.limit
             },
+            showMessage(text){
+              this.message = text
+              $('.toast').toast("show")
+            },
 
             async filterBy (key, value) {
                 if(key === "role"){
                     this.selectedRole = value
                 }
+            },
+
+          async getPartnerAct (paymentId) {
+            if(this.orderBusy === true)  return
+            this.orderBusy = true
+            try {
+              const { errors, data } = await this.$apollo.mutate({
+                mutation: gql`
+          mutation RequestAct ($id: Int!) {
+            generatePartnerAct(id: $id) {
+              url
             }
+          }
+          `,
+                variables: {
+                  id: paymentId
+                }
+              });
+
+              if (errors && !isEmpty(errors)) {
+                const error = head().message || 'Ошибка сервера';
+                this.showMessage(convertServerError(error));
+              } else {
+
+                if (data.generatePartnerAct.url) {
+                  //window.location.href = data.generatePdf.url;
+                  window.open(data.generatePartnerAct.url, '_blank');
+                  this.sendQuery = false
+                }
+              }
+            } catch (error) {
+              this.showMessage(convertServerError(error.message));
+            }
+            finally {
+
+              this.orderBusy = false
+            }
+          },
+
 
         },
         computed: {
             getTableHeaders,
-            getTableFields () { return getTableFields(this.payments) }
+            getTableFields () { return getTableFields(this.payments, {
+              getPartnerAct: this.getPartnerAct
+            }) }
         }
     }
 </script>

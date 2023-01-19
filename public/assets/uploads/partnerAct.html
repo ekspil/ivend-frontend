@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="stylesheet" type="text/css" href="order.css">
+</head>
+<body>
+
+
+<div class="main">
+    <table width="100%" style="font-family: Arial; text-align: center;">
+            <tbody>
+            <tr style="height: 126.094px;">
+                <td style="width: 161.484px; height: 126.094px;">&nbsp;</td>
+                <td style=" height: 126.094px;">&nbsp;</td>
+                <td style="width: 182px; height: 126.094px;  text-align: left;">
+                    <p>Директору ООО &laquo;АЙВЕНД&raquo;<br /> ИНН/КПП 7815714120/780501001<br /> Бояринцеву Д.А.</p>
+                    <p>От <span id="companyName"></span> ИНН <span id="inn"></span> </p>
+                </td>
+            </tr>
+            <tr style="height: 100px;">
+                <td style="width: 161.484px; height: 42px;">&nbsp;</td>
+                <td style=" height: 42px;">Отчет партнера<br />по партнерскому договору №<span id="userId"></span></td>
+                <td style="width: 182px; height: 42px;">&nbsp;</td>
+            </tr>
+            <tr style="height: 100px;">
+                <td style="width: 161.484px; height: 42px;  text-align: left;">г. Санкт-Петербург&nbsp; &nbsp;&nbsp;</td>
+                <td style=" height: 42px;">&nbsp;</td>
+                <td style="width: 182px; height: 42px;"><span id="to1"></span></td>
+            </tr>
+            <tr style="height: 100px;">
+                <td colspan="3" style="height: 42px; text-align: left;">Настоящий отчет составлен за период с <span id="from1"></span> по <span id="to2"></span> и свидетельствует о выполнении следующих действий:</td>
+            </tr>
+            <tr style="height: 100px;">
+                <td colspan="3">
+                    <table   border="1" width="100%" style="border-collapse:collapse;">
+                        <tbody >
+                        <tr>
+                            <td style="width: 50px;  border: 1px solid #595959;">№ п/п</td>
+                            <td style="width: 180px;  border: 1px solid #595959;">Дата (период)</td>
+                            <td>Содержание операции</td>
+                            <td style="width: 100px;  border: 1px solid #595959;">Сумма операции</td>
+                        </tr>
+                        <tr id="tableBody">
+                            <td>1</td>
+                            <td> c <span id="from2"></span><br> по <span id="to3"></span></td>
+                            <td>Комиссия партнера за услуги фискализации и телеметрии</td>
+                            <td> <span id="amount"></span> руб.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr style="height: 42px;">
+                <td style="width: 161.484px; height: 42px;">&nbsp;</td>
+                <td style="height: 42px;">&nbsp;</td>
+                <td style="width: 182px; height: 42px;">&nbsp;</td>
+            </tr>
+            <tr style="height: 42px;">
+                <td style="width: 161.484px; height: 42px;">
+                    <p>Отчет сдал</p>
+                    <p>_______________________&nbsp; &nbsp;&nbsp;</p>
+                </td>
+                <td style="height: 42px;">&nbsp;</td>
+                <td style="width: 182px; height: 42px;">
+                    <p>Отчет принял</p>
+                    <p>&nbsp;__________________________</p>
+                </td>
+            </tr>
+            </tbody>
+    </table>
+
+</div>
+
+<script type="text/javascript">
+    console.log(location.href)
+    const data = new URL(location.href)
+    const dateTo = new Date(data.searchParams.get("to")).toLocaleString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    const dateFrom = new Date(data.searchParams.get("from")).toLocaleString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    const amount = String(- Number(data.searchParams.get("amount")))
+    document.getElementById("amount").innerHTML=amount
+    document.getElementById("companyName").innerHTML=data.searchParams.get("companyName");
+    document.getElementById("inn").innerHTML=data.searchParams.get("inn");
+    //document.getElementById("documentId").innerHTML=data.searchParams.get("id");
+    document.getElementById("from1").innerHTML=dateFrom
+    document.getElementById("from2").innerHTML=dateFrom
+    document.getElementById("to1").innerHTML=dateTo
+    document.getElementById("to2").innerHTML=dateTo
+    document.getElementById("to3").innerHTML=dateTo
+    document.getElementById("userId").innerHTML=data.searchParams.get("userId");
+</script>
+</body>
+</html>

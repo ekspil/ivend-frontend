@@ -926,6 +926,10 @@
 
 * fix billing auto sum
 
+# 1.8.1 - Release
+
+* add partner acts
+
 
 
 

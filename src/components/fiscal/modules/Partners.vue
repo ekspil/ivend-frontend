@@ -45,6 +45,41 @@
                 </div>
             </div>
         </div>
+
+
+
+      <div class="modal fade" id="ModalPartnerApply" tabindex="-1" data-backdrop="static"  role="dialog" aria-labelledby="ModalPartnerApplyLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Выплата партнеру</h5>
+
+            </div>
+            <div class="modal-body" v-if="selectedPayment">
+              <div class="row">
+                <div class="col-6">Cумма</div>
+                <div class="col-6">{{selectedPayment.sum}}</div>
+
+                <div class="col-6">Статус</div>
+                <div class="col-6">{{selectedPayment.status}}</div>
+
+                <div class="col-6">Дата</div>
+                <div class="col-6">{{new Date(selectedPayment.date).toLocaleDateString()}}</div>
+
+                <div class="col-6">Акт</div>
+                <div class="col-6"><button class="btn btn-primary ml-auto badge badge-primary" @click="getPartnerAct(selectedPayment.id)" :disabled="orderBusy">Скачать</button></div>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="clearWindow()">Закрыть</button>
+              <button type="button" class="btn btn-primary" @click.prevent="setFeeSuccess(selectedPayment.id)" :disabled="selectedPayment && selectedPayment.status === 'SUCCESS'">Подтвердить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Toast :message="message" :error="true" />
+
     </div>
 </template>
 
@@ -53,12 +88,16 @@
     import Table from '@/modules/table/Table';
     import Period from '@/modules/PeriodLarge';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/Partners';
+    import {head, isEmpty} from "ramda";
+    import { convertServerError } from '@/utils';
+    import Toast from '@/modules/Toast';
 
     export default {
         name: 'Users',
         components: {
             Table,
-            Period
+            Period,
+            Toast
         },
         data: () => ({
             period: {
@@ -66,6 +105,7 @@
               to: null
             },
             orderKey: null,
+            message: null,
             orderDesc: null,
             users: null,
             offset: 0,
@@ -73,6 +113,9 @@
             savedLimit :100,
             search: "",
             savedSelectedRole: "VENDOR",
+            selectedPayment: null,
+            interval1: null,
+            orderBusy: false,
             selections: [
             ]
         }),
@@ -85,6 +128,14 @@
                             id
                             email
                             partnerFee(period: $period)
+                            partnerInfo{
+                              lastPayment
+                              lastPaymentAmount
+                              payments
+                              paymentsAmount
+                              lastPaymentStatus
+                              lastPaymentId
+                            }
                             vendors{
                                 id
                                 monthPay(period: $period)
@@ -168,6 +219,14 @@
                 this.orderDesc = desc
             },
 
+            showModal(){
+              $('#ModalPartnerApply').modal("show")
+            },
+
+          showMessage(text){
+            alert(text)
+          },
+
             async payFee(userId, sum){
               try {
 
@@ -198,6 +257,30 @@
                   alert("Ошибка сохранения коммисии")
               }
             },
+
+            async setFeeSuccess(id){
+              try {
+
+
+                  const {errors, data} = await this.$apollo.mutate({
+                    mutation: gql`
+							mutation successFeeTransaction ($id:Int!) {
+								successFeeTransaction(id: $id)
+							}
+						`,
+                    variables:{
+                      id
+                    }
+                  });
+
+
+
+                  alert("Успешно подтверждено")
+
+              } catch (error) {
+                  alert("Ошибка подтверждения")
+              }
+            },
             prevPage() {
                 if(this.offset - this.limit < 0) {
                     return
@@ -210,7 +293,70 @@
                 if(key === "role"){
                     this.selectedRole = value
                 }
+            },
+
+          getPayment(){
+            if(!window.partnerPaymentId) return null
+            if(!this.users) return null
+            const id = Number(window.partnerPaymentId)
+
+            const paymentUser = this.users.find(item => {
+              if(!item.partnerInfo) return false
+              if(item.partnerInfo.lastPaymentId !== id) return false
+
+              return true
+            })
+
+            this.selectedPayment = {
+              id: paymentUser.partnerInfo.lastPaymentId,
+              status: paymentUser.partnerInfo.lastPaymentStatus,
+              sum: paymentUser.partnerInfo.lastPaymentAmount,
+              date: paymentUser.partnerInfo.lastPayment,
             }
+
+          },
+          clearWindow(){
+            window.partnerPaymentId = undefined
+            this.selectedPayment = null
+          },
+
+          async getPartnerAct (paymentId) {
+            if(this.orderBusy === true)  return
+            this.orderBusy = true
+            try {
+              const { errors, data } = await this.$apollo.mutate({
+                mutation: gql`
+          mutation RequestAct ($id: Int!) {
+            generatePartnerAct(id: $id) {
+              url
+            }
+          }
+          `,
+                variables: {
+                  id: paymentId
+                }
+              });
+
+              if (errors && !isEmpty(errors)) {
+                const error = head().message || 'Ошибка сервера';
+                this.showMessage(convertServerError(error));
+              } else {
+
+                if (data.generatePartnerAct.url) {
+                  //window.location.href = data.generatePdf.url;
+                  window.open(data.generatePartnerAct.url, '_blank');
+                  this.sendQuery = false
+                }
+              }
+            } catch (error) {
+              this.showMessage(convertServerError(error.message));
+            }
+            finally {
+
+              this.orderBusy = false
+            }
+          },
+
 
         },
         computed: {
@@ -222,6 +368,16 @@
               showUsersKey: "vendors",
               showUsers: this.showUsers,
             }) }
-        }
+        },
+      mounted() {
+          this.interval1 = setInterval(()=>{
+            if(this.selectedPayment) return
+            this.getPayment()
+          }, 500)
+      },
+      beforeDestroy() {
+          if(this.interval1) clearInterval(this.interval1)
+
+      }
     }
 </script>

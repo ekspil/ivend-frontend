@@ -247,9 +247,9 @@ export const getGradation = ms => ({
  * @return {[string]} Tooltip
  * @author Samir Amirseidov
  */
-export const createTooltip = (type, string, link, id) => {
+export const createTooltip = (type, string, link, id, partnerPaymentId) => {
 
-	if(!link && !id){
+	if(!link && !id && !partnerPaymentId){
 
 		switch (type) {
 			case 'alert':
@@ -301,6 +301,19 @@ export const createTooltip = (type, string, link, id) => {
 				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.tempSim = '${link}'" >${string}</button>`;
 			default:
 				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.tempSim = '${link}'" >НЕТ</button>`;
+		}
+	}
+	else if (partnerPaymentId) {
+
+		switch (type) {
+			case 'alert':
+				return `<button class="btn btn-danger ml-auto badge badge-danger" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.partnerPaymentId = '${partnerPaymentId}'; $('#ModalPartnerApply').modal('show')" >${string}</button>`;
+			case 'warning':
+				return `<button class="btn btn-warning ml-auto badge badge-warning" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.partnerPaymentId = '${partnerPaymentId}'; $('#ModalPartnerApply').modal('show') " >${string}</button>`;
+			case 'primary':
+				return `<button class="btn btn-primary ml-auto badge badge-primary" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.partnerPaymentId = '${partnerPaymentId}'; $('#ModalPartnerApply').modal('show')" >${string}</button>`;
+			default:
+				return `<button class="btn btn-gray ml-auto badge badge-gray" data-toggle="modal" data-target="#resetSimMonitoring" onclick="window.partnerPaymentId = '${partnerPaymentId}'" >НЕТ</button>`;
 		}
 	}
 };

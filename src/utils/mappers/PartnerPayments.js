@@ -12,13 +12,15 @@ export const getTableHeaders = () => [
 
 
         } },
+    { name: 'Статус', key: 'status', unsortable: false  },
 
 
 ];
 
-export const getTableFields = (data, props) => data.map(({controllerFee, createdAt, id}) => ({
+export const getTableFields = (data, props) => data.map(({controllerFee, createdAt, id, status}) => ({
     id,
     createdAt,
+    status,
     controllerFee: controllerFee.toFixed(2),
     props,
 }));
