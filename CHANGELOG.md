@@ -930,6 +930,10 @@
 
 * add partner acts
 
+# 1.8.2 - Release
+
+* add texteditor
+
 
 
 

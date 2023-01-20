@@ -42,12 +42,18 @@
                                         <Field className="form-control" value="" name="date" formName="addNews" placeholder="Дата"/>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label class="form-label f-b">Текст  ([P] - параграф, [li]https://ivend.pro[name]Наш сайт[li] - пример ссылки, не больше одной на параграф)</label>
-                                        <Field className="form-control" value="" name="text" formName="addNews" placeholder="Текст"/>
-                                    </div>
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="form-label f-b">Текст  ([P] - параграф, [li]https://ivend.pro[name]Наш сайт[li] - пример ссылки, не больше одной на параграф)</label>-->
+<!--                                        <Field className="form-control" value="" name="text" formName="addNews" placeholder="Текст"/>-->
+<!--                                    </div>-->
 
-                                    <div class="form-group">
+                                  <div class="form-group">
+                                    <label class="form-label f-b">Текст</label>
+                                    <vue-editor v-model="input.text" :editorToolbar="customToolbar"></vue-editor>
+                                  </div>
+
+
+                                  <div class="form-group">
                                         <label class="form-label f-b">Ссылка на картинку</label>
                                         <Field className="form-control" value="" name="link" formName="addNews" placeholder="Ссылка на изображение"/>
                                     </div>
@@ -73,17 +79,34 @@
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
 
+    import { VueEditor } from 'vue2-editor'
+
     export default {
         name: 'addNews',
         components: {
             Validate,
-            Field
+            Field,
+            VueEditor
         },
         data: () => ({
             input: {
-                active: 0
+                active: 0,
+                text: null,
             },
             type: "news",
+          customToolbar: [
+            [{
+              header: [false, 1, 2, 3, 4, 5, 6]
+            }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['image', 'link'],
+            [{
+              color: []
+            }, {
+              background: []
+            }],
+          ],
 
             schema: {
                 inn: [required],
@@ -94,6 +117,7 @@
             async save () {
                 const data = {
                     active: Number(this.input.active),
+                    text: this.input.text,
                     ...this.$store.getters['cache/data']
                 };
 

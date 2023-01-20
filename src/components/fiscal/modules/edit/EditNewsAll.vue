@@ -42,9 +42,14 @@
                                         <Field className="form-control" :value="data.news.date" name="date" formName="addNews" placeholder="Дата"/>
                                     </div>
 
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="form-label f-b">Текст  ([P] - параграф, [li]https://ivend.pro[name]Наш сайт[li] - пример ссылки, не больше одной на параграф)</label>-->
+<!--                                        <Field className="form-control" :value="data.news.text" name="text" formName="addNews" placeholder="Текст (Используй в тексте: [P]  - он создаст новый параграф)"/>-->
+<!--                                    </div>-->
+
                                     <div class="form-group">
-                                        <label class="form-label f-b">Текст  ([P] - параграф, [li]https://ivend.pro[name]Наш сайт[li] - пример ссылки, не больше одной на параграф)</label>
-                                        <Field className="form-control" :value="data.news.text" name="text" formName="addNews" placeholder="Текст (Используй в тексте: [P]  - он создаст новый параграф)"/>
+                                      <label class="form-label f-b">Текст</label>
+                                      <vue-editor v-model="input.text" :editorToolbar="customToolbar"></vue-editor>
                                     </div>
 
                                     <div class="form-group">
@@ -72,24 +77,41 @@
 
     import Validate from '@/modules/validation/Validate';
     import Field from '@/modules/validation/Field';
+    import { VueEditor } from 'vue2-editor'
 
     export default {
         name: 'addNews',
         components: {
             Validate,
-            Field
+            Field,
+            VueEditor
         },
         data: () => ({
             input: {
                 active: 0,
-                id: null
+                id: null,
+                text: null
             },
+
+          customToolbar: [
+            [{
+              header: [false, 1, 2, 3, 4, 5, 6]
+            }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['image', 'link'],
+            [{
+              color: []
+            }, {
+              background: []
+            }],
+          ],
             type: null,
             query: null,
 
             schema: {
                 header: [required],
-                text: [required],
+               // text: [required],
                 date: [required]
             }
         }),
@@ -137,12 +159,16 @@
                     switch(this.type){
                         case "news":
                             i = data.news
+                            this.input.text = i.text
                             break
                         case "info":
                             i = data.info
+                            this.input.text = i.text
+
                             break
                         case "instr":
                             i = data.instr
+                            this.input.text = i.text
                             break
                     }
 
@@ -159,6 +185,7 @@
                 const data = {
                     active: Number(this.input.active),
                     id: Number(this.input.id),
+                    text: this.input.text,
                     ...this.$store.getters['cache/data']
                 };
 
