@@ -13,8 +13,17 @@
           </h5>
 
 
+
+
         </div>
+
+
+
           <div class="modal-body">
+            <div class="form-group">
+
+              <input class=""  type="checkbox" v-model="data.controller.autoSetUp" /><label class="f-b ml-2"> - автоматическая настройка</label>
+            </div>
             <div v-if="data.controller.mode === 'ps_m_D'">
             <div class="form-group">
               <label class="form-label f-b">Цена импульса линии 1 (монетник, синий провод)</label>

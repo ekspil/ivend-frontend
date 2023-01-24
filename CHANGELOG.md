@@ -934,6 +934,10 @@
 
 * add texteditor
 
+# 1.8.3 - Hotfix
+
+* add autosend checkbox
+
 
 
 

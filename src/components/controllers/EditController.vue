@@ -176,6 +176,7 @@ export default {
         controller: getController(id: $id) {
           id
           uid
+          autoSetUp
           mode
           revision {
             id,
@@ -303,6 +304,7 @@ export default {
           bankTerminalMode: controller.bankTerminalMode,
           bankTerminalUid: controller.bankTerminalUid,
           readStatMode: controller.readStatMode,
+          autoSetUp: controller.autoSetUp,
           remotePrinterId: inputData.remotePrinterId
         };
 

@@ -202,6 +202,7 @@ export default {
         controller: getController(id: $id) {
           id
           uid
+          autoSetUp
           simCardNumber
           mode
           imsi
@@ -346,7 +347,8 @@ export default {
           remotePrinterId: inputData.remotePrinterId,
           simCardNumber: inputData.simCardNumber,
           sim: inputData.sim,
-          cashless: controller.cashless
+          cashless: controller.cashless,
+          autoSetUp: controller.autoSetUp
         };
 
 
