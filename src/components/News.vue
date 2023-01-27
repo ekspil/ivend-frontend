@@ -23,9 +23,9 @@
                       <div  class="row" v-if="selectedNew.link">
 
                         <div class="col-sm-4" v-if="selectedNew.link"><img :src="selectedNew.link" /></div>
-                        <div class="col-sm-8"><p class="text-black mb-2" v-for="par in splitP(selectedNew.text)"><span v-html="par"></span></p></div>
+                        <div class="col-sm-8"><p class="text-black mb-2" v-for="par in splitP(selectedNew.text)"><span  class="noMargin"  v-html="par"></span></p></div>
                       </div>
-                      <p class="text-black mb-2" v-if="!selectedNew.link" v-for="par in splitP(selectedNew.text)"><span v-html="par"></span></p>
+                      <p class="text-black mb-2" v-if="!selectedNew.link" v-for="par in splitP(selectedNew.text)"><span  class="noMargin"  v-html="par"></span></p>
 
 
 
@@ -115,6 +115,7 @@ export default {
       }
       finally {
         $('#ModalNewsPopup').modal("hide")
+        this.$emit("clearNewsData")
       }
     },
 
@@ -138,4 +139,11 @@ export default {
 .modal-dialog {
   max-width: 800px;
 }
+
+>>> .noMargin > p {
+  margin-top: 0; /* Отступ сверху */
+  margin-bottom: 0 ; /* Отступ снизу */
+}
+
+
 </style>

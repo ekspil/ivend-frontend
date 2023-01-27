@@ -938,6 +938,10 @@
 
 * add autosend checkbox
 
+# 1.8.4 - Hotfix
+
+* add autosend checkbox
+
 
 
 

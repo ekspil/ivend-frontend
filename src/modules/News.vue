@@ -18,9 +18,9 @@
                                 <div  class="row" v-if="ne.link">
 
                                     <div class="col-sm-4" v-if="ne.link"><img :src="ne.link" /></div>
-                                    <div class="col-sm-8"><p class="text-black mb-2" v-for="par in splitP(ne.text)"><span v-html="par"></span></p></div>
+                                    <div class="col-sm-8"><p class="text-black mb-2" v-for="par in splitP(ne.text)"><span class="noMargin" v-html="par"></span></p></div>
                                 </div>
-                                <p class="text-black mb-2" v-if="!ne.link" v-for="par in splitP(ne.text)"><span v-html="par"></span></p>
+                                <p class="text-black mb-2" v-if="!ne.link" v-for="par in splitP(ne.text)"><span class="noMargin" v-html="par"></span></p>
 
 
 
@@ -67,3 +67,11 @@
         }
     }
 </script>
+
+<style scoped>
+>>> .noMargin > p {
+  margin-top: 0; /* Отступ сверху */
+  margin-bottom: 0; /* Отступ снизу */
+}
+
+</style>

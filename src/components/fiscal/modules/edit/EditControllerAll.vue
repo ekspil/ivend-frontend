@@ -105,6 +105,11 @@
                   </select>
                 </div>
 
+                <div class="form-group"  style="margin-top: 1rem" v-if="isVendista  && data.controller.bankTerminalMode === 'vda1'">
+
+                  <label class="f-b "> Aвтоматическая настройка</label> <input class="ml-5"  type="checkbox" v-model="data.controller.autoSetUp" />
+                </div>
+
                 <div class="form-group" v-if="data.controller.bankTerminalMode === 'vda1'">
                   <label class="form-label f-b">Дополнительные команды</label>
                   <div>
@@ -280,6 +285,12 @@ export default {
   computed:{
     isVendistaIntegrated(){
       if(this.data && this.data.controller && this.data.controller.uid.slice(0, 3) === "300"){
+        return true
+      }
+      return false
+    },
+    isVendista(){
+      if(this.data && this.data.controller && this.data.controller.uid.slice(0, 3) === "500"){
         return true
       }
       return false

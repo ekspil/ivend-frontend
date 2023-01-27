@@ -3,7 +3,7 @@
 
 
       <div >
-        <News :data="data"></News>
+        <News v-if="data" :data="data" @clearNewsData="clearNewsData"></News>
       </div>
     <div class="ren-navbar" id="headerMenuCollapse">
         <div class="container">
@@ -181,7 +181,12 @@
                     }
                 `,
 
-                update: data => data.user,
+                update(data){
+                 if(data && data.user && data.user.newInfoId) {
+                   this.data = data.user.newInfoId
+                 }
+                 return data.user
+                },
                 pollInterval: 10000
             }
         },
@@ -261,16 +266,16 @@
         }, 3000)
 
 
-        this.interval2 = setInterval(()=>{
-
-          if(this.user && this.user.newInfoId){
-
-            this.data = this.user.newInfoId
-            $('#ModalNewsPopup').modal("show")
-            clearInterval(this.interval2)
-          }
-
-        }, 3000)
+        // this.interval2 = setInterval(()=>{
+        //
+        //   if(this.user && this.user.newInfoId){
+        //
+        //     this.data = this.user.newInfoId
+        //     $('#ModalNewsPopup').modal("show")
+        //     clearInterval(this.interval2)
+        //   }
+        //
+        // }, 3000)
 
 
       },
@@ -278,12 +283,26 @@
           if(this.interval){
             clearInterval(this.interval)
           }
+          // if(this.interval2){
+          //   clearInterval(this.interval2)
+          // }
+      },
+      watch: {
+          async data(newVal, oldVal){
+            if(!newVal) return
+            if(newVal === oldVal) return
+            await this.$nextTick()
+            $('#ModalNewsPopup').modal("show")
+          }
       },
       computed: {
 
 
       },
         methods: {
+          clearNewsData(){
+            this.data = null
+          },
           headerMenuCollapse(){
 
 
