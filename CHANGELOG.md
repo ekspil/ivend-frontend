@@ -942,6 +942,10 @@
 
 * add autosend checkbox
 
+# 1.8.5 - Hotfix
+
+* new tarrifs
+
 
 
 

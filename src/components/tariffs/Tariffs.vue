@@ -26,19 +26,19 @@
                     <th scope="row" class="black-bold">Абонентская плата за Услугу телеметрии Контроллера</th>
 
 
-                    <td class="black-bold">{{ (this.tariff && this.tariff.telemetry ) ? this.tariff.telemetry : 100 }} руб./мес.</td>
+                    <td class="black-bold">{{ (this.tariff && this.tariff.telemetry ) ? this.tariff.telemetry : 125 }} руб./мес.</td>
                   </tr>
                   <tr>
                     <th scope="row" class="black-bold">Абонентская плата за Услугу телеметрии Терминала</th>
 
 
-                    <td class="black-bold">{{100}} руб./мес.</td>
+                    <td class="black-bold">{{125}} руб./мес.</td>
                   </tr>
                   <tr>
                     <th scope="row" class="black-bold">Абонентская плата за Услугу телеметрии Смарт-терминала</th>
 
 
-                    <td class="black-bold">{{150}} руб./мес.</td>
+                    <td class="black-bold">{{185}} руб./мес.</td>
                   </tr>
                   <tr>
                     <th scope="row" class="black-bold">Абонентская плата за Услугу фискализации одного Автомата (от 20 шт)</th>
