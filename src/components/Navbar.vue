@@ -152,6 +152,7 @@
             </el-row>
             <div style="text-align: center"><a href="#" @click.prevent="closeHelp">Скрыть подсказки</a></div>
         </div>
+      <div class="ren-navbar" style="background-color: red; text-align: center" v-if="!isAdmin() && $store.state.auth.admin.token">Режим администратора. Вы в профиле пользователя!</div>
     </div>
 </template>
 
@@ -296,7 +297,6 @@
           }
       },
       computed: {
-
 
       },
         methods: {

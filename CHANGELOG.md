@@ -950,6 +950,10 @@
 
 * duplicate machines
 
+# 1.8.7 - Hotfix
+
+* duplicate machines
+
 
 
 
