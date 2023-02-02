@@ -108,6 +108,9 @@
 							<a href="#" class="dropdown-item" @click.prevent="field.props.remove(field.id, field.type)">
 								<i class="dropdown-icon fe fe-x"></i> Удалить
 							</a>
+							<a v-if="field.props.duplicateMachine && field.id" href="#" class="dropdown-item" @click.prevent="field.props.duplicateMachine(field.id)">
+								<i class="dropdown-icon fe fe-refresh-cw"></i> Создать копию автомата
+							</a>
 							<a v-if="field.props.showControllers && field.id" href="#" class="dropdown-item" @click.prevent="field.props.showControllers(field.id)">
 								<i class="dropdown-icon fe fe-refresh-cw"></i> Показать контроллеры
 							</a>

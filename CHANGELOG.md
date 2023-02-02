@@ -946,6 +946,10 @@
 
 * new tarrifs
 
+# 1.8.6 - Hotfix
+
+* duplicate machines
+
 
 
 

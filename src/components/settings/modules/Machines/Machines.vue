@@ -167,6 +167,28 @@
 
                 this.machines = this.machines.filter(machine => machine.id !== id);
             },
+            async duplicateMachine (id) {
+              try{
+
+                await this.$apollo.mutate({
+                  mutation: gql`
+                        mutation ($id: Int!) {
+                            duplicateMachine (id: $id) {
+                                name
+                            }
+                        }
+                    `,
+                  variables: { id }
+                });
+
+                await this.$apollo.queries.machines.refetch()
+              }
+              catch (e) {
+                console.log("Ошибка при обращении к серверу при дубликации мометов")
+              }
+
+
+            },
           async checkParams(machines){
             if(this.$route.query.to === 'items'){
               if(machines[0]){
@@ -222,6 +244,7 @@
             getTableFields () {
                 return getTableFields(this.machinesSearch, {
                     remove: this.removeMachine,
+                    duplicateMachine: this.duplicateMachine,
                     routeKey: "controllerName",
                     routeId: "controllerId",
                     routeParams: "/machines",
