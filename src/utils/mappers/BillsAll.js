@@ -19,10 +19,11 @@ function getNum(){
 export const getTableHeaders = () => [
     //{ name: '№', key: 'num', link: false },
     { name: 'ИД', key: 'id', link: false },
+    { name: 'Платеж', key: 'meta', link: false },
     { name: 'Тип', key: 'type', unsortable: false },
     { name: 'Компания', key: 'userName', unsortable: false },
     { name: 'Сумма', key: 'amount', unsortable: false },
-    { name: 'Создан', key: 'createdAt',
+    { name: 'Оплата', key: 'createdAt',
         critery ({createdAt}) {
             const date = new Date(createdAt)
             return date.toLocaleDateString()
@@ -52,6 +53,7 @@ export const getTableFields = (data, props) => data.map(bill => ({
     userName: bill.userName,
     applied: bill.applied,
     amount: bill.amount,
+    meta: bill.meta,
     createdAt: bill.createdAt,
     props,
     route: ``

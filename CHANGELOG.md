@@ -954,6 +954,10 @@
 
 * duplicate machines
 
+# 1.8.8 - Hotfix
+
+* fix admin payments
+
 
 
 

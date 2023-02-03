@@ -7,21 +7,21 @@
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
 
-                                <div class="form-group " style="width: 70%; padding-left: 0px">
+                                <div class="form-group " style="width: 30%; padding-left: 0px">
                                     <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
                                 </div>
 
-                              <div class="form-group " style="width: 30%; padding-left: 5px">
-                                <select class="form-control custom-select" v-model="selectedStatus">
-                                  <option key="null" :value="null" selected="selected">Все</option>
-                                  <option key="9997" value="payed" >Оплаченные</option>
-                                  <option key="9996" value="not_payed" >Неоплаченные</option>
-                                </select>
-                              </div>
+<!--                              <div class="form-group " style="width: 30%; padding-left: 5px">-->
+<!--                                <select class="form-control custom-select" v-model="selectedStatus">-->
+<!--                                  <option key="null" :value="null" selected="selected">Все</option>-->
+<!--                                  <option key="9997" value="payed" >Оплаченные</option>-->
+<!--                                  <option key="9996" value="not_payed" >Неоплаченные</option>-->
+<!--                                </select>-->
+<!--                              </div>-->
 <!--                                <span class="col-auto">-->
 <!--                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>-->
 <!--                                </span>-->
-                              <div class="stats-top-menu__date-buttons">
+                              <div class="stats-top-menu__date-buttons"  style=" padding-right: 0px">
                                 <Period @onChange="onPeriodChange" :allTime="true"/>
                               </div>
                                 <Table
