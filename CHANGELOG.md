@@ -958,6 +958,10 @@
 
 * fix admin payments
 
+# 1.8.9 - Hotfix
+
+* fix admin payments
+
 
 
 

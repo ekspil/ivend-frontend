@@ -6,8 +6,26 @@
                     <div class="card">
                         <div class="text-wrap">
                             <div class="example top-buttons-container top-buttons">
-                                <div v-if="!$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminEnter()">Режим администратора</div>
-                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>
+
+
+                              <div class="item-action dropdown m-2">
+                                <a href="javascript:void(0)" data-toggle="dropdown" class="icon" >
+                                  <i class="fe fe-more-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                  <a href="#" class="dropdown-item" @click.prevent="generateTempPassword()">
+                                    <i class="dropdown-icon fe fe-camera"></i> Сгенерировать универсальный пароль
+                                  </a>
+                                  <a v-if="!$store.state.auth.admin.token" href="#" class="dropdown-item" @click.prevent="adminEnter()">
+                                    <i class="dropdown-icon fe fe-refresh-cw"></i> Режим администратора
+                                  </a>
+                                  <a v-if="$store.state.auth.admin.token" href="#" class="dropdown-item" @click.prevent="adminOut()">
+                                    <i class="dropdown-icon fe fe-refresh-cw"></i> Выйти из режима администратора
+                                  </a>
+                                </div>
+                              </div>
+<!--                                <div v-if="!$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminEnter()">Режим администратора</div>-->
+<!--                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>-->
 
                                 <div class="form-group" style="width: 25%; padding-left: 10px">
                                   <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
@@ -107,6 +125,7 @@
                 </div>
             </div>
         </div>
+      <toast :message="message" :error="true"></toast>
     </div>
 </template>
 
@@ -117,12 +136,14 @@
     import ExportExcel from '@/modules/table/ExportExcel';
     import { getTableHeaders, getTableFields } from '@/utils/mappers/UsersAll';
     import { mapMutations } from 'vuex';
+    import Toast from '@/modules/Toast'
 
     export default {
         name: 'Users',
         components: {
             Table,
-          ExportExcel
+          ExportExcel,
+          Toast
         },
         data: () => ({
             selectedManagerId: null,
@@ -137,6 +158,7 @@
             searchTemp: "",
             selectedRole: "VENDOR",
             savedSelectedRole: "VENDOR",
+            message: null,
             selections: [
                 {
                 key: "role",
@@ -231,6 +253,29 @@
             },
             adminOut: function(){
                 this.setAdminToken(null)
+            },
+            showMessage(text){
+            this.message = text
+            $('.toast').toast("show")
+            },
+            generateTempPassword: async function(){
+
+              try{
+                const result = await this.$apollo.mutate({
+                  mutation: gql `mutation generateTempPassword{
+                                         generateTempPassword
+                                         }
+
+          `,
+                });
+
+                this.showMessage(result.data.generateTempPassword)
+              }
+              catch (e) {
+                alert(e.message)
+              }
+
+
             },
             nextPage() {
                 if(!this.users || !this.users.length) {
