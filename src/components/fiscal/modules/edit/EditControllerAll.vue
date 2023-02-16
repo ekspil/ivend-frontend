@@ -218,6 +218,7 @@ export default {
           }
           status
           bankTerminalMode
+          bankTerminalUid
           readStatMode
           fiscalizationMode
           remotePrinterId
@@ -359,7 +360,8 @@ export default {
           simCardNumber: inputData.simCardNumber,
           sim: inputData.sim,
           cashless: controller.cashless,
-          autoSetUp: controller.autoSetUp
+          autoSetUp: controller.autoSetUp,
+          bankTerminalUid: controller.bankTerminalUid
         };
 
 
