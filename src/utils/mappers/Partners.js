@@ -39,6 +39,7 @@ export const getTableHeaders = () => [
     { name: 'Комиссия', key: 'fee', unsortable: false  },
     { name: 'Посл.выплата', key: 'lastPayment', unsortable: false,
         critery({lastPayment, lastPaymentStatus, lastPaymentId}) {
+            if(!lastPayment) lastPayment = "Выплат нет"
             if(lastPaymentStatus === 'WAITING'){
 
                 return createTooltip("warning", lastPayment, false, false, lastPaymentId);
@@ -51,7 +52,10 @@ export const getTableHeaders = () => [
     },
     { name: 'Сумма посл.выплаты', key: 'lastPaymentAmount', unsortable: false,
         critery({lastPaymentAmount, lastPaymentStatus, lastPaymentId}) {
+            if(!lastPaymentAmount) lastPaymentAmount = "Выплат нет"
+            else lastPaymentAmount = Number(lastPaymentAmount).toFixed(2)
             if(lastPaymentStatus === 'WAITING'){
+
 
                 return createTooltip("warning", lastPaymentAmount, false, false, lastPaymentId);
             }

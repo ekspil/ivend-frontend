@@ -967,6 +967,11 @@
 * fix admin payments
 
 
+# 1.8.11 - Hotfix
+
+* fix partner fee
+
+
 
 
 
