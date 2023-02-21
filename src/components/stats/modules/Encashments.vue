@@ -5,7 +5,7 @@
 				<div class="stats-top-menu__date-buttons">
 					<Period @onChange="onPeriodChange"/>
 					<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
-						<option label="Выберите группу" :value="null"></option>
+						<option label="Все группы" :value="null"></option>
 						<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
 					</select>
 				</div>

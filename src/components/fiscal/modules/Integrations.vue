@@ -29,6 +29,7 @@
                                         className="settings-table"
                                         sortBy="traffic"
                                         :order="true"
+                                        style="min-height: 270px"
 
                                 />
 

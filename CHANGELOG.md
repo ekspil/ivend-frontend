@@ -976,6 +976,11 @@
 * fix partner fee
 
 
+# 1.8.13 - Hotfix
+
+* smoll fixes
+
+
 
 
 
