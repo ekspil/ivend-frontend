@@ -19,7 +19,7 @@
 
             <div class="auth-block__link-title col-8 left">Фискальный документ</div><div class="auth-block__link-title col-4 right">
             {{ bill.fiscalDocumentNumber }}</div>
-            <div class="auth-block__link-title col-6 left">Дата выдачи</div><div class="auth-block__link-title col-6 right">{{datetime[0] + " " + datetime[1]}}</div>
+            <div class="auth-block__link-title col-6 left">Дата выдачи</div><div class="auth-block__link-title col-6 right">{{datetime}}</div>
 
             <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
             <div class="auth-block__link-title col-6 left">Автомат</div><div class="auth-block__link-title col-6 right">{{ bill.machineNumber}}</div>
@@ -167,7 +167,7 @@ export default {
           mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getMinutes())
           //Фэйковые данные
           this.value = `t=${mappedReceiptDate}&s=${(data.getFiscalReceipt.sale.price).toFixed(2)}&fn=${data.getFiscalReceipt.fnNumber}&i=${data.getFiscalReceipt.fiscalDocumentNumber}&fp=${data.getFiscalReceipt.fiscalDocumentAttribute}&n=1`
-          this.datetime = data.getFiscalReceipt.receiptDatetime.substr(0, 19).split("T")
+          this.datetime = new Date(data.getFiscalReceipt.receiptDatetime).toLocaleString()
           if(data.getFiscalReceipt.ecrRegistrationNumber.includes("http")){
             this.$router.replace(data.getFiscalReceipt.ecrRegistrationNumber)
             window.location.href = data.getFiscalReceipt.ecrRegistrationNumber
@@ -181,7 +181,7 @@ export default {
       value: 'https://example.com?dkjdkjf=3&kdkfjkdfjkdsjfksf=8977897',
       size: 100,
       bill: null,
-      datetime: [],
+      datetime: null,
       text: "Ожидание загрузки чека..."
     }),
     mounted: async function (){

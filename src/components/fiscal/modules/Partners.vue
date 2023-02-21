@@ -58,7 +58,7 @@
             <div class="modal-body" v-if="selectedPayment">
               <div class="row">
                 <div class="col-6">Cумма</div>
-                <div class="col-6">{{selectedPayment.sum}}</div>
+                <div class="col-6">{{Number(selectedPayment.sum).toFixed(2)}}</div>
 
                 <div class="col-6">Статус</div>
                 <div class="col-6">{{selectedPayment.status}}</div>

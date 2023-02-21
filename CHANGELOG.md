@@ -971,6 +971,10 @@
 
 * fix partner fee
 
+# 1.8.12 - Hotfix
+
+* fix partner fee
+
 
 
 
