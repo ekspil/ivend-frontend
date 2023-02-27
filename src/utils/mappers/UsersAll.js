@@ -1,5 +1,7 @@
 
-
+Date.prototype.daysInMonth = function() {
+    return 33 - new Date(this.getFullYear(), this.getMonth(), 33).getDate();
+};
 
 export const getTableHeaders = () => [
     { name: 'ID', key: 'id', unsortable: false , link: true },
@@ -28,7 +30,7 @@ export const getTableFields = (data, props) => data.map(user => ({
     id: user.id,
     phone: user.phone,
     balance: Number(Number(user.billing.balance).toFixed(2)),
-    dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())/50).toFixed(0) * 50,
+    dailyBill: (user.billing.dailyBill*(new Date().daysInMonth())).toFixed(0),
     email: user.email,
     role: user.role,
     partnerId: user.partnerId,
