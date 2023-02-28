@@ -990,7 +990,7 @@
 
 * mailing statistic
 
-# 1.8.16 - Hotfix
+# 1.8.17 - Hotfix
 
 * bill qr fix
 

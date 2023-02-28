@@ -159,12 +159,12 @@ export default {
 
           const receiptDateUtcDate = new Date(data.getFiscalReceipt.receiptDatetime)
           let mappedReceiptDate = ""
-          mappedReceiptDate += receiptDateUtcDate.getFullYear() + ""
-          mappedReceiptDate += getTwoDigitDateFormat((receiptDateUtcDate.getMonth() + 1)) + ""
-          mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getDate()) + ""
+          mappedReceiptDate += receiptDateUtcDate.getUTCFullYear() + ""
+          mappedReceiptDate += getTwoDigitDateFormat((receiptDateUtcDate.getUTCMonth() + 1)) + ""
+          mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getUTCDate()) + ""
           mappedReceiptDate += "T"
-          mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getHours())
-          mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getMinutes())
+          mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getUTCHours())
+          mappedReceiptDate += getTwoDigitDateFormat(receiptDateUtcDate.getUTCMinutes())
           //Фэйковые данные
           this.value = `t=${mappedReceiptDate}&s=${(data.getFiscalReceipt.sale.price).toFixed(2)}&fn=${data.getFiscalReceipt.fnNumber}&i=${data.getFiscalReceipt.fiscalDocumentNumber}&fp=${data.getFiscalReceipt.fiscalDocumentAttribute}&n=1`
           this.datetime = new Date(data.getFiscalReceipt.receiptDatetime).toLocaleString()
