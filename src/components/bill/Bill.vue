@@ -157,7 +157,7 @@ export default {
             return (monthOrDate < 10) ? "0" + monthOrDate : "" + monthOrDate
           }
 
-          const receiptDateUtcDate = new  Date(new Date(data.getFiscalReceipt.receiptDatetime).getTime() - 3600000*3)
+          const receiptDateUtcDate = new Date(data.getFiscalReceipt.receiptDatetime)
           let mappedReceiptDate = ""
           mappedReceiptDate += receiptDateUtcDate.getFullYear() + ""
           mappedReceiptDate += getTwoDigitDateFormat((receiptDateUtcDate.getMonth() + 1)) + ""
@@ -168,6 +168,7 @@ export default {
           //Фэйковые данные
           this.value = `t=${mappedReceiptDate}&s=${(data.getFiscalReceipt.sale.price).toFixed(2)}&fn=${data.getFiscalReceipt.fnNumber}&i=${data.getFiscalReceipt.fiscalDocumentNumber}&fp=${data.getFiscalReceipt.fiscalDocumentAttribute}&n=1`
           this.datetime = new Date(data.getFiscalReceipt.receiptDatetime).toLocaleString()
+          this.datetimeISO = new Date(data.getFiscalReceipt.receiptDatetime).toLocaleString()
           if(data.getFiscalReceipt.ecrRegistrationNumber.includes("http")){
             this.$router.replace(data.getFiscalReceipt.ecrRegistrationNumber)
             window.location.href = data.getFiscalReceipt.ecrRegistrationNumber
