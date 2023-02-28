@@ -986,6 +986,11 @@
 * smoll fixes
 
 
+# 1.8.15 - Hotfix
+
+* mailing statistic
+
+
 
 
 

@@ -65,6 +65,8 @@
                             link
                             header
                             active
+                            smsStatus
+                            mailStatus
                             }
                       getAllInfo {
                             id
@@ -166,7 +168,7 @@
                             variables: { id }
                         });
 
-                        alert("СМС рассылка выполнена!")
+                        alert("СМС рассылка отправлена на исполнение!")
 
             },
             async sendEmail (id) {
@@ -181,7 +183,7 @@
                         });
 
 
-              alert("Почтовая рассылка выполнена!")
+              alert("Почтовая рассылка отправлена на исполнение!")
 
             }
 
