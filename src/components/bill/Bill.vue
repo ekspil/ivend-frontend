@@ -158,6 +158,7 @@ export default {
           }
 
           const receiptDateUtcDate = new Date(data.getFiscalReceipt.receiptDatetime)
+          receiptDateUtcDate.setUTCHours(receiptDateUtcDate.getUTCHours() + 3)
           let mappedReceiptDate = ""
           mappedReceiptDate += receiptDateUtcDate.getUTCFullYear() + ""
           mappedReceiptDate += getTwoDigitDateFormat((receiptDateUtcDate.getUTCMonth() + 1)) + ""
