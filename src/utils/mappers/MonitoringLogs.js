@@ -11,6 +11,8 @@ const mapType = type => {
 		case 'NO_CASHLESS_24H': return 'Банковский терминал';
 		case 'NO_CASH_24H': return 'Купюроприемник';
 		case 'NO_COINS_24H': return 'Монетник';
+		case 'SIM_CONTROLLER': return 'Связь';
+		case 'ENABLED': return 'Связь';
 		default: return '?';
 	}
 }

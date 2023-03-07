@@ -994,6 +994,10 @@
 
 * bill qr fix
 
+# 1.8.19 - Hotfix
+
+* bill qr fix
+
 
 
 
