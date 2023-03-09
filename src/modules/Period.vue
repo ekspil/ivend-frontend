@@ -50,7 +50,8 @@
 				range-separator="-"
 				@close="setPeriodRange"
 				:editable="false"
-				:input-class="(calendar1 && calendar1.length > 1)?'stats-top-menu__item stats-top-menu__item--date green-selected':'stats-top-menu__item stats-top-menu__item--date green-selected-no'"
+				style="width: 180px;"
+        :input-class="(calendar1 && calendar1.length > 1)?'stats-top-menu__item stats-top-menu__item--date green-selected':'stats-top-menu__item stats-top-menu__item--date green-selected-no'"
 		>
 			<template v-slot:icon-calendar="{ emit }">
 				<div >

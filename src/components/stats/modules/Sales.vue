@@ -2,12 +2,13 @@
 	<div>
 		<div class="stats-top-menu">
 			<div class="stats-top-menu__date-buttons">
-				<Period @onChange="onPeriodChange"/>
-				<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
+				<Period @onChange="onPeriodChange" />
+          <input v-model="searchTemp" class="select2 stats-top-menu__item" style="width: 130px;" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp"/>
+				<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" style="width: 110px;" placeholder="Выберите группу">
 					<option label="Все группы" :value="null"></option>
 					<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
 				</select>
-				<ExportExcel v-if="machines && machines.length > 0" class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+				<ExportExcel v-if="machines && machines.length > 0" class="disabled-small select2" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
 		</div>
 
@@ -43,6 +44,8 @@ export default {
 	data: () => ({
 		selectedGroupId: null,
 		machines: [],
+    search: null,
+    searchTemp: null,
 		period: {
 			from: null,
 			to: null
@@ -51,9 +54,9 @@ export default {
 	apollo: {
 		machines: {
 			query: gql`
-			query ($machineGroupId: Int, $period: Period) {
+			query ($machineGroupId: Int, $period: Period, $search: String) {
 
-					getItemSales (machineGroupId: $machineGroupId, period: $period) {
+					getItemSales (machineGroupId: $machineGroupId, period: $period, search: $search) {
 						id
 						name
 						salesSummary {
@@ -74,13 +77,16 @@ export default {
 						period: {
               from: this.period,
               to: Date.now()
-            }
+            },
+            machineGroupId: this.selectedGroupId,
+            search: this.search
 					};
 				}
 
 				return {
 					machineGroupId: this.selectedGroupId,
-					period: this.period
+					period: this.period,
+          search: this.search
 				};
 			},
 			update(data) {
