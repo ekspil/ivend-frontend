@@ -10,7 +10,10 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(({ id, name, salesSummary }) => ({
 	name,
-	...salesSummary,
+	salesCount: Number(salesSummary.salesCount.toFixed(2)),
+	overallAmount: Number(salesSummary.overallAmount.toFixed(2)),
+	cashAmount: Number(salesSummary.cashAmount.toFixed(2)),
+	cashlessAmount: Number(salesSummary.cashlessAmount.toFixed(2)),
 
 	invisible: () => {
 		const salesData = values(pickBy(val => {
