@@ -1006,6 +1006,10 @@
 
 * fix kopeyki
 
+# 1.8.22 - Hotfix
+
+* fix kopeyki
+
 
 
 
