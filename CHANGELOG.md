@@ -1010,6 +1010,10 @@
 
 * fix kopeyki
 
+# 1.8.23 - Hotfix
+
+* fix statuses in item sales
+
 
 
 

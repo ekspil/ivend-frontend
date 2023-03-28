@@ -15,6 +15,8 @@ export const getTableHeaders = () => [
       switch (receiptStatus) {
         case "PENDING":
           return createTooltip('warning', 'В очереди');
+        case "WAITING":
+          return createTooltip('warning', 'Ожидание');
         case "ERROR":
           return createTooltip('alert', 'Ошибка');
         case "SUCCESS":
