@@ -1014,6 +1014,10 @@
 
 * fix statuses in item sales
 
+# 1.8.24 - Hotfix
+
+* fix remember form
+
 
 
 
