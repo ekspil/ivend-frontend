@@ -60,7 +60,7 @@
 							</div>
 						</div>
 					</div>
-					<div v-else-if="field && field.props && field.props.payFee && field.props.payFeeKey === header.key" class="">
+					<div v-else-if="field && field.props && false && field.props.payFee && field.props.payFeeKey === header.key" class="">
 						<div class="item-action dropdown">
 							<a href="javascript:void(0)" data-toggle="dropdown" class="bold-link bold-int">
 								{{ field[header.key] }}

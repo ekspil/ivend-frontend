@@ -1018,6 +1018,10 @@
 
 * fix remember form
 
+# 1.8.25 - Hotfix
+
+* remove old partner fee mech
+
 
 
 
