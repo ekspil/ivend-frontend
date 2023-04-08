@@ -16,7 +16,7 @@
                 <td style=" height: 126.094px;">&nbsp;</td>
                 <td style="width: 182px; height: 126.094px;  text-align: left;">
                     <p>Директору ООО &laquo;АЙВЕНД&raquo;<br /> ИНН/КПП 7815714120/780501001<br /> Бояринцеву Д.А.</p>
-                    <p>От <span id="companyName"></span> ИНН <span id="inn"></span> </p>
+                    <p>От <span id="companyName"></span><br/> ИНН <span id="inn"></span> </p>
                 </td>
             </tr>
             <tr style="height: 100px;">
@@ -60,12 +60,12 @@
             <tr style="height: 42px;">
                 <td style="width: 161.484px; height: 42px;">
                     <p>Отчет сдал</p>
-                    <p>_______________________&nbsp; &nbsp;&nbsp;</p>
+                    <p>___________________ ООО "АЙВЕНД"</p>
                 </td>
                 <td style="height: 42px;">&nbsp;</td>
                 <td style="width: 182px; height: 42px;">
                     <p>Отчет принял</p>
-                    <p>&nbsp;__________________________</p>
+                    <p>&nbsp;______________________ <span id="companyName2"></span></p>
                 </td>
             </tr>
             </tbody>
@@ -90,6 +90,7 @@
     const amount = String(- Number(data.searchParams.get("amount")))
     document.getElementById("amount").innerHTML=amount
     document.getElementById("companyName").innerHTML=data.searchParams.get("companyName");
+    document.getElementById("companyName2").innerHTML=data.searchParams.get("companyName");
     document.getElementById("inn").innerHTML=data.searchParams.get("inn");
     //document.getElementById("documentId").innerHTML=data.searchParams.get("id");
     document.getElementById("from1").innerHTML=dateFrom

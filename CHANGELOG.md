@@ -1022,6 +1022,10 @@
 
 * remove old partner fee mech
 
+# 1.8.26 - Hotfix
+
+* fix partner act
+
 
 
 
