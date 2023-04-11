@@ -1026,6 +1026,10 @@
 
 * fix partner act
 
+# 1.8.27 - Hotfix
+
+* fix partner act
+
 
 
 
