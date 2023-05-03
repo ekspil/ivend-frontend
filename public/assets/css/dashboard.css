@@ -112,8 +112,12 @@ blockquote {
 dfn {
 	font-style: italic;
 }
-b, strong {
+b {
 	font-weight: bolder;
+}
+
+strong {
+	font-weight: bold !important
 }
 small {
 	font-size: 80%;

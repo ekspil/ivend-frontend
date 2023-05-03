@@ -1030,6 +1030,10 @@
 
 * fix partner act
 
+# 1.8.28 - Hotfix
+
+* fix strong
+
 
 
 
