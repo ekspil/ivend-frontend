@@ -173,6 +173,7 @@ export default {
 
         getOrangeStatistic(userId: $userId) {
             orangeFixSum
+            orangeCount
         }
       }
       `,

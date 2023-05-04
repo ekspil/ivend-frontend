@@ -90,19 +90,29 @@
                         const [exist] = services.filter(serv => serv.id === service.id)
                         if(!exist){
                           let s = JSON.parse(JSON.stringify(service))
-                          if(s.id === 60 && this.orangeBilling) s.price = -this.orangeBilling.orangeFixSum
                           s.count = 1
+                          if(s.id === 60 && this.orangeBilling) {
+                            s.price = -this.orangeBilling.orangeFixSum
+                            s.count = -this.orangeBilling.orangeCount
+                          }
                             services.push(s)
                         }else{
                             services.map(serv => {
-                                if(serv.id === 60 && this.orangeBilling) serv.price = -this.orangeBilling.orangeFixSum
+                                if(serv.id === 60 && this.orangeBilling) {
+                                  serv.price = -this.orangeBilling.orangeFixSum
+                                  serv.count = -this.orangeBilling.orangeCount
+                                  return serv
+                                }
                                 if(serv.id !== service.id) return serv
                                 serv.price = serv.price + service.price
                                 serv.count++
                                 if(service.fixCount){
                                     serv.count = service.fixCount
                                     serv.price = service.price
-                                    if(serv.id === 60 && this.orangeBilling) serv.price = -this.orangeBilling.orangeFixSum
+                                    if(serv.id === 60 && this.orangeBilling) {
+                                      serv.price = -this.orangeBilling.orangeFixSum
+                                      serv.count = -this.orangeBilling.orangeCount
+                                    }
                                 }
                                 return serv
                             })
