@@ -1039,6 +1039,10 @@
 
 * fix orange count
 
+# 1.8.30 - Hotfix
+
+* fix orange day price
+
 
 
 

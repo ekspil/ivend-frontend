@@ -21,14 +21,14 @@
         </div>
         <div class="balance-info-block balance-info__block">
           <div class="balance-info-block__info-container row">
-            <div class="balance-info-block__count balance-info-block__count--currency col  disabled-small">{{ (billing.dailyBill + orangeDay).toFixed(0) }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col  disabled-small">{{ (billing.dailyBill).toFixed(0) }}</div>
             <div class="balance-info-block__title col-4  disabled-small">Ежедневное списание</div>
             <div class="balance-info-block__icon col-1.5  disabled-small">
               <i class="far fa-calendar-alt  disabled-small"></i>
             </div>
             <div class="w-100"></div>
 
-            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/1 + orangeMonth).toFixed(0) * 1 }}</div>
+            <div class="balance-info-block__count balance-info-block__count--currency col">{{ (billing.dailyBill*(new Date().daysInMonth())/1).toFixed(0) * 1 }}</div>
             <div class="balance-info-block__title col-4">Ежемесячное списание</div>
             <div class="balance-info-block__icon col-1.5">
               <i class="far fa-calendar-alt"></i>
