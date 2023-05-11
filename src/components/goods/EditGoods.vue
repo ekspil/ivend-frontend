@@ -27,7 +27,7 @@
                 <tbody>
                   <tr>
                     <td class="input-cel">
-                      <Field type="text" formName="addGoods" name="buttonId" :value="data.button.buttonId" placeholder="Введите ID кнопки" disabled />
+                      <Field type="text" formName="addGoods" name="buttonId" :value="String(data.button.buttonId)" placeholder="Введите ID кнопки" disabled />
                     </td>
                     <td class="input-cel">
                       <CustomSelect

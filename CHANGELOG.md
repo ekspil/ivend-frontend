@@ -1048,6 +1048,11 @@
 * new bank data
 
 
+# 1.8.32 - Hotfix
+
+* hotfix edit buttons
+
+
 
 
 
