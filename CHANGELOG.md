@@ -1043,6 +1043,10 @@
 
 * fix orange day price
 
+# 1.8.31 - Hotfix
+
+* new bank data
+
 
 
 
