@@ -1053,6 +1053,11 @@
 * hotfix edit buttons
 
 
+# 1.8.33- Hotfix
+
+* add aqsi
+
+
 
 
 
