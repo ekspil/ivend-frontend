@@ -1057,6 +1057,10 @@
 
 * add aqsi
 
+# 1.8.34- Hotfix
+
+* edit orange bugs
+
 
 
 

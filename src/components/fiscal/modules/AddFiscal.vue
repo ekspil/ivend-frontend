@@ -30,7 +30,8 @@
                                         <select v-model="input.kktModel" class="form-control custom-select">
                                             <option value="УМКА-01-ФА (ФН15)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН15)</option>
                                             <option value="УМКА-01-ФА (ФН36)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН36)</option>
-                                            <option value="ORANGE_DATA" v-if="input.type === 'orange'">ORANGE DATA</option>
+                                            <option value="ORANGE_15" v-if="input.type === 'orange'">ORANGE DATA (ФН15)</option>
+                                            <option value="ORANGE_36" v-if="input.type === 'orange'">ORANGE DATA (ФН36)</option>
                                             <option value="REKASSA" v-if="input.type === 'rekassa'">Рекасса Online KKM</option>
                                             <option value="TELEMEDIA" v-if="input.type === 'telemedia'">Телемедиа Online KKM</option>
 
