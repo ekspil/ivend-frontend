@@ -1062,6 +1062,11 @@
 * edit orange bugs
 
 
+# 1.8.35- Hotfix
+
+* add search in stat
+
+
 
 
 

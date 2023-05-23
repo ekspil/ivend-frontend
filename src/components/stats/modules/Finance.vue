@@ -4,10 +4,12 @@
 			<div class="stats-top-menu__content-container">
 				<div class="stats-top-menu__date-buttons">
 					<Period @onChange="onPeriodChange"/>
-				</div>
+          <input v-model="searchTemp" class="select2 stats-top-menu__item" style="width: 130px;" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp"/>
+
+        </div>
 				<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
 					<option label="Все группы" :value="null"></option>
-					<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
+					<option v-for="group in groups" v-bind:value="group.id" :key="group.id">{{group.name}}</option>
 				</select>
 				<ExportExcel class="disabled-small" :table="{ headers: getTableHeaders, fields: getTableFields }"/>
 			</div>
@@ -50,6 +52,8 @@ export default {
 		value2: '',
 		selectedGroupId: null,
 		machines: [],
+    search: null,
+    searchTemp: null,
 		controllers: [],
 		period: {
 			from: null,
@@ -59,8 +63,8 @@ export default {
 	apollo: {
 		machines: {
 			query: gql`
-			query ($machineGroupId: Int, $period: Period) {
-				getMachineSales (machineGroupId: $machineGroupId, period: $period) {
+			query ($machineGroupId: Int, $period: Period, $search: String) {
+				getMachineSales (machineGroupId: $machineGroupId, period: $period, search: $search) {
 						id
 						name
 						salesSummary {
@@ -80,13 +84,16 @@ export default {
 						period: {
               from: this.period,
               to: Date.now() + 30 * 24 * 60 * 60 * 1000
-            }
+            },
+            machineGroupId: this.selectedGroupId,
+            search: this.search
 					};
 				}
 
 				return {
 					period: this.period,
-					machineGroupId: this.selectedGroupId
+					machineGroupId: this.selectedGroupId,
+          search: this.search
 				};
 			},
 			update(data) {
@@ -133,7 +140,7 @@ export default {
 		})); }
 	},
   watch:{
-    selectedGroupId(newVal, oldVal){
+    selectedGroupId(newVal){
       if(this.$store.state.user.selectedGroupIdSt === newVal) return
       this.$store.state.user.selectedGroupIdSt = newVal
     }
@@ -150,7 +157,7 @@ export default {
 		},
 		setSales(d){
 		  if(!d) return
-			const sal = d.reduce((acc, item) => {
+      const sal = d.reduce((acc, item) => {
 				acc.count = acc.count + item.salesSummary.salesCount
 				acc.amount = acc.amount + item.salesSummary.overallAmount
 				return acc
