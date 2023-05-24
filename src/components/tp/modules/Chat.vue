@@ -5,7 +5,7 @@
 
             <div class="row mt-5">
                 <div class="col-lg-10 offset-lg-1 col-md-12">
-                    <div class="form-label f-b card-header my-auto">Позвонить в техническую поддержку: {{infoPhoneTech}}</div>
+                    <div class="form-label f-b card-header my-auto">Позвонить в техническую поддержку: {{infoPhoneTech}}, время работы: Пн-Пт 10:00-18:00 МСК</div>
 
                     <Validate
                             formName="addQuestion"
