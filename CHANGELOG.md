@@ -1067,6 +1067,11 @@
 * add search in stat
 
 
+# 1.8.36- Hotfix
+
+* add zero sales controllers switch
+
+
 
 
 
