@@ -52,6 +52,7 @@ import Home from '@/components/Home';
 import Confirm from '@/components/Confirm';
 
 import Tp from '@/components/tp/Tp'
+import Directory from '@/components/directory/Directory'
 
 import { includes } from 'ramda';
 
@@ -114,7 +115,9 @@ const routes = [
     { path: '/sms/:tel', component: Sms },
     { path: '/register', component: Registration },
     { path: '/remember', component: Remember },
-    { path: '/NewPassword', component: NewPassword }
+    { path: '/NewPassword', component: NewPassword },
+
+    { path: '/directory', component: Directory },
 ];
 
 
@@ -150,6 +153,12 @@ router.beforeEach((to, from, next) => {
         } else if (role === 'VENDOR_NOT_CONFIRMED' && to.path !== '/confirm') {
             return next('/confirm');
         }
+     }
+
+     else if(role !== 'ADMIN'){
+         if(['/directory'].includes(to.path)){
+             return next('/home');
+         }
      }
 
     return next();
