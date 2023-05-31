@@ -1079,6 +1079,10 @@
 
 * add no managers select
 
+# 1.8.40- Hotfix
+
+* add no managers select
+
 
 
 
