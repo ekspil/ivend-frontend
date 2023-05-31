@@ -141,9 +141,13 @@ router.beforeEach((to, from, next) => {
 
      if (isSecured && !token) {
          return next('/login');
-     }else if(isLogin && token && remember){
+     }
+     else if(isLogin && token && remember){
              return next('/home');
 
+     }
+     else if(['/fiscalAll', '/directory'].includes(to.path) && role !== 'ADMIN'){
+         return next('/home');
      }
      else if (!isSecured && token || token && role !== 'VENDOR') {
         if (role === 'VENDOR_NEGATIVE_BALANCE' && !['/billing', '/settings', '/tp'].includes(to.path)) {
@@ -155,11 +159,6 @@ router.beforeEach((to, from, next) => {
         }
      }
 
-     else if(role !== 'ADMIN'){
-         if(['/directory'].includes(to.path)){
-             return next('/home');
-         }
-     }
 
     return next();
 })
