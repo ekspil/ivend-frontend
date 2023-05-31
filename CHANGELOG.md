@@ -1075,6 +1075,10 @@
 
 * add directory
 
+# 1.8.39- Hotfix
+
+* add no managers select
+
 
 
 

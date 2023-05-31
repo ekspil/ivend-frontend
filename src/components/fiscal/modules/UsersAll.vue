@@ -42,7 +42,8 @@
                               </div>
                               <div class="form-group " style="width: 25%; padding-left: 10px" v-if="managers">
                               <select class="form-control custom-select" v-model="selectedManagerId">
-                                <option key="0" :value="null" selected="selected">Все менеджеры
+                                <option key="-1" :value="null" selected="selected">Все менеджеры</option>
+                                <option key="0" :value="0">Без менеджеров
                                 </option>
                                 <option v-for="manager in managers"
                                         :key="manager.id" :value="manager.id">
@@ -223,7 +224,7 @@
                       orderDesc: this.orderDesc,
                       search: this.search,
                       partnerId,
-                      managerId: Number(this.selectedManagerId)
+                      managerId: this.selectedManagerId
                     };
                 },
                 update (data) {
