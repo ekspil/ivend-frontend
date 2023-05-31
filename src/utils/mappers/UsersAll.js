@@ -12,17 +12,16 @@ export const getTableHeaders = () => [
     { name: 'Списание', key: 'dailyBill', unsortable: false  },
     { name: 'Телефон', key: 'phone', unsortable: false},
     { name: 'Почта', key: 'email', unsortable: false  },
-
-    { name: 'Статус', key: 'role', link: false },
-    { name: 'Партнер', key: 'partnerId', link: false },
     { name: 'Менеджер', key: 'managerId', critery ({managerId, props}) {
-        if(!props.managers) return ""
-          const manager = props.managers.find(item => item.id === managerId)
+            if(!props.managers) return ""
+            const manager = props.managers.find(item => item.id === managerId)
             if(!manager) return ""
             return manager.name
 
         }, link: false },
 
+    { name: 'Статус', key: 'role', link: false },
+    { name: 'Партнер', key: 'partnerId', link: false },
 
 ];
 
