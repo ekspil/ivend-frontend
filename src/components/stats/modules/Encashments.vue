@@ -4,7 +4,9 @@
 			<div class="stats-top-menu__content-container">
 				<div class="stats-top-menu__date-buttons">
 					<Period @onChange="onPeriodChange"/>
-					<select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
+          <input v-model="searchTemp" class="select2 stats-top-menu__item" style="width: 130px;" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp"/>
+
+          <select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
 						<option label="Все группы" :value="null"></option>
 						<option v-for="group in groups" v-bind:value="group.id">{{group.name}}</option>
 					</select>
@@ -67,6 +69,8 @@
     data: () => ({
       selectedGroupId: null,
       machines: [],
+      search: null,
+      searchTemp: null,
       period: {
         from: null,
         to: null
@@ -75,8 +79,8 @@
     apollo: {
       machines: {
         query: gql`
-			query($machineGroupId: Int, $period: Period)  {
-				getMachines(machineGroupId: $machineGroupId) {
+			query($machineGroupId: Int, $period: Period, $search: String)  {
+				getMachines(machineGroupId: $machineGroupId, search: $search) {
 					id
 					name
 					place
@@ -97,8 +101,9 @@
 			`,
         variables () {
           return {
-            	machineGroupId: this.selectedGroupId,
-			  	period: this.period
+            machineGroupId: this.selectedGroupId,
+			  	  period: this.period,
+            search: this.search
           };
         },
         update(data) {
@@ -122,7 +127,10 @@
     },
     computed: {
       getTableHeaders,
-      getTableFields () { return getTableFields(this.machines); }
+      getTableFields () {
+
+        if(!this.machines.length) return null
+        return getTableFields(this.machines.filter(i=>i)); }
     },
     watch:{
       selectedGroupId(newVal, oldVal){
@@ -161,6 +169,7 @@
       },
     	setEncashments(d){
 			const sal = d.reduce((acc, item) => {
+			  if(!item || !item.encashments) return acc
 				acc.count = acc.count + item.encashments.length
 				acc.amount = acc.amount + item.encashments.reduce((accc, itemm) => {
 							return Number(itemm.sum) + accc

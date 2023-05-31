@@ -52,6 +52,7 @@ import Home from '@/components/Home';
 import Confirm from '@/components/Confirm';
 
 import Tp from '@/components/tp/Tp'
+import Directory from '@/components/directory/Directory'
 
 import { includes } from 'ramda';
 
@@ -114,7 +115,9 @@ const routes = [
     { path: '/sms/:tel', component: Sms },
     { path: '/register', component: Registration },
     { path: '/remember', component: Remember },
-    { path: '/NewPassword', component: NewPassword }
+    { path: '/NewPassword', component: NewPassword },
+
+    { path: '/directory', component: Directory },
 ];
 
 
@@ -138,9 +141,13 @@ router.beforeEach((to, from, next) => {
 
      if (isSecured && !token) {
          return next('/login');
-     }else if(isLogin && token && remember){
+     }
+     else if(isLogin && token && remember){
              return next('/home');
 
+     }
+     else if(['/fiscalAll', '/directory'].includes(to.path) && role !== 'ADMIN'){
+         return next('/home');
      }
      else if (!isSecured && token || token && role !== 'VENDOR') {
         if (role === 'VENDOR_NEGATIVE_BALANCE' && !['/billing', '/settings', '/tp'].includes(to.path)) {
@@ -151,6 +158,7 @@ router.beforeEach((to, from, next) => {
             return next('/confirm');
         }
      }
+
 
     return next();
 })

@@ -5,7 +5,7 @@
 
             <div id="canvas" class="gradient"></div>
 
-            <div class="container-fluid">
+            <div v-if="user" class="container-fluid">
                 <div class="d-flex">
                     <router-link class="header-brand" to="/home">
                         <img alt="iVend" class="header-brand-img" :src="logo">
@@ -73,8 +73,8 @@
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                 <a class="dropdown-item" href="#"><i
                                         class="dropdown-icon mdi mdi-account-outline"></i> Профиль</a>
-                                <a class="dropdown-item" href="#"><i class="dropdown-icon mdi mdi-settings"></i>
-                                    Настройки</a>
+                                <a v-if="user.role === 'ADMIN'" class="dropdown-item" href="#" @click.prevent="$router.push('/directory')"><i class="dropdown-icon mdi mdi-settings"></i>
+                                    Настройки справочников</a>
                                 <div class="dropdown-divider"></div>
                                 <a @click.prevent="exit" class="dropdown-item" href="#"><i
                                         class="dropdown-icon mdi mdi-logout-variant"></i> Выйти</a>
@@ -122,6 +122,7 @@
                     query {
                         user: getProfile {
                             phone
+                            role
                             countryCode
                             legalInfo {
                                timeZone

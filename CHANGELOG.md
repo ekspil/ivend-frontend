@@ -1062,6 +1062,28 @@
 * edit orange bugs
 
 
+# 1.8.35- Hotfix
+
+* add search in stat
+
+
+# 1.8.36- Hotfix
+
+* add zero sales controllers switch
+
+# 1.8.37- Hotfix
+
+* add directory
+
+# 1.8.39- Hotfix
+
+* add no managers select
+
+# 1.8.40- Hotfix
+
+* add no managers select
+
+
 
 
 

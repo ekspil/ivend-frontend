@@ -17,7 +17,8 @@ const state = () => ({
 	editedUser: null,
 	periodStat: null,
 	periodStatType: null,
-	services: null
+	services: null,
+	showZeroValues: false,
 });
 
 const getters = {
@@ -26,6 +27,7 @@ const getters = {
 	sales: state => state.sharedData.sales,
 	encashments: state => state.sharedData.encashments,
 	services: state => state.services,
+	showZeroValues: state => state.showZeroValues,
 	periodStat: state => {
 		return {
 			period: state.periodStat,
@@ -42,6 +44,10 @@ const mutations = {
 	},
 	setServices(state, services){
 		state.services = services
+	},
+	switchShowZeroValues(state, value){
+
+		state.showZeroValues = value
 	},
 	setSales(state, {sales}){
 		if(!sales) return

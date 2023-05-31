@@ -7,7 +7,7 @@ export const getTableHeaders = () => [
 	{ name: 'Контроллер', key: 'controller'},
 
 ];
-
+import store from '@/store'
 export const getTableFields = data => data.map(({ id, name, salesSummary, controller }) => ({
 	id,
 	name,
@@ -18,4 +18,12 @@ export const getTableFields = data => data.map(({ id, name, salesSummary, contro
 	cashlessAmount: Number(salesSummary.cashlessAmount.toFixed(2)),
 
 	route: `/stats/${id}`
-})).filter(e => e.salesCount);
+})).filter(e => {
+	if(store.getters['cache/showZeroValues']){
+		return true
+	}
+	else {
+		return Boolean(e.salesCount)
+	}
+
+});
