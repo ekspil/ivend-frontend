@@ -366,7 +366,7 @@ export default {
                 amount: parseFloat(Number(this.depositSum).toFixed(0)),
                 inn: this.legalInfo.inn,
                 companyName: this.legalInfo.companyName,
-                services: this.services,
+                services: JSON.stringify([{"id":999,"name":"Абонентская плата за услуги телеметрии и фискализации в ЛК iVend","price":parseFloat(Number(this.depositSum).toFixed(0)),"fixCount":true, "count":1}]),
                 prefix: "VFT"
             }
           }
