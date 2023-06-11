@@ -5,7 +5,7 @@
 
             <div class="row mt-5">
                 <div class="col-lg-10 offset-lg-1 col-md-12">
-                    <div class="form-label f-b card-header my-auto">Позвонить в техническую поддержку: {{infoPhoneTech}}</div>
+                    <div class="form-label f-b card-header my-auto">Позвонить в техническую поддержку: {{infoPhoneTech}} {{infoScheduleTech ? ", время работы: "+infoScheduleTech : "" }}</div>
 
                     <Validate
                             formName="addQuestion"
@@ -69,6 +69,7 @@
         },
         data: ()=> ({
             infoPhoneTech: "+7 (952) 381-31-41",
+            infoScheduleTech: "Пн-Пт 10:00-18:00 МСК",
             input: {
                 category: "general"
             },
@@ -81,6 +82,7 @@
       beforeMount() {
         if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.infoPhoneTech){
           this.infoPhoneTech = this.$store.state.user.partnerInfo.infoPhoneTech
+          this.infoScheduleTech = null
         }
       },
         methods: {

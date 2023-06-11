@@ -12,8 +12,14 @@
                     </router-link>
                     <div class="d-flex order-lg-2 ml-auto">
                         <div class="dropdown d-none d-md-flex" v-if="true">
-                            <span class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
-                                <span v-if="user" class="text-black f-b">Телефон: {{{phone: infoPhoneCom, countryCode: user.countryCode} | prettifyObj }}</span>
+                            <span v-if="user && infoPhonePartner" class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
+                                <span class="text-black f-b">Телефон: {{{phone: infoPhonePartner, countryCode: user.countryCode} | prettifyObj }}</span>
+                            </span>
+                            <span v-if="user && !infoPhonePartner" class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
+                                <span class="text-black f-b">Техподдержка: {{{phone: infoPhoneTech, countryCode: user.countryCode} | prettifyObj }}</span>
+                            </span>
+                            <span v-if="user && !infoPhonePartner" class="ml-2 d-none d-lg-block"  style=" padding:15px"  >
+                                <span class="text-black f-b">Продажи: {{{phone: infoPhoneCom, countryCode: user.countryCode} | prettifyObj }}</span>
                             </span>
                         </div></div>
 
@@ -109,12 +115,14 @@
             this.logo = `/api/v1/files/file/${this.$store.state.user.partnerInfo.partnerId}/${this.$store.state.user.partnerInfo.fileLogo}`
           }
           if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.infoPhoneCom){
-            this.infoPhoneCom = this.$store.state.user.partnerInfo.infoPhoneCom
+            this.infoPhonePartner = this.$store.state.user.partnerInfo.infoPhoneCom
           }
       },
       data: ()=>({
           logo: "/assets/images/brand/logo.png",
-          infoPhoneCom: "9313288159"
+          infoPhonePartner: false,
+          infoPhoneCom: "9313288159",
+          infoPhoneTech: "9523813141",
         }),
         apollo: {
             user: {
