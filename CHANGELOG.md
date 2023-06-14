@@ -1093,6 +1093,10 @@
 
 * kkt provider
 
+# 1.8.43- Hotfix
+
+* fix bill sum
+
 
 
 
