@@ -23,7 +23,7 @@
 
             <div class="auth-block__link-title col-6 left"></div><div class="auth-block__link-title col-6 right"></div>
             <div class="auth-block__link-title col-6 left">Автомат</div><div class="auth-block__link-title col-6 right">{{ bill.machineNumber}}</div>
-            <div class="auth-block__link-title col-5 left no-right">Адрес расчетов</div><div class="auth-block__link-title col-7 right no-left">{{ "Курск" }}</div>
+            <div class="auth-block__link-title col-5 left no-right">Адрес расчетов</div><div class="auth-block__link-title col-7 right no-left">{{ fiscalAddress }}</div>
             <div class="auth-block__link-title col-5 left no-right">Место расчетов</div><div class="auth-block__link-title col-7 right no-left">{{ bill.place}}</div>
             <div class="auth-block__link-title col-4 left">Кассир</div><div class="auth-block__link-title col-8 right">Администратор Kassir</div>
 
@@ -136,6 +136,7 @@ export default {
               fiscalDocumentNumber
               ecrRegistrationNumber
               fiscalDocumentAttribute
+              kktProvider
               fnNumber
             }
         }
@@ -147,10 +148,18 @@ export default {
         },
 
         update (data) {
-
           if(!data){
             this.text = "Вашего чека еще нет в системе ОФД, попробуйте перезагрузить страницу через пару минут..."
             return null
+          }
+
+          const kktProvider = data.getFiscalReceipt.kktProvider
+          if (kktProvider === "umka") {
+            this.fiscalAddress = "г. Курск, ул. Верхняя Луговая 54"
+          } else if (kktProvider === "orange") {
+            this.fiscalAddress = "г. Москва, Алтуфьевское шоссе 33Г"
+          } else {
+            this.fiscalAddress = "Курск"
           }
 
           const getTwoDigitDateFormat = (monthOrDate) => {
