@@ -153,13 +153,13 @@ export default {
             return null
           }
 
-          const kktProvider = data.getFiscalReceipt.kktProvider
+          const kktProvider = data?.getFiscalReceipt?.kktProvider
           if (kktProvider === "umka") {
             this.fiscalAddress = "г. Курск, ул. Верхняя Луговая 54"
           } else if (kktProvider === "orange") {
             this.fiscalAddress = "г. Москва, Алтуфьевское шоссе 33Г"
-          } else {
-            this.fiscalAddress = "Курск"
+          } else if(kktProvider === "umka_new") {
+            this.fiscalAddress = "г. Курск, ул. Верхняя Луговая, д.54"
           }
 
           const getTwoDigitDateFormat = (monthOrDate) => {
@@ -193,7 +193,8 @@ export default {
       size: 100,
       bill: null,
       datetime: null,
-      text: "Ожидание загрузки чека..."
+      text: "Ожидание загрузки чека...",
+      fiscalAddress: "Курск"
     }),
     mounted: async function (){
     },

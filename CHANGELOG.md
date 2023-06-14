@@ -1089,6 +1089,11 @@
 * add no managers select
 
 
+# 1.8.42- Hotfix
+
+* kkt provider
+
+
 
 
 
