@@ -35,8 +35,8 @@
                                         <select v-model="data.kkt.kktModel" class="form-control custom-select">
                                             <option v-if="data.kkt.type === 'umka' || data.kkt.type === 'umka_new' " value="УМКА-01-ФА (ФН15)">УМКА-01-ФА (ФН15)</option>
                                             <option v-if="data.kkt.type === 'umka' || data.kkt.type === 'umka_new' "  value="УМКА-01-ФА (ФН36)">УМКА-01-ФА (ФН36)</option>
-                                            <option v-if="data.kkt.type === 'orange'"  value="ORANGE_36">Orange (ФН36)</option>
-                                            <option v-if="data.kkt.type === 'orange'"  value="ORANGE_15">Orange (ФН15)</option>
+                                            <option v-if="data.kkt.type === 'orange'"  value="ORANGE_36">PAYONLINE-01-ФА (ФН36)</option>
+                                            <option v-if="data.kkt.type === 'orange'"  value="ORANGE_15">PAYONLINE-01-ФА (ФН15)</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

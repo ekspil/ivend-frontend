@@ -84,6 +84,17 @@ const statusToText = field => {
 //     };
 
 
+const getKktModel = (model) => {
+    switch(model){
+        case "ORANGE_15":
+            return "PAYONLINE-01-ФА ФН15"
+        case "ORANGE_36":
+            return "PAYONLINE-01-ФА ФН36"
+        default:
+            return model
+    }
+}
+
 
 
 export const getTableHeaders = () => [
@@ -120,7 +131,7 @@ export const getTableHeaders = () => [
 export const getTableFields = (data, props) => data.map(kkt => ({
     id: kkt.id,
     companyName: (kkt.companyName ? kkt.companyName.split(" ")[0] : '-') +  ' ' +   (kkt.companyName &&  kkt.companyName.split(" ")[1]? kkt.companyName.split(" ")[1] : ''),
-    model: kkt.kktModel || '-',
+    model: getKktModel(kkt.kktModel) || '-',
     factoryNum: kkt.kktFactoryNumber || '-',
     regNum: kkt.kktRegNumber || '-',
     kktStatus: kkt.kktStatus || '-',

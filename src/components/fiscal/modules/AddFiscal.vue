@@ -28,10 +28,10 @@
                                     <div class="form-group" >
                                         <label class="form-label f-b">Модель онлайн кассы</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
-                                            <option value="УМКА-01-ФА (ФН15)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН15)</option>
-                                            <option value="УМКА-01-ФА (ФН36)" v-if="input.type === 'umka'">УМКА-01-ФА (ФН36)</option>
-                                            <option value="ORANGE_15" v-if="input.type === 'orange'">ORANGE DATA (ФН15)</option>
-                                            <option value="ORANGE_36" v-if="input.type === 'orange'">ORANGE DATA (ФН36)</option>
+                                            <option value="УМКА-01-ФА (ФН15)" v-if="input.type === 'umka'">УМКА-01-ФА ФН15 (Только для ОСН)</option>
+                                            <option value="УМКА-01-ФА (ФН36)" v-if="input.type === 'umka'">УМКА-01-ФА ФН36</option>
+                                            <option value="ORANGE_15" v-if="input.type === 'orange'">PAYONLINE-01-ФА ФН15 (Только для ОСН)</option>
+                                            <option value="ORANGE_36" v-if="input.type === 'orange'">PAYONLINE-01-ФА ФН36</option>
                                             <option value="REKASSA" v-if="input.type === 'rekassa'">Рекасса Online KKM</option>
                                             <option value="TELEMEDIA" v-if="input.type === 'telemedia'">Телемедиа Online KKM</option>
 
@@ -93,6 +93,7 @@
             kkt: {
                 profile: null
             },
+            typeHistory: "umka",
             input: {
                 kktModel: "УМКА-01-ФА (ФН36)",
                 type: "umka"
@@ -123,6 +124,23 @@
                     };
                 }
             }
+        },
+        watch: {
+          input: {
+            handler(newValue, oldValue) {
+              if(newValue.type === this.typeHistory) return
+              if(newValue.type === "umka"){
+                this.input.kktModel = "УМКА-01-ФА (ФН36)"
+                this.typeHistory = "umka"
+              }
+              if(newValue.type === "orange"){
+                this.input.kktModel = "ORANGE_36"
+                this.typeHistory = "orange"
+              }
+            },
+            deep: true
+          }
+
         },
         methods: {
             selectDefaultFN(){

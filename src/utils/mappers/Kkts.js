@@ -18,6 +18,17 @@ const getStatus = (status, action) => {
 
 };
 
+const getKktModel = (model) => {
+    switch(model){
+        case "ORANGE_15":
+            return "PAYONLINE-01-ФА ФН15"
+        case "ORANGE_36":
+            return "PAYONLINE-01-ФА ФН36"
+        default:
+            return model
+    }
+}
+
 export const getTableHeaders = () => [
     { name: 'ID', key: 'id' },
     { name: 'Модель', key: 'model', unsortable: true },
@@ -33,7 +44,7 @@ export const getTableHeaders = () => [
 
 export const getTableFields = data => data.map(kkt => ({
     id: kkt.id,
-    model: kkt.kktModel || '-',
+    model: getKktModel(kkt.kktModel) || '-',
     factoryNum: kkt.kktFactoryNumber || '-',
     regNum: kkt.kktRegNumber || '-',
     fiscalNum: kkt.kktFNNumber || '-',

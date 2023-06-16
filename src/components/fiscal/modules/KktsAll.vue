@@ -22,8 +22,8 @@
                                   <option key="5" :value="2" selected="selected">2: Ошибка</option>
                                   <option key="4" :value="3" selected="selected">3: Внимание</option>
                                   <option key="3" :value="4" selected="selected">4: Регистрация</option>
-                                  <option key="3" :value="5" selected="selected">5: Активация</option>
-                                  <option key="3" :value="6" selected="selected">6: Зарегистрирована</option>
+                                  <option key="2" :value="5" selected="selected">5: Активация</option>
+                                  <option key="1" :value="6" selected="selected">6: Зарегистрирована</option>
                                   <option key="0" :value="7" selected="selected">7: Работает</option>
                                 </select>
                               </div>

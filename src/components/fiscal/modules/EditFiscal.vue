@@ -39,7 +39,7 @@
                                     <!--</div>-->
                                     <div class="form-group">
                                     <label class="form-label f-b">Модель онлайн кассы</label>
-                                    <Field className="form-control" :value="data.kkt.kktModel" disabled name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
+                                    <Field className="form-control" :value="getKktModel(data.kkt.kktModel)" disabled name="kktModel" formName="editFiscal" placeholder="Модель ККТ"/>
                                     </div>
 
                                     <div class="form-group">
@@ -158,6 +158,16 @@
             }
         },
         methods: {
+          getKktModel(model){
+            switch(model){
+              case "ORANGE_15":
+                return "PAYONLINE-01-ФА ФН15"
+              case "ORANGE_36":
+                return "PAYONLINE-01-ФА ФН36"
+              default:
+                return model
+            }
+          },
             async save() {
                 try {
                     this.kktUploading = true;

@@ -1097,6 +1097,10 @@
 
 * fix bill sum
 
+# 1.8.44- Hotfix
+
+* new function in bill generation
+
 
 
 
