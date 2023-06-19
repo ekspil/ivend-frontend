@@ -18,12 +18,12 @@
 <!--                                  <option key="9996" value="not_payed" >Неоплаченные</option>-->
 <!--                                </select>-->
 <!--                              </div>-->
-                                <span class="col-auto">
-                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
-                                </span>
                               <div class="stats-top-menu__date-buttons"  style=" padding-right: 0px">
                                 <Period @onChange="onPeriodChange" :allTime="true"/>
                               </div>
+                                <span class="col-auto">
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                                </span>
                                 <Table
                                         v-if="bills"
                                         :headers="getTableHeaders"
