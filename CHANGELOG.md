@@ -1102,6 +1102,11 @@
 * new function in bill generation
 
 
+# 1.8.46- Hotfix
+
+* fix bill page
+
+
 
 
 

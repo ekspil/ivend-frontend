@@ -18,9 +18,9 @@
 <!--                                  <option key="9996" value="not_payed" >Неоплаченные</option>-->
 <!--                                </select>-->
 <!--                              </div>-->
-<!--                                <span class="col-auto">-->
-<!--                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>-->
-<!--                                </span>-->
+                                <span class="col-auto">
+                                            <ExportExcel :table="{ headers: getTableHeaders, fields: getTableFields }"/>
+                                </span>
                               <div class="stats-top-menu__date-buttons"  style=" padding-right: 0px">
                                 <Period @onChange="onPeriodChange" :allTime="true"/>
                               </div>
@@ -30,7 +30,7 @@
                                         :fields="getTableFields"
                                         className="settings-table"
                                         sortBy="createdAt"
-                                        :order="false"
+                                        :orderAll="descFunc"
 
                                 />
 
@@ -99,8 +99,8 @@
         apollo: {
             bills: {
                 query: gql`
-                    query ($input: AllBillsInput!) {
-                        getAllBills(input: $input) {
+                    query ($input: AllBillsInput!, $orderDesc: Boolean, $orderKey: String,) {
+                        getAllBills(input: $input, orderDesc: $orderDesc, orderKey: $orderKey) {
                             id,
                             applied
                             meta
@@ -130,7 +130,9 @@
                             limit: Number(this.limit),
                             status: this.selectedStatus,
                             search: this.search
-                        }
+                        },
+                        orderKey: this.orderKey,
+                        orderDesc: this.orderDesc,
                     };
                 },
                 update (data) {
@@ -147,6 +149,7 @@
                 period.to = period.from
               }
               this.period = period;
+              this.offset = 0
             },
             nextPage() {
                 if(!this.bills || !this.bills.length) {
