@@ -14,6 +14,7 @@
                                     <select v-model="selectType" class="form-control custom-select">
                                         <option value="all">Все</option>
                                         <option value="news">Новость</option>
+                                        <option value="partnerInfo">Информация для партнера</option>
                                         <option value="info">(ТП) Информация</option>
                                         <option value="instr">(ТП) Инструкция</option>
                                     </select>
@@ -76,6 +77,14 @@
                             header
                             active
                             }
+                      getAllPartnerInfo {
+                            id
+                            date
+                            text
+                            link
+                            header
+                            active
+                            }
                       getAllInstr {
                             id
                             date
@@ -95,11 +104,15 @@
                         item.type = "info"
                         return item
                     })
+                    const partnerInfo = data.getAllPartnerInfo.map(item => {
+                        item.type = "partnerInfo"
+                        return item
+                    })
                     const news = data.getAllNews.map(item => {
                         item.type = "news"
                         return item
                     })
-                    return [...instr, ...info, ...news];
+                    return [...instr, ...info, ...news, ...partnerInfo];
                 }
             }
         },
@@ -136,6 +149,23 @@
 
                         this.news = this.news.filter(ne => {
                             return !(ne.id === id && ne.type === "info")
+                        });
+                        break
+
+                    case "Партнер инфо":
+
+                        await this.$apollo.mutate({
+                            mutation: gql`
+                        mutation ($id: Int!) {
+                            deletePartnerInfo (id: $id)
+                        }
+                    `,
+                            variables: { id }
+                        });
+
+
+                        this.news = this.news.filter(ne => {
+                            return !(ne.id === id && ne.type === "partnerInfo")
                         });
                         break
 

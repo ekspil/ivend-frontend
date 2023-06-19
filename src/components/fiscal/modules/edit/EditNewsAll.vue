@@ -19,6 +19,7 @@
                                         <label class="form-label f-b">Тип записи</label>
                                         <select v-model="type" class="form-control custom-select" disabled>
                                             <option value="news">Новость</option>
+                                            <option value="partnerInfo">Информация для партнера</option>
                                             <option value="info">(ТП) Информация</option>
                                             <option value="instr">(ТП) Инструкция</option>
                                         </select>
@@ -143,6 +144,14 @@
           link
           date
         }
+        partnerInfo: getPartnerInfoById(id: $id) {
+          id
+          active
+          header
+          text
+          link
+          date
+        }
         instr: getInstrById(id: $id) {
           id
           active
@@ -163,6 +172,11 @@
                             break
                         case "info":
                             i = data.info
+                            this.input.text = i.text
+
+                            break
+                        case "partnerInfo":
+                            i = data.partnerInfo
                             this.input.text = i.text
 
                             break
@@ -216,6 +230,26 @@
                                 mutation: gql`
 					mutation saveInfo ($data: InfoInput!) {
 						changeInfo (input: $data) {
+							id
+						}
+					}
+					`,
+                                variables: {
+                                    data: data
+                                }
+                            });
+
+                            this.$refs.form.process({ errors, success: 'Успешно сохранено.' });
+                        } catch (error) {
+                            this.$refs.form.showMessage('error', convertServerError(error.message));
+                        }
+                        break
+                    case "partnerInfo":
+                        try {
+                            const { errors } = await this.$apollo.mutate({
+                                mutation: gql`
+					mutation savePartnerInfo ($data: PartnerInformationInput!) {
+						changePartnerInfo (input: $data) {
 							id
 						}
 					}

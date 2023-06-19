@@ -4,6 +4,7 @@ const mapType = type => {
     switch (type) {
         case 'news': return 'Новость';
         case 'info': return 'Информация';
+        case 'partnerInfo': return 'Партнер инфо';
         case 'instr': return 'Инструкция';
         default: return '?';
     }

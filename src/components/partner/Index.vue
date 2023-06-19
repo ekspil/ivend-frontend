@@ -23,6 +23,7 @@
     import Tabs from '@/modules/Tabs';
     import Vendors from '@/components/partner/PartnerUsers';
     import PartnerPayments from '@/components/partner/PartnerPayments';
+    import PartnerInfos from '@/components/partner/PartnerInfos';
 
 
     export default {
@@ -32,6 +33,7 @@
             tabs: [
                 { name: 'Вендоры', component: Vendors, route: 'vendors' },
                 { name: 'Выплаты', component: PartnerPayments, route: 'partnerPayments' },
+                { name: 'Информация для партнера', component: PartnerInfos, route: 'partnerInfo' },
             ]
         })
     }

@@ -1107,6 +1107,11 @@
 * fix bill page
 
 
+# 1.8.47- Hotfix
+
+* fix bill page
+
+
 
 
 
