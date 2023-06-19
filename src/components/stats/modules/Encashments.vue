@@ -3,7 +3,7 @@
 		<div class="stats-top-menu">
 			<div class="stats-top-menu__content-container">
 				<div class="stats-top-menu__date-buttons">
-<!--					<Period @onChange="onPeriodChange"/>-->
+					<Period @onChange="onPeriodChange"/>
           <input v-model="searchTemp" class="select2 stats-top-menu__item" style="width: 130px;" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp"/>
 
           <select v-if="groups" v-model="selectedGroupId" class="select2 stats-top-menu__item" placeholder="Выберите группу">
