@@ -1111,6 +1111,10 @@
 
 * fix bill page
 
+# 1.8.49- Hotfix
+
+* extended encashments
+
 
 
 
