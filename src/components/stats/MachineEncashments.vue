@@ -42,7 +42,7 @@ import Table from '@/modules/table/Table';
 import ExportExcel from '@/modules/table/ExportExcel';
 import { getTableHeaders, getTableFields } from '@/utils/mappers/MachineEncashments';
 
-import Period from '@/modules/Period';
+import Period from '@/modules/PeriodLarge';
 
 export default {
 	name: 'machineSales',
@@ -65,9 +65,17 @@ export default {
 				machine: getMachineById (id: $id) {
 					id
 					name
+					place
+					controller {
+						uid
+					}
 
 					encashments(period: $period){
 						sum
+						count
+						cashless
+						countCashless
+						meta
 						createdAt
 						timestamp
 
@@ -81,7 +89,6 @@ export default {
 					period: this.period
 				};
 			},
-            pollInterval: 60000,
 			update: data => data.machine
 		}
 	},

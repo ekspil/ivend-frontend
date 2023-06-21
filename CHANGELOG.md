@@ -1115,6 +1115,10 @@
 
 * extended encashments
 
+# 1.8.50- Hotfix
+
+* extended machine encashments
+
 
 
 
