@@ -5,7 +5,7 @@
 
             <div id="canvas" class="gradient"></div>
 
-            <div v-if="user" class="container-fluid">
+            <div class="container-fluid">
                 <div class="d-flex">
                     <router-link class="header-brand" to="/home">
                         <img alt="iVend" class="header-brand-img" :src="logo">
@@ -68,7 +68,7 @@
                                 <a class="dropdown-item text-center text-muted-dark" href="#">Все события</a>
                             </div>
                         </div>
-                        <div class="dropdown">
+                        <div v-if="user" class="dropdown" >
                             <a class="nav-link pr-0 leading-none d-flex" data-toggle="dropdown" href="#">
                                     <span class="avatar avatar-md brround"
                                           style="background-image: url(/assets/images/faces/female/25.jpg)"></span>
