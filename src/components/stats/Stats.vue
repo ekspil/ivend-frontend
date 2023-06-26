@@ -17,7 +17,7 @@
                 </div>
               </div>
               <div class="card-title-right f-b" v-if="sales && !$route.fullPath.includes('encashments')"><span class="disabled-small" style="color: #3ddabd">{{sales.count}}</span> <span class="disabled-small"> продаж на суммму </span><span style="color: #3ddabd">{{Number(sales.amount).toFixed(2)}}</span> руб.</div>
-              <div class="card-title-right f-b" v-if="sales && $route.fullPath.includes('encashments')"><span class="disabled-small">Кол инкассаций: </span><span class="disabled-small" style="color: #3ddabd">{{encashments.count}}</span> <span class="disabled-small">Сумма:</span> <span style="color: #3ddabd"> {{encashments.amount}}</span> руб.</div>
+              <div class="card-title-right f-b" v-if="sales && $route.fullPath.includes('encashments')"><span class="disabled-small">Кол-во инкассаций: </span><span class="disabled-small" style="color: #3ddabd">{{encashments.count}}</span> <span class="disabled-small"> Сумма:</span> <span style="color: #3ddabd"> {{encashments.amount}}</span> руб.</div>
 
             </div>
 
