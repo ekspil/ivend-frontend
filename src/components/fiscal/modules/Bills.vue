@@ -8,7 +8,7 @@
                             <div class="example top-buttons-container top-buttons">
 
                                 <div class="form-group " style="width: 30%; padding-left: 0px">
-                                    <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
+                                    <input v-model="searchTemp" class="form-control custom-select search-input" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
                                 </div>
 
 <!--                              <div class="form-group " style="width: 30%; padding-left: 5px">-->

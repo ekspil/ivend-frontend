@@ -4210,6 +4210,9 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 	-moz-appearance: none;
 	appearance: none;
 }
+.custom-select.search-input {
+	background: none;
+}
 .custom-select:focus {
 	border-color: #1991eb;
 	outline: 0;
