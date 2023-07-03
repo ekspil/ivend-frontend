@@ -4200,13 +4200,18 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 	line-height: 1.5;
 	color: #000;
 	vertical-align: middle;
-	background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 5'%3E%3Cpath fill='#919191' d='M0 0L10 0L5 5L0 0'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
-	background-size: 8px 10px;
+	background: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='20' height='12' version='1.1' viewBox='0 0 13.23 7.938' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m3.23 4.926c-2.854-2.848-3.23-3.26-3.23-3.534 0-0.4621 0.9622-1.375 1.449-1.375 0.263 0 0.2672 0.003795 2.747 2.471 1.264 1.258 2.326 2.296 2.358 2.308 0.03285 0.01131 1.13-1.05 2.438-2.358 2.909-2.909 2.672-2.79 3.632-1.819 0.8167 0.8266 0.9884 0.5557-2.669 4.211-3.109 3.108-3.109 3.108-3.409 3.108-0.2994 0-0.2994 0-3.317-3.012z' stroke-width='.05501'/%3E%3C/svg%3E%0A");
+	background-repeat: no-repeat;
+	background-position: right 0.75rem center;
+	background-size: 1em;
 	border:1px solid #c4d8f8;
 	border-radius: 3px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+}
+.custom-select.search-input {
+	background: none;
 }
 .custom-select:focus {
 	border-color: #1991eb;

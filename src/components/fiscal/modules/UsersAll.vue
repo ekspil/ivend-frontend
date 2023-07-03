@@ -28,7 +28,7 @@
 <!--                                <div v-if="$store.state.auth.admin.token" class="top-buttons__left-container btn btn-primary" @click="adminOut()">Выйти из режима администратора</div>-->
 
                                 <div class="form-group" style="width: 25%; padding-left: 10px">
-                                  <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
+                                  <input v-model="searchTemp" class="form-control custom-select search-input" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
                                 </div>
                               <div class="form-group " style="width: 25%; padding-left: 10px">
                               <select class="form-control custom-select" v-model="selectedRole">

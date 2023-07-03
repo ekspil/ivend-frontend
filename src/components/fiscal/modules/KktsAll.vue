@@ -11,7 +11,7 @@
 <!--                                </div>-->
 
                                 <div class="form-group" style="width: 50%; padding-left: 10px">
-                                  <input v-model="searchTemp" class="form-control custom-select" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
+                                  <input v-model="searchTemp" class="form-control custom-select search-input" placeholder="Поиск" @focusout="search = searchTemp" @keydown.enter="search = searchTemp">
                                 </div>
 
                               <div class="form-group " style="width: 25%; padding-left: 10px">
