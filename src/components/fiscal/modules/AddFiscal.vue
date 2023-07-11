@@ -15,7 +15,7 @@
                                 <div class="col-md-12 col-lg-12">
 
                                     <div class="form-group">
-                                        <label class="form-label f-b">Касса</label>
+                                        <label class="form-label f-b">Выберите кассу</label>
                                         <select v-model="input.type" class="form-control custom-select" @change="selectDefaultFN()">
 
                                             <option value="orange">OrangeData(Россия)</option>
@@ -26,7 +26,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group" >
-                                        <label class="form-label f-b">Модель онлайн кассы</label>
+                                        <label class="form-label f-b">Выберите модель онлайн кассы</label>
                                         <select v-model="input.kktModel" class="form-control custom-select">
                                             <option value="УМКА-01-ФА (ФН15)" v-if="input.type === 'umka'">УМКА-01-ФА ФН15 (Только для ОСН)</option>
                                             <option value="УМКА-01-ФА (ФН36)" v-if="input.type === 'umka'">УМКА-01-ФА ФН36</option>
@@ -95,8 +95,8 @@
             },
             typeHistory: "umka",
             input: {
-                kktModel: "УМКА-01-ФА (ФН36)",
-                type: "umka"
+                kktModel: null,
+                type: null
 
             },
 
@@ -159,6 +159,10 @@
 
             },
             async save () {
+                if(!this.input.kktModel || !this.input.type){
+                  this.$refs.form.showMessage('error', "Не все поля заполнены!");
+                  return
+                }
                 const data = {
                     kktModel: this.input.kktModel,
                     type: this.input.type,
