@@ -35,7 +35,7 @@ export const getTableHeaders = () => [
 				} else if (gradation.minutes > 30 && gradation.hours < 24) {
 					return createTooltip('alert', `${gradation.hours} ${getWordEnding(gradation.hours, 'час')}`, controllerSim);
 				} else if (gradation.days > 0) {
-					createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`, controllerSim);
+					return createTooltip('alert', `${gradation.days} ${getWordEnding(gradation.days, 'день')}`, controllerSim);
 				}
 			}
 
