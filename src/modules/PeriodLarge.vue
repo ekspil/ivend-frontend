@@ -109,7 +109,7 @@
         let periodNew = this.getPeriod
         this.$emit('onChange', periodNew);
       },
-			setPeriod (period = 'Месяц') {
+			setPeriod (period = 'Год') {
 				this.calendar1 = null
 				this.period = period;
 
@@ -204,7 +204,7 @@
 					case 'cache':
 						period = this.periodStat.period
 						if(!period && !this.allTime) {
-							this.period = "Месяц"
+							this.period = "Год"
 							return this.getPeriod
 						}
 						if(!period && this.allTime) {
