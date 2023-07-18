@@ -97,6 +97,8 @@
                         place
                         kkt{
                           id
+                          kktFactoryNumber
+
                         }
                         group {
                           id

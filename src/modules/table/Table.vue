@@ -1,7 +1,7 @@
 <template>
 	<div :class="['table-responsive', className, short ?'no-overflow': '']">
 		<table class="table card-table table-vcenter text-nowrap">
-			<thead>
+			<thead class="sticky-top bg-white">
 				<tr>
 					<th
 					v-for="(header, index) in headers" :key="index"
@@ -403,4 +403,6 @@
   color: #20088d !important;
 
 }
+
+
 </style>

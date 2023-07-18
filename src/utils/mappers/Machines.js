@@ -11,7 +11,7 @@ export const getTableHeaders = () => [
         critery ({ fiscalizationMode, kkt}) {
 
 
-            if(fiscalizationMode === "UNAPPROVED" && kkt) return kkt.id
+            if(fiscalizationMode === "UNAPPROVED" && kkt) return kkt.kktFactoryNumber
             if(fiscalizationMode === "UNAPPROVED" && !kkt) return "Все ККМ"
             return "Без кассы"
 
