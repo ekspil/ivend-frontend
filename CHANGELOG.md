@@ -1132,6 +1132,10 @@
 
 * hotfix
 
+# 1.8.54- Hotfix
+
+* fix connection error
+
 
 
 
