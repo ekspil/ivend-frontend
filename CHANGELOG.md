@@ -1148,6 +1148,10 @@
 
 * fix table and kkm number
 
+# 1.8.58- Hotfix
+
+* fix table width
+
 
 
 
