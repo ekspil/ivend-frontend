@@ -1,6 +1,6 @@
 <template>
   <div class="container" v-if="billing">
-    <div class="side-app">
+    <div class="side-app max-w-1200">
       <Alert message="Ваш платеж будет подтверждён в ближайшее время." v-if="isRedirectedFromYandex" class="balance-alert" />
 
       <div class="balance-info">

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="side-app">
+        <div class="side-app max-w-1200">
             <div class="page-header">
 <!--                <h4 class="page-title">Рабочий стол</h4>-->
             </div>

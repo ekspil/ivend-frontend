@@ -20421,3 +20421,10 @@ svg {
 .search-cont{
 	padding: 0.45rem 0.75rem;
 }
+
+@media (min-width: 1280px) {
+	.side-app.max-w-1200 {
+		max-width: 1200px;
+		margin: auto;
+	}
+}

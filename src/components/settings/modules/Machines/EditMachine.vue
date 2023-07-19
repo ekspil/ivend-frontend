@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="side-app">
+    <div class="side-app max-w-1200">
       <div class="row mt-5">
         <div class="col-lg-10 offset-lg-1 col-md-12">
           <div class="card">

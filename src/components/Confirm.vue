@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="side-app">
+        <div class="side-app max-w-1200">
             <div class="page-header" v-if="isRoleNotConfirmed && !isRedirectedForConfirmationUserAction">
                 <h4 class="page-title">Проверьте, пожалуйста, вашу почту и подтвердите регистрацию. (В случае, если письмо не пришло, проверьте папку "Спам")</h4>
             </div>
