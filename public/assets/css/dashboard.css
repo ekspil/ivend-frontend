@@ -14297,6 +14297,9 @@ a.icon {
 		display: none;
 	}
 }
+.top-buttons > .card-header {
+	min-height: 3rem;
+}
 
 .card-img-overlay {
 	background-color: rgba(0, 0, 0, 0.4);
