@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="side-app" v-if="user">
+        <div class="side-app max-w-1200" v-if="user">
             <div class="row mt-5">
                 <div class="col-lg-8 offset-2 card">
                     <div class="card-header" v-if="user.legalInfo">
