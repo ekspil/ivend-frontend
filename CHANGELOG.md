@@ -1152,6 +1152,10 @@
 
 * fix table width
 
+# 1.8.59- Hotfix
+
+* fix table width
+
 
 
 
