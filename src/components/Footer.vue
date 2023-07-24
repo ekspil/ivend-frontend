@@ -22,7 +22,7 @@
       if(this.$store.state.user.partnerInfo && this.$store.state.user.partnerInfo.fileOferta){
         this.oferta = `/api/v1/files/download/${this.$store.state.user.partnerInfo.partnerId}/${this.$store.state.user.partnerInfo.fileOferta}`
       } else{
-        this.oferta = "/assets/uploads/oferta.pdf"
+        this.oferta = "/assets/uploads/contract.pdf"
       }
     },
     data: () =>({
