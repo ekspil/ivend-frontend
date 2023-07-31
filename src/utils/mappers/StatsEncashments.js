@@ -23,7 +23,12 @@ export const getTableHeaders = () => [
       return getTimestamp(encashmentTimestamp);
     }
   },
-  {name: 'Сумма инкасс', key: 'lastEncashSum'},
+
+  {name: 'Кол-во продаж', key: 'encashmentsCount', critery({encashmentsCount, encashmentsCountCashless}) { return Number(encashmentsCount) +  Number(encashmentsCountCashless)}},
+  {name: 'Сумма', key: 'encashmentsSum', critery({encashmentsSum, encashmentsSumCashless}) { return Number(encashmentsSum) +  Number(encashmentsSumCashless)}},
+  {name: 'Наличные', key: 'encashmentsSum'},
+  {name: 'Безнал', key: 'encashmentsSumCashless'},
+    //{name: 'Сумма инкасс', key: 'lastEncashSum'},
   // {name: 'Кол инкасс', key: 'encashmentsCount'},
   // {name: 'Сумма инкасс', key: 'encashmentsAmount'},
   //{name: 'Кол-во продаж', key: 'salesCount'},
@@ -33,11 +38,22 @@ export const getTableHeaders = () => [
   {name: 'Адрес установки', key: 'place'},
   {name: 'Контроллер', key: 'controller'},
 ];
-
+import store from '@/store'
 export const getTableFields = data => data.map(({id, name, lastEncashment, dataAfterEncashment, place, controller, encashments}) => ({
   id,
   name,
-  // encashmentsCount: encashments.length,
+  encashmentsSum: encashments.reduce((acc, item) => {
+    return Number(item.sum) + acc
+  }, 0),
+  encashmentsSumCashless: encashments.reduce((acc, item) => {
+    return Number(item.cashless) + acc
+  }, 0),
+  encashmentsCount: encashments.reduce((acc, item) => {
+    return Number(item.count) + acc
+  }, 0),
+  encashmentsCountCashless: encashments.reduce((acc, item) => {
+    return Number(item.countCashless) + acc
+  }, 0),
   // encashmentsAmount: encashments.reduce((acc, item) => {
   //   return Number(item.sum) + acc
   // }, 0),
@@ -52,4 +68,12 @@ export const getTableFields = data => data.map(({id, name, lastEncashment, dataA
   cashlessCountInMachine: dataAfterEncashment?.cashlessCountInMachine || 0,
   lastEncashSum: lastEncashment ? (lastEncashment.sum + Number(lastEncashment.cashless)) : null,
   route: `/machine/${id}/encashments`
-}));
+})).filter(e => {
+  if(store.getters['cache/showZeroValues']){
+    return true
+  }
+  else {
+    return Boolean(e.encashSum + e.encashmentsCount + e.encashmentsCountCashless)
+  }
+
+});;

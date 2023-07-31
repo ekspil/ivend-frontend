@@ -1157,6 +1157,11 @@
 * fix table width
 
 
+# 1.8.60- Hotfix
+
+* fix encashment info
+
+
 
 
 
